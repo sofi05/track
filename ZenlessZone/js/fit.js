@@ -1,0 +1,116 @@
+const characters = [
+{ name: 'Nicole', imgName: 'Outfit_Cunning_Cutie_Icon', have: true, rarity: 4, status: 'available' },
+{ name: 'Ellen', imgName: 'Outfit_On_Campus_Icon', have: false, rarity: 5, status: 'available'},
+{ name: 'Astra Yao', imgName: 'Outfit_Chandelier_Icon', have: false, rarity: 5, status: 'available' },
+{ name: 'Yixuan', imgName: 'Outfit_Trails_of_Ink_Icon', have: false, rarity: 5, status: 'available' },
+{ name: 'Alice', imgName: 'Outfit_Sea_of_Thyme_Icon', have: false, rarity: 5, status: 'new'},
+{ name: 'Yuzuha', imgName: 'Outfit_Tanuki_in_Broad_Daylight_Icon', have: false, rarity: 5, status: 'new' },
+  // Add more characters here
+];
+
+const charListEl = document.getElementById('charList');
+const searchInput = document.getElementById('searchInput');
+const filterBtn = document.getElementById('filterBtn');
+const filterPopup = document.getElementById('filterPopup');
+
+let selectedFilters = {
+  have: false,
+  want: false,
+  new: false,
+};
+
+function renderList() {
+  charListEl.innerHTML = '';
+  const searchTerm = searchInput.value.toLowerCase();
+
+  characters
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter(c => {
+      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
+
+      const hasHave = selectedFilters.have;
+      const hasWant = selectedFilters.want;
+      const hasNew = selectedFilters.new;
+
+      const matchesHave = !hasHave || (hasHave && c.have);
+      const matchesWant = !hasWant || (hasWant && !c.have);
+      const matchesStatus = (!hasNew) || (hasNew && c.status === 'new');
+
+      return matchesSearch && matchesHave && matchesWant && matchesStatus;
+    })
+    .forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'char-card';
+      card.title = `${c.name} (${c.element}, ${c.rarity}★)`;
+
+      const iconWrapper = document.createElement('div');
+      iconWrapper.className = 'icon-wrapper';
+      if (c.rarity === 5) {
+        iconWrapper.style.background = 'linear-gradient(100deg, #7c4600ff, #ffa632cc)';
+      } else {
+        iconWrapper.style.background = 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
+      }
+
+      if (c.status === 'new') {
+        const soonLabel = document.createElement('div');
+        soonLabel.textContent = 'New';
+        soonLabel.className = 'soon-label';
+        iconWrapper.appendChild(soonLabel);
+      }
+
+      const img = document.createElement('img');
+      img.className = 'char-icon';
+      const imgSrcName = c.imgName ? c.imgName : c.name;
+      img.src = `../assets/outfit/Zenless/${imgSrcName}.webp`;
+      img.alt = c.name;
+
+      iconWrapper.appendChild(img);
+
+      const label = document.createElement('div');
+      label.textContent = c.name;
+
+      card.appendChild(iconWrapper);
+      card.appendChild(label);
+      charListEl.appendChild(card);
+    });
+}
+
+// Setup filter logic
+searchInput.addEventListener('input', renderList);
+filterBtn.addEventListener('click', () => {
+  filterPopup.classList.toggle('hidden');
+});
+
+document.addEventListener('click', (e) => {
+  if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
+    filterPopup.classList.add('hidden');
+  }
+});
+
+// ✅ SINGLE unified logic to allow only ONE active filter at a time
+document.querySelectorAll('.filter-checkbox').forEach(option => {
+  option.addEventListener('change', (e) => {
+    const type = e.target.dataset.filter;
+    const wasChecked = e.target.checked;
+
+    // Uncheck all and reset filters
+    for (let key in selectedFilters) {
+      selectedFilters[key] = false;
+      document.querySelector(`[data-filter="${key}"]`).checked = false;
+    }
+
+    // Only re-check if user had just checked it
+    if (wasChecked) {
+      selectedFilters[type] = true;
+      e.target.checked = true;
+    }
+
+    filterPopup.classList.add('hidden');
+
+    renderList();
+  });
+});
+
+
+renderList();

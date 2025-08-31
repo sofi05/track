@@ -1,0 +1,227 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f2f2f2;
+  color: #333;
+}
+
+.hna-page {
+  padding: 1rem;
+  padding-bottom: 100px; /* leave space for nav */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.birthday-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.birthday-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.birthday-icons img {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  transition: transform 0.2s;
+}
+.birthday-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Bottom Navigation (SVG Style) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.bottom-nav a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.bottom-nav a:hover {
+  color: #007bff;
+}
+
+.bottom-nav svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom: 4px;
+}
+
+.search-filter {
+  margin: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-filter input {
+  flex-grow: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.search-filter button {
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.char-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  padding-bottom: 80px;
+}
+
+.char-card {
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 11px; /* change this value as needed */
+}
+
+.char-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* THIS IS FOR CHARA */
+.icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px; /* match char-icon */
+  box-sizing: border-box;
+  background-color: transparent; /* will be set dynamically */
+  overflow: hidden; /* clip the image inside rounded corners */
+}
+
+.char-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px; /* same as wrapper */
+  object-fit: cover;
+  display: block;
+  margin: 0; /* no margin */
+  padding: 0; /* no padding */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.element-icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  object-fit: contain;
+  pointer-events: none;
+  box-shadow: none;
+  z-index: 10;  /* above char icon */
+}
+
+/* Override for element icon inside icon-wrapper */
+.icon-wrapper > .element-icon {
+  top: 2px !important;
+  left: 2px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Updated filter popup styling */
+#filterPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+  padding: 16px 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 12px; /* softer rounded corners */
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 160px;
+  backdrop-filter: blur(4px); /* optional soft blur behind */
+}
+
+#filterPopup label {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+#filterPopup input[type="checkbox"] {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.soon-label {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: rgba(255, 69, 0, 0.85); /* bright orange/red with some transparency */
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 20;
+  text-transform: uppercase;
+  user-select: none;
+  font-family: 'Arial Black', Arial, sans-serif;
+}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Honkai Impact 3rd - Hoyodex</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="bday.js" defer></script>
+  <link rel="stylesheet" href="index.css" />  <!-- New and Reruns Section Styles -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const birthdayContainer = document.getElementById("birthday-icons");
+      const todayKey = getTodayDateKey();
+
+      if (birthdays[todayKey]) {
+        birthdays[todayKey].forEach((name) => {
+          const img = document.createElement("img");
+          const cleanName = name.replace(/[^a-zA-Z]/g, "");
+          const fileName = `UI_AvatarIcon_${cleanName}.png`;
+          img.src = `../assets/charaid/Genshin/${fileName}`;
+          img.alt = name;
+          img.title = name;
+          birthdayContainer.appendChild(img);
+        });
+      } else {
+        const none = document.createElement("p");
+        none.textContent = "No birthdays today!";
+        birthdayContainer.appendChild(none);
+      }
+
+      function getTodayDateKey() {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        return `${month}-${day}`;
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="hi3-page">
+    <h1>Honkai Impact 3rd</h1>
+
+    <h5 align="center"> coming soon...</h5>
+    <h6 align="center"> too lazy to actually get the assets lmao </h6>
+
+    <!--
+    <!- New Characters Section ->
+    <section id="new-characters">
+      <h3>New Characters</h3>
+      <div id="new-characters-slider" class="slider">
+        <!- New characters will be rendered here by index.js ->
+      </div>
+    </section>
+
+    <!- Reruns Section ->
+    <section id="reruns">
+      <h3>Reruns</h3>
+      <div id="reruns-slider" class="slider">
+        <!- Rerun characters, grouped by version, will be rendered here by index.js ->
+      </div>
+    </section> -->
+
+    <!-- Bottom Navigation (SVG Icon Version) -->
+    <nav class="bottom-nav">
+      <a href="#" id="tab-characters" title="Characters"> <!--chara.html-->
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        Characters
+      </a>
+      <a href="#" id="tab-inventory" title="Inventory"> <!--inventory.html-->
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-2-2h-4v2h4v8h-4v2h4a2 2 0 0 0 2-2zm-10-4V6H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4v-4z"/></svg>
+        Inventory
+      </a>
+      <a href="#" id="tab-wishlist" title="WishList"> <!--wish.html-->
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        WishList
+      </a>
+      <a href="#" id="tab-add" title="Add"> <!--add.html-->
+        <svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        Add
+      </a>
+    </nav>
+  </div>
+  <!-- Link to external JS -->
+<script src="chara.js"></script>  <!-- Load chara.js first -->
+<script src="index.js"></script>  <!-- Then load index.js -->
+
+</body>
+</html>

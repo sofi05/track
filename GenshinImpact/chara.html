@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GI: Characters</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/chara.js" defer></script>
+</head>
+<body>
+  <h1>Characters</h1>
+
+  <div class="search-filter">
+  <input type="text" id="searchInput" placeholder="Search by name..." />
+  <button id="filterBtn">Filter</button>
+</div>
+
+<div id="filterPopup" class="filter-popup hidden">
+  <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
+  <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
+  <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+</div>
+
+
+  <div class="char-list" id="charList"></div>
+
+  <!-- Bottom nav -->
+    <nav class="bottom-nav">
+      <a href="index.html" title="Home">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Home</a>
+      <a href="chara.html" id="tab-characters" title="Characters">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        Characters</a>
+      <a href="menu.html" id="tab-quests" title="Quests">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
+        Menu</a>
+    
+<!-- GAME SWITCH BUTTON (will trigger popup) -->
+<a href="#" id="tab-play" title="Switch Game">
+  <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+    <path d="M3.75 9c-1.1 0-1.5 0.73-1.5 1.82 0 2.19 1.1 5.08 2.2 6.56s2.93 1.1 3.66 0l1.46-2.2h4.39l1.46 2.2c0.73 1.1 2.5 1.1 3.66 0s2.2-4.4 2.2-6.56c0-1.1-0.4-1.82-1.5-1.82-1.9 0-3 1.52-3.75 2.28H8.7c-0.6-0.6-1.5-1.8-3-1.8z"/>
+  </svg>
+  Change
+</a>
+
+</nav>
+
+<!-- Popup container for switching games -->
+<div id="popup-container"></div>
+
+<!-- Include JS and CSS for popup -->
+<script src="../change.js"></script>
+<link rel="stylesheet" href="../change.css" />
+
+</body>
+</html>
