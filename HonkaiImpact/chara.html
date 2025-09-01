@@ -3,30 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Honkai Star Rail</title>
+  <title>GI: Characters</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/index.css" />  <!-- New and Reruns Section Styles -->
+  <script src="js/chara.js" defer></script>
 </head>
 <body>
-    <script src="js/chara.js"></script>  <!-- Load chara.js first -->
-    <script src="js/index.js"></script>  <!-- Then load index.js -->
-  <div class="hna-page">
-    <h1>Honkai: Nexus Anima</h1>
+  <h1>Characters</h1>
 
-    <h5 align="center"> coming soon...</h5>
+  <div class="search-filter">
+  <input type="text" id="searchInput" placeholder="Search by name..." />
+  <button id="filterBtn">Filter</button>
+</div>
 
-     <!-- Bottom nav -->
+<div id="filterPopup" class="filter-popup hidden">
+  <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
+  <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
+  <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+</div>
+
+
+  <div class="char-list" id="charList"></div>
+
+  <!-- Bottom nav -->
     <nav class="bottom-nav">
       <a href="index.html" title="Home">
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
       Home</a>
-      <a href="#" id="tab-characters" title="Characters">
+      <a href="chara.html" id="tab-characters" title="Characters">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         Characters</a>
       <a href="menu.html" id="tab-quests" title="Quests">
         <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
         Menu</a>
-      
+    
 <!-- GAME SWITCH BUTTON (will trigger popup) -->
 <a href="#" id="tab-play" title="Switch Game">
   <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">

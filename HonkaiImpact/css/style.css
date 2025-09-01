@@ -1,23 +1,25 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background: #f2f2f2;
-  color: #333;
+  background: #121212; /* dark background */
+  color: #ddd; /* light text */
 }
 
-.hna-page {
+.hi3-page {
   padding: 1rem;
   padding-bottom: 100px; /* leave space for nav */
 }
 
-h2 {
+h1 {
   text-align: center;
   margin-bottom: 1rem;
+  color: #eee;
 }
 
 .birthday-section h2 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  color: #ccc;
 }
 
 .birthday-icons {
@@ -32,11 +34,13 @@ h2 {
   height: 64px;
   border-radius: 10px;
   object-fit: cover;
-  border: 2px solid #ccc;
+  border: 2px solid #555; /* darker border */
   transition: transform 0.2s;
+  background-color: #ccc;
 }
 .birthday-icons img:hover {
   transform: scale(1.1);
+  border-color: #aaa; /* lighter border on hover */
 }
 
 /* Bottom Navigation (SVG Style) */
@@ -45,8 +49,8 @@ h2 {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: white;
-  border-top: 1px solid #ccc;
+  background: #1e1e1e; /* dark nav background */
+  border-top: 1px solid #333;
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
@@ -57,7 +61,7 @@ h2 {
   flex: 1;
   text-align: center;
   text-decoration: none;
-  color: #333;
+  color: #ccc;
   font-size: 0.75rem;
   display: flex;
   flex-direction: column;
@@ -66,7 +70,7 @@ h2 {
 }
 
 .bottom-nav a:hover {
-  color: #007bff;
+  color: #4096ff;
 }
 
 .bottom-nav svg {
@@ -88,16 +92,27 @@ h2 {
   padding: 6px 10px;
   font-size: 14px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+}
+
+.search-filter input::placeholder {
+  color: #888;
 }
 
 .search-filter button {
   padding: 6px 10px;
   font-size: 14px;
-  background-color: #eee;
-  border: 1px solid #ccc;
+  background-color: #333;
+  border: 1px solid #444;
   border-radius: 6px;
   cursor: pointer;
+  color: #eee;
+}
+
+.search-filter button:hover {
+  background-color: #555;
 }
 
 .char-list {
@@ -113,7 +128,8 @@ h2 {
   width: 80px;
   text-align: center;
   cursor: pointer;
-  font-size: 11px; /* change this value as needed */
+  font-size: 11px;
+  color: #ddd;
 }
 
 .char-card img {
@@ -121,6 +137,7 @@ h2 {
   height: 80px;
   border-radius: 12px;
   object-fit: cover;
+  border: 1px solid #444;
 }
 
 .hidden {
@@ -135,17 +152,17 @@ h2 {
   border-radius: 12px; /* match char-icon */
   box-sizing: border-box;
   background-color: transparent; /* will be set dynamically */
-  overflow: hidden; /* clip the image inside rounded corners */
+  overflow: hidden;
 }
 
 .char-icon {
   width: 100%;
   height: 100%;
-  border-radius: 12px; /* same as wrapper */
+  border-radius: 12px;
   object-fit: cover;
   display: block;
-  margin: 0; /* no margin */
-  padding: 0; /* no padding */
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
@@ -157,19 +174,20 @@ h2 {
   height: 18px;
   border-radius: 0;
   background: transparent;
-  border: none;
+  border: none; /* Make sure there's no border */
   object-fit: contain;
   pointer-events: none;
-  box-shadow: none;
-  z-index: 10;  /* above char icon */
+  box-shadow: none; /* Remove the box-shadow for no outline */
+  z-index: 10;
 }
 
-/* Override for element icon inside icon-wrapper */
+
 .icon-wrapper > .element-icon {
   top: 2px !important;
   left: 2px !important;
   width: 18px !important;
   height: 18px !important;
+  border: none; /* Make sure there's no border */
 }
 
 /* Updated filter popup styling */
@@ -178,17 +196,18 @@ h2 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+  background: rgba(30, 30, 30, 0.95); /* dark translucent */
   padding: 16px 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  border-radius: 12px; /* softer rounded corners */
+  border: 1px solid #444;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
   z-index: 2000;
   display: flex;
   flex-direction: column;
   gap: 10px;
   min-width: 160px;
-  backdrop-filter: blur(4px); /* optional soft blur behind */
+  backdrop-filter: blur(6px);
+  color: #eee;
 }
 
 #filterPopup label {
@@ -204,15 +223,11 @@ h2 {
   cursor: pointer;
 }
 
-.hidden {
-  display: none !important;
-}
-
 .soon-label {
   position: absolute;
   bottom: 4px;
   right: 4px;
-  background: rgba(255, 69, 0, 0.85); /* bright orange/red with some transparency */
+  background: rgba(255, 69, 0, 0.85);
   color: white;
   font-weight: bold;
   font-size: 10px;
@@ -224,4 +239,3 @@ h2 {
   user-select: none;
   font-family: 'Arial Black', Arial, sans-serif;
 }
-

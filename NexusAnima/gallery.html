@@ -3,19 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Honkai Star Rail</title>
+  <title>HNA: Gallery</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/index.css" />  <!-- New and Reruns Section Styles -->
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/gallery.css" />
 </head>
 <body>
-    <script src="js/chara.js"></script>  <!-- Load chara.js first -->
-    <script src="js/index.js"></script>  <!-- Then load index.js -->
+  
+  <script src="js/gallery.js"></script>
+  
   <div class="hna-page">
-    <h1>Honkai: Nexus Anima</h1>
+    <h1>Gallery</h1>
 
-    <h5 align="center"> coming soon...</h5>
+    <section class="gallery-controls">
+      <label class="upload-label">
+        Upload Image
+        <input type="file" id="imageUploader" accept="image/*" multiple hidden>
 
-     <!-- Bottom nav -->
+      </label>
+    </section>
+
+    <section class="gallery-grid" id="galleryGrid">
+      <!-- Thumbnails will appear here -->
+    </section>
+
+    <!-- Popup viewer -->
+    <div id="imagePopup" class="image-popup hidden">
+      <span id="popupClose" class="popup-close">✖</span>
+      <img id="popupImg" src="" alt="Full view">
+    </div>
+
+  <section class="gallery-controls">
+    <button id="clearGalleryBtn" class="clear-btn">Clear Gallery</button>
+  </section>
+
+
+    <!-- Bottom nav -->
     <nav class="bottom-nav">
       <a href="index.html" title="Home">
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -26,7 +49,6 @@
       <a href="menu.html" id="tab-quests" title="Quests">
         <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
         Menu</a>
-      
 <!-- GAME SWITCH BUTTON (will trigger popup) -->
 <a href="#" id="tab-play" title="Switch Game">
   <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
