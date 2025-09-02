@@ -1,5 +1,5 @@
 const characters = [
-  { name: 'Amber', imgName: 'ambor', have: true, element: 'Pyro', rarity: 4, status: 'available' },
+  { name: 'Amber', imgName: 'Ambor', have: true, element: 'Pyro', rarity: 4, status: 'available' },
   { name: 'Xiao', have: true, element: 'Anemo', rarity: 5, status: 'available' },
   { name: 'Mona', have: true, element: 'Hydro', rarity: 5, status: 'available' },
   { name: 'Lisa', have: true, element: 'Electro', rarity: 4, status: 'available' },
