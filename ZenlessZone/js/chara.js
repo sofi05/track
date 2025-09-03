@@ -1,48 +1,48 @@
 const characters = [
-{ name: 'Anby', imgName: 'IconRoleCrop01', have: true, element: 'IconElectric', rarity: 4, status: 'available' },
-{ name: 'Soldier 11', imgName: 'IconRoleCrop05', have: true, element: 'IconFire', rarity: 5, status: 'available' },
-{ name: 'Corin', imgName: 'IconRoleCrop09', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
-{ name: 'Billy', imgName: 'IconRoleCrop10', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
-{ name: 'Nekomata', imgName: 'IconRoleCrop11', have: false, element: 'IconPhysical', rarity: 5, status: 'available', version: '2.0' },
-{ name: 'Nicole', imgName: 'IconRoleCrop12', have: true, element: 'IconEther', rarity: 4, status: 'available' },
-{ name: 'Miyabi', imgName: 'IconRoleCrop13', have: true, element: 'IconFrost', rarity: 5, status: 'available' },
-{ name: 'Koleda', imgName: 'IconRoleCrop14', have: true, element: 'IconFire', rarity: 5, status: 'available' },
-{ name: 'Anton', imgName: 'IconRoleCrop15', have: true, element: 'IconElectric', rarity: 4, status: 'available' },
-{ name: 'Ben', imgName: 'IconRoleCrop16', have: true, element: 'IconFire', rarity: 4, status: 'available' },
-{ name: 'Soukaku', imgName: 'IconRoleCrop17', have: true, element: 'IconIce', rarity: 4, status: 'available' },
-{ name: 'Lycaon', imgName: 'IconRoleCrop18', have: true, element: 'IconIce', rarity: 5, status: 'available' },
-{ name: 'Grace', imgName: 'IconRoleCrop20', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
-{ name: 'Ellen', imgName: 'IconRoleCrop21', have: false, element: 'IconIce', rarity: 5, status: 'available', version: '1.5' },
-{ name: 'Rina', imgName: 'IconRoleCrop22', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
-{ name: 'Zhu Yuan', imgName: 'IconRoleCrop23', have: false, element: 'IconEther', rarity: 5, status: 'available', version: '1.6' },
-{ name: 'Jane Doe', imgName: 'IconRoleCrop24', have: false, element: 'IconPhysical', rarity: 5, status: 'available', version: '1.7' },
-{ name: 'Caesar', imgName: 'IconRoleCrop25', have: false, element: 'IconPhysical', rarity: 5, status: 'available', version: '2.0' },
-{ name: 'Lighter', imgName: 'IconRoleCrop26', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '1.7' },
-{ name: 'Lucy', imgName: 'IconRoleCrop27', have: false, element: 'IconFire', rarity: 4, status: 'available', version: '1.6' },
-{ name: 'Piper', imgName: 'IconRoleCrop28', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
-{ name: 'Qingyi', imgName: 'IconRoleCrop29', have: false, element: 'IconElectric', rarity: 5, status: 'available', version: '1.5' },
-{ name: 'Seth', imgName: 'IconRoleCrop30', have: true, element: 'IconElectric', rarity: 4, status: 'available' },
-{ name: 'Yanagi', imgName: 'IconRoleCrop31', have: false, element: 'IconElectric', rarity: 5, status: 'available', version: '2.1' },
-{ name: 'Burnice', imgName: 'IconRoleCrop32', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '1.6' },
-{ name: 'Harumasa', imgName: 'IconRoleCrop35', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
-{ name: 'Astra Yao', imgName: 'IconRoleCrop36', have: false, element: 'IconEther', rarity: 5, status: 'available', version: '2.0' },
-{ name: 'Evelyn', imgName: 'IconRoleCrop37', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '2.2' },
-{ name: 'Pulchra', imgName: 'IconRoleCrop38', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
-{ name: 'Trigger', imgName: 'IconRoleCrop39', have: false, element: 'IconElectric', rarity: 5, status: 'available', version: '2.2' },
-{ name: 'Anby Soldier 0', imgName: 'IconRoleCrop40', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
-{ name: 'Vivian', imgName: 'IconRoleCrop41', have: false, element: 'IconEther', rarity: 5, status: 'available', version: '1.7' },
-{ name: 'Hugo', imgName: 'IconRoleCrop42', have: false, element: 'IconIce', rarity: 5, status: 'available', version: '1.7' },
-{ name: 'Ju Fufu', imgName: 'IconRoleCrop43', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '2.0' },
-{ name: 'Yixuan', imgName: 'IconRoleCrop44', have: false, element: 'IconAuricInk', rarity: 5, status: 'available', version: '2.0' },
-{ name: 'Pan Yinhu', imgName: 'IconRoleCrop45', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
-{ name: 'Alice', imgName: 'IconRoleCrop46', have: false, element: 'IconPhysical', rarity: 5, status: 'new', version: '2.1' },
-{ name: 'Yuzuha', imgName: 'IconRoleCrop47', have: false, element: 'IconPhysical', rarity: 5, status: 'new', version: '2.1' },
+{ name: 'Anby', imgName: '01', have: true, element: 'IconElectric', rarity: 4, status: 'available' },
+{ name: 'Soldier 11', imgName: '05', have: true, element: 'IconFire', rarity: 5, status: 'available' },
+{ name: 'Corin', imgName: '09', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
+{ name: 'Billy', imgName: '10', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
+{ name: 'Nekomata', imgName: '11', have: false, element: 'IconPhysical', rarity: 5, status: 'available', version: '2.0' },
+{ name: 'Nicole', imgName: '12', have: true, element: 'IconEther', rarity: 4, status: 'available' },
+{ name: 'Miyabi', imgName: '13', have: true, element: 'IconFrost', rarity: 5, status: 'available' },
+{ name: 'Koleda', imgName: '14', have: true, element: 'IconFire', rarity: 5, status: 'available' },
+{ name: 'Anton', imgName: '15', have: true, element: 'IconElectric', rarity: 4, status: 'available' },
+{ name: 'Ben', imgName: '16', have: true, element: 'IconFire', rarity: 4, status: 'available' },
+{ name: 'Soukaku', imgName: '17', have: true, element: 'IconIce', rarity: 4, status: 'available' },
+{ name: 'Lycaon', imgName: '18', have: true, element: 'IconIce', rarity: 5, status: 'available' },
+{ name: 'Grace', imgName: '20', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
+{ name: 'Ellen', imgName: '21', have: false, element: 'IconIce', rarity: 5, status: 'available', version: '1.5' },
+{ name: 'Rina', imgName: '22', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
+{ name: 'Zhu Yuan', imgName: '23', have: false, element: 'IconEther', rarity: 5, status: 'available', version: '1.6' },
+{ name: 'Jane Doe', imgName: '24', have: false, element: 'IconPhysical', rarity: 5, status: 'available', version: '1.7' },
+{ name: 'Caesar', imgName: '25', have: false, element: 'IconPhysical', rarity: 5, status: 'available', version: '2.0' },
+{ name: 'Lighter', imgName: '26', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '1.7' },
+{ name: 'Lucy', imgName: '27', have: false, element: 'IconFire', rarity: 4, status: 'available', version: '1.6' },
+{ name: 'Piper', imgName: '28', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
+{ name: 'Qingyi', imgName: '29', have: false, element: 'IconElectric', rarity: 5, status: 'available', version: '1.5' },
+{ name: 'Seth', imgName: '30', have: true, element: 'IconElectric', rarity: 4, status: 'available' },
+{ name: 'Yanagi', imgName: '31', have: false, element: 'IconElectric', rarity: 5, status: 'available', version: '2.1' },
+{ name: 'Burnice', imgName: '32', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '1.6' },
+{ name: 'Harumasa', imgName: '35', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
+{ name: 'Astra Yao', imgName: '36', have: false, element: 'IconEther', rarity: 5, status: 'available', version: '2.0' },
+{ name: 'Evelyn', imgName: '37', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '2.2' },
+{ name: 'Pulchra', imgName: '38', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
+{ name: 'Trigger', imgName: '39', have: false, element: 'IconElectric', rarity: 5, status: 'available', version: '2.2' },
+{ name: 'Anby Soldier 0', imgName: '40', have: true, element: 'IconElectric', rarity: 5, status: 'available' },
+{ name: 'Vivian', imgName: '41', have: false, element: 'IconEther', rarity: 5, status: 'available', version: '1.7' },
+{ name: 'Hugo', imgName: '42', have: false, element: 'IconIce', rarity: 5, status: 'available', version: '1.7' },
+{ name: 'Ju Fufu', imgName: '43', have: false, element: 'IconFire', rarity: 5, status: 'available', version: '2.0' },
+{ name: 'Yixuan', imgName: '44', have: false, element: 'IconAuricInk', rarity: 5, status: 'available', version: '2.0' },
+{ name: 'Pan Yinhu', imgName: '45', have: true, element: 'IconPhysical', rarity: 4, status: 'available' },
+{ name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', rarity: 5, status: 'new', version: '2.1' },
+{ name: 'Yuzuha', imgName: '47', have: false, element: 'IconPhysical', rarity: 5, status: 'new', version: '2.1' },
 
-{ name: 'Seed', imgName: 'IconRoleCrop48', have: false, element: 'IconElectric', rarity: 5, status: 'soon', version: '2.2' },
-{ name: 'Orphie & Magus', imgName: 'IconRoleCrop49', have: false, element: 'IconFire', rarity: 5, status: 'soon', version: '2.2' },
-{ name: 'Lucia', imgName: 'IconRoleCrop50', have: false, element: 'IconEther', rarity: 5, status: 'soon', version: '2.3' },
-{ name: 'Manato', imgName: 'IconRoleCrop51', have: false, element: 'IconFire', rarity: 4, status: 'soon', version: '2.3' },
-{ name: 'Yidhari', imgName: 'IconRoleCrop52', have: false, element: 'IconIce', rarity: 5, status: 'soon', version: '2.3' }
+{ name: 'Seed', imgName: '48', have: false, element: 'IconElectric', rarity: 5, status: 'soon', version: '2.2' },
+{ name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', rarity: 5, status: 'soon', version: '2.2' },
+{ name: 'Lucia', imgName: '50', have: false, element: 'IconEther', rarity: 5, status: 'soon', version: '2.3' },
+{ name: 'Manato', imgName: '51', have: false, element: 'IconFire', rarity: 4, status: 'soon', version: '2.3' },
+{ name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', rarity: 5, status: 'soon', version: '2.3' }
   // Add more characters here
 ];
 
@@ -112,7 +112,7 @@ function renderList() {
       const img = document.createElement('img');
       img.className = 'char-icon';
       const imgSrcName = c.imgName ? c.imgName : c.name;
-      img.src = `../assets/charaid/Zenless/${imgSrcName}.png`;
+      img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
       img.alt = c.name;
 
       const elementImg = document.createElement('img');
@@ -129,6 +129,13 @@ function renderList() {
       card.appendChild(iconWrapper);
       card.appendChild(label);
       charListEl.appendChild(card);
+
+        card.addEventListener('click', () => {
+        const imgName = c.imgName ? c.imgName : c.name;
+        const imgPath = `../assets/Sprite/Zenless/IconRole${imgName}.png`;
+        showPopup(imgPath, c.name);
+      });
+
     });
 }
 
@@ -175,3 +182,17 @@ document.querySelectorAll('.filter-checkbox').forEach(option => {
 });
 
 renderList();
+// Function to show popup sprite
+function showPopup(imgPath, altText) {
+  const popup = document.getElementById('spritePopup');
+  const popupImg = document.getElementById('spritePopupImg');
+
+  popupImg.src = imgPath;
+  popupImg.alt = altText;
+  popup.style.display = 'flex';
+}
+
+// Close popup on clicking ✕
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('spritePopup').style.display = 'none';
+});

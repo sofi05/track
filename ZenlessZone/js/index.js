@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const iconImg = document.createElement('img');
-    iconImg.src = `../assets/charaid/Zenless/${char.imgName}.png`;
+    iconImg.src = `../assets/charaid/Zenless/IconRoleCrop${char.imgName}.png`;
     iconImg.alt = char.name;
     iconImg.classList.add('char-icon');
 

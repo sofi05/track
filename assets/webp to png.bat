@@ -13,6 +13,10 @@ for %%f in ("%input_folder%\*.webp") do (
     echo Converting: %%f
     magick "%%f" "!output_folder!\%%~nf.png"
     echo Converted: %%f → !output_folder!\%%~nf.png
+    
+    :: Delete the .webp file after conversion
+    del "%%f"
+    echo Deleted: %%f
 )
 
 echo Done converting.

@@ -1,0 +1,26 @@
+.birthday-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.birthday-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.birthday-icons img {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #555; /* darker border */
+  transition: transform 0.2s;
+  background-color: #ccc;
+}
+.birthday-icons img:hover {
+  transform: scale(1.1);
+  border-color: #aaa; /* lighter border on hover */
+}

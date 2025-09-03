@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updates updates..."  
+git commit -m "merged repetitive stuff"  
 git push origin main  

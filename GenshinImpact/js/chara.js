@@ -191,6 +191,12 @@ function renderList() {
       card.appendChild(iconWrapper);
       card.appendChild(label);
       charListEl.appendChild(card);
+
+      card.addEventListener('click', () => {
+        const imgName = c.imgName ? c.imgName : c.name;
+        const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
+        showPopup(imgPath, c.name);
+      });
     });
 }
 
@@ -237,3 +243,17 @@ document.querySelectorAll('.filter-checkbox').forEach(option => {
 });
 
 renderList();
+// Function to show popup sprite
+function showPopup(imgPath, altText) {
+  const popup = document.getElementById('spritePopup');
+  const popupImg = document.getElementById('spritePopupImg');
+
+  popupImg.src = imgPath;
+  popupImg.alt = altText;
+  popup.style.display = 'flex';
+}
+
+// Close popup on clicking ✕
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('spritePopup').style.display = 'none';
+});

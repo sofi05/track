@@ -1,6 +1,6 @@
 const characters = [
-  { name: 'March 7th', imgName: 'Item_Nascent_Spring', have: true, rarity: 4, status: 'available' },
-  { name: 'Firefly', imgName: 'Item_Spring_Missive', have: false, rarity: 5, status: 'new' }
+  { name: 'March 7th', imgName: 'Item_Nascent_Spring', imgName2:'1100101', have: true, rarity: 4, status: 'available' },
+  { name: 'Firefly', imgName: 'Item_Spring_Missive', imgName2:'1131001', have: false, rarity: 5, status: 'new' }
   // Add more characters here
 ];
 
@@ -69,6 +69,12 @@ function renderList() {
       card.appendChild(iconWrapper);
       card.appendChild(label);
       charListEl.appendChild(card);
+
+      card.addEventListener('click', () => {
+        const imgPath = `../assets/Sprite/StarRail/Outfit/${c.imgName2}.png`;
+        showPopup(imgPath, c.name);
+      });
+
     });
 }
 
@@ -110,3 +116,17 @@ document.querySelectorAll('.filter-checkbox').forEach(option => {
 
 
 renderList();
+// Function to show popup sprite
+function showPopup(imgPath, altText) {
+  const popup = document.getElementById('spritePopup');
+  const popupImg = document.getElementById('spritePopupImg');
+
+  popupImg.src = imgPath;
+  popupImg.alt = altText;
+  popup.style.display = 'flex';
+}
+
+// Close popup on clicking ✕
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('spritePopup').style.display = 'none';
+});
