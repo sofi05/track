@@ -226,3 +226,12 @@ function showPopup(imgPath, altText) {
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
 });
+
+// Close popup when clicking outside the image
+const popup = document.getElementById('spritePopup');
+
+popup.addEventListener('click', (e) => {
+  if (e.target === popup) {
+    popup.style.display = 'none';
+  }
+});
