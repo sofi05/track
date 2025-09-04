@@ -243,3 +243,196 @@ h1 {
   cursor: pointer;
   user-select: none;
 }
+/* Filter category container */
+.filter-category {
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+
+/* First category should not have a top border */
+.filter-category:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* Toggle buttons for filter categories */
+.filter-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #eee;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  padding: 6px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Add a little arrow for toggle */
+.filter-toggle::after {
+  content: '▼';
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  margin-left: 8px;
+}
+
+/* Rotate arrow when active */
+.filter-toggle.active::after {
+  transform: rotate(-180deg);
+}
+
+/* Filter options container */
+.filter-options {
+  margin-top: 6px;
+  display: none; /* Hidden by default */
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Show options when visible */
+.filter-options.visible {
+  display: flex;
+}
+
+/* Labels inside options */
+.filter-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Element images */
+.element-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.element-label input[type="radio"],
+.element-label input[type="checkbox"] {
+  display: none;
+}
+
+/* Highlight selected element */
+.filter-options input[type="radio"]:checked + .element-img {
+  border-color: #4096ff;
+  box-shadow: 0 0 8px #4096ffaa;
+}
+
+.filter-popup .filter-section {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Optional: hover effect on element images */
+.filter-options label:hover .element-img {
+  border-color: #666;
+}
+
+/* Radio and checkbox inputs styling */
+.filter-options input[type="radio"],
+.filter-options input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Sub-filters inside Status (for spacing) */
+.sub-filter {
+  margin-bottom: 6px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+/* Hide the radio circle */
+.element-label input[type="radio"] {
+  display: none;
+}
+
+/* Make the image look clickable */
+.element-img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+  border-radius: 4px;
+}
+
+/* On hover */
+.element-img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* When selected (optional – using :has) */
+.element-label:has(input[type="radio"]:checked) .element-img {
+  opacity: 1;
+  outline: 2px solid #4af;
+  outline-offset: 2px;
+}
+
+.region-grid label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter-options.region-grid {
+  display: none; /* hidden by default */
+}
+
+.filter-options.region-grid.visible {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5em 1em;
+}
+
+/* ======== New CSS for Region images (Snezhnaya, Khaenriah, Unknown) ======== */
+
+/* Style for region labels with images */
+.region-label-img {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+}
+
+/* Hide the checkbox */
+.region-label-img input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the region image */
+.region-label-img .region-img {
+  width: 40px; /* adjust as needed */
+  height: 40px;
+  object-fit: contain;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0.7;
+}
+
+/* Hover effect */
+.region-label-img:hover .region-img {
+  opacity: 1;
+  border-color: #4096ff;
+  box-shadow: 0 0 8px #4096ffaa;
+}
+
+/* Highlight when checkbox is checked */
+.region-label-img input[type="checkbox"]:checked + .region-img {
+  border-color: #4096ff;
+  box-shadow: 0 0 12px #4096ffcc;
+  opacity: 1;
+}

@@ -1,77 +1,77 @@
 const characters = [
-{ name: 'Cerydra', imgName: '1412', have: false, element: 'wind', rarity: 5,  status: 'new', version: '3.5' },
-{ name: 'Hysilens', imgName: '1410', have: false, element: 'physical', rarity: 5,  status: 'new', version: '3.5' },
-{ name: 'Phainon', imgName: '1408', have: true, element: 'physical', rarity: 5,  status: 'available' },
-{ name: 'Cipher', imgName: '1406', have: false, element: 'quantum', rarity: 5,  status: 'available', version: '3.3' },
-{ name: 'Hyacine', imgName: '1409', have: true, element: 'wind', rarity: 5,  status: 'available' },
-{ name: 'Anaxa', imgName: '1405', have: false, element: 'wind', rarity: 5,  status: 'available', version: '3.2' },
-{ name: 'Castorice', imgName: '1407', have: true, element: 'quantum', rarity: 5,  status: 'available' },
-{ name: 'Mydei', imgName: '1404', have: false, element: 'imaginary', rarity: 5,  status: 'available', version: '3.1' },
-{ name: 'Tribbie', imgName: '1403', have: false, element: 'quantum', rarity: 5,  status: 'available', version: '3.4' },
-{ name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', rarity: 5,  status: 'available', version: '3.3' },
-{ name: 'The Herta', imgName: '1401', have: true, element: 'ice', rarity: 5,  status: 'available' },
-{ name: 'Fugue', imgName: '1225', have: false, element: 'fire', rarity: 5,  status: 'available', version: '3.2' },
-{ name: 'Sunday', imgName: '1313', have: false, element: 'imaginary', rarity: 5,  status: 'available', version: '3.4' },
-{ name: 'Rappa', imgName: '1317', have: false, element: 'imaginary', rarity: 5,  status: 'available', version: '2.6' },
-{ name: 'Lingsha', imgName: '1222', have: false, element: 'fire', rarity: 5,  status: 'available', version: '3.0' },
-{ name: 'Feixiao', imgName: '1220', have: false, element: 'wind', rarity: 5,  status: 'available', version: '3.0' },
-{ name: 'Moze', imgName: '1223', have: true, element: 'thunder', rarity: 4,  status: 'available' },
-{ name: 'Jiaoqiu', imgName: '1218', have: false, element: 'fire', rarity: 5,  status: 'available', version: '3.2' },
-{ name: 'Yunli', imgName: '1221', have: false, element: 'physical', rarity: 5,  status: 'available', version: '3.1' },
-{ name: 'March 7th', imgName: '1224', have: false, element: 'imaginary', rarity: 4, status: 'available', version: '2.1' },
-{ name: 'Jade', imgName: '1314', have: false, element: 'quantum', rarity: 5,  status: 'available', version: '3.0' },
-{ name: 'Firefly', imgName: '1310', have: false, element: 'fire', rarity: 5,  status: 'available', version: '3.4' },
-{ name: 'Boothill', imgName: '1315', have: false, element: 'physical', rarity: 5,  status: 'available', version: '3.0' },
-{ name: 'Robin', imgName: '1309', have: false, element: 'physical', rarity: 5,  status: 'available', version: '3.0' },
-{ name: 'Aventurine', imgName: '1304', have: true, element: 'imaginary', rarity: 5,  status: 'available' },
-{ name: 'Gallagher', imgName: '1301', have: true, element: 'fire', rarity: 4,  status: 'available' },
-{ name: 'Acheron', imgName: '1308', have: true, element: 'thunder', rarity: 5,  status: 'available' },
-{ name: 'Misha', imgName: '1312', have: true, element: 'ice', rarity: 4,  status: 'available' },
-{ name: 'Sparkle', imgName: '1306', have: false, element: 'quantum', rarity: 5,  status: 'available', version: '3.4' },
-{ name: 'Black Swan', imgName: '1307', have: true, element: 'wind', rarity: 5,  status: 'available' },
-{ name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', rarity: 5,  status: 'available' },
-{ name: 'Xueyi', imgName: '1214', have: true, element: 'quantum', rarity: 4,  status: 'available' },
-{ name: 'Ruan Mei', imgName: '1303', have: false, element: 'ice', rarity: 5,  status: 'available', version: '3.2' },
-{ name: 'Hanya', imgName: '1215', have: false, element: 'physical', rarity: 4,  status: 'available', version: '3.4' },
-{ name: 'Argenti', imgName: '1302', have: true, element: 'physical', rarity: 5,  status: 'available' },
-{ name: 'Huohuo', imgName: '1217', have: false, element: 'wind', rarity: 5,  status: 'available', version: '3.1' },
-{ name: 'Topaz & Numby', imgName: '1112', have: false, element: 'fire', rarity: 5,  status: 'available', version: '2.5' },
-{ name: 'Guinaifen', imgName: '1210', have: false, element: 'fire', rarity: 4,  status: 'available', version: '3.1' },
-{ name: 'Jingliu', imgName: '1212', have: false, element: 'ice', rarity: 5,  status: 'available', version: '3.4' },
-{ name: 'Lynx', imgName: '1110', have: true, element: 'quantum', rarity: 4,  status: 'available' },
-{ name: 'Fu Xuan', imgName: '1208', have: false, element: 'quantum', rarity: 5,  status: 'available', version: '3.2' },
-{ name: 'Dan Heng • IL', imgName: '1213', have: true, element: 'imaginary', rarity: 5,  status: 'available' },
-{ name: 'Kafka', imgName: '1005', have: true, element: 'thunder', rarity: 5,  status: 'available' },
-{ name: 'Luka', imgName: '1111', have: true, element: 'physical', rarity: 4,  status: 'available' },
-{ name: 'Blade', imgName: '1205', have: true, element: 'wind', rarity: 5,  status: 'available' },
-{ name: 'Luocha', imgName: '1203', have: true, element: 'imaginary', rarity: 5,  status: 'available' },
-{ name: 'Yukong', imgName: '1207', have: true, element: 'imaginary', rarity: 4,  status: 'available' },
-{ name: 'Silver Wolf', imgName: '1006', have: true, element: 'quantum', rarity: 5,  status: 'available' },
-{ name: 'Jing Yuan', imgName: '1204', have: false, element: 'thunder', rarity: 5,  status: 'available', version: '2.7' },
-{ name: 'March 7th', imgName: '1001', have: true, element: 'ice', rarity: 4,  status: 'available' },
-{ name: 'Dan Heng', imgName: '1002', have: true, element: 'wind', rarity: 4,  status: 'available' },
-{ name: 'Himeko', imgName: '1003', have: true, element: 'fire', rarity: 5,  status: 'available' },
-{ name: 'Welt', imgName: '1004', have: false, element: 'imaginary', rarity: 5,  status: 'available', version: '3.2' },
-{ name: 'Arlan', imgName: '1008', have: true, element: 'thunder', rarity: 4,  status: 'available' },
-{ name: 'Asta', imgName: '1009', have: true, element: 'fire', rarity: 4,  status: 'available' },
-{ name: 'Herta', imgName: '1013', have: true, element: 'ice', rarity: 4,  status: 'available' },
-{ name: 'Bronya', imgName: '1101', have: true, element: 'wind', rarity: 5,  status: 'available' },
-{ name: 'Seele', imgName: '1102', have: true, element: 'quantum', rarity: 5,  status: 'available' },
-{ name: 'Serval', imgName: '1103', have: true, element: 'thunder', rarity: 4,  status: 'available' },
-{ name: 'Gepard', imgName: '1104', have: true, element: 'ice', rarity: 5,  status: 'available' },
-{ name: 'Natasha', imgName: '1105', have: true, element: 'physical', rarity: 4,  status: 'available' },
-{ name: 'Pela', imgName: '1106', have: true, element: 'ice', rarity: 4,  status: 'available' },
-{ name: 'Clara', imgName: '1107', have: true, element: 'physical', rarity: 5,  status: 'available' },
-{ name: 'Sampo', imgName: '1108', have: true, element: 'wind', rarity: 4,  status: 'available' },
-{ name: 'Hook', imgName: '1109', have: true, element: 'fire', rarity: 4,  status: 'available' },
-{ name: 'Qingque', imgName: '1201', have: true, element: 'quantum', rarity: 4,  status: 'available' },
-{ name: 'Tingyun', imgName: '1202', have: true, element: 'thunder', rarity: 4,  status: 'available' },
-{ name: 'Sushang', imgName: '1206', have: true, element: 'physical', rarity: 4,  status: 'available' },
-{ name: 'Yanqing', imgName: '1209', have: true, element: 'ice', rarity: 5,  status: 'available' },
-{ name: 'Bailu', imgName: '1211', have: true, element: 'thunder', rarity: 5,  status: 'available' },
+{ name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', rarity: 5,  status: 'new', version: '3.5' },
+{ name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', rarity: 5,  status: 'new', version: '3.5' },
+{ name: 'Phainon', imgName: '1408', have: true, element: 'physical', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Cipher', imgName: '1406', have: false, element: 'quantum', group:'nihi', gender:'f', rarity: 5,  status: 'available', version: '3.3' },
+{ name: 'Hyacine', imgName: '1409', have: true, element: 'wind', group:'reme', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Anaxa', imgName: '1405', have: false, element: 'wind', group:'eru', gender:'m', rarity: 5,  status: 'available', version: '3.2' },
+{ name: 'Castorice', imgName: '1407', have: true, element: 'quantum', group:'reme', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Mydei', imgName: '1404', have: false, element: 'imaginary', group:'dest', gender:'m', rarity: 5,  status: 'available', version: '3.1' },
+{ name: 'Tribbie', imgName: '1403', have: false, element: 'quantum', group:'harm', gender:'f', rarity: 5,  status: 'available', version: '3.4' },
+{ name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', rarity: 5,  status: 'available', version: '3.3' },
+{ name: 'The Herta', imgName: '1401', have: true, element: 'ice', group:'eru', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Fugue', imgName: '1225', have: false, element: 'fire', group:'nihi', gender:'f', rarity: 5,  status: 'available', version: '3.2' },
+{ name: 'Sunday', imgName: '1313', have: false, element: 'imaginary', group:'harm', gender:'m', rarity: 5,  status: 'available', version: '3.4' },
+{ name: 'Rappa', imgName: '1317', have: false, element: 'imaginary', group:'eru', gender:'f', rarity: 5,  status: 'available', version: '2.6' },
+{ name: 'Lingsha', imgName: '1222', have: false, element: 'fire', group:'abun', gender:'f', rarity: 5,  status: 'available', version: '3.0' },
+{ name: 'Feixiao', imgName: '1220', have: false, element: 'wind', group:'hunt', gender:'f', rarity: 5,  status: 'available', version: '3.0' },
+{ name: 'Moze', imgName: '1223', have: true, element: 'thunder', group:'hunt', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Jiaoqiu', imgName: '1218', have: false, element: 'fire', group:'nihi', gender:'m', rarity: 5,  status: 'available', version: '3.2' },
+{ name: 'Yunli', imgName: '1221', have: false, element: 'physical', group:'dest', gender:'f', rarity: 5,  status: 'available', version: '3.1' },
+{ name: 'March 7th', imgName: '1224', have: false, element: 'imaginary', group:'hunt', gender:'f', rarity: 4, status: 'available', version: '2.1' },
+{ name: 'Jade', imgName: '1314', have: false, element: 'quantum', group:'eru', gender:'f', rarity: 5,  status: 'available', version: '3.0' },
+{ name: 'Firefly', imgName: '1310', have: false, element: 'fire', group:'dest', gender:'f', rarity: 5,  status: 'available', version: '3.4' },
+{ name: 'Boothill', imgName: '1315', have: false, element: 'physical', group:'hunt', gender:'m', rarity: 5,  status: 'available', version: '3.0' },
+{ name: 'Robin', imgName: '1309', have: false, element: 'physical', group:'harm', gender:'f', rarity: 5,  status: 'available', version: '3.0' },
+{ name: 'Aventurine', imgName: '1304', have: true, element: 'imaginary', group:'prese', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Gallagher', imgName: '1301', have: true, element: 'fire', group:'abun', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Acheron', imgName: '1308', have: true, element: 'thunder', group:'nihi', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Sparkle', imgName: '1306', have: false, element: 'quantum', group:'harm', gender:'f', rarity: 5,  status: 'available', version: '3.4' },
+{ name: 'Black Swan', imgName: '1307', have: true, element: 'wind', group:'nihi', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', group:'hunt', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Xueyi', imgName: '1214', have: true, element: 'quantum', group:'dest', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Ruan Mei', imgName: '1303', have: false, element: 'ice', group:'harm', gender:'f', rarity: 5,  status: 'available', version: '3.2' },
+{ name: 'Hanya', imgName: '1215', have: false, element: 'physical', group:'harm', gender:'f', rarity: 4,  status: 'available', version: '3.4' },
+{ name: 'Argenti', imgName: '1302', have: true, element: 'physical', group:'eru', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Huohuo', imgName: '1217', have: false, element: 'wind', group:'abun', gender:'f', rarity: 5,  status: 'available', version: '3.1' },
+{ name: 'Topaz & Numby', imgName: '1112', have: false, element: 'fire', group:'hunt', gender:'f', rarity: 5,  status: 'available', version: '2.5' },
+{ name: 'Guinaifen', imgName: '1210', have: false, element: 'fire', group:'nihi', gender:'f', rarity: 4,  status: 'available', version: '3.1' },
+{ name: 'Jingliu', imgName: '1212', have: false, element: 'ice', group:'dest', gender:'f', rarity: 5,  status: 'available', version: '3.4' },
+{ name: 'Lynx', imgName: '1110', have: true, element: 'quantum', group:'abun', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Fu Xuan', imgName: '1208', have: false, element: 'quantum', group:'prese', gender:'f', rarity: 5,  status: 'available', version: '3.2' },
+{ name: 'Dan Heng • IL', imgName: '1213', have: true, element: 'imaginary', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Kafka', imgName: '1005', have: true, element: 'thunder', group:'nihi', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Luka', imgName: '1111', have: true, element: 'physical', group:'nihi', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Blade', imgName: '1205', have: true, element: 'wind', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Luocha', imgName: '1203', have: true, element: 'imaginary', group:'abun', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Yukong', imgName: '1207', have: true, element: 'imaginary', group:'harm', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Silver Wolf', imgName: '1006', have: true, element: 'quantum', group:'nihi', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Jing Yuan', imgName: '1204', have: false, element: 'thunder', group:'eru', gender:'m', rarity: 5,  status: 'available', version: '2.7' },
+{ name: 'March 7th', imgName: '1001', have: true, element: 'ice', group:'prese', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Dan Heng', imgName: '1002', have: true, element: 'wind', group:'hunt', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Himeko', imgName: '1003', have: true, element: 'fire', group:'eru', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Welt', imgName: '1004', have: false, element: 'imaginary', group:'nihi', gender:'m', rarity: 5,  status: 'available', version: '3.2' },
+{ name: 'Arlan', imgName: '1008', have: true, element: 'thunder', group:'dest', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Asta', imgName: '1009', have: true, element: 'fire', group:'harm', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Herta', imgName: '1013', have: true, element: 'ice', group:'eru', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Bronya', imgName: '1101', have: true, element: 'wind', group:'harm', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Seele', imgName: '1102', have: true, element: 'quantum', group:'hunt', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Serval', imgName: '1103', have: true, element: 'thunder', group:'eru', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Gepard', imgName: '1104', have: true, element: 'ice', group:'prese', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Natasha', imgName: '1105', have: true, element: 'physical', group:'abun', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Pela', imgName: '1106', have: true, element: 'ice', group:'nihi', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Clara', imgName: '1107', have: true, element: 'physical', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+{ name: 'Sampo', imgName: '1108', have: true, element: 'wind', group:'nihi', gender:'m', rarity: 4,  status: 'available' },
+{ name: 'Hook', imgName: '1109', have: true, element: 'fire', group:'dest', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Qingque', imgName: '1201', have: true, element: 'quantum', group:'eru', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Tingyun', imgName: '1202', have: true, element: 'thunder', group:'harm', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Sushang', imgName: '1206', have: true, element: 'physical', group:'hunt', gender:'f', rarity: 4,  status: 'available' },
+{ name: 'Yanqing', imgName: '1209', have: true, element: 'ice', group:'hunt', gender:'m', rarity: 5,  status: 'available' },
+{ name: 'Bailu', imgName: '1211', have: true, element: 'thunder', group:'abun', gender:'f', rarity: 5,  status: 'available' },
 
-{ name: 'Evernight', imgName: '1413', have: false, element: 'thunder', rarity: 5,  status: 'soon', version: '3.6' },
-{ name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'thunder', rarity: 5,  status: 'soon', version: '3.6' },
+{ name: 'Evernight', imgName: '1413', have: false, element: 'thunder', group:'reme', gender:'f', rarity: 5,  status: 'soon', version: '3.6' },
+{ name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'thunder', group:'prese', gender:'m', rarity: 5,  status: 'soon', version: '3.6' },
 
   // Add more characters here
 ];
@@ -82,11 +82,26 @@ const filterBtn = document.getElementById('filterBtn');
 const filterPopup = document.getElementById('filterPopup');
 
 let selectedFilters = {
-  have: false,
-  want: false,
-  new: false,
-  soon: false,
+  have: null,
+  newStatus: {
+    new: false,
+    soon: false,
+  },
+  element: null,
+  rarity: null,
+  region: new Set(),
+  gender: null,
+  group: null,
 };
+
+// Toggle dropdown sections
+document.querySelectorAll('.filter-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    button.classList.toggle('active');
+    const options = button.nextElementSibling;
+    if (options) options.classList.toggle('visible');
+  });
+});
 
 function renderList() {
   charListEl.innerHTML = '';
@@ -98,20 +113,47 @@ function renderList() {
     .filter(c => {
       const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-      const hasHave = selectedFilters.have;
-      const hasWant = selectedFilters.want;
-      const hasNew = selectedFilters.new;
-      const hasSoon = selectedFilters.soon;
+      // Filter by 'have'
+      if (selectedFilters.have !== null) {
+        if (selectedFilters.have && !c.have) return false;
+        if (!selectedFilters.have && c.have) return false;
+      }
 
-      const matchesHave = !hasHave || (hasHave && c.have);
-      const matchesWant = !hasWant || (hasWant && !c.have);
+      // Filter by newStatus (new or soon)
+      const wantsNew = selectedFilters.newStatus.new;
+      const wantsSoon = selectedFilters.newStatus.soon;
 
-      // Matches 'new' or 'soon' statuses when `new` is selected
-      const matchesStatus = (!hasNew && !hasSoon) || 
-                            (hasNew && (c.status === 'new' || c.status === 'soon')) || 
-                            (hasSoon && c.status === 'soon');
+      if (wantsNew || wantsSoon) {
+        if (wantsNew && wantsSoon) {
+          if (!(c.status === 'new' || c.status === 'soon')) return false;
+        } else if (wantsNew && c.status !== 'new') {
+          return false;
+        } else if (wantsSoon && c.status !== 'soon') {
+          return false;
+        }
+      }
+    // Filter by element
+      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
 
-      return matchesSearch && matchesHave && matchesWant && matchesStatus;
+      // Filter by rarity (string comparison)
+      if (selectedFilters.rarity && c.rarity.toString() !== selectedFilters.rarity) return false;
+
+      // Filter by region (multi-select)
+      if (selectedFilters.region.size > 0) {
+        if (!Array.isArray(c.region)) return false; // Safety check
+
+        if (!c.region.some(r => selectedFilters.region.has(r))) {
+          return false;
+        }
+      }
+
+      // Filter by gender
+      if (selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
+
+      // Filter by group
+      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
+
+      return matchesSearch;
     })
     .forEach(c => {
       const card = document.createElement('div');
@@ -120,11 +162,9 @@ function renderList() {
 
       const iconWrapper = document.createElement('div');
       iconWrapper.className = 'icon-wrapper';
-      if (c.rarity === 5) {
-        iconWrapper.style.background = 'linear-gradient(100deg, #7c4600ff, #ffa632cc)';
-      } else {
-        iconWrapper.style.background = 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
-      }
+      iconWrapper.style.background = c.rarity === 5
+        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
+        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
 
       if (c.status === 'new') {
         const newLabel = document.createElement('div');
@@ -168,8 +208,67 @@ function renderList() {
     });
 }
 
-// Setup filter logic
-searchInput.addEventListener('input', renderList);
+// ===== Filter Listeners with "toggle to unselect" support =====
+
+// Utility: Toggle radio as deselectable
+function setupToggleableRadio(groupName, filterKey) {
+  const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
+  inputs.forEach(input => {
+    input.addEventListener('click', e => {
+      const value = e.target.value;
+
+      // Special handling for "have" radio buttons (convert to boolean)
+      const parsedValue = (filterKey === "have")
+        ? (value === "true")
+        : value;
+
+      if (selectedFilters[filterKey] === parsedValue) {
+        selectedFilters[filterKey] = null;
+        input.checked = false;
+      } else {
+        selectedFilters[filterKey] = parsedValue;
+      }
+
+      renderList();
+    });
+  });
+}
+
+// 1) Have
+setupToggleableRadio("have", "have");
+
+// 2) Element
+setupToggleableRadio("element", "element");
+
+// 3) Rarity
+setupToggleableRadio("rarity", "rarity");
+
+// 4) Gender
+setupToggleableRadio("gender", "gender");
+
+// 5) Region (multi-select checkboxes)
+document.querySelectorAll('input[name="region"]').forEach(input => {
+  input.addEventListener('change', e => {
+    if (e.target.checked) {
+      selectedFilters.region.add(e.target.value);
+    } else {
+      selectedFilters.region.delete(e.target.value);
+    }
+    renderList();
+  });
+});
+
+// 6) NewStatus (checkbox - controls both 'new' and 'soon')
+document.querySelectorAll('input[name="newStatus"]').forEach(input => {
+  input.addEventListener('change', e => {
+    const isChecked = e.target.checked;
+    selectedFilters.newStatus.new = isChecked;
+    selectedFilters.newStatus.soon = isChecked;
+    renderList();
+  });
+});
+
+// ============ Filter popup toggle =============
 filterBtn.addEventListener('click', () => {
   filterPopup.classList.toggle('hidden');
 });
@@ -180,39 +279,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ✅ SINGLE unified logic to allow only ONE active filter at a time
-document.querySelectorAll('.filter-checkbox').forEach(option => {
-  option.addEventListener('change', (e) => {
-    const type = e.target.dataset.filter;
-    const wasChecked = e.target.checked;
-
-    // Allow `new` and `soon` to be independently checked.
-    if (type === 'new' || type === 'soon') {
-      selectedFilters[type] = wasChecked;
-    } else {
-      // Reset `have` and `want` filters to allow only one active at a time.
-      for (let key in selectedFilters) {
-        if (key !== 'new' && key !== 'soon') {
-          selectedFilters[key] = false;
-          document.querySelector(`[data-filter="${key}"]`).checked = false;
-        }
-      }
-
-      if (wasChecked) {
-        selectedFilters[type] = true;
-        e.target.checked = true;
-      }
-    }
-
-    filterPopup.classList.add('hidden');
-
-    renderList();
-  });
-});
-
-
-renderList();
-// Function to show popup sprite
+// ============ Sprite popup =============
 function showPopup(imgPath, altText) {
   const popup = document.getElementById('spritePopup');
   const popupImg = document.getElementById('spritePopupImg');
@@ -222,16 +289,23 @@ function showPopup(imgPath, altText) {
   popup.style.display = 'flex';
 }
 
-// Close popup on clicking ✕
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
 });
 
-// Close popup when clicking outside the image
 const popup = document.getElementById('spritePopup');
-
 popup.addEventListener('click', (e) => {
   if (e.target === popup) {
     popup.style.display = 'none';
   }
 });
+
+// ============ Search input =============
+searchInput.addEventListener('input', () => {
+  renderList();
+});
+
+setupToggleableRadio("group", "group");
+
+// ============ Initial render ============
+renderList();

@@ -1,3 +1,3 @@
 git add . 
-git commit -m "i fix one thing remember one thousands"  
+git commit -m "added more filters"  
 git push origin main  

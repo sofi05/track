@@ -16,9 +16,130 @@
 </div>
 
 <div id="filterPopup" class="filter-popup hidden">
-  <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
-  <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
-  <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+
+  <!-- Status (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Status</button>
+    <div class="filter-options">
+      <!-- Have: binary choice -->
+      <div class="sub-filter">
+        <label><input type="radio" name="have" value="true"> Have</label>
+        <label><input type="radio" name="have" value="false"> Haven't</label>
+      </div>
+      <!-- Soon/New (combined as single checkbox) -->
+      <div class="sub-filter">
+        <label><input type="checkbox" name="newStatus" value="true"> New</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Element (single-select with images) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Element</button>
+    <div class="filter-options">
+      <label class="element-label">
+        <input type="radio" name="element" value="IconElectric">
+        <img src="../assets/element/ZZZ/IconElectric.png" alt="Electric" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="IconEther">
+        <img src="../assets/element/ZZZ/IconEther.png" alt="Ether" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="IconFire">
+        <img src="../assets/element/ZZZ/IconFire.png" alt="Fire" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="IconIce">
+        <img src="../assets/element/ZZZ/IconIce.png" alt="Ice" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="IconPhysical">
+        <img src="../assets/element/ZZZ/IconPhysical.png" alt="Physical" class="element-img">
+      </label>
+    </div>
+  </div>
+
+  <!-- Rarity (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Rarity</button>
+    <div class="filter-options">
+      <label><input type="radio" name="rarity" value="4"> 4★</label>
+      <label><input type="radio" name="rarity" value="5"> 5★ </label>
+    </div>
+  </div>
+
+  <!-- Region (multi-select) -->
+  <div class="filter-category">
+  <button type="button" class="filter-toggle">Factions</button>
+  <div class="filter-options region-grid">
+    <label class="element-label" for="group-cunhar">
+      <input type="radio" name="group" value="cunhar" id="group-cunhar" />
+      <img class="element-img" src="../assets/others/group/ZZZ/cunhar.png" alt="Cunning Hares" />
+    </label>
+
+    <label class="element-label" for="group-belo">
+      <input type="radio" name="group" value="belo" id="group-belo" />
+      <img class="element-img" src="../assets/others/group/ZZZ/belo.png" alt="Belobog Industries" />
+    </label>
+
+    <label class="element-label" for="group-sons">
+      <input type="radio" name="group" value="sons" id="group-sons" />
+      <img class="element-img" src="../assets/others/group/ZZZ/sons.png" alt="Sons of Calydon" />
+    </label>
+
+    <label class="element-label" for="group-mock">
+      <input type="radio" name="group" value="mock" id="group-mock" />
+      <img class="element-img" src="../assets/others/group/ZZZ/mock.png" alt="Mockingbird" />
+    </label>
+
+    <label class="element-label" for="group-spook">
+      <input type="radio" name="group" value="spook" id="group-spook" />
+      <img class="element-img" src="../assets/others/group/ZZZ/spook.png" alt="Spook Shack" />
+    </label>
+
+    <label class="element-label" for="group-vic">
+      <input type="radio" name="group" value="vic" id="group-vic" />
+      <img class="element-img" src="../assets/others/group/ZZZ/vic.png" alt="Victoria Housekeeping" />
+    </label>
+
+    <label class="element-label" for="group-obol">
+      <input type="radio" name="group" value="obol" id="group-obol" />
+      <img class="element-img" src="../assets/others/group/ZZZ/obol.png" alt="Obol Squad" />
+    </label>
+
+    <label class="element-label" for="group-spec">
+      <input type="radio" name="group" value="spec" id="group-spec" />
+      <img class="element-img" src="../assets/others/group/ZZZ/spec.png" alt="Special Response Team" />
+    </label>
+
+    <label class="element-label" for="group-sec6">
+      <input type="radio" name="group" value="sec6" id="group-sec6" />
+      <img class="element-img" src="../assets/others/group/ZZZ/sec6.png" alt="Section 6" />
+    </label>
+
+    <label class="element-label" for="group-star">
+      <input type="radio" name="group" value="star" id="group-star" />
+      <img class="element-img" src="../assets/others/group/ZZZ/star.png" alt="Stars of Lyra" />
+    </label>
+
+    <label class="element-label" for="group-sum">
+      <input type="radio" name="group" value="sum" id="group-sum" />
+      <img class="element-img" src="../assets/others/group/ZZZ/sum.png" alt="Yunkui Summit" />
+    </label>
+  </div>
+</div>
+
+
+  <!-- Gender (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Gender</button>
+    <div class="filter-options">
+      <label><input type="radio" name="gender" value="m"> Male</label>
+      <label><input type="radio" name="gender" value="f"> Female</label>
+    </div>
+  </div>
+
 </div>
 
 

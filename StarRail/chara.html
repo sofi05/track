@@ -15,11 +15,125 @@
     <button id="filterBtn">Filter</button>
   </div>
 
-  <div id="filterPopup" class="filter-popup hidden">
-    <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
-    <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
-    <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+<div id="filterPopup" class="filter-popup hidden">
+
+  <!-- Status (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Status</button>
+    <div class="filter-options">
+      <!-- Have: binary choice -->
+      <div class="sub-filter">
+        <label><input type="radio" name="have" value="true"> Have</label>
+        <label><input type="radio" name="have" value="false"> Haven't</label>
+      </div>
+      <!-- Soon/New (combined as single checkbox) -->
+      <div class="sub-filter">
+        <label><input type="checkbox" name="newStatus" value="true"> New</label>
+      </div>
+    </div>
   </div>
+
+  <!-- Element (single-select with images) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Element</button>
+    <div class="filter-options">
+      <label class="element-label">
+        <input type="radio" name="element" value="fire">
+        <img src="../assets/element/HSR/fire.png" alt="fire" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="ice">
+        <img src="../assets/element/HSR/ice.png" alt="ice" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="imaginary">
+        <img src="../assets/element/HSR/imaginary.png" alt="imaginary" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="physical">
+        <img src="../assets/element/HSR/physical.png" alt="physical" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="quantum">
+        <img src="../assets/element/HSR/quantum.png" alt="quantum" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="thunder">
+        <img src="../assets/element/HSR/thunder.png" alt="thunder" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="wind">
+        <img src="../assets/element/HSR/wind.png" alt="wind" class="element-img">
+      </label>
+    </div>
+  </div>
+
+  <!-- Rarity (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Rarity</button>
+    <div class="filter-options">
+      <label><input type="radio" name="rarity" value="4"> 4★</label>
+      <label><input type="radio" name="rarity" value="5"> 5★ </label>
+    </div>
+  </div>
+
+  <!-- Region (multi-select) -->
+  <div class="filter-category">
+  <button type="button" class="filter-toggle">Path</button>
+  <div class="filter-options region-grid">
+    <label class="element-label" for="group-abun">
+      <input type="radio" name="group" value="abun" id="group-abun" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Abundance.png" alt="Abundance" />
+    </label>
+
+    <label class="element-label" for="group-dest">
+      <input type="radio" name="group" value="dest" id="group-dest" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Destruction.png" alt="Destruction" />
+    </label>
+
+    <label class="element-label" for="group-eru">
+      <input type="radio" name="group" value="eru" id="group-eru" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Erudition.png" alt="Erudition" />
+    </label>
+
+    <label class="element-label" for="group-harm">
+      <input type="radio" name="group" value="harm" id="group-harm" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Harmony.png" alt="Harmony" />
+    </label>
+
+    <label class="element-label" for="group-nihi">
+      <input type="radio" name="group" value="nihi" id="group-nihi" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Nihility.png" alt="Nihility" />
+    </label>
+
+    <label class="element-label" for="group-prese">
+      <input type="radio" name="group" value="prese" id="group-prese" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Preservation.png" alt="Preservation" />
+    </label>
+
+    <label class="element-label" for="group-reme">
+      <input type="radio" name="group" value="reme" id="group-reme" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_Remembrance.png" alt="Remembrance" />
+    </label>
+
+    <label class="element-label" for="group-hunt">
+      <input type="radio" name="group" value="hunt" id="group-hunt" />
+      <img class="element-img" src="../assets/others/group/HSR/Path_The_Hunt.png" alt="The Hunt" />
+    </label>
+  </div>
+</div>
+
+
+  <!-- Gender (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Gender</button>
+    <div class="filter-options">
+      <label><input type="radio" name="gender" value="m"> Male</label>
+      <label><input type="radio" name="gender" value="f"> Female</label>
+    </div>
+  </div>
+
+</div>
 
   <div class="char-list" id="charList"></div>
 

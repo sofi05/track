@@ -6,8 +6,6 @@ const characters = [
 
 const charListEl = document.getElementById('charList');
 const searchInput = document.getElementById('searchInput');
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
 
 let selectedFilters = {
   have: false,
@@ -25,13 +23,9 @@ function renderList() {
     .filter(c => {
       const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-      const hasHave = selectedFilters.have;
-      const hasWant = selectedFilters.want;
-      const hasNew = selectedFilters.new;
-
-      const matchesHave = !hasHave || (hasHave && c.have);
-      const matchesWant = !hasWant || (hasWant && !c.have);
-      const matchesStatus = (!hasNew) || (hasNew && c.status === 'new');
+      const matchesHave = !selectedFilters.have || (selectedFilters.have && c.have);
+      const matchesWant = !selectedFilters.want || (selectedFilters.want && !c.have);
+      const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
 
       return matchesSearch && matchesHave && matchesWant && matchesStatus;
     })
@@ -42,17 +36,15 @@ function renderList() {
 
       const iconWrapper = document.createElement('div');
       iconWrapper.className = 'icon-wrapper';
-      if (c.rarity === 5) {
-        iconWrapper.style.background = 'linear-gradient(100deg, #7c4600ff, #ffa632cc)';
-      } else {
-        iconWrapper.style.background = 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
-      }
+      iconWrapper.style.background = c.rarity === 5
+        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
+        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
 
       if (c.status === 'new') {
-        const soonLabel = document.createElement('div');
-        soonLabel.textContent = 'New';
-        soonLabel.className = 'soon-label';
-        iconWrapper.appendChild(soonLabel);
+        const label = document.createElement('div');
+        label.textContent = 'NEW';
+        label.className = 'soon-label';
+        iconWrapper.appendChild(label);
       }
 
       const img = document.createElement('img');
@@ -78,8 +70,54 @@ function renderList() {
     });
 }
 
-// Setup filter logic
+// Unified single-select checkbox logic
+document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+  checkbox.addEventListener('change', e => {
+    const type = e.target.dataset.filter;
+    const wasChecked = e.target.checked;
+
+    // Reset all filters
+    for (let key in selectedFilters) {
+      selectedFilters[key] = false;
+      document.querySelector(`[data-filter="${key}"]`).checked = false;
+    }
+
+    // Re-check only the one just clicked
+    if (wasChecked) {
+      selectedFilters[type] = true;
+      e.target.checked = true;
+    }
+
+    renderList();
+  });
+});
+
+// Search typing
 searchInput.addEventListener('input', renderList);
+
+// Show popup
+function showPopup(imgPath, altText) {
+  const popup = document.getElementById('spritePopup');
+  const popupImg = document.getElementById('spritePopupImg');
+
+  popupImg.src = imgPath;
+  popupImg.alt = altText;
+  popup.style.display = 'flex';
+}
+
+// Close popup on click outside or ✕
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('spritePopup').style.display = 'none';
+});
+document.getElementById('spritePopup').addEventListener('click', e => {
+  if (e.target.id === 'spritePopup') {
+    e.target.style.display = 'none';
+  }
+});
+
+const filterBtn = document.getElementById('filterBtn');
+const filterPopup = document.getElementById('filterPopup');
+
 filterBtn.addEventListener('click', () => {
   filterPopup.classList.toggle('hidden');
 });
@@ -90,52 +128,4 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ✅ SINGLE unified logic to allow only ONE active filter at a time
-document.querySelectorAll('.filter-checkbox').forEach(option => {
-  option.addEventListener('change', (e) => {
-    const type = e.target.dataset.filter;
-    const wasChecked = e.target.checked;
-
-    // Uncheck all and reset filters
-    for (let key in selectedFilters) {
-      selectedFilters[key] = false;
-      document.querySelector(`[data-filter="${key}"]`).checked = false;
-    }
-
-    // Only re-check if user had just checked it
-    if (wasChecked) {
-      selectedFilters[type] = true;
-      e.target.checked = true;
-    }
-
-    filterPopup.classList.add('hidden');
-
-    renderList();
-  });
-});
-
-
 renderList();
-// Function to show popup sprite
-function showPopup(imgPath, altText) {
-  const popup = document.getElementById('spritePopup');
-  const popupImg = document.getElementById('spritePopupImg');
-
-  popupImg.src = imgPath;
-  popupImg.alt = altText;
-  popup.style.display = 'flex';
-}
-
-// Close popup on clicking ✕
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-
-// Close popup when clicking outside the image
-const popup = document.getElementById('spritePopup');
-
-popup.addEventListener('click', (e) => {
-  if (e.target === popup) {
-    popup.style.display = 'none';
-  }
-});

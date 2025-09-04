@@ -16,10 +16,128 @@
 </div>
 
 <div id="filterPopup" class="filter-popup hidden">
-  <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
-  <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
-  <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+
+  <!-- Status (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Status</button>
+    <div class="filter-options">
+      <!-- Have: binary choice -->
+      <div class="sub-filter">
+        <label><input type="radio" name="have" value="true"> Have</label>
+        <label><input type="radio" name="have" value="false"> Haven't</label>
+      </div>
+      <!-- Soon/New (combined as single checkbox) -->
+      <div class="sub-filter">
+        <label><input type="checkbox" name="newStatus" value="true"> New</label>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Element (single-select with images) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Element</button>
+    <div class="filter-options">
+      <label class="element-label">
+        <input type="radio" name="element" value="Anemo">
+        <img src="../assets/element/Genshin/Anemo.png" alt="Anemo" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Geo">
+        <img src="../assets/element/Genshin/Geo.png" alt="Geo" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Electro">
+        <img src="../assets/element/Genshin/Electro.png" alt="Electro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Dendro">
+        <img src="../assets/element/Genshin/Dendro.png" alt="Dendro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Hydro">
+        <img src="../assets/element/Genshin/Hydro.png" alt="Hydro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Pyro">
+        <img src="../assets/element/Genshin/Pyro.png" alt="Pyro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Cryo">
+        <img src="../assets/element/Genshin/Cryo.png" alt="Cryo" class="element-img">
+      </label>
+    </div>
+  </div>
+
+  <!-- Rarity (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Rarity</button>
+    <div class="filter-options">
+      <label><input type="radio" name="rarity" value="4"> 4★</label>
+      <label><input type="radio" name="rarity" value="5"> 5★ </label>
+    </div>
+  </div>
+
+  <!-- Region (multi-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Region</button>
+    <div class="filter-options region-grid">
+      <label for="region-mond" class="region-label-img">
+        <input type="checkbox" name="region" value="mond" id="region-mond">
+        <img src="../assets/others/group/Genshin/mond.png" alt="Mondstadt" class="region-img">
+      </label>
+
+      <label for="region-liy" class="region-label-img">
+        <input type="checkbox" name="region" value="liy" id="region-liy">
+        <img src="../assets/others/group/Genshin/liy.png" alt="Liyue" class="region-img">
+      </label>
+
+      <label for="region-ina" class="region-label-img">
+        <input type="checkbox" name="region" value="ina" id="region-ina">
+        <img src="../assets/others/group/Genshin/ina.png" alt="Inazuma" class="region-img">
+      </label>
+
+      <label for="region-sum" class="region-label-img">
+        <input type="checkbox" name="region" value="sum" id="region-sum">
+        <img src="../assets/others/group/Genshin/sum.png" alt="Sumeru" class="region-img">
+      </label>
+
+      <label for="region-font" class="region-label-img">
+        <input type="checkbox" name="region" value="font" id="region-font">
+        <img src="../assets/others/group/Genshin/font.png" alt="Fontaine" class="region-img">
+      </label>
+
+      <label for="region-nat" class="region-label-img">
+        <input type="checkbox" name="region" value="nat" id="region-nat">
+        <img src="../assets/others/group/Genshin/nat.png" alt="Natlan" class="region-img">
+      </label>
+
+      <label for="region-snez">
+        <input type="checkbox" name="region" value="snez" id="region-snez">Snezhnaya
+      </label>
+
+      <label for="region-khae">
+        <input type="checkbox" name="region" value="khae" id="region-khae">Khaenriah
+      </label>
+
+      <label for="region-unk">
+        <input type="checkbox" name="region" value="unk" id="region-unk">Unknown
+      </label>
+      <!-- Add all 8+ regions -->
+    </div>
+  </div>
+
+  <!-- Gender (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Gender</button>
+    <div class="filter-options">
+      <label><input type="radio" name="gender" value="m"> Male</label>
+      <label><input type="radio" name="gender" value="f"> Female</label>
+    </div>
+  </div>
+
 </div>
+
 
 
   <div class="char-list" id="charList"></div>
@@ -54,7 +172,6 @@
 <!--SPRITE-->
 <div id="spritePopup" class="sprite-popup" style="display:none;">
   <span class="close-btn">✕</span>
-  <span class="close-btn"></span>
   <img id="spritePopupImg" src="" alt="" />
 </div>
 <div id="spriteList"></div>
