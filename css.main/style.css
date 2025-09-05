@@ -405,12 +405,18 @@ h1 {
   align-items: center;
   cursor: pointer;
   gap: 6px;
+  
 }
 
 /* Hide the checkbox */
 .region-label-img input[type="checkbox"] {
   display: none;
 }
+
+.region-label-img input[type="radio"] {
+  display: none; /* hide the default radio "O" */
+}
+
 
 /* Style the region image */
 .region-label-img .region-img {

@@ -66,11 +66,24 @@ let selectedFilters = {
 // Toggle dropdown sections
 document.querySelectorAll('.filter-toggle').forEach(button => {
   button.addEventListener('click', () => {
+    const allButtons = document.querySelectorAll('.filter-toggle');
+    const allOptions = document.querySelectorAll('.filter-options');
+
+    allButtons.forEach(btn => {
+      if (btn !== button) btn.classList.remove('active');
+    });
+
+    allOptions.forEach(opt => {
+      if (opt !== button.nextElementSibling) opt.classList.remove('visible');
+    });
+
+    // Toggle current one
     button.classList.toggle('active');
     const options = button.nextElementSibling;
     if (options) options.classList.toggle('visible');
   });
 });
+
 
 function renderList() {
   charListEl.innerHTML = '';

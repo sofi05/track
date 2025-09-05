@@ -121,18 +121,32 @@ let selectedFilters = {
   },
   element: null,
   rarity: null,
-  region: new Set(),
+  region: null, // ⬅️ Changed from Set() to single value
   gender: null,
+  group: null,
 };
 
 // Toggle dropdown sections
 document.querySelectorAll('.filter-toggle').forEach(button => {
   button.addEventListener('click', () => {
+    const allButtons = document.querySelectorAll('.filter-toggle');
+    const allOptions = document.querySelectorAll('.filter-options');
+
+    allButtons.forEach(btn => {
+      if (btn !== button) btn.classList.remove('active');
+    });
+
+    allOptions.forEach(opt => {
+      if (opt !== button.nextElementSibling) opt.classList.remove('visible');
+    });
+
+    // Toggle current one
     button.classList.toggle('active');
     const options = button.nextElementSibling;
     if (options) options.classList.toggle('visible');
   });
 });
+
 
 function renderList() {
   charListEl.innerHTML = '';
@@ -170,17 +184,17 @@ function renderList() {
       // Filter by rarity (string comparison)
       if (selectedFilters.rarity && c.rarity.toString() !== selectedFilters.rarity) return false;
 
-      // Filter by region (multi-select)
-      if (selectedFilters.region.size > 0) {
-        if (!Array.isArray(c.region)) return false; // Safety check
-
-        if (!c.region.some(r => selectedFilters.region.has(r))) {
-          return false;
-        }
+      // ✅ Filter by region (single select)
+      if (selectedFilters.region) {
+        if (!Array.isArray(c.region)) return false;
+        if (!c.region.includes(selectedFilters.region)) return false;
       }
 
       // Filter by gender
       if (selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
+
+      // Filter by group
+      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
 
       return matchesSearch;
     })
@@ -275,17 +289,8 @@ setupToggleableRadio("rarity", "rarity");
 // 4) Gender
 setupToggleableRadio("gender", "gender");
 
-// 5) Region (multi-select checkboxes)
-document.querySelectorAll('input[name="region"]').forEach(input => {
-  input.addEventListener('change', e => {
-    if (e.target.checked) {
-      selectedFilters.region.add(e.target.value);
-    } else {
-      selectedFilters.region.delete(e.target.value);
-    }
-    renderList();
-  });
-});
+// ✅ 5) Region (now single-select)
+setupToggleableRadio("region", "region");
 
 // 6) NewStatus (checkbox - controls both 'new' and 'soon')
 document.querySelectorAll('input[name="newStatus"]').forEach(input => {
@@ -297,7 +302,10 @@ document.querySelectorAll('input[name="newStatus"]').forEach(input => {
   });
 });
 
-// ============ Filter popup toggle =============
+// Group (if applicable)
+setupToggleableRadio("group", "group");
+
+// ============ Filter popup toggle ============
 filterBtn.addEventListener('click', () => {
   filterPopup.classList.toggle('hidden');
 });
@@ -308,7 +316,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ============ Sprite popup =============
+// ============ Sprite popup ============
 function showPopup(imgPath, altText) {
   const popup = document.getElementById('spritePopup');
   const popupImg = document.getElementById('spritePopupImg');
@@ -329,11 +337,10 @@ popup.addEventListener('click', (e) => {
   }
 });
 
-// ============ Search input =============
+// ============ Search input ============
 searchInput.addEventListener('input', () => {
   renderList();
 });
-
 
 // ============ Initial render ============
 renderList();
