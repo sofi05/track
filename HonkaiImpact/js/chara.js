@@ -107,8 +107,8 @@ const characters = [
   { name: 'Susannah', imgName: 'Valkyrie_Quicksand', folder:'SoloChara', have: true, element: 'QUA', rarity: '4', part:'1', status: 'available' },
 
   //COLLAB characters
-  { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'All_Collabs', have: true, element: 'BIO', rarity: '4', part:'1', status: 'available' },
-  { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'All_Collabs', have: true, element: 'QUA', rarity: '5', part:'2', status: 'available' },
+  { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'All_Collabs', have: true, element: 'BIO', rarity: '4', part:'1', status: 'available', collab: true },
+  { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'All_Collabs', have: true, element: 'QUA', rarity: '5', part:'2', status: 'available', collab: true },
 
   //part 2 (Honkai Impact 3th)
   { name: 'Coralie • BF', imgName: 'Behold_Fate-Defying_Dragon', folder:'Coralie', have: false, element: 'MECH', rarity: '5', part:'2', status: 'new', version:'8.4' },
@@ -175,28 +175,29 @@ function renderList() {
     .sort((a, b) => a.name.localeCompare(b.name))
     .filter(c => {
       const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-      const matchesPart = selectedPart === 'all' || c.part === selectedPart;
-  
-  // Filter by 'have'
-    if (selectedFilters.have !== null) {
-      if (selectedFilters.have && !c.have) return false;
-      if (!selectedFilters.have && c.have) return false;
-    }
+      const matchesPart = selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab);
 
-    // Filter by newStatus (new or soon)
-    const wantsNew = selectedFilters.newStatus.new;
-    const wantsSoon = selectedFilters.newStatus.soon;
-
-    if (wantsNew || wantsSoon) {
-      if (wantsNew && wantsSoon) {
-        if (!(c.status === 'new' || c.status === 'soon')) return false;
-      } else if (wantsNew && c.status !== 'new') {
-        return false;
-      } else if (wantsSoon && c.status !== 'soon') {
-        return false;
+      // Filter by 'have'
+      if (selectedFilters.have !== null) {
+        if (selectedFilters.have && !c.have) return false;
+        if (!selectedFilters.have && c.have) return false;
       }
-    }
-    // Filter by element
+
+      // Filter by newStatus (new or soon)
+      const wantsNew = selectedFilters.newStatus.new;
+      const wantsSoon = selectedFilters.newStatus.soon;
+
+      if (wantsNew || wantsSoon) {
+        if (wantsNew && wantsSoon) {
+          if (!(c.status === 'new' || c.status === 'soon')) return false;
+        } else if (wantsNew && c.status !== 'new') {
+          return false;
+        } else if (wantsSoon && c.status !== 'soon') {
+          return false;
+        }
+      }
+
+      // Filter by element
       if (selectedFilters.element && c.element !== selectedFilters.element) return false;
 
       // Filter by rarity (string comparison)
@@ -220,7 +221,7 @@ function renderList() {
         3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
       };
 
-    iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
+      iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
 
       if (c.status === 'new') {
         const newLabel = document.createElement('div');
@@ -243,7 +244,6 @@ function renderList() {
       img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
       img.alt = c.name;
 
-
       const elementImg = document.createElement('img');
       elementImg.className = 'element-icon';
       elementImg.src = `../assets/element/HI3/${c.element}.png`;
@@ -259,7 +259,7 @@ function renderList() {
       card.appendChild(label);
       charListEl.appendChild(card);
 
-      //SPRITES - chANGE THISSSSSSS
+      // SPRITES - Change this
       card.addEventListener('click', () => {
         const imgName = c.imgName || c.name;
         const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
@@ -362,10 +362,9 @@ document.querySelectorAll('.part-btn').forEach(btn => {
     btn.classList.add('active');
 
     // Update selectedPart and re-render
-    selectedPart = btn.dataset.part;
+    selectedPart = btn.dataset.part === 'collab' ? 'collab' : btn.dataset.part;
     renderList();
   });
 });
-
 
 renderList();
