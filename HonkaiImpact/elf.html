@@ -15,6 +15,12 @@
   <button id="filterBtn">Filter</button>
 </div>
 
+<div class="part-toggle" id="partToggle">
+  <button data-part="2" class="part-btn active">Part 2</button>
+  <button data-part="1" class="part-btn">Part 1</button>
+  <button data-part="all" class="part-btn">All</button>
+</div>
+
 <div id="filterPopup" class="filter-popup hidden">
 
   <!-- Status (single-select) -->
@@ -27,6 +33,29 @@
         <label><input type="radio" name="have" value="false"> Haven't</label>
       </div>
     </div>
+  </div>
+
+  <!-- Element (single-select with images) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Element</button>
+    <div class="filter-options">
+      <label class="element-label">
+        <input type="radio" name="element" value="Fire_DMG">
+        <img src="../assets/others/HI3/Cores/Core_Fire_DMG.png" alt="Fire" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Ice_DMG">
+        <img src="../assets/others/HI3/Cores/Core_Ice_DMG.png" alt="Ice" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Lightning_DMG">
+        <img src="../assets/others/HI3/Cores/Core_Lightning_DMG.png" alt="Lightning" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Physical">
+        <img src="../assets/others/HI3/Cores/Core_Physical.png" alt="Physical" class="element-img">
+      </label>
+      </div>
   </div>
 
   <!-- Rarity (single-select) -->
