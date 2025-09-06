@@ -125,7 +125,7 @@ const characters = [
     spriteImages: ['Auspicious_Dazzle', 'Midnight_Moon'], },
   
   { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2',
-    spriteImages: ['Gentle_is_the_Night', 'Roseate_Summer', ''], },
+    spriteImages: ['Gentle_is_the_Night', 'Roseate_Summer'], },
   
   { name: 'Theresa', imgName: 'Valkyrie_Pledge', folder: 'Theresa', spriteFolder: 'Theresa', have: false, part: '1',
     spriteImages: ['Before_the_Dawn', 'Blood_Knight_-_Moonlight', 'Campus_Detective','Empyrean_Psalms', 'Grand_Sage','Heat_of_Trifolium','Lilac_of_the_Valley', 'Magic_Girl_Teriri','Morning_Sunshine','Ouranons_Forgiveness','Pledge','Rosy_Bridesmaid','Shallow_Sunset','Starry_Night','Sugar_Haw_Child','Wonderland_Trek',

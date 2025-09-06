@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added outfit page"  
+git commit -m "fixed outfit page"
 git push origin main  
