@@ -107,8 +107,8 @@ const characters = [
   { name: 'Susannah', imgName: 'Valkyrie_Quicksand', folder:'SoloChara', have: true, element: 'QUA', rarity: '4', part:'1', status: 'available' },
 
   //COLLAB characters
-  { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'.Collab', have: true, element: 'BIO', rarity: '4', part:'1', status: 'available' },
-  { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'.Collab', have: true, element: 'QUA', rarity: '5', part:'2', status: 'available' },
+  { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'-Collab', have: true, element: 'BIO', rarity: '4', part:'1', status: 'available' },
+  { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'-Collab', have: true, element: 'QUA', rarity: '5', part:'2', status: 'available' },
 
   //part 2 (Honkai Impact 3th)
   { name: 'Coralie • BF', imgName: 'Behold_Fate-Defying_Dragon', folder:'Coralie', have: false, element: 'MECH', rarity: '5', part:'2', status: 'new', version:'8.4' },

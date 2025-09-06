@@ -50,11 +50,16 @@
   <script src="../all-js.main/change.js"></script>
   <link rel="stylesheet" href="../css.main/change.css" />
 
-  <!-- Outfit sprite popup -->
-  <div id="spritePopup" class="sprite-popup" style="display:none;">
-    <span class="close-btn">✕</span>
-    <img id="spritePopupImg" src="" alt="" />
+<!-- Popup container -->
+<div id="spritePopup" class="popup">
+  <div class="popup-content">
+    <button class="close-btn">✕</button>
+    <button id="prevBtn" class="nav-btn">←</button>
+    <img id="spritePopupImg" class="popup-img" />
+    <button id="nextBtn" class="nav-btn">→</button>
   </div>
+</div>
+
 
   <!-- Outfit List JS -->
   <script src="../HonkaiImpact/js/fit.js"></script>

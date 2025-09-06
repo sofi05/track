@@ -471,3 +471,44 @@ h1 {
   border-color: #a3a3a3;
   color: rgb(0, 0, 0);
 }
+
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.popup-img {
+  max-width: 80vw;
+  max-height: 80vh;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
