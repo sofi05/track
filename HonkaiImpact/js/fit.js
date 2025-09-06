@@ -290,10 +290,13 @@ function showPopup(folderPath, charName, spriteList = []) {
     });
 
     popup.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - touchStartX;
-      if (diff > 50) prevImage();
-      else if (diff < -50) nextImage();
-    });
+  // Only allow swipe if there's more than one sprite
+  if (spriteList.length > 1) {
+    const diff = e.changedTouches[0].clientX - touchStartX;
+    if (diff > 50) prevImage();
+    else if (diff < -50) nextImage();
+  }
+});
   }
 
   showImageAt(0);
