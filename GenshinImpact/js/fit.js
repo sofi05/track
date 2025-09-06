@@ -67,7 +67,7 @@ function renderList() {
       const img = document.createElement('img');
       img.className = 'char-icon';
       const imgSrcName = c.imgName || c.name;
-      img.src = `../assets/outfit/Genshin/${imgSrcName}.webp`;
+      img.src = `../assets/charaid/Genshin/Outfit/${imgSrcName}.webp`;
       img.alt = c.name;
 
       iconWrapper.appendChild(img);
@@ -80,7 +80,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const imgPath = `../assets/Sprite/Genshin/Outfit/UI_Costume_${c.imgName2}.png`;
+        const imgPath = `../assets/sprite/Genshin/Outfit/UI_Costume_${c.imgName2}.png`;
         showPopup(imgPath, c.name);
       });
     });

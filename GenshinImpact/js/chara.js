@@ -232,7 +232,7 @@ function renderList() {
 
       const elementImg = document.createElement('img');
       elementImg.className = 'element-icon';
-      elementImg.src = `../assets/element/Genshin/${c.element}.png`;
+      elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
       elementImg.alt = c.element;
 
       iconWrapper.appendChild(img);
@@ -247,7 +247,7 @@ function renderList() {
 
       card.addEventListener('click', () => {
         const imgName = c.imgName ? c.imgName : c.name;
-        const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
+        const imgPath = `../assets/sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
         showPopup(imgPath, c.name);
       });
     });

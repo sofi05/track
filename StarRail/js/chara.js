@@ -206,7 +206,7 @@ function renderList() {
 
       const elementImg = document.createElement('img');
       elementImg.className = 'element-icon';
-      elementImg.src = `../assets/element/HSR/${c.element}.png`;
+      elementImg.src = `../assets/others/StarRail/Element/${c.element}.png`;
       elementImg.alt = c.element;
 
       iconWrapper.appendChild(img);
@@ -221,7 +221,7 @@ function renderList() {
       
             card.addEventListener('click', () => {
         const imgName = c.imgName ? c.imgName : c.name;
-        const imgPath = `../assets/Sprite/StarRail/${imgName}.png`;
+        const imgPath = `../assets/sprite/StarRail/${imgName}.png`;
         showPopup(imgPath, c.name);
       });
     });

@@ -246,7 +246,7 @@ function renderList() {
 
       const elementImg = document.createElement('img');
       elementImg.className = 'element-icon';
-      elementImg.src = `../assets/element/HI3/${c.element}.png`;
+      elementImg.src = `../assets/others/HI3/Element/${c.element}.png`;
       elementImg.alt = c.element;
 
       iconWrapper.appendChild(img);
@@ -262,7 +262,7 @@ function renderList() {
       // SPRITES - Change this
       card.addEventListener('click', () => {
         const imgName = c.imgName || c.name;
-        const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
+        const imgPath = `../assets/sprite/HI3/${c.folder}/${imgSrcName}.png`;
         showPopup(imgPath, c.name);
       });
     });

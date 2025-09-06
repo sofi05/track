@@ -54,7 +54,7 @@ function renderList() {
       const img = document.createElement('img');
       img.className = 'char-icon';
       const imgSrcName = c.imgName ? c.imgName : c.name;
-      img.src = `../assets/outfit/Zenless/${imgSrcName}.webp`;
+      img.src = `../assets/charaid/Zenless/Outfit/${imgSrcName}.webp`;
       img.alt = c.name;
 
       iconWrapper.appendChild(img);
@@ -67,7 +67,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const imgPath = `../assets/Sprite/Zenless/Outfit/${c.imgName2}.png`;
+        const imgPath = `../assets/sprite/Zenless/Outfit/${c.imgName2}.png`;
         showPopup(imgPath, c.name);
       });
     });

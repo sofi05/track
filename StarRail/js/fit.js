@@ -50,7 +50,7 @@ function renderList() {
       const img = document.createElement('img');
       img.className = 'char-icon';
       const imgSrcName = c.imgName ? c.imgName : c.name;
-      img.src = `../assets/outfit/StarRail/${imgSrcName}.webp`;
+      img.src = `../assets/charaid/StarRail/Outfit/${imgSrcName}.webp`;
       img.alt = c.name;
 
       iconWrapper.appendChild(img);
@@ -63,7 +63,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const imgPath = `../assets/Sprite/StarRail/Outfit/${c.imgName2}.png`;
+        const imgPath = `../assets/sprite/StarRail/Outfit/${c.imgName2}.png`;
         showPopup(imgPath, c.name);
       });
 

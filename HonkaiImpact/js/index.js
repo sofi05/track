@@ -46,7 +46,7 @@ iconWrapper.style.background = rarityGradients[char.rarity] || 'linear-gradient(
 
 
     const elementIcon = document.createElement('img');
-    elementIcon.src = `../assets/element/HI3/${char.element}.png`; // Modify path as needed
+    elementIcon.src = `../assets/others/HI3/Element/${char.element}.png`; // Modify path as needed
     elementIcon.alt = char.element;
     elementIcon.classList.add('element-icon');
 

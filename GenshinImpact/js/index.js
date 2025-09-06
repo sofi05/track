@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const elementIcon = document.createElement('img');
-    elementIcon.src = `../assets/element/Genshin/${char.element}.png`; // Modify path as needed
+    elementIcon.src = `../assets/others/Genshin/Element/${char.element}.png`; // Modify path as needed
     elementIcon.alt = char.element;
     elementIcon.classList.add('element-icon');
 
