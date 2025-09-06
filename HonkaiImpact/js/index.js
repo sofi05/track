@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newCharacters = characters.filter(char => char.status === 'new' || char.status === 'soon');
 
   // Filter for rerun characters (have: false and status: 'available')
-  const rerunCharacters = characters.filter(char => char.have === false && char.status === 'available');
+  const rerunCharacters = characters.filter(char => char.have === false && char.status === 'available' && char.version);
 
   // Sort new characters by version (smallest to largest)
   newCharacters.sort((a, b) => a.version - b.version);  // Sorting in ascending order (smallest to largest)
@@ -25,29 +25,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const iconWrapper = document.createElement('div');
     iconWrapper.classList.add('icon-wrapper');
 
-    // Set background based on rarity
-    if (char.rarity === 5) {
-      iconWrapper.style.background = 'linear-gradient(100deg, #7c4600ff, #ffa632cc)';
-    } else {
-      iconWrapper.style.background = 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
-    }
+    // Define gradients by rarity
+    const rarityGradients = {
+      5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
+      4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
+      3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
+    };
 
+// Apply based on character rarity
+iconWrapper.style.background = rarityGradients[char.rarity] || 'linear-gradient(135deg, #444, #999)';
+
+      
     const iconImg = document.createElement('img');
 
-    // Check if char.imgName exists
-    if (char.imgName) {
-      iconImg.src = `../assets/charaid/Genshin/UI_AvatarIcon_${char.imgName}.png`; // Use the image path if imgName exists
-    } else {
-      iconImg.src = `../assets/charaid/Genshin/UI_AvatarIcon_${char.name}.png`; 
-      // Use a placeholder image if imgName is not available, with the text as the fallback
-    }
+    const imgSrcName = char.imgName || char.name;
+    iconImg.src = `../assets/charaid/Honkai/${char.folder}/${imgSrcName}.png`;
 
     iconImg.alt = char.name;
     iconImg.classList.add('char-icon');
 
 
     const elementIcon = document.createElement('img');
-    elementIcon.src = `../assets/element/Genshin/${char.element}.png`; // Modify path as needed
+    elementIcon.src = `../assets/element/HI3/${char.element}.png`; // Modify path as needed
     elementIcon.alt = char.element;
     elementIcon.classList.add('element-icon');
 

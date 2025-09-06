@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GI: Characters</title>
+  <title>HI3: Characters</title>
   <link rel="stylesheet" href="../css.main/style.css" />
   <script src="js/chara.js" defer></script>
 </head>
@@ -15,11 +15,88 @@
   <button id="filterBtn">Filter</button>
 </div>
 
-<div id="filterPopup" class="filter-popup hidden">
-  <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
-  <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
-  <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+<div class="part-toggle" id="partToggle">
+  <button data-part="2" class="part-btn active">Part 2</button>
+  <button data-part="1" class="part-btn">Part 1</button>
+  <button data-part="all" class="part-btn">All</button>
 </div>
+
+
+<div id="filterPopup" class="filter-popup hidden">
+
+  <!-- Status (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Status</button>
+    <div class="filter-options">
+      <!-- Have: binary choice -->
+      <div class="sub-filter">
+        <label><input type="radio" name="have" value="true"> Have</label>
+        <label><input type="radio" name="have" value="false"> Haven't</label>
+      </div>
+      <!-- Soon/New (combined as single checkbox) -->
+      <div class="sub-filter">
+        <label><input type="checkbox" name="newStatus" value="true"> New</label>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Element (single-select with images) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Element</button>
+    <div class="filter-options">
+      <label class="element-label">
+        <input type="radio" name="element" value="Anemo">
+        <img src="../assets/element/Genshin/Anemo.png" alt="Anemo" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Geo">
+        <img src="../assets/element/Genshin/Geo.png" alt="Geo" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Electro">
+        <img src="../assets/element/Genshin/Electro.png" alt="Electro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Dendro">
+        <img src="../assets/element/Genshin/Dendro.png" alt="Dendro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Hydro">
+        <img src="../assets/element/Genshin/Hydro.png" alt="Hydro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Pyro">
+        <img src="../assets/element/Genshin/Pyro.png" alt="Pyro" class="element-img">
+      </label>
+      <label class="element-label">
+        <input type="radio" name="element" value="Cryo">
+        <img src="../assets/element/Genshin/Cryo.png" alt="Cryo" class="element-img">
+      </label>
+    </div>
+  </div>
+
+  <!-- Rarity (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Rarity</button>
+    <div class="filter-options">
+      <label><input type="radio" name="rarity" value="4"> 4★</label>
+      <label><input type="radio" name="rarity" value="5"> 5★ </label>
+      
+    </div>
+  </div>
+
+  <!-- Gender (single-select) -->
+  <div class="filter-category">
+    <button type="button" class="filter-toggle">Parts</button>
+    <div class="filter-options">
+      <label><input type="radio" name="gender" value="1"> One</label>
+      <label><input type="radio" name="gender" value="2"> Two</label>
+    </div>
+  </div>
+
+</div>
+
 
 
   <div class="char-list" id="charList"></div>
@@ -48,10 +125,17 @@
 
 <!-- Popup container for switching games -->
 <div id="popup-container"></div>
-
-<!-- Include JS and CSS for popup -->
 <script src="../all-js.main/change.js"></script>
 <link rel="stylesheet" href="../css.main/change.css" />
+
+<!--SPRITE-->
+<div id="spritePopup" class="sprite-popup" style="display:none;">
+  <span class="close-btn">✕</span>
+  <img id="spritePopupImg" src="" alt="" />
+</div>
+<div id="spriteList"></div>
+<script src="../HonkaiImpact/js/sprite.js"></script>
+
 
 </body>
 </html>

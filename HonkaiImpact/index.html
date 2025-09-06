@@ -5,21 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Honkai Impact 3rd</title>
   <link rel="stylesheet" href="../css.main/style.css" />
+  <link rel="stylesheet" href="../css.main/bday.css" />
+  <script src="js/bday.js" defer></script>
   <link rel="stylesheet" href="../css.main/index.css" />  <!-- New and Reruns Section Styles -->
 </head>
 <body>
-  <div class="hi3-page">
+
+  <script src="js/chara.js"></script>  <!-- Load chara.js first -->
+  <script src="js/index.js"></script>  <!-- Then load index.js -->
+  
+  <div class="game-page">
     <h1>Honkai Impact 3rd</h1>
 
-    <h5 align="center"> coming soon...</h5>
-    <h6 align="center"> too lazy put the assets in order now... </h6>
+<section class="birthday-section">
+  <h2>🎉 Today's Birthdays</h2>
+  <div id="birthday-icons" class="birthday-icons"></div>
+</section>
+
+
+    <!-- New Characters Section -->
+    <section id="new-characters">
+      <h3>New Characters</h3>
+      <div id="new-characters-slider" class="slider">
+        <!-- New characters will be rendered here by index.js -->
+      </div>
+    </section>
+
+    <!-- Reruns Section -->
+    <section id="reruns">
+      <h3>Reruns</h3>
+      <div id="reruns-slider" class="slider">
+        <!-- Rerun characters, grouped by version, will be rendered here by index.js -->
+      </div>
+    </section>
 
     <!-- Bottom nav -->
     <nav class="bottom-nav">
       <a href="index.html" title="Home">
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
       Home</a>
-      <a href="#" id="tab-characters" title="Characters">
+      <a href="chara.html" id="tab-characters" title="Characters">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         Characters</a>
       <a href="menu.html" id="tab-quests" title="Quests">
@@ -42,9 +67,6 @@
 <!-- Include JS and CSS for popup -->
 <script src="../all-js.main/change.js"></script>
 <link rel="stylesheet" href="../css.main/change.css" />
-  <!-- Link to external JS -->
-<script src="js/chara.js"></script>  <!-- Load chara.js first -->
-<script src="js/index.js"></script>  <!-- Then load index.js -->
 
 </body>
 </html>

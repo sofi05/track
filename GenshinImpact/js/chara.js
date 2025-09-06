@@ -209,6 +209,8 @@ function renderList() {
         ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
         : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
 
+      iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
+
       if (c.status === 'new') {
         const newLabel = document.createElement('div');
         newLabel.textContent = 'NEW';

@@ -442,3 +442,32 @@ h1 {
   box-shadow: 0 0 12px #4096ffcc;
   opacity: 1;
 }
+
+/* Match part buttons to search filter button style */
+.part-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px;
+}
+
+.part-btn {
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #eee;
+  transition: background-color 0.2s ease;
+}
+
+.part-btn:hover {
+  background-color: #555;
+}
+
+.part-btn.active {
+  background-color: #a3a3a3;
+  border-color: #a3a3a3;
+  color: rgb(0, 0, 0);
+}

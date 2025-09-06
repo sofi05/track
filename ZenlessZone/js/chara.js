@@ -132,13 +132,15 @@ function renderList() {
     .forEach(c => {
       const card = document.createElement('div');
       card.className = 'char-card';
-      card.title = `${c.name} (${c.element}, ${c.rarity}★)`;
+      card.title = `${c.name} (${c.element}, ${c.rarity})`;
 
       const iconWrapper = document.createElement('div');
       iconWrapper.className = 'icon-wrapper';
       iconWrapper.style.background = c.rarity === 5
         ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
         : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
+
+      iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
 
       if (c.status === 'new') {
         const newLabel = document.createElement('div');
