@@ -53,13 +53,10 @@ const filterPopup = document.getElementById('filterPopup');
 
 let selectedFilters = {
   have: null,
-  newStatus: {
-    new: false,
-    soon: false,
-  },
+  newStatus: false, // single flag for both "new" and "soon"
   element: null,
   rarity: null,
-  group: null,  // changed from Set() to null
+  group: null,  
   gender: null,
 };
 
@@ -84,7 +81,6 @@ document.querySelectorAll('.filter-toggle').forEach(button => {
   });
 });
 
-
 function renderList() {
   charListEl.innerHTML = '';
   const searchTerm = searchInput.value.toLowerCase();
@@ -102,17 +98,9 @@ function renderList() {
       }
 
       // Filter by newStatus (new or soon)
-      const wantsNew = selectedFilters.newStatus.new;
-      const wantsSoon = selectedFilters.newStatus.soon;
-
-      if (wantsNew || wantsSoon) {
-        if (wantsNew && wantsSoon) {
-          if (!(c.status === 'new' || c.status === 'soon')) return false;
-        } else if (wantsNew && c.status !== 'new') {
-          return false;
-        } else if (wantsSoon && c.status !== 'soon') {
-          return false;
-        }
+      const wantsNewSoon = selectedFilters.newStatus;
+      if (wantsNewSoon) {
+        if (!(c.status === 'new' || c.status === 'soon')) return false;
       }
 
       // Filter by element
@@ -226,19 +214,13 @@ setupToggleableRadio("gender", "gender");
 setupToggleableRadio("group", "group");
 
 // 6) NewStatus (checkbox - controls both 'new' and 'soon')
-document.querySelectorAll('input[name="newStatus"]').forEach(input => {
-  input.addEventListener('change', e => {
-    const isChecked = e.target.checked;
-    if (e.target.value === "new") {
-      selectedFilters.newStatus.new = isChecked;
-    } else if (e.target.value === "soon") {
-      selectedFilters.newStatus.soon = isChecked;
-    }
-    renderList();
-  });
+document.querySelector('input[name="newStatus"]').addEventListener('change', e => {
+  selectedFilters.newStatus = e.target.checked;
+  renderList();
 });
 
 // ============ Filter popup toggle =============
+
 filterBtn.addEventListener('click', () => {
   filterPopup.classList.toggle('hidden');
 });
@@ -250,6 +232,7 @@ document.addEventListener('click', (e) => {
 });
 
 // ============ Sprite popup =============
+
 function showPopup(imgPath, altText) {
   const popup = document.getElementById('spritePopup');
   const popupImg = document.getElementById('spritePopupImg');
@@ -271,9 +254,11 @@ popup.addEventListener('click', (e) => {
 });
 
 // ============ Search input =============
+
 searchInput.addEventListener('input', () => {
   renderList();
 });
 
 // ============ Initial render ============
+
 renderList();

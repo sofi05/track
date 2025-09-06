@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added collab filter for hi3 + colored icon"  
+git commit -m "fixed filters for some games"  
 git push origin main  

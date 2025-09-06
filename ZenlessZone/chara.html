@@ -17,21 +17,22 @@
 
 <div id="filterPopup" class="filter-popup hidden">
 
-  <!-- Status (single-select) -->
-  <div class="filter-category">
-    <button type="button" class="filter-toggle">Status</button>
-    <div class="filter-options">
-      <!-- Have: binary choice -->
-      <div class="sub-filter">
-        <label><input type="radio" name="have" value="true"> Have</label>
-        <label><input type="radio" name="have" value="false"> Haven't</label>
-      </div>
-      <!-- Soon/New (combined as single checkbox) -->
-      <div class="sub-filter">
-        <label><input type="checkbox" name="newStatus" value="true"> New</label>
-      </div>
+<!-- Status (single-select) -->
+<div class="filter-category">
+  <button type="button" class="filter-toggle">Status</button>
+  <div class="filter-options">
+    <!-- Have: binary choice -->
+    <div class="sub-filter">
+      <label><input type="radio" name="have" value="true"> Have</label>
+      <label><input type="radio" name="have" value="false"> Haven't</label>
+    </div>
+    <!-- New/Soon combined as a single checkbox -->
+    <div class="sub-filter">
+      <label><input type="checkbox" name="newStatus" value="true"> New</label>
     </div>
   </div>
+</div>
+
 
   <!-- Element (single-select with images) -->
   <div class="filter-category">
