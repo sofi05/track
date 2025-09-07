@@ -67,7 +67,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const imgPath = `../assets/sprite/Zenless/Outfit/${c.imgName2}.png`;
+        const imgPath = `../assets/Sprite/Zenless/Outfit/${c.imgName2}.png`;
         showPopup(imgPath, c.name);
       });
     });

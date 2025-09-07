@@ -63,7 +63,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const imgPath = `../assets/sprite/StarRail/Outfit/${c.imgName2}.png`;
+        const imgPath = `../assets/Sprite/StarRail/Outfit/${c.imgName2}.png`;
         showPopup(imgPath, c.name);
       });
 

@@ -115,7 +115,7 @@ function renderList() {
       // SPRITES - Change this
       card.addEventListener('click', () => {
         const imgName = c.imgName || c.name;
-        const imgPath = `../assets/sprite/HI3/${c.folder}/${imgSrcName}.png`;
+        const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
         showPopup(imgPath, c.name);
       });
     });

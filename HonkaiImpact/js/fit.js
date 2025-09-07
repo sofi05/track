@@ -199,7 +199,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const spriteFolderPath = `../assets/sprite/HI3/Outfit/${c.spriteFolder}`;
+        const spriteFolderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
         showPopup(spriteFolderPath, c.name, c.spriteImages || []);
       });
     });

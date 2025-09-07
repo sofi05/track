@@ -158,7 +158,7 @@ createImageElement(c) {
     }
 
     container.addEventListener('click', () => {
-      const imgPath = `../assets/sprite/HI3/${c.folder}/${imgSrcName}.png`;
+      const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
       showPopup(imgPath, c.name);
     });
 

@@ -80,7 +80,7 @@ function renderList() {
       charListEl.appendChild(card);
 
       card.addEventListener('click', () => {
-        const imgPath = `../assets/sprite/Genshin/Outfit/UI_Costume_${c.imgName2}.png`;
+        const imgPath = `../assets/Sprite/Genshin/Outfit/UI_Costume_${c.imgName2}.png`;
         showPopup(imgPath, c.name);
       });
     });
