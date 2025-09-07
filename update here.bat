@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed sprite typo"  
+git commit -m "merged more js for global"  
 git push origin main  

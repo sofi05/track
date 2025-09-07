@@ -1,94 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Get the sliders for new characters and reruns
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
 
-  // Filter for new characters (status: 'new')
-  const newCharacters = characters.filter(char => char.status === 'new' || char.status === 'soon');
+  const { newCharacters, rerunCharacters } = filterAndSortCharacters(characters, true);
 
-  // Filter for rerun characters (have: false and status: 'available')
-  const rerunCharacters = characters.filter(char => char.have === false && char.status === 'available' && char.version);
-
-  // Sort new characters by version (smallest to largest)
-  newCharacters.sort((a, b) => a.version - b.version);  // Sorting in ascending order (smallest to largest)
-
-  // Sort rerun characters by version (largest to smallest)
-  rerunCharacters.sort((a, b) => b.version - a.version); // Sorting in descending order (largest to smallest)
-
-  // Function to create a character card
-  const createCharacterCard = (char) => {
-    // Create a character box
-    const charBox = document.createElement('div');
-    charBox.classList.add('version-box');
-
-    // Create character icon wrapper
-    const iconWrapper = document.createElement('div');
-    iconWrapper.classList.add('icon-wrapper');
-
-    // Define gradients by rarity
-    const rarityGradients = {
-      5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
-      4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
-      3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
-    };
-
-// Apply based on character rarity
-iconWrapper.style.background = rarityGradients[char.rarity] || 'linear-gradient(135deg, #444, #999)';
-
-      
-    const iconImg = document.createElement('img');
-
-    const imgSrcName = char.imgName || char.name;
-    iconImg.src = `../assets/charaid/Honkai/${char.folder}/${imgSrcName}.png`;
-
-    iconImg.alt = char.name;
-    iconImg.classList.add('char-icon');
-
-
-    const elementIcon = document.createElement('img');
-    elementIcon.src = `../assets/others/HI3/Element/${char.element}.png`; // Modify path as needed
-    elementIcon.alt = char.element;
-    elementIcon.classList.add('element-icon');
-
-    iconWrapper.appendChild(iconImg);
-    iconWrapper.appendChild(elementIcon);
-
-    // Character info (name and version)
-    const charInfo = document.createElement('div');
-    charInfo.classList.add('char-info');
-
-    const charName = document.createElement('h3');
-    charName.textContent = char.name;
-
-    const charVersion = document.createElement('div');
-    charVersion.textContent = `Version: ${char.version || 'N/A'}`;
-
-    // Append character name and version
-    charInfo.appendChild(charName);
-    charInfo.appendChild(charVersion);
-
-    // Check if the name overflows into two lines
-    if (charName.scrollHeight > charName.clientHeight) {
-      charName.classList.add('long-name'); // Apply the 'long-name' class to shrink font size
-    }
-
-    // Append the icon and character info to the character box
-    charBox.appendChild(iconWrapper);
-    charBox.appendChild(charInfo);
-
-    return charBox;
+  const config = {
+    iconPath: '../assets/charaid/Honkai',
+    elementPath: '../assets/others/HI3/Element',
+    dynamicGradient: true,
+    useImgName: true,
   };
 
-  // Render new characters (sorted from smallest to largest version)
+  // Custom image path function for HI3 to include folder
+  const hi3ImgPathFn = (char, imgName, config) => {
+    return `${config.iconPath}/${char.folder}/${imgName}.png`;
+  };
+
   newCharacters.forEach(char => {
-    const charCard = createCharacterCard(char);
-    newCharSlider.appendChild(charCard);
+    const card = createCharacterCard(char, config, hi3ImgPathFn);
+    newCharSlider.appendChild(card);
   });
 
-  // Render rerun characters (sorted from largest to smallest version)
   rerunCharacters.forEach(char => {
-    const charCard = createCharacterCard(char);
-    rerunSlider.appendChild(charCard);
+    const card = createCharacterCard(char, config, hi3ImgPathFn);
+    rerunSlider.appendChild(card);
   });
 });
-

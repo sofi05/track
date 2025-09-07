@@ -115,7 +115,7 @@ createImageElement(c) {
     // Click-to-popup full sprite (e.g., gacha art)
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/StarRail/${imgName}.png`;
+      const imgPath = `../assets/Sprite/StarRail/${c.imgName}.png`;
       showPopup(imgPath, c.name);
     });
 
