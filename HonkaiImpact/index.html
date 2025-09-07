@@ -4,14 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Honkai Impact 3rd</title>
+
+<!-- Load the game-specific birthday data -->
+<script src="js/bday.js" defer></script>
+
+<!-- Load the global birthday logic -->
+<script src="../all-js.main/bday.js" defer></script>
+
   <link rel="stylesheet" href="../css.main/style.css" />
   <link rel="stylesheet" href="../css.main/bday.css" />
-  <script src="js/bday.js" defer></script>
   <link rel="stylesheet" href="../css.main/index.css" />  <!-- New and Reruns Section Styles -->
 </head>
 <body>
 
-  <script src="js/chara.js"></script>  <!-- Load chara.js first -->
+  <script src="js/chara.js" defer></script>
+  <script src="../all-js.main/chara.js" defer></script>
+  
   <script src="js/index.js"></script>  <!-- Then load index.js -->
   
   <div class="game-page">

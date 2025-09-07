@@ -118,6 +118,7 @@ h1 {
 }
 
 /* THIS IS FOR CHARA */
+/* THIS IS FOR CHARA */
 .icon-wrapper {
   position: relative;
   width: 80px;
@@ -126,6 +127,7 @@ h1 {
   box-sizing: border-box;
   background-color: transparent; /* will be set dynamically */
   overflow: hidden;
+  z-index: 0;
 }
 
 .char-icon {
@@ -141,27 +143,22 @@ h1 {
   z-index: 1;
 }
 
+/* Element icon (Pyro, Hydro, etc.) */
 .element-icon {
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 0;
-  background: transparent;
-  border: none; /* Make sure there's no border */
-  object-fit: contain;
-  pointer-events: none;
-  box-shadow: none; /* Remove the box-shadow for no outline */
-  z-index: 10;
-}
-
-
-.icon-wrapper > .element-icon {
-  top: 2px !important;
-  left: 2px !important;
   width: 18px !important;
   height: 18px !important;
-  border: none; /* Make sure there's no border */
+  top: 5px; /* Adjust the vertical position */
+  left: 5px; /* Adjust the horizontal position */
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%; /* Circle shape */
+  z-index: 10; /* Ensure it sits above the character image */
+  border: none !important; /* Remove border */
+  outline: none !important; 
 }
+
+
 
 /* Updated filter popup styling */
 #filterPopup {

@@ -1,4 +1,5 @@
-const birthdays = {
+window.BDAY_CONFIG = {
+  birthdays: {
 
   '01-01': [{ folder: 'Durandal', imgName: 'Palatinus_Equinox' }], 
 
@@ -33,66 +34,24 @@ const birthdays = {
 
   '12-07': [{ folder:'Kiana', imgName:'Ba-Dum_Fiery_Wishing_Star'}],
   '12-21': [{ folder:'Griseo', imgName:'Cosmic_Expression'}],
+
+  //'09-06': [{ folder:'Kiana', imgName:'Ba-Dum_Fiery_Wishing_Star'}], //Test
+},
+
+createImageElement(entry) {
+    const container = document.createElement('div');
+    container.classList.add('birthday-icon');
+
+    const img = document.createElement('img');
+    const src = `../assets/charaid/Honkai/${entry.folder}/${entry.imgName}.png`;
+    img.src = src;
+    img.alt = entry;
+
+    img.onerror = () => {
+      img.style.display = 'none';
+    };
+
+    container.appendChild(img);
+    return container;
+  },
 };
-
-function getTodayDateKey() {
-  const today = new Date();
-  const day = String(today.getDate()).padStart(2, '0');
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  return `${month}-${day}`;
-}
-
-function createDebugImage(entry) {
-  const img = document.createElement('img');
-  const src = `../assets/charaid/Honkai/${entry.folder}/${entry.imgName}.png`;
-
-  console.log('Creating img element with src:', src);
-  img.src = src;
-
-  img.alt = entry.imgName.replace(/_/g, ' ');
-  img.title = img.alt;
-  console.log('alt set to:', img.alt);
-
-  img.onerror = () => {
-    console.error('Image failed to load:', src);
-    img.style.border = '2px solid red';
-    img.title += ' (Image failed to load)';
-  };
-  img.onload = () => {
-    console.log('Image loaded successfully:', src);
-  };
-
-  return img;
-}
-
-function debugShowBirthdays() {
-  const key = getTodayDateKey();
-  console.log('Today is:', key);
-
-  const container = document.getElementById('birthday-icons');
-  if (!container) {
-    console.warn('Could not find #birthday-icons');
-    return;
-  }
-  console.log('Found container:', container);
-
-  container.innerHTML = '<!-- debug clear -->';
-
-  const list = birthdays[key];
-  console.log('Birthdays list for today:', list);
-
-  if (list && list.length) {
-    list.forEach(entry => {
-      const img = createDebugImage(entry);
-      container.appendChild(img);
-      console.log('Appended img:', img);
-    });
-  } else {
-    const p = document.createElement('p');
-    p.textContent = 'No birthdays today!';
-    container.appendChild(p);
-    console.log('Appended fallback text');
-  }
-}
-
-document.addEventListener('DOMContentLoaded', debugShowBirthdays);

@@ -1,4 +1,5 @@
-const characters = [
+window.CHARA_CONFIG = {
+  characters: [
 { name: 'Anby', imgName: '01', have: true, element: 'IconElectric', group:'cunhar', gender:'f', rarity: 4, status: 'available' },
 { name: 'Soldier 11', imgName: '05', have: true, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available' },
 { name: 'Corin', imgName: '09', have: true, element: 'IconPhysical', group:'vic', gender:'f', rarity: 4, status: 'available' },
@@ -44,221 +45,56 @@ const characters = [
 { name: 'Manato', imgName: '51', have: false, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'soon', version: '2.3' },
 { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3' }
   // Add more characters here
-];
+],
 
-const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
 
-let selectedFilters = {
-  have: null,
-  newStatus: false, // single flag for both "new" and "soon"
-  element: null,
-  rarity: null,
-  group: null,  
-  gender: null,
-};
+createImageElement(c) {
+    const container = document.createElement('div');
+    container.className = 'char-icon-container';
 
-// Toggle dropdown sections
-document.querySelectorAll('.filter-toggle').forEach(button => {
-  button.addEventListener('click', () => {
-    const allButtons = document.querySelectorAll('.filter-toggle');
-    const allOptions = document.querySelectorAll('.filter-options');
+    // Main character portrait
+    const img = document.createElement('img');
+    img.className = 'char-icon';
+    const imgSrcName = c.imgName ? c.imgName : c.name;
+    img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
+    img.alt = c.name;
 
-    allButtons.forEach(btn => {
-      if (btn !== button) btn.classList.remove('active');
-    });
+    // Element icon (e.g., Quantum, Physical, etc.)
+    const elementImg = document.createElement('img');
+    elementImg.className = 'element-icon';
+    elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;
+    elementImg.alt = c.element;
 
-    allOptions.forEach(opt => {
-      if (opt !== button.nextElementSibling) opt.classList.remove('visible');
-    });
+    container.appendChild(img);
+    container.appendChild(elementImg);
 
-    // Toggle current one
-    button.classList.toggle('active');
-    const options = button.nextElementSibling;
-    if (options) options.classList.toggle('visible');
-  });
-});
+    // Optional: Display world/tags
+    if (Array.isArray(c.world)) {
+      const worldList = document.createElement('div');
+      worldList.className = 'world-list';
 
-function renderList() {
-  charListEl.innerHTML = '';
-  const searchTerm = searchInput.value.toLowerCase();
-
-  characters
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-
-      // Filter by 'have'
-      if (selectedFilters.have !== null) {
-        if (selectedFilters.have && !c.have) return false;
-        if (!selectedFilters.have && c.have) return false;
-      }
-
-      // Filter by newStatus (new or soon)
-      const wantsNewSoon = selectedFilters.newStatus;
-      if (wantsNewSoon) {
-        if (!(c.status === 'new' || c.status === 'soon')) return false;
-      }
-
-      // Filter by element
-      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
-
-      // Filter by rarity (string comparison)
-      if (selectedFilters.rarity && c.rarity.toString() !== selectedFilters.rarity) return false;
-
-      // Filter by group (single-select)
-      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
-
-      // Filter by gender
-      if (selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
-
-      return matchesSearch;
-    })
-    .forEach(c => {
-      const card = document.createElement('div');
-      card.className = 'char-card';
-      card.title = `${c.name} (${c.element}, ${c.rarity})`;
-
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'icon-wrapper';
-      iconWrapper.style.background = c.rarity === 5
-        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
-        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
-
-      iconWrapper.style.background = c.rarity || 'linear-gradient(135deg, #444, #999)';
-
-      if (c.status === 'new') {
-        const newLabel = document.createElement('div');
-        newLabel.textContent = 'NEW';
-        newLabel.className = 'soon-label';
-        iconWrapper.appendChild(newLabel);
-      }
-      if (c.status === 'soon') {
-        const soonLabel = document.createElement('div');
-        soonLabel.textContent = 'SOON';
-        soonLabel.className = 'soon-label';
-        iconWrapper.appendChild(soonLabel);
-      }
-
-      const img = document.createElement('img');
-      img.className = 'char-icon';
-      const imgSrcName = c.imgName ? c.imgName : c.name;
-      img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
-      img.alt = c.name;
-
-      const elementImg = document.createElement('img');
-      elementImg.className = 'element-icon';
-      elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;
-      elementImg.alt = c.element;
-
-      iconWrapper.appendChild(img);
-      iconWrapper.appendChild(elementImg);
-
-      const label = document.createElement('div');
-      label.textContent = c.name;
-
-      card.appendChild(iconWrapper);
-      card.appendChild(label);
-      charListEl.appendChild(card);
-
-      card.addEventListener('click', () => {
-        const imgName = c.imgName ? c.imgName : c.name;
-        const imgPath = `../assets/sprite/Zenless/IconRole${imgName}.png`;
-        showPopup(imgPath, c.name);
+      c.world.forEach(world => {
+        const worldLabel = document.createElement('span');
+        worldLabel.className = 'world-label';
+        worldLabel.textContent = world;
+        worldList.appendChild(worldLabel);
       });
+
+      container.appendChild(worldList);
+    }
+
+    // Click-to-popup full sprite (e.g., gacha art)
+    container.addEventListener('click', () => {
+      const imgName = c.imgName ? c.imgName : c.name;
+      const imgPath = `../assets/sprite/Zenless/IconRole${imgName}.png`;
+      showPopup(imgPath, c.name);
     });
-}
 
-// ===== Filter Listeners with "toggle to unselect" support =====
+    // Fallback if image fails
+    img.onerror = () => {
+      img.style.display = 'none';
+    };
 
-// Utility: Toggle radio as deselectable
-function setupToggleableRadio(groupName, filterKey) {
-  const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
-  inputs.forEach(input => {
-    input.addEventListener('click', e => {
-      const value = e.target.value;
-
-      // Special handling for "have" radio buttons (convert to boolean)
-      const parsedValue = (filterKey === "have")
-        ? (value === "true")
-        : value;
-
-      if (selectedFilters[filterKey] === parsedValue) {
-        selectedFilters[filterKey] = null;
-        input.checked = false;
-      } else {
-        selectedFilters[filterKey] = parsedValue;
-      }
-
-      renderList();
-    });
-  });
-}
-
-// 1) Have
-setupToggleableRadio("have", "have");
-
-// 2) Element
-setupToggleableRadio("element", "element");
-
-// 3) Rarity
-setupToggleableRadio("rarity", "rarity");
-
-// 4) Gender
-setupToggleableRadio("gender", "gender");
-
-// 5) Group (single-select radios, toggleable)
-setupToggleableRadio("group", "group");
-
-// 6) NewStatus (checkbox - controls both 'new' and 'soon')
-document.querySelector('input[name="newStatus"]').addEventListener('change', e => {
-  selectedFilters.newStatus = e.target.checked;
-  renderList();
-});
-
-// ============ Filter popup toggle =============
-
-filterBtn.addEventListener('click', () => {
-  filterPopup.classList.toggle('hidden');
-});
-
-document.addEventListener('click', (e) => {
-  if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
-    filterPopup.classList.add('hidden');
-  }
-});
-
-// ============ Sprite popup =============
-
-function showPopup(imgPath, altText) {
-  const popup = document.getElementById('spritePopup');
-  const popupImg = document.getElementById('spritePopupImg');
-
-  popupImg.src = imgPath;
-  popupImg.alt = altText;
-  popup.style.display = 'flex';
-}
-
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-
-const popup = document.getElementById('spritePopup');
-popup.addEventListener('click', (e) => {
-  if (e.target === popup) {
-    popup.style.display = 'none';
-  }
-});
-
-// ============ Search input =============
-
-searchInput.addEventListener('input', () => {
-  renderList();
-});
-
-// ============ Initial render ============
-
-renderList();
+    return container;
+  },
+};

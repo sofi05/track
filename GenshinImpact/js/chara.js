@@ -1,4 +1,5 @@
-const characters = [
+window.CHARA_CONFIG = {
+  characters: [
   { name: 'Amber', imgName: 'Ambor', have: true, element: 'Pyro', rarity: 4, region:['mond'], gender:'f',  status: 'available' },
   { name: 'Xiao', have: true, element: 'Anemo', rarity: 5, region:['liy'], gender:'m',  status: 'available' },
   { name: 'Mona', have: true, element: 'Hydro', rarity: 5, region:['mond'], gender:'f',  status: 'available' },
@@ -106,243 +107,47 @@ const characters = [
   
   
   // Add more characters here
-];
+],
 
-const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
+createImageElement(c) {
+    const container = document.createElement('div');
+    container.className = 'char-icon-container';
 
-let selectedFilters = {
-  have: null,
-  newStatus: {
-    new: false,
-    soon: false,
+    const img = document.createElement('img');
+    img.className = 'char-icon';
+    const imgSrcName = c.imgName ? c.imgName : c.name;
+    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;
+    img.alt = c.name;
+
+    const elementImg = document.createElement('img');
+    elementImg.className = 'element-icon';
+    elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
+    elementImg.alt = c.element;
+
+    container.appendChild(img);
+    container.appendChild(elementImg);
+
+    // Optional: Display the regions
+    const regionList = document.createElement('div');
+    regionList.className = 'region-list';
+    c.region.forEach(region => {
+      const regionLabel = document.createElement('span');
+      regionLabel.className = 'region-label';
+      regionLabel.textContent = region;
+      regionList.appendChild(regionLabel);
+    });
+    container.appendChild(regionList);
+
+    container.addEventListener('click', () => {
+      const imgName = c.imgName ? c.imgName : c.name;
+      const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
+      showPopup(imgPath, c.name);
+    });
+
+    img.onerror = () => {
+      img.style.display = 'none';
+    };
+
+    return container;
   },
-  element: null,
-  rarity: null,
-  region: null, // ⬅️ Changed from Set() to single value
-  gender: null,
-  group: null,
 };
-
-// Toggle dropdown sections
-document.querySelectorAll('.filter-toggle').forEach(button => {
-  button.addEventListener('click', () => {
-    const allButtons = document.querySelectorAll('.filter-toggle');
-    const allOptions = document.querySelectorAll('.filter-options');
-
-    allButtons.forEach(btn => {
-      if (btn !== button) btn.classList.remove('active');
-    });
-
-    allOptions.forEach(opt => {
-      if (opt !== button.nextElementSibling) opt.classList.remove('visible');
-    });
-
-    // Toggle current one
-    button.classList.toggle('active');
-    const options = button.nextElementSibling;
-    if (options) options.classList.toggle('visible');
-  });
-});
-
-
-function renderList() {
-  charListEl.innerHTML = '';
-  const searchTerm = searchInput.value.toLowerCase();
-
-  characters
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-
-      // Filter by 'have'
-      if (selectedFilters.have !== null) {
-        if (selectedFilters.have && !c.have) return false;
-        if (!selectedFilters.have && c.have) return false;
-      }
-
-      // Filter by newStatus (new or soon)
-      const wantsNew = selectedFilters.newStatus.new;
-      const wantsSoon = selectedFilters.newStatus.soon;
-
-      if (wantsNew || wantsSoon) {
-        if (wantsNew && wantsSoon) {
-          if (!(c.status === 'new' || c.status === 'soon')) return false;
-        } else if (wantsNew && c.status !== 'new') {
-          return false;
-        } else if (wantsSoon && c.status !== 'soon') {
-          return false;
-        }
-      }
-
-      // Filter by element
-      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
-
-      // Filter by rarity (string comparison)
-      if (selectedFilters.rarity && c.rarity.toString() !== selectedFilters.rarity) return false;
-
-      // ✅ Filter by region (single select)
-      if (selectedFilters.region) {
-        if (!Array.isArray(c.region)) return false;
-        if (!c.region.includes(selectedFilters.region)) return false;
-      }
-
-      // Filter by gender
-      if (selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
-
-      // Filter by group
-      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
-
-      return matchesSearch;
-    })
-    .forEach(c => {
-      const card = document.createElement('div');
-      card.className = 'char-card';
-      card.title = `${c.name} (${c.element}, ${c.rarity}★)`;
-
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'icon-wrapper';
-      iconWrapper.style.background = c.rarity === 5
-        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
-        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
-
-      iconWrapper.style.background = c.rarity || 'linear-gradient(135deg, #444, #999)';
-        
-      if (c.status === 'new') {
-        const newLabel = document.createElement('div');
-        newLabel.textContent = 'NEW';
-        newLabel.className = 'soon-label';
-        iconWrapper.appendChild(newLabel);
-      }
-      if (c.status === 'soon') {
-        const soonLabel = document.createElement('div');
-        soonLabel.textContent = 'SOON';
-        soonLabel.className = 'soon-label';
-        iconWrapper.appendChild(soonLabel);
-      }
-
-      const img = document.createElement('img');
-      img.className = 'char-icon';
-      const imgSrcName = c.imgName ? c.imgName : c.name;
-      img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;
-      img.alt = c.name;
-
-      const elementImg = document.createElement('img');
-      elementImg.className = 'element-icon';
-      elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
-      elementImg.alt = c.element;
-
-      iconWrapper.appendChild(img);
-      iconWrapper.appendChild(elementImg);
-
-      const label = document.createElement('div');
-      label.textContent = c.name;
-
-      card.appendChild(iconWrapper);
-      card.appendChild(label);
-      charListEl.appendChild(card);
-
-      card.addEventListener('click', () => {
-        const imgName = c.imgName ? c.imgName : c.name;
-        const imgPath = `../assets/sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
-        showPopup(imgPath, c.name);
-      });
-    });
-}
-
-// ===== Filter Listeners with "toggle to unselect" support =====
-
-// Utility: Toggle radio as deselectable
-function setupToggleableRadio(groupName, filterKey) {
-  const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
-  inputs.forEach(input => {
-    input.addEventListener('click', e => {
-      const value = e.target.value;
-
-      // Special handling for "have" radio buttons (convert to boolean)
-      const parsedValue = (filterKey === "have")
-        ? (value === "true")
-        : value;
-
-      if (selectedFilters[filterKey] === parsedValue) {
-        selectedFilters[filterKey] = null;
-        input.checked = false;
-      } else {
-        selectedFilters[filterKey] = parsedValue;
-      }
-
-      renderList();
-    });
-  });
-}
-
-// 1) Have
-setupToggleableRadio("have", "have");
-
-// 2) Element
-setupToggleableRadio("element", "element");
-
-// 3) Rarity
-setupToggleableRadio("rarity", "rarity");
-
-// 4) Gender
-setupToggleableRadio("gender", "gender");
-
-// ✅ 5) Region (now single-select)
-setupToggleableRadio("region", "region");
-
-// 6) NewStatus (checkbox - controls both 'new' and 'soon')
-document.querySelectorAll('input[name="newStatus"]').forEach(input => {
-  input.addEventListener('change', e => {
-    const isChecked = e.target.checked;
-    selectedFilters.newStatus.new = isChecked;
-    selectedFilters.newStatus.soon = isChecked;
-    renderList();
-  });
-});
-
-// Group (if applicable)
-setupToggleableRadio("group", "group");
-
-// ============ Filter popup toggle ============
-filterBtn.addEventListener('click', () => {
-  filterPopup.classList.toggle('hidden');
-});
-
-document.addEventListener('click', (e) => {
-  if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
-    filterPopup.classList.add('hidden');
-  }
-});
-
-// ============ Sprite popup ============
-function showPopup(imgPath, altText) {
-  const popup = document.getElementById('spritePopup');
-  const popupImg = document.getElementById('spritePopupImg');
-
-  popupImg.src = imgPath;
-  popupImg.alt = altText;
-  popup.style.display = 'flex';
-}
-
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-
-const popup = document.getElementById('spritePopup');
-popup.addEventListener('click', (e) => {
-  if (e.target === popup) {
-    popup.style.display = 'none';
-  }
-});
-
-// ============ Search input ============
-searchInput.addEventListener('input', () => {
-  renderList();
-});
-
-// ============ Initial render ============
-renderList();

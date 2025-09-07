@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added astralop in hi3"  
+git commit -m "merged some js for global"  
 git push origin main  

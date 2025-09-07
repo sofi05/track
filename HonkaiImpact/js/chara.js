@@ -1,4 +1,5 @@
-const characters = [
+window.CHARA_CONFIG = {
+  characters: [
   //part 1 (Honkai Impact 3rd)
   { name: 'Bronya • BN', imgName: 'Black_Nucleus', folder:'Bronya', have: true, element: 'BIO', rarity: '5', part:'1', status: 'available' },
   { name: 'Bronya • DB', imgName: 'Dimension_Breaker', folder:'Bronya', have: false, element: 'MECH', rarity: '5', part:'1', status: 'available', version:'5.1' },
@@ -97,9 +98,9 @@ const characters = [
   { name: 'Schariac', imgName: 'Dreamweaver', folder:'SoloChara', have: true, element: 'MECH', rarity: '5', part:'1', status: 'available' },
   { name: 'Eden', imgName: 'Golden_Diva', folder:'SoloChara', have: true, element: 'IMG', rarity: '4', part:'1', status: 'available' },
   { name: 'Vill-V', imgName: 'Helical_Contraption', folder:'SoloChara', have: false, element: 'QUA', rarity: '5', part:'1', status: 'available', version:'5.9' },
-  { name: 'Mobius', imgName: 'Infinite_Ouroboros', folder:'SoloChara', have: false, element: 'MECH', rarity: '4', part:'1', status: 'available', version:'8.1' },
+  { name: 'Mobius', imgName: 'Infinite_Ouroboros', folder:'SoloChara', have: false, element: 'MECH', rarity: '5', part:'1', status: 'available', version:'8.1' },
   { name: 'Natasha', imgName: 'Midnight_Absinthe', folder:'SoloChara', have: true, element: 'IMG', rarity: '4', part:'1', status: 'available' },
-  { name: 'Sirin', imgName: 'Miracle_Magical_Girl', folder:'SoloChara', have: true, element: 'IMG', rarity: '4', part:'1', status: 'available' },
+  { name: 'Sirin', imgName: 'Miracle_Magical_Girl', folder:'SoloChara', have: true, element: 'IMG', rarity: '5', part:'1', status: 'available' },
   { name: 'Pardofelis', imgName: 'Reverist_Calico', folder:'SoloChara', have: true, element: 'IMG', rarity: '4', part:'1', status: 'available' },
   { name: 'Shigure Kira', imgName: 'Sugary_Starburst', folder:'SoloChara', have: false, element: 'MECH', rarity: '4', part:'1', status: 'available', version:'6.7' },
   { name: 'Carole', imgName: 'Sweet_n_Spicy', folder:'SoloChara', have: true, element: 'MECH', rarity: '4', part:'1', status: 'available' },
@@ -125,246 +126,46 @@ const characters = [
   { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: '5', part:'2',  status: 'available', version:'7.8' },
   { name: 'Theresa', imgName: 'Schicksals_Imperative', folder:'Theresa', have: false, element: 'QUA', rarity: '5', part:'2',  status: 'available', version:'7.7' },
   // Add more characters here
-];
+],
 
-let selectedPart = '2'; // Default to Part 2
+createImageElement(c) {
+    const container = document.createElement('div');
+    container.className = 'char-icon-container';
 
-const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
+    const img = document.createElement('img');
+    img.className = 'char-icon';
+    const imgSrcName = c.imgName || c.name;
+    img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
+    img.alt = c.name;
 
-let selectedFilters = {
-  have: null,
-  newStatus: {
-    new: false,
-    soon: false,
-  },
-  element: null,
-  rarity: null,
-  group: null,
+    const elementImg = document.createElement('img');
+    elementImg.className = 'element-icon';
+    elementImg.src = `../assets/others/HI3/Element/${c.element}.png`;
+    elementImg.alt = c.element;
+
+    container.appendChild(img);
+    container.appendChild(elementImg);
+
+    // Optional group/label
+    if (c.group) {
+      const groupLabel = document.createElement('div');
+      groupLabel.className = 'region-list';
+      const label = document.createElement('span');
+      label.className = 'region-label';
+      label.textContent = c.group;
+      groupLabel.appendChild(label);
+      container.appendChild(groupLabel);
+    }
+
+    container.addEventListener('click', () => {
+      const imgPath = `../assets/sprite/HI3/${c.folder}/${imgSrcName}.png`;
+      showPopup(imgPath, c.name);
+    });
+
+    img.onerror = () => {
+      img.style.display = 'none';
+    };
+
+    return container;
+  }
 };
-
-// Toggle dropdown sections
-document.querySelectorAll('.filter-toggle').forEach(button => {
-  button.addEventListener('click', () => {
-    const allButtons = document.querySelectorAll('.filter-toggle');
-    const allOptions = document.querySelectorAll('.filter-options');
-
-    allButtons.forEach(btn => {
-      if (btn !== button) btn.classList.remove('active');
-    });
-
-    allOptions.forEach(opt => {
-      if (opt !== button.nextElementSibling) opt.classList.remove('visible');
-    });
-
-    // Toggle current one
-    button.classList.toggle('active');
-    const options = button.nextElementSibling;
-    if (options) options.classList.toggle('visible');
-  });
-});
-
-function renderList() {
-  charListEl.innerHTML = '';
-  const searchTerm = searchInput.value.toLowerCase();
-
-  characters
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-      const matchesPart = selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab);
-
-      // Filter by 'have'
-      if (selectedFilters.have !== null) {
-        if (selectedFilters.have && !c.have) return false;
-        if (!selectedFilters.have && c.have) return false;
-      }
-
-      // Filter by newStatus (new or soon)
-      const wantsNew = selectedFilters.newStatus.new;
-      const wantsSoon = selectedFilters.newStatus.soon;
-
-      if (wantsNew || wantsSoon) {
-        if (wantsNew && wantsSoon) {
-          if (!(c.status === 'new' || c.status === 'soon')) return false;
-        } else if (wantsNew && c.status !== 'new') {
-          return false;
-        } else if (wantsSoon && c.status !== 'soon') {
-          return false;
-        }
-      }
-
-      // Filter by element
-      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
-
-      // Filter by rarity (string comparison)
-      if (selectedFilters.rarity && c.rarity.toString() !== selectedFilters.rarity) return false;
-
-      // Filter by group
-      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
-
-      return matchesSearch && matchesPart;
-    })
-    .forEach(c => {
-      const card = document.createElement('div');
-      card.className = 'char-card';
-      card.title = `${c.name} (${c.element}, ${c.rarity})`;
-
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'icon-wrapper';
-      const rarityGradients = {
-        5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
-        4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
-        3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
-      };
-
-      iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
-
-      if (c.status === 'new') {
-        const newLabel = document.createElement('div');
-        newLabel.textContent = 'NEW';
-        newLabel.className = 'soon-label';
-        iconWrapper.appendChild(newLabel);
-      }
-      if (c.status === 'soon') {
-        const soonLabel = document.createElement('div');
-        soonLabel.textContent = 'SOON';
-        soonLabel.className = 'soon-label';
-        iconWrapper.appendChild(soonLabel);
-      }
-
-      const img = document.createElement('img');
-      img.className = 'char-icon';
-
-      // Use the new Honkai-based path
-      const imgSrcName = c.imgName || c.name;
-      img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
-      img.alt = c.name;
-
-      const elementImg = document.createElement('img');
-      elementImg.className = 'element-icon';
-      elementImg.src = `../assets/others/HI3/Element/${c.element}.png`;
-      elementImg.alt = c.element;
-
-      iconWrapper.appendChild(img);
-      iconWrapper.appendChild(elementImg);
-
-      const label = document.createElement('div');
-      label.textContent = c.name;
-
-      card.appendChild(iconWrapper);
-      card.appendChild(label);
-      charListEl.appendChild(card);
-
-      // SPRITES - Change this
-      card.addEventListener('click', () => {
-        const imgName = c.imgName || c.name;
-        const imgPath = `../assets/sprite/HI3/${c.folder}/${imgSrcName}.png`;
-        showPopup(imgPath, c.name);
-      });
-    });
-}
-
-// ===== Filter Listeners with "toggle to unselect" support =====
-
-// Utility: Toggle radio as deselectable
-function setupToggleableRadio(groupName, filterKey) {
-  const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
-  inputs.forEach(input => {
-    input.addEventListener('click', e => {
-      const value = e.target.value;
-
-      // Special handling for "have" radio buttons (convert to boolean)
-      const parsedValue = (filterKey === "have")
-        ? (value === "true")
-        : value;
-
-      if (selectedFilters[filterKey] === parsedValue) {
-        selectedFilters[filterKey] = null;
-        input.checked = false;
-      } else {
-        selectedFilters[filterKey] = parsedValue;
-      }
-
-      renderList();
-    });
-  });
-}
-
-// 1) Have
-setupToggleableRadio("have", "have");
-
-// 2) Element
-setupToggleableRadio("element", "element");
-
-// 3) Rarity
-setupToggleableRadio("rarity", "rarity");
-
-// ✅ 5) group (now single-select)
-setupToggleableRadio("group", "group");
-
-// 6) NewStatus (checkbox - controls both 'new' and 'soon')
-document.querySelectorAll('input[name="newStatus"]').forEach(input => {
-  input.addEventListener('change', e => {
-    const isChecked = e.target.checked;
-    selectedFilters.newStatus.new = isChecked;
-    selectedFilters.newStatus.soon = isChecked;
-    renderList();
-  });
-});
-
-// ============ Filter popup toggle ============
-filterBtn.addEventListener('click', () => {
-  filterPopup.classList.toggle('hidden');
-});
-
-document.addEventListener('click', (e) => {
-  if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
-    filterPopup.classList.add('hidden');
-  }
-});
-
-// ============ Sprite popup ============
-function showPopup(imgPath, altText) {
-  const popup = document.getElementById('spritePopup');
-  const popupImg = document.getElementById('spritePopupImg');
-
-  popupImg.src = imgPath;
-  popupImg.alt = altText;
-  popup.style.display = 'flex';
-}
-
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-
-const popup = document.getElementById('spritePopup');
-popup.addEventListener('click', (e) => {
-  if (e.target === popup) {
-    popup.style.display = 'none';
-  }
-});
-
-// ============ Search input ============
-searchInput.addEventListener('input', () => {
-  renderList();
-});
-
-document.querySelectorAll('.part-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Remove active state from all buttons
-    document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
-
-    // Add active state to the clicked button
-    btn.classList.add('active');
-
-    // Update selectedPart and re-render
-    selectedPart = btn.dataset.part === 'collab' ? 'collab' : btn.dataset.part;
-    renderList();
-  });
-});
-
-renderList();

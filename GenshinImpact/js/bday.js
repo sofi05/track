@@ -1,4 +1,5 @@
-const birthdays = {
+window.BDAY_CONFIG = {
+  birthdays: {
   '01-03': ['Wanderer'],
   '01-06': ['Lanyan'],
   '01-09': ['Tohma'],
@@ -109,75 +110,23 @@ const birthdays = {
   '12-22': ['Gaming'],
   '12-29': ['Tighnari'],
   '12-31': ['Zhongli'],
+
+  //'09-06': ['Zhongli'], //Test
+},
+
+createImageElement(name) {
+    const container = document.createElement('div');
+    container.classList.add('birthday-icon');
+
+    const img = document.createElement('img');
+    img.alt = name;
+    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${name}.png`;
+
+    img.onerror = () => {
+      img.style.display = 'none';
+    };
+
+    container.appendChild(img);
+    return container;
+  },
 };
-
-function getTodayDateKey() {
-  const today = new Date();
-  const day = String(today.getDate()).padStart(2, '0');
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  return `${month}-${day}`; // MM-DD
-}
-
-function createBirthdayElement(name) {
-  const container = document.createElement('div');
-  container.classList.add('birthday-icon');
-
-  const img = document.createElement('img');
-  img.alt = name;
-  img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${name}.png`;
-
-  img.onerror = () => {
-    img.style.display = 'none';
-  };
-
-  container.appendChild(img);
-  return container;
-}
-
-function showTodaysBirthdays() {
-  const todayKey = getTodayDateKey();
-  const bdaySection = document.getElementById('birthday-today');
-  bdaySection.innerHTML = ''; // Clear existing
-
-  const todayList = birthdays[todayKey];
-
-  if (todayList && todayList.length > 0) {
-    todayList.forEach((name) => {
-      const birthdayIcon = createBirthdayElement(name);
-      bdaySection.appendChild(birthdayIcon);
-    });
-  } else {
-    bdaySection.textContent = 'No birthdays today!';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', showTodaysBirthdays);
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const birthdayContainer = document.getElementById("birthday-icons");
-      const todayKey = getTodayDateKey();
-
-      if (birthdays[todayKey]) {
-        birthdays[todayKey].forEach((name) => {
-          const img = document.createElement("img");
-          const cleanName = name.replace(/[^a-zA-Z]/g, "");
-          const fileName = `UI_AvatarIcon_${cleanName}.png`;
-          img.src = `../assets/charaid/Genshin/${fileName}`;
-          img.alt = name;
-          img.title = name;
-          birthdayContainer.appendChild(img);
-        });
-      } else {
-        const none = document.createElement("p");
-        none.textContent = "No birthdays today!";
-        birthdayContainer.appendChild(none);
-      }
-
-      function getTodayDateKey() {
-        const today = new Date();
-        const day = String(today.getDate()).padStart(2, '0');
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        return `${month}-${day}`;
-      }
-    });
-
