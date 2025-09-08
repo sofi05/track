@@ -104,6 +104,8 @@ window.CHARA_CONFIG = {
   { name: 'Aino', have: false, element: 'Hydro', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.0' },
   { name: 'Flins', have: false, element: 'Electro', rarity: 5, region:['snez'], gender:'m',  status: 'soon', version: '6.0' },
   { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'soon', version: '6.0' },
+  { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'soon', version: '6.1' },
+  { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.1' },
   
   
   // Add more characters here

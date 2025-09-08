@@ -225,6 +225,18 @@ searchInput.addEventListener('input', () => {
 // ===== Filter Section Toggles =====
 document.querySelectorAll('.filter-toggle').forEach(button => {
   button.addEventListener('click', () => {
+    const allFilters = document.querySelectorAll('.filter-toggle');
+    
+    // Close all filters except the clicked one
+    allFilters.forEach(filterBtn => {
+      if (filterBtn !== button) {
+        filterBtn.classList.remove('active');
+        const options = filterBtn.nextElementSibling;
+        if (options) options.classList.remove('visible');
+      }
+    });
+
+    // Toggle the clicked filter
     button.classList.toggle('active');
     const options = button.nextElementSibling;
     if (options) options.classList.toggle('visible');

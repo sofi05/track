@@ -64,7 +64,7 @@ const characters = [
 { name: 'Shigure Kira', imgName: 'Sugary_Starburst', folder:'SoloChara', spriteFolder: 'Kira', have: false, part: '1',
     spriteImages: ['Dreamy_Melody', 'Fuzzy_Pink_Love', 'Tonights_My_Time'], },
 
-{ name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', spriteFolder: 'Lantern', have: false, part: '2',
+{ name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', spriteFolder: 'Lantern', have: false, part: '2',status: 'new',
     spriteImages: ['At_Your_Service'], },
 
 { name: 'Mei', imgName: 'Crimson_Impulse', folder: 'Mei', spriteFolder: 'Mei', have: false, part: '1',
@@ -124,7 +124,7 @@ const characters = [
   { name: 'Sushang', imgName: 'Jade_Knight', folder: 'Sushang', spriteFolder: 'Sushang', have: false, part: '1',
     spriteImages: ['Auspicious_Dazzle', 'Midnight_Moon'], },
   
-  { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2',
+  { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2', status: 'new',
     spriteImages: ['Gentle_is_the_Night', 'Roseate_Summer'], },
   
   { name: 'Theresa', imgName: 'Valkyrie_Pledge', folder: 'Theresa', spriteFolder: 'Theresa', have: false, part: '1',
