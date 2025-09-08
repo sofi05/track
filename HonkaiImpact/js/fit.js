@@ -1,4 +1,6 @@
-const characters = [
+const gameConfig = {
+  id: 'hi3',
+  characters: [
 //SOLO FOLDER
 { name: 'Ai Hyperion', imgName: 'Chrono_Navi', folder: 'SoloChara', spriteFolder: 'Ai', have: false, part: '1',
     spriteImages: ['Burning_Rescue_Soul', 'Indelible_Memories', 'Leisurely_Melody'], },
@@ -140,193 +142,13 @@ const characters = [
     spriteImages: ['Eldritch_Vantage'], },
   
   // Add more characters here
-];
+],
 
-const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
 
-let selectedFilters = {
-  have: false,
-  want: false,
-  new: false,
+  pathPrefix: "../assets/charaid/Honkai/",
+  spritePrefix: ".../assets/Sprite/HI3/Outfit/", 
+
+  getImgPath: (char) => `${gameConfig.pathPrefix}${char.folder}/${char.imgName}.png`,
+  getSpritePath: (char) => (char.spriteImages || []).map( 
+    img =>`${gameConfig.spritePrefix}${char.spriteFolder}/${img}.png`),
 };
-
-function renderList() {
-  charListEl.innerHTML = '';
-  const searchTerm = searchInput.value.toLowerCase();
-
-  characters
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-      const matchesHave = !selectedFilters.have || (selectedFilters.have && c.have);
-      const matchesWant = !selectedFilters.want || (selectedFilters.want && !c.have);
-      const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
-      return matchesSearch && matchesHave && matchesWant && matchesStatus;
-    })
-    .forEach(c => {
-      if (!c.name) return; // Skip entries without a name
-
-      const card = document.createElement('div');
-      card.className = 'char-card';
-      card.title = c.name;
-
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'icon-wrapper';
-      iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)';
-
-      if (c.status === 'new') {
-        const label = document.createElement('div');
-        label.textContent = 'NEW';
-        label.className = 'soon-label';
-        iconWrapper.appendChild(label);
-      }
-
-      const img = document.createElement('img');
-      img.className = 'char-icon';
-      const imgSrcName = c.imgName || c.name;
-      img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
-      img.alt = c.name;
-
-      iconWrapper.appendChild(img);
-
-      const label = document.createElement('div');
-      label.textContent = c.name;
-
-      card.appendChild(iconWrapper);
-      card.appendChild(label);
-      charListEl.appendChild(card);
-
-      card.addEventListener('click', () => {
-        const spriteFolderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
-        showPopup(spriteFolderPath, c.name, c.spriteImages || []);
-      });
-    });
-}
-
-// Unified single-select checkbox logic
-document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
-  checkbox.addEventListener('change', e => {
-    const type = e.target.dataset.filter;
-    const wasChecked = e.target.checked;
-
-    for (let key in selectedFilters) {
-      selectedFilters[key] = false;
-      document.querySelector(`[data-filter="${key}"]`).checked = false;
-    }
-
-    if (wasChecked) {
-      selectedFilters[type] = true;
-      e.target.checked = true;
-    }
-
-    renderList();
-  });
-});
-
-// Search typing
-searchInput.addEventListener('input', renderList);
-
-// Show sprite popup with carousel
-function showPopup(folderPath, charName, spriteList = []) {
-  const popup = document.getElementById('spritePopup');
-  const popupImg = document.getElementById('spritePopupImg');
-
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-
-  if (!spriteList.length) {
-    popupImg.src = '';
-    popupImg.alt = 'No sprites found';
-    popup.style.display = 'flex';
-
-    // Hide navigation buttons
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
-    return;
-  }
-
-  let index = 0;
-
-  function showImageAt(idx) {
-    index = idx;
-    popupImg.src = `${folderPath}/${spriteList[index]}.png`;
-    popupImg.alt = `${charName} - ${spriteList[index]}`;
-  }
-
-  function nextImage() {
-    index = (index + 1) % spriteList.length;
-    showImageAt(index);
-  }
-
-  function prevImage() {
-    index = (index - 1 + spriteList.length) % spriteList.length;
-    showImageAt(index);
-  }
-
-  // Show or hide navigation buttons
-  if (spriteList.length <= 1) {
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
-  } else {
-    prevBtn.style.display = 'block';
-    nextBtn.style.display = 'block';
-
-    prevBtn.onclick = prevImage;
-    nextBtn.onclick = nextImage;
-
-    // Keyboard arrows
-    document.onkeydown = (e) => {
-      if (popup.style.display !== 'flex') return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
-    };
-
-    // Mobile swipe support
-    let touchStartX = 0;
-    popup.addEventListener('touchstart', e => {
-      touchStartX = e.touches[0].clientX;
-    });
-
-    popup.addEventListener('touchend', e => {
-  // Only allow swipe if there's more than one sprite
-  if (spriteList.length > 1) {
-    const diff = e.changedTouches[0].clientX - touchStartX;
-    if (diff > 50) prevImage();
-    else if (diff < -50) nextImage();
-  }
-});
-  }
-
-  showImageAt(0);
-  popup.style.display = 'flex';
-}
-
-// Close popup
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-
-document.getElementById('spritePopup').addEventListener('click', e => {
-  if (e.target.id === 'spritePopup') {
-    e.target.style.display = 'none';
-  }
-});
-
-// Filter popup toggle
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
-
-filterBtn.addEventListener('click', () => {
-  filterPopup.classList.toggle('hidden');
-});
-
-document.addEventListener('click', (e) => {
-  if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
-    filterPopup.classList.add('hidden');
-  }
-});
-
-// Initial render
-renderList();
