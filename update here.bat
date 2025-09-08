@@ -1,3 +1,3 @@
 git add . 
-git commit -m "cleaned some note in code.js + merged fit.js"  
+git commit -m "cleaned some notes"  
 git push origin main  

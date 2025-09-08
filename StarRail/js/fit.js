@@ -8,10 +8,7 @@ const gameConfig = {
 pathPrefix: "../assets/charaid/StarRail/Outfit/", 
 spritePrefix: "../assets/Sprite/StarRail/Outfit/", 
 
-  // Function to get the correct image path for the character
   getImgPath: (imgName) => `${gameConfig.pathPrefix}${imgName}.webp`,
-
-  // Function to get the correct sprite path for the character's second image
   getSpritePath: (imgName2) => `${gameConfig.spritePrefix}${imgName2}.png`
 };
 

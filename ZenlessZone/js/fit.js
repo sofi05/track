@@ -9,12 +9,9 @@ const gameConfig = {
   // Add more characters here
 ],
 
-  pathPrefix: "../assets/charaid/Zenless/Outfit/", // Where the images are stored
-  spritePrefix: "../assets/Sprite/Zenless/Outfit/", // Where the sprites are stored
+  pathPrefix: "../assets/charaid/Zenless/Outfit/", 
+  spritePrefix: "../assets/Sprite/Zenless/Outfit/",
 
-  // Function to get the correct image path for the character
   getImgPath: (imgName) => `${gameConfig.pathPrefix}${imgName}.webp`,
-
-  // Function to get the correct sprite path for the character's second image
   getSpritePath: (imgName2) => `${gameConfig.spritePrefix}${imgName2}.png`
 };
