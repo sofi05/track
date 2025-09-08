@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Popup HTML (inserted directly)
   const popupHTML = `
 <div id="game-switcher" class="game-switcher hidden">
   <div class="switcher-content">
@@ -25,11 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
   `;
-  
-  // Insert popup HTML into the container
+
   document.getElementById('popup-container').innerHTML = popupHTML;
 
-  // Now set up the event listeners
+  // Event listeners
   const switcherPopup = document.getElementById('game-switcher');
   const switchButton = document.getElementById('tab-play');
 

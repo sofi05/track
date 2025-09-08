@@ -81,14 +81,12 @@ createImageElement(c) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
 
-    // Main character portrait
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
     img.src = `../assets/charaid/StarRail/${imgSrcName}.png`;
     img.alt = c.name;
 
-    // Element icon (e.g., Quantum, Physical, etc.)
     const elementImg = document.createElement('img');
     elementImg.className = 'element-icon';
     elementImg.src = `../assets/others/StarRail/Element/${c.element}.png`;
@@ -112,14 +110,12 @@ createImageElement(c) {
       container.appendChild(worldList);
     }
 
-    // Click-to-popup full sprite (e.g., gacha art)
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
       const imgPath = `../assets/Sprite/StarRail/${c.imgName}.png`;
       showPopup(imgPath, c.name);
     });
-
-    // Fallback if image fails
+    
     img.onerror = () => {
       img.style.display = 'none';
     };

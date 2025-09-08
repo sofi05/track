@@ -1,6 +1,3 @@
-// all-js.main/shared.js
-
-// Expose functions to global scope
 window.filterAndSortCharacters = function (characters, isHI3 = false) {
   const newCharacters = characters.filter(char => char.status === 'new' || char.status === 'soon');
   let rerunCharacters = characters.filter(char => char.have === false && char.status === 'available');

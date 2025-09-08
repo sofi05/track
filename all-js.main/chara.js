@@ -21,7 +21,7 @@ let selectedFilters = {
 window.CHARA_CONFIG = window.CHARA_CONFIG || {};
 const characters = window.CHARA_CONFIG.characters || [];
 
-// Check if any character has a part property
+// Check if any character has a part tag
 const hasPartInfo = characters.some(c => typeof c.part !== 'undefined');
 
 // Default to Part 2 (only meaningful if hasPartInfo is true)

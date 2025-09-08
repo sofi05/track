@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
 
-  // Use the shared filter function (same filter logic for zzz)
   const { newCharacters, rerunCharacters } = filterAndSortCharacters(characters);
 
   const config = {
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     elementPath: '../assets/others/Zenless/Element',
     imagePrefix: 'IconRoleCrop',
     useImgName: true,
-    dynamicGradient: false,  // zzz uses simple 5-star or else gradient
+    dynamicGradient: false,  
   };
 
   newCharacters.forEach(char => {

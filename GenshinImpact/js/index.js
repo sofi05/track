@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
 
-  const { newCharacters, rerunCharacters } = filterAndSortCharacters(characters); // ✅ global call
+  const { newCharacters, rerunCharacters } = filterAndSortCharacters(characters); 
 
   const config = {
     iconPath: '../assets/charaid/Genshin',
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   newCharacters.forEach(char => {
-    newCharSlider.appendChild(createCharacterCard(char, config)); // ✅ global call
+    newCharSlider.appendChild(createCharacterCard(char, config)); 
   });
 
   rerunCharacters.forEach(char => {
