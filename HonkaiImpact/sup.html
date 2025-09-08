@@ -20,7 +20,6 @@
     <button data-part="2" class="part-btn active">Part 2</button>
     <button data-part="1" class="part-btn">Part 1</button>
     <button data-part="all" class="part-btn">All</button>
-    <button class="part-btn" data-part="collab">Collab</button>
   </div>
 
   <div id="filterPopup" class="filter-popup hidden">
@@ -33,9 +32,6 @@
           <label><input type="radio" name="have" value="true"> Have</label>
           <label><input type="radio" name="have" value="false"> Haven't</label>
         </div>
-        <div class="sub-filter">
-          <label><input type="checkbox" name="newStatus" value="true"> New</label>
-        </div>
       </div>
     </div>
 
@@ -44,40 +40,28 @@
       <button type="button" class="filter-toggle">Element</button>
       <div class="filter-options">
         <label class="element-label">
-          <input type="radio" name="element" value="BIO">
-          <img src="../assets/others/HI3/Element/BIO.png" alt="BIO" class="element-img">
+          <input type="radio" name="element" value="Fire_DMG">
+          <img src="../assets/others/HI3/Cores/Core_Fire_DMG.png" alt="Fire" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="IMG">
-          <img src="../assets/others/HI3/Element/IMG.png" alt="IMG" class="element-img">
+          <input type="radio" name="element" value="Ice_DMG">
+          <img src="../assets/others/HI3/Cores/Core_Ice_DMG.png" alt="Ice" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="MECH">
-          <img src="../assets/others/HI3/Element/MECH.png" alt="MECH" class="element-img">
+          <input type="radio" name="element" value="Lightning_DMG">
+          <img src="../assets/others/HI3/Cores/Core_Lightning_DMG.png" alt="Lightning" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="PSY">
-          <img src="../assets/others/HI3/Element/PSY.png" alt="PSY" class="element-img">
+          <input type="radio" name="element" value="Physical">
+          <img src="../assets/others/HI3/Cores/Core_Physical.png" alt="Physical" class="element-img">
         </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="QUA">
-          <img src="../assets/others/HI3/Element/QUA.png" alt="QUA" class="element-img">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="SD">
-          <img src="../assets/others/HI3/Element/SD.png" alt="SD" class="element-img">
-        </label>
-        </div>
+      </div>
     </div>
 
     <!-- RARITY -->
     <div class="filter-category">
       <button type="button" class="filter-toggle">Rarity</button>
       <div class="filter-options">
-        <label class="element-label">
-          <input type="radio" name="rarity" value="3">
-          <img src="../assets/others/HI3/Rank/B.png" class="element-img">
-        </label>
         <label class="element-label">
           <input type="radio" name="rarity" value="4">
           <img src="../assets/others/HI3/Rank/A.png" class="element-img">
@@ -110,17 +94,16 @@
     </a>
   </nav>
 
-  <!--SPRITE-->
   <div id="spritePopup" class="sprite-popup" style="display:none;">
     <span class="close-btn">✕</span>
     <img id="spritePopupImg" src="" alt="" />
   </div>
   <div id="spriteList"></div>
 
-  <!--SCRIPTS-->
-  <script src="js/chara.js" defer></script>
+  <!--SPRITE-->
+  <script src="js/sup.js" defer></script>
+  <script src="../all-js.main/sup.js"></script>
   <script src="../all-js.main/change.js"></script>
-  <script src="../all-js.main/chara.js" defer></script>
-    
+
 </body>
 </html>

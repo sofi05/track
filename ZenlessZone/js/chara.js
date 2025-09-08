@@ -6,7 +6,7 @@ window.CHARA_CONFIG = {
 { name: 'Billy', imgName: '10', have: true, element: 'IconPhysical', group:'cunhar', gender:'m', rarity: 4, status: 'available' },
 { name: 'Nekomata', imgName: '11', have: false, element: 'IconPhysical', group:'cunhar', gender:'f', rarity: 5, status: 'available', version: '2.0' },
 { name: 'Nicole', imgName: '12', have: true, element: 'IconEther', group:'cunhar', gender:'f', rarity: 4, status: 'available' },
-{ name: 'Miyabi', imgName: '13', have: true, element: 'IconFrost', group:'sec6', gender:'f', rarity: 5, status: 'available' },
+{ name: 'Miyabi', imgName: '13', have: true, element: 'IconFrost', filterElement: 'IconIce', group:'sec6', gender:'f', rarity: 5, status: 'available' },
 { name: 'Koleda', imgName: '14', have: true, element: 'IconFire', group:'belo', gender:'f', rarity: 5, status: 'available' },
 { name: 'Anton', imgName: '15', have: true, element: 'IconElectric', group:'belo', gender:'m', rarity: 4, status: 'available' },
 { name: 'Ben', imgName: '16', have: true, element: 'IconFire', group:'belo', gender:'m', rarity: 4, status: 'available' },
@@ -34,7 +34,7 @@ window.CHARA_CONFIG = {
 { name: 'Vivian', imgName: '41', have: false, element: 'IconEther', group:'mock', gender:'f', rarity: 5, status: 'available', version: '1.7' },
 { name: 'Hugo', imgName: '42', have: false, element: 'IconIce', group:'mock', gender:'m', rarity: 5, status: 'available', version: '1.7' },
 { name: 'Ju Fufu', imgName: '43', have: false, element: 'IconFire', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.0' },
-{ name: 'Yixuan', imgName: '44', have: false, element: 'IconAuricInk', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.0' },
+{ name: 'Yixuan', imgName: '44', have: false, element: 'IconAuricInk', filterElement: 'IconEther', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.0' },
 { name: 'Pan Yinhu', imgName: '45', have: true, element: 'IconPhysical', group:'sum', gender:'m', rarity: 4, status: 'available' },
 { name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.1' },
 { name: 'Yuzuha', imgName: '47', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.1' },
@@ -47,7 +47,7 @@ window.CHARA_CONFIG = {
   // Add more characters here
 ],
 
-createImageElement(c) {
+  createImageElement(c) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
 
@@ -59,13 +59,13 @@ createImageElement(c) {
 
     const elementImg = document.createElement('img');
     elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;
+    elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;  // Using `c.element` for the displayed element
     elementImg.alt = c.element;
 
     container.appendChild(img);
     container.appendChild(elementImg);
 
-    // Optional: Display world/tags
+    // Optional: Display world/tags if available
     if (Array.isArray(c.world)) {
       const worldList = document.createElement('div');
       worldList.className = 'world-list';

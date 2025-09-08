@@ -76,7 +76,9 @@ function renderList() {
       }
 
       // Filter: Element
-      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
+      if (selectedFilters.element) {
+        if (c.element !== selectedFilters.element && c.filterElement !== selectedFilters.element) return false;
+      }
 
       // Filter: Rarity
       if (selectedFilters.rarity && c.rarity.toString() !== selectedFilters.rarity) return false;
