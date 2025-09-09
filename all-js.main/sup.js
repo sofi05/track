@@ -20,8 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
       .sort((a, b) => a.name.localeCompare(b.name))
       .filter(c => {
         const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-        const matchesPart = selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab);
 
+        // Updated matchesPart logic
+        const matchesPart = selectedPart === 'all' || 
+                            (!c.part) || // Show characters without a part regardless
+                            c.part === selectedPart || 
+                            (selectedPart === 'collab' && c.collab);
+
+        // Apply filters for 'have', 'rarity', and 'element'
         if (selectedFilters.have !== null) {
           if (selectedFilters.have && !c.have) return false;
           if (!selectedFilters.have && c.have) return false;
@@ -61,9 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'char-icon';
         const imgSrcName = c.imgName || c.name;
-        img.src = `${gameFolder}/${c.folder}/${imgSrcName}.png`;
-        img.alt = c.name;
 
+        // Fix the folder issue by ensuring c.folder is not undefined for the specific game
+        const charFolder = c.folder || '';  // Default to empty string if folder is undefined
+        img.src = `${gameFolder}/${charFolder}/${imgSrcName}.png`; // Build the image source path
+
+        img.alt = c.name;
         iconWrapper.appendChild(img);
 
         const label = document.createElement('div');
@@ -74,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         charListEl.appendChild(card);
 
         card.addEventListener('click', () => {
-          const imgPath = `${spriteFolder}/${c.folder}/${imgSrcName}.png`;
+          const imgPath = `${spriteFolder}/${charFolder}/${imgSrcName}.png`; // Same fix for click path
           showPopup(imgPath, c.name);
         });
       });
