@@ -1,3 +1,3 @@
 git add . 
-git commit -m "removed elements for bangboo"  
+git commit -m "added permanent on index"  
 git push origin main  

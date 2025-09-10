@@ -1,13 +1,24 @@
 window.filterAndSortCharacters = function (characters, isHI3 = false) {
   const newCharacters = characters.filter(char => char.status === 'new' || char.status === 'soon');
-  let rerunCharacters = characters.filter(char => char.have === false && char.status === 'available');
 
-  if (isHI3) rerunCharacters = rerunCharacters.filter(char => char.version);
+  const permaCharacters = characters.filter(char => char.perma === true);
+  const permaIds = new Set(permaCharacters.map(char => char.id || char.name)); // fallback to name if no id
+
+  let rerunCharacters = characters.filter(char =>
+    char.have === false &&
+    char.status === 'available' &&
+    !permaIds.has(char.id || char.name)
+  );
+
+  if (isHI3) {
+    rerunCharacters = rerunCharacters.filter(char => char.version);
+  }
 
   newCharacters.sort((a, b) => a.version - b.version);
   rerunCharacters.sort((a, b) => b.version - a.version);
+  permaCharacters.sort((a, b) => b.version - a.version); // Sort however you'd prefer
 
-  return { newCharacters, rerunCharacters };
+  return { newCharacters, rerunCharacters, permaCharacters };
 };
 
 window.createCharacterCard = function (char, config, customImgPathFn) {
@@ -42,7 +53,6 @@ window.createCharacterCard = function (char, config, customImgPathFn) {
   const iconImg = document.createElement('img');
   const imgName = useImgName ? char.imgName || char.name : char.name;
 
-  // Use custom function if provided, otherwise default path build
   iconImg.src = customImgPathFn 
     ? customImgPathFn(char, imgName, config) 
     : `${iconPath}/${imagePrefix}${imgName}${imageSuffix}.png`;
@@ -79,4 +89,3 @@ window.createCharacterCard = function (char, config, customImgPathFn) {
 
   return charBox;
 };
-

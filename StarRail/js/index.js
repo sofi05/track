@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
+  const permaSlider = document.getElementById('perma-slider');
 
-  const newCharacters = characters.filter(char => char.status === 'new' || char.status === 'soon');
-  const rerunCharacters = characters.filter(char => char.have === false && char.status === 'available');
-
-  newCharacters.sort((a, b) => a.version - b.version);
-  rerunCharacters.sort((a, b) => b.version - a.version);
+  const { newCharacters, rerunCharacters, permaCharacters} = filterAndSortCharacters(characters);
 
   const config = {
     iconPath: '../assets/charaid/StarRail',
@@ -22,5 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   rerunCharacters.forEach(char => {
     rerunSlider.appendChild(createCharacterCard(char, config));
+  });
+
+  permaCharacters.forEach(char => {
+    permaSlider.appendChild(createCharacterCard(char, config));
   });
 });
