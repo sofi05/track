@@ -4,10 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const filterBtn = document.getElementById('filterBtn');
   const filterPopup = document.getElementById('filterPopup');
+  const newFilterCheckbox = document.getElementById('filterNew'); // ✅ NEW checkbox
 
   // ====== Global Variables ======
-  let selectedPart = '2'; // Default part
-  let selectedFilters = { have: null, rarity: null, element: null };
+  window.selectedFilters = { have: null, rarity: null, element: null, isNew: false }; // ✅ isNew added
+
+  // ====== Global Function to Sync Filters ======
+  window.updateFiltersFromUI = function () {
+    const newFilterCheckbox = document.getElementById('filterNew');
+    window.selectedFilters.isNew = newFilterCheckbox ? newFilterCheckbox.checked : false;
+  };
 
   // ====== Render function ======
   function renderList(characters, gameFolder, spriteFolder) {
@@ -21,26 +27,27 @@ document.addEventListener('DOMContentLoaded', () => {
       .filter(c => {
         const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-        // Updated matchesPart logic
-        const matchesPart = selectedPart === 'all' || 
-                            (!c.part) || // Show characters without a part regardless
-                            c.part === selectedPart || 
+        const matchesPart = selectedPart === 'all' ||
+                            (!c.part) ||
+                            c.part === selectedPart ||
                             (selectedPart === 'collab' && c.collab);
 
-        // Apply filters for 'have', 'rarity', and 'element'
         if (selectedFilters.have !== null) {
           if (selectedFilters.have && !c.have) return false;
           if (!selectedFilters.have && c.have) return false;
         }
+
         if (selectedFilters.rarity && c.rarity !== selectedFilters.rarity) return false;
         if (selectedFilters.element && c.element !== selectedFilters.element) return false;
+
+        if (selectedFilters.isNew && c.status !== 'new') return false; // ✅ NEW logic
 
         return matchesSearch && matchesPart;
       })
       .forEach(c => {
         const card = document.createElement('div');
         card.className = 'char-card';
-        card.title = `${c.name} (${c.element}, ${c.rarity})`;
+        card.title = `${c.name} (${c.element || 'Unknown'}, ${c.rarity}★)`;
 
         const iconWrapper = document.createElement('div');
         iconWrapper.className = 'icon-wrapper';
@@ -67,11 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'char-icon';
         const imgSrcName = c.imgName || c.name;
-
-        // Fix the folder issue by ensuring c.folder is not undefined for the specific game
-        const charFolder = c.folder || '';  // Default to empty string if folder is undefined
-        img.src = `${gameFolder}/${charFolder}/${imgSrcName}.png`; // Build the image source path
-
+        const charFolder = c.folder || '';
+        img.src = `${gameFolder}/${charFolder}/${imgSrcName}.png`;
         img.alt = c.name;
         iconWrapper.appendChild(img);
 
@@ -83,10 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
         charListEl.appendChild(card);
 
         card.addEventListener('click', () => {
-          const imgPath = `${spriteFolder}/${charFolder}/${imgSrcName}.png`; // Same fix for click path
+          const imgPath = `${spriteFolder}/${charFolder}/${imgSrcName}.png`;
           showPopup(imgPath, c.name);
         });
       });
+
     updateCharCount();
   }
 
@@ -105,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
           selectedFilters[filterKey] = parsedValue;
         }
 
+        updateFiltersFromUI(); // ✅ Sync 'new' checkbox state
         renderList(characters, gameFolder, spriteFolder);
       });
     });
@@ -114,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.filter-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const options = btn.nextElementSibling;
-      // Close others
       document.querySelectorAll('.filter-options').forEach(opt => {
         if (opt !== options) opt.classList.remove('visible');
       });
@@ -151,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ====== Part Buttons ======
+  let selectedPart = '2';
   document.querySelectorAll('.part-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
@@ -161,6 +167,15 @@ document.addEventListener('DOMContentLoaded', () => {
         renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
     });
   });
+
+  // ====== NEW Checkbox Filter Listener ======
+  if (newFilterCheckbox) {
+    newFilterCheckbox.addEventListener('change', () => {
+      updateFiltersFromUI();
+      if (window.currentCharacters && window.gameFolder && window.spriteFolder)
+        renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
+    });
+  }
 
   // ====== Expose functions to window ======
   window.renderGlobalList = renderList;

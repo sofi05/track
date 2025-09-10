@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Define the character data for the specific game
   const characters = [
     { name: 'Bagboo', have: true, rarity: '4' },
     { name: 'Cryboo', have: true, rarity: '4' },
@@ -33,59 +32,43 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Overtimeboo', have: false, rarity: '4' },
     { name: 'Belion', have: false, rarity: '5' },
     { name: 'Miss Esme', have: false, rarity: '5' },
-    { name: 'Mercury', have: false, rarity: '5' },
-    { name: 'Excaliboo', have: false, rarity: '4' }
-    // Add more characters as needed
+    { name: 'Mercury', have: false, rarity: '5', status: 'new' },
+    { name: 'Excaliboo', have: false, rarity: '4', status: 'new' }
   ];
 
-  // Define the path for sprites and icons (same for both)
-  const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';  // Same path for both sprite and icon
+  const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';
+  const missingIndexes = [8, 22, 33, 34, 35];
+  let currentIndex = 1;
 
-  // Missing image indexes to skip
-  const missingIndexes = [8, 22, 33, 34, 35]; 
-
-  // Save to global window object for the global code to use
-  window.currentCharacters = characters;
-  window.spriteFolder = spriteFolder;
-
-  let currentIndex = 1; // Start the imgName from 1
-
-  // Dynamically assign imgName to characters, skipping missing ones
-  characters.forEach((character, index) => {
-    // Skip missing numbers
-    while (missingIndexes.includes(currentIndex)) {
-      currentIndex++; // Skip missing index
-    }
-
+  characters.forEach((character) => {
+    while (missingIndexes.includes(currentIndex)) currentIndex++;
     const imgName = `BangbooGarageRole${String(currentIndex).padStart(2, '0')}`;
-    character.imgName = imgName;  // Assign imgName to the character
-
-    // Build the image path
-    const imgPath = `${spriteFolder}${imgName}.png`;
-    character.imgPath = imgPath;
-
-    // Log to verify correct path creation
-    console.log(`Character: ${character.name}, imgPath: ${imgPath}`);
-
-    currentIndex++;  // Increment for the next character
+    character.imgName = imgName;
+    character.imgPath = `${spriteFolder}${imgName}.png`;
+    currentIndex++;
   });
 
-  // Filter out characters with no valid imgName (those that are missing)
   const validCharacters = characters.filter(c => c.imgName !== null);
 
-  // Call global render to display the valid characters only
-  if (window.renderGlobalList) {
-    window.renderGlobalList(validCharacters, spriteFolder, spriteFolder);  // Same path for both sprite and icon
-  } else {
-    console.error('renderGlobalList function is not defined');
-  }
+  // Set global variables required by your global.js
+  window.currentCharacters = validCharacters;
+  window.gameFolder = spriteFolder; // <-- add this!
+  window.spriteFolder = spriteFolder;
 
-  // Optionally, set up filters (if needed)
+  // Setup filters (have, rarity, element)
   if (window.setupGlobalFilters) {
     window.setupGlobalFilters('have', 'have', validCharacters, spriteFolder, spriteFolder);
     window.setupGlobalFilters('rarity', 'rarity', validCharacters, spriteFolder, spriteFolder);
     window.setupGlobalFilters('element', 'element', validCharacters, spriteFolder, spriteFolder);
-  } else {
-    console.error('setupGlobalFilters function is not defined');
+  }
+
+  // Update 'new' filter from UI before rendering
+  if (typeof window.updateFiltersFromUI === 'function') {
+    window.updateFiltersFromUI();
+  }
+
+  // Render the list
+  if (window.renderGlobalList) {
+    window.renderGlobalList(validCharacters, spriteFolder, spriteFolder);
   }
 });
