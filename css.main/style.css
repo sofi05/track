@@ -509,3 +509,15 @@ h1 {
   border: none;
   cursor: pointer;
 }
+
+.game-logo {
+  width: 200px;        /* or whatever size you want */
+  height: auto;        /* maintain aspect ratio */
+  display: block;
+  margin: 0 auto;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}

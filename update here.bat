@@ -1,3 +1,3 @@
 git add . 
-git commit -m "finally managed to add sprite to index.html"  
+git commit -m "added nexus maybe charas"  
 git push origin main  
