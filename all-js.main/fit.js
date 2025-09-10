@@ -5,6 +5,7 @@ let selectedFilters = {
   have: false,
   want: false,
   new: false,
+  part: null,
 };
 
 function renderList() {
@@ -21,11 +22,17 @@ function renderList() {
       const matchesHave = !selectedFilters.have || (selectedFilters.have && c.have);
       const matchesWant = !selectedFilters.want || (selectedFilters.want && !c.have);
       const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
-      return matchesSearch && matchesHave && matchesWant && matchesStatus;
+
+      let matchesPart = true;
+      if (selectedFilters.part !== null) {
+        matchesPart = c.part === selectedFilters.part;
+      }
+
+      return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
     });
 
   filteredCharacters.forEach(c => {
-    if (!c.name) return; // Skip empty entries
+    if (!c.name) return;
 
     const card = document.createElement('div');
     card.className = 'char-card';
@@ -34,16 +41,14 @@ function renderList() {
     const iconWrapper = document.createElement('div');
     iconWrapper.className = 'icon-wrapper';
 
-    // Background colors
     if (gameConfig.id === 'hi3') {
-      iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)'; // HI3 gray
+      iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)';
     } else {
       iconWrapper.style.background = c.rarity === 5
-        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)' // 5★ gold
-        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)'; // others purple
+        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
+        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
     }
 
-    // "NEW" label
     if (c.status === 'new') {
       const label = document.createElement('div');
       label.textContent = 'NEW';
@@ -69,7 +74,6 @@ function renderList() {
     card.appendChild(label);
     charListEl.appendChild(card);
 
-    // Click to open popup
     card.addEventListener('click', () => {
       if (gameConfig.id === 'hi3') {
         const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
@@ -79,32 +83,63 @@ function renderList() {
       }
     });
   });
+  updateCharCount();
 }
 
-// Checkbox filters
-document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+// Handle "status" checkboxes (new, have, want)
+document.querySelectorAll('.filter-checkbox[data-filter]').forEach(checkbox => {
   checkbox.addEventListener('change', e => {
     const type = e.target.dataset.filter;
     const wasChecked = e.target.checked;
 
-    for (let key in selectedFilters) {
+    // Clear all status filters
+    for (let key of ['have', 'want', 'new']) {
       selectedFilters[key] = false;
-      document.querySelector(`[data-filter="${key}"]`).checked = false;
+      const el = document.querySelector(`[data-filter="${key}"]`);
+      if (el) el.checked = false;
     }
 
+    // If a status filter is checked, clear part filters
     if (wasChecked) {
       selectedFilters[type] = true;
       e.target.checked = true;
+
+      // Uncheck all part checkboxes
+      selectedFilters.part = null;
+      document.querySelectorAll('input[name="part"]').forEach(cb => cb.checked = false);
     }
 
     renderList();
   });
 });
 
-// Search input
+// Handle "part" filters (checkbox-like, but exclusive behavior)
+document.querySelectorAll('input[name="part"]').forEach(partCheckbox => {
+  partCheckbox.addEventListener('change', e => {
+    if (e.target.checked) {
+      // Clear status filters
+      for (let key of ['have', 'want', 'new']) {
+        selectedFilters[key] = false;
+        const el = document.querySelector(`[data-filter="${key}"]`);
+        if (el) el.checked = false;
+      }
+
+      // Uncheck other part checkboxes
+      document.querySelectorAll('input[name="part"]').forEach(cb => {
+        if (cb !== e.target) cb.checked = false;
+      });
+
+      selectedFilters.part = e.target.value;
+    } else {
+      selectedFilters.part = null;
+    }
+
+    renderList();
+  });
+});
+
 searchInput.addEventListener('input', renderList);
 
-// Popup
 function showPopup(imgPath, altText, spriteList = []) {
   const popup = document.getElementById('spritePopup');
   const popupImg = document.getElementById('spritePopupImg');
@@ -152,7 +187,6 @@ function showPopup(imgPath, altText, spriteList = []) {
       if (e.key === 'ArrowLeft') prevImage();
     };
 
-    // Mobile swipe
     let touchStartX = 0;
     popup.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
     popup.addEventListener('touchend', e => {
@@ -166,7 +200,6 @@ function showPopup(imgPath, altText, spriteList = []) {
   popup.style.display = 'flex';
 }
 
-// Close popup
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
 });
@@ -174,7 +207,6 @@ document.getElementById('spritePopup').addEventListener('click', e => {
   if (e.target.id === 'spritePopup') e.target.style.display = 'none';
 });
 
-// Filter popup toggle
 const filterBtn = document.getElementById('filterBtn');
 const filterPopup = document.getElementById('filterPopup');
 filterBtn.addEventListener('click', () => filterPopup.classList.toggle('hidden'));
@@ -182,5 +214,10 @@ document.addEventListener('click', e => {
   if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) filterPopup.classList.add('hidden');
 });
 
-// Initial render
+function updateCharCount() {
+  const count = document.querySelectorAll('.char-card').length;
+  const countText = `Total: ${count} character${count !== 1 ? 's' : ''}`;
+  document.getElementById('charCount').textContent = countText;
+}
+
 renderList();

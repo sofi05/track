@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added notes to charas.js"  
+git commit -m "updated sprites + some changes"  
 git push origin main  

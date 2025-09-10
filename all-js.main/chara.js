@@ -145,6 +145,8 @@ function renderList() {
       card.appendChild(label);
       charListEl.appendChild(card);
     });
+
+    updateCharCount();
 }
 
 // ===== Filter Setups =====
@@ -261,4 +263,11 @@ document.querySelectorAll('.part-btn').forEach(btn => {
 if (!characters || characters.length === 0) {
   console.warn("No characters loaded from CHARA_CONFIG.");
 }
+
+function updateCharCount() {
+  const count = document.querySelectorAll('.char-card').length;
+  const countText = `Total: ${count} character${count !== 1 ? 's' : ''}`;
+  document.getElementById('charCount').textContent = countText;
+}
+
 renderList();

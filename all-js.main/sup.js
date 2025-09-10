@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showPopup(imgPath, c.name);
         });
       });
+    updateCharCount();
   }
 
   // ====== Filter Listeners ======
@@ -165,3 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.renderGlobalList = renderList;
   window.setupGlobalFilters = setupToggleableRadio;
 });
+
+function updateCharCount() {
+  const count = document.querySelectorAll('.char-card').length;
+  const countText = `Total: ${count} character${count !== 1 ? 's' : ''}`;
+  document.getElementById('charCount').textContent = countText;
+}

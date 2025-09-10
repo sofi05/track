@@ -11,18 +11,20 @@
 </head>
 <body>
   <h1>Outfits</h1>
+  <p id="charCount" style="text-align: center; font-size: 0.8rem; margin-top: -10px; margin-bottom: 20px; color: #666;">
+  Total: 0 characters</p>
 
   <div class="search-filter">
     <input type="text" id="searchInput" placeholder="Search by name..." />
     <button id="filterBtn">Filter</button>
   </div>
 
-   <!-- FILTER -->
+  <!-- FILTER -->
   <div id="filterPopup" class="filter-popup hidden">
     <div class="filter-section">
-      <label><input type="checkbox" class="filter-checkbox" data-filter="have"> Have</label>
-      <label><input type="checkbox" class="filter-checkbox" data-filter="want"> Want</label>
       <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
+      <label><input type="checkbox" name="part" value="2" class="part-radio"> Part 2</label>
+      <label><input type="checkbox" name="part" value="1" class="part-radio"> Part 1</label>
     </div>
   </div>
 
