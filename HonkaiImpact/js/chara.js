@@ -129,6 +129,13 @@ window.CHARA_CONFIG = {
   // Add more characters here
 ],
 
+getSpritePath: function(char) {
+    const imgName = char.imgName || char.name;
+    // Assume each char has a folder property for their folder name
+    const folder = char.folder || ''; 
+    return `../assets/Sprite/HI3/${folder}/${imgName}.png`;
+  },
+
 createImageElement(c) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
