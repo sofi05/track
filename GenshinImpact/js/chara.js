@@ -78,6 +78,8 @@ window.CHARA_CONFIG = {
   { name: 'Tighnari', have: true, element: 'Dendro', rarity: 5, region:['sum'], gender:'m',  status: 'available' },
   { name: 'Shinobu', have: true, element: 'Electro', rarity: 4, region:['ina'], gender:'f',  status: 'available' },
   { name: 'Sucrose', have: true, element: 'Anemo', rarity: 4, region:['mond'], gender:'f',  status: 'available' },
+  { name: 'Mizuki', have: true, element: 'Anemo', rarity: 5, region:['ina'], gender:'f',  status: 'available' },
+  { name: 'Aino', have: true, element: 'Hydro', rarity: 4, region:['snez'], gender:'f',  status: 'new' },
 
   //DON'T HAVE
   { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '4.5' },
@@ -102,16 +104,11 @@ window.CHARA_CONFIG = {
   { name: 'Klee', have: false, element: 'Pyro', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '4.5' },
   { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '5.7' },
   { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
-  { name: 'Mizuki', have: false, element: 'Anemo', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.4', perma: true },
   
-  
-  { name: 'Aino', have: false, element: 'Hydro', rarity: 4, region:['snez'], gender:'f',  status: 'new', version: '6.0' },
   { name: 'Flins', have: false, element: 'Electro', rarity: 5, region:['snez'], gender:'m',  status: 'new', version: '6.0' },
   { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.0' },
   { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'soon', version: '6.1' },
   { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.1' },
-  
-  
   // Add more characters here
 ],
 
