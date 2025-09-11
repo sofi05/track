@@ -169,6 +169,24 @@ function createCharacterPopup(char, getSpritePath) {
     textAlign: 'center',
   });
 
+  // Close button
+   const closeButton = document.createElement('button');
+   closeButton.textContent = '✕';  // Unicode multiplication sign looks good for X
+
+   Object.assign(closeButton.style, {
+     position: 'absolute',
+     top: '8px',
+     right: '12px',
+     background: 'transparent',
+     border: 'none',
+     color: '#fff',
+     fontSize: '20px',
+     cursor: 'pointer',
+  });
+
+  popup.style.position = 'fixed'; // already fixed, good
+  popup.style.paddingTop = '40px'; // to avoid close button overlapping content
+
   // Sprite image with path from getSpritePath
   const sprite = document.createElement('img');
   sprite.src = getSpritePath(char);
@@ -195,6 +213,7 @@ function createCharacterPopup(char, getSpritePath) {
   rarityEl.textContent = `Rarity: ${char.rarity || 'N/A'} ★`;
   rarityEl.style.margin = '2px 0 4px';
 
+  popup.appendChild(closeButton);
   popup.appendChild(sprite);
   popup.appendChild(nameEl);
   popup.appendChild(versionEl);
@@ -212,6 +231,10 @@ function createCharacterPopup(char, getSpritePath) {
   setTimeout(() => {
     document.addEventListener('click', onClickOutside);
   }, 0);
+
+  closeButton.addEventListener('click', () => {
+    popup.remove();
+  });
 
   document.body.appendChild(popup);
 }

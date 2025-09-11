@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added nexus maybe charas"  
+git commit -m "added X on sprite popup"  
 git push origin main  
