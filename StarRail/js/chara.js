@@ -74,8 +74,8 @@ window.CHARA_CONFIG = {
 { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'new', version: '3.5' },
 { name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'new', version: '3.5' },
 
-{ name: 'Evernight', imgName: '1413', have: false, element: 'thunder', group:'reme', gender:'f', world:['ae'],rarity: 5,  status: 'soon', version: '3.6' },
-{ name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'thunder', group:'prese', gender:'m', world:['ae'],rarity: 5,  status: 'soon', version: '3.6' },
+{ name: 'Evernight', imgName: '1413', have: false, element: 'ice', group:'reme', gender:'f', world:['ae'],rarity: 5,  status: 'soon', version: '3.6' },
+{ name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'physical', group:'prese', gender:'m', world:['ae'],rarity: 5,  status: 'soon', version: '3.6' },
 
   // Add more characters here
 ],
