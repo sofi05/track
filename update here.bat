@@ -1,3 +1,3 @@
 git add . 
-git commit -m "removed onwed charas from 'new charas'"  
+git commit -m "finished past honkai list"  
 git push origin main  

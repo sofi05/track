@@ -531,24 +531,37 @@ h1 {
 /* Popup backdrop */
 #game-past {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align to top */
-  padding-top: 50px;
+  align-items: center; /* Centering the popup vertically */
   z-index: 9999;
 }
 
 /* Inner popup content */
 .popup-inner {
   background: rgb(65, 65, 65);
-  padding: 20px;
-  max-width: fit-content;
-  width: 90%;
+  padding: 20px; /* Added space inside the popup */
+  width: 310px; /* Fixed width to match two icons side by side */
+  height: auto; /* Allow the height to grow if necessary */
   border-radius: 8px;
   box-shadow: 0 0 10px #00000088;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content inside the popup */
+  margin: 20px; /* Added margin for spacing around the popup */
+  text-align: center;
+  margin-top: 0; /* Optional: remove margin above the inner popup */
+}
+
+.popup-inner a {
+  color: white; /* Set link color to white */
+  text-decoration: none; /* Optional: remove underline from links */
 }
 
 /* Horizontal image layout */
@@ -556,13 +569,15 @@ h1 {
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin-top: 15px;
-  flex-wrap: wrap;
+  margin-top: 4px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  margin-bottom: 0; /* Remove or reduce margin */
+  padding-bottom: 0; /* Ensure no extra padding exists */
 }
 
 /* Each image box */
 .game-hnk img {
-  width: 100px;
+  width: 100px; /* Fixed width for each image */
   cursor: pointer;
   border-radius: 30px;
   border: 2px solid transparent;
@@ -573,26 +588,52 @@ h1 {
   border-color: #007bff;
 }
 
-/* Slider (video + desc) below images */
+/* Slider content box */
 .slider-content {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding-top: 15px;
+  margin-top: -5px !important;
+  padding: 20px;
+  width: 300px; /* Define width to create the box */
+  height: 300px; /* Define height to make it square-like */
+  max-height: 300px; /* Optional: make sure it doesn’t exceed this height */
+  overflow: hidden; /* Hide overflowing content */
+  background-color: rgb(65, 65, 65); /* Background color */
+  color: white; /* Text color */
+  border-radius: 8px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding/border in size */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically and horizontally center the content */
+  text-align: justify; /* Justify the text */
+  padding: 20px; /* Add padding inside the box */
 }
 
-/* Close button inside slider */
-#slider-close {
-  margin-bottom: 10px;
-  cursor: pointer;
-  background: #e74c3c;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
+/* Center the h4 and reduce spacing from the rest of the text */
+#slider-message h4 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 5px; /* Reduce space below the h4 */
+  font-size: 1.2em; /* Optional: adjust heading size */
+  margin-top: 0; /* Remove extra space on top */
 }
 
-#slider-close:hover {
-  background: #c0392b;
+/* Slider text */
+#slider-message {
+  max-height: 220px; /* Limit the height of the text container */
+  overflow-y: auto; /* Enable scrolling if text exceeds box height */
+  display: block;
+  margin-top: -10px; /* Remove any extra margin at the top of the text */
+}
 
+.game-hnk {
+  margin-bottom: 0; /* Remove any margin from individual icon container */
+}
+
+/* Grayed out icon */
+.game-hnk img.gray {
+  filter: grayscale(100%);
+}
+
+/* Active (colored) icon */
+.game-hnk img.active {
+  filter: none;
+  border-color: #007bff; /* Highlight border for active icon */
 }
