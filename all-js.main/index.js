@@ -1,6 +1,8 @@
 // === Filter and sort characters ===
 window.filterAndSortCharacters = function (characters, isHI3 = false) {
-  const newCharacters = characters.filter(char => char.status === 'new' || char.status === 'soon');
+  const newCharacters = characters.filter(char => 
+    char.have === false &&
+    char.status === 'new' || char.status === 'soon');
 
   const permaCharacters = characters.filter(char => char.perma === true);
   const permaIds = new Set(permaCharacters.map(char => char.id || char.name)); // fallback to name if no id
