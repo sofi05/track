@@ -131,10 +131,13 @@ window.CHARA_CONFIG = {
 
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
-    // Assume each char has a folder property for their folder name
     const folder = char.folder || ''; 
     return `../assets/Sprite/HI3/${folder}/${imgName}.png`;
   },
+
+getFallbackPath: function(char) {
+  return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; //change this when needed
+},
 
 createImageElement(c) {
     const container = document.createElement('div');
@@ -145,6 +148,11 @@ createImageElement(c) {
     const imgSrcName = c.imgName || c.name;
     img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
     img.alt = c.name;
+
+    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+    img.onerror = () => {
+      img.src = fallbackImg;
+    };
 
     const elementImg = document.createElement('img');
     elementImg.className = 'element-icon';

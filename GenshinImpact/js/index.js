@@ -6,22 +6,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const { newCharacters, rerunCharacters, permaCharacters } = filterAndSortCharacters(characters); 
 
   const config = {
-    iconPath: '../assets/charaid/Genshin',
-    elementPath: '../assets/others/Genshin/Element',
-    imagePrefix: 'UI_AvatarIcon_',
+    iconPath: '../assets/charaid/Genshin',  // This is where icons are
+    elementPath: '../assets/others/Genshin/Element', 
+    imagePrefix: 'UI_AvatarIcon_',  // Prefix for icons
     useImgName: true,
     dynamicGradient: false,
   };
 
+  // Update this code to pass the correct icon source logic
   newCharacters.forEach(char => {
-    newCharSlider.appendChild(createCharacterCard(char, config)); 
+    newCharSlider.appendChild(createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath)); 
   });
 
   rerunCharacters.forEach(char => {
-    rerunSlider.appendChild(createCharacterCard(char, config));
+    rerunSlider.appendChild(createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath));
   });
 
   permaCharacters.forEach(char => {
-    permaSlider.appendChild(createCharacterCard(char, config));
+    permaSlider.appendChild(createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath));
   });
 });
+
+// Icon source function (used for icons only)
+function getIconPath(char, imgName, config) {
+  return `${config.iconPath}/${config.imagePrefix}${imgName}.png`;  // This returns the icon path for the card
+}

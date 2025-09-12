@@ -24,6 +24,10 @@ getSpritePath: function(char) {
     return `../assets/Sprite/NexusAnima/${imgName}.png`;
   },
 
+getFallbackPath: function(char) {
+  return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; //change this when needed
+},
+
 createImageElement(c) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
@@ -33,6 +37,11 @@ createImageElement(c) {
     const imgSrcName = c.imgName || c.name;
     img.src = `../assets/charaid/NexusAnima/TempIcons/${imgName}.png`;
     img.alt = c.name;
+
+    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+  img.onerror = () => {
+    img.src = fallbackImg;
+  };
 
     container.appendChild(img);
 
@@ -51,10 +60,6 @@ createImageElement(c) {
       const imgPath = `../assets/Sprite/NexusAnima/${imgName}.png`;
       showPopup(imgPath, c.name);
     });
-
-    img.onerror = () => {
-      img.style.display = 'none';
-    };
 
     return container;
   }

@@ -52,53 +52,57 @@ window.CHARA_CONFIG = {
 
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
-    // Assume each char has a folder property for their folder name
     const folder = char.folder || ''; 
     return `../assets/Sprite/Zenless/IconRole${imgName}.png`;
   },
+
+getFallbackPath: function(char) {
+  return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; //change this when needed
+},
   
-  createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
+createImageElement(c) {
+  const container = document.createElement('div');
+  container.className = 'char-icon-container';
 
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-    const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
-    img.alt = c.name;
+  const img = document.createElement('img');
+  img.className = 'char-icon';
+  const imgSrcName = c.imgName ? c.imgName : c.name;
+  img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
+  img.alt = c.name;
 
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;  // Using `c.element` for the displayed element
-    elementImg.alt = c.element;
+const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+  img.onerror = () => {
+    img.src = fallbackImg;
+  };
 
-    container.appendChild(img);
-    container.appendChild(elementImg);
+  const elementImg = document.createElement('img');
+  elementImg.className = 'element-icon';
+  elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;  // Using `c.element` for the displayed element
+  elementImg.alt = c.element;
 
-    // Optional: Display world/tags if available
-    if (Array.isArray(c.world)) {
-      const worldList = document.createElement('div');
-      worldList.className = 'world-list';
+  container.appendChild(img);
+  container.appendChild(elementImg);
 
-      c.world.forEach(world => {
-        const worldLabel = document.createElement('span');
-        worldLabel.className = 'world-label';
-        worldLabel.textContent = world;
-        worldList.appendChild(worldLabel);
-      });
+  // Optional: Display world/tags if available
+  if (Array.isArray(c.world)) {
+    const worldList = document.createElement('div');
+    worldList.className = 'world-list';
 
-      container.appendChild(worldList);
-    }
-
-    container.addEventListener('click', () => {
-      const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Zenless/IconRole${imgName}.png`;
-      showPopup(imgPath, c.name);
+    c.world.forEach(world => {
+      const worldLabel = document.createElement('span');
+      worldLabel.className = 'world-label';
+      worldLabel.textContent = world;
+      worldList.appendChild(worldLabel);
     });
 
-    img.onerror = () => {
-      img.style.display = 'none';
-    };
+    container.appendChild(worldList);
+  }
+
+  container.addEventListener('click', () => {
+    const imgName = c.imgName ? c.imgName : c.name;
+    const imgPath = `../assets/Sprite/Zenless/IconRole${imgName}.png`;
+    showPopup(imgPath, c.name);
+  });
 
     return container;
   },

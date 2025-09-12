@@ -107,27 +107,35 @@ window.CHARA_CONFIG = {
   
   { name: 'Flins', have: false, element: 'Electro', rarity: 5, region:['snez'], gender:'m',  status: 'new', version: '6.0' },
   { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.0' },
-  { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'soon', version: '6.1' },
+  { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'soon', version: '6.1' },
   { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.1' },
   // Add more characters here
 ],
 
-getSpritePath: function(char) {
+  getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
-    // Assume each char has a folder property for their folder name
     const folder = char.folder || ''; 
     return `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
   },
 
-createImageElement(c) {
+  getFallbackPath: function(char) {
+    return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`;
+  },
+
+  createImageElement(c) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
 
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;
+    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;  // Default image path
     img.alt = c.name;
+
+    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+    img.onerror = () => {
+      img.src = fallbackImg;
+    };
 
     const elementImg = document.createElement('img');
     elementImg.className = 'element-icon';
@@ -154,10 +162,6 @@ createImageElement(c) {
       showPopup(imgPath, c.name);
     });
 
-    img.onerror = () => {
-      img.style.display = 'none';
-    };
-
     return container;
-  },
+  }
 };

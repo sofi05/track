@@ -13,14 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   newCharacters.forEach(char => {
-    newCharSlider.appendChild(createCharacterCard(char, config)); 
+    newCharSlider.appendChild(createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath)); 
   });
 
   rerunCharacters.forEach(char => {
-    rerunSlider.appendChild(createCharacterCard(char, config));
+    rerunSlider.appendChild(createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath));
   });
 
   permaCharacters.forEach(char => {
-    permaSlider.appendChild(createCharacterCard(char, config));
+    permaSlider.appendChild(createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath));
   });
 });
+
+// Icon source function (used for icons only)
+function getIconPath(char, imgName, config) {
+  return `${config.iconPath}/${config.imagePrefix}${imgName}.png`;  // This returns the icon path for the card
+}

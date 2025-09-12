@@ -24,8 +24,7 @@ window.filterAndSortCharacters = function (characters, isHI3 = false) {
   return { newCharacters, rerunCharacters, permaCharacters };
 };
 
-// === Create character card for display ===
-window.createCharacterCard = function (char, config, customImgPathFn) {
+window.createCharacterCard = function (char, config, customImgPathFn, customFallbackPathFn) {
   const {
     iconPath,
     elementPath,
@@ -57,13 +56,25 @@ window.createCharacterCard = function (char, config, customImgPathFn) {
   const iconImg = document.createElement('img');
   const imgName = useImgName ? char.imgName || char.name : char.name;
 
-  iconImg.src = customImgPathFn 
-    ? customImgPathFn(char, imgName, config) 
+  // 1. Ensure that we're using the icon image path, not the sprite
+  const iconSrc = customImgPathFn ? customImgPathFn(char, imgName, config)
     : `${iconPath}/${imagePrefix}${imgName}${imageSuffix}.png`;
 
+  // Set the icon source
+  iconImg.src = iconSrc;
   iconImg.alt = char.name;
   iconImg.classList.add('char-icon');
 
+  // 2. Fallback logic: only if the icon fails to load
+  const fallbackImg = customFallbackPathFn ? customFallbackPathFn(char) : null;
+
+  iconImg.onerror = function () {
+    if (fallbackImg && iconImg.src !== fallbackImg) {
+      iconImg.src = fallbackImg;
+    }
+  };
+
+  // 3. Element icon (this remains the same as it points to the elements)
   const elementIcon = document.createElement('img');
   elementIcon.src = `${elementPath}/${char.element}.png`;
   elementIcon.alt = char.element;
@@ -91,16 +102,16 @@ window.createCharacterCard = function (char, config, customImgPathFn) {
   charBox.appendChild(iconWrapper);
   charBox.appendChild(charInfo);
 
-  // Add click event to open popup for this character
+  // 4. Click event to show popup - we use sprite path for the popup (NOT for the icon)
   charBox.style.cursor = 'pointer';
   charBox.addEventListener('click', () => {
-    // Use gameFolder property or fallback to window.currentGameFolder or default
-    const gameFolder = char.gameFolder || window.currentGameFolder || 'ZenlessZone';
-    showCharacterPopup(gameFolder, char.id || char.name);
+    const spritePath = window.CHARA_CONFIG.getSpritePath(char);  // Get sprite path for the popup
+    showCharacterPopup(char.gameFolder || 'ZenlessZone', char.id || char.name, spritePath);  // Pass sprite path to the popup
   });
 
   return charBox;
 };
+
 
 // === Utility: Dynamically load external script ===
 function loadScript(url) {
@@ -258,3 +269,11 @@ async function showCharacterPopup(gameFolder, charIdOrName) {
     showErrorPopup('Failed to load character data or popup');
   }
 }
+
+console.log('Trying to load image from:', imgPath);
+iconImg.onerror = () => {
+  console.log('Primary image failed, loading fallback...');
+  if (fallbackImg) {
+    iconImg.src = fallbackImg;
+  }
+};

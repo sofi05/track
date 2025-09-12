@@ -29,17 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   newCharacters.forEach(char => {
-    const card = createCharacterCard(char, config, hi3ImgPathFn);
-    newCharSlider.appendChild(card);
+    newCharSlider.appendChild(createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath));
   });
 
   rerunCharacters.forEach(char => {
-    const card = createCharacterCard(char, config, hi3ImgPathFn);
-    rerunSlider.appendChild(card);
+    rerunSlider.appendChild(createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath));
   });
 
   permaCharacters.forEach(char => {
-    const card = createCharacterCard(char, config, hi3ImgPathFn);
-    permaSlider.appendChild(card);
+    permaSlider.appendChild(createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath));
   });
 });
+
+// Icon source function (used for icons only)
+function getIconPath(char, imgName, config) {
+  return `${config.iconPath}/${config.imagePrefix}${imgName}.png`;  // This returns the icon path for the card
+}

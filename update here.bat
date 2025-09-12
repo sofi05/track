@@ -1,3 +1,3 @@
 git add . 
-git commit -m "finished past honkai list"  
+git commit -m "added pic for fallback"  
 git push origin main  

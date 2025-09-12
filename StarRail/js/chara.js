@@ -82,10 +82,13 @@ window.CHARA_CONFIG = {
 
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
-    // Assume each char has a folder property for their folder name
     const folder = char.folder || ''; 
     return `../assets/Sprite/StarRail/${imgName}.png`;
   },
+
+getFallbackPath: function(char) {
+  return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; //change this when needed
+},
 
 createImageElement(c) {
     const container = document.createElement('div');
@@ -96,6 +99,11 @@ createImageElement(c) {
     const imgSrcName = c.imgName ? c.imgName : c.name;
     img.src = `../assets/charaid/StarRail/${imgSrcName}.png`;
     img.alt = c.name;
+
+    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+  img.onerror = () => {
+    img.src = fallbackImg;
+  };
 
     const elementImg = document.createElement('img');
     elementImg.className = 'element-icon';
@@ -125,10 +133,6 @@ createImageElement(c) {
       const imgPath = `../assets/Sprite/StarRail/${c.imgName}.png`;
       showPopup(imgPath, c.name);
     });
-    
-    img.onerror = () => {
-      img.style.display = 'none';
-    };
 
     return container;
   },
