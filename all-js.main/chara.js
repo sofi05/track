@@ -3,7 +3,10 @@ const searchInput = document.getElementById('searchInput');
 const filterBtn = document.getElementById('filterBtn');
 const filterPopup = document.getElementById('filterPopup');
 
-let selectedFilters = {
+let selectedFilters;
+
+// Default filter structure template (keep this consistent)
+const filterDefaults = {
   have: null,
   newStatus: {
     new: false,
@@ -15,7 +18,15 @@ let selectedFilters = {
   gender: null,
   group: null,
   world: null,
+  spec: null,
+  // Add new filters here as needed, e.g., 
+  // someNewFilter: null
 };
+
+// Initialize selectedFilters dynamically from filterDefaults
+function initializeFilters() {
+  selectedFilters = JSON.parse(JSON.stringify(filterDefaults)); // Clone the structure
+}
 
 // Load characters from CHARA_CONFIG
 window.CHARA_CONFIG = window.CHARA_CONFIG || {};
@@ -97,6 +108,10 @@ function renderList() {
       // Filter: World
       if (selectedFilters.world && !c.world.includes(selectedFilters.world)) return false;
 
+      // Filter: Spec
+      if (selectedFilters.spec && !c.spec.includes(selectedFilters.spec)) return false;
+
+      // Return based on search term match
       return matchesSearch;
     })
     .forEach(c => {
@@ -179,7 +194,9 @@ setupToggleableRadio("gender", "gender");
 setupToggleableRadio("region", "region");
 setupToggleableRadio("world", "world");
 setupToggleableRadio("group", "group");
+setupToggleableRadio("spec", "spec");
 
+// Handle "New" and "Soon" status filter
 document.querySelectorAll('input[name="newStatus"]').forEach(input => {
   input.addEventListener('change', e => {
     const isChecked = e.target.checked;
@@ -253,9 +270,19 @@ document.querySelectorAll('.part-btn').forEach(btn => {
     document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    selectedPart = btn.dataset.part;
+    const newPart = btn.dataset.part;
 
-    renderList();
+    // Check if part is actually changing
+    if (newPart !== selectedPart) {
+      // Reset selectedFilters dynamically from filterDefaults
+      initializeFilters(); // Reset to default structure
+
+      // After reset, set the new part
+      selectedPart = newPart;
+
+      // Trigger render again after reset
+      renderList();
+    }
   });
 });
 
@@ -270,4 +297,6 @@ function updateCharCount() {
   document.getElementById('charCount').textContent = countText;
 }
 
+// Initialize filters once
+initializeFilters();
 renderList();

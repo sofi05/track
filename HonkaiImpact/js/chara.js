@@ -80,7 +80,7 @@ window.CHARA_CONFIG = {
   { name: 'Seele • SP', imgName: 'Swallowtail_Phantasm', folder:'Seele', have: true, element: 'QUA', rarity: '4', part:'1', status: 'available' },
   { name: 'Seele • HoR', imgName: 'Herrscher_of_Rebirth', folder:'Seele', have: false, element: 'PSY', rarity: '5', part:'1', status: 'available', version:'6.8' },
   { name: 'Seele • SN', imgName: 'Starchasm_Nyx', folder:'Seele', have: false, element: 'QUA', rarity: '5', part:'1', status: 'available', version:'7.7', perma: true },
-  { name: 'Seele • SN', imgName: 'Stygian_Nymph', folder:'Seele', have: false, element: 'QUA', rarity: '5', part:'1', status: 'available', version:'7.8', perma: true },
+  { name: 'Seele • SN ', imgName: 'Stygian_Nymph', folder:'Seele', have: false, element: 'QUA', rarity: '5', part:'1', status: 'available', version:'7.8', perma: true },
   
   { name: 'Sushang', imgName: 'Jade_Knight', folder:'Sushang', have: false, element: 'PSY', rarity: '5', part:'1', status: 'available', version:'6.1', perma: true },
   
@@ -109,22 +109,22 @@ window.CHARA_CONFIG = {
   
   //COLLAB characters
   { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'All_Collabs', have: true, element: 'BIO', rarity: '4', part:'1', status: 'available', collab: true },
-  { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'All_Collabs', have: false, element: 'QUA', rarity: '5', part:'2', status: 'available', collab: true },
+  { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'All_Collabs', have: false, element: 'QUA', rarity: '5', part:'2', status: 'available', collab: true, spec:'WS' },
 
   //part 2 (Honkai Impact 3th)
-  { name: 'Coralie • VB', imgName: 'Valkyrie_Blastmetal', folder:'Coralie', have: true, element: 'PSY', rarity: '4', part:'2', status: 'available' },
-  { name: 'Durandal', imgName: 'Reign_Solaris', folder:'Durandal', have: true, element: 'IMG', rarity: '5', part:'2', status: 'available' },
-  { name: 'Erdös • VB', imgName: 'Valkyrie_Boltstorm', folder:'Erdos', have: true, element: 'MECH', rarity: '4', part:'2', status: 'available' },
-  { name: 'Kiana', imgName: 'Ba-Dum_Fiery_Wishing_Star', folder:'Kiana', have: true, element: 'SD', rarity: '5', part:'2', status: 'available' },
-  { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: '5', part:'2',  status: 'available', version:'8.2' },
-  { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', have: false, element: 'SD', rarity: '5', part:'2',  status: 'available', version:'7.6' },
-  { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', have: false, element: 'PSY', rarity: '5', part:'2',  status: 'available', version:'7.5' },
-  { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', have: false, element: 'MECH', rarity: '5', part:'2',  status: 'available', version:'7.4' },
-  { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: '5', part:'2',  status: 'available', version:'7.8' },
-  { name: 'Theresa', imgName: 'Schicksals_Imperative', folder:'Theresa', have: false, element: 'QUA', rarity: '5', part:'2',  status: 'available', version:'7.7' },
-  { name: 'Coralie • BF', imgName: 'Behold_Fate-Defying_Dragon', folder:'Coralie', have: false, element: 'MECH', rarity: '5', part:'2', status: 'new', version:'8.4' },
-  { name: 'Erdös • PA', imgName: 'Planar_Armament_-_Warped_Spacetime', folder:'Erdos', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', version:'8.3' },
-  { name: 'Sushang', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', version:'8.2' },
+  { name: 'Coralie • VB', imgName: 'Valkyrie_Blastmetal', folder:'Coralie', have: true, element: 'PSY', rarity: '4', part:'2', status: 'available', spec:'RoO' },
+  { name: 'Durandal', imgName: 'Reign_Solaris', folder:'Durandal', have: true, element: 'IMG', rarity: '5', part:'2', status: 'available', spec:'LoA' },
+  { name: 'Erdös • VB', imgName: 'Valkyrie_Boltstorm', folder:'Erdos', have: true, element: 'MECH', rarity: '4', part:'2', status: 'available', spec:'WS' },
+  { name: 'Kiana', imgName: 'Ba-Dum_Fiery_Wishing_Star', folder:'Kiana', have: true, element: 'SD', rarity: '5', part:'2', status: 'available', spec:'LoA' },
+  { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: '5', part:'2',  status: 'available', spec:'WS', version:'8.2' },
+  { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', have: false, element: 'SD', rarity: '5', part:'2',  status: 'available', spec:'WoD', version:'7.6' },
+  { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', have: false, element: 'PSY', rarity: '5', part:'2',  status: 'available', spec:'WoD', version:'7.5' },
+  { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', have: false, element: 'MECH', rarity: '5', part:'2',  status: 'available', spec:'WoD', version:'7.4' },
+  { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: '5', part:'2',  status: 'available', spec:'RoO', version:'7.8' },
+  { name: 'Theresa', imgName: 'Schicksals_Imperative', folder:'Theresa', have: false, element: 'QUA', rarity: '5', part:'2',  status: 'available', spec:'WS', version:'7.7' },
+  { name: 'Coralie • BF', imgName: 'Behold_Fate-Defying_Dragon', folder:'Coralie', have: false, element: 'MECH', rarity: '5', part:'2', status: 'new', spec:'RoO', version:'8.4' },
+  { name: 'Erdös • PA', imgName: 'Planar_Armament_-_Warped_Spacetime', folder:'Erdos', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', spec:'GoI', version:'8.3' },
+  { name: 'Sushang', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', spec:'LoA', version:'8.2' },
   
   // Add more characters here
 ],
@@ -185,3 +185,34 @@ createImageElement(c) {
     return container;
   }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const partButtons = document.querySelectorAll('.part-btn');
+  const specFilter = document.querySelector('#specFilter');
+
+  specFilter.classList.add('hidden');
+
+  partButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const part = this.getAttribute('data-part');
+
+      // Remove active class from all buttons
+      partButtons.forEach(btn => btn.classList.remove('active'));
+
+      // Add active class to clicked button
+      this.classList.add('active');
+
+      if (part === '2') {
+        specFilter.classList.remove('hidden');
+      } else {
+        specFilter.classList.add('hidden');
+      }
+    });
+  });
+
+  // Check if Part 2 is already active on page load
+  const activePartButton = document.querySelector('.part-btn.active');
+  if (activePartButton && activePartButton.getAttribute('data-part') === '2') {
+    specFilter.classList.remove('hidden');
+  }
+});
