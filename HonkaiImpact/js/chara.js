@@ -126,6 +126,8 @@ window.CHARA_CONFIG = {
   { name: 'Erdös • PA', imgName: 'Planar_Armament_-_Warped_Spacetime', folder:'Erdos', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', spec:'GoI', version:'8.3' },
   { name: 'Sushang', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', spec:'LoA', version:'8.2' },
   
+  { name: 'Elysia • HLE', imgName: '(Temp)_Hi_Love_Elf', folder:'Elysia', have: false, element: 'SD', rarity: '5', part:'2', status: 'soon', spec:'GoI', version:'8.5'  },
+  
   // Add more characters here
 ],
 

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const characters = [
-    //PART 1 - ELFS
+    // PART 1 - ELFS
     { name: 'Jingwei\'s Wings', imgName: 'Jingweis_Wings', folder:'All_Elfs', have: true, rarity: '4', element: 'Fire_DMG', part:'1'},
     { name: 'Blood Embrace', imgName: 'Blood_Embrace', folder:'All_Elfs', have: false, rarity: '4', element: 'Physical', part:'1' },
     { name: 'Selune\'s Elegy', imgName: 'Selunes_Elegy', folder:'All_Elfs', have: false, rarity: '5', element: 'Ice_DMG', part:'1' },
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Water\'s Edge', imgName: 'Waters_Edge', folder:'All_Elfs', have: false, rarity: '5', element: 'Ice_DMG', part:'1'},
     { name: 'Project Bunny', imgName: 'Project_Bunny', folder:'All_Elfs', have: false, rarity: '5', element: 'Physical', part:'1'},
     
-    //PART 2 - ASTRAL OP
+    // PART 2 - ASTRAL OP
     { name: 'Chenxue', imgName: 'Chenxue', folder:'All_AstralOp', have: false, rarity: '5', element: 'Fire_DMG', part:'2', status: 'new'},
     { name: 'Dreamseeker', imgName: 'Dreamseeker', folder:'All_AstralOp', have: true, rarity: '5', element: 'Lightning_DMG', part:'2'},
     { name: 'Serapeum', imgName: 'Serapeum', folder:'All_AstralOp', have: false, rarity: '5', element: 'Physical', part:'2'},
@@ -27,15 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameFolder = '../assets/charaid/Honkai';
   const spriteFolder = '../assets/Sprite/HI3';
 
-  // Save to window so global can use
   window.currentCharacters = characters;
   window.gameFolder = gameFolder;
   window.spriteFolder = spriteFolder;
 
-  // Call global render
   window.renderGlobalList(characters, gameFolder, spriteFolder);
 
-  // Setup filters
   window.setupGlobalFilters('have', 'have', characters, gameFolder, spriteFolder);
   window.setupGlobalFilters('rarity', 'rarity', characters, gameFolder, spriteFolder);
   window.setupGlobalFilters('element', 'element', characters, gameFolder, spriteFolder);

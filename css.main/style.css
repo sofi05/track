@@ -548,7 +548,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center; 
-  text-align: justify; 
+  text-align: center; 
   padding: 20px; 
 }
 

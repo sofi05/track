@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ====== Global Variables ======
   window.selectedFilters = { have: null, rarity: null, element: null, isNew: false }; // ✅ isNew added
+  let selectedPart = '2'; // default part, change as needed
 
   // ====== Global Function to Sync Filters ======
   window.updateFiltersFromUI = function () {
@@ -155,19 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
       renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
   });
 
-  // ====== Part Buttons ======
-  let selectedPart = '2';
-  document.querySelectorAll('.part-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedPart = btn.dataset.part === 'collab' ? 'collab' : btn.dataset.part;
-
-      if (window.currentCharacters && window.gameFolder && window.spriteFolder)
-        renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
-    });
-  });
-
   // ====== NEW Checkbox Filter Listener ======
   if (newFilterCheckbox) {
     newFilterCheckbox.addEventListener('change', () => {
@@ -177,11 +165,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ====== Part Buttons and Reset Filters ======
+  function resetFilters() {
+    // Reset selected filters object
+    window.selectedFilters = { have: null, rarity: null, element: null, isNew: false };
+
+    // Clear search input
+    if (searchInput) searchInput.value = '';
+
+    // Reset all radios
+    const radios = filterPopup.querySelectorAll('input[type="radio"]');
+    radios.forEach(radio => {
+      radio.checked = false;
+      radio.dispatchEvent(new Event('change'));
+    });
+
+    // Reset all checkboxes
+    const checkboxes = filterPopup.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+      checkbox.dispatchEvent(new Event('change'));
+    });
+
+    // Hide filter popup
+    if (filterPopup) filterPopup.classList.add('hidden');
+  }
+
+  document.querySelectorAll('.part-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons, add to clicked
+      document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Reset filters and UI elements
+      resetFilters();
+
+      // Update selected part
+      selectedPart = btn.dataset.part === 'collab' ? 'collab' : btn.dataset.part;
+
+      // Render updated list
+      if (window.currentCharacters && window.gameFolder && window.spriteFolder)
+        renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
+    });
+  });
+
   // ====== Expose functions to window ======
   window.renderGlobalList = renderList;
   window.setupGlobalFilters = setupToggleableRadio;
 });
 
+// ====== Update Character Count ======
 function updateCharCount() {
   const count = document.querySelectorAll('.char-card').length;
   const countText = `Total: ${count} character${count !== 1 ? 's' : ''}`;

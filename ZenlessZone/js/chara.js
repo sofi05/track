@@ -28,7 +28,7 @@ window.CHARA_CONFIG = {
 { name: 'Jane Doe', imgName: '24', have: false, element: 'IconPhysical', group:'spec', gender:'f', rarity: 5, status: 'available', version: '1.7' },
 { name: 'Caesar', imgName: '25', have: false, element: 'IconPhysical', group:'sons', gender:'f', rarity: 5, status: 'available', version: '2.0' },
 { name: 'Lighter', imgName: '26', have: false, element: 'IconFire', group:'sons', gender:'m', rarity: 5, status: 'available', version: '1.7' },
-{ name: 'Lucy', imgName: '27', have: false, element: 'IconFire', group:'sons', gender:'f', rarity: 4, status: 'available', version: '1.6', perma: true },
+{ name: 'Lucy', imgName: '27', have: false, element: 'IconFire', group:'sons', gender:'f', rarity: 4, status: 'available', version: '2.2', perma: true },
 { name: 'Qingyi', imgName: '29', have: false, element: 'IconElectric', group:'spec', gender:'f', rarity: 5, status: 'available', version: '1.5' },
 { name: 'Yanagi', imgName: '31', have: false, element: 'IconElectric', group:'sec6', gender:'f', rarity: 5, status: 'available', version: '2.1' },
 { name: 'Burnice', imgName: '32', have: false, element: 'IconFire', group:'sons', gender:'f', rarity: 5, status: 'available', version: '1.6' },
