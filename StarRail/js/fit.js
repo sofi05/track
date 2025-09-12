@@ -11,6 +11,3 @@ spritePrefix: "../assets/Sprite/StarRail/Outfit/",
   getImgPath: (imgName) => `${gameConfig.pathPrefix}${imgName}.webp`,
   getSpritePath: (imgName2) => `${gameConfig.spritePrefix}${imgName2}.png`
 };
-
-    
-

@@ -46,7 +46,7 @@
   border-radius: 8px;
   background: #444; /* dark background for icons */
   padding: 4px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease; /* Combined transition */
   filter: brightness(0.9); /* slightly muted */
 }
 

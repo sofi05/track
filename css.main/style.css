@@ -1,13 +1,13 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background: #121212; /* dark background */
-  color: #ddd; /* light text */
+  background: #121212; 
+  color: #ddd; 
 }
 
 .game-page {
   padding: 1rem;
-  padding-bottom: 100px; /* leave space for nav */
+  padding-bottom: 100px; 
 }
 
 h1 {
@@ -22,7 +22,7 @@ h1 {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #1e1e1e; /* dark nav background */
+  background: #1e1e1e; 
   border-top: 1px solid #333;
   display: flex;
   justify-content: space-around;
@@ -118,14 +118,13 @@ h1 {
 }
 
 /* THIS IS FOR CHARA */
-/* THIS IS FOR CHARA */
 .icon-wrapper {
   position: relative;
   width: 80px;
   height: 80px;
-  border-radius: 12px; /* match char-icon */
+  border-radius: 12px; 
   box-sizing: border-box;
-  background-color: transparent; /* will be set dynamically */
+  background-color: transparent; 
   overflow: hidden;
   z-index: 0;
 }
@@ -143,7 +142,6 @@ h1 {
   z-index: 1;
 }
 
-/* Element icon (Pyro, Hydro, etc.) */
 .element-icon {
   position: absolute;
   width: 18px !important;
@@ -152,21 +150,18 @@ h1 {
   left: 5px; /* Adjust the horizontal position */
   background-size: cover;
   background-position: center;
-  border-radius: 50%; /* Circle shape */
+  border-radius: 50%; 
   z-index: 10; /* Ensure it sits above the character image */
-  border: none !important; /* Remove border */
+  border: none !important; 
   outline: none !important; 
 }
 
-
-
-/* Updated filter popup styling */
 #filterPopup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(30, 30, 30, 0.95); /* dark translucent */
+  background: rgba(30, 30, 30, 0.95); 
   padding: 16px 20px;
   border: 1px solid #444;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
@@ -210,8 +205,6 @@ h1 {
   font-family: 'Arial Black', Arial, sans-serif;
 }
 
-/* SPRITE LIST ENTRIES */
-
 /* POPUP */
 .sprite-popup {
   position: fixed;
@@ -240,19 +233,17 @@ h1 {
   cursor: pointer;
   user-select: none;
 }
-/* Filter category container */
+
 .filter-category {
   border-top: 1px solid #444;
   padding-top: 10px;
 }
 
-/* First category should not have a top border */
 .filter-category:first-child {
   border-top: none;
   padding-top: 0;
 }
 
-/* Toggle buttons for filter categories */
 .filter-toggle {
   width: 100%;
   background: none;
@@ -268,7 +259,6 @@ h1 {
   align-items: center;
 }
 
-/* Add a little arrow for toggle */
 .filter-toggle::after {
   content: '▼';
   font-size: 12px;
@@ -281,20 +271,17 @@ h1 {
   transform: rotate(-180deg);
 }
 
-/* Filter options container */
 .filter-options {
   margin-top: 6px;
-  display: none; /* Hidden by default */
+  display: none; 
   flex-wrap: wrap;
   gap: 8px;
 }
 
-/* Show options when visible */
 .filter-options.visible {
   display: flex;
 }
 
-/* Labels inside options */
 .filter-options label {
   display: flex;
   align-items: center;
@@ -304,26 +291,41 @@ h1 {
   user-select: none;
 }
 
-/* Element images */
+/* Highlight selected element */
+.filter-options input[type="radio"]:checked + .element-img {
+  border-color: #4096ff;
+  box-shadow: 0 0 8px #4096ffaa;
+}
+
+.filter-options label:hover .element-img {
+  border-color: #666;
+}
+
+.filter-options input[type="radio"],
+.filter-options input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
 .element-img {
   width: 32px;
   height: 32px;
   border-radius: 6px;
   object-fit: contain;
   border: 2px solid transparent;
-  transition: border-color 0.3s ease;
   cursor: pointer;
+  transition: border-color 0.3s ease, opacity 0.2s, transform 0.2s; /* Merged transitions */
+  opacity: 0.6;
+}
+
+.element-img:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .element-label input[type="radio"],
 .element-label input[type="checkbox"] {
   display: none;
-}
-
-/* Highlight selected element */
-.filter-options input[type="radio"]:checked + .element-img {
-  border-color: #4096ff;
-  box-shadow: 0 0 8px #4096ffaa;
 }
 
 .filter-popup .filter-section {
@@ -332,47 +334,13 @@ h1 {
   padding: 0.5rem 1rem;
 }
 
-/* Optional: hover effect on element images */
-.filter-options label:hover .element-img {
-  border-color: #666;
-}
-
-/* Radio and checkbox inputs styling */
-.filter-options input[type="radio"],
-.filter-options input[type="checkbox"] {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-/* Sub-filters inside Status (for spacing) */
 .sub-filter {
   margin-bottom: 6px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
-/* Hide the radio circle */
-.element-label input[type="radio"] {
-  display: none;
-}
 
-/* Make the image look clickable */
-.element-img {
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s, transform 0.2s;
-  border-radius: 4px;
-}
-
-/* On hover */
-.element-img:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-/* When selected (optional – using :has) */
 .element-label:has(input[type="radio"]:checked) .element-img {
   opacity: 1;
   outline: 2px solid #4af;
@@ -385,7 +353,7 @@ h1 {
 }
 
 .filter-options.region-grid {
-  display: none; /* hidden by default */
+  display: none; 
 }
 
 .filter-options.region-grid.visible {
@@ -394,9 +362,6 @@ h1 {
   gap: 0.5em 1em;
 }
 
-/* ======== for Region images (Snezhnaya, Khaenriah, Unknown) ======== */
-
-/* Style for region labels with images */
 .region-label-img {
   display: inline-flex;
   align-items: center;
@@ -405,19 +370,13 @@ h1 {
   
 }
 
-/* Hide the checkbox */
-.region-label-img input[type="checkbox"] {
+.region-label-img input[type="checkbox"],
+.region-label-img input[type="radio"] {
   display: none;
 }
 
-.region-label-img input[type="radio"] {
-  display: none; /* hide the default radio "O" */
-}
-
-
-/* Style the region image */
 .region-label-img .region-img {
-  width: 40px; /* adjust as needed */
+  width: 40px; 
   height: 40px;
   object-fit: contain;
   border: 2px solid transparent;
@@ -426,21 +385,18 @@ h1 {
   opacity: 0.7;
 }
 
-/* Hover effect */
 .region-label-img:hover .region-img {
   opacity: 1;
   border-color: #4096ff;
   box-shadow: 0 0 8px #4096ffaa;
 }
 
-/* Highlight when checkbox is checked */
 .region-label-img input[type="checkbox"]:checked + .region-img {
   border-color: #4096ff;
   box-shadow: 0 0 12px #4096ffcc;
   opacity: 1;
 }
 
-/* Match part buttons to search filter button style */
 .part-toggle {
   display: flex;
   justify-content: center;
@@ -511,8 +467,8 @@ h1 {
 }
 
 .game-logo {
-  width: 200px;        /* or whatever size you want */
-  height: auto;        /* maintain aspect ratio */
+  width: 200px;        
+  height: auto;        
   display: block;
   margin: 0 auto;
 }
@@ -522,13 +478,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/*UHHH NEW*/
-/* Hide elements with class 'hidden' */
-.hidden {
-  display: none;
-}
-
-/* Popup backdrop */
 #game-past {
   position: fixed;
   top: 0;
@@ -538,46 +487,43 @@ h1 {
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: center; /* Centering the popup vertically */
+  align-items: center; 
   z-index: 9999;
 }
 
-/* Inner popup content */
 .popup-inner {
   background: rgb(65, 65, 65);
-  padding: 20px; /* Added space inside the popup */
-  width: 310px; /* Fixed width to match two icons side by side */
-  height: auto; /* Allow the height to grow if necessary */
+  padding: 20px; 
+  width: 310px; 
+  height: auto; 
   border-radius: 8px;
   box-shadow: 0 0 10px #00000088;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center; /* Center the content inside the popup */
-  margin: 20px; /* Added margin for spacing around the popup */
+  margin: 20px; 
   text-align: center;
-  margin-top: 0; /* Optional: remove margin above the inner popup */
+  margin-top: 0; 
 }
 
 .popup-inner a {
-  color: white; /* Set link color to white */
-  text-decoration: none; /* Optional: remove underline from links */
+  color: white; 
+  text-decoration: none; 
 }
 
-/* Horizontal image layout */
 .game-hnk-list {
   display: flex;
   gap: 10px;
   justify-content: center;
   margin-top: 4px;
-  flex-wrap: nowrap; /* Prevent wrapping */
-  margin-bottom: 0; /* Remove or reduce margin */
-  padding-bottom: 0; /* Ensure no extra padding exists */
+  flex-wrap: nowrap;  
+  margin-bottom: 0; 
+  padding-bottom: 0; 
 }
 
-/* Each image box */
 .game-hnk img {
-  width: 100px; /* Fixed width for each image */
+  width: 100px; 
   cursor: pointer;
   border-radius: 30px;
   border: 2px solid transparent;
@@ -588,52 +534,47 @@ h1 {
   border-color: #007bff;
 }
 
-/* Slider content box */
 .slider-content {
   margin-top: -5px !important;
   padding: 20px;
-  width: 300px; /* Define width to create the box */
-  height: 300px; /* Define height to make it square-like */
-  max-height: 300px; /* Optional: make sure it doesn’t exceed this height */
-  overflow: hidden; /* Hide overflowing content */
-  background-color: rgb(65, 65, 65); /* Background color */
-  color: white; /* Text color */
-  border-radius: 8px; /* Rounded corners */
-  box-sizing: border-box; /* Include padding/border in size */
+  width: 300px; 
+  height: 300px; 
+  max-height: 300px; 
+  overflow: hidden; 
+  background-color: rgb(65, 65, 65); 
+  color: white; 
+  border-radius: 8px; 
+  box-sizing: border-box; 
   display: flex;
   justify-content: center;
-  align-items: center; /* Vertically and horizontally center the content */
-  text-align: justify; /* Justify the text */
-  padding: 20px; /* Add padding inside the box */
+  align-items: center; 
+  text-align: justify; 
+  padding: 20px; 
 }
 
-/* Center the h4 and reduce spacing from the rest of the text */
 #slider-message h4 {
-  text-align: center; /* Center the heading */
-  margin-bottom: 5px; /* Reduce space below the h4 */
-  font-size: 1.2em; /* Optional: adjust heading size */
-  margin-top: 0; /* Remove extra space on top */
+  text-align: center; 
+  margin-bottom: 5px; 
+  font-size: 1.2em; 
+  margin-top: 0; 
 }
 
-/* Slider text */
 #slider-message {
-  max-height: 220px; /* Limit the height of the text container */
-  overflow-y: auto; /* Enable scrolling if text exceeds box height */
+  max-height: 220px; 
+  overflow-y: auto; 
   display: block;
-  margin-top: -10px; /* Remove any extra margin at the top of the text */
+  margin-top: -10px;
 }
 
 .game-hnk {
-  margin-bottom: 0; /* Remove any margin from individual icon container */
+  margin-bottom: 0; 
 }
 
-/* Grayed out icon */
 .game-hnk img.gray {
   filter: grayscale(100%);
 }
 
-/* Active (colored) icon */
 .game-hnk img.active {
   filter: none;
-  border-color: #007bff; /* Highlight border for active icon */
+  border-color: #007bff; 
 }

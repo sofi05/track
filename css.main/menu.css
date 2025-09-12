@@ -16,7 +16,7 @@
   text-decoration: none;
   color: #eee; /* light text */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8); /* stronger shadow for dark bg */
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease; /* More specific transition properties */
 }
 
 .menu-button:hover {

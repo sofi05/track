@@ -111,7 +111,7 @@ window.BDAY_CONFIG = {
   '12-29': ['Tighnari'],
   '12-31': ['Zhongli'],
 
-  //'09-06': ['Zhongli'], //Test
+  //'09-11': ['Zhongli'], //Test
 },
 
 createImageElement(name) {
