@@ -57,7 +57,7 @@ getSpritePath: function(char) {
   },
 
 getFallbackPath: function(char) {
-  return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; //change this when needed
+  return `../assets/others/Zenless/Random/Icon_Event_Unknown.webp`; //change this when needed
 },
   
 createImageElement(c) {

@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added pic for fallback"  
+git commit -m "updated pic for fallback in other active games"  
 git push origin main  
