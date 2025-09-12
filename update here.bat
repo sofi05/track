@@ -1,3 +1,3 @@
 git add . 
-git commit -m "merged some css + removed last empty line in code"  
+git commit -m "now it highlights the current version"  
 git push origin main  

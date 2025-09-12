@@ -1,4 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const GAME_ID = 'HonkaiImpact';
+
+  if (!window.GAME_VERSIONS) {
+    await loadScript('../all-js.main/vs.js'); // Adjust path if needed
+  }
+
+  const actualVersion = window.GAME_VERSIONS?.[GAME_ID];
+
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
   const permaSlider = document.getElementById('perma-slider');
@@ -28,20 +36,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${config.iconPath}/${char.folder}/${imgName}.png`;
   };
 
-  newCharacters.forEach(char => {
-    newCharSlider.appendChild(createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath));
-  });
+  const appendChar = (container, charList) => {
+    charList.forEach(char => {
+      const card = createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath);
 
-  rerunCharacters.forEach(char => {
-    rerunSlider.appendChild(createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath));
-  });
+      // ✅ Highlight if version matches actual version
+      if (char.version && actualVersion && char.version === actualVersion) {
+        card.classList.add('version-match');
+      }
 
-  permaCharacters.forEach(char => {
-    permaSlider.appendChild(createCharacterCard(char, config, hi3ImgPathFn, window.CHARA_CONFIG.getFallbackPath));
-  });
+      container.appendChild(card);
+    });
+  };
+
+  appendChar(newCharSlider, newCharacters);
+  appendChar(rerunSlider, rerunCharacters);
+  appendChar(permaSlider, permaCharacters);
 });
 
-// Icon source function (used for icons only)
 function getIconPath(char, imgName, config) {
-  return `${config.iconPath}/${config.imagePrefix}${imgName}.png`;  // This returns the icon path for the card
+  return `${config.iconPath}/${config.imagePrefix}${imgName}.png`;
 }
