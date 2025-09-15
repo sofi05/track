@@ -56,7 +56,7 @@ window.CHARA_CONFIG = {
 { name: 'Jingliu', imgName: '1212', have: false, element: 'ice', group:'dest', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.4' },
 { name: 'Jiaoqiu', imgName: '1218', have: false, element: 'fire', group:'nihi', gender:'m', world:['txl'], rarity: 5,  status: 'available', version: '3.2' },
 { name: 'Yunli', imgName: '1221', have: false, element: 'physical', group:'dest', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.1' },
-{ name: 'March 7th', imgName: '1224', have: false, element: 'imaginary', group:'hunt', gender:'f', world:['ae'],rarity: 4, status: 'available', version: '2.1', perma: true },
+{ name: 'March 7th ', imgName: '1224', have: false, element: 'imaginary', group:'hunt', gender:'f', world:['ae'],rarity: 4, status: 'available', version: '2.1', perma: true },
 { name: 'Jade', imgName: '1314', have: false, element: 'quantum', group:'eru', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '3.0' },
 { name: 'Firefly', imgName: '1310', have: false, element: 'fire', group:'dest', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '3.4' },
 { name: 'Boothill', imgName: '1315', have: false, element: 'physical', group:'hunt', gender:'m', world:['ot'],rarity: 5,  status: 'available', version: '3.0' },
