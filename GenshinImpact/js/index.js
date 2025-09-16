@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadScript('../all-js.main/vs.js'); // Adjust path if needed
   }
 
-  const actualVersion = window.GAME_VERSIONS?.[GAME_ID];
+  const versionData = window.GAME_VERSIONS?.[GAME_ID];
+  const actualVersion = versionData?.version;
+
+  if (typeof initializeCountdown === 'function') {
+    initializeCountdown(GAME_ID, 'countdown-newchars');
+  } else {
+    console.warn('[Countdown] Function not found!');
+  }
 
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
@@ -25,7 +32,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     charList.forEach(char => {
       const card = createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath);
 
-      // ✅ Highlight if version matches actual version
       if (char.version && actualVersion && char.version === actualVersion) {
         card.classList.add('version-match');
       }

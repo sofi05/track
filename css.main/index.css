@@ -165,3 +165,9 @@
 #filterPopup.hidden {
   display: none;
 }
+
+#countdown-newchars {
+  font-size: 0.6em;
+  color: #aaa;
+  margin-left: 6px;
+}

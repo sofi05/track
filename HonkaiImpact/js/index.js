@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadScript('../all-js.main/vs.js'); // Adjust path if needed
   }
 
-  const actualVersion = window.GAME_VERSIONS?.[GAME_ID];
+  const versionData = window.GAME_VERSIONS?.[GAME_ID];
+  const actualVersion = versionData?.version;
+
+  if (typeof initializeCountdown === 'function') {
+    initializeCountdown(GAME_ID, 'countdown-newchars');
+  } else {
+    console.warn('[Countdown] Function not found!');
+  }
 
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');

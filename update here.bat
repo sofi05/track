@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed march sprite in home"  
+git commit -m "added countdown to indexes"  
 git push origin main  
