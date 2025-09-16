@@ -161,10 +161,31 @@ async function loadCharaJs(gameFolder) {
 
 // === Create and show character info popup ===
 function createCharacterPopup(char, getSpritePath) {
-  // Remove any existing popup
-  const existingPopup = document.getElementById('char-popup');
-  if (existingPopup) existingPopup.remove();
+  // Remove any existing popup or backdrop
+  document.getElementById('char-popup')?.remove();
+  document.getElementById('popup-backdrop')?.remove();
 
+  // === BACKDROP ===
+  const backdrop = document.createElement('div');
+  backdrop.id = 'popup-backdrop';
+  Object.assign(backdrop.style, {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    zIndex: 9999, // behind popup
+  });
+
+  // Clicking backdrop closes everything
+  backdrop.addEventListener('click', () => {
+    popup.remove();
+    backdrop.remove();
+    clearInterval(countdownInterval);
+  });
+
+  // === POPUP ===
   const popup = document.createElement('div');
   popup.id = 'char-popup';
   Object.assign(popup.style, {
@@ -182,46 +203,56 @@ function createCharacterPopup(char, getSpritePath) {
     textAlign: 'center',
   });
 
-  // Close button
-   const closeButton = document.createElement('button');
-   closeButton.textContent = '✕';  // Unicode multiplication sign looks good for X
-
-   Object.assign(closeButton.style, {
-     position: 'absolute',
-     top: '8px',
-     right: '12px',
-     background: 'transparent',
-     border: 'none',
-     color: '#fff',
-     fontSize: '20px',
-     cursor: 'pointer',
+  const closeButton = document.createElement('button');
+  closeButton.textContent = '✕';
+  Object.assign(closeButton.style, {
+    position: 'absolute',
+    top: '8px',
+    right: '12px',
+    background: 'transparent',
+    border: 'none',
+    color: '#fff',
+    fontSize: '20px',
+    cursor: 'pointer',
   });
 
-  popup.style.position = 'fixed'; // already fixed, good
-  popup.style.paddingTop = '40px'; // to avoid close button overlapping content
+  closeButton.addEventListener('click', () => {
+    popup.remove();
+    backdrop.remove();
+    clearInterval(countdownInterval);
+  });
 
-  // Sprite image with path from getSpritePath
+  popup.style.paddingTop = '40px';
+
+  // === Your existing popup content ===
   const sprite = document.createElement('img');
   sprite.src = getSpritePath(char);
   sprite.alt = char.name;
   sprite.style.width = '328px';
   sprite.style.height = '328px';
   sprite.style.objectFit = 'contain';
-  sprite.onerror = () => {
-    sprite.style.display = 'none';
-  };
+  sprite.onerror = () => { sprite.style.display = 'none'; };
 
-  // Name
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
   nameEl.style.margin = '10px 0 5px';
 
-  // Version
-  const versionEl = document.createElement('p');
+  const versionLine = document.createElement('div');
+  versionLine.classList.add('version-line');
+  versionLine.style.display = 'flex';
+  versionLine.style.justifyContent = 'center';
+  versionLine.style.alignItems = 'center';
+
+  const versionEl = document.createElement('span');
   versionEl.textContent = `Version: ${char.version || 'N/A'}`;
-  versionEl.style.margin = '14px 0 2px';
-  
-  // Rarity
+
+  const countdownEl = document.createElement('span');
+  countdownEl.classList.add('inline-countdown');
+  countdownEl.textContent = '';
+
+  versionLine.appendChild(versionEl);
+  versionLine.appendChild(countdownEl);
+
   const rarityEl = document.createElement('p');
   rarityEl.textContent = `Rarity: ${char.rarity || 'N/A'} ★`;
   rarityEl.style.margin = '2px 0 4px';
@@ -229,27 +260,58 @@ function createCharacterPopup(char, getSpritePath) {
   popup.appendChild(closeButton);
   popup.appendChild(sprite);
   popup.appendChild(nameEl);
-  popup.appendChild(versionEl);
+  popup.appendChild(versionLine);
   popup.appendChild(rarityEl);
 
-  // Close popup when clicking outside
-  function onClickOutside(event) {
-    if (!popup.contains(event.target)) {
-      popup.remove();
-      document.removeEventListener('click', onClickOutside);
+  // Append backdrop and popup
+  document.body.appendChild(backdrop);
+  document.body.appendChild(popup);
+
+  // === Countdown logic remains same ===
+  function findMatchingVersionDates(charVersion) {
+    for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
+      if (gameData.date1vs === charVersion && gameData.date1) {
+        return { targetDate: new Date(gameData.date1), versionLabel: gameData.date1vs };
+      }
+      if (gameData.date2vs === charVersion && gameData.date2) {
+        return { targetDate: new Date(gameData.date2), versionLabel: gameData.date2vs };
+      }
     }
+    return null;
   }
 
-  // Delay attaching listener to avoid immediate close
-  setTimeout(() => {
-    document.addEventListener('click', onClickOutside);
-  }, 0);
+  const match = findMatchingVersionDates(char.version);
 
-  closeButton.addEventListener('click', () => {
-    popup.remove();
-  });
+  function updateCountdown() {
+    if (!match) {
+      countdownEl.textContent = '';
+      return;
+    }
+    const now = new Date();
+    const diff = match.targetDate - now;
+    if (diff <= 0) {
+      countdownEl.textContent = ' (Released)';
+      return;
+    }
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
 
-  document.body.appendChild(popup);
+    let label = '';
+    if (days > 0) label = `in ${days}d`;
+    else if (hours > 0) label = `in ${hours % 24}h`;
+    else if (minutes > 0) label = `in ${minutes % 60}m`;
+    else label = `in ${seconds % 60}s`;
+
+    countdownEl.textContent = ` (${label})`;
+  }
+
+  let countdownInterval = null;
+  if (match) {
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+  }
 }
 
 // === Show character popup by loading chara.js and finding character ===

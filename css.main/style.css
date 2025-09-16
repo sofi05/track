@@ -578,3 +578,9 @@ h1 {
   filter: none;
   border-color: #007bff; 
 }
+
+.inline-countdown {
+  font-size: 0.75em;
+  color: #ffc107;
+  margin-left: 4px;
+}

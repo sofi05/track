@@ -1,27 +1,27 @@
 window.GAME_VERSIONS = {
   GenshinImpact: {
     version: '6.0',
-    date1: '2025-10-22T00:00:00', //6.1 start
-    date2: '', //no date
+    date1vs: '6.1', date1: '2025-10-22T00:00:00', 
+    date2vs: '6.2', date2: '', //no date
     },
   StarRail: {
     version: '3.5',
-    date1: '2025-09-24T00:00:00', //3.6 start
-    date2: '2025-11-05T00:00:00', //3.7 start
+    date1vs:'3.6', date1: '2025-09-24T00:00:00',
+    date2vs:'3.7', date2: '2025-11-05T00:00:00', 
   },
   ZenlessZone: {
     version: '2.2',
-    date1: '2025-10-15T00:00:00', //2.3 start
-    date2: '',
+    date1vs: '2.3', date1: '2025-10-15T00:00:00', //2.3 start
+    date2vs: ''  , date2: '',
   },
   HonkaiImpact: {
-    version:'8.4',     
-    date1: '2025-09-26T00:00:00', //8.5 CN start
-    date2: '2025-10-24T00:00:00', //8.5 Global
+    version:'8.4',  
+    date1vs:'8.5', date1: '2025-09-26T00:00:00', //8.5 CN start
+    date2vs:'8.6', date2: '2025-10-24T00:00:00', //8.5 Global
   },
   NexusAnima: {
     version: '0.0',//BETA in CBT1
-    date1: '',
-    date2: '',
+    date1vs: '', date1:'',
+    date2vs: '', date2: '',
   },        
 };
