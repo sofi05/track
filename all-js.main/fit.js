@@ -157,32 +157,39 @@ function showPopup(imgPath, altText, spriteList = []) {
   const allowSwipe = spriteList.length > 1;
 
   function showImageAt(idx) {
-    index = idx;
+  index = idx;
 
-    // Hide and reset before loading new image
-    popupImg.style.visibility = 'hidden';
-    popupImg.src = ''; // Clear any previous image
-    popupImg.alt = '';
+  const newSrc = allowSwipe
+    ? `${imgPath}/${spriteList[index]}.png`
+    : typeof imgPath === 'string' ? imgPath : '';
 
-    // Set new image after a short delay
-    const newSrc = allowSwipe
-      ? `${imgPath}/${spriteList[index]}.png`
-      : typeof imgPath === 'string' ? imgPath : '';
+  const newAlt = allowSwipe
+    ? `${altText} - ${spriteList[index]}`
+    : altText || 'No sprites found';
 
-    popupImg.alt = allowSwipe
-      ? `${altText} - ${spriteList[index]}`
-      : altText || 'No sprites found';
-
-    // Defer setting src to prevent flicker
-    setTimeout(() => {
-      popupImg.src = newSrc;
-    }, 20);
-
-    // Only show after loading
-    popupImg.onload = () => {
-      popupImg.style.visibility = 'visible';
-    };
+  // 🔄 Only reload if the src is different
+  if (popupImg.src.endsWith(newSrc)) {
+    // Just update alt text if needed
+    popupImg.alt = newAlt;
+    return;
   }
+
+  // 🧼 Full reset
+  popupImg.style.visibility = 'hidden';
+  popupImg.src = '';
+  popupImg.alt = '';
+
+  // ⏱ Set new image after small delay
+  setTimeout(() => {
+    popupImg.src = newSrc;
+    popupImg.alt = newAlt;
+  }, 20);
+
+  popupImg.onload = () => {
+    popupImg.style.visibility = 'visible';
+  };
+}
+
 
   function nextImage() {
     if (!allowSwipe) return;
