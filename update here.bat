@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added countdown to the popup in indexes, fixed popup not closing if i click on another chara"  
+git commit -m "updated all js"  
 git push origin main  

@@ -50,24 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const validCharacters = characters.filter(c => c.imgName !== null);
 
-  // Set global variables required by your global.js
   window.currentCharacters = validCharacters;
-  window.gameFolder = spriteFolder; // <-- add this!
+  window.gameFolder = spriteFolder; 
   window.spriteFolder = spriteFolder;
 
-  // Setup filters (have, rarity, element)
   if (window.setupGlobalFilters) {
     window.setupGlobalFilters('have', 'have', validCharacters, spriteFolder, spriteFolder);
     window.setupGlobalFilters('rarity', 'rarity', validCharacters, spriteFolder, spriteFolder);
     window.setupGlobalFilters('element', 'element', validCharacters, spriteFolder, spriteFolder);
   }
 
-  // Update 'new' filter from UI before rendering
   if (typeof window.updateFiltersFromUI === 'function') {
     window.updateFiltersFromUI();
   }
 
-  // Render the list
   if (window.renderGlobalList) {
     window.renderGlobalList(validCharacters, spriteFolder, spriteFolder);
   }

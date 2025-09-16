@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const GAME_ID = 'StarRail';
 
   if (!window.GAME_VERSIONS) {
-    await loadScript('../all-js.main/vs.js'); // Adjust path if needed
+    await loadScript('../all-js.main/vs.js'); 
   }
 
   const versionData = window.GAME_VERSIONS?.[GAME_ID];
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
   const permaSlider = document.getElementById('perma-slider');
+  const permaSection = document.getElementById('perma');
 
   const { newCharacters, rerunCharacters, permaCharacters } = filterAndSortCharacters(characters);
 
@@ -32,7 +33,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     charList.forEach(char => {
       const card = createCharacterCard(char, config, getIconPath, window.CHARA_CONFIG.getFallbackPath);
 
-      // ✅ Highlight if version matches actual version
       if (char.version && actualVersion && char.version === actualVersion) {
         card.classList.add('version-match');
       }
@@ -44,6 +44,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   appendChar(newCharSlider, newCharacters);
   appendChar(rerunSlider, rerunCharacters);
   appendChar(permaSlider, permaCharacters);
+  
+  if (permaCharacters.length === 0 && permaSection) {
+    permaSection.style.display = 'none';
+  }
 });
 
 function getIconPath(char, imgName, config) {

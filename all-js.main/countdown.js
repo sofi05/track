@@ -38,7 +38,6 @@ function initializeCountdown(gameKey, elementId) {
     }
   }
 
-  // Initial render + interval
   render();
   setInterval(render, 1000);
 }

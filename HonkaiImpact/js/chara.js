@@ -127,7 +127,6 @@ window.CHARA_CONFIG = {
   { name: 'Sushang', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: '5', part:'2', status: 'available', spec:'LoA', version:'8.2' },
   
   { name: 'Elysia • HLE', imgName: '(Temp)_Hi_Love_Elf', folder:'Elysia', have: false, element: 'SD', rarity: '5', part:'2', status: 'soon', spec:'GoI', version:'8.5'  },
-  
   // Add more characters here
 ],
 
@@ -138,7 +137,7 @@ getSpritePath: function(char) {
   },
 
 getFallbackPath: function(char) {
-  return `../assets/others/HI3/Random/Clouds_Shadow.webp`; //change this when needed
+  return `../assets/others/HI3/Random/Clouds_Shadow.webp`; 
 },
 
 createImageElement(c) {
@@ -151,7 +150,7 @@ createImageElement(c) {
     img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
     img.alt = c.name;
 
-    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+    const fallbackImg = this.getFallbackPath(c);  
     img.onerror = () => {
       img.src = fallbackImg;
     };
@@ -163,17 +162,6 @@ createImageElement(c) {
 
     container.appendChild(img);
     container.appendChild(elementImg);
-
-    // Optional group/label
-    if (c.group) {
-      const groupLabel = document.createElement('div');
-      groupLabel.className = 'region-list';
-      const label = document.createElement('span');
-      label.className = 'region-label';
-      label.textContent = c.group;
-      groupLabel.appendChild(label);
-      container.appendChild(groupLabel);
-    }
 
     container.addEventListener('click', () => {
       const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
@@ -198,10 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', function() {
       const part = this.getAttribute('data-part');
 
-      // Remove active class from all buttons
       partButtons.forEach(btn => btn.classList.remove('active'));
 
-      // Add active class to clicked button
       this.classList.add('active');
 
       if (part === '2') {
@@ -212,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Check if Part 2 is already active on page load
   const activePartButton = document.querySelector('.part-btn.active');
   if (activePartButton && activePartButton.getAttribute('data-part') === '2') {
     specFilter.classList.remove('hidden');

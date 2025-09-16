@@ -1,11 +1,10 @@
-// === Filter and sort characters ===
 window.filterAndSortCharacters = function (characters, isHI3 = false) {
   const newCharacters = characters.filter(char => 
     char.have === false &&
     char.status === 'new' || char.status === 'soon');
 
   const permaCharacters = characters.filter(char => char.perma === true);
-  const permaIds = new Set(permaCharacters.map(char => char.id || char.name)); // fallback to name if no id
+  const permaIds = new Set(permaCharacters.map(char => char.id || char.name)); 
 
   let rerunCharacters = characters.filter(char =>
     char.have === false &&
@@ -56,16 +55,13 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   const iconImg = document.createElement('img');
   const imgName = useImgName ? char.imgName || char.name : char.name;
 
-  // 1. Ensure that we're using the icon image path, not the sprite
   const iconSrc = customImgPathFn ? customImgPathFn(char, imgName, config)
     : `${iconPath}/${imagePrefix}${imgName}${imageSuffix}.png`;
 
-  // Set the icon source
   iconImg.src = iconSrc;
   iconImg.alt = char.name;
   iconImg.classList.add('char-icon');
 
-  // 2. Fallback logic: only if the icon fails to load
   const fallbackImg = customFallbackPathFn ? customFallbackPathFn(char) : null;
 
   iconImg.onerror = function () {
@@ -74,7 +70,6 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
     }
   };
 
-  // 3. Element icon (this remains the same as it points to the elements)
   const elementIcon = document.createElement('img');
   elementIcon.src = `${elementPath}/${char.element}.png`;
   elementIcon.alt = char.element;
@@ -102,22 +97,19 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   charBox.appendChild(iconWrapper);
   charBox.appendChild(charInfo);
 
-  // 4. Click event to show popup - we use sprite path for the popup (NOT for the icon)
   charBox.style.cursor = 'pointer';
   charBox.addEventListener('click', () => {
-    const spritePath = window.CHARA_CONFIG.getSpritePath(char);  // Get sprite path for the popup
-    showCharacterPopup(char.gameFolder || 'ZenlessZone', char.id || char.name, spritePath);  // Pass sprite path to the popup
+    const spritePath = window.CHARA_CONFIG.getSpritePath(char);  
+    showCharacterPopup(char.gameFolder || 'ZenlessZone', char.id || char.name, spritePath);  
   });
 
   return charBox;
 };
 
-
 // === Utility: Dynamically load external script ===
 function loadScript(url) {
   return new Promise((resolve, reject) => {
     if (document.querySelector(`script[src="${url}"]`)) {
-      // Already loaded
       resolve();
       return;
     }
@@ -129,15 +121,12 @@ function loadScript(url) {
   });
 }
 
-// === Load chara.js and wait until CHARA_CONFIG and getSpritePath are ready ===
 async function loadCharaJs(gameFolder) {
-  // Load from js/chara.js relative to current page (which is already inside the gameFolder)
   const scriptPath = `./js/chara.js`;
-
   await loadScript(scriptPath);
 
-  const maxWaitTime = 2000; // ms
-  const intervalTime = 50; // ms
+  const maxWaitTime = 2000; 
+  const intervalTime = 50; 
   let waited = 0;
 
   return new Promise((resolve, reject) => {
@@ -161,11 +150,9 @@ async function loadCharaJs(gameFolder) {
 
 // === Create and show character info popup ===
 function createCharacterPopup(char, getSpritePath) {
-  // Remove any existing popup or backdrop
   document.getElementById('char-popup')?.remove();
   document.getElementById('popup-backdrop')?.remove();
 
-  // === BACKDROP ===
   const backdrop = document.createElement('div');
   backdrop.id = 'popup-backdrop';
   Object.assign(backdrop.style, {
@@ -175,10 +162,9 @@ function createCharacterPopup(char, getSpritePath) {
     width: '100vw',
     height: '100vh',
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    zIndex: 9999, // behind popup
+    zIndex: 9999, 
   });
 
-  // Clicking backdrop closes everything
   backdrop.addEventListener('click', () => {
     popup.remove();
     backdrop.remove();
@@ -224,7 +210,6 @@ function createCharacterPopup(char, getSpritePath) {
 
   popup.style.paddingTop = '40px';
 
-  // === Your existing popup content ===
   const sprite = document.createElement('img');
   sprite.src = getSpritePath(char);
   sprite.alt = char.name;
@@ -263,11 +248,9 @@ function createCharacterPopup(char, getSpritePath) {
   popup.appendChild(versionLine);
   popup.appendChild(rarityEl);
 
-  // Append backdrop and popup
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
 
-  // === Countdown logic remains same ===
   function findMatchingVersionDates(charVersion) {
     for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
       if (gameData.date1vs === charVersion && gameData.date1) {
@@ -314,7 +297,6 @@ function createCharacterPopup(char, getSpritePath) {
   }
 }
 
-// === Show character popup by loading chara.js and finding character ===
 async function showCharacterPopup(gameFolder, charIdOrName) {
   try {
     const { characters, getSpritePath } = await loadCharaJs(gameFolder);

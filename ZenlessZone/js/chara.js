@@ -57,7 +57,7 @@ getSpritePath: function(char) {
   },
 
 getFallbackPath: function(char) {
-  return `../assets/others/Zenless/Random/Icon_Event_Unknown.webp`; //change this when needed
+  return `../assets/others/Zenless/Random/Icon_Event_Unknown.webp`; 
 },
   
 createImageElement(c) {
@@ -70,33 +70,18 @@ createImageElement(c) {
   img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
   img.alt = c.name;
 
-const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+const fallbackImg = this.getFallbackPath(c);  
   img.onerror = () => {
     img.src = fallbackImg;
   };
 
   const elementImg = document.createElement('img');
   elementImg.className = 'element-icon';
-  elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;  // Using `c.element` for the displayed element
+  elementImg.src = `../assets/others/Zenless/Element/${c.element}.png`;  
   elementImg.alt = c.element;
 
   container.appendChild(img);
   container.appendChild(elementImg);
-
-  // Optional: Display world/tags if available
-  if (Array.isArray(c.world)) {
-    const worldList = document.createElement('div');
-    worldList.className = 'world-list';
-
-    c.world.forEach(world => {
-      const worldLabel = document.createElement('span');
-      worldLabel.className = 'world-label';
-      worldLabel.textContent = world;
-      worldList.appendChild(worldLabel);
-    });
-
-    container.appendChild(worldList);
-  }
 
   container.addEventListener('click', () => {
     const imgName = c.imgName ? c.imgName : c.name;

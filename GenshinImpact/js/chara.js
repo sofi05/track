@@ -129,10 +129,10 @@ window.CHARA_CONFIG = {
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;  // Default image path
+    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;  
     img.alt = c.name;
 
-    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+    const fallbackImg = this.getFallbackPath(c);  
     img.onerror = () => {
       img.src = fallbackImg;
     };
@@ -145,7 +145,7 @@ window.CHARA_CONFIG = {
     container.appendChild(img);
     container.appendChild(elementImg);
 
-    // Optional: Display the regions
+    // If theres two or more in a tag
     const regionList = document.createElement('div');
     regionList.className = 'region-list';
     c.region.forEach(region => {

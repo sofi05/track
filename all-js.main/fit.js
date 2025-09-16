@@ -86,25 +86,21 @@ function renderList() {
   updateCharCount();
 }
 
-// Handle "status" checkboxes (new, have, want)
 document.querySelectorAll('.filter-checkbox[data-filter]').forEach(checkbox => {
   checkbox.addEventListener('change', e => {
     const type = e.target.dataset.filter;
     const wasChecked = e.target.checked;
 
-    // Clear all status filters
     for (let key of ['have', 'want', 'new']) {
       selectedFilters[key] = false;
       const el = document.querySelector(`[data-filter="${key}"]`);
       if (el) el.checked = false;
     }
 
-    // If a status filter is checked, clear part filters
     if (wasChecked) {
       selectedFilters[type] = true;
       e.target.checked = true;
 
-      // Uncheck all part checkboxes
       selectedFilters.part = null;
       document.querySelectorAll('input[name="part"]').forEach(cb => cb.checked = false);
     }
@@ -113,18 +109,15 @@ document.querySelectorAll('.filter-checkbox[data-filter]').forEach(checkbox => {
   });
 });
 
-// Handle "part" filters (checkbox-like, but exclusive behavior)
 document.querySelectorAll('input[name="part"]').forEach(partCheckbox => {
   partCheckbox.addEventListener('change', e => {
     if (e.target.checked) {
-      // Clear status filters
       for (let key of ['have', 'want', 'new']) {
         selectedFilters[key] = false;
         const el = document.querySelector(`[data-filter="${key}"]`);
         if (el) el.checked = false;
       }
 
-      // Uncheck other part checkboxes
       document.querySelectorAll('input[name="part"]').forEach(cb => {
         if (cb !== e.target) cb.checked = false;
       });

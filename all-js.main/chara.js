@@ -5,7 +5,6 @@ const filterPopup = document.getElementById('filterPopup');
 
 let selectedFilters;
 
-// Default filter structure template (keep this consistent)
 const filterDefaults = {
   have: null,
   newStatus: {
@@ -19,23 +18,18 @@ const filterDefaults = {
   group: null,
   world: null,
   spec: null,
-  // Add new filters here as needed, e.g., 
-  // someNewFilter: null
+  // Add new filters here as needed
 };
 
-// Initialize selectedFilters dynamically from filterDefaults
 function initializeFilters() {
-  selectedFilters = JSON.parse(JSON.stringify(filterDefaults)); // Clone the structure
+  selectedFilters = JSON.parse(JSON.stringify(filterDefaults)); 
 }
 
-// Load characters from CHARA_CONFIG
 window.CHARA_CONFIG = window.CHARA_CONFIG || {};
 const characters = window.CHARA_CONFIG.characters || [];
 
-// Check if any character has a part tag
+// Check if any character has a part tag & Default to P2
 const hasPartInfo = characters.some(c => typeof c.part !== 'undefined');
-
-// Default to Part 2 (only meaningful if hasPartInfo is true)
 let selectedPart = '2';
 
 // ===== Rarity Gradient Helper =====
@@ -48,7 +42,6 @@ function getRarityGradient(rarity) {
   return gradients[rarity] || 'linear-gradient(135deg, #444, #999)'; // Fallback
 }
 
-// ===== Render List =====
 function renderList() {
   charListEl.innerHTML = '';
   const searchTerm = searchInput.value.toLowerCase();
@@ -111,7 +104,7 @@ function renderList() {
       // Filter: Spec
       if (selectedFilters.spec && !c.spec.includes(selectedFilters.spec)) return false;
 
-      // Return based on search term match
+      // Add new filters here as needed
       return matchesSearch;
     })
     .forEach(c => {
@@ -123,7 +116,6 @@ function renderList() {
       iconWrapper.className = 'icon-wrapper';
       iconWrapper.style.background = getRarityGradient(c.rarity);
 
-      // NEW / SOON Tags
       if (c.status === 'new') {
         const newLabel = document.createElement('div');
         newLabel.textContent = 'NEW';
@@ -137,14 +129,12 @@ function renderList() {
         iconWrapper.appendChild(soonLabel);
       }
 
-      // Element Icon
       const elementIcon = document.createElement('div');
       elementIcon.className = 'element-icon';
       elementIcon.style.backgroundImage = `url('path_to_icons/${c.element.toLowerCase()}.png')`;
       elementIcon.title = c.element;
       iconWrapper.appendChild(elementIcon);
 
-      // Game-specific image block
       if (typeof CHARA_CONFIG.createImageElement === 'function') {
         const imageBlock = CHARA_CONFIG.createImageElement(c);
         if (imageBlock) {
@@ -152,7 +142,6 @@ function renderList() {
         }
       }
 
-      // Character Name
       const label = document.createElement('div');
       label.textContent = c.name;
 
@@ -195,8 +184,8 @@ setupToggleableRadio("region", "region");
 setupToggleableRadio("world", "world");
 setupToggleableRadio("group", "group");
 setupToggleableRadio("spec", "spec");
+// Add new filters here as needed
 
-// Handle "New" and "Soon" status filter
 document.querySelectorAll('input[name="newStatus"]').forEach(input => {
   input.addEventListener('change', e => {
     const isChecked = e.target.checked;
@@ -206,7 +195,6 @@ document.querySelectorAll('input[name="newStatus"]').forEach(input => {
   });
 });
 
-// ===== Filter Popup Toggle =====
 filterBtn.addEventListener('click', () => {
   filterPopup.classList.toggle('hidden');
 });
@@ -243,12 +231,10 @@ searchInput.addEventListener('input', () => {
   renderList();
 });
 
-// ===== Filter Section Toggles =====
 document.querySelectorAll('.filter-toggle').forEach(button => {
   button.addEventListener('click', () => {
     const allFilters = document.querySelectorAll('.filter-toggle');
-    
-    // Close all filters except the clicked one
+
     allFilters.forEach(filterBtn => {
       if (filterBtn !== button) {
         filterBtn.classList.remove('active');
@@ -257,7 +243,6 @@ document.querySelectorAll('.filter-toggle').forEach(button => {
       }
     });
 
-    // Toggle the clicked filter
     button.classList.toggle('active');
     const options = button.nextElementSibling;
     if (options) options.classList.toggle('visible');
@@ -272,15 +257,9 @@ document.querySelectorAll('.part-btn').forEach(btn => {
 
     const newPart = btn.dataset.part;
 
-    // Check if part is actually changing
     if (newPart !== selectedPart) {
-      // Reset selectedFilters dynamically from filterDefaults
-      initializeFilters(); // Reset to default structure
-
-      // After reset, set the new part
+      initializeFilters(); 
       selectedPart = newPart;
-
-      // Trigger render again after reset
       renderList();
     }
   });
@@ -297,6 +276,5 @@ function updateCharCount() {
   document.getElementById('charCount').textContent = countText;
 }
 
-// Initialize filters once
 initializeFilters();
 renderList();

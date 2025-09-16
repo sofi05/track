@@ -22,7 +22,7 @@
     const todayKey = getTodayDateKey();
     const bdaySection = document.getElementById('birthday-icons');
     if (!bdaySection) return;
-    bdaySection.innerHTML = ''; // Clear existing
+    bdaySection.innerHTML = ''; 
 
     const todayList = birthdays[todayKey];
 

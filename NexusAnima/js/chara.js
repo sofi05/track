@@ -19,7 +19,6 @@ window.CHARA_CONFIG = {
 
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
-    // Assume each char has a folder property for their folder name
     const folder = char.folder || ''; 
     return `../assets/Sprite/NexusAnima/${imgName}.png`;
   },
@@ -38,14 +37,14 @@ createImageElement(c) {
     img.src = `../assets/charaid/NexusAnima/TempIcons/${imgName}.png`;
     img.alt = c.name;
 
-    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+    const fallbackImg = this.getFallbackPath(c);  
   img.onerror = () => {
     img.src = fallbackImg;
   };
 
     container.appendChild(img);
 
-    // Optional group/label
+    // if theres 2+
     if (c.group) {
       const groupLabel = document.createElement('div');
       groupLabel.className = 'region-list';

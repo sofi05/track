@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sliderMessage = document.getElementById('slider-message');
   const switchButton = document.getElementById('tab-past');
 
-  let activeIcon = null; // To keep track of the currently active icon
+  let activeIcon = null; 
 
   // Show popup
   switchButton.addEventListener('click', e => {
@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === popup) {
       popup.classList.add('hidden');
       sliderContent.classList.add('hidden');
-      resetIcons(); // Reset icons when closing popup
+      resetIcons(); 
     }
   });
 
-  // Sample video + description content
+  // Description content
   const sliderContents = [
     `<h4><a href="https://www.youtube.com/watch?v=AkzHkRAIjgo">Fly Me to the Moon</a></h4>
      <p>The first game developed by early miHoYo members before the company was formally established. 
@@ -52,12 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
      It centers on the adventures of Kiana Kaslana as she fights her way through the zombie-infested school grounds.</p>`
   ];
 
-  // Function to reset all icons to initial state
   const resetIcons = () => {
     document.querySelectorAll('.game-hnk img').forEach(img => {
       img.classList.remove('active', 'gray');
     });
-    activeIcon = null; // Reset active icon
+    activeIcon = null; 
   };
 
   // Show content on image click and toggle active state
@@ -66,26 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const index = icon.dataset.index;
       const img = icon.querySelector('img');
 
-      // If clicking the same icon again, close the slider
       if (activeIcon === img) {
         sliderContent.classList.add('hidden');
         resetIcons();
         return;
       }
 
-      // Set the content for the slider
       sliderMessage.innerHTML = sliderContents[index] || `<p>No content available</p>`;
-
-      // Show the slider and set the new active icon
       sliderContent.classList.remove('hidden');
       
       // Graying out the other icons
-      resetIcons(); // Reset all icons first
-      img.classList.add('active'); // Set the clicked icon as active
-      img.classList.remove('gray'); // Ensure active icon is colored
-      activeIcon = img; // Update the active icon state
+      resetIcons(); 
+      img.classList.add('active'); 
+      img.classList.remove('gray'); 
+      activeIcon = img; 
 
-      // Gray out all other icons
       document.querySelectorAll('.game-hnk img').forEach(otherImg => {
         if (otherImg !== img) {
           otherImg.classList.add('gray');

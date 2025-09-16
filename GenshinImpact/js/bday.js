@@ -45,7 +45,7 @@ window.BDAY_CONFIG = {
   '05-27': ['Fischl'],
   '05-31': ['Sethos'],
 
-  '06-01': ['Itto'], // You may choose to handle Player separately
+  '06-01': ['Itto'], // Add Paimon?
   '06-08': ['Escoffier'],
   '06-09': ['Lisa'],
   '06-16': ['Venti'],

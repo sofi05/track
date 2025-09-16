@@ -27,24 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('popup-container').innerHTML = popupHTML;
 
-  // Event listeners
   const switcherPopup = document.getElementById('game-switcher');
   const switchButton = document.getElementById('tab-play');
 
-  // Open popup
   switchButton.addEventListener('click', (e) => {
     e.preventDefault();
     switcherPopup.classList.remove('hidden');
   });
 
-  // Close popup on background click
   switcherPopup.addEventListener('click', (e) => {
     if (e.target === switcherPopup) {
       switcherPopup.classList.add('hidden');
     }
   });
 
-  // Handle icon click (navigate to game)
   document.querySelectorAll('.game-icon').forEach(icon => {
     icon.addEventListener('click', () => {
       const url = icon.dataset.url;

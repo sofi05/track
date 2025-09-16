@@ -1,22 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ====== Elements ======
   const charListEl = document.getElementById('charList');
   const searchInput = document.getElementById('searchInput');
   const filterBtn = document.getElementById('filterBtn');
   const filterPopup = document.getElementById('filterPopup');
-  const newFilterCheckbox = document.getElementById('filterNew'); // ✅ NEW checkbox
+  const newFilterCheckbox = document.getElementById('filterNew'); 
 
   // ====== Global Variables ======
-  window.selectedFilters = { have: null, rarity: null, element: null, isNew: false }; // ✅ isNew added
-  let selectedPart = '2'; // default part, change as needed
+  window.selectedFilters = { have: null, rarity: null, element: null, isNew: false }; 
+  let selectedPart = '2'; // Default part, change as needed
 
-  // ====== Global Function to Sync Filters ======
   window.updateFiltersFromUI = function () {
     const newFilterCheckbox = document.getElementById('filterNew');
     window.selectedFilters.isNew = newFilterCheckbox ? newFilterCheckbox.checked : false;
   };
 
-  // ====== Render function ======
   function renderList(characters, gameFolder, spriteFolder) {
     if (!charListEl) return;
     charListEl.innerHTML = '';
@@ -41,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedFilters.rarity && c.rarity !== selectedFilters.rarity) return false;
         if (selectedFilters.element && c.element !== selectedFilters.element) return false;
 
-        if (selectedFilters.isNew && c.status !== 'new') return false; // ✅ NEW logic
+        if (selectedFilters.isNew && c.status !== 'new') return false; 
 
         return matchesSearch && matchesPart;
       })
@@ -58,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
 
-        // NEW / SOON Tags
         if (c.status === 'new') {
           const newLabel = document.createElement('div');
           newLabel.textContent = 'NEW';
@@ -111,13 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
           selectedFilters[filterKey] = parsedValue;
         }
 
-        updateFiltersFromUI(); // ✅ Sync 'new' checkbox state
+        updateFiltersFromUI(); 
         renderList(characters, gameFolder, spriteFolder);
       });
     });
   }
 
-  // ====== Accordion for Filter Sections ======
   document.querySelectorAll('.filter-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const options = btn.nextElementSibling;
@@ -156,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
       renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
   });
 
-  // ====== NEW Checkbox Filter Listener ======
   if (newFilterCheckbox) {
     newFilterCheckbox.addEventListener('change', () => {
       updateFiltersFromUI();
@@ -167,13 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ====== Part Buttons and Reset Filters ======
   function resetFilters() {
-    // Reset selected filters object
     window.selectedFilters = { have: null, rarity: null, element: null, isNew: false };
-
-    // Clear search input
     if (searchInput) searchInput.value = '';
 
-    // Reset all radios
     const radios = filterPopup.querySelectorAll('input[type="radio"]');
     radios.forEach(radio => {
       radio.checked = false;
@@ -187,29 +177,22 @@ document.addEventListener('DOMContentLoaded', () => {
       checkbox.dispatchEvent(new Event('change'));
     });
 
-    // Hide filter popup
     if (filterPopup) filterPopup.classList.add('hidden');
   }
 
   document.querySelectorAll('.part-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      // Remove active class from all buttons, add to clicked
       document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Reset filters and UI elements
       resetFilters();
-
-      // Update selected part
       selectedPart = btn.dataset.part === 'collab' ? 'collab' : btn.dataset.part;
 
-      // Render updated list
       if (window.currentCharacters && window.gameFolder && window.spriteFolder)
         renderList(window.currentCharacters, window.gameFolder, window.spriteFolder);
     });
   });
 
-  // ====== Expose functions to window ======
   window.renderGlobalList = renderList;
   window.setupGlobalFilters = setupToggleableRadio;
 });

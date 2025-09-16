@@ -87,7 +87,7 @@ getSpritePath: function(char) {
   },
 
 getFallbackPath: function(char) {
-  return `../assets/others/StarRail/Random/Type_Unknown_Small.webp`; //change this when needed
+  return `../assets/others/StarRail/Random/Type_Unknown_Small.webp`; 
 },
 
 createImageElement(c) {
@@ -100,7 +100,7 @@ createImageElement(c) {
     img.src = `../assets/charaid/StarRail/${imgSrcName}.png`;
     img.alt = c.name;
 
-    const fallbackImg = this.getFallbackPath(c);  // Path to fallback image
+    const fallbackImg = this.getFallbackPath(c);  
   img.onerror = () => {
     img.src = fallbackImg;
   };
@@ -113,7 +113,7 @@ createImageElement(c) {
     container.appendChild(img);
     container.appendChild(elementImg);
 
-    // Optional: Display world/tags
+    // If theres two or more in a tag
     if (Array.isArray(c.world)) {
       const worldList = document.createElement('div');
       worldList.className = 'world-list';
