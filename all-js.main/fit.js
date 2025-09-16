@@ -135,15 +135,15 @@ searchInput.addEventListener('input', renderList);
 
 function showPopup(imgPath, altText, spriteList = []) {
   const popup = document.getElementById('spritePopup');
+  const popupImg = document.getElementById('spritePopupImg');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
+  // 🧹 Clear old touch listeners if any
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
   }
-
-  const popupImg = document.getElementById('spritePopupImg');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
 
   if (!spriteList.length) {
     popupImg.src = typeof imgPath === 'string' ? imgPath : '';
@@ -160,7 +160,6 @@ function showPopup(imgPath, altText, spriteList = []) {
     popupImg.src = `${imgPath}/${spriteList[index]}.png`;
     popupImg.alt = `${altText} - ${spriteList[index]}`;
   }
-  popupImg.src = ''; // Clear old image to avoid flashing
 
   function nextImage() {
     index = (index + 1) % spriteList.length;
@@ -187,7 +186,7 @@ function showPopup(imgPath, altText, spriteList = []) {
       if (e.key === 'ArrowLeft') prevImage();
     };
 
-    if (spriteList.length > 1) {
+    // ✅ Swipe support (only if more than 1 image)
     let touchStartX = 0;
 
     const handleTouchStart = e => touchStartX = e.touches[0].clientX;
@@ -200,14 +199,14 @@ function showPopup(imgPath, altText, spriteList = []) {
     popup.addEventListener('touchstart', handleTouchStart);
     popup.addEventListener('touchend', handleTouchEnd);
 
-    // Cleanup (optional but safer if reusing the popup)
+    // Store cleanup function to avoid stacking listeners
     popup._removeTouchEvents = () => {
       popup.removeEventListener('touchstart', handleTouchStart);
       popup.removeEventListener('touchend', handleTouchEnd);
     };
   }
-}
 
+  popupImg.src = ''; // ✅ Prevent flashing old image
   showImageAt(0);
   popup.style.display = 'flex';
 }
