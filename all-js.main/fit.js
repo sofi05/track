@@ -139,21 +139,18 @@ function showPopup(imgPath, altText, spriteList = []) {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  // 🧼 Clean up old events
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
   }
   document.onkeydown = null;
 
-  // 🧹 FULL image reset
   popupImg.src = '';
   popupImg.alt = '';
   popupImg.style.visibility = 'hidden';
 
   let index = 0;
 
-  // 🚫 Block swipe if there's <= 1 image
   const allowSwipe = spriteList.length > 1;
 
   function showImageAt(idx) {
@@ -167,19 +164,15 @@ function showPopup(imgPath, altText, spriteList = []) {
     ? `${altText} - ${spriteList[index]}`
     : altText || 'No sprites found';
 
-  // 🔄 Only reload if the src is different
   if (popupImg.src.endsWith(newSrc)) {
-    // Just update alt text if needed
     popupImg.alt = newAlt;
     return;
   }
 
-  // 🧼 Full reset
   popupImg.style.visibility = 'hidden';
   popupImg.src = '';
   popupImg.alt = '';
 
-  // ⏱ Set new image after small delay
   setTimeout(() => {
     popupImg.src = newSrc;
     popupImg.alt = newAlt;
@@ -213,14 +206,12 @@ function showPopup(imgPath, altText, spriteList = []) {
     prevBtn.onclick = prevImage;
     nextBtn.onclick = nextImage;
 
-    // Keyboard nav
     document.onkeydown = e => {
       if (popup.style.display !== 'flex') return;
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
     };
 
-    // Touch nav
     let touchStartX = 0;
     const handleTouchStart = e => touchStartX = e.touches[0].clientX;
     const handleTouchEnd = e => {
