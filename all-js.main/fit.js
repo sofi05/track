@@ -139,67 +139,81 @@ function showPopup(imgPath, altText, spriteList = []) {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  // 🧼 Clean up old touch/keyboard listeners
+  // 🧼 Clean up old events
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
   }
   document.onkeydown = null;
 
+  // 🧹 FULL image reset
+  popupImg.src = '';
+  popupImg.alt = '';
+  popupImg.style.visibility = 'hidden';
+
   let index = 0;
 
-  // 👇 Helper: show specific image
+  // 🚫 Block swipe if there's <= 1 image
+  const allowSwipe = spriteList.length > 1;
+
   function showImageAt(idx) {
     index = idx;
 
-    // ✅ Temporarily hide image to avoid flicker
+    // Hide and reset before loading new image
     popupImg.style.visibility = 'hidden';
-    popupImg.src = ''; // Clear previous image
+    popupImg.src = ''; // Clear any previous image
+    popupImg.alt = '';
 
-    const newSrc = spriteList.length
+    // Set new image after a short delay
+    const newSrc = allowSwipe
       ? `${imgPath}/${spriteList[index]}.png`
       : typeof imgPath === 'string' ? imgPath : '';
 
-    popupImg.alt = spriteList.length
+    popupImg.alt = allowSwipe
       ? `${altText} - ${spriteList[index]}`
       : altText || 'No sprites found';
 
-    // ✅ Set new source after a short delay to prevent visual flash
+    // Defer setting src to prevent flicker
     setTimeout(() => {
       popupImg.src = newSrc;
-    }, 20); // 1 frame delay
+    }, 20);
 
-    // ✅ When image loads, show it
+    // Only show after loading
     popupImg.onload = () => {
       popupImg.style.visibility = 'visible';
     };
   }
 
   function nextImage() {
+    if (!allowSwipe) return;
     index = (index + 1) % spriteList.length;
     showImageAt(index);
   }
 
   function prevImage() {
+    if (!allowSwipe) return;
     index = (index - 1 + spriteList.length) % spriteList.length;
     showImageAt(index);
   }
 
-  if (spriteList.length <= 1) {
+  if (!allowSwipe) {
     prevBtn.style.display = 'none';
     nextBtn.style.display = 'none';
   } else {
     prevBtn.style.display = 'block';
     nextBtn.style.display = 'block';
+
     prevBtn.onclick = prevImage;
     nextBtn.onclick = nextImage;
 
+    // Keyboard nav
     document.onkeydown = e => {
       if (popup.style.display !== 'flex') return;
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
     };
 
+    // Touch nav
     let touchStartX = 0;
     const handleTouchStart = e => touchStartX = e.touches[0].clientX;
     const handleTouchEnd = e => {
@@ -217,12 +231,10 @@ function showPopup(imgPath, altText, spriteList = []) {
     };
   }
 
-  // ✅ Ensure img is hidden before first load
-  popupImg.style.visibility = 'hidden';
-  popupImg.src = '';
   showImageAt(0);
   popup.style.display = 'flex';
 }
+
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
