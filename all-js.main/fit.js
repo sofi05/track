@@ -139,26 +139,22 @@ function showPopup(imgPath, altText, spriteList = []) {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  // 🧹 Clear old touch listeners if any
+  // 🧼 Clean up old touch/keyboard listeners
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
   }
-
-  if (!spriteList.length) {
-    popupImg.src = typeof imgPath === 'string' ? imgPath : '';
-    popupImg.alt = altText || 'No sprites found';
-    popup.style.display = 'flex';
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
-    return;
-  }
+  document.onkeydown = null;
 
   let index = 0;
   function showImageAt(idx) {
     index = idx;
-    popupImg.src = `${imgPath}/${spriteList[index]}.png`;
-    popupImg.alt = `${altText} - ${spriteList[index]}`;
+    popupImg.src = spriteList.length
+      ? `${imgPath}/${spriteList[index]}.png`
+      : typeof imgPath === 'string' ? imgPath : '';
+    popupImg.alt = spriteList.length
+      ? `${altText} - ${spriteList[index]}`
+      : altText || 'No sprites found';
   }
 
   function nextImage() {
@@ -172,23 +168,26 @@ function showPopup(imgPath, altText, spriteList = []) {
   }
 
   if (spriteList.length <= 1) {
+    // Hide navigation buttons
     prevBtn.style.display = 'none';
     nextBtn.style.display = 'none';
   } else {
+    // Show navigation buttons
     prevBtn.style.display = 'block';
     nextBtn.style.display = 'block';
+
     prevBtn.onclick = prevImage;
     nextBtn.onclick = nextImage;
 
+    // ✅ Only add keyboard nav if more than 1 image
     document.onkeydown = e => {
       if (popup.style.display !== 'flex') return;
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
     };
 
-    // ✅ Swipe support (only if more than 1 image)
+    // ✅ Only add swipe nav if more than 1 image
     let touchStartX = 0;
-
     const handleTouchStart = e => touchStartX = e.touches[0].clientX;
     const handleTouchEnd = e => {
       const diff = e.changedTouches[0].clientX - touchStartX;
@@ -199,17 +198,17 @@ function showPopup(imgPath, altText, spriteList = []) {
     popup.addEventListener('touchstart', handleTouchStart);
     popup.addEventListener('touchend', handleTouchEnd);
 
-    // Store cleanup function to avoid stacking listeners
     popup._removeTouchEvents = () => {
       popup.removeEventListener('touchstart', handleTouchStart);
       popup.removeEventListener('touchend', handleTouchEnd);
     };
   }
 
-  popupImg.src = ''; // ✅ Prevent flashing old image
+  popupImg.src = ''; // Prevent flicker from previous character
   showImageAt(0);
   popup.style.display = 'flex';
 }
+
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
