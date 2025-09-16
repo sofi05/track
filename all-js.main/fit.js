@@ -135,6 +135,12 @@ searchInput.addEventListener('input', renderList);
 
 function showPopup(imgPath, altText, spriteList = []) {
   const popup = document.getElementById('spritePopup');
+
+  if (popup._removeTouchEvents) {
+    popup._removeTouchEvents();
+    delete popup._removeTouchEvents;
+  }
+
   const popupImg = document.getElementById('spritePopupImg');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
@@ -154,6 +160,7 @@ function showPopup(imgPath, altText, spriteList = []) {
     popupImg.src = `${imgPath}/${spriteList[index]}.png`;
     popupImg.alt = `${altText} - ${spriteList[index]}`;
   }
+  popupImg.src = ''; // Clear old image to avoid flashing
 
   function nextImage() {
     index = (index + 1) % spriteList.length;
@@ -180,14 +187,26 @@ function showPopup(imgPath, altText, spriteList = []) {
       if (e.key === 'ArrowLeft') prevImage();
     };
 
+    if (spriteList.length > 1) {
     let touchStartX = 0;
-    popup.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
-    popup.addEventListener('touchend', e => {
+
+    const handleTouchStart = e => touchStartX = e.touches[0].clientX;
+    const handleTouchEnd = e => {
       const diff = e.changedTouches[0].clientX - touchStartX;
       if (diff > 50) prevImage();
       else if (diff < -50) nextImage();
-    });
+    };
+
+    popup.addEventListener('touchstart', handleTouchStart);
+    popup.addEventListener('touchend', handleTouchEnd);
+
+    // Cleanup (optional but safer if reusing the popup)
+    popup._removeTouchEvents = () => {
+      popup.removeEventListener('touchstart', handleTouchStart);
+      popup.removeEventListener('touchend', handleTouchEnd);
+    };
   }
+}
 
   showImageAt(0);
   popup.style.display = 'flex';
