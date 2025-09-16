@@ -147,14 +147,32 @@ function showPopup(imgPath, altText, spriteList = []) {
   document.onkeydown = null;
 
   let index = 0;
+
+  // 👇 Helper: show specific image
   function showImageAt(idx) {
     index = idx;
-    popupImg.src = spriteList.length
+
+    // ✅ Temporarily hide image to avoid flicker
+    popupImg.style.visibility = 'hidden';
+    popupImg.src = ''; // Clear previous image
+
+    const newSrc = spriteList.length
       ? `${imgPath}/${spriteList[index]}.png`
       : typeof imgPath === 'string' ? imgPath : '';
+
     popupImg.alt = spriteList.length
       ? `${altText} - ${spriteList[index]}`
       : altText || 'No sprites found';
+
+    // ✅ Set new source after a short delay to prevent visual flash
+    setTimeout(() => {
+      popupImg.src = newSrc;
+    }, 20); // 1 frame delay
+
+    // ✅ When image loads, show it
+    popupImg.onload = () => {
+      popupImg.style.visibility = 'visible';
+    };
   }
 
   function nextImage() {
@@ -168,25 +186,20 @@ function showPopup(imgPath, altText, spriteList = []) {
   }
 
   if (spriteList.length <= 1) {
-    // Hide navigation buttons
     prevBtn.style.display = 'none';
     nextBtn.style.display = 'none';
   } else {
-    // Show navigation buttons
     prevBtn.style.display = 'block';
     nextBtn.style.display = 'block';
-
     prevBtn.onclick = prevImage;
     nextBtn.onclick = nextImage;
 
-    // ✅ Only add keyboard nav if more than 1 image
     document.onkeydown = e => {
       if (popup.style.display !== 'flex') return;
       if (e.key === 'ArrowRight') nextImage();
       if (e.key === 'ArrowLeft') prevImage();
     };
 
-    // ✅ Only add swipe nav if more than 1 image
     let touchStartX = 0;
     const handleTouchStart = e => touchStartX = e.touches[0].clientX;
     const handleTouchEnd = e => {
@@ -204,11 +217,12 @@ function showPopup(imgPath, altText, spriteList = []) {
     };
   }
 
-  popupImg.src = ''; // Prevent flicker from previous character
+  // ✅ Ensure img is hidden before first load
+  popupImg.style.visibility = 'hidden';
+  popupImg.src = '';
   showImageAt(0);
   popup.style.display = 'flex';
 }
-
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
