@@ -47,11 +47,14 @@
   </nav>
 
   <!--SPRITE-->
-  <div id="spritePopup" class="sprite-popup" style="display:none;">
-    <span class="close-btn">✕</span>
-    <img id="spritePopupImg" src="" alt="" />
+  <div id="spritePopup" class="popup">
+    <div class="popup-content">
+      <button class="close-btn">✕</button>
+      <button id="prevBtn" class="nav-btn">←</button>
+      <img id="spritePopupImg" class="popup-img" />
+      <button id="nextBtn" class="nav-btn">→</button>
+    </div>
   </div>
-  <div id="spriteList"></div>
 
   <script src="js/fit.js" defer></script>
   <script src="../ZenlessZone/js/fit.js"></script>

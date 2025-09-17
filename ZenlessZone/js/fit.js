@@ -12,6 +12,6 @@ const gameConfig = {
   pathPrefix: "../assets/charaid/Zenless/Outfit/", 
   spritePrefix: "../assets/Sprite/Zenless/Outfit/",
 
-  getImgPath: (imgName) => `${gameConfig.pathPrefix}${imgName}.webp`,
-  getSpritePath: (imgName2) => `${gameConfig.spritePrefix}${imgName2}.png`
+  getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.webp`,
+  getSpritePath: (c) => `${gameConfig.spritePrefix}${c.imgName2}.png`
 };

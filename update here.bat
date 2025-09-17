@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added Thespian Trick in genshin"  
+git commit -m "fixed broken outfit links"  
 git push origin main  

@@ -75,13 +75,16 @@ function renderList() {
     charListEl.appendChild(card);
 
     card.addEventListener('click', () => {
-      if (gameConfig.id === 'hi3') {
-        const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
-        showPopup(folderPath, c.name, c.spriteImages || []);
-      } else {
-        showPopup(gameConfig.getSpritePath(c), c.name, c.spriteImages);
-      }
-    });
+  if (gameConfig.id === 'hi3') {
+    const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
+    showPopup(folderPath, c.name, c.spriteImages || []);
+  } else {
+    // Zenless or other games: just show the one sprite
+    const spritePath = gameConfig.getSpritePath(c); // uses imgName2
+    showPopup(spritePath, c.name, [c.imgName2]);     // just wrap in array
+  }
+});
+
   });
   updateCharCount();
 }
@@ -166,9 +169,13 @@ function showPopup(imgPath, altText, spriteList = []) {
       newAlt = `${altText} - ${spriteList[index] || 'Sprite'}`;
     }
 
-    // CASE 2: HI3 with folder + spriteList
+    // CASE 2: HI3 with folder + spriteList OR full path passed
     else if (typeof imgPath === 'string' && spriteList.length > 0) {
-      newSrc = `${imgPath}/${spriteList[index]}.png`;
+      if (imgPath.endsWith('.png')) {
+        newSrc = imgPath;  // Already a full filename, don’t append
+      } else {
+        newSrc = `${imgPath}/${spriteList[index]}.png`;  // Folder + filename
+      }
       newAlt = `${altText} - ${spriteList[index]}`;
     }
 
