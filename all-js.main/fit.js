@@ -62,7 +62,7 @@ function renderList() {
     if (gameConfig.id === 'hi3') {
       img.src = `../assets/charaid/Honkai/${c.folder}/${c.imgName}.png`;
     } else {
-      img.src = gameConfig.getImgPath(c.imgName);
+      img.src = gameConfig.getImgPath(c);
     }
     img.alt = c.name;
     iconWrapper.appendChild(img);
@@ -79,7 +79,7 @@ function renderList() {
         const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
         showPopup(folderPath, c.name, c.spriteImages || []);
       } else {
-        showPopup(gameConfig.getSpritePath(c.imgName2), c.name);
+        showPopup(gameConfig.getSpritePath(c), c.name, c.spriteImages);
       }
     });
   });
@@ -143,6 +143,7 @@ function showPopup(imgPath, altText, spriteList = []) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
   }
+
   document.onkeydown = null;
 
   popupImg.src = '';
@@ -154,35 +155,49 @@ function showPopup(imgPath, altText, spriteList = []) {
   const allowSwipe = spriteList.length > 1;
 
   function showImageAt(idx) {
-  index = idx;
+    index = idx;
 
-  const newSrc = allowSwipe
-    ? `${imgPath}/${spriteList[index]}.png`
-    : typeof imgPath === 'string' ? imgPath : '';
+    let newSrc = '';
+    let newAlt = '';
 
-  const newAlt = allowSwipe
-    ? `${altText} - ${spriteList[index]}`
-    : altText || 'No sprites found';
+    // CASE 1: Genshin or prebuilt array
+    if (Array.isArray(imgPath)) {
+      newSrc = imgPath[index] || imgPath[0];
+      newAlt = `${altText} - ${spriteList[index] || 'Sprite'}`;
+    }
 
-  if (popupImg.src.endsWith(newSrc)) {
-    popupImg.alt = newAlt;
-    return;
+    // CASE 2: HI3 with folder + spriteList
+    else if (typeof imgPath === 'string' && spriteList.length > 0) {
+      newSrc = `${imgPath}/${spriteList[index]}.png`;
+      newAlt = `${altText} - ${spriteList[index]}`;
+    }
+
+    // fallback (unlikely)
+    else {
+      newSrc = imgPath;
+      newAlt = altText || 'No sprites found';
+    }
+
+    // console.log('showing:', newSrc);
+
+    if (popupImg.src.endsWith(newSrc)) {
+      popupImg.alt = newAlt;
+      return;
+    }
+
+    popupImg.style.visibility = 'hidden';
+    popupImg.src = '';
+    popupImg.alt = '';
+
+    setTimeout(() => {
+      popupImg.src = newSrc;
+      popupImg.alt = newAlt;
+    }, 20);
+
+    popupImg.onload = () => {
+      popupImg.style.visibility = 'visible';
+    };
   }
-
-  popupImg.style.visibility = 'hidden';
-  popupImg.src = '';
-  popupImg.alt = '';
-
-  setTimeout(() => {
-    popupImg.src = newSrc;
-    popupImg.alt = newAlt;
-  }, 20);
-
-  popupImg.onload = () => {
-    popupImg.style.visibility = 'visible';
-  };
-}
-
 
   function nextImage() {
     if (!allowSwipe) return;
@@ -232,7 +247,6 @@ function showPopup(imgPath, altText, spriteList = []) {
   showImageAt(0);
   popup.style.display = 'flex';
 }
-
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';

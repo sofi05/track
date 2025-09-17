@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed swipe popup"  
+git commit -m "added Thespian Trick in genshin"  
 git push origin main  
