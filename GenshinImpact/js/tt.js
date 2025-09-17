@@ -168,7 +168,7 @@ const gameConfig = {
     { name: 'Yoimiya', have: [true], 
         spriteImages: ['Filled_With_Confidence'] },
 
-    { name: 'YunJin', have: [false], status:'new',
+    { name: 'Yun Jin', imgName: 'Yunjin', have: [false], status:'new',
         spriteImages: ['Masters_Poise'] },
     
     { name: 'Zhongli', have: [true], 
