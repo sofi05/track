@@ -1,9 +1,8 @@
 const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
 const filterBtn = document.getElementById('filterBtn');
 const filterPopup = document.getElementById('filterPopup');
 const genderToggleBtn = document.getElementById('genderToggleBtn'); // Reference to gender toggle
-const genderLabel = document.getElementById('genderLabel'); // Gender label text
+const characterName = document.getElementById('characterName'); // Reference to the h1 tag
 
 let selectedFilters;
 let selectedGender = 'f'; // Default to female gender
@@ -15,17 +14,14 @@ const filterDefaults = {
     soon: false,
   },
   element: null,
-  rarity: null,
-  region: null,
   gender: null, // This will now be controlled by the gender toggle
   group: null,
-  world: null,
-  spec: null,
 };
 
 function initializeFilters() {
   selectedFilters = JSON.parse(JSON.stringify(filterDefaults));
   selectedFilters.gender = selectedGender; // Set default gender filter
+  updateTitleBasedOnGender(selectedGender); // Set the title dynamically
 }
 
 window.CHARA_CONFIG = window.CHARA_CONFIG || {};
@@ -57,7 +53,7 @@ function renderList() {
 
       // Gender filter check
       if (selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
-      
+
       // Part filter applied only if part info exists
       if (hasPartInfo) {
         if (!(selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab))) {
@@ -65,7 +61,14 @@ function renderList() {
         }
       }
 
-      // Other filters (e.g., have, status, element, etc.) go here...
+      // Filter: Element
+      if (selectedFilters.element) {
+        if (c.element !== selectedFilters.element && c.filterElement !== selectedFilters.element) return false;
+      }
+
+      // Filter: Group
+      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
+
       return matchesSearch;
     });
 
@@ -79,17 +82,17 @@ function renderList() {
     iconWrapper.style.background = getRarityGradient(c.rarity);
 
     if (c.status === 'new') {
-        const newLabel = document.createElement('div');
-        newLabel.textContent = 'NEW';
-        newLabel.className = 'soon-label';
-        iconWrapper.appendChild(newLabel);
-      }
-      if (c.status === 'soon') {
-        const soonLabel = document.createElement('div');
-        soonLabel.textContent = 'SOON';
-        soonLabel.className = 'soon-label';
-        iconWrapper.appendChild(soonLabel);
-      }
+      const newLabel = document.createElement('div');
+      newLabel.textContent = 'NEW';
+      newLabel.className = 'soon-label';
+      iconWrapper.appendChild(newLabel);
+    }
+    if (c.status === 'soon') {
+      const soonLabel = document.createElement('div');
+      soonLabel.textContent = 'SOON';
+      soonLabel.className = 'soon-label';
+      iconWrapper.appendChild(soonLabel);
+    }
 
     const elementIcon = document.createElement('div');
     elementIcon.className = 'element-icon';
@@ -97,7 +100,7 @@ function renderList() {
     elementIcon.title = c.element;
     iconWrapper.appendChild(elementIcon);
 
-        if (typeof CHARA_CONFIG.createImageElement === 'function') {
+    if (typeof CHARA_CONFIG.createImageElement === 'function') {
       const imageBlock = CHARA_CONFIG.createImageElement(c);
       if (imageBlock) {
         iconWrapper.appendChild(imageBlock);
@@ -105,6 +108,7 @@ function renderList() {
     }
 
     const label = document.createElement('div');
+    const charName = selectedGender === 'f' ? c.name : c.maleName || c.name;  // Update the character's name based on gender
     label.textContent;
 
     card.appendChild(iconWrapper);
@@ -117,11 +121,21 @@ function renderList() {
 
 // ===== Gender Toggle =====
 genderToggleBtn.addEventListener('change', () => {
-  selectedGender = genderToggleBtn.checked ? 'm' : 'f';
-  selectedFilters.gender = selectedGender;
-  genderLabel.textContent = selectedGender === 'f' ? '' : ''; // Update label text
+  selectedGender = genderToggleBtn.checked ? 'm' : 'f'; 
+  selectedFilters.gender = selectedGender; 
+
+  updateTitleBasedOnGender(selectedGender);
   renderList(); 
 });
+
+function updateTitleBasedOnGender(gender) {
+  const firstChar = characters.find(c => c.gender === gender);
+  if (firstChar) {
+    characterName.textContent = firstChar.name;
+  } else {
+    characterName.textContent = gender === 'f' ? 'Female Characters' : 'Male Characters';
+  }
+}
 
 // ===== Filter Setups =====
 function setupToggleableRadio(groupName, filterKey) {
@@ -146,14 +160,9 @@ function setupToggleableRadio(groupName, filterKey) {
   });
 }
 
-setupToggleableRadio("have", "have");
 setupToggleableRadio("element", "element");
-setupToggleableRadio("rarity", "rarity");
 setupToggleableRadio("gender", "gender");
-setupToggleableRadio("region", "region");
-setupToggleableRadio("world", "world");
 setupToggleableRadio("group", "group");
-setupToggleableRadio("spec", "spec");
 
 document.querySelectorAll('input[name="newStatus"]').forEach(input => {
   input.addEventListener('change', e => {
@@ -196,8 +205,22 @@ popup.addEventListener('click', (e) => {
 });
 
 // ===== Search =====
-searchInput.addEventListener('input', () => {
-  renderList();
+document.querySelectorAll('.filter-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    const allFilters = document.querySelectorAll('.filter-toggle');
+
+    allFilters.forEach(filterBtn => {
+      if (filterBtn !== button) {
+        filterBtn.classList.remove('active');
+        const options = filterBtn.nextElementSibling;
+        if (options) options.classList.remove('visible');
+      }
+    });
+
+    button.classList.toggle('active');
+    const options = button.nextElementSibling;
+    if (options) options.classList.toggle('visible');
+  });
 });
 
 // ===== Part Buttons =====
@@ -209,7 +232,7 @@ document.querySelectorAll('.part-btn').forEach(btn => {
     const newPart = btn.dataset.part;
 
     if (newPart !== selectedPart) {
-      initializeFilters(); 
+      initializeFilters();
       selectedPart = newPart;
       renderList();
     }

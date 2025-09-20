@@ -45,21 +45,6 @@ createImageElement(c) {
     container.appendChild(img);
     container.appendChild(elementImg);
 
-    // If theres two or more in a tag
-    if (Array.isArray(c.world)) {
-      const worldList = document.createElement('div');
-      worldList.className = 'world-list';
-
-      c.world.forEach(world => {
-        const worldLabel = document.createElement('span');
-        worldLabel.className = 'world-label';
-        worldLabel.textContent = world;
-        worldList.appendChild(worldLabel);
-      });
-
-      container.appendChild(worldList);
-    }
-
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
       const imgPath = `../assets/Sprite/StarRail/${c.imgName}.png`;

@@ -9,38 +9,25 @@
   <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">    
 </head>
 <body>
-    <div class="gender-toggle">
+
+  <h1 id="characterName">Characters</h1> 
+  <p id="charCount" style="text-align: center; font-size: 0.8rem; margin-top: -10px; margin-bottom: 20px; color: #666;">
+  Total: 0 characters</p>
+
+  <div class="gender-toggle">
     <label class="switch">
       <input type="checkbox" id="genderToggleBtn" />
       <span class="slider round"></span>
     </label>
     <span id="genderLabel"></span>
   </div>
-
-  <h1>Characters</h1>
-  <p id="charCount" style="text-align: center; font-size: 0.8rem; margin-top: -10px; margin-bottom: 20px; color: #666;">
-  Total: 0 characters</p>
-
+  
   <div class="search-filter">
-    <input type="text" id="searchInput" placeholder="Search by name..." />
+    <input id="searchInput" placeholder="Main character"/>
     <button id="filterBtn">Filter</button>
   </div>
 
   <div id="filterPopup" class="filter-popup hidden">
-    <!-- STATUS -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Status</button>
-      <div class="filter-options">
-        <div class="sub-filter">
-          <label><input type="radio" name="have" value="true"> Have</label>
-          <label><input type="radio" name="have" value="false"> Haven't</label>
-        </div>
-        <div class="sub-filter">
-          <label><input type="checkbox" name="newStatus" value="true"> New</label>
-        </div>
-      </div>
-    </div>
-
     <!-- ELEMENT -->
     <div class="filter-category">
       <button type="button" class="filter-toggle">Element</button>
@@ -76,7 +63,7 @@
       </div>
     </div>
 
-    <!-- REGION -->
+    <!-- PATH -->
     <div class="filter-category">
       <button type="button" class="filter-toggle">Path</button>
       <div class="filter-options">
@@ -115,65 +102,7 @@
       </div>
     </div>
 
-    <!-- WORLD -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">World</button>
-      <div class="filter-options">
-        <label class="element-label" for="world-hss">
-          <input type="radio" name="world" value="hss" id="world-hss" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Herta_Space_Station.png" alt="Herta Space"
-          style="filter: brightness(0) invert(1);" />
-        </label>
-        <label class="element-label" for="world-ae">
-          <input type="radio" name="world" value="ae" id="world-ae" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Astral_Express.webp" alt="Astral Express" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-JVI">
-          <input type="radio" name="world" value="JVI" id="world-JVI" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Jarilo-VI.png" alt="Jarilo-VI"
-          style="filter: brightness(0) invert(1);" />
-        </label>
-        <label class="element-label" for="world-txl">
-          <input type="radio" name="world" value="txl" id="world-txl" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_The_Xianzhou_Luofu.png" alt="Xianzhou Luofu" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-pena">
-          <input type="radio" name="world" value="pena" id="world-pena" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Penacony.png" alt="Penacony" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-amp">
-          <input type="radio" name="world" value="amp" id="world-amp" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Amphoreus.png" alt="Amphoreus" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-ot">
-          <input type="radio" name="world" value="ot" id="world-ot" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Other.png" alt="Other" />
-        </label>
-      </div>
-    </div>
-
-    <!-- RARITY -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Rarity</button>
-      <div class="filter-options">
-        <label><input type="radio" name="rarity" value="4"> 4★</label>
-        <label><input type="radio" name="rarity" value="5"> 5★ </label>
-      </div>
-    </div>
-
-    <!-- GENDER -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Gender</button>
-      <div class="filter-options">
-        <label><input type="radio" name="gender" value="m"> Male</label>
-        <label><input type="radio" name="gender" value="f"> Female</label>
-      </div>
-    </div>
-</div>
+  </div>
 
   <div class="char-list" id="charList"></div>
   <div id="popup-container"></div>
