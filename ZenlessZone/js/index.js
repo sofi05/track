@@ -10,10 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (typeof initializeCountdown === 'function') {
     initializeCountdown(GAME_ID, 'countdown-newchars');
-  } else {
-    console.warn('[Countdown] Function not found!');
-  }
-
+  } 
+  
   const newCharSlider = document.getElementById('new-characters-slider');
   const rerunSlider = document.getElementById('reruns-slider');
   const permaSlider = document.getElementById('perma-slider');

@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed some more info to NA chara"  
+git commit -m "fixed multiple pics in fit + removed console"  
 git push origin main  

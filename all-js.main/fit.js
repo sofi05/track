@@ -197,36 +197,41 @@ function showPopup(imgPath, altText, spriteList = []) {
     : (!isFullPathSingle && spriteList.length > 1);
 
   function showImageAt(idx) {
-    index = idx;
-    let newSrc = '';
-    let newAlt = '';
+  index = idx;
+  let newSrc = '';
+  let newAlt = '';
 
-    if (isArrayMode) {
-      newSrc = imgPath[index] || imgPath[0];
-      newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
-    } else if (isFullPathSingle) {
-      newSrc = imgPath;
-      newAlt = altText;
-    } else if (typeof imgPath === 'string' && spriteList.length > 0) {
-      newSrc = `${imgPath}/${spriteList[index]}${defaultExt}`;
-      newAlt = `${altText} - ${spriteList[index]}`;
-    } else {
-      newSrc = typeof imgPath === 'string' ? imgPath : '';
-      newAlt = altText || 'No sprite';
-    }
+  if (isArrayMode) {
+    newSrc = imgPath[index] || imgPath[0];
+    newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
+  } else if (isFullPathSingle) {
+    newSrc = imgPath;
+    newAlt = altText;
+  } else if (typeof imgPath === 'string' && spriteList.length > 0) {
+    let extension = '.png'; 
+    newSrc = `${imgPath}/${spriteList[index]}${extension}`;
+    newAlt = `${altText} - ${spriteList[index]}`;
+  } else {
+    newSrc = typeof imgPath === 'string' ? imgPath : '';
+    newAlt = altText || 'No sprite';
+  }
 
-    popupImg.style.visibility = 'hidden';
-    popupImg.src = '';
-    popupImg.alt = '';
+  popupImg.style.visibility = 'hidden';
+  popupImg.src = '';
+  popupImg.alt = '';
 
-    setTimeout(() => {
-      popupImg.src = newSrc;
-      popupImg.alt = newAlt;
-    }, 20);
+  setTimeout(() => {
+    popupImg.src = newSrc;
+    popupImg.alt = newAlt;
+  }, 20);
 
-    popupImg.onload = () => {
-      popupImg.style.visibility = 'visible';
-    };
+  popupImg.onload = () => {
+    popupImg.style.visibility = 'visible';
+  };
+
+  popupImg.onerror = (err) => {
+    popupImg.style.visibility = 'hidden'; 
+  };
   }
 
   function nextImage() {

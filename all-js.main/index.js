@@ -307,14 +307,11 @@ async function showCharacterPopup(gameFolder, charIdOrName) {
 
     createCharacterPopup(char, getSpritePath);
   } catch (error) {
-    console.error(error);
     showErrorPopup('Failed to load character data or popup');
   }
 }
 
-console.log('Trying to load image from:', imgPath);
 iconImg.onerror = () => {
-  console.log('Primary image failed, loading fallback...');
   if (fallbackImg) {
     iconImg.src = fallbackImg;
   }

@@ -148,7 +148,19 @@ const gameConfig = {
   pathPrefix: "../assets/charaid/Honkai/",
   spritePrefix: ".../assets/Sprite/HI3/Outfit/", 
 
-  getImgPath: (char) => `${gameConfig.pathPrefix}${char.folder}/${char.imgName}.png`,
-  getSpritePath: (char) => (char.spriteImages || []).map( 
-    img =>`${gameConfig.spritePrefix}${char.spriteFolder}/${img}.png`),
+  getImgPath: (char) => {
+    if (gameConfig.id === 'hi3') {
+      return `${gameConfig.pathPrefix}${char.folder}/${char.imgName}.png`; // HI3 path structure
+    }
+    return `../assets/${char.folder}/${char.imgName}.png`;
+  },
+
+  getSpritePath: (char) => {
+    if (gameConfig.id === 'hi3') {
+      return (char.spriteImages || []).map(
+        img => `${gameConfig.spritePrefix}${char.spriteFolder}/${img}.png`
+      );
+    }
+    return (char.spriteImages || []).map(img => `../assets/Sprite/${char.spriteFolder}/${img}.png`);
+  },
 };

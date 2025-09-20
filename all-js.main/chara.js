@@ -266,10 +266,6 @@ document.querySelectorAll('.part-btn').forEach(btn => {
 });
 
 // ===== Initial Render =====
-if (!characters || characters.length === 0) {
-  console.warn("No characters loaded from CHARA_CONFIG.");
-}
-
 function updateCharCount() {
   const count = document.querySelectorAll('.char-card').length;
   const countText = `Total: ${count} character${count !== 1 ? 's' : ''}`;
