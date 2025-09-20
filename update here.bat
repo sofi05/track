@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed tag"  
+git commit -m "minor changes + added pompom to outfits"  
 git push origin main  

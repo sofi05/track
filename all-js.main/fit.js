@@ -26,6 +26,9 @@ function renderList() {
       let matchesPart = true;
       if (selectedFilters.part !== null) {
         matchesPart = c.part === selectedFilters.part;
+        if (selectedFilters.part === 'none') {
+          matchesPart = !('part' in c);
+        }
       }
 
       return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
@@ -75,17 +78,16 @@ function renderList() {
     charListEl.appendChild(card);
 
     card.addEventListener('click', () => {
-  if (gameConfig.id === 'hi3') {
-    const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
-    showPopup(folderPath, c.name, c.spriteImages || []);
-  } else {
-    // Zenless or other games: just show the one sprite
-    const spritePath = gameConfig.getSpritePath(c); // uses imgName2
-    showPopup(spritePath, c.name, [c.imgName2]);     // just wrap in array
-  }
-});
-
+      if (gameConfig.id === 'hi3') {
+        const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
+        showPopup(folderPath, c.name, c.spriteImages || []);
+      } else {
+        const spritePath = gameConfig.getSpritePath(c); 
+        showPopup(spritePath, c.name, [c.imgName2]);  
+      }
+    });
   });
+
   updateCharCount();
 }
 
@@ -105,8 +107,26 @@ document.querySelectorAll('.filter-checkbox[data-filter]').forEach(checkbox => {
       e.target.checked = true;
 
       selectedFilters.part = null;
+      document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('input[name="part"]').forEach(cb => cb.checked = false);
     }
+
+    renderList();
+  });
+});
+
+document.querySelectorAll('.part-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    for (let key of ['have', 'want', 'new']) {
+      selectedFilters[key] = false;
+      const el = document.querySelector(`[data-filter="${key}"]`);
+      if (el) el.checked = false;
+    }
+
+    document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    selectedFilters.part = btn.dataset.part;
 
     renderList();
   });
@@ -124,6 +144,8 @@ document.querySelectorAll('input[name="part"]').forEach(partCheckbox => {
       document.querySelectorAll('input[name="part"]').forEach(cb => {
         if (cb !== e.target) cb.checked = false;
       });
+
+      document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
 
       selectedFilters.part = e.target.value;
     } else {
@@ -163,29 +185,24 @@ function showPopup(imgPath, altText, spriteList = []) {
     let newSrc = '';
     let newAlt = '';
 
-    // CASE 1: Genshin or prebuilt array
     if (Array.isArray(imgPath)) {
       newSrc = imgPath[index] || imgPath[0];
       newAlt = `${altText} - ${spriteList[index] || 'Sprite'}`;
     }
 
-    // CASE 2: HI3 with folder + spriteList OR full path passed
     else if (typeof imgPath === 'string' && spriteList.length > 0) {
       if (imgPath.endsWith('.png')) {
-        newSrc = imgPath;  // Already a full filename, don’t append
+        newSrc = imgPath;  
       } else {
-        newSrc = `${imgPath}/${spriteList[index]}.png`;  // Folder + filename
+        newSrc = `${imgPath}/${spriteList[index]}.png`;  
       }
       newAlt = `${altText} - ${spriteList[index]}`;
     }
 
-    // fallback (unlikely)
     else {
       newSrc = imgPath;
       newAlt = altText || 'No sprites found';
     }
-
-    // console.log('showing:', newSrc);
 
     if (popupImg.src.endsWith(newSrc)) {
       popupImg.alt = newAlt;
@@ -276,3 +293,13 @@ function updateCharCount() {
 }
 
 renderList();
+
+window.addEventListener('DOMContentLoaded', () => {
+  const partButtons = document.querySelectorAll('.part-btn');
+  if (partButtons.length > 0 && !selectedFilters.part) {
+    partButtons.forEach(b => b.classList.remove('active'));
+    partButtons[0].classList.add('active');
+    selectedFilters.part = partButtons[0].dataset.part;
+    renderList();
+  }
+});
