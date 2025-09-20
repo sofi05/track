@@ -39,18 +39,16 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   const iconWrapper = document.createElement('div');
   iconWrapper.classList.add('icon-wrapper');
 
-  if (dynamicGradient) {
-    const rarityGradients = {
-      5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
-      4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
-      3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
-    };
-    iconWrapper.style.background = rarityGradients[char.rarity] || 'linear-gradient(135deg, #444, #999)';
-  } else {
-    iconWrapper.style.background = (char.rarity === 5)
-      ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
-      : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
-  }
+  const rarityGradients = {
+    5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',  // Rarity 5
+    4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',  // Rarity 4
+    3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',  // Rarity 3
+  };
+
+  // Use char.rarity or fallback to null if invalid, then apply the gradient or fallback to gray
+  const charRarity = [3, 4, 5].includes(char.rarity) ? char.rarity : null;
+
+  iconWrapper.style.background = rarityGradients[charRarity] || 'linear-gradient(135deg, #444, #999)';
 
   const iconImg = document.createElement('img');
   const imgName = useImgName ? char.imgName || char.name : char.name;

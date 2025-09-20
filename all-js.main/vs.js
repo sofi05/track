@@ -20,7 +20,7 @@ window.GAME_VERSIONS = {
     date2vs:'8.6', date2: '2025-10-24T00:00:00', 
   },
   NexusAnima: {
-    version: '0.0',//BETA in CBT1
+    version: '',//BETA in CBT1
     date1vs: '', date1:'',
     date2vs: '', date2: '',
   },        
