@@ -6,8 +6,8 @@ window.CHARA_CONFIG = {
     { name: 'Stelle', imgName: '8004', have: true, element: 'fire', group:'prese', gender:'f', rarity: 5,  status: 'available' },
     { name: 'Caelus', imgName: '8005', have: true, element: 'imaginary', group:'harm', gender:'m', rarity: 5,  status: 'available' },
     { name: 'Stelle', imgName: '8006', have: true, element: 'imaginary', group:'harm', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Caelus', imgName: '8007', have: true, element: 'ice', group:'reme', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Stelle', imgName: '8008', have: true, element: 'ice', group:'reme', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Caelus', imgName: '8007', have: true, element: 'ice', group:'reme', gender:'m', rarity: 5,  status: 'soon' },
+    { name: 'Stelle', imgName: '8008', have: true, element: 'ice', group:'reme', gender:'f', rarity: 5,  status: 'new' },
 
     // Add more characters here
   ],
