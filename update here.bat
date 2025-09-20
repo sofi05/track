@@ -1,3 +1,3 @@
 git add . 
-git commit -m "minor changes + added pompom to outfits"  
+git commit -m "fixed tt genshin page and added some more info to NA chara"  
 git push origin main  

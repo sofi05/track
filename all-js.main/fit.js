@@ -44,12 +44,19 @@ function renderList() {
     const iconWrapper = document.createElement('div');
     iconWrapper.className = 'icon-wrapper';
 
+    function getRarityGradient(rarity) {
+    const gradients = {
+      5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)', // Gold (5★)
+      4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)', // Purple (4★)
+      3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)', // Blue (3★)
+    };
+    return gradients[rarity] || 'linear-gradient(135deg, #444, #999)'; // Fallback
+  }
+
     if (gameConfig.id === 'hi3') {
       iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)';
     } else {
-      iconWrapper.style.background = c.rarity === 5
-        ? 'linear-gradient(100deg, #7c4600ff, #ffa632cc)'
-        : 'linear-gradient(135deg, #805292ff, #d9c3f3cc)';
+      iconWrapper.style.background = getRarityGradient(c.rarity);
     }
 
     if (c.status === 'new') {
@@ -164,6 +171,8 @@ function showPopup(imgPath, altText, spriteList = []) {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
+  const defaultExt = '.webp';
+
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
@@ -177,36 +186,33 @@ function showPopup(imgPath, altText, spriteList = []) {
 
   let index = 0;
 
-  const allowSwipe = spriteList.length > 1;
+  const isArrayMode = Array.isArray(imgPath);
+  const isFullPathSingle =
+    typeof imgPath === 'string' &&
+    (imgPath.endsWith('.png') || imgPath.endsWith('.webp')) &&
+    spriteList.length <= 1;
+
+  const allowSwipe = isArrayMode
+    ? imgPath.length > 1
+    : (!isFullPathSingle && spriteList.length > 1);
 
   function showImageAt(idx) {
     index = idx;
-
     let newSrc = '';
     let newAlt = '';
 
-    if (Array.isArray(imgPath)) {
+    if (isArrayMode) {
       newSrc = imgPath[index] || imgPath[0];
-      newAlt = `${altText} - ${spriteList[index] || 'Sprite'}`;
-    }
-
-    else if (typeof imgPath === 'string' && spriteList.length > 0) {
-      if (imgPath.endsWith('.png')) {
-        newSrc = imgPath;  
-      } else {
-        newSrc = `${imgPath}/${spriteList[index]}.png`;  
-      }
-      newAlt = `${altText} - ${spriteList[index]}`;
-    }
-
-    else {
+      newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
+    } else if (isFullPathSingle) {
       newSrc = imgPath;
-      newAlt = altText || 'No sprites found';
-    }
-
-    if (popupImg.src.endsWith(newSrc)) {
-      popupImg.alt = newAlt;
-      return;
+      newAlt = altText;
+    } else if (typeof imgPath === 'string' && spriteList.length > 0) {
+      newSrc = `${imgPath}/${spriteList[index]}${defaultExt}`;
+      newAlt = `${altText} - ${spriteList[index]}`;
+    } else {
+      newSrc = typeof imgPath === 'string' ? imgPath : '';
+      newAlt = altText || 'No sprite';
     }
 
     popupImg.style.visibility = 'hidden';
@@ -225,13 +231,15 @@ function showPopup(imgPath, altText, spriteList = []) {
 
   function nextImage() {
     if (!allowSwipe) return;
-    index = (index + 1) % spriteList.length;
+    const total = isArrayMode ? imgPath.length : spriteList.length;
+    index = (index + 1) % total;
     showImageAt(index);
   }
 
   function prevImage() {
     if (!allowSwipe) return;
-    index = (index - 1 + spriteList.length) % spriteList.length;
+    const total = isArrayMode ? imgPath.length : spriteList.length;
+    index = (index - 1 + total) % total;
     showImageAt(index);
   }
 

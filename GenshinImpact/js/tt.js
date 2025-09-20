@@ -190,16 +190,3 @@ const gameConfig = {
     return images.map(img => `${gameConfig.spritePrefix}${folder}/${img}.webp`);
  }
 };
-
-if (gameConfig.id !== 'hi3') {
-  gameConfig.characters = gameConfig.characters.map(c => ({
-    ...c,
-    have: Array.isArray(c.have) ? c.have[0] : !!c.have, // Convert [false] → false
-    imgName: c.imgName || c.name.replace(/\s+/g, ''), // fallback for missing imgName
-    spriteFolder: c.spriteFolder || c.name.replace(/\s+/g, ''), // fallback for spriteFolder
-    folder: c.folder || '', // optional, in case your render logic uses it
-    part: c.part || null, // optional
-    rarity: c.rarity || 4, // fallback default rarity
-    spriteImages: c.spriteImages || [], // prevent undefined errors
-  }));
-}
