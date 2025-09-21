@@ -45,7 +45,7 @@ window.BDAY_CONFIG = {
     '05-27': ['Fischl'],
     '05-31': ['Sethos'],
 
-    '06-01': ['Itto'], // Add Paimon?
+    '06-01': ['Itto', 'Paimon'], 
     '06-08': ['Escoffier'],
     '06-09': ['Lisa'],
     '06-16': ['Venti'],
@@ -111,7 +111,7 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
 
-    //'09-11': ['Zhongli'], //Test
+    //'09-20': ['Itto', 'Paimon'],  //Test
   },
 
 createImageElement(name) {
