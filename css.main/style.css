@@ -607,7 +607,7 @@ h1 {
   height: 0;
 }
 
-.slider {
+.slider2 {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -619,7 +619,7 @@ h1 {
   border-radius: 34px;
 }
 
-.slider:before {
+.slider2:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -631,19 +631,19 @@ h1 {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked + .slider2 {
   background-color: #1c1f1c; /* Green when on */
 }
 
-input:checked + .slider:before {
+input:checked + .slider2:before {
   transform: translateX(26px);
 }
 
 /* Rounded corners */
-.slider.round {
+.slider2.round {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider2.round:before {
   border-radius: 50%;
 }
