@@ -1,6 +1,6 @@
 const gameConfig = {
   characters: [
-    { name: 'Alhaitham', imgName: 'Alhatham', have: [false], status:'new',
+    { name: 'Alhaitham', imgName: 'Alhatham', have: [false, true], status:'new',
         spriteImages: ['Noise_Filtering', 'Reading_Time'] },
         
     { name: 'Amber', imgName: 'Ambor', have: [true], 

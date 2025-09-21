@@ -14,25 +14,33 @@ function renderList() {
 
   const characters = gameConfig.characters;
 
-  const filteredCharacters = characters
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-      const matchesHave = !selectedFilters.have || (selectedFilters.have && c.have);
-      const matchesWant = !selectedFilters.want || (selectedFilters.want && !c.have);
-      const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
+const filteredCharacters = characters
+  .slice()
+  .sort((a, b) => a.name.localeCompare(b.name))
+  .filter(c => {
+    const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-      let matchesPart = true;
-      if (selectedFilters.part !== null) {
-        matchesPart = c.part === selectedFilters.part;
-        if (selectedFilters.part === 'none') {
-          matchesPart = !('part' in c);
-        }
+    const matchesHave = !selectedFilters.have || (
+      (selectedFilters.have === true && (c.have === true || 
+      (Array.isArray(c.have) && c.have.includes(true)))) 
+    );
+
+    const matchesWant = !selectedFilters.want || (
+      selectedFilters.want && (c.have === false || (Array.isArray(c.have) && c.have.includes(false)))
+    );
+
+    const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
+
+    let matchesPart = true;
+    if (selectedFilters.part !== null) {
+      matchesPart = c.part === selectedFilters.part;
+      if (selectedFilters.part === 'none') {
+        matchesPart = !('part' in c);
       }
+    }
 
-      return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
-    });
+    return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
+  });
 
   filteredCharacters.forEach(c => {
     if (!c.name) return;
