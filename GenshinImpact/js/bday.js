@@ -79,6 +79,7 @@ window.BDAY_CONFIG = {
     '09-09': ['Razor'],
     '09-13': ['Albedo'],
     '09-20': ['Clorinde'],
+    '09-21': ['Aino'],
     '09-22': ['Emilie'],
     '09-24': ['Freminet'],
     '09-28': ['Ayaka'],

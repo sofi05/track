@@ -1,3 +1,3 @@
 git add . 
-git commit -m "edited tt genshin page ONCE AGAIN"  
+git commit -m "added aino to bday list bc today is her bday! + prep for stigma"  
 git push origin main  
