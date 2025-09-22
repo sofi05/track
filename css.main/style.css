@@ -154,6 +154,7 @@ h1 {
   z-index: 10; /* Ensure it sits above the character image */
   border: none !important; 
   outline: none !important; 
+  background-color: rgba(0, 0, 0, 0.5); /*eh might remove this*/
 }
 
 #filterPopup {
