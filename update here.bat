@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added main chara page for most games (plus the draft for others)"  
+git commit -m "forgot to add the new game to the page 0"  
 git push origin main  
