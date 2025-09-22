@@ -42,6 +42,14 @@ h1 {
   transition: color 0.2s ease;
 }
 
+.nav-icon-image {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  margin-bottom: 4px;
+  filter: brightness(0) invert(1); /* Optional: makes image behave like SVG in dark UI */
+}
+
 .bottom-nav a:hover {
   color: #4096ff;
 }
@@ -154,7 +162,7 @@ h1 {
   z-index: 10; /* Ensure it sits above the character image */
   border: none !important; 
   outline: none !important; 
-  background-color: rgba(0, 0, 0, 0.5); /*eh might remove this*/
+  background-color: rgba(0, 0, 0, 0.171); /*eh might remove this*/
 }
 
 #filterPopup {
