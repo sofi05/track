@@ -302,10 +302,18 @@ document.getElementById('spritePopup').addEventListener('click', e => {
 
 const filterBtn = document.getElementById('filterBtn');
 const filterPopup = document.getElementById('filterPopup');
-filterBtn.addEventListener('click', () => filterPopup.classList.toggle('hidden'));
-document.addEventListener('click', e => {
-  if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) filterPopup.classList.add('hidden');
-});
+
+if (filterBtn && filterPopup) {
+  filterBtn.addEventListener('click', () => {
+    filterPopup.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
+      filterPopup.classList.add('hidden');
+    }
+  });
+}
 
 function updateCharCount() {
   const count = document.querySelectorAll('.char-card').length;
