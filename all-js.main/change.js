@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="game-icon" data-url="../NexusAnima/index.html" style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';">
         <img src="../assets/gameico/hna.webp" />
       </div>
+      <div class="game-icon" data-url="../PetitPlanet/index.html" style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';">
+        <img src="../assets/gameico/pp.webp" />
+      </div>
     </div>
   </div>
 </div>

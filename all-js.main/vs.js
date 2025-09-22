@@ -23,5 +23,11 @@ window.GAME_VERSIONS = {
     version: '',//BETA in CBT1
     date1vs: '', date1:'',
     date2vs: '', date2: '',
-  },        
+  },   
+  PetitPlanet: {
+    version: '',//No beta or version yet
+    date1vs: '', date1:'',
+    date2vs: '', date2: '',
+  }, 
+  
 };
