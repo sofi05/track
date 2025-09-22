@@ -647,37 +647,3 @@ input:checked + .slider2:before {
 .slider2.round:before {
   border-radius: 50%;
 }
-
-/* ========== TYPE B ELEMENT ICON FADE ========== */
-body.typeB .element-icon {
-  width: 24px;
-  height: 24px;
-  margin: 4px;
-  transition: opacity 0.3s ease;
-  opacity: 1;
-  border: none;
-  outline: none;
-  box-shadow: none;
-  image-rendering: auto;
-}
-
-/* Fade-out state for icon transitions */
-body.typeB .element-icon.fade-out {
-  opacity: 0;
-}
-
-/* Remove unwanted borders around icons in typeB */
-body.typeB .char-card img,
-body.typeB .char-card .element-icon {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* Optional: Keep label & layout clean */
-body.typeB .char-card .char-label {
-  font-size: 12px;
-  margin-top: 4px;
-  text-align: center;
-  line-height: 1.2;
-}
