@@ -1,3 +1,3 @@
 git add . 
-git commit -m "removed logo.webp and kept it as logo.png updated html"  
+git commit -m "trying smth here"  
 git push origin main  

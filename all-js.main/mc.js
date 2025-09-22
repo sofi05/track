@@ -51,8 +51,6 @@ function groupTypeBCharacters(characters) {
 
   characters.forEach(char => {
     const key = `${char.name}_${char.gender}`;
-
-    // Flatten element array if char.element is already an array
     const elementsArray = Array.isArray(char.element) ? [...char.element] : [char.element];
 
     if (!map.has(key)) {
@@ -64,14 +62,12 @@ function groupTypeBCharacters(characters) {
       });
     } else {
       const entry = map.get(key);
-      // Add elements, flattening
       entry.elements.push(...elementsArray);
       entry.imgNames.push(char.imgName);
       entry.allVersions.push(char);
     }
   });
 
-  // Remove duplicate elements for each grouped character
   return Array.from(map.values()).map(c => ({
     ...c,
     elements: [...new Set(c.elements)],
@@ -134,7 +130,6 @@ function renderList() {
   const card = document.createElement('div');
   card.className = 'char-card';
 
-  // Build element text safely
   const elementText = 
     Array.isArray(c.elements) && c.elements.length > 0 ? c.elements.join(', ') :
     (typeof c.element === 'string' && c.element.trim() !== '' ? c.element : '');
@@ -174,7 +169,7 @@ function renderList() {
         index++;
       };
       updateIcon();
-      setInterval(updateIcon, 2000);
+      setInterval(updateIcon, 1000);
     } else {
       // fallback: single element in elements array or c.element string
       const singleElement = (c.elements && c.elements.length) ? c.elements[0] : c.element;
