@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HSR: Characters</title>
+  <title>GI: Main Character</title>
   <link rel="stylesheet" href="../css.main/style.css" />
   <link rel="stylesheet" href="../css.main/change.css" />
   <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">    
 </head>
-<body>
+<body class="typeB">
 
   <h1 id="characterName">Characters</h1> 
   <p id="charCount" style="text-align: center; font-size: 0.8rem; margin-top: -10px; margin-bottom: 20px; color: #666;">
@@ -24,7 +24,6 @@
   
   <div class="search-filter">
     <input id="searchInput" placeholder="Main character"/>
-    <button id="filterBtn">Filter</button>
   </div>
 
   <div id="filterPopup" class="filter-popup hidden">
@@ -33,75 +32,35 @@
       <button type="button" class="filter-toggle">Element</button>
       <div class="filter-options">
         <label class="element-label">
-          <input type="radio" name="element" value="fire">
-          <img src="../assets/others/StarRail/Element/fire.png" alt="fire" class="element-img">
+          <input type="radio" name="element" value="Anemo">
+          <img src="../assets/others/Genshin/Element/Anemo.png" alt="Anemo" class="element-icon-mc">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="ice">
-          <img src="../assets/others/StarRail/Element/ice.png" alt="ice" class="element-img">
+          <input type="radio" name="element" value="Geo">
+          <img src="../assets/others/Genshin/Element/Geo.png" alt="Geo" class="element-icon-mc">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="imaginary">
-          <img src="../assets/others/StarRail/Element/imaginary.png" alt="imaginary" class="element-img">
+          <input type="radio" name="element" value="Electro">
+          <img src="../assets/others/Genshin/Element/Electro.png" alt="Electro" class="element-icon-mc">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="physical">
-          <img src="../assets/others/StarRail/Element/physical.png" alt="physical" class="element-img">
+          <input type="radio" name="element" value="Dendro">
+          <img src="../assets/others/Genshin/Element/Dendro.png" alt="Dendro" class="element-icon-mc">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="quantum">
-          <img src="../assets/others/StarRail/Element/quantum.png" alt="quantum" class="element-img">
+          <input type="radio" name="element" value="Hydro">
+          <img src="../assets/others/Genshin/Element/Hydro.png" alt="Hydro" class="element-icon-mc">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="thunder">
-          <img src="../assets/others/StarRail/Element/thunder.png" alt="thunder" class="element-img">
+          <input type="radio" name="element" value="Pyro">
+          <img src="../assets/others/Genshin/Element/Pyro.png" alt="Pyro" class="element-icon-mc">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="wind">
-          <img src="../assets/others/StarRail/Element/wind.png" alt="wind" class="element-img">
+          <input type="radio" name="element" value="Cryo">
+          <img src="../assets/others/Genshin/Element/Cryo.png" alt="Cryo" class="element-icon-mc">
         </label>
       </div>
     </div>
-
-    <!-- PATH -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Path</button>
-      <div class="filter-options">
-        <label class="element-label" for="group-abun">
-          <input type="radio" name="group" value="abun" id="group-abun" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Abundance.png" alt="Abundance" />
-        </label>
-        <label class="element-label" for="group-dest">
-          <input type="radio" name="group" value="dest" id="group-dest" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Destruction.png" alt="Destruction" />
-        </label>
-        <label class="element-label" for="group-eru">
-          <input type="radio" name="group" value="eru" id="group-eru" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Erudition.png" alt="Erudition" />
-        </label>
-        <label class="element-label" for="group-harm">
-          <input type="radio" name="group" value="harm" id="group-harm" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Harmony.png" alt="Harmony" />
-        </label>
-        <label class="element-label" for="group-nihi">
-          <input type="radio" name="group" value="nihi" id="group-nihi" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Nihility.png" alt="Nihility" />
-        </label>
-        <label class="element-label" for="group-prese">
-          <input type="radio" name="group" value="prese" id="group-prese" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Preservation.png" alt="Preservation" />
-        </label>
-        <label class="element-label" for="group-reme">
-          <input type="radio" name="group" value="reme" id="group-reme" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Remembrance.png" alt="Remembrance" />
-        </label>
-        <label class="element-label" for="group-hunt">
-          <input type="radio" name="group" value="hunt" id="group-hunt" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_The_Hunt.png" alt="The Hunt" />
-        </label>
-      </div>
-    </div>
-
   </div>
 
   <div class="char-list" id="charList"></div>
@@ -132,7 +91,6 @@
 
   <!--SCRIPTS-->
   <script src="js/mc.js" defer></script>
-  <script src="../StarRail/js/sprite.js"></script>
   <script src="../all-js.main/mc.js" defer></script>
   <script src="../all-js.main/change.js"></script>
 </body>

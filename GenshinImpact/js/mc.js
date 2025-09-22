@@ -1,17 +1,17 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: 'Aether', imgName: 'PlayerBoy', have: false, element: 'Anemo', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine', imgName: 'PlayerGirl', have: true, element: 'Anemo', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether', imgName: 'PlayerBoy', have: false, element: 'Geo', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine', imgName: 'PlayerGirl', have: true, element: 'Geo', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether', imgName: 'PlayerBoy', have: false, element: 'Electro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine', imgName: 'PlayerGirl', have: true, element: 'Electro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether', imgName: 'PlayerBoy', have: false, element: 'Dendro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine', imgName: 'PlayerGirl', have: true, element: 'Dendro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether', imgName: 'PlayerBoy', have: false, element: 'Hydro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine', imgName: 'PlayerGirl', have: true, element: 'Hydro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether', imgName: 'PlayerBoy', have: false, element: 'Pyro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine', imgName: 'PlayerGirl', have: true, element: 'Pyro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Anemo', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Anemo', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Geo', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Geo', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Electro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Electro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Dendro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Dendro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Hydro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Hydro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Pyro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Pyro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
     
     // Add more characters here
   ],
@@ -57,4 +57,10 @@ createImageElement(c) {
 
     return container;
   },
+};
+window.CHARA_CONFIG.pageType = "typeB";
+
+window.CHARA_CONFIG.getElementIconPath = function(el) {
+  // This can vary by game, page, folder, whatever
+  return `../assets/others/Genshin/Element/${el}.png`;
 };

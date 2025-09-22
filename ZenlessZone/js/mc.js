@@ -47,8 +47,6 @@ getPath: function(char, type, callback) {
     container.className = 'char-icon-container';
 
     const img = document.createElement('img');
-    img.className = 'char-icon';
-    img.alt = c.name;
 
     this.getPath(c, 'charid', (imgPath) => {
       img.src = imgPath;  
@@ -56,7 +54,6 @@ getPath: function(char, type, callback) {
 
     const elementImg = document.createElement('img');
     container.appendChild(img);
-    container.appendChild(elementImg);
 
     container.addEventListener('click', () => {
       this.getPath(c, 'sprite', (imgPath) => {
