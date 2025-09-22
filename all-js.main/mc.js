@@ -51,114 +51,163 @@ function groupTypeBCharacters(characters) {
 
   characters.forEach(char => {
     const key = `${char.name}_${char.gender}`;
+
+    // Flatten element array if char.element is already an array
+    const elementsArray = Array.isArray(char.element) ? [...char.element] : [char.element];
+
     if (!map.has(key)) {
       map.set(key, {
         ...char,
-        elements: [char.element],
+        elements: elementsArray,
         imgNames: [char.imgName],
         allVersions: [char],
       });
     } else {
       const entry = map.get(key);
-      entry.elements.push(char.element);
+      // Add elements, flattening
+      entry.elements.push(...elementsArray);
       entry.imgNames.push(char.imgName);
       entry.allVersions.push(char);
     }
   });
 
-  return Array.from(map.values());
+  // Remove duplicate elements for each grouped character
+  return Array.from(map.values()).map(c => ({
+    ...c,
+    elements: [...new Set(c.elements)],
+  }));
 }
 
 function renderList() {
   charListEl.innerHTML = '';
   const searchTerm = searchInput?.value?.toLowerCase() || '';
 
-  let listToRender = isTypeB ? groupTypeBCharacters(characters) : characters;
+  // Filter characters based on current filters BEFORE grouping for Type B
+  let filteredChars = characters
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter(c => {
+      if (isTypeB && selectedFilters.GP && c.GP != selectedFilters.GP) return false;
+      if (!isTypeB && selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
 
-  const filteredChars = listToRender
-  .slice()
-  .sort((a, b) => a.name.localeCompare(b.name))
-  .filter(c => {
-    if (isTypeB && selectedFilters.GP && c.GP != selectedFilters.GP) return false;
-    if (!isTypeB && selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
+      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
+      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
 
-      const charName = selectedGender === 'f' ? c.name : c.maleName || c.name;
-      const matchesSearch = charName.toLowerCase().includes(searchTerm);
-
-      if (selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
       if (hasPartInfo) {
         if (!(selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab))) {
           return false;
         }
       }
-      if (selectedFilters.element && !c.elements?.includes(selectedFilters.element) && c.element !== selectedFilters.element) return false;
-      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
+      // Filter: Have
+      if (selectedFilters.have !== null) {
+        if (selectedFilters.have && !c.have) return false;
+        if (!selectedFilters.have && c.have) return false;
+      }
 
-      return matchesSearch;
+      // Filter: Status (New / Soon)
+      const wantsNew = selectedFilters.newStatus.new;
+      const wantsSoon = selectedFilters.newStatus.soon;
+
+      if (wantsNew || wantsSoon) {
+        if (wantsNew && wantsSoon) {
+          if (!(c.status === 'new' || c.status === 'soon')) return false;
+        } else if (wantsNew && c.status !== 'new') {
+          return false;
+        } else if (wantsSoon && c.status !== 'soon') {
+          return false;
+        }
+      }
+
+      const charName = selectedGender === 'f' ? c.name : c.maleName || c.name;
+      if (!charName.toLowerCase().includes(searchTerm)) return false;
+
+      return true;
     });
 
+  if (isTypeB) {
+    filteredChars = groupTypeBCharacters(filteredChars);
+  }
+
+  const CURRENT_GAME = window.CHARA_CONFIG?.game || 'genshin';
+
   filteredChars.forEach(c => {
-    const card = document.createElement('div');
-    card.className = 'char-card';
-    card.title = `(${c.elements?.join(', ') || c.element}, ${c.rarity}★)`;
+  const card = document.createElement('div');
+  card.className = 'char-card';
 
-    const iconWrapper = document.createElement('div');
-    iconWrapper.className = 'icon-wrapper';
-    iconWrapper.style.background = getRarityGradient(c.rarity);
+  // Build element text safely
+  const elementText = 
+    Array.isArray(c.elements) && c.elements.length > 0 ? c.elements.join(', ') :
+    (typeof c.element === 'string' && c.element.trim() !== '' ? c.element : '');
 
-    if (c.status === 'new') {
-      const newLabel = document.createElement('div');
-      newLabel.textContent = 'NEW';
-      newLabel.className = 'soon-label';
-      iconWrapper.appendChild(newLabel);
-    }
-    if (c.status === 'soon') {
-      const soonLabel = document.createElement('div');
-      soonLabel.textContent = 'SOON';
-      soonLabel.className = 'soon-label';
-      iconWrapper.appendChild(soonLabel);
-    }
+  card.title = elementText 
+    ? `(${elementText}, ${c.rarity}★)` 
+    : `(${c.rarity}★)`;
 
+  const iconWrapper = document.createElement('div');
+  iconWrapper.className = 'icon-wrapper';
+  iconWrapper.style.background = getRarityGradient(c.rarity);
+
+  if (c.status === 'new') {
+    const newLabel = document.createElement('div');
+    newLabel.textContent = 'NEW';
+    newLabel.className = 'soon-label';
+    iconWrapper.appendChild(newLabel);
+  }
+  if (c.status === 'soon') {
+    const soonLabel = document.createElement('div');
+    soonLabel.textContent = 'SOON';
+    soonLabel.className = 'soon-label';
+    iconWrapper.appendChild(soonLabel);
+  }
+
+  // ONLY add element icon IF typeB
+  if (isTypeB) {
     const elementIcon = document.createElement('div');
     elementIcon.className = 'element-icon';
 
-    if (isTypeB && c.elements.length > 1) {
+    if (c.elements && c.elements.length > 1) {
       let index = 0;
       const updateIcon = () => {
         const el = c.elements[index % c.elements.length];
-        elementIcon.style.backgroundImage = `url('path_to_icons/${el.toLowerCase()}.png')`;
+        elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${el.toLowerCase()}.png')`;
         elementIcon.title = el;
         index++;
       };
       updateIcon();
       setInterval(updateIcon, 2000);
     } else {
-      elementIcon.style.backgroundImage = `url('path_to_icons/${c.element.toLowerCase()}.png')`;
-      elementIcon.title = c.element;
+      // fallback: single element in elements array or c.element string
+      const singleElement = (c.elements && c.elements.length) ? c.elements[0] : c.element;
+      elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${singleElement.toLowerCase()}.png')`;
+      elementIcon.title = singleElement;
     }
+
     iconWrapper.appendChild(elementIcon);
+  }
 
-    if (typeof CHARA_CONFIG.createImageElement === 'function') {
-      const imageBlock = CHARA_CONFIG.createImageElement(c);
-      if (imageBlock) {
-        iconWrapper.appendChild(imageBlock);
-      }
+  if (typeof CHARA_CONFIG.createImageElement === 'function') {
+    const imageBlock = CHARA_CONFIG.createImageElement(c);
+    if (imageBlock) {
+      iconWrapper.appendChild(imageBlock);
     }
+  }
 
-    card.appendChild(iconWrapper);
+  card.appendChild(iconWrapper);
 
-    if (isTypeB) {
-      const label = document.createElement('div');
-      label.className = 'char-label';
-      label.textContent = selectedGender === 'f' ? c.name : c.maleName || c.name;
-      card.appendChild(label);
-    }
+  if (isTypeB) {
+    const label = document.createElement('div');
+    label.className = 'char-label';
+    label.textContent = selectedGender === 'f' ? c.name : c.maleName || c.name;
+    card.appendChild(label);
+  }
 
-    charListEl.appendChild(card);
-  });
+  charListEl.appendChild(card);
+});
+
 
   updateCharCount(filteredChars.length);
 }
+
 
 genderToggleBtn?.addEventListener('change', () => {
   if (isTypeB) {
@@ -198,15 +247,23 @@ function setupToggleableRadio(groupName, filterKey) {
 setupToggleableRadio("element", "element");
 setupToggleableRadio("gender", "gender");
 setupToggleableRadio("group", "group");
+setupToggleableRadio("have", "have");
 
 document.querySelectorAll('input[name="newStatus"]').forEach(input => {
   input.addEventListener('change', e => {
+    const value = e.target.value;   // "new" or "soon"
     const isChecked = e.target.checked;
-    selectedFilters.newStatus.new = isChecked;
-    selectedFilters.newStatus.soon = isChecked;
+
+    if (value === 'new') {
+      selectedFilters.newStatus.new = isChecked;
+    } else if (value === 'soon') {
+      selectedFilters.newStatus.soon = isChecked;
+    }
+
     renderList();
   });
 });
+
 
 filterBtn?.addEventListener('click', () => {
   filterPopup?.classList.toggle('hidden');
@@ -263,41 +320,20 @@ function updateTitleBasedOnToggle() {
     const charsWithGP = characters.filter(c => c.GP == selectedGP);
 
     if (charsWithGP.length > 0) {
-
-      characterName.textContent = charsWithGP[0].name2 || `${selectedGP}`;
-    } else {
-      characterName.textContent = `${selectedGP}`;
+      const someChar = charsWithGP[0];
+      characterName.textContent = selectedGP === '1' ? someChar.name2 : someChar.name2;
     }
   } else {
-    const firstChar = characters.find(c => c.gender === selectedGender);
-    if (firstChar) {
-      characterName.textContent = firstChar.name;
-    } else {
-      characterName.textContent = selectedGender === 'f' ? 'Female Characters' : 'Male Characters';
+    const charsWithGender = characters.filter(c => c.gender === selectedGender);
+    if (charsWithGender.length > 0) {
+      characterName.textContent = charsWithGender[0].name;
     }
   }
 }
 
-// ===== Part Buttons =====
-document.querySelectorAll('.part-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    selectedPart = btn.dataset.part;
-    document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderList();
-  });
-});
-
-// ===== Count Display (Optional) =====
-function updateCharCount(displayedCount = null) {
-  const count = document.getElementById('charCount');
-  if (!count) return;
-
-  const displayed = displayedCount !== null
-    ? displayedCount
-    : charListEl.querySelectorAll('.char-card').length;
-
-  count.textContent = `Total: ${displayed} characters`;
+function updateCharCount(count) {
+  const countEl = document.getElementById('charCount');
+  if (countEl) countEl.textContent = `Total: ${count} characters`;
 }
 
 initializeFilters();

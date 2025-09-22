@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed css and added some changes to mc pages"  
+git commit -m "finished most of the mc pages"  
 git push origin main  

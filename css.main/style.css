@@ -146,8 +146,8 @@ h1 {
   position: absolute;
   width: 18px !important;
   height: 18px !important;
-  top: 5px; /* Adjust the vertical position */
-  left: 5px; /* Adjust the horizontal position */
+  top: 2px; /* Adjust the vertical position */
+  left: 2px; /* Adjust the horizontal position */
   background-size: cover;
   background-position: center;
   border-radius: 50%; 

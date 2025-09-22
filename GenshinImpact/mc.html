@@ -14,52 +14,22 @@
   <p id="charCount" style="text-align: center; font-size: 0.8rem; margin-top: -10px; margin-bottom: 20px; color: #666;">
   Total: 0 characters</p>
 
-  <div class="gender-toggle">
+    <div class="gender-toggle">
     <label class="switch">
       <input type="checkbox" id="genderToggleBtn" />
       <span class="slider2 round"></span>
     </label>
     <span id="genderLabel"></span>
-  </div>
-  
-  <div class="search-filter">
-    <input id="searchInput" placeholder="Main character"/>
+    <div class="search-filter">
+    <button id="filterBtn">Filter</button>
+    </div>
   </div>
 
   <div id="filterPopup" class="filter-popup hidden">
-    <!-- ELEMENT -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Element</button>
-      <div class="filter-options">
-        <label class="element-label">
-          <input type="radio" name="element" value="Anemo">
-          <img src="../assets/others/Genshin/Element/Anemo.png" alt="Anemo" class="element-icon-mc">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="Geo">
-          <img src="../assets/others/Genshin/Element/Geo.png" alt="Geo" class="element-icon-mc">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="Electro">
-          <img src="../assets/others/Genshin/Element/Electro.png" alt="Electro" class="element-icon-mc">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="Dendro">
-          <img src="../assets/others/Genshin/Element/Dendro.png" alt="Dendro" class="element-icon-mc">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="Hydro">
-          <img src="../assets/others/Genshin/Element/Hydro.png" alt="Hydro" class="element-icon-mc">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="Pyro">
-          <img src="../assets/others/Genshin/Element/Pyro.png" alt="Pyro" class="element-icon-mc">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="Cryo">
-          <img src="../assets/others/Genshin/Element/Cryo.png" alt="Cryo" class="element-icon-mc">
-        </label>
-      </div>
+    <!-- STATUS -->
+    <div class="filter-section">
+          <label><input type="radio" name="have" value="true"> Have</label>
+          <label><input type="radio" name="have" value="false"> Haven't</label>
     </div>
   </div>
 

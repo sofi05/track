@@ -1,18 +1,11 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Anemo', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Anemo', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Geo', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Geo', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Electro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Electro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Dendro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Dendro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Hydro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Hydro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: 'Pyro', group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: 'Pyro', group:'dest', gender:'f', rarity: 5,  status: 'available' },
-    
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], group:'dest', gender:'f', rarity: 5,  status: 'available' },
+
+    { name: 'Manekin',name2: 'Manekins', GP: 2, imgName: 'PlayerBoy', have: false, group:'dest', gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Manekina',name2: 'Manekins', GP: 2, imgName: 'PlayerGirl', have: false, group:'dest', gender:'f', rarity: 5,  status: 'available' },
+  
     // Add more characters here
   ],
 
@@ -37,21 +30,36 @@ createImageElement(c) {
     img.alt = c.name;
 
     const fallbackImg = this.getFallbackPath(c);  
-  img.onerror = () => {
-    img.src = fallbackImg;
-  };
-
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
-    elementImg.alt = c.element;
+    img.onerror = () => {
+      img.src = fallbackImg;
+    };
 
     container.appendChild(img);
-    container.appendChild(elementImg);
+
+    if (typeof c.element === 'string') {
+      const elementImg = document.createElement('img');
+      elementImg.className = 'element-icon';
+      elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
+      elementImg.alt = c.element;
+      container.appendChild(elementImg);
+    }
+
+    // If theres two or more in a tag
+    const elementList = document.createElement('div');
+    elementList.className = 'element-list';
+    if (Array.isArray(c.element)) {
+      c.element.forEach(element => {
+        const elementLabel = document.createElement('span');
+        elementLabel.className = 'element-label';
+        elementLabel.textContent = element;
+        elementList.appendChild(elementLabel);
+      });
+      container.appendChild(elementList);
+    }
 
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName}.png`;
+      const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
       showPopup(imgPath, c.name);
     });
 
