@@ -43,11 +43,12 @@ h1 {
 }
 
 .nav-icon-image {
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
   margin-bottom: 4px;
-  filter: brightness(0) invert(1); /* Optional: makes image behave like SVG in dark UI */
+  filter: brightness(0) invert(1);
+  vertical-align: middle;
 }
 
 .bottom-nav a:hover {

@@ -1,3 +1,3 @@
 git add . 
-git commit -m "forgot to add the new game to the page 0"  
+git commit -m "corrected march 7th version, changed haven't for don't, testing logo.webp as logo.png cropped"  
 git push origin main  
