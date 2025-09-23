@@ -213,6 +213,15 @@ function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ
   msg.textContent = message;
   container.appendChild(msg);
 }
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const popup = document.getElementById('spritePopup');
+    if (popup.style.display === 'flex') { // or !== 'none'
+      popup.style.display = 'none';
+    }
+  }
+});
 // ====== Update Character Count ======
 function updateCharCount() {
   const count = document.querySelectorAll('.char-card').length;

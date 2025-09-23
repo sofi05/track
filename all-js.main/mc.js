@@ -216,6 +216,15 @@ genderToggleBtn?.addEventListener('change', () => {
   renderList();
 });
 
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const popup = document.getElementById('spritePopup');
+    if (popup.style.display === 'flex') { // or !== 'none'
+      popup.style.display = 'none';
+    }
+  }
+});
+
 // ===== Filter Setup =====
 function setupToggleableRadio(groupName, filterKey) {
   const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
