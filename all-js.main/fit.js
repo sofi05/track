@@ -188,52 +188,43 @@ function showPopup(imgPath, altText, spriteList = []) {
 
   const defaultExt = '.webp';
 
+  // Cleanup old swipe listeners
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
   }
 
-  popupImg.src = '';
-  popupImg.alt = '';
-  popupImg.style.visibility = 'hidden';
-
   let index = 0;
 
   const isArrayMode = Array.isArray(imgPath);
-  const isFullPathSingle =
+  const isFullPathSingle = (
     typeof imgPath === 'string' &&
     (imgPath.endsWith('.png') || imgPath.endsWith('.webp')) &&
-    spriteList.length <= 1;
+    spriteList.length <= 1
+  );
 
   const allowSwipe = isArrayMode
     ? imgPath.length > 1
     : (!isFullPathSingle && spriteList.length > 1);
 
-  // Show thumbnails if multiple images
   const totalImages = isArrayMode ? imgPath.length : spriteList.length;
 
-  // Clear old thumbnails
+  // Clear previous thumbnails
   thumbnailContainer.innerHTML = '';
 
+  // Show thumbnails if multiple images
   if (totalImages > 1) {
     thumbnailContainer.style.display = 'flex';
 
     for (let i = 0; i < totalImages; i++) {
       const thumb = document.createElement('img');
       thumb.className = 'thumbnail-img';
-      thumb.style.width = '40px';
-      thumb.style.height = '40px';
-      thumb.style.objectFit = 'contain';
-      thumb.style.cursor = 'pointer';
-      thumb.style.border = '2px solid transparent';
-      thumb.style.borderRadius = '4px';
 
       if (isArrayMode) {
         thumb.src = imgPath[i];
         thumb.alt = `${altText} - ${i + 1}`;
       } else {
-        let extension = '.png';
-        thumb.src = `${imgPath}/${spriteList[i]}${extension}`;
+        thumb.src = `${imgPath}/${spriteList[i]}.png`;
         thumb.alt = `${altText} - ${spriteList[i]}`;
       }
 
@@ -243,9 +234,6 @@ function showPopup(imgPath, altText, spriteList = []) {
 
       thumb.addEventListener('click', () => {
         showImageAt(i);
-        Array.from(thumbnailContainer.children).forEach((t, idx) => {
-          t.style.borderColor = idx === i ? '#ffaa00' : 'transparent';
-        });
       });
 
       thumbnailContainer.appendChild(thumb);
@@ -266,8 +254,7 @@ function showPopup(imgPath, altText, spriteList = []) {
       newSrc = imgPath;
       newAlt = altText;
     } else if (typeof imgPath === 'string' && spriteList.length > 0) {
-      let extension = '.png';
-      newSrc = `${imgPath}/${spriteList[index]}${extension}`;
+      newSrc = `${imgPath}/${spriteList[index]}.png`;
       newAlt = `${altText} - ${spriteList[index]}`;
     } else {
       newSrc = typeof imgPath === 'string' ? imgPath : '';
@@ -275,28 +262,21 @@ function showPopup(imgPath, altText, spriteList = []) {
     }
 
     popupImg.style.visibility = 'hidden';
-    popupImg.src = '';
-    popupImg.alt = '';
-
-    setTimeout(() => {
-      popupImg.src = newSrc;
-      popupImg.alt = newAlt;
-    }, 20);
+    popupImg.src = newSrc;
+    popupImg.alt = newAlt;
 
     popupImg.onload = () => {
       popupImg.style.visibility = 'visible';
     };
 
-    popupImg.onerror = (err) => {
+    popupImg.onerror = () => {
       popupImg.style.visibility = 'hidden';
     };
 
-    // Update thumbnail border highlight
-    if (thumbnailContainer) {
-      Array.from(thumbnailContainer.children).forEach((t, i) => {
-        t.style.borderColor = i === idx ? '#ffaa00' : 'transparent';
-      });
-    }
+    // Update thumbnail highlight
+    Array.from(thumbnailContainer.children).forEach((t, i) => {
+      t.classList.toggle('selected', i === idx);
+    });
   }
 
   function nextImage() {
@@ -313,6 +293,7 @@ function showPopup(imgPath, altText, spriteList = []) {
     showImageAt(index);
   }
 
+  // Show/hide arrow buttons
   if (!allowSwipe) {
     prevBtn.style.display = 'none';
     nextBtn.style.display = 'none';
@@ -324,21 +305,20 @@ function showPopup(imgPath, altText, spriteList = []) {
     nextBtn.onclick = nextImage;
 
     document.addEventListener('keydown', function(event) {
-    const popup = document.getElementById('spritePopup');
-    if (popup.style.display !== 'flex') return;
+      if (popup.style.display !== 'flex') return;
 
-    switch(event.key) {
-      case 'Escape':
-        popup.style.display = 'none';
-        break;
-      case 'ArrowRight':
-        nextImage();
-        break;
-      case 'ArrowLeft':
-        prevImage();
-        break;
-    }
-  });
+      switch (event.key) {
+        case 'Escape':
+          popup.style.display = 'none';
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+      }
+    });
 
     let touchStartX = 0;
     const handleTouchStart = e => (touchStartX = e.touches[0].clientX);
