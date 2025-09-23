@@ -184,6 +184,7 @@ function showPopup(imgPath, altText, spriteList = []) {
   const popupImg = document.getElementById('spritePopupImg');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
+  const thumbnailContainer = document.getElementById('thumbnailContainer');
 
   const defaultExt = '.webp';
 
@@ -210,42 +211,94 @@ function showPopup(imgPath, altText, spriteList = []) {
     ? imgPath.length > 1
     : (!isFullPathSingle && spriteList.length > 1);
 
-  function showImageAt(idx) {
-  index = idx;
-  let newSrc = '';
-  let newAlt = '';
+  // Show thumbnails if multiple images
+  const totalImages = isArrayMode ? imgPath.length : spriteList.length;
 
-  if (isArrayMode) {
-    newSrc = imgPath[index] || imgPath[0];
-    newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
-  } else if (isFullPathSingle) {
-    newSrc = imgPath;
-    newAlt = altText;
-  } else if (typeof imgPath === 'string' && spriteList.length > 0) {
-    let extension = '.png'; 
-    newSrc = `${imgPath}/${spriteList[index]}${extension}`;
-    newAlt = `${altText} - ${spriteList[index]}`;
+  // Clear old thumbnails
+  thumbnailContainer.innerHTML = '';
+
+  if (totalImages > 1) {
+    thumbnailContainer.style.display = 'flex';
+
+    for (let i = 0; i < totalImages; i++) {
+      const thumb = document.createElement('img');
+      thumb.className = 'thumbnail-img';
+      thumb.style.width = '40px';
+      thumb.style.height = '40px';
+      thumb.style.objectFit = 'contain';
+      thumb.style.cursor = 'pointer';
+      thumb.style.border = '2px solid transparent';
+      thumb.style.borderRadius = '4px';
+
+      if (isArrayMode) {
+        thumb.src = imgPath[i];
+        thumb.alt = `${altText} - ${i + 1}`;
+      } else {
+        let extension = '.png';
+        thumb.src = `${imgPath}/${spriteList[i]}${extension}`;
+        thumb.alt = `${altText} - ${spriteList[i]}`;
+      }
+
+      if (i === index) {
+        thumb.style.borderColor = '#ffaa00';
+      }
+
+      thumb.addEventListener('click', () => {
+        showImageAt(i);
+        Array.from(thumbnailContainer.children).forEach((t, idx) => {
+          t.style.borderColor = idx === i ? '#ffaa00' : 'transparent';
+        });
+      });
+
+      thumbnailContainer.appendChild(thumb);
+    }
   } else {
-    newSrc = typeof imgPath === 'string' ? imgPath : '';
-    newAlt = altText || 'No sprite';
+    thumbnailContainer.style.display = 'none';
   }
 
-  popupImg.style.visibility = 'hidden';
-  popupImg.src = '';
-  popupImg.alt = '';
+  function showImageAt(idx) {
+    index = idx;
+    let newSrc = '';
+    let newAlt = '';
 
-  setTimeout(() => {
-    popupImg.src = newSrc;
-    popupImg.alt = newAlt;
-  }, 20);
+    if (isArrayMode) {
+      newSrc = imgPath[index] || imgPath[0];
+      newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
+    } else if (isFullPathSingle) {
+      newSrc = imgPath;
+      newAlt = altText;
+    } else if (typeof imgPath === 'string' && spriteList.length > 0) {
+      let extension = '.png';
+      newSrc = `${imgPath}/${spriteList[index]}${extension}`;
+      newAlt = `${altText} - ${spriteList[index]}`;
+    } else {
+      newSrc = typeof imgPath === 'string' ? imgPath : '';
+      newAlt = altText || 'No sprite';
+    }
 
-  popupImg.onload = () => {
-    popupImg.style.visibility = 'visible';
-  };
+    popupImg.style.visibility = 'hidden';
+    popupImg.src = '';
+    popupImg.alt = '';
 
-  popupImg.onerror = (err) => {
-    popupImg.style.visibility = 'hidden'; 
-  };
+    setTimeout(() => {
+      popupImg.src = newSrc;
+      popupImg.alt = newAlt;
+    }, 20);
+
+    popupImg.onload = () => {
+      popupImg.style.visibility = 'visible';
+    };
+
+    popupImg.onerror = (err) => {
+      popupImg.style.visibility = 'hidden';
+    };
+
+    // Update thumbnail border highlight
+    if (thumbnailContainer) {
+      Array.from(thumbnailContainer.children).forEach((t, i) => {
+        t.style.borderColor = i === idx ? '#ffaa00' : 'transparent';
+      });
+    }
   }
 
   function nextImage() {
@@ -279,7 +332,7 @@ function showPopup(imgPath, altText, spriteList = []) {
     };
 
     let touchStartX = 0;
-    const handleTouchStart = e => touchStartX = e.touches[0].clientX;
+    const handleTouchStart = e => (touchStartX = e.touches[0].clientX);
     const handleTouchEnd = e => {
       const diff = e.changedTouches[0].clientX - touchStartX;
       if (diff > 50) prevImage();
@@ -298,6 +351,15 @@ function showPopup(imgPath, altText, spriteList = []) {
   showImageAt(0);
   popup.style.display = 'flex';
 }
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const popup = document.getElementById('spritePopup');
+    if (popup.style.display === 'flex') { // or !== 'none'
+      popup.style.display = 'none';
+    }
+  }
+});
 
 document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
