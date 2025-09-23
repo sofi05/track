@@ -160,6 +160,13 @@ function renderList() {
   updateCharCount();
 }
 
+function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
+  const msg = document.createElement('div');
+  msg.className = 'no-results-message';
+  msg.textContent = message;
+  container.appendChild(msg);
+  }
+  
 // ===== Filter Setups =====
 function setupToggleableRadio(groupName, filterKey) {
   const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
@@ -271,13 +278,6 @@ document.querySelectorAll('.part-btn').forEach(btn => {
     }
   });
 });
-
-function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
-  const msg = document.createElement('div');
-  msg.className = 'no-results-message';
-  msg.textContent = message;
-  container.appendChild(msg);
-}
 
 // ===== Initial Render =====
 function updateCharCount() {
