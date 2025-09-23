@@ -193,8 +193,6 @@ function showPopup(imgPath, altText, spriteList = []) {
     delete popup._removeTouchEvents;
   }
 
-  document.onkeydown = null;
-
   popupImg.src = '';
   popupImg.alt = '';
   popupImg.style.visibility = 'hidden';
@@ -325,11 +323,22 @@ function showPopup(imgPath, altText, spriteList = []) {
     prevBtn.onclick = prevImage;
     nextBtn.onclick = nextImage;
 
-    document.onkeydown = e => {
-      if (popup.style.display !== 'flex') return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
-    };
+    document.addEventListener('keydown', function(event) {
+    const popup = document.getElementById('spritePopup');
+    if (popup.style.display !== 'flex') return;
+
+    switch(event.key) {
+      case 'Escape':
+        popup.style.display = 'none';
+        break;
+      case 'ArrowRight':
+        nextImage();
+        break;
+      case 'ArrowLeft':
+        prevImage();
+        break;
+    }
+  });
 
     let touchStartX = 0;
     const handleTouchStart = e => (touchStartX = e.touches[0].clientX);
