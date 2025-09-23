@@ -232,8 +232,34 @@ function showPopup(imgPath, altText, spriteList = []) {
         thumb.style.borderColor = '#ffaa00';
       }
 
+      let touchStartX = 0;
+      let touchMoved = false;
+
+      thumb.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchMoved = false;
+      });
+
+      thumb.addEventListener('touchmove', e => {
+        const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+        if (deltaX > 10) touchMoved = true;
+      });
+
+      thumb.addEventListener('touchend', e => {
+        if (!touchMoved) {
+          showImageAt(i);
+          Array.from(thumbnailContainer.children).forEach((t, idx) => {
+            t.classList.toggle('selected', idx === i);
+          });
+        }
+      });
+
+      // Also keep mouse click for desktop
       thumb.addEventListener('click', () => {
         showImageAt(i);
+        Array.from(thumbnailContainer.children).forEach((t, idx) => {
+          t.classList.toggle('selected', idx === i);
+        });
       });
 
       thumbnailContainer.appendChild(thumb);
