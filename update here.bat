@@ -1,3 +1,3 @@
 git add . 
-git commit -m " try to stop slider to mix "
+git commit -m "almost there"
 git push origin main  
