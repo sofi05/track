@@ -108,7 +108,7 @@ function renderList() {
       return matchesSearch;
     });
 
-  if (filteredCharacters.length === 0) {
+  if (filteredChars.length === 0) {
     showNoResultsMessage(charListEl);
     updateCharCount();
     return;
