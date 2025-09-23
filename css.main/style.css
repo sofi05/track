@@ -261,12 +261,6 @@ h1 {
   }
 }
 
-@media (min-width: 768px) {
-  .image-and-thumbs-wrapper {
-    max-width: 300px;
-  }
-}
-
 .sprite-popup .close-btn {
   position: absolute;
   top: 30px;
@@ -499,7 +493,6 @@ h1 {
   overflow-y: auto;
   gap: 12px;
   width: 100%;
-  max-width: none; 
 }
 
 #spritePopupImg {
@@ -687,7 +680,6 @@ h1 {
 
 .inline-countdown {
   font-size: 0.75em;
-  color: #8a8a8a;
   margin-left: 4px;
 }
 
