@@ -480,8 +480,9 @@ h1 {
 }
 
 .popup-img {
-  width: 100%; 
-  height: auto; 
+  width: 100%; /* fill container width */
+  height: auto; /* keep aspect ratio */
+  max-height: 80vh; /* keep your existing height limit */
   object-fit: contain;
   border-radius: 12px;
 }
@@ -490,9 +491,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /*NEW*/
+  max-height: 100vh; /* Prevent it from overflowing vertically */
   overflow-y: auto;
   gap: 12px;
   width: 100%;
+  max-width: 95vh;
 }
 
 #spritePopupImg {
@@ -680,6 +684,7 @@ h1 {
 
 .inline-countdown {
   font-size: 0.75em;
+  color: #ffc107;
   margin-left: 4px;
 }
 
