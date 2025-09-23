@@ -11,7 +11,7 @@ window.CHARA_CONFIG = {
     { name: 'Bronya • YA', imgName: 'Yamabuki_Armor', folder:'Bronya', have: true, element: 'PSY', rarity: 4, part:'1', status: 'available' },
     { name: 'Bronya • DB', imgName: 'Dimension_Breaker', folder:'Bronya', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'5.1', perma: true },
     { name: 'Bronya • DK', imgName: 'Drive_Kometa', folder:'Bronya', have: false, element: 'PSY', rarity: 4, part:'1', status: 'available', version:'3.1' },
-    { name: 'Bronya • S', imgName: 'Silverwing_-_N-EX', folder:'Bronya', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'7.8', perma: true },
+    { name: 'Bronya • S', imgName: 'Silverwing_-_N-EX', folder:'Bronya', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'7.8', perma: true, apho: true },
 
     { name: 'Durandal • VG', imgName: 'Valkyrie_Gloria', folder:'Durandal', have: true, element: 'QUA', rarity: 4, part:'1', status: 'available' },
     { name: 'Durandal • BN', imgName: 'Bright_Knight_-_Excelsis', folder:'Durandal', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'7.0', perma: true },
@@ -99,13 +99,18 @@ window.CHARA_CONFIG = {
     { name: 'Natasha', imgName: 'Midnight_Absinthe', folder:'SoloChara', have: true, element: 'IMG', rarity: 4, part:'1', status: 'available' },
     { name: 'Sirin', imgName: 'Miracle_Magical_Girl', folder:'SoloChara', have: true, element: 'IMG', rarity: 5, part:'1', status: 'available' },
     { name: 'Pardofelis', imgName: 'Reverist_Calico', folder:'SoloChara', have: true, element: 'IMG', rarity: 4, part:'1', status: 'available' },
-    { name: 'Carole', imgName: 'Sweet_n_Spicy', folder:'SoloChara', have: true, element: 'MECH', rarity: 4, part:'1', status: 'available' },
+    { name: 'Carole Pepper', imgName: 'Sweet_n_Spicy', folder:'SoloChara', have: true, element: 'MECH', rarity: 4, part:'1', status: 'available', apho: true },
     { name: 'PROMETHEUS', imgName: 'Terminal_Aide_0017', folder:'SoloChara', have: true, element: 'IMG', rarity: 4, part:'1', status: 'available' },
     { name: 'Susannah', imgName: 'Valkyrie_Quicksand', folder:'SoloChara', have: true, element: 'QUA', rarity: 4, part:'1', status: 'available' },
     { name: 'Aponia', imgName: 'Disciplinary_Perdition', folder:'SoloChara', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'3.4', perma: true },
     { name: 'Vill-V', imgName: 'Helical_Contraption', folder:'SoloChara', have: false, element: 'QUA', rarity: 5, part:'1', status: 'available', version:'5.9', },
     { name: 'Mobius', imgName: 'Infinite_Ouroboros', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.1', perma: true },
     { name: 'Shigure Kira', imgName: 'Sugary_Starburst', folder:'SoloChara', have: true, element: 'MECH', rarity: 4, part:'1', status: 'available', version:'6.7' },
+
+    //part 1 (A Post-Honkai Odyssey -APHO-)
+    { name: 'Raiden Mei', imgName: 'Raiden_Mei_APHO', folder:'APHO', have: true, element: 'PSY', rarity:5, part:'1', status: 'available', apho: true },
+    { name: 'Lyle Collodi', imgName: 'Lyle_Collodi_APHO', folder:'APHO', have: false, element: 'MECH', rarity:3, part:'1', status: 'available', apho: true },
+    { name: 'Timido Cute', imgName: 'Timido_Cute_APHO', folder:'APHO', have: false, element: 'MECH', rarity:3, part:'1', status: 'available', apho: true },
     
     //COLLAB characters
     { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'All_Collabs', have: true, element: 'BIO', rarity: 4, part:'1', status: 'available', collab: true },

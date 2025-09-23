@@ -54,7 +54,7 @@ function renderList() {
       const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
       if (hasPartInfo) {
-        if (!(selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab))) {
+        if (!(selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab) || (selectedPart === 'apho' && c.apho))) {
           return false;
         }
       }
