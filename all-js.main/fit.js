@@ -220,7 +220,8 @@ function showPopup(imgPath, altText, spriteList = []) {
   if (totalImages > 1) {
     thumbnailContainer.style.display = 'flex';
 
-    for (let i = 0; i < totalImages; i++) {
+    const maxThumbnails = 5;
+    for (let i = 0; i < Math.min(totalImages, maxThumbnails); i++) {
       const thumb = document.createElement('img');
       thumb.className = 'thumbnail-img';
 
