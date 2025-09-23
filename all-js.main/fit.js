@@ -43,10 +43,6 @@ function renderList() {
     });
 
   if (filteredCharacters.length === 0) {
-    // Remove previous "no-results" message before appending a new one
-    const existingMessage = document.querySelector('.no-results-message');
-    if (existingMessage) existingMessage.remove();
-
     const messageEl = document.createElement('div');
     messageEl.className = 'no-results-message';
     messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
@@ -107,8 +103,8 @@ function renderList() {
           const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
           showPopup(folderPath, c.name, c.spriteImages || []);
         } else {
-          const spritePath = gameConfig.getSpritePath(c);
-          showPopup(spritePath, c.name, [c.imgName2]);
+          const spritePath = gameConfig.getSpritePath(c); 
+          showPopup(spritePath, c.name, [c.imgName2]);  
         }
       });
     });
