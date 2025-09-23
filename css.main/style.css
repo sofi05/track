@@ -452,7 +452,7 @@ h1 {
 .popup-img {
   width: 100%; /* fill container width */
   height: auto; /* keep aspect ratio */
-  max-height: 90vh; /* keep your existing height limit */
+  max-height: 87vh; /* keep your existing height limit */
   object-fit: contain;
   border-radius: 12px;
 }
@@ -470,12 +470,13 @@ h1 {
 
 #thumbnailContainer {
   display: flex;
-  justify-content: center;  /* This centers the thumbnails */
+  justify-content: center;
   overflow-x: auto;
   padding: 4px 2px;
   gap: 6px;
   width: 100%;
   max-width: 100vw;
+  max-height: 60px; /* <-- Prevent container from growing too tall */
   box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: #8a8a8a transparent;
@@ -483,15 +484,32 @@ h1 {
   -webkit-overflow-scrolling: touch;
 }
 
+
 .thumbnail-img {
-  width: 50px;
-  height: 50px;
+  width: 10vw; /* 10% of viewport width */
+  height: 10vw;
+  max-width: 50px;
+  max-height: 50px;
   object-fit: cover;
   border: 2px solid transparent;
   border-radius: 4px;
   scroll-snap-align: center;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .thumbnail-img {
+    width: 12vw;
+    height: 12vw;
+    max-width: 48px;
+    max-height: 48px;
+  }
+
+  #thumbnailContainer {
+    padding: 6px 4px;
+    gap: 4px;
+  }
 }
 
 #thumbnailContainer::-webkit-scrollbar {
