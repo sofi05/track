@@ -1,3 +1,3 @@
 git add . 
-git commit -m " trying to block the slider to be clickable while sliding "
+git commit -m " try to stop slider to mix "
 git push origin main  

@@ -185,6 +185,10 @@ function showPopup(imgPath, altText, spriteList = []) {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const thumbnailContainer = document.getElementById('thumbnailContainer');
+  // Prevent thumbnail swipe from affecting the popup swipe
+  thumbnailContainer.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
+  thumbnailContainer.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
+  thumbnailContainer.addEventListener('touchend', e => e.stopPropagation(), { passive: true });
 
   const defaultExt = '.webp';
 
