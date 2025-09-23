@@ -239,16 +239,22 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .popup-img {
-    max-width: 90vw;
-    max-height: 60vh;
+  .sprite-popup {
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
-  #thumbnailContainer {
-    padding-bottom: 10px;
+  .sprite-popup img {
+    max-height: 85dvh;
+    max-width: 95vw;
+    object-fit: contain;
   }
 
-  .close-btn {
+  .sprite-popup .close-btn {
     top: 10px;
     right: 10px;
     font-size: 24px;

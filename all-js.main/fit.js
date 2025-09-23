@@ -415,3 +415,10 @@ window.addEventListener('DOMContentLoaded', () => {
     renderList();
   }
 });
+
+window.addEventListener('resize', () => {
+  const popup = document.querySelector('.sprite-popup');
+  if (popup) {
+    popup.style.height = window.innerHeight + 'px';
+  }
+});
