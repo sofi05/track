@@ -1,4 +1,5 @@
 window.CHARA_CONFIG = {
+  //PICS ARE FROM SITE OR BETA, THEYRE TEMP, CHANGE IT ON LAUNCH
   characters: [
     //Rarity 4
     { name: 'Cassio Rollex', imgName: 'Cassio_Rollex', have: false, gender:'m', rarity: 4, status: 'new', version: '0.3' },
@@ -6,23 +7,26 @@ window.CHARA_CONFIG = {
     { name: 'Kiana', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
     { name: 'Maple Manybell', imgName: 'Maple_Manybell',  have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
     { name: 'Nanafey', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
-    { name: 'Jalily Belau', imgName: '',  have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },    
+    { name: 'Jalily Belau', imgName: 'Jalily_Belau',  have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },    
     
     //??
-    { name: 'Victus', imgName: 'The_2nd_Novarch', have: false, type: [''], gender:'m', status: 'soon', version: '0.1' },
-    { name: 'Amstradath', imgName: 'The_5th_Sovereign',  have: false, type: [''], gender:'m', status: 'soon', version: '0.1'},
-    { name: 'Apeiron', imgName: 'The_57th_Novarch',  have: false, type: [''], gender:'', status: 'soon', version: '0.1' },
-    { name: 'Breadhead', imgName: '',  have: false, gender:'m', rarity: 5, status: 'new' }, //unsure
+    { name: 'Victus', imgName: 'Victus', have: false, type: [''], gender:'m', status: 'soon', version: '0.1' },
+    { name: 'Amstradath', imgName: 'Amstradath',  have: false, type: [''], gender:'m', status: 'soon', version: '0.1'},
+    { name: 'Apeiron', imgName: 'Apeiron',  have: false, type: [''], gender:'', status: 'soon', version: '0.1' },
+    { name: 'Breadhead', imgName: 'Breadhead',  have: false, gender:'m', status: 'new' }, //unsure
+    { name: 'Darsea', imgName: 'Darsea',  have: false, gender:'f', status: 'new' }, //unsure
+    { name: 'Argenti', imgName: '',  have: false, gender:'m', status: 'new' }, //unsure
 
     //Rarity 5
-    { name: 'Kumyo Kyo', imgName: 'The_4th_Sovereign',  have: false, type: ['sov'], gender:'m', rarity: 5, status: 'new', version: '0.3' },
-    { name: 'Prabhas', imgName: 'The_16th_Novarch',  have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
-    { name: 'Armand', imgName: 'The_17th_Novarch',  have: false, type: ['sov','nov'], gender:'m', rarity: 5, status: 'new', version: '0.3'  },
-    { name: 'Blade', imgName: 'The_22nd_Novarch',  have: false, type: ['nov'], gender:'m', rarity: 5, status: 'new', version: '0.3' },
-    { name: 'Parayaya', imgName: 'The_29th_Novarch',  have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
-    { name: 'Parayaya 2', imgName: '',  have: false, type: ['sov'], gender:'f', rarity: 5, status: 'new' },
-    { name: 'Sir Champion', imgName: 'The_34th_Novarch', gender:'m',  have: false, type: ['nov'], rarity: 5, status: 'new', version: '0.3' },
-    { name: 'Hungrille', imgName: '',  have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Kumyo Kyo', imgName: 'Kumyo_Kyo',  have: false, type: ['sov'], gender:'m', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Prabhas', imgName: 'Prabhas',  have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Armand', imgName: 'Armand',  have: false, type: ['sov','nov'], gender:'m', rarity: 5, status: 'new', version: '0.3'  },
+    { name: 'Blade', imgName: 'Blade',  have: false, type: ['nov'], gender:'m', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Parayaya', imgName: 'Parayaya',  have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Parayaya 2', imgName: 'Parayaya_OG',  have: false, type: ['sov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Sir Champion', imgName: 'Sir_Champion', gender:'m',  have: false, type: ['nov'], rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Hungrille', imgName: 'Hungrille',  have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Amorphiron', imgName: 'Amorphiron',  have: false, type: [''], gender:'m', rarity: 5, status: 'new', version: '0.3' },
     // Add more characters here
   ],
 
