@@ -76,7 +76,7 @@ window.CHARA_CONFIG = {
 
     { name: 'Evernight', imgName: '1413', have: false, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5,  status: 'soon', version: '3.6' },
     { name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'soon', version: '3.6' },
-
+    { name: 'Cyrene', imgName: '', have: false, element: 'ice', group:'', gender:'f', world:['amp'],rarity: 5,  status: 'soon', version: '3.7' },
     // Add more characters here
   ],
 
