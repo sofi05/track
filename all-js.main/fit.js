@@ -43,10 +43,9 @@ function renderList() {
     });
 
   if (filteredCharacters.length === 0) {
-    const messageEl = document.createElement('div');
-    messageEl.className = 'no-results-message';
-    messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
-    charListEl.appendChild(messageEl);
+    showNoResultsMessage(charListEl);
+    updateCharCount();
+    return;
   } else {
     filteredCharacters.forEach(c => {
       if (!c.name) return;
@@ -328,6 +327,12 @@ function updateCharCount() {
   document.getElementById('charCount').textContent = countText;
 }
 
+function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
+  const msg = document.createElement('div');
+  msg.className = 'no-results-message';
+  msg.textContent = message;
+  container.appendChild(msg);
+}
 renderList();
 
 window.addEventListener('DOMContentLoaded', () => {

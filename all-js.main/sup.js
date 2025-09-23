@@ -47,12 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // If no characters match the filters, show the "Nothing new here" message
   if (filteredCharacters.length === 0) {
-    const messageEl = document.createElement('div');
-    messageEl.className = 'no-results-message';
-    messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
-    charListEl.appendChild(messageEl);
+    showNoResultsMessage(charListEl);
+    updateCharCount();
+    return;
   } else {
-    // If characters are found, render them as usual
     filteredCharacters.forEach(c => {
       const card = document.createElement('div');
       card.className = 'char-card';
@@ -209,6 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.setupGlobalFilters = setupToggleableRadio;
 });
 
+function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
+  const msg = document.createElement('div');
+  msg.className = 'no-results-message';
+  msg.textContent = message;
+  container.appendChild(msg);
+}
 // ====== Update Character Count ======
 function updateCharCount() {
   const count = document.querySelectorAll('.char-card').length;

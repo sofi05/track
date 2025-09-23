@@ -108,11 +108,10 @@ function renderList() {
       return matchesSearch;
     });
 
-  if (filteredChars.length === 0) {
-    const messageEl = document.createElement('div');
-    messageEl.className = 'no-results-message';
-    messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
-    charListEl.appendChild(messageEl);
+  if (filteredCharacters.length === 0) {
+    showNoResultsMessage(charListEl);
+    updateCharCount();
+    return;
   } else {
     filteredChars.forEach(c => {
       const card = document.createElement('div');
@@ -272,6 +271,13 @@ document.querySelectorAll('.part-btn').forEach(btn => {
     }
   });
 });
+
+function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
+  const msg = document.createElement('div');
+  msg.className = 'no-results-message';
+  msg.textContent = message;
+  container.appendChild(msg);
+}
 
 // ===== Initial Render =====
 function updateCharCount() {
