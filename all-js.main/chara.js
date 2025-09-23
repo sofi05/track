@@ -46,13 +46,13 @@ function renderList() {
   charListEl.innerHTML = '';
   const searchTerm = searchInput.value.toLowerCase();
 
-  characters
+  // Filter characters based on all your filters
+  const filteredChars = characters
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name))
     .filter(c => {
       const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-      // Part filter applied only if part info exists
       if (hasPartInfo) {
         if (!(selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab))) {
           return false;
@@ -106,8 +106,15 @@ function renderList() {
 
       // Add new filters here as needed
       return matchesSearch;
-    })
-    .forEach(c => {
+    });
+
+  if (filteredChars.length === 0) {
+    const messageEl = document.createElement('div');
+    messageEl.className = 'no-results-message';
+    messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
+    charListEl.appendChild(messageEl);
+  } else {
+    filteredChars.forEach(c => {
       const card = document.createElement('div');
       card.className = 'char-card';
       card.title = `${c.name} (${c.element}, ${c.rarity}★)`;
@@ -149,8 +156,9 @@ function renderList() {
       card.appendChild(label);
       charListEl.appendChild(card);
     });
+  }
 
-    updateCharCount();
+  updateCharCount();
 }
 
 // ===== Filter Setups =====

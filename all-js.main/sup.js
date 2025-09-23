@@ -15,82 +15,94 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function renderList(characters, gameFolder, spriteFolder) {
-    if (!charListEl) return;
-    charListEl.innerHTML = '';
-    const searchTerm = searchInput.value.toLowerCase();
+  if (!charListEl) return;
+  charListEl.innerHTML = '';
 
-    characters
-      .slice()
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .filter(c => {
-        const matchesSearch = c.name.toLowerCase().includes(searchTerm);
+  const searchTerm = searchInput.value.toLowerCase();
 
-        const matchesPart = selectedPart === 'all' ||
-                            (!c.part) ||
-                            c.part === selectedPart ||
-                            (selectedPart === 'collab' && c.collab);
+  // Filter and sort characters
+  const filteredCharacters = characters
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter(c => {
+      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-        if (selectedFilters.have !== null) {
-          if (selectedFilters.have && !c.have) return false;
-          if (!selectedFilters.have && c.have) return false;
-        }
+      const matchesPart = selectedPart === 'all' ||
+                          (!c.part) ||
+                          c.part === selectedPart ||
+                          (selectedPart === 'collab' && c.collab);
 
-        if (selectedFilters.rarity && c.rarity !== selectedFilters.rarity) return false;
-        if (selectedFilters.element && c.element !== selectedFilters.element) return false;
+      if (selectedFilters.have !== null) {
+        if (selectedFilters.have && !c.have) return false;
+        if (!selectedFilters.have && c.have) return false;
+      }
 
-        if (selectedFilters.isNew && c.status !== 'new') return false; 
+      if (selectedFilters.rarity && c.rarity !== selectedFilters.rarity) return false;
+      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
 
-        return matchesSearch && matchesPart;
-      })
-      .forEach(c => {
-        const card = document.createElement('div');
-        card.className = 'char-card';
-        card.title = `${c.name} (${c.element || 'Unknown'}, ${c.rarity}★)`;
+      if (selectedFilters.isNew && c.status !== 'new') return false;
 
-        const iconWrapper = document.createElement('div');
-        iconWrapper.className = 'icon-wrapper';
-        const rarityGradients = {
-          5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
-          4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
-        };
-        iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
+      return matchesSearch && matchesPart;
+    });
 
-        if (c.status === 'new') {
-          const newLabel = document.createElement('div');
-          newLabel.textContent = 'NEW';
-          newLabel.className = 'soon-label';
-          iconWrapper.appendChild(newLabel);
-        }
-        if (c.status === 'soon') {
-          const soonLabel = document.createElement('div');
-          soonLabel.textContent = 'SOON';
-          soonLabel.className = 'soon-label';
-          iconWrapper.appendChild(soonLabel);
-        }
+  // If no characters match the filters, show the "Nothing new here" message
+  if (filteredCharacters.length === 0) {
+    const messageEl = document.createElement('div');
+    messageEl.className = 'no-results-message';
+    messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
+    charListEl.appendChild(messageEl);
+  } else {
+    // If characters are found, render them as usual
+    filteredCharacters.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'char-card';
+      card.title = `${c.name} (${c.element || 'Unknown'}, ${c.rarity}★)`;
 
-        const img = document.createElement('img');
-        img.className = 'char-icon';
-        const imgSrcName = c.imgName || c.name;
-        const charFolder = c.folder || '';
-        img.src = `${gameFolder}/${charFolder}/${imgSrcName}.png`;
-        img.alt = c.name;
-        iconWrapper.appendChild(img);
+      const iconWrapper = document.createElement('div');
+      iconWrapper.className = 'icon-wrapper';
+      const rarityGradients = {
+        5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
+        4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
+      };
+      iconWrapper.style.background = rarityGradients[c.rarity] || 'linear-gradient(135deg, #444, #999)';
 
-        const label = document.createElement('div');
-        label.textContent = c.name;
+      if (c.status === 'new') {
+        const newLabel = document.createElement('div');
+        newLabel.textContent = 'NEW';
+        newLabel.className = 'soon-label';
+        iconWrapper.appendChild(newLabel);
+      }
+      if (c.status === 'soon') {
+        const soonLabel = document.createElement('div');
+        soonLabel.textContent = 'SOON';
+        soonLabel.className = 'soon-label';
+        iconWrapper.appendChild(soonLabel);
+      }
 
-        card.appendChild(iconWrapper);
-        card.appendChild(label);
-        charListEl.appendChild(card);
+      const img = document.createElement('img');
+      img.className = 'char-icon';
+      const imgSrcName = c.imgName || c.name;
+      const charFolder = c.folder || '';
+      img.src = `${gameFolder}/${charFolder}/${imgSrcName}.png`;
+      img.alt = c.name;
+      iconWrapper.appendChild(img);
 
-        card.addEventListener('click', () => {
-          const imgPath = `${spriteFolder}/${charFolder}/${imgSrcName}.png`;
-          showPopup(imgPath, c.name);
-        });
+      const label = document.createElement('div');
+      label.textContent = c.name;
+
+      card.appendChild(iconWrapper);
+      card.appendChild(label);
+      charListEl.appendChild(card);
+
+      card.addEventListener('click', () => {
+        const imgPath = `${spriteFolder}/${charFolder}/${imgSrcName}.png`;
+        showPopup(imgPath, c.name);
       });
-
-    updateCharCount();
+    });
   }
+
+  updateCharCount();
+}
 
   // ====== Filter Listeners ======
   function setupToggleableRadio(groupName, filterKey, characters, gameFolder, spriteFolder) {

@@ -657,3 +657,10 @@ input:checked + .slider2:before {
 .slider2.round:before {
   border-radius: 50%;
 }
+
+.no-results-message {
+  padding: 20px;
+  font-size: 1.2em;
+  text-align: center;
+  color: #666;
+}

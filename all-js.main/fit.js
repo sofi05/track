@@ -14,94 +14,101 @@ function renderList() {
 
   const characters = gameConfig.characters;
 
-const filteredCharacters = characters
-  .slice()
-  .sort((a, b) => a.name.localeCompare(b.name))
-  .filter(c => {
-    const matchesSearch = c.name.toLowerCase().includes(searchTerm);
+  const filteredCharacters = characters
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter(c => {
+      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
 
-    const matchesHave = !selectedFilters.have || (
-      (selectedFilters.have === true && (c.have === true || 
-      (Array.isArray(c.have) && c.have.includes(true)))) 
-    );
+      const matchesHave = !selectedFilters.have || (
+        (selectedFilters.have === true && (c.have === true || 
+        (Array.isArray(c.have) && c.have.includes(true)))) 
+      );
 
-    const matchesWant = !selectedFilters.want || (
-      selectedFilters.want && (c.have === false || (Array.isArray(c.have) && c.have.includes(false)))
-    );
+      const matchesWant = !selectedFilters.want || (
+        selectedFilters.want && (c.have === false || (Array.isArray(c.have) && c.have.includes(false)))
+      );
 
-    const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
+      const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
 
-    let matchesPart = true;
-    if (selectedFilters.part !== null) {
-      matchesPart = c.part === selectedFilters.part;
-      if (selectedFilters.part === 'none') {
-        matchesPart = !('part' in c);
+      let matchesPart = true;
+      if (selectedFilters.part !== null) {
+        matchesPart = c.part === selectedFilters.part;
+        if (selectedFilters.part === 'none') {
+          matchesPart = !('part' in c);
+        }
       }
-    }
 
-    return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
-  });
-
-  filteredCharacters.forEach(c => {
-    if (!c.name) return;
-
-    const card = document.createElement('div');
-    card.className = 'char-card';
-    card.title = `${c.name} (${c.rarity || ''}★)`;
-
-    const iconWrapper = document.createElement('div');
-    iconWrapper.className = 'icon-wrapper';
-
-    function getRarityGradient(rarity) {
-    const gradients = {
-      5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)', // Gold (5★)
-      4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)', // Purple (4★)
-      3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)', // Blue (3★)
-    };
-    return gradients[rarity] || 'linear-gradient(135deg, #444, #999)'; // Fallback
-  }
-
-    if (gameConfig.id === 'hi3') {
-      iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)';
-    } else {
-      iconWrapper.style.background = getRarityGradient(c.rarity);
-    }
-
-    if (c.status === 'new') {
-      const label = document.createElement('div');
-      label.textContent = 'NEW';
-      label.className = 'soon-label';
-      iconWrapper.appendChild(label);
-    }
-
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-
-    if (gameConfig.id === 'hi3') {
-      img.src = `../assets/charaid/Honkai/${c.folder}/${c.imgName}.png`;
-    } else {
-      img.src = gameConfig.getImgPath(c);
-    }
-    img.alt = c.name;
-    iconWrapper.appendChild(img);
-
-    const label = document.createElement('div');
-    label.textContent = c.name;
-
-    card.appendChild(iconWrapper);
-    card.appendChild(label);
-    charListEl.appendChild(card);
-
-    card.addEventListener('click', () => {
-      if (gameConfig.id === 'hi3') {
-        const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
-        showPopup(folderPath, c.name, c.spriteImages || []);
-      } else {
-        const spritePath = gameConfig.getSpritePath(c); 
-        showPopup(spritePath, c.name, [c.imgName2]);  
-      }
+      return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
     });
-  });
+
+  if (filteredCharacters.length === 0) {
+    const messageEl = document.createElement('div');
+    messageEl.className = 'no-results-message';
+    messageEl.textContent = "Nothing new here ∑( ⚆ᗝ⚆)";
+    charListEl.appendChild(messageEl);
+  } else {
+    filteredCharacters.forEach(c => {
+      if (!c.name) return;
+
+      const card = document.createElement('div');
+      card.className = 'char-card';
+      card.title = `${c.name} (${c.rarity || ''}★)`;
+
+      const iconWrapper = document.createElement('div');
+      iconWrapper.className = 'icon-wrapper';
+
+      function getRarityGradient(rarity) {
+        const gradients = {
+          5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)', // Gold (5★)
+          4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)', // Purple (4★)
+          3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)', // Blue (3★)
+        };
+        return gradients[rarity] || 'linear-gradient(135deg, #444, #999)'; // Fallback
+      }
+
+      if (gameConfig.id === 'hi3') {
+        iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)';
+      } else {
+        iconWrapper.style.background = getRarityGradient(c.rarity);
+      }
+
+      if (c.status === 'new') {
+        const label = document.createElement('div');
+        label.textContent = 'NEW';
+        label.className = 'soon-label';
+        iconWrapper.appendChild(label);
+      }
+
+      const img = document.createElement('img');
+      img.className = 'char-icon';
+
+      if (gameConfig.id === 'hi3') {
+        img.src = `../assets/charaid/Honkai/${c.folder}/${c.imgName}.png`;
+      } else {
+        img.src = gameConfig.getImgPath(c);
+      }
+      img.alt = c.name;
+      iconWrapper.appendChild(img);
+
+      const label = document.createElement('div');
+      label.textContent = c.name;
+
+      card.appendChild(iconWrapper);
+      card.appendChild(label);
+      charListEl.appendChild(card);
+
+      card.addEventListener('click', () => {
+        if (gameConfig.id === 'hi3') {
+          const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
+          showPopup(folderPath, c.name, c.spriteImages || []);
+        } else {
+          const spritePath = gameConfig.getSpritePath(c); 
+          showPopup(spritePath, c.name, [c.imgName2]);  
+        }
+      });
+    });
+  }
 
   updateCharCount();
 }
