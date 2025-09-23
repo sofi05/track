@@ -263,7 +263,7 @@ h1 {
 
 @media (min-width: 768px) {
   .image-and-thumbs-wrapper {
-    max-width: 300px;
+    max-width: 90vw;
   }
 }
 
@@ -499,6 +499,7 @@ h1 {
   overflow-y: auto;
   gap: 12px;
   width: 100%;
+  max-width: none; 
 }
 
 #spritePopupImg {
@@ -506,6 +507,8 @@ h1 {
   max-height: 70dvh;
   object-fit: contain;
   border-radius: 12px;
+  width: auto;
+  height: auto;
 }
 
 #thumbnailContainer {
