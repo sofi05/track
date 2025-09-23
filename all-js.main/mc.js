@@ -163,17 +163,17 @@ function renderList() {
     if (c.elements && c.elements.length > 1) {
       let index = 0;
       const updateIcon = () => {
-        const el = c.elements[index % c.elements.length];
-        elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${el.toLowerCase()}.png')`;
-        elementIcon.title = el;
-        index++;
+      const el = c.elements[index % c.elements.length];
+      elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${el}.png')`;
+      elementIcon.title = el;
+      index++;
       };
       updateIcon();
       setInterval(updateIcon, 1000);
     } else {
       // fallback: single element in elements array or c.element string
       const singleElement = (c.elements && c.elements.length) ? c.elements[0] : c.element;
-      elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${singleElement.toLowerCase()}.png')`;
+      elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${singleElement}.png')`;
       elementIcon.title = singleElement;
     }
 
