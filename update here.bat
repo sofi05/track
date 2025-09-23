@@ -1,3 +1,3 @@
 git add . 
-git commit -m "testing if nothing new message works now in netlify"  
+git commit -m "something is wrong..."  
 git push origin main  
