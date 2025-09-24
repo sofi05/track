@@ -216,6 +216,35 @@ function showPopup(imgPath, altText, spriteList = []) {
   // Clear previous thumbnails
   thumbnailContainer.innerHTML = '';
 
+  // Enable drag-to-scroll on thumbnail container
+let isDragging = false;
+let startX, scrollLeftStart;
+
+thumbnailContainer.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  startX = e.pageX - thumbnailContainer.offsetLeft;
+  scrollLeftStart = thumbnailContainer.scrollLeft;
+  thumbnailContainer.classList.add('dragging'); // Optional: style on drag
+});
+
+thumbnailContainer.addEventListener('mouseleave', () => {
+  isDragging = false;
+  thumbnailContainer.classList.remove('dragging');
+});
+
+thumbnailContainer.addEventListener('mouseup', () => {
+  isDragging = false;
+  thumbnailContainer.classList.remove('dragging');
+});
+
+thumbnailContainer.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  e.preventDefault();
+  const x = e.pageX - thumbnailContainer.offsetLeft;
+  const walk = (x - startX) * 1.5; // scroll speed multiplier
+  thumbnailContainer.scrollLeft = scrollLeftStart - walk;
+});
+
   // Show thumbnails if multiple images
   if (totalImages > 1) {
     thumbnailContainer.style.display = 'flex';
@@ -271,6 +300,24 @@ function showPopup(imgPath, altText, spriteList = []) {
   } else {
     thumbnailContainer.style.display = 'none';
   }
+
+setTimeout(() => {
+  thumbnailContainer.scrollLeft = 0;
+}, 0);
+  
+function updateThumbnailAlignment() {
+  const container = document.getElementById('thumbnailContainer');
+  const thumbsCount = container.children.length;
+
+  if (thumbsCount < 5) {
+    container.style.justifyContent = 'center';  // center for few thumbs
+  } else {
+    container.style.justifyContent = 'flex-start';  // scroll left for many thumbs
+  }
+}
+
+// Call this after thumbnails are generated or updated:
+updateThumbnailAlignment();
 
   function showImageAt(idx) {
     index = idx;

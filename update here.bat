@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated the hsr version"
+git commit -m "i think i did it, i fixed it!"
 git push origin main  
