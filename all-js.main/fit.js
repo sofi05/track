@@ -261,10 +261,6 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
         thumb.alt = `${altText} - ${spriteList[i]}`;
       }
 
-      if (i === index) {
-        thumb.style.borderColor = '#ffaa00';
-      }
-
       let touchStartX = 0;
       let touchMoved = false;
 
