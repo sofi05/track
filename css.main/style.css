@@ -550,6 +550,16 @@ h1 {
   #thumbnailContainer {
     padding: 6px 4px;
     gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;     /* <--- Make sure vertical scrolling is disabled */
+    flex-wrap: nowrap;      /* <--- Prevent wrapping */
+    white-space: nowrap;    /* <--- For horizontal flow */
+    max-height: none;       /* <--- Let it expand if needed */
+  }
+
+  #thumbnailContainer::-webkit-scrollbar {
+    height: 6px;
+    display: block;         /* <--- Allow scrollbar to be visible if desired */
   }
 }
 
