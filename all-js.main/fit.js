@@ -351,9 +351,10 @@ updateThumbnailAlignment();
     };
 
     // Update thumbnail highlight
-    Array.from(thumbnailContainer.children).forEach((t, i) => {
-      t.classList.toggle('selected', i === idx);
+    Array.from(thumbnailContainer.querySelectorAll('.thumbnail-img')).forEach((img, i) => {
+      img.classList.toggle('selected', i === idx);
     });
+
   }
 
   function nextImage() {

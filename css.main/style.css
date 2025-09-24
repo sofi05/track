@@ -535,10 +535,6 @@ h1 {
   background: transparent;
 }
 
-.thumbnail-img.selected {
-  border-color: #ffaa00;
-}
-
 @media (max-width: 600px) {
   .thumbnail-img {
     width: 12vw;
@@ -560,6 +556,25 @@ h1 {
   #thumbnailContainer::-webkit-scrollbar {
     height: 6px;
     display: block;         /* <--- Allow scrollbar to be visible if desired */
+  }
+
+  .sprite-popup img {
+    width: 95vw;           /* fit screen width */
+    max-height: 85vh;      /* leave some vertical space */
+    height: auto;
+    object-fit: contain;
+  }
+
+  .sprite-popup .close-btn {
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+  }
+
+  .sprite-popup {
+    padding: 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
   }
 }
 
