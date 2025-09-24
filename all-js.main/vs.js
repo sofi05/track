@@ -5,9 +5,9 @@ window.GAME_VERSIONS = {
     date2vs: '6.2', date2: '',
     },
   StarRail: {
-    version: '3.5',
-    date1vs:'3.6', date1: '2025-09-24T00:00:00',
-    date2vs:'3.7', date2: '2025-11-05T00:00:00', 
+    version: '3.6',
+    date1vs:'3.7', date1: '2025-11-05T00:00:00',
+    date2vs:'3.8', date2: '', 
   },
   ZenlessZone: {
     version: '2.2',
