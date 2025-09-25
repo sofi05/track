@@ -228,19 +228,18 @@ sprite.onerror = () => {
 sprite.onload = () => {
   const aspectRatio = sprite.naturalWidth / sprite.naturalHeight;
 
-  if (aspectRatio < 0.65) {
-    // Portrait → show more head/upper body
-    sprite.style.objectFit = 'contain';
-    sprite.style.objectPosition = 'center top';
-    sprite.style.transform = 'scale(1.15)'; // Slight zoom-in for better crop
+  if (aspectRatio < 0.75) {
+    // Tall portrait images: show entire image from the top, no cropping
+    sprite.style.objectFit = 'contain';        // fits entire image inside container
+    sprite.style.objectPosition = 'top center';  // align image at top center
+    sprite.style.transform = '';              // no zoom
   } else {
-    // Wide → normal crop
+    // Wide or square images: cover normally
     sprite.style.objectFit = 'cover';
-    sprite.style.objectPosition = 'center top';
+    sprite.style.objectPosition = 'center center';
     sprite.style.transform = '';
   }
 };
-
 
   sprite.onerror = () => {
     sprite.style.display = 'none';
