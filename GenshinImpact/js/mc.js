@@ -1,10 +1,10 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 5,  status: 'available' },
+    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 5,  status: 'available' },
 
-    { name: 'Manekin',name2: 'Manekins', GP: 2, imgName: 'PlayerBoy', have: false, group:'dest', gender:'m', rarity: 5,  status: 'available' },
-    { name: 'Manekina',name2: 'Manekins', GP: 2, imgName: 'PlayerGirl', have: false, group:'dest', gender:'f', rarity: 5,  status: 'available' },
+    { name: 'Manekin',name2: 'Manekins', GP: 2, imgName: 'MannequinBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 3,  status: 'available' },
+    { name: 'Manekina',name2: 'Manekins', GP: 2, imgName: 'MannequinGirl', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 3,  status: 'available' },
   
     // Add more characters here
   ],

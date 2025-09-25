@@ -1,3 +1,3 @@
 git add . 
-git commit -m "Fixing this never ends"
+git commit -m "added cyrene (hsr) + manekins (gi) "
 git push origin main  
