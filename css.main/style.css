@@ -444,6 +444,8 @@ h1 {
   mask-composite: intersect;
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
+  object-fit: cover;
+  object-position: center; 
 }
 
 .popup {
@@ -552,6 +554,10 @@ h1 {
 }
 
 @media (max-width: 600px) {
+  .sprite-fade {
+    object-position: center top; /* Move image up slightly */
+  }
+
   .thumbnail-img {
     width: 12vw;
     height: 12vw;
