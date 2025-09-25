@@ -160,9 +160,16 @@ function createCharacterPopup(char, getSpritePath) {
     width: '100vw',
     height: '100vh',
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    zIndex: 9999,
+    zIndex: 9999, 
   });
 
+  backdrop.addEventListener('click', () => {
+    popup.remove();
+    backdrop.remove();
+    clearInterval(countdownInterval);
+  });
+
+  // === POPUP ===
   const popup = document.createElement('div');
   popup.id = 'char-popup';
   Object.assign(popup.style, {
@@ -180,28 +187,42 @@ function createCharacterPopup(char, getSpritePath) {
     textAlign: 'center',
   });
 
-  // Create container div to hold image + close button (position relative)
+  // Container for image + close button
   const imageContainer = document.createElement('div');
   imageContainer.style.position = 'relative';
   imageContainer.style.display = 'inline-block';
+  imageContainer.style.width = '328px';
+  imageContainer.style.height = '328px';
+  imageContainer.style.overflow = 'hidden';
+  imageContainer.style.borderRadius = '20px'; // optional rounding to match popup
 
-  // Create image
   const sprite = document.createElement('img');
   sprite.src = getSpritePath(char);
   sprite.alt = char.name;
-  sprite.style.width = '328px';
-  sprite.style.height = '328px';
-  sprite.style.objectFit = 'contain';
+
+  // This zooms and crops the image centered
+  sprite.style.width = '100%';
+  sprite.style.height = '100%';
+  sprite.style.objectFit = 'cover';
+  sprite.style.objectPosition = 'center';
+
   sprite.onerror = () => { sprite.style.display = 'none'; };
 
-  // Create close button
+  
+  // Apply CSS mask for fading edges (horizontal fade)
+  sprite.style.webkitMaskImage = 
+  'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)';
+  sprite.style.maskImage = 
+  'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)';
+
+
   const closeButton = document.createElement('button');
   closeButton.textContent = '✕';
   Object.assign(closeButton.style, {
     position: 'absolute',
-    top: '4px',      // adjust to position above the image
+    top: '4px',
     right: '4px',
-    background: 'transparent',
+    background: 'rgba(0, 0, 0, 0)',
     border: 'none',
     color: '#fff',
     fontSize: '20px',
@@ -217,14 +238,12 @@ function createCharacterPopup(char, getSpritePath) {
     clearInterval(countdownInterval);
   });
 
-  // Append sprite and close button to container
   imageContainer.appendChild(sprite);
   imageContainer.appendChild(closeButton);
-
-  // Append container to popup (only once)
   popup.appendChild(imageContainer);
 
-  // Add text content below image
+  popup.style.paddingTop = '40px';
+
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
   nameEl.style.margin = '10px 0 5px';
@@ -253,19 +272,54 @@ function createCharacterPopup(char, getSpritePath) {
   popup.appendChild(versionLine);
   popup.appendChild(rarityEl);
 
-  // Append backdrop and popup to body
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
-  backdrop.addEventListener('click', () => {
-    popup.remove();
-    backdrop.remove();
-    clearInterval(countdownInterval);
-  });
 
+  function findMatchingVersionDates(charVersion) {
+    for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
+      if (gameData.date1vs === charVersion && gameData.date1) {
+        return { targetDate: new Date(gameData.date1), versionLabel: gameData.date1vs };
+      }
+      if (gameData.date2vs === charVersion && gameData.date2) {
+        return { targetDate: new Date(gameData.date2), versionLabel: gameData.date2vs };
+      }
+    }
+    return null;
+  }
 
-  // rest of your countdown code here ...
+  const match = findMatchingVersionDates(char.version);
+
+  function updateCountdown() {
+    if (!match) {
+      countdownEl.textContent = '';
+      return;
+    }
+    const now = new Date();
+    const diff = match.targetDate - now;
+    if (diff <= 0) {
+      countdownEl.textContent = ' (Released)';
+      return;
+    }
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    let label = '';
+    if (days > 0) label = `in ${days}d`;
+    else if (hours > 0) label = `in ${hours % 24}h`;
+    else if (minutes > 0) label = `in ${minutes % 60}m`;
+    else label = `in ${seconds % 60}s`;
+
+    countdownEl.textContent = ` (${label})`;
+  }
+
+  let countdownInterval = null;
+  if (match) {
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+  }
 }
-
 
 async function showCharacterPopup(gameFolder, charIdOrName) {
   try {
