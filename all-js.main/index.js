@@ -204,17 +204,12 @@ function createCharacterPopup(char, getSpritePath) {
   sprite.style.width = '100%';
   sprite.style.height = '100%';
   sprite.style.objectFit = 'cover';
-  sprite.style.objectPosition = 'center';
+  sprite.style.objectPosition = 'center top';
 
   sprite.onerror = () => { sprite.style.display = 'none'; };
 
   
-  // Apply CSS mask for fading edges (horizontal fade)
-  sprite.style.webkitMaskImage = 
-  'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)';
-  sprite.style.maskImage = 
-  'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)';
-
+ sprite.classList.add('sprite-fade');
 
   const closeButton = document.createElement('button');
   closeButton.textContent = '✕';
