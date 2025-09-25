@@ -433,21 +433,6 @@ h1 {
   user-select: none;
 }
 
-.sprite-fade {
-  -webkit-mask-image: 
-    linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-    linear-gradient(to top, transparent 0%, black 30%, black 100%);
-  -webkit-mask-composite: intersect;
-  mask-image: 
-    linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-    linear-gradient(to top, transparent 0%, black 40%, black 100%);
-  mask-composite: intersect;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-  object-fit: cover;
-  object-position: center; 
-}
-
 .popup {
   display: none;
   position: fixed;
@@ -554,10 +539,6 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .sprite-fade {
-    object-position: center 25%; /* Move image up slightly */
-  }
-
   .thumbnail-img {
     width: 12vw;
     height: 12vw;

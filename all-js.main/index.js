@@ -160,7 +160,7 @@ function createCharacterPopup(char, getSpritePath) {
     width: '100vw',
     height: '100vh',
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    zIndex: 9999, 
+    zIndex: 9999,
   });
 
   backdrop.addEventListener('click', () => {
@@ -169,7 +169,7 @@ function createCharacterPopup(char, getSpritePath) {
     clearInterval(countdownInterval);
   });
 
-  // === POPUP ===
+  // === POPUP BOX ===
   const popup = document.createElement('div');
   popup.id = 'char-popup';
   Object.assign(popup.style, {
@@ -185,30 +185,66 @@ function createCharacterPopup(char, getSpritePath) {
     zIndex: 10000,
     minWidth: '220px',
     textAlign: 'center',
+    width: '360px',
+    maxWidth: '95vw',
   });
 
-  // Container for image + close button
+  // === IMAGE CONTAINER ===
   const imageContainer = document.createElement('div');
-  imageContainer.style.position = 'relative';
-  imageContainer.style.display = 'inline-block';
-  imageContainer.style.width = '328px';
-  imageContainer.style.height = '328px';
-  imageContainer.style.overflow = 'hidden';
-  imageContainer.style.borderRadius = '20px'; // optional rounding to match popup
+  Object.assign(imageContainer.style, {
+    position: 'relative',
+    width: '100%',
+    height: '400px', // fixed height so popup size doesn’t change
+    overflow: 'hidden',
+    borderRadius: '20px',
+  });
 
   const sprite = document.createElement('img');
-  sprite.src = getSpritePath(char);
-  sprite.alt = char.name;
+sprite.src = getSpritePath(char);
+sprite.alt = char.name;
+sprite.style.width = '100%';
+sprite.style.height = '100%';
+sprite.style.display = 'block';
+sprite.style.objectFit = 'cover';
+sprite.style.objectPosition = 'center top';
 
-  // This zooms and crops the image centered
-  sprite.style.width = '100%';
-  sprite.style.height = '100%';
-  sprite.style.objectFit = 'cover';
+// Apply fading masks inline
+sprite.style.WebkitMaskImage = `
+  linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+  linear-gradient(to bottom, black 85%, transparent 100%)
+`;
+sprite.style.maskImage = `
+  linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+  linear-gradient(to bottom, black 85%, transparent 100%)
+`;
+sprite.style.WebkitMaskComposite = 'destination-in';
+sprite.style.maskComposite = 'intersect';
 
-  sprite.onerror = () => { sprite.style.display = 'none'; };
+sprite.onerror = () => {
+  sprite.style.display = 'none';
+};
 
-  
- sprite.classList.add('sprite-fade');
+// Once the image loads, adjust based on aspect ratio
+sprite.onload = () => {
+  const aspectRatio = sprite.naturalWidth / sprite.naturalHeight;
+
+  if (aspectRatio < 0.65) {
+    // Portrait → show more head/upper body
+    sprite.style.objectFit = 'contain';
+    sprite.style.objectPosition = 'center top';
+    sprite.style.transform = 'scale(1.15)'; // Slight zoom-in for better crop
+  } else {
+    // Wide → normal crop
+    sprite.style.objectFit = 'cover';
+    sprite.style.objectPosition = 'center top';
+    sprite.style.transform = '';
+  }
+};
+
+
+  sprite.onerror = () => {
+    sprite.style.display = 'none';
+  };
 
   const closeButton = document.createElement('button');
   closeButton.textContent = '✕';
@@ -236,17 +272,17 @@ function createCharacterPopup(char, getSpritePath) {
   imageContainer.appendChild(closeButton);
   popup.appendChild(imageContainer);
 
-  popup.style.paddingTop = '40px';
-
+  // === INFO BELOW IMAGE ===
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
   nameEl.style.margin = '10px 0 5px';
 
   const versionLine = document.createElement('div');
-  versionLine.classList.add('version-line');
-  versionLine.style.display = 'flex';
-  versionLine.style.justifyContent = 'center';
-  versionLine.style.alignItems = 'center';
+  Object.assign(versionLine.style, {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
 
   const versionEl = document.createElement('span');
   versionEl.textContent = `Version: ${char.version || 'N/A'}`;
@@ -269,6 +305,7 @@ function createCharacterPopup(char, getSpritePath) {
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
 
+  // === COUNTDOWN LOGIC ===
   function findMatchingVersionDates(charVersion) {
     for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
       if (gameData.date1vs === charVersion && gameData.date1) {
@@ -314,6 +351,7 @@ function createCharacterPopup(char, getSpritePath) {
     countdownInterval = setInterval(updateCountdown, 1000);
   }
 }
+
 
 async function showCharacterPopup(gameFolder, charIdOrName) {
   try {
