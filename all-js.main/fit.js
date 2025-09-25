@@ -1,6 +1,8 @@
 const charListEl = document.getElementById('charList');
 const searchInput = document.getElementById('searchInput');
 
+let allowSwipe = false; // Track current swipe state globally
+
 let selectedFilters = {
   have: false,
   want: false,
@@ -207,9 +209,9 @@ function showPopup(imgPath, altText, spriteList = []) {
     spriteList.length <= 1
   );
 
-  const allowSwipe = isArrayMode
-    ? imgPath.length > 1
-    : (!isFullPathSingle && spriteList.length > 1);
+  allowSwipe = isArrayMode
+  ? imgPath.length > 1
+  : (!isFullPathSingle && spriteList.length > 1);
 
   const totalImages = isArrayMode ? imgPath.length : spriteList.length;
 
@@ -381,18 +383,23 @@ updateThumbnailAlignment();
     document.addEventListener('keydown', function(event) {
       if (popup.style.display !== 'flex') return;
 
-      switch (event.key) {
-        case 'Escape':
-          popup.style.display = 'none';
-          break;
-        case 'ArrowRight':
-          nextImage();
-          break;
-        case 'ArrowLeft':
-          prevImage();
-          break;
+      if (event.key === 'Escape') {
+        popup.style.display = 'none';
+        return;
       }
-    });
+
+      if (!allowSwipe) return;
+
+  switch (event.key) {
+    case 'ArrowRight':
+      nextImage();
+      break;
+    case 'ArrowLeft':
+      prevImage();
+      break;
+  }
+});
+
 
     let touchStartX = 0;
     const handleTouchStart = e => (touchStartX = e.touches[0].clientX);
