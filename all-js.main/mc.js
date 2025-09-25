@@ -124,7 +124,7 @@ function renderList() {
     filteredChars = groupTypeBCharacters(filteredChars);
   }
 
-  const CURRENT_GAME = window.CHARA_CONFIG?.game || 'Genshin';
+  const CURRENT_GAME = (window.CHARA_CONFIG?.game || 'Genshin').charAt(0).toUpperCase() + (window.CHARA_CONFIG?.game || 'Genshin').slice(1).toLowerCase();
 
   filteredChars.forEach(c => {
   const card = document.createElement('div');
