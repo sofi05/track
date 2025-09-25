@@ -204,7 +204,6 @@ function createCharacterPopup(char, getSpritePath) {
   sprite.style.width = '100%';
   sprite.style.height = '100%';
   sprite.style.objectFit = 'cover';
-  sprite.style.objectPosition = 'center top';
 
   sprite.onerror = () => { sprite.style.display = 'none'; };
 

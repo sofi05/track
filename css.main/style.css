@@ -555,7 +555,7 @@ h1 {
 
 @media (max-width: 600px) {
   .sprite-fade {
-    object-position: center top; /* Move image up slightly */
+    object-position: center 25%; /* Move image up slightly */
   }
 
   .thumbnail-img {
