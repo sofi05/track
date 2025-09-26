@@ -192,6 +192,16 @@ function showPopup(imgPath, altText, spriteList = []) {
   thumbnailContainer.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
   thumbnailContainer.addEventListener('touchend', e => e.stopPropagation(), { passive: true });
 
+  thumbnailContainer.addEventListener('click', (e) => {
+    e.stopPropagation(); // ⛔ stop it from reaching the popup
+  });
+
+popup.addEventListener('click', (e) => {
+  if (e.target === popup) {
+    popup.style.display = 'none';
+  }
+});
+
   const defaultExt = '.webp';
 
   // Cleanup old swipe listeners
