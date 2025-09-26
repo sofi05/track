@@ -260,6 +260,8 @@ sprite.onerror = () => {
   lines.forEach(line => {
     const lineEl = document.createElement('div');
     lineEl.textContent = line;
+    lineEl.style.margin = '2px 0';   // small margin top and bottom
+    lineEl.style.lineHeight = '1.2'; 
     fallbackPlaceholder.appendChild(lineEl);
   });
 

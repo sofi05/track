@@ -1,3 +1,3 @@
 git add . 
-git commit -m "nice message when theres no sprite in index"
+git commit -m "fixed space in between on mobile"
 git push origin main  
