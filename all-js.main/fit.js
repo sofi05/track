@@ -275,6 +275,13 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
         thumb.alt = `${altText} - ${spriteList[i]}`;
       }
 
+      thumb.onload = () => {
+        loadedThumbs++;
+        if (loadedThumbs === totalImages) {
+          updateThumbnailAlignment(); // after all thumbs loaded
+        }
+      };
+
       let touchStartX = 0;
       let touchMoved = false;
 
@@ -411,14 +418,6 @@ updateThumbnailAlignment();
       break;
   }
 });
-
-thumb.onload = () => {
-  loadedThumbs++;
-  if (loadedThumbs === totalImages) {
-    updateThumbnailAlignment(); // after all thumbs loaded
-  }
-};
-
 
     let touchStartX = 0;
     const handleTouchStart = e => (touchStartX = e.touches[0].clientX);
