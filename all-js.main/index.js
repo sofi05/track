@@ -334,7 +334,18 @@ sprite.onload = () => {
   // === INFO BELOW IMAGE ===
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
-  nameEl.style.margin = '10px 0 5px';
+  nameEl.style.margin = '4px 0 2px';  // smaller margins
+  nameEl.style.lineHeight = '1.2';   // tighter line height
+
+  versionLine.style.margin = '0';
+  versionLine.style.lineHeight = '1.2';
+
+  versionEl.style.margin = '0 6px 0 0'; // if you want some horizontal spacing
+
+  countdownEl.style.margin = '0';
+
+  rarityEl.style.margin = '2px 0 4px';  // already small, but can try less like '1px 0 2px'
+  rarityEl.style.lineHeight = '1.2';
 
   const versionLine = document.createElement('div');
   Object.assign(versionLine.style, {
