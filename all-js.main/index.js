@@ -335,31 +335,33 @@ function createCharacterPopup(char, getSpritePath) {
 
   // ✅ Apply compact layout *after* all styles have been set
   if (isMobile) {
-    nameEl.style.margin = '4px 0';
-    nameEl.style.fontSize = '18px';
-    nameEl.style.lineHeight = '1.2';
-
-    versionEl.style.fontSize = '13px';
-    versionEl.style.lineHeight = '1.2';
-
-    countdownEl.style.fontSize = '12px';
-    countdownEl.style.lineHeight = '1.2';
-
-    versionLine.style.margin = '2px 0';
-
-    rarityEl.style.fontSize = '14px';
-    rarityEl.style.margin = '2px 0';
-    rarityEl.style.lineHeight = '1.2';
-
-  }
-
-  if (isMobile) {
+  // Name
+  nameEl.style.marginTop = '4px';
   nameEl.style.marginBottom = '2px';
+  nameEl.style.fontSize = '18px';
+  nameEl.style.lineHeight = '1.2';
+
+  // Version Line container (div)
   versionLine.style.marginTop = '2px';
   versionLine.style.marginBottom = '2px';
-  rarityEl.style.marginTop = '2px';
-}
 
+  // Version and countdown (spans)
+  versionEl.style.fontSize = '13px';
+  versionEl.style.lineHeight = '1.2';
+  countdownEl.style.fontSize = '12px';
+  countdownEl.style.lineHeight = '1.2';
+
+  // Rarity (p)
+  rarityEl.style.marginTop = '2px';
+  rarityEl.style.marginBottom = '4px';
+  rarityEl.style.fontSize = '14px';
+  rarityEl.style.lineHeight = '1.2';
+
+  // Optionally reduce the default margins/padding of these elements to prevent extra gaps
+  nameEl.style.padding = '0';
+  versionLine.style.padding = '0';
+  rarityEl.style.padding = '0';
+}
 
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
