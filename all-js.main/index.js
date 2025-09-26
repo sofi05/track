@@ -335,20 +335,21 @@ function createCharacterPopup(char, getSpritePath) {
 
   // ✅ Apply compact layout *after* all styles have been set
   if (isMobile) {
-    nameEl.style.margin = '6px 0 2px';
+    nameEl.style.margin = '4px 0';
     nameEl.style.fontSize = '18px';
+    nameEl.style.lineHeight = '1.2';
 
     versionEl.style.fontSize = '13px';
+    versionEl.style.lineHeight = '1.2';
+
     countdownEl.style.fontSize = '12px';
-    versionLine.style.marginBottom = '2px';
+    countdownEl.style.lineHeight = '1.2';
+
+    versionLine.style.margin = '2px 0';
 
     rarityEl.style.fontSize = '14px';
     rarityEl.style.margin = '2px 0';
-
-    popup.style.padding = '12px';
-    popup.style.width = '280px';
-    popup.style.minWidth = '180px';
-    imageContainer.style.height = '150px';
+    rarityEl.style.lineHeight = '1.2';
   }
 
   document.body.appendChild(backdrop);
