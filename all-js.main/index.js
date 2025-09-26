@@ -172,6 +172,8 @@ function createCharacterPopup(char, getSpritePath) {
   // === POPUP BOX ===
   const popup = document.createElement('div');
   popup.id = 'char-popup';
+  popup.classList.add('responsive-popup');
+
   Object.assign(popup.style, {
     position: 'fixed',
     top: '50%',

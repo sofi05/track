@@ -553,15 +553,15 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  #char-popup {
-    width: 90vw !important;  /* Smaller width on small screens */
+  .responsive-popup {
+    width: 90vw !important;
     max-width: 300px !important;
     height: auto !important;
-    max-height: 80vh !important; /* keep some vertical space */
-    overflow-y: auto;  /* scroll if content is taller */
+    max-height: 80vh !important;
+    overflow-y: auto;
   }
-  #char-popup > div {  /* imageContainer inside popup */
-    height: 60vw !important; /* smaller image container height */
+  .responsive-popup > div {
+    height: 60vw !important;
   }
 
   .thumbnail-img {
