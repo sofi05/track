@@ -559,8 +559,8 @@ h1 {
     max-height: 80vh !important;
     overflow-y: auto;
   }
-  .responsive-popup > div {
-    height: 60vw !important;
+  .responsive-popup .image-container {
+    height: 200px !important;
   }
 
   .thumbnail-img {
