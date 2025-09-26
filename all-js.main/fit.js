@@ -435,20 +435,14 @@ document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
 });
 document.getElementById('spritePopup').addEventListener('click', e => {
-  const popup = e.currentTarget;
-
-  // Instead of just image or thumbnailContainer, check for a general wrapper
-  const popupImg = document.getElementById('spritePopupImg');
   const thumbnailContainer = document.getElementById('thumbnailContainer');
-  const closeBtn = document.querySelector('.close-btn');
 
-  // Prevent closing if clicking on: image, thumbnails, or close button
-  const clickedInsideContent = popupImg.contains(e.target) ||
-                                thumbnailContainer.contains(e.target) ||
-                                closeBtn.contains(e.target);
+  // If the click is inside the thumbnails area, do NOT close
+  if (thumbnailContainer.contains(e.target)) return;
 
-  if (!clickedInsideContent) {
-    popup.style.display = 'none';
+  // Otherwise, close the popup
+  if (e.target.id === 'spritePopup') {
+    e.target.style.display = 'none';
   }
 });
 
