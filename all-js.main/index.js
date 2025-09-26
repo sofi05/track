@@ -306,21 +306,13 @@ function createCharacterPopup(char, getSpritePath) {
 
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
-  Object.assign(nameEl.style, {
-    margin: '0',
-    padding: '0',
-    fontSize: isMobile ? '18px' : '22px',
-    lineHeight: '1.2',
-  });
+  nameEl.style.margin = '10px 0 5px';
 
   const versionLine = document.createElement('div');
   Object.assign(versionLine.style, {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '4px',
-    margin: '4px 0',
-    padding: '0',
   });
 
   const versionEl = document.createElement('span');
@@ -359,27 +351,6 @@ function createCharacterPopup(char, getSpritePath) {
     rarityEl.style.margin = '2px 0';
     rarityEl.style.lineHeight = '1.2';
   }
-
-  Object.assign(versionEl.style, {
-  fontSize: isMobile ? '13px' : '14px',
-  lineHeight: '1.2',
-  margin: '0',
-  padding: '0',
-});
-Object.assign(countdownEl.style, {
-  fontSize: isMobile ? '12px' : '13px',
-  lineHeight: '1.2',
-  margin: '0',
-  padding: '0',
-});
-
-Object.assign(rarityEl.style, {
-  fontSize: isMobile ? '14px' : '16px',
-  margin: '0',
-  padding: '0',
-  lineHeight: '1.2',
-});
-
 
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
@@ -432,12 +403,6 @@ Object.assign(rarityEl.style, {
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 1000);
   }
-
-  [popup, nameEl, versionEl, countdownEl, rarityEl].forEach(el => {
-  el.style.margin = '0';
-  el.style.padding = '0';
-});
-
 }
 
 async function showCharacterPopup(gameFolder, charIdOrName) {

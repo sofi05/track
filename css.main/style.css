@@ -579,7 +579,6 @@ h1 {
     flex-wrap: nowrap;      /* <--- Prevent wrapping */
     white-space: nowrap;    /* <--- For horizontal flow */
     max-height: none;       /* <--- Let it expand if needed */
-    max-width: 100vw;
   }
 
   #thumbnailContainer::-webkit-scrollbar {
@@ -604,26 +603,6 @@ h1 {
     padding: 16px;
     box-sizing: border-box;
     overflow-y: auto;
-  }
-
-  html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-
-  .popup,
-  .popup-content,
-  .main-img-wrapper,
-  .popup-img,
-  .sprite-popup img,
-  #filterPopup {
-    max-width: 100vw !important;
-    overflow-x: hidden;
-  }
-
-  .bottom-nav {
-    box-sizing: border-box;
-    max-width: 100vw;
   }
 }
 
