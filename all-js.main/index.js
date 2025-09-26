@@ -345,6 +345,8 @@ if (isMobile) {
   versionEl.style.fontSize = '13px';
   countdownEl.style.fontSize = '12px';
   rarityEl.style.fontSize = '14px';
+  nameEl.style.backgroundColor = 'red';
+
 
   versionLine.style.display = 'flex';
   versionLine.style.flexWrap = 'wrap';
