@@ -253,10 +253,6 @@ sprite.onload = () => {
   }
 };
 
-  sprite.onerror = () => {
-    sprite.style.display = 'none';
-  };
-
   const closeButton = document.createElement('button');
   closeButton.textContent = '✕';
   Object.assign(closeButton.style, {
