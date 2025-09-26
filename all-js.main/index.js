@@ -350,7 +350,16 @@ function createCharacterPopup(char, getSpritePath) {
     rarityEl.style.fontSize = '14px';
     rarityEl.style.margin = '2px 0';
     rarityEl.style.lineHeight = '1.2';
+
   }
+
+  if (isMobile) {
+  nameEl.style.marginBottom = '2px';
+  versionLine.style.marginTop = '2px';
+  versionLine.style.marginBottom = '2px';
+  rarityEl.style.marginTop = '2px';
+}
+
 
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
