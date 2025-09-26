@@ -199,6 +199,16 @@ function createCharacterPopup(char, getSpritePath) {
     borderRadius: '20px',
   });
 
+  function onKeyDown(event) {
+  if (event.key === 'Escape') {
+    popup.remove();
+    backdrop.remove();
+    clearInterval(countdownInterval);
+    window.removeEventListener('keydown', onKeyDown);  // clean up listener
+  }
+}
+window.addEventListener('keydown', onKeyDown);
+
   const sprite = document.createElement('img');
 sprite.src = getSpritePath(char);
 sprite.alt = char.name;
