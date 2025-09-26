@@ -151,6 +151,8 @@ function createCharacterPopup(char, getSpritePath) {
   document.getElementById('char-popup')?.remove();
   document.getElementById('popup-backdrop')?.remove();
 
+  const isMobile = window.innerWidth <= 480; // ✅ Moved to top so it runs no matter what
+
   const backdrop = document.createElement('div');
   backdrop.id = 'popup-backdrop';
   Object.assign(backdrop.style, {
@@ -169,11 +171,9 @@ function createCharacterPopup(char, getSpritePath) {
     clearInterval(countdownInterval);
   });
 
-  // === POPUP BOX ===
   const popup = document.createElement('div');
   popup.id = 'char-popup';
   popup.classList.add('responsive-popup');
-
   Object.assign(popup.style, {
     position: 'fixed',
     top: '50%',
@@ -181,7 +181,7 @@ function createCharacterPopup(char, getSpritePath) {
     transform: 'translate(-50%, -50%)',
     background: '#222',
     color: '#fff',
-    padding: '20px',
+    padding: '20px',  // ✅ Will be overridden later for mobile
     borderRadius: '28px',
     boxShadow: '0 0 10px rgba(0,0,0,0.7)',
     zIndex: 10000,
@@ -191,119 +191,93 @@ function createCharacterPopup(char, getSpritePath) {
     maxWidth: '95vw',
   });
 
-  // === IMAGE CONTAINER ===
   const imageContainer = document.createElement('div');
   Object.assign(imageContainer.style, {
     position: 'relative',
     width: '100%',
-    height: '400px', // fixed height so popup size doesn’t change
+    height: '400px', // ✅ Will be overridden for mobile
     overflow: 'hidden',
     borderRadius: '20px',
   });
 
   function onKeyDown(event) {
-  if (event.key === 'Escape') {
-    popup.remove();
-    backdrop.remove();
-    clearInterval(countdownInterval);
-    window.removeEventListener('keydown', onKeyDown);  // clean up listener
+    if (event.key === 'Escape') {
+      popup.remove();
+      backdrop.remove();
+      clearInterval(countdownInterval);
+      window.removeEventListener('keydown', onKeyDown);
+    }
   }
-}
-window.addEventListener('keydown', onKeyDown);
+  window.addEventListener('keydown', onKeyDown);
 
   const sprite = document.createElement('img');
-sprite.src = getSpritePath(char);
-sprite.alt = char.name;
-sprite.style.width = '100%';
-sprite.style.height = '100%';
-sprite.style.display = 'block';
-sprite.style.objectFit = 'cover';
-sprite.style.objectPosition = 'center top';
+  sprite.src = getSpritePath(char);
+  sprite.alt = char.name;
+  sprite.style.width = '100%';
+  sprite.style.height = '100%';
+  sprite.style.display = 'block';
+  sprite.style.objectFit = 'cover';
+  sprite.style.objectPosition = 'center top';
 
-// Apply fading masks inline
-sprite.style.WebkitMaskImage = `
-  linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-  linear-gradient(to bottom, black 85%, transparent 100%)
-`;
-sprite.style.maskImage = `
-  linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-  linear-gradient(to bottom, black 85%, transparent 100%)
-`;
-sprite.style.WebkitMaskComposite = 'destination-in';
-sprite.style.maskComposite = 'intersect';
+  sprite.style.WebkitMaskImage = `
+    linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+    linear-gradient(to bottom, black 85%, transparent 100%)
+  `;
+  sprite.style.maskImage = `
+    linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+    linear-gradient(to bottom, black 85%, transparent 100%)
+  `;
+  sprite.style.WebkitMaskComposite = 'destination-in';
+  sprite.style.maskComposite = 'intersect';
 
-sprite.onerror = () => {
-  sprite.style.display = 'none';
+  sprite.onerror = () => {
+    sprite.style.display = 'none';
 
-  const fallbackPlaceholder = document.createElement('div');
+    const fallbackPlaceholder = document.createElement('div');
+    Object.assign(fallbackPlaceholder.style, {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#fff',
+      fontSize: '14px',
+      height: '200px',
+      width: '150px',
+      margin: '0 auto',
+      backgroundColor: '#333',
+      borderRadius: '20px',
+    });
 
-  fallbackPlaceholder.style.display = 'flex';
-  fallbackPlaceholder.style.flexDirection = 'column';
-  fallbackPlaceholder.style.justifyContent = 'center';
-  fallbackPlaceholder.style.alignItems = 'center';
-  fallbackPlaceholder.style.color = '#fff';
-  fallbackPlaceholder.style.fontSize = '14px';
-  fallbackPlaceholder.style.height = '200px';
-  fallbackPlaceholder.style.width = '150px';
-  fallbackPlaceholder.style.margin = '0 auto';
-  fallbackPlaceholder.style.backgroundColor = '#333';
-  fallbackPlaceholder.style.borderRadius = '20px';
+    fallbackPlaceholder.innerHTML = '';
+    const lines = ['Nothing here yet', '(－ω－)｡｡｡ zᶻᶻ'];
+    lines.forEach(line => {
+      const lineEl = document.createElement('div');
+      lineEl.textContent = line;
+      lineEl.style.margin = '2px 0';
+      lineEl.style.lineHeight = '1.2';
+      fallbackPlaceholder.appendChild(lineEl);
+    });
 
-  // Clear any existing content just in case
-  fallbackPlaceholder.innerHTML = '';
+    imageContainer.style.height = isMobile ? '150px' : '200px';
+    fallbackPlaceholder.style.width = isMobile ? '120px' : '150px';
+    fallbackPlaceholder.style.height = isMobile ? '150px' : '200px';
 
-  const lines = [
-    'Nothing here yet',
-    '(－ω－)｡｡｡ zᶻᶻ',
-  ];
+    imageContainer.appendChild(fallbackPlaceholder);
+  };
 
-  lines.forEach(line => {
-    const lineEl = document.createElement('div');
-    lineEl.textContent = line;
-    lineEl.style.margin = '2px 0';   // small margin top and bottom
-    lineEl.style.lineHeight = '1.2'; 
-    fallbackPlaceholder.appendChild(lineEl);
-  });
+  sprite.onload = () => {
+    const aspectRatio = sprite.naturalWidth / sprite.naturalHeight;
 
-  const isMobile = window.innerWidth <= 480; // or any breakpoint you want
-
-if (isMobile) {
-  fallbackPlaceholder.style.width = '120px';
-  fallbackPlaceholder.style.height = '150px';
-  popup.style.width = '240px';
-  popup.style.minWidth = '180px';
-  imageContainer.style.height = '150px';
-} else {
-  fallbackPlaceholder.style.width = '150px';
-  fallbackPlaceholder.style.height = '200px';
-  popup.style.width = '280px';
-  popup.style.minWidth = '200px';
-  imageContainer.style.height = '200px';
-}
-
-  popup.style.width = '280px';      // smaller width for popup
-  popup.style.minWidth = '180px';
-  imageContainer.style.height = '200px';
-
-  imageContainer.appendChild(fallbackPlaceholder);
-};
-
-// Once the image loads, adjust based on aspect ratio
-sprite.onload = () => {
-  const aspectRatio = sprite.naturalWidth / sprite.naturalHeight;
-
-  if (aspectRatio < 0.75) {
-    // Tall portrait images: show entire image from the top, no cropping
-    sprite.style.objectFit = 'contain';        // fits entire image inside container
-    sprite.style.objectPosition = 'top center';  // align image at top center
-    sprite.style.transform = '';              // no zoom
-  } else {
-    // Wide or square images: cover normally
-    sprite.style.objectFit = 'cover';
-    sprite.style.objectPosition = 'center center';
-    sprite.style.transform = '';
-  }
-};
+    if (aspectRatio < 0.75) {
+      sprite.style.objectFit = 'contain';
+      sprite.style.objectPosition = 'top center';
+      sprite.style.transform = '';
+    } else {
+      sprite.style.objectFit = 'cover';
+      sprite.style.objectPosition = 'center center';
+      sprite.style.transform = '';
+    }
+  };
 
   const closeButton = document.createElement('button');
   closeButton.textContent = '✕';
@@ -320,7 +294,6 @@ sprite.onload = () => {
     padding: '2px 6px',
     zIndex: 10,
   });
-
   closeButton.addEventListener('click', () => {
     popup.remove();
     backdrop.remove();
@@ -331,7 +304,6 @@ sprite.onload = () => {
   imageContainer.appendChild(closeButton);
   popup.appendChild(imageContainer);
 
-  // === INFO BELOW IMAGE ===
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
   nameEl.style.margin = '10px 0 5px';
@@ -361,25 +333,28 @@ sprite.onload = () => {
   popup.appendChild(versionLine);
   popup.appendChild(rarityEl);
 
+  // ✅ Apply compact layout *after* all styles have been set
+  if (isMobile) {
+    nameEl.style.margin = '6px 0 2px';
+    nameEl.style.fontSize = '18px';
+
+    versionEl.style.fontSize = '13px';
+    countdownEl.style.fontSize = '12px';
+    versionLine.style.marginBottom = '2px';
+
+    rarityEl.style.fontSize = '14px';
+    rarityEl.style.margin = '2px 0';
+
+    popup.style.padding = '12px';
+    popup.style.width = '280px';
+    popup.style.minWidth = '180px';
+    imageContainer.style.height = '150px';
+  }
+
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
 
-  // === Apply compact spacing on mobile ===
-if (isMobile) {
-  nameEl.style.margin = '6px 0 2px';
-  nameEl.style.fontSize = '18px';
-
-  versionEl.style.fontSize = '13px';
-  countdownEl.style.fontSize = '12px';
-  versionLine.style.marginBottom = '2px';
-
-  rarityEl.style.fontSize = '14px';
-  rarityEl.style.margin = '2px 0';
-
-  popup.style.padding = '12px';
-}
-
-  // === COUNTDOWN LOGIC ===
+  // === COUNTDOWN ===
   function findMatchingVersionDates(charVersion) {
     for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
       if (gameData.date1vs === charVersion && gameData.date1) {
@@ -399,12 +374,15 @@ if (isMobile) {
       countdownEl.textContent = '';
       return;
     }
+
     const now = new Date();
     const diff = match.targetDate - now;
+
     if (diff <= 0) {
       countdownEl.textContent = ' (Released)';
       return;
     }
+
     const seconds = Math.floor(diff / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
@@ -425,7 +403,6 @@ if (isMobile) {
     countdownInterval = setInterval(updateCountdown, 1000);
   }
 }
-
 
 async function showCharacterPopup(gameFolder, charIdOrName) {
   try {
