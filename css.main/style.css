@@ -516,23 +516,33 @@ h1 {
   width: 48px;
   height: 64px;
   object-fit: cover;
-  overflow: hidden;
-  position: relative;
-  object-position: top center; 
-  border-radius: 4px;
+  object-position: center center;
+  display: block;
   border: 2px solid transparent;
+  border-radius: 4px;
   flex-shrink: 0;
   scroll-snap-align: center;
   cursor: pointer;
-  transition: border 0.2s ease-in-out;
-  user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  display: block;
   pointer-events: auto;
   touch-action: manipulation;
+  position: relative; /* Important */
+  z-index: 2;          /* Make sure it’s above popup bg */
+  background-color: transparent; /* Force box */
+  box-sizing: content-box;
 }
+
+.thumbnail-wrapper {
+  width: 48px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
 
 .thumbnail-wrapper img {
   position: absolute;

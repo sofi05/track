@@ -187,21 +187,13 @@ function showPopup(imgPath, altText, spriteList = []) {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const thumbnailContainer = document.getElementById('thumbnailContainer');
-  // Prevent thumbnail swipe from affecting the popup swipe
+
+  // Prevent thumbnail swipe from affecting popup swipe
   thumbnailContainer.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
   thumbnailContainer.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
   thumbnailContainer.addEventListener('touchend', e => e.stopPropagation(), { passive: true });
 
-  thumbnailContainer.addEventListener('click', (e) => {
-    e.stopPropagation(); // ⛔ stop it from reaching the popup
-  });
-
-popup.addEventListener('click', (e) => {
-  const isInsideThumbnail = thumbnailContainer.contains(e.target);
-  if (!isInsideThumbnail && e.target === popup) {
-    popup.style.display = 'none';
-  }
-});
+  thumbnailContainer.addEventListener('click', e => e.stopPropagation());
 
   const defaultExt = '.webp';
 
@@ -221,44 +213,44 @@ popup.addEventListener('click', (e) => {
   );
 
   allowSwipe = isArrayMode
-  ? imgPath.length > 1
-  : (!isFullPathSingle && spriteList.length > 1);
+    ? imgPath.length > 1
+    : (!isFullPathSingle && spriteList.length > 1);
 
   const totalImages = isArrayMode ? imgPath.length : spriteList.length;
 
   // Clear previous thumbnails
   thumbnailContainer.innerHTML = '';
 
-  // Enable drag-to-scroll on thumbnail container
-let isDragging = false;
-let startX, scrollLeftStart;
+  // Enable drag-to-scroll on thumbnails
+  let isDragging = false;
+  let startX, scrollLeftStart;
 
-thumbnailContainer.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  startX = e.pageX - thumbnailContainer.offsetLeft;
-  scrollLeftStart = thumbnailContainer.scrollLeft;
-  thumbnailContainer.classList.add('dragging'); // Optional: style on drag
-});
+  thumbnailContainer.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - thumbnailContainer.offsetLeft;
+    scrollLeftStart = thumbnailContainer.scrollLeft;
+    thumbnailContainer.classList.add('dragging');
+  });
 
-thumbnailContainer.addEventListener('mouseleave', () => {
-  isDragging = false;
-  thumbnailContainer.classList.remove('dragging');
-});
+  thumbnailContainer.addEventListener('mouseleave', () => {
+    isDragging = false;
+    thumbnailContainer.classList.remove('dragging');
+  });
 
-thumbnailContainer.addEventListener('mouseup', () => {
-  isDragging = false;
-  thumbnailContainer.classList.remove('dragging');
-});
+  thumbnailContainer.addEventListener('mouseup', () => {
+    isDragging = false;
+    thumbnailContainer.classList.remove('dragging');
+  });
 
-thumbnailContainer.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
-  e.preventDefault();
-  const x = e.pageX - thumbnailContainer.offsetLeft;
-  const walk = (x - startX) * 1.5; // scroll speed multiplier
-  thumbnailContainer.scrollLeft = scrollLeftStart - walk;
-});
+  thumbnailContainer.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - thumbnailContainer.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    thumbnailContainer.scrollLeft = scrollLeftStart - walk;
+  });
 
-  // Show thumbnails if multiple images
+  // Show thumbnails
   if (totalImages > 1) {
     thumbnailContainer.style.display = 'flex';
 
@@ -278,7 +270,7 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
       thumb.onload = () => {
         loadedThumbs++;
         if (loadedThumbs === totalImages) {
-          updateThumbnailAlignment(); // after all thumbs loaded
+          updateThumbnailAlignment();
         }
       };
 
@@ -297,6 +289,7 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
 
       thumb.addEventListener('touchend', e => {
         if (!touchMoved) {
+          e.stopPropagation();
           showImageAt(i);
           Array.from(thumbnailContainer.children).forEach((t, idx) => {
             t.classList.toggle('selected', idx === i);
@@ -304,8 +297,8 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
         }
       });
 
-      // Also keep mouse click for desktop
-      thumb.addEventListener('click', () => {
+      thumb.addEventListener('click', (e) => {
+        e.stopPropagation();
         showImageAt(i);
         Array.from(thumbnailContainer.children).forEach((t, idx) => {
           t.classList.toggle('selected', idx === i);
@@ -318,23 +311,20 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
     thumbnailContainer.style.display = 'none';
   }
 
-setTimeout(() => {
-  thumbnailContainer.scrollLeft = 0;
-}, 0);
-  
-function updateThumbnailAlignment() {
-  const container = document.getElementById('thumbnailContainer');
-  const thumbsCount = container.children.length;
+  setTimeout(() => {
+    thumbnailContainer.scrollLeft = 0;
+  }, 0);
 
-  if (thumbsCount < 5) {
-    container.style.justifyContent = 'center';  // center for few thumbs
-  } else {
-    container.style.justifyContent = 'flex-start';  // scroll left for many thumbs
+  function updateThumbnailAlignment() {
+    const thumbsCount = thumbnailContainer.children.length;
+    if (thumbsCount < 5) {
+      thumbnailContainer.style.justifyContent = 'center';
+    } else {
+      thumbnailContainer.style.justifyContent = 'flex-start';
+    }
   }
-}
 
-// Call this after thumbnails are generated or updated:
-updateThumbnailAlignment();
+  updateThumbnailAlignment();
 
   function showImageAt(idx) {
     index = idx;
@@ -367,11 +357,10 @@ updateThumbnailAlignment();
       popupImg.style.visibility = 'hidden';
     };
 
-    // Update thumbnail highlight
+    // Highlight selected thumb
     Array.from(thumbnailContainer.querySelectorAll('.thumbnail-img')).forEach((img, i) => {
       img.classList.toggle('selected', i === idx);
     });
-
   }
 
   function nextImage() {
@@ -388,7 +377,7 @@ updateThumbnailAlignment();
     showImageAt(index);
   }
 
-  // Show/hide arrow buttons
+  // Arrow key and swipe support
   if (!allowSwipe) {
     prevBtn.style.display = 'none';
     nextBtn.style.display = 'none';
@@ -399,25 +388,23 @@ updateThumbnailAlignment();
     prevBtn.onclick = prevImage;
     nextBtn.onclick = nextImage;
 
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
       if (popup.style.display !== 'flex') return;
-
       if (event.key === 'Escape') {
         popup.style.display = 'none';
         return;
       }
-
       if (!allowSwipe) return;
 
-  switch (event.key) {
-    case 'ArrowRight':
-      nextImage();
-      break;
-    case 'ArrowLeft':
-      prevImage();
-      break;
-  }
-});
+      switch (event.key) {
+        case 'ArrowRight':
+          nextImage();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+      }
+    });
 
     let touchStartX = 0;
     const handleTouchStart = e => (touchStartX = e.touches[0].clientX);
@@ -439,6 +426,7 @@ updateThumbnailAlignment();
   showImageAt(0);
   popup.style.display = 'flex';
 }
+
 
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
