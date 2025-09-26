@@ -435,7 +435,14 @@ document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
 });
 document.getElementById('spritePopup').addEventListener('click', e => {
-  if (e.target.id === 'spritePopup') e.target.style.display = 'none';
+  const popup = e.currentTarget;
+  const img = document.getElementById('spritePopupImg');
+  const thumbnailContainer = document.getElementById('thumbnailContainer');
+
+  // If the click was NOT on the image or thumbnail container or any of their children, close it
+  if (!img.contains(e.target) && !thumbnailContainer.contains(e.target)) {
+    popup.style.display = 'none';
+  }
 });
 
 const filterBtn = document.getElementById('filterBtn');

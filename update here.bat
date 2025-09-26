@@ -1,3 +1,3 @@
 git add . 
-git commit -m "forgot to update html for a few"
+git commit -m "fixing mobile problem with thumbnail"
 git push origin main  
