@@ -341,7 +341,7 @@ function createCharacterPopup(char, getSpritePath) {
     popup.style.padding = '12px';
     popup.style.width = '280px';
     popup.style.minWidth = '180px';
-    imageContainer.style.height = '150px';
+    imageContainer.style.height = 'auto';
   }
 
   document.body.appendChild(backdrop);
