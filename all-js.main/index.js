@@ -334,25 +334,15 @@ function createCharacterPopup(char, getSpritePath) {
   popup.appendChild(rarityEl);
 
   // ✅ Apply compact layout *after* all styles have been set
-if (isMobile) {
-  [nameEl, versionLine, versionEl, countdownEl, rarityEl].forEach(el => {
-    el.style.margin = '0';
-    el.style.padding = '0';
-    el.style.lineHeight = '1.1';  // tight
-  });
+  if (isMobile) {
+    nameEl.style.margin = '6px 0 2px';
+    nameEl.style.fontSize = '18px';
 
-  nameEl.style.fontSize = '18px';
-  versionEl.style.fontSize = '13px';
-  countdownEl.style.fontSize = '12px';
-  rarityEl.style.fontSize = '14px';
-  nameEl.style.backgroundColor = 'red';
-
-
-  versionLine.style.display = 'flex';
-  versionLine.style.flexWrap = 'wrap';
-  versionLine.style.justifyContent = 'center';
-  versionLine.style.gap = '4px'; // small gap between version & countdown
-}
+    popup.style.padding = '12px';
+    popup.style.width = '280px';
+    popup.style.minWidth = '180px';
+    imageContainer.style.height = '150px';
+  }
 
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
