@@ -334,18 +334,29 @@ sprite.onload = () => {
   // === INFO BELOW IMAGE ===
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
-  nameEl.style.margin = '4px 0 2px';  // smaller margins
-  nameEl.style.lineHeight = '1.2';   // tighter line height
+  // Name (h2)
+nameEl.style.margin = '4px 0 2px';
+nameEl.style.lineHeight = '1.2';
 
-  versionLine.style.margin = '0';
-  versionLine.style.lineHeight = '1.2';
+// Version line container (div)
+versionLine.style.margin = '0';
+versionLine.style.lineHeight = '1.2';
+versionLine.style.display = 'flex';
+versionLine.style.justifyContent = 'center';
+versionLine.style.alignItems = 'center';
 
-  versionEl.style.margin = '0 6px 0 0'; // if you want some horizontal spacing
+// Version text (span)
+versionEl.style.margin = '0 6px 0 0';  // right margin for spacing from countdown
+versionEl.style.lineHeight = '1.2';
 
-  countdownEl.style.margin = '0';
+// Countdown text (span)
+countdownEl.style.margin = '0';
+countdownEl.style.lineHeight = '1.2';
 
-  rarityEl.style.margin = '2px 0 4px';  // already small, but can try less like '1px 0 2px'
-  rarityEl.style.lineHeight = '1.2';
+// Rarity paragraph (p)
+rarityEl.style.margin = '2px 0 4px';
+rarityEl.style.lineHeight = '1.2';
+
 
   const versionLine = document.createElement('div');
   Object.assign(versionLine.style, {
