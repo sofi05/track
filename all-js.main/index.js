@@ -265,6 +265,22 @@ sprite.onerror = () => {
     fallbackPlaceholder.appendChild(lineEl);
   });
 
+  const isMobile = window.innerWidth <= 480; // or any breakpoint you want
+
+if (isMobile) {
+  fallbackPlaceholder.style.width = '120px';
+  fallbackPlaceholder.style.height = '150px';
+  popup.style.width = '240px';
+  popup.style.minWidth = '180px';
+  imageContainer.style.height = '150px';
+} else {
+  fallbackPlaceholder.style.width = '150px';
+  fallbackPlaceholder.style.height = '200px';
+  popup.style.width = '280px';
+  popup.style.minWidth = '200px';
+  imageContainer.style.height = '200px';
+}
+
   popup.style.width = '280px';      // smaller width for popup
   popup.style.minWidth = '180px';
   imageContainer.style.height = '200px';
