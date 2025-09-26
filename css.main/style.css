@@ -418,19 +418,33 @@ h1 {
 }
 
 .sprite-popup img {
-  max-height: 90%;
+  max-height: 90vh;
   border-radius: 12px;
+  display: block;
+  width: 100%;      /* fill the wrapper */
+  height: auto;  
+}
+
+.sprite-popup .popup-wrapper {
+  position: relative;  
+  display: inline-block;
+  max-width: 90vw;  
+  max-height: 90vh;
 }
 
 .sprite-popup .close-btn {
   position: absolute;
-  top: 30px;
-  right: 40px;
   font-size: 28px;
   font-weight: bold;
   color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 4px;
   cursor: pointer;
   user-select: none;
+  top: 8%;
+  right: 8%;
+  z-index: 10;
 }
 
 .popup {
