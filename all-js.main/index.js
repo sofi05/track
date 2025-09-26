@@ -234,6 +234,40 @@ sprite.style.maskComposite = 'intersect';
 
 sprite.onerror = () => {
   sprite.style.display = 'none';
+
+  const fallbackPlaceholder = document.createElement('div');
+
+  fallbackPlaceholder.style.display = 'flex';
+  fallbackPlaceholder.style.flexDirection = 'column';
+  fallbackPlaceholder.style.justifyContent = 'center';
+  fallbackPlaceholder.style.alignItems = 'center';
+  fallbackPlaceholder.style.color = '#fff';
+  fallbackPlaceholder.style.fontSize = '14px';
+  fallbackPlaceholder.style.height = '200px';
+  fallbackPlaceholder.style.width = '150px';
+  fallbackPlaceholder.style.margin = '0 auto';
+  fallbackPlaceholder.style.backgroundColor = '#333';
+  fallbackPlaceholder.style.borderRadius = '20px';
+
+  // Clear any existing content just in case
+  fallbackPlaceholder.innerHTML = '';
+
+  const lines = [
+    'Nothing here yet',
+    '(－ω－)｡｡｡ zᶻᶻ',
+  ];
+
+  lines.forEach(line => {
+    const lineEl = document.createElement('div');
+    lineEl.textContent = line;
+    fallbackPlaceholder.appendChild(lineEl);
+  });
+
+  popup.style.width = '280px';      // smaller width for popup
+  popup.style.minWidth = '180px';
+  imageContainer.style.height = '200px';
+
+  imageContainer.appendChild(fallbackPlaceholder);
 };
 
 // Once the image loads, adjust based on aspect ratio
