@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed space in between on mobile"
+git commit -m "fix the space in between ksdfnjskd"
 git push origin main  

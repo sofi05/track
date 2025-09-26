@@ -334,29 +334,7 @@ sprite.onload = () => {
   // === INFO BELOW IMAGE ===
   const nameEl = document.createElement('h2');
   nameEl.textContent = char.name;
-  // Name (h2)
-nameEl.style.margin = '4px 0 2px';
-nameEl.style.lineHeight = '1.2';
-
-// Version line container (div)
-versionLine.style.margin = '0';
-versionLine.style.lineHeight = '1.2';
-versionLine.style.display = 'flex';
-versionLine.style.justifyContent = 'center';
-versionLine.style.alignItems = 'center';
-
-// Version text (span)
-versionEl.style.margin = '0 6px 0 0';  // right margin for spacing from countdown
-versionEl.style.lineHeight = '1.2';
-
-// Countdown text (span)
-countdownEl.style.margin = '0';
-countdownEl.style.lineHeight = '1.2';
-
-// Rarity paragraph (p)
-rarityEl.style.margin = '2px 0 4px';
-rarityEl.style.lineHeight = '1.2';
-
+  nameEl.style.margin = '10px 0 5px';
 
   const versionLine = document.createElement('div');
   Object.assign(versionLine.style, {
