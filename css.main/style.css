@@ -530,6 +530,8 @@ h1 {
   -webkit-user-select: none;
   -moz-user-select: none;
   display: block;
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 
 .thumbnail-wrapper img {

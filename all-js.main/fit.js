@@ -197,7 +197,8 @@ function showPopup(imgPath, altText, spriteList = []) {
   });
 
 popup.addEventListener('click', (e) => {
-  if (e.target === popup) {
+  const isInsideThumbnail = thumbnailContainer.contains(e.target);
+  if (!isInsideThumbnail && e.target === popup) {
     popup.style.display = 'none';
   }
 });
@@ -261,6 +262,7 @@ thumbnailContainer.addEventListener('mousemove', (e) => {
   if (totalImages > 1) {
     thumbnailContainer.style.display = 'flex';
 
+    let loadedThumbs = 0;
     for (let i = 0; i < totalImages; i++) {
       const thumb = document.createElement('img');
       thumb.className = 'thumbnail-img';
@@ -409,6 +411,13 @@ updateThumbnailAlignment();
       break;
   }
 });
+
+thumb.onload = () => {
+  loadedThumbs++;
+  if (loadedThumbs === totalImages) {
+    updateThumbnailAlignment(); // after all thumbs loaded
+  }
+};
 
 
     let touchStartX = 0;
