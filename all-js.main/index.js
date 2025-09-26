@@ -364,6 +364,21 @@ sprite.onload = () => {
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
 
+  // === Apply compact spacing on mobile ===
+if (isMobile) {
+  nameEl.style.margin = '6px 0 2px';
+  nameEl.style.fontSize = '18px';
+
+  versionEl.style.fontSize = '13px';
+  countdownEl.style.fontSize = '12px';
+  versionLine.style.marginBottom = '2px';
+
+  rarityEl.style.fontSize = '14px';
+  rarityEl.style.margin = '2px 0';
+
+  popup.style.padding = '12px';
+}
+
   // === COUNTDOWN LOGIC ===
   function findMatchingVersionDates(charVersion) {
     for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
