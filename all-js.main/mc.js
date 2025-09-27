@@ -51,7 +51,9 @@ function groupTypeBCharacters(characters) {
 
   characters.forEach(char => {
     const key = `${char.name}_${char.gender}`;
-    const elementsArray = Array.isArray(char.element) ? [...char.element] : [char.element];
+    const elementsArray = Array.isArray(char.element)
+    ? char.element.filter(el => el != null)
+    : (char.element != null ? [char.element] : []);
 
     if (!map.has(key)) {
       map.set(key, {
@@ -155,24 +157,23 @@ function renderList() {
     iconWrapper.appendChild(soonLabel);
   }
 
-  // ONLY add element icon IF typeB
-  if (isTypeB) {
+  // ONLY add element icon IF typeB AND has elements
+  if (isTypeB && Array.isArray(c.elements) && c.elements.length > 0) {
     const elementIcon = document.createElement('div');
     elementIcon.className = 'element-icon';
 
-    if (c.elements && c.elements.length > 1) {
+    if (c.elements.length > 1) {
       let index = 0;
       const updateIcon = () => {
-      const el = c.elements[index % c.elements.length];
-      elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${el}.png')`;
-      elementIcon.title = el;
-      index++;
+        const el = c.elements[index % c.elements.length];
+        elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${el}.png')`;
+        elementIcon.title = el;
+        index++;
       };
       updateIcon();
       setInterval(updateIcon, 1000);
     } else {
-      // fallback: single element in elements array or c.element string
-      const singleElement = (c.elements && c.elements.length) ? c.elements[0] : c.element;
+      const singleElement = c.elements[0];
       elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${singleElement}.png')`;
       elementIcon.title = singleElement;
     }
