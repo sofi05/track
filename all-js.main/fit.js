@@ -441,14 +441,23 @@ document.querySelector('.close-btn').addEventListener('click', () => {
   document.getElementById('spritePopup').style.display = 'none';
 });
 document.getElementById('spritePopup').addEventListener('click', e => {
+  const popup = e.currentTarget;
   const thumbnailContainer = document.getElementById('thumbnailContainer');
 
-  // If the click is inside the thumbnails area, do NOT close
-  if (thumbnailContainer.contains(e.target)) return;
+  // Don't close if clicking inside popup children (like thumbnails, image, buttons)
+  if (
+    thumbnailContainer.contains(e.target) ||
+    document.getElementById('spritePopupImg').contains(e.target) ||
+    document.getElementById('prevBtn').contains(e.target) ||
+    document.getElementById('nextBtn').contains(e.target) ||
+    document.querySelector('.close-btn').contains(e.target)
+  ) {
+    return;
+  }
 
-  // Otherwise, close the popup
-  if (e.target.id === 'spritePopup') {
-    e.target.style.display = 'none';
+  // Close only when truly clicking the background (overlay) area
+  if (e.target === popup) {
+    popup.style.display = 'none';
   }
 });
 
@@ -496,4 +505,8 @@ window.addEventListener('resize', () => {
   if (popup) {
     popup.style.height = window.innerHeight + 'px';
   }
+});
+
+document.getElementById('thumbnailContainer').addEventListener('click', e => {
+  e.stopPropagation(); // Prevent clicks from bubbling to the popup background
 });

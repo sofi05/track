@@ -159,7 +159,7 @@ h1 {
   background-size: cover;
   background-position: center;
   border-radius: 50%; 
-  z-index: 10; /* Ensure it sits above the character image */
+  z-index: 10001; /* Ensure it sits above the character image */
   border: none !important; 
   outline: none !important; 
   background-color: rgba(0, 0, 0, 0.171); /*eh might remove this*/
@@ -586,10 +586,11 @@ h1 {
     padding: 6px 4px;
     gap: 4px;
     overflow-x: auto;
-    overflow-y: hidden;     /* <--- Make sure vertical scrolling is disabled */
-    flex-wrap: nowrap;      /* <--- Prevent wrapping */
-    white-space: nowrap;    /* <--- For horizontal flow */
-    max-height: none;       /* <--- Let it expand if needed */
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-height: none;
+    justify-content: center !important;
   }
 
   #thumbnailContainer::-webkit-scrollbar {
