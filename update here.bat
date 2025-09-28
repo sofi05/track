@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated some assets + fixed title on some pages"
+git commit -m "two changes in two css, testing for mobile"
 git push origin main  

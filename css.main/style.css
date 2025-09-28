@@ -840,3 +840,23 @@ input:checked + .slider2:before {
   text-align: center;
   color: #666;
 }
+
+/* Mobile-specific adjustments for chara page images */
+@media (max-width: 768px) {
+  /* Make all character images scale to container width */
+  .game-page img, 
+  .char-card img,
+  .sprite-popup img {
+    max-width: 95vw;   /* fill most of the screen */
+    height: auto;      /* keep aspect ratio */
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;    /* center images */
+  }
+
+  /* Ensure popup wrapper fits screen */
+  .sprite-popup .popup-wrapper {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+}

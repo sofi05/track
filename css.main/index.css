@@ -1,15 +1,42 @@
 #new-characters, #reruns {
-  margin-bottom: 40px; /* Unified margin for both sections */
+  margin-bottom: 40px;
 }
 
 .slider {
   display: flex;
   overflow-x: auto;
   gap: 20px;
-  padding: 10px 0 10px 10px; /* Combined padding values */
+  padding: 10px 0 10px 10px;
   justify-content: flex-start;
-  scrollbar-width: thin; /* Adjust scroll bar for better look */
-  scrollbar-color: #bbb #222; /* Scrollbar thumb and track for dark mode */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+
+.slider::-webkit-scrollbar {
+  height: 4px;
+}
+
+.slider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slider::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  transition: background 0.3s, opacity 0.3s;
+  opacity: 0.1;
+}
+
+.slider:hover::-webkit-scrollbar-thumb,
+.slider:active::-webkit-scrollbar-thumb {
+  opacity: 0.35;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 768px) {
+  .slider::-webkit-scrollbar {
+    height: 1px;
+  }
 }
 
 .version-group {
@@ -21,7 +48,7 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 50px;
-  color: #eee; /* Lighter text for dark background */
+  color: #eee;
 }
 
 .version-group .char-card {
@@ -29,7 +56,7 @@
 }
 
 .version-box {
-  background-color: #2c2c2c; /* Dark gray */
+  background-color: #2c2c2c;
   border-radius: 8px;
   padding: 10px;
   text-align: center;
@@ -39,7 +66,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ddd; /* Lighter text */
+  color: #ddd;
 }
 
 .version-box h3 {
@@ -68,10 +95,9 @@
 }
 
 .version-box.version-match {
-  outline: 3px solid #2a9c63; /* bright green */
+  outline: 3px solid #2a9c63;
   outline-offset: -2px;
 }
-
 
 .icon-wrapper {
   position: relative;
@@ -79,7 +105,7 @@
   height: 80px;
   border-radius: 12px;
   box-sizing: border-box;
-  background-color: transparent; /* Set dynamically */
+  background-color: transparent;
   overflow: hidden;
 }
 
@@ -100,6 +126,8 @@
   position: absolute;
   width: 18px;
   height: 18px;
+  top: 2px;
+  left: 2px;
   border-radius: 0;
   background: transparent;
   border: none;
@@ -107,11 +135,6 @@
   pointer-events: none;
   box-shadow: none;
   z-index: 10;
-}
-
-.icon-wrapper > .element-icon {
-  top: 2px;
-  left: 2px;
 }
 
 .no-results {
@@ -122,7 +145,7 @@
   font-style: italic;
   padding: 20px;
   border-radius: 5px;
-  background-color: #222; /* Dark background */
+  background-color: #222;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
@@ -139,7 +162,7 @@
 }
 
 #filterPopup {
-  display: none; /* Hidden by default */
+  display: none;
   position: absolute;
   top: 60px;
   left: 20px;
