@@ -526,7 +526,7 @@ h1 {
   pointer-events: auto;
   touch-action: manipulation;
   position: relative; /* Important */
-  z-index: 2;          /* Make sure it’s above popup bg */
+  z-index: 10001;          /* Make sure it’s above popup bg */
   background-color: transparent; /* Force box */
   box-sizing: content-box;
 }
