@@ -490,47 +490,28 @@ h1 {
 
 #thumbnailContainer {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
-  gap: 6px;
-  padding: 8px;
-  margin-top: 12px;
+  justify-content: center;
+  gap: 5px;
+  overflow-x: auto;               /* enable horizontal scrolling */
   width: 100%;
-  max-width: calc(7 * 48px + 6 * 6px); /* enough for ~5 thumbs (or just do it: calc(5 * 48px + 6 * 6px)) */
-  max-height: 50px;
-  box-sizing: border-box;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(180, 180, 180, 0.3) transparent;
-  position: relative;
-  z-index: 10001; /* Raise above image */
-  margin-left: auto;
-  margin-right: auto;
-  scroll-behavior: smooth;
+  max-width: 600px;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 0;
+  background: rgba(0,0,0,0.3);    /* semi-transparent background */
+  scrollbar-width: thin;          /* Firefox */
+  scrollbar-color: rgba(200,200,200,0.5) transparent; /* Firefox */
 }
 
 .thumbnail-img {
-  width: 48px;
-  height: 64px;
-  min-height: 64px;
-  min-width: 48px;
-  object-fit: cover;
-  object-position: center center;
-  display: block;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  flex-shrink: 0;
-  scroll-snap-align: center;
+  flex: 0 0 calc(20% - 4px);      /* 5 thumbs = 20% width each minus gap */
+  height: 60px;                    /* fixed height for all thumbs */
+  object-fit: cover;               /* crop to fit box without stretching */
   cursor: pointer;
-  pointer-events: auto;
-  touch-action: manipulation;
-  position: relative; /* Important */
-  z-index: 10001;          /* Make sure it’s above popup bg */
-  background-color: transparent; /* Force box */
-  box-sizing: content-box;
+  border: 2px solid transparent;   /* border for selection effect */
+  transition: border 0.2s;
 }
 
 .thumbnail-wrapper {
@@ -561,6 +542,21 @@ h1 {
 #thumbnailContainer::-webkit-scrollbar-thumb {
   background-color: none;
   border-radius: 3px;
+}
+
+.thumbnail-img:hover {
+  transform: scale(1.05);
+}
+
+/* Center the image slider inside popup */
+#popup-slider {
+  display: flex;
+  justify-content: center;   /* center images horizontally */
+  align-items: center;       /* center vertically */
+  height: 100%;
+  overflow-x: auto;          /* allow horizontal scrolling */
+  scroll-behavior: smooth;
+  padding-bottom: 60px; 
 }
 
 .thumbnail-img.selected {
