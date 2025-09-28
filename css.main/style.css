@@ -845,7 +845,6 @@ input:checked + .slider2:before {
 @media (max-width: 768px) {
   /* Make all character images scale to container width */
   .game-page img, 
-  .char-card img,
   .sprite-popup img {
     max-width: 95vw;   /* fill most of the screen */
     height: auto;      /* keep aspect ratio */
