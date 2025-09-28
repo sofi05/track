@@ -602,7 +602,7 @@ h1 {
     white-space: nowrap;
     max-height: 100px; /* instead of none */
     padding-top: 6px;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     z-index: 10001; 
   }
 

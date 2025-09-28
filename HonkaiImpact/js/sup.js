@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // PART 2 - ASTRAL OP
     { name: 'Chenxue', imgName: 'Chenxue', folder:'All_AstralOp', have: false, rarity: '5', element: 'Fire_DMG', part:'2', status: 'new'},
-    { name: 'Dreamseeker', imgName: 'Dreamseeker', folder:'All_AstralOp', have: true, rarity: '5', element: 'Lightning_DMG', part:'2'},
+    //{ name: 'Dreamseeker', imgName: 'Dreamseeker', folder:'All_AstralOp', have: true, rarity: '5', element: 'Lightning_DMG', part:'2'},
     { name: 'Serapeum', imgName: 'Serapeum', folder:'All_AstralOp', have: false, rarity: '5', element: 'Physical', part:'2'},
     { name: 'Songque', imgName: 'Songque_AstralOp', folder:'All_AstralOp', have: false, rarity: '5', element: 'Lightning_DMG', part:'2'},
     { name: 'Theresa', imgName: 'Theresa_Apocalypse_AstralOp', folder:'All_AstralOp', have: false, rarity: '5', element: 'Lightning_DMG', part:'2'},
