@@ -506,24 +506,36 @@ h1 {
 }
 
 .thumbnail-img {
-  flex: 0 0 calc(20% - 4px);      /* 5 thumbs = 20% width each minus gap */
-  height: 60px;                    /* fixed height for all thumbs */
-  object-fit: cover;               /* crop to fit box without stretching */
+  width: 80px;
+  height: 80px;
+  background: rgba(200,200,200,0.1);
+  padding: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  border: 2px solid transparent;   /* border for selection effect */
-  transition: border 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* center vertically */
+  overflow: hidden;
+}
+
+.thumbnail-img img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;       /* let width scale */
+  height: auto;      /* let height scale */
+  object-fit: contain;
+  object-position: top;
+  display: block;
 }
 
 .thumbnail-wrapper {
-  width: 48px;
-  height: 64px;
+  width: 80px;              /* match thumbnail width */
+  height: 80px;             /* match thumbnail height */
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-  scroll-snap-align: center;
+  align-items: flex-start;  /* top-align the image */
+  overflow: hidden;         /* still hide overflow if too tall */
 }
 
 #thumbnailContainer::-webkit-scrollbar {
