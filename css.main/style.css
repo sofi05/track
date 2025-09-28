@@ -159,7 +159,7 @@ h1 {
   background-size: cover;
   background-position: center;
   border-radius: 50%; 
-  z-index: 10001; /* Ensure it sits above the character image */
+  z-index: 10; /* Ensure it sits above the character image */
   border: none !important; 
   outline: none !important; 
   background-color: rgba(0, 0, 0, 0.171); /*eh might remove this*/
@@ -506,7 +506,7 @@ h1 {
   scrollbar-width: thin;
   scrollbar-color: rgba(180, 180, 180, 0.3) transparent;
   position: relative;
-  z-index: 10; /* Raise above image */
+  z-index: 10001; /* Raise above image */
   margin-left: auto;
   margin-right: auto;
   scroll-behavior: smooth;

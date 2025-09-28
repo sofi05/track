@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated hi3 chara version (counting from part 2>"
+git commit -m "inverted smth on css oops"
 git push origin main  
