@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed 3 things"
+git commit -m "fixed 2 stuff"
 git push origin main  
