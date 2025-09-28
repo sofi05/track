@@ -401,34 +401,52 @@ setTimeout(updateThumbnailAlignment, 50);
   }
 
   // Main image display logic
-  let index = 0;
+  // ===== Main image display logic with auto-resize =====
+let index = 0;
 
-  function showImageAt(idx) {
-    index = idx;
-    let newSrc = images[index] || images[0] || '';
-    let newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
+function showImageAt(idx) {
+  index = idx;
+  let newSrc = images[index] || images[0] || '';
+  let newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
 
+  // Reset sizing
+  popupImg.style.width = '';
+  popupImg.style.height = '';
+  popupImg.style.objectFit = 'contain';
+  popupImg.style.visibility = 'hidden';
+  popupImg.src = newSrc;
+  popupImg.alt = newAlt;
+
+  // Resize dynamically on load
+  popupImg.onload = () => {
+    const maxWidth = window.innerWidth * 0.95;
+    const maxHeight = window.innerHeight * 0.95;
+
+    let width = popupImg.naturalWidth;
+    let height = popupImg.naturalHeight;
+
+    // scale down if bigger than popup
+    const widthRatio = maxWidth / width;
+    const heightRatio = maxHeight / height;
+    const ratio = Math.min(widthRatio, heightRatio, 1); // don't upscale small images
+
+    width *= ratio;
+    height *= ratio;
+
+    popupImg.style.width = width + 'px';
+    popupImg.style.height = height + 'px';
+    popupImg.style.visibility = 'visible';
+  };
+
+  popupImg.onerror = () => {
     popupImg.style.visibility = 'hidden';
-    popupImg.src = newSrc;
-    popupImg.alt = newAlt;
+  };
 
-    if (popupImg.complete && popupImg.naturalWidth !== 0) {
-      popupImg.style.visibility = 'visible';
-    } else {
-      popupImg.onload = () => {
-        popupImg.style.visibility = 'visible';
-      };
-    }
-
-    popupImg.onerror = () => {
-      popupImg.style.visibility = 'hidden';
-    };
-
-    // highlight selected thumb
-    Array.from(thumbnailContainer.querySelectorAll('.thumbnail-img')).forEach((img, i) => {
-      img.classList.toggle('selected', i === idx);
-    });
-  }
+  // highlight selected thumb
+  Array.from(thumbnailContainer.querySelectorAll('.thumbnail-img')).forEach((img, i) => {
+    img.classList.toggle('selected', i === idx);
+  });
+}
 
   function nextImage() {
     if (!allowSwipe) return;

@@ -235,6 +235,30 @@ function showPopup(imgPath, altText) {
 
   popupImg.src = imgPath;
   popupImg.alt = altText;
+
+  // ===== Fit large images to screen without creating scroll =====
+  const maxWidth = window.innerWidth * 0.95;
+  const maxHeight = window.innerHeight * 0.95;
+
+  popupImg.style.width = '';
+  popupImg.style.height = '';
+  popupImg.style.objectFit = 'contain';
+
+  popupImg.onload = () => {
+    let width = popupImg.naturalWidth;
+    let height = popupImg.naturalHeight;
+
+    const widthRatio = maxWidth / width;
+    const heightRatio = maxHeight / height;
+    const ratio = Math.min(widthRatio, heightRatio, 1); // don't upscale
+
+    width *= ratio;
+    height *= ratio;
+
+    popupImg.style.width = width + 'px';
+    popupImg.style.height = height + 'px';
+  };
+
   popup.style.display = 'flex';
 }
 
