@@ -1,3 +1,3 @@
 git add . 
-git commit -m "man, i give up, pls work"
+git commit -m "updated some assets + fixed title on some pages"
 git push origin main  

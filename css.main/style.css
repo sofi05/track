@@ -572,7 +572,9 @@ h1 {
 }
 
 .thumbnail-img.selected {
-  border-color: #8a8a8a;
+  border: 2px solid #c4c3c1; /* bright border to highlight */
+  border-radius: 4px;         /* optional rounded corners */
+  opacity: 1;
 }
 
 @media (max-width: 600px) {
