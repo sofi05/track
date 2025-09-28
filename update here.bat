@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fixed thumbnail not being centered in mobile + tried to fix click"
+git commit -m "added count on index page, updated X on popups (majority) + updated hsr mc"
 git push origin main  

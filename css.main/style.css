@@ -433,16 +433,16 @@ h1 {
 
 .sprite-popup .close-btn {
   position: absolute;
-  font-size: 28px;
+  font-size: 13px;
   font-weight: bold;
-  color: white;
+  color: rgb(209, 209, 209);
   background-color: rgba(0, 0, 0, 0.6);
   padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
   user-select: none;
   top: 8%;
-  right: 8%;
+  right: 2%;
   z-index: 10;
 }
 

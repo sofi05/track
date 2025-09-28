@@ -20,6 +20,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Filter characters as usual
   const { newCharacters, rerunCharacters, permaCharacters } = filterAndSortCharacters(characters); 
 
+    // === Add character count to top right corner ===
+  const totalCount = newCharacters.length + rerunCharacters.length + permaCharacters.length;
+
+  const charCountBox = document.createElement('div');
+  charCountBox.textContent = `Total: ${totalCount} Characters`;
+  Object.assign(charCountBox.style, {
+    position: 'fixed',
+    top: '6px',
+    right: '8px',
+    fontSize: '12px',
+    color: '#fff',
+    background: '#0008',
+    padding: '4px 8px',
+    borderRadius: '6px',
+    zIndex: '9999',
+    fontFamily: 'monospace',
+    pointerEvents: 'none'
+  });
+
+  document.body.appendChild(charCountBox);
+
   // Sort characters by version (newest first) and then alphabetically (A-Z)
   const sortByVersionAndName = (a, b) => {
     // Compare by version first (descending)
