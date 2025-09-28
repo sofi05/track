@@ -1,3 +1,3 @@
 git add . 
-git commit -m "this is too hard to fix omg"
+git commit -m "man, i give up, pls work"
 git push origin main  

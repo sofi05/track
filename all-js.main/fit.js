@@ -289,8 +289,12 @@ function showPopup(imgPath, altText, spriteList = []) {
   let loadedThumbs = 0;
 
   function updateThumbnailAlignment() {
-    const thumbsCount = thumbnailContainer.children.length;
-    thumbnailContainer.style.justifyContent = thumbsCount < 5 ? 'center' : 'flex-start';
+    if (window.innerWidth <= 600) {
+      thumbnailContainer.style.justifyContent = 'flex-start';
+    } else {
+      const thumbsCount = thumbnailContainer.children.length;
+      thumbnailContainer.style.justifyContent = thumbsCount < 5 ? 'center' : 'flex-start';
+    }
   }
 
   function scrollToSelectedThumbnail(i) {
@@ -328,7 +332,7 @@ function showPopup(imgPath, altText, spriteList = []) {
         setTimeout(() => {
           scrollToSelectedThumbnail(0);
           thumbnailContainer.scrollLeft = 0;
-        }, 20);
+        }, 100); 
       }
     };
 
