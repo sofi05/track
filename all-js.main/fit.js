@@ -371,13 +371,24 @@ setTimeout(updateThumbnailAlignment, 50);
     });
 
     thumb.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showImageAt(i);
-      Array.from(thumbnailContainer.children).forEach((t, idx) => {
-        t.classList.toggle('selected', idx === i);
-      });
-      scrollToSelectedThumbnail(i);
-    });
+  e.stopPropagation();
+  showImageAt(i);
+  Array.from(thumbnailContainer.children).forEach((t, idx) => {
+    t.classList.toggle('selected', idx === i);
+  });
+
+  // Option 1: Instant scroll only if needed
+  const thumbLeft = thumb.offsetLeft;
+  const thumbRight = thumbLeft + thumb.offsetWidth;
+  const containerLeft = thumbnailContainer.scrollLeft;
+  const containerRight = containerLeft + thumbnailContainer.clientWidth;
+
+  if (thumbLeft < containerLeft) {
+    thumbnailContainer.scrollLeft = thumbLeft; // scroll left instantly
+  } else if (thumbRight > containerRight) {
+    thumbnailContainer.scrollLeft = thumbRight - thumbnailContainer.clientWidth; // scroll right instantly
+  }
+});
 
     thumbnailContainer.appendChild(thumb);
   }

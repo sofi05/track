@@ -301,10 +301,17 @@ renderList();
 (function() {
   const fallbackSrc = "../assets/others/mimo-sleep.b230350.png";
 
-  function applyFallbackStyles(img) {
-    img.style.filter = "grayscale(100%) brightness(40%)";
-    img.style.objectFit = "contain";
+function addFallback(img) {
+  if (!img.dataset.fallbackAdded && img.closest('.sprite-popup')) {
+    img.dataset.fallbackAdded = true;
+    img.onerror = function() {
+      if (img.src !== fallbackSrc) {
+        img.src = fallbackSrc;
+        applyFallbackStyles(img); // only gray when fallback
+      }
+    };
   }
+}
 
   function addFallback(img) {
     // Only if it's a sprite and has no data-fallback attribute
