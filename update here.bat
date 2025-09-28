@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added count on index page, updated X on popups (majority) + updated hsr mc"
+git commit -m "updated hi3 chara version (counting from part 2>"
 git push origin main  
