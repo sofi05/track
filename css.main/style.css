@@ -515,6 +515,8 @@ h1 {
 .thumbnail-img {
   width: 48px;
   height: 64px;
+  min-height: 64px;
+  min-width: 48px;
   object-fit: cover;
   object-position: center center;
   display: block;
@@ -543,18 +545,6 @@ h1 {
   scroll-snap-align: center;
 }
 
-
-.thumbnail-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: auto;
-  max-width: none;
-  max-height: none;
-  object-fit: none; /* Don’t scale to fit */
-}
-
 #thumbnailContainer::-webkit-scrollbar {
   height: 6px;
 }
@@ -578,6 +568,8 @@ h1 {
   .thumbnail-img {
     width: 12vw;
     height: 12vw;
+    min-height: 12vw;
+    min-width: 12vw;
     max-width: 48px;
     max-height: 48px;
     z-index: 10001; 

@@ -251,71 +251,100 @@ function showPopup(imgPath, altText, spriteList = []) {
   });
 
   // Show thumbnails
-  if (totalImages > 1) {
-    thumbnailContainer.style.display = 'flex';
+  // Show thumbnails
+if (totalImages > 1) {
+  thumbnailContainer.style.display = 'flex';
 
-    let loadedThumbs = 0;
-    for (let i = 0; i < totalImages; i++) {
-      const thumb = document.createElement('img');
-      thumb.className = 'thumbnail-img';
+  let loadedThumbs = 0;
 
-      if (isArrayMode) {
-        thumb.src = imgPath[i];
-        thumb.alt = `${altText} - ${i + 1}`;
-      } else {
-        thumb.src = `${imgPath}/${spriteList[i]}.png`;
-        thumb.alt = `${altText} - ${spriteList[i]}`;
+  function updateThumbnailAlignment() {
+    const thumbsCount = thumbnailContainer.children.length;
+    if (thumbsCount < 5) {
+      thumbnailContainer.style.justifyContent = 'center';
+    } else {
+      thumbnailContainer.style.justifyContent = 'flex-start';
+    }
+  }
+
+  function scrollToSelectedThumbnail(index = 0) {
+    const selectedThumb = thumbnailContainer.querySelectorAll('.thumbnail-img')[index];
+    if (selectedThumb) {
+      selectedThumb.scrollIntoView({ behavior: 'auto', inline: 'start', block: 'nearest' });
+    }
+  }
+  
+  function updateThumbnailAlignment() {
+  const thumbsCount = thumbnailContainer.children.length;
+  if (thumbsCount < 5) {
+    thumbnailContainer.style.justifyContent = 'center';
+  } else {
+    thumbnailContainer.style.justifyContent = 'flex-start';
+  }
+}
+
+
+  for (let i = 0; i < totalImages; i++) {
+    const thumb = document.createElement('img');
+    thumb.className = 'thumbnail-img';
+
+    if (isArrayMode) {
+      thumb.src = imgPath[i];
+      thumb.alt = `${altText} - ${i + 1}`;
+    } else {
+      thumb.src = `${imgPath}/${spriteList[i]}.png`;
+      thumb.alt = `${altText} - ${spriteList[i]}`;
+    }
+
+    thumb.onload = () => {
+      loadedThumbs++;
+      if (loadedThumbs === totalImages) {
+        updateThumbnailAlignment();
+        scrollToSelectedThumbnail(0);
       }
+    };
 
-      thumb.onload = () => {
-        loadedThumbs++;
-        if (loadedThumbs === totalImages) {
-          updateThumbnailAlignment();
-        }
-      };
+    let touchStartX = 0;
+    let touchMoved = false;
 
-      let touchStartX = 0;
-      let touchMoved = false;
+    thumb.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchMoved = false;
+    });
 
-      thumb.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-        touchMoved = false;
-      });
+    thumb.addEventListener('touchmove', e => {
+      const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+      if (deltaX > 10) touchMoved = true;
+    });
 
-      thumb.addEventListener('touchmove', e => {
-        const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
-        if (deltaX > 10) touchMoved = true;
-      });
-
-      thumb.addEventListener('touchend', e => {
-        if (!touchMoved) {
-          e.stopPropagation();
-          showImageAt(i);
-          Array.from(thumbnailContainer.children).forEach((t, idx) => {
-            t.classList.toggle('selected', idx === i);
-          });
-        }
-      });
-
-      thumb.addEventListener('click', (e) => {
+    thumb.addEventListener('touchend', e => {
+      if (!touchMoved) {
         e.stopPropagation();
         showImageAt(i);
         Array.from(thumbnailContainer.children).forEach((t, idx) => {
           t.classList.toggle('selected', idx === i);
         });
+        scrollToSelectedThumbnail(i);
+      }
+    });
+
+    thumb.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImageAt(i);
+      Array.from(thumbnailContainer.children).forEach((t, idx) => {
+        t.classList.toggle('selected', idx === i);
       });
+      scrollToSelectedThumbnail(i);
+    });
 
-      thumbnailContainer.appendChild(thumb);
-    }
-  } else {
-    thumbnailContainer.style.display = 'none';
+    thumbnailContainer.appendChild(thumb);
   }
+} else {
+  thumbnailContainer.style.display = 'none';
+}
 
-  requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
+  setTimeout(() => {
     thumbnailContainer.scrollLeft = 0;
-  });
-});
+  }, 0);
 
   function updateThumbnailAlignment() {
     const thumbsCount = thumbnailContainer.children.length;
@@ -327,28 +356,6 @@ function showPopup(imgPath, altText, spriteList = []) {
   }
 
   updateThumbnailAlignment();
-
-  const thumbWrapper = document.createElement('div');
-thumbWrapper.className = 'thumbnail-wrapper';
-thumbWrapper.style.display = 'inline-block';
-thumbWrapper.style.padding = '6px';
-thumbWrapper.style.touchAction = 'manipulation';
-
-const thumb = document.createElement('img');
-thumb.className = 'thumbnail-img';
-// set src, alt, etc. as before
-
-thumbWrapper.appendChild(thumb);
-thumbnailContainer.appendChild(thumbWrapper);
-
-// move event listeners to thumbWrapper instead of thumb
-thumbWrapper.addEventListener('click', (e) => {
-  e.stopPropagation();
-  showImageAt(i);
-  Array.from(thumbnailContainer.children).forEach((child, idx) => {
-    child.classList.toggle('selected', idx === i);
-  });
-});
 
   function showImageAt(idx) {
     index = idx;
