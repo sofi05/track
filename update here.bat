@@ -1,3 +1,3 @@
 git add . 
-git commit -m "added fallback for sprites"
+git commit -m "fixed skipping on thumbnail"
 git push origin main  
