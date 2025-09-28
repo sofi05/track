@@ -272,7 +272,7 @@ if (totalImages > 1) {
       selectedThumb.scrollIntoView({ behavior: 'auto', inline: 'start', block: 'nearest' });
     }
   }
-  
+
   function updateThumbnailAlignment() {
   const thumbsCount = thumbnailContainer.children.length;
   if (thumbsCount < 5) {
@@ -342,9 +342,8 @@ if (totalImages > 1) {
   thumbnailContainer.style.display = 'none';
 }
 
-  setTimeout(() => {
-    thumbnailContainer.scrollLeft = 0;
-  }, 0);
+  thumbnailContainer.scrollLeft = 0;
+  thumbnailContainer.scrollTo({ left: 0, behavior: 'instant' }); // if needed
 
   function updateThumbnailAlignment() {
     const thumbsCount = thumbnailContainer.children.length;
@@ -380,9 +379,14 @@ if (totalImages > 1) {
     popupImg.src = newSrc;
     popupImg.alt = newAlt;
 
-    popupImg.onload = () => {
+    // Show immediately if already loaded
+    if (popupImg.complete && popupImg.naturalWidth !== 0) {
       popupImg.style.visibility = 'visible';
-    };
+    } else {
+      popupImg.onload = () => {
+        popupImg.style.visibility = 'visible';
+      };
+    }
 
     popupImg.onerror = () => {
       popupImg.style.visibility = 'hidden';
@@ -456,6 +460,14 @@ if (totalImages > 1) {
 
   showImageAt(0);
   popup.style.display = 'flex';
+  setTimeout(() => {
+    showImageAt(0); // ensure it's called *after* DOM reflow
+  }, 10);
+
+  popup.offsetHeight; // trigger reflow
+  popup.style.display = 'flex';
+  showImageAt(0);
+
 }
 
 
