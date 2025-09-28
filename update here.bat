@@ -1,3 +1,3 @@
 git add . 
-git commit -m "fix on the icons mobile"
+git commit -m "added fallback for sprites"
 git push origin main  

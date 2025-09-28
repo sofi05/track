@@ -343,3 +343,42 @@ function updateCharCount(count) {
 
 initializeFilters();
 renderList();
+
+(function() {
+  const fallbackSrc = "../assets/others/mimo-sleep.b230350.png";
+
+  function applyFallbackStyles(img) {
+    img.style.filter = "grayscale(100%) brightness(40%)";
+    img.style.objectFit = "contain";
+  }
+
+  function addFallback(img) {
+    // Only if it's a sprite and has no data-fallback attribute
+    if (!img.dataset.fallbackAdded && img.closest('.sprite-popup')) {
+      img.dataset.fallbackAdded = true;
+      img.onerror = function() {
+        if (img.src !== fallbackSrc) {
+          img.src = fallbackSrc;
+          applyFallbackStyles(img);
+        }
+      };
+    }
+  }
+
+  // Apply to all existing sprites
+  document.querySelectorAll(".sprite-popup img").forEach(addFallback);
+
+  // Observe dynamically added sprites
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.tagName === "IMG" && node.closest('.sprite-popup')) addFallback(node);
+        else if (node.querySelectorAll) {
+          node.querySelectorAll(".sprite-popup img").forEach(addFallback);
+        }
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
