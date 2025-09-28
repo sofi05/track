@@ -580,6 +580,7 @@ h1 {
     height: 12vw;
     max-width: 48px;
     max-height: 48px;
+    z-index: 10001; 
   }
 
   #thumbnailContainer {
@@ -591,6 +592,7 @@ h1 {
     white-space: nowrap;
     max-height: none;
     justify-content: center !important;
+    z-index: 10001; 
   }
 
   #thumbnailContainer::-webkit-scrollbar {
