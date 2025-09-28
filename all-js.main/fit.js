@@ -315,6 +315,7 @@ if (totalImages > 1) {
 
     thumb.onload = () => {
       loadedThumbs++;
+      thumbnailContainer.scrollLeft = 0;
       if (loadedThumbs === totalImages) {
         updateThumbnailAlignment();
         scrollToSelectedThumbnail(0);
@@ -360,7 +361,6 @@ if (totalImages > 1) {
   thumbnailContainer.style.display = 'none';
 }
 
-  thumbnailContainer.scrollLeft = 0;
   thumbnailContainer.scrollTo({ left: 0, behavior: 'instant' }); // if needed
 
   function updateThumbnailAlignment() {
