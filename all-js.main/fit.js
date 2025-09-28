@@ -311,9 +311,11 @@ function showPopup(imgPath, altText, spriteList = []) {
     thumbnailContainer.style.display = 'none';
   }
 
-  setTimeout(() => {
+  requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
     thumbnailContainer.scrollLeft = 0;
-  }, 0);
+  });
+});
 
   function updateThumbnailAlignment() {
     const thumbsCount = thumbnailContainer.children.length;
@@ -325,6 +327,28 @@ function showPopup(imgPath, altText, spriteList = []) {
   }
 
   updateThumbnailAlignment();
+
+  const thumbWrapper = document.createElement('div');
+thumbWrapper.className = 'thumbnail-wrapper';
+thumbWrapper.style.display = 'inline-block';
+thumbWrapper.style.padding = '6px';
+thumbWrapper.style.touchAction = 'manipulation';
+
+const thumb = document.createElement('img');
+thumb.className = 'thumbnail-img';
+// set src, alt, etc. as before
+
+thumbWrapper.appendChild(thumb);
+thumbnailContainer.appendChild(thumbWrapper);
+
+// move event listeners to thumbWrapper instead of thumb
+thumbWrapper.addEventListener('click', (e) => {
+  e.stopPropagation();
+  showImageAt(i);
+  Array.from(thumbnailContainer.children).forEach((child, idx) => {
+    child.classList.toggle('selected', idx === i);
+  });
+});
 
   function showImageAt(idx) {
     index = idx;

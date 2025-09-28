@@ -1,3 +1,3 @@
 git add . 
-git commit -m "inverted smth on css oops"
+git commit -m "this is too hard to fix omg"
 git push origin main  
