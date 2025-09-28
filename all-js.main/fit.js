@@ -289,13 +289,18 @@ function showPopup(imgPath, altText, spriteList = []) {
   let loadedThumbs = 0;
 
   function updateThumbnailAlignment() {
-    if (window.innerWidth <= 600) {
-      thumbnailContainer.style.justifyContent = 'flex-start';
-    } else {
-      const thumbsCount = thumbnailContainer.children.length;
-      thumbnailContainer.style.justifyContent = thumbsCount < 5 ? 'center' : 'flex-start';
-    }
+  const thumbs = Array.from(thumbnailContainer.children);
+  if (!thumbs.length) return;
+
+  const totalThumbWidth = thumbs.reduce((sum, t) => sum + t.offsetWidth + 4 /*gap*/, 0); 
+  const containerWidth = thumbnailContainer.clientWidth;
+
+  if (totalThumbWidth < containerWidth) {
+    thumbnailContainer.style.justifyContent = 'center'; // center if fits
+  } else {
+    thumbnailContainer.style.justifyContent = 'flex-start'; // left-align if scrollable
   }
+}
 
   function scrollToSelectedThumbnail(i) {
     const thumbnails = thumbnailContainer.querySelectorAll('.thumbnail-img');
