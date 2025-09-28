@@ -292,15 +292,20 @@ function showPopup(imgPath, altText, spriteList = []) {
   const thumbs = Array.from(thumbnailContainer.children);
   if (!thumbs.length) return;
 
-  const totalThumbWidth = thumbs.reduce((sum, t) => sum + t.offsetWidth + 4 /*gap*/, 0); 
-  const containerWidth = thumbnailContainer.clientWidth;
+  // get computed widths including margin/gap
+  const gap = 5; // match your CSS gap
+  const totalThumbWidth = thumbs.reduce((sum, t) => sum + t.getBoundingClientRect().width + gap, 0);
+  const containerWidth = thumbnailContainer.getBoundingClientRect().width;
 
-  if (totalThumbWidth < containerWidth) {
+  if (totalThumbWidth <= containerWidth) {
     thumbnailContainer.style.justifyContent = 'center'; // center if fits
   } else {
     thumbnailContainer.style.justifyContent = 'flex-start'; // left-align if scrollable
   }
 }
+
+// call it after a small delay to allow mobile layout to settle
+setTimeout(updateThumbnailAlignment, 50);
 
   function scrollToSelectedThumbnail(i) {
     const thumbnails = thumbnailContainer.querySelectorAll('.thumbnail-img');

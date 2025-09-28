@@ -595,16 +595,16 @@ h1 {
   }
 
   #thumbnailContainer {
-    gap: 4px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    max-height: 100px; /* instead of none */
-    padding-top: 6px;
-    justify-content: flex-start !important;
-    z-index: 10001; 
-  }
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  max-height: 100px;
+  padding-top: 6px;
+  z-index: 10001; 
+  /* remove justify-content here */
+}
 
   #thumbnailContainer::-webkit-scrollbar {
     height: 6px;
