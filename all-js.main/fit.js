@@ -251,7 +251,6 @@ function showPopup(imgPath, altText, spriteList = []) {
   });
 
   // Show thumbnails
-  // Show thumbnails
 if (totalImages > 1) {
   thumbnailContainer.style.display = 'flex';
 
@@ -266,12 +265,31 @@ if (totalImages > 1) {
     }
   }
 
-  function scrollToSelectedThumbnail(index = 0) {
-    const selectedThumb = thumbnailContainer.querySelectorAll('.thumbnail-img')[index];
-    if (selectedThumb) {
-      selectedThumb.scrollIntoView({ behavior: 'auto', inline: 'start', block: 'nearest' });
-    }
+  function scrollToSelectedThumbnail(index) {
+  const thumbnails = thumbnailContainer.querySelectorAll('.thumbnail-img');
+  if (!thumbnails[index]) return;
+
+  const thumb = thumbnails[index];
+  const containerRect = thumbnailContainer.getBoundingClientRect();
+  const thumbRect = thumb.getBoundingClientRect();
+
+  const offsetLeft = thumb.offsetLeft;
+  const containerWidth = thumbnailContainer.clientWidth;
+  const thumbWidth = thumb.offsetWidth;
+
+  // If thumbnail is left of visible area, scroll left
+  if (thumbRect.left < containerRect.left) {
+    thumbnailContainer.scrollLeft = offsetLeft;
+  } 
+  // If thumbnail is right of visible area, scroll right but don't over-scroll
+  else if (thumbRect.right > containerRect.right) {
+    thumbnailContainer.scrollLeft = Math.min(
+      offsetLeft - containerWidth + thumbWidth,
+      thumbnailContainer.scrollWidth - containerWidth
+    );
   }
+  // else, thumbnail is fully visible, do nothing
+}
 
   function updateThumbnailAlignment() {
   const thumbsCount = thumbnailContainer.children.length;

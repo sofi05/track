@@ -553,6 +553,20 @@ h1 {
   background: transparent;
 }
 
+#thumbnailContainer::-webkit-scrollbar {
+  height: 6px;
+  display: none;
+}
+
+#thumbnailContainer::-webkit-scrollbar-thumb {
+  background-color: none;
+  border-radius: 3px;
+}
+
+.thumbnail-img.selected {
+  border-color: #8a8a8a;
+}
+
 @media (max-width: 600px) {
   .responsive-popup {
     width: 90vw !important;
@@ -610,20 +624,6 @@ h1 {
     box-sizing: border-box;
     overflow-y: auto;
   }
-}
-
-#thumbnailContainer::-webkit-scrollbar {
-  height: 6px;
-  display: none;
-}
-
-#thumbnailContainer::-webkit-scrollbar-thumb {
-  background-color: none;
-  border-radius: 3px;
-}
-
-.thumbnail-img.selected {
-  border-color: #8a8a8a;
 }
 
 .nav-btn {
