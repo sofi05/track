@@ -589,22 +589,19 @@ h1 {
 
   .thumbnail-img {
     width: 12vw;
-    height: 12vw;
-    min-height: 12vw;
-    min-width: 12vw;
-    max-width: 48px;
-    max-height: 48px;
-    z-index: 10001; 
+    height: auto;
+    max-height: 80px; /* bigger than 48px */
+    object-fit: contain;
   }
 
   #thumbnailContainer {
-    padding: 6px 4px;
     gap: 4px;
     overflow-x: auto;
     overflow-y: hidden;
     flex-wrap: nowrap;
     white-space: nowrap;
-    max-height: none;
+    max-height: 100px; /* instead of none */
+    padding-top: 6px;
     justify-content: center !important;
     z-index: 10001; 
   }
