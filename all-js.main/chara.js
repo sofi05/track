@@ -236,10 +236,9 @@ function showPopup(imgPath, altText) {
   popupImg.src = imgPath;
   popupImg.alt = altText;
 
-  // ===== Fit large images to screen without creating scroll =====
+  // Fit large images to screen
   const maxWidth = window.innerWidth * 0.95;
   const maxHeight = window.innerHeight * 0.95;
-
   popupImg.style.width = '';
   popupImg.style.height = '';
   popupImg.style.objectFit = 'contain';
@@ -247,29 +246,34 @@ function showPopup(imgPath, altText) {
   popupImg.onload = () => {
     let width = popupImg.naturalWidth;
     let height = popupImg.naturalHeight;
-
     const widthRatio = maxWidth / width;
     const heightRatio = maxHeight / height;
-    const ratio = Math.min(widthRatio, heightRatio, 1); // don't upscale
-
+    const ratio = Math.min(widthRatio, heightRatio, 1);
     width *= ratio;
     height *= ratio;
-
     popupImg.style.width = width + 'px';
     popupImg.style.height = height + 'px';
   };
 
   popup.style.display = 'flex';
+
+  // ===== BLOCK PAGE SCROLL =====
+  document.body.style.overflow = 'hidden';
 }
 
+// Close popup
 document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
+  const popup = document.getElementById('spritePopup');
+  popup.style.display = 'none';
+  document.body.style.overflow = ''; // restore scroll
 });
 
+// Also clicking outside the image closes popup
 const popup = document.getElementById('spritePopup');
 popup.addEventListener('click', (e) => {
   if (e.target === popup) {
     popup.style.display = 'none';
+    document.body.style.overflow = ''; // restore scroll
   }
 });
 

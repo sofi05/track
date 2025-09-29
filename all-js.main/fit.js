@@ -513,6 +513,7 @@ function showImageAt(idx) {
   // Start at first image (and make sure layout has time to settle)
   showImageAt(0);
   popup.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
   setTimeout(() => {
     updateThumbnailAlignment();
     scrollToSelectedThumbnail(0);
@@ -570,6 +571,7 @@ document.getElementById('spritePopup').addEventListener('click', e => {
   // Close only when truly clicking the background (overlay) area
   if (e.target === popup) {
     popup.style.display = 'none';
+    document.body.style.overflow = '';
   }
 });
 

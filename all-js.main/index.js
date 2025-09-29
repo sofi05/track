@@ -165,12 +165,6 @@ function createCharacterPopup(char, getSpritePath) {
     zIndex: 9999,
   });
 
-  backdrop.addEventListener('click', () => {
-    popup.remove();
-    backdrop.remove();
-    clearInterval(countdownInterval);
-  });
-
   const popup = document.createElement('div');
   popup.id = 'char-popup';
   popup.classList.add('responsive-popup');
@@ -181,7 +175,7 @@ function createCharacterPopup(char, getSpritePath) {
     transform: 'translate(-50%, -50%)',
     background: '#222',
     color: '#fff',
-    padding: '20px',  // ✅ Will be overridden later for mobile
+    padding: '20px',
     borderRadius: '28px',
     boxShadow: '0 0 10px rgba(0,0,0,0.7)',
     zIndex: 10000,
@@ -195,7 +189,7 @@ function createCharacterPopup(char, getSpritePath) {
   Object.assign(imageContainer.style, {
     position: 'relative',
     width: '100%',
-    height: '400px', // ✅ Will be overridden for mobile
+    height: '400px',
     overflow: 'hidden',
     borderRadius: '20px',
   });
@@ -206,6 +200,7 @@ function createCharacterPopup(char, getSpritePath) {
       backdrop.remove();
       clearInterval(countdownInterval);
       window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = ''; // restore scroll
     }
   }
   window.addEventListener('keydown', onKeyDown);
@@ -218,7 +213,6 @@ function createCharacterPopup(char, getSpritePath) {
   sprite.style.display = 'block';
   sprite.style.objectFit = 'cover';
   sprite.style.objectPosition = 'center top';
-
   sprite.style.WebkitMaskImage = `
     linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
     linear-gradient(to bottom, black 85%, transparent 100%)
@@ -232,7 +226,6 @@ function createCharacterPopup(char, getSpritePath) {
 
   sprite.onerror = () => {
     sprite.style.display = 'none';
-
     const fallbackPlaceholder = document.createElement('div');
     Object.assign(fallbackPlaceholder.style, {
       display: 'flex',
@@ -247,7 +240,6 @@ function createCharacterPopup(char, getSpritePath) {
       backgroundColor: '#333',
       borderRadius: '20px',
     });
-
     fallbackPlaceholder.innerHTML = '';
     const lines = ['Nothing here yet', '(－ω－)｡｡｡ zᶻᶻ'];
     lines.forEach(line => {
@@ -257,25 +249,20 @@ function createCharacterPopup(char, getSpritePath) {
       lineEl.style.lineHeight = '1.2';
       fallbackPlaceholder.appendChild(lineEl);
     });
-
     imageContainer.style.height = isMobile ? '150px' : '200px';
     fallbackPlaceholder.style.width = isMobile ? '120px' : '150px';
     fallbackPlaceholder.style.height = isMobile ? '150px' : '200px';
-
     imageContainer.appendChild(fallbackPlaceholder);
   };
 
   sprite.onload = () => {
     const aspectRatio = sprite.naturalWidth / sprite.naturalHeight;
-
     if (aspectRatio < 0.75) {
       sprite.style.objectFit = 'contain';
       sprite.style.objectPosition = 'top center';
-      sprite.style.transform = '';
     } else {
       sprite.style.objectFit = 'cover';
       sprite.style.objectPosition = 'center center';
-      sprite.style.transform = '';
     }
   };
 
@@ -298,6 +285,14 @@ function createCharacterPopup(char, getSpritePath) {
     popup.remove();
     backdrop.remove();
     clearInterval(countdownInterval);
+    document.body.style.overflow = ''; // restore scroll
+  });
+
+  backdrop.addEventListener('click', () => {
+    popup.remove();
+    backdrop.remove();
+    clearInterval(countdownInterval);
+    document.body.style.overflow = ''; // restore scroll
   });
 
   imageContainer.appendChild(sprite);
@@ -333,11 +328,9 @@ function createCharacterPopup(char, getSpritePath) {
   popup.appendChild(versionLine);
   popup.appendChild(rarityEl);
 
-  // ✅ Apply compact layout *after* all styles have been set
   if (isMobile) {
     nameEl.style.margin = '6px 0 2px';
     nameEl.style.fontSize = '18px';
-
     popup.style.padding = '12px';
     popup.style.width = '280px';
     popup.style.minWidth = '180px';
@@ -347,6 +340,9 @@ function createCharacterPopup(char, getSpritePath) {
 
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
+
+  // ✅ Freeze scroll
+  document.body.style.overflow = 'hidden';
 
   // === COUNTDOWN ===
   function findMatchingVersionDates(charVersion) {
@@ -385,7 +381,7 @@ function createCharacterPopup(char, getSpritePath) {
     let label = '';
     if (days > 0) label = `in ${days}d`;
     else if (hours > 0) label = `in ${hours % 24}h`;
-    else if (minutes > 0) label = `in ${minutes % 60}m`;
+    else if (minutes > 0) label = `in ${seconds % 60}m`;
     else label = `in ${seconds % 60}s`;
 
     countdownEl.textContent = ` (${label})`;

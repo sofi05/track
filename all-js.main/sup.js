@@ -139,12 +139,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ====== Popup ======
   function showPopup(imgPath, altText) {
-    const popup = document.getElementById('spritePopup');
-    const popupImg = document.getElementById('spritePopupImg');
-    popupImg.src = imgPath;
-    popupImg.alt = altText;
-    popup.style.display = 'flex';
+  const popup = document.getElementById('spritePopup');
+  const popupImg = document.getElementById('spritePopupImg');
+  popupImg.src = imgPath;
+  popupImg.alt = altText;
+  popup.style.display = 'flex';
+  
+  // Freeze scroll
+  document.body.style.overflow = 'hidden';
+}
+
+// Close popup
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('spritePopup').style.display = 'none';
+  document.body.style.overflow = ''; // Restore scroll
+});
+document.getElementById('spritePopup').addEventListener('click', e => {
+  if (e.target === e.currentTarget) {
+    e.currentTarget.style.display = 'none';
+    document.body.style.overflow = ''; // Restore scroll
   }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const popup = document.getElementById('spritePopup');
+    if (popup.style.display === 'flex') {
+      popup.style.display = 'none';
+      document.body.style.overflow = ''; // Restore scroll
+    }
+  }
+});
 
   filterBtn.addEventListener('click', () => filterPopup.classList.toggle('hidden'));
   document.addEventListener('click', e => {
