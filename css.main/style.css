@@ -840,3 +840,8 @@ input:checked + .slider2:before {
   text-align: center;
   color: #666;
 }
+
+.thespian-trick #spritePopupImg {
+  clip-path: inset(8% round 30px); /* 20px corner radius */
+  object-fit: cover;
+}
