@@ -153,7 +153,6 @@ function createCharacterPopup(char, getSpritePath) {
 
   const isMobile = window.innerWidth <= 480;
 
-  // ⏱️ shared intervals for cleanup
   let countdownInterval = null;
   let phaseInterval = null;
 
@@ -306,78 +305,109 @@ function createCharacterPopup(char, getSpritePath) {
 
   // === Phase with dynamic status ===
   const phaseEl = document.createElement('div');
-  if (char.p) {
-    phaseEl.style.marginTop = '4px';
-    phaseEl.style.opacity = '0.9';
-    phaseEl.style.fontSize = '14px';
-    phaseEl.style.color = '#b4b4b4ff';
+  phaseEl.style.marginTop = '4px';
+  phaseEl.style.opacity = '0.9';
+  phaseEl.style.fontSize = '14px';
+  phaseEl.style.color = '#b4b4b4ff';
+  const phaseText = document.createElement('span');
+  phaseText.textContent = `Phase ${char.p}`;
+  const phaseStatus = document.createElement('span');
+  phaseStatus.style.marginLeft = '4px';
+  phaseStatus.style.opacity = '0.85';
+ if (char.p) {
+  phaseEl.appendChild(phaseText);
+  phaseEl.appendChild(phaseStatus);
+  popup.appendChild(phaseEl);
+}
 
-    const phaseText = document.createElement('span');
-    phaseText.textContent = `Phase ${char.p}`;
-    const phaseStatus = document.createElement('span');
-    phaseStatus.style.marginLeft = '8px';
-    phaseStatus.style.opacity = '0.85';
-    phaseEl.appendChild(phaseText);
-    phaseEl.appendChild(phaseStatus);
-
-    function parseDate(s) {
-      if (!s) return null;
-      const d = new Date(s);
-      return isNaN(d.getTime()) ? null : d;
-    }
-    function firstNonEmptyDate(...vals) {
-      for (const v of vals) {
-        const d = parseDate(v);
-        if (d) return d;
-      }
-      return null;
-    }
-
-    function findPhaseWindow(version, pNum) {
-      const gv = window.GAME_VERSIONS || {};
-      for (const g of Object.values(gv)) {
-        if (g.version === version) {
-          const start = parseDate(g[`p${pNum}`]);
-          const end = pNum === 1 ? parseDate(g.p2) || firstNonEmptyDate(g.date1, g.date2) : firstNonEmptyDate(g.date1, g.date2);
-          return { start, end };
-        }
-        if (g.date1vs === version) {
-          const start = parseDate(g[`date1p${pNum}`]);
-          const end = pNum === 1 ? parseDate(g.date1p2) || parseDate(g.date2) : parseDate(g.date2);
-          return { start, end };
-        }
-        if (g.date2vs === version) {
-          const start = parseDate(g[`date2p${pNum}`]);
-          return { start, end: null };
-        }
-      }
-      return { start: null, end: null };
-    }
-
-    function formatCountdown(ms) {
-      const s = Math.floor(ms / 1000);
-      const m = Math.floor(s / 60);
-      const h = Math.floor(m / 60);
-      const d = Math.floor(h / 24);
-      if (d > 0) return `(${d}d)`;
-      if (h > 0) return `(${h % 24}h)`;
-      if (m > 0) return `(${m % 60}m)`;
-      return ` (~${s % 60}s)`;
-    }
-
-    const { start: phaseStart, end: phaseEnd } = findPhaseWindow(char.version, char.p);
-
-    function updatePhaseStatus() {
-      if (!phaseStart) return (phaseStatus.textContent = '');
-      const now = new Date();
-      if (now < phaseStart) phaseStatus.textContent = formatCountdown(phaseStart - now);
-      else if (phaseEnd && now >= phaseEnd) phaseStatus.textContent = '(ended)';
-      else phaseStatus.textContent = '(active)';
-    }
-
-    updatePhaseStatus();
-    phaseInterval = setInterval(updatePhaseStatus, 1000);
+  function parseDate(s) {
+    if (!s) return null;
+    const d = new Date(s);
+    return isNaN(d.getTime()) ? null : d;
   }
+  function firstNonEmptyDate(...vals) {
+    for (const v of vals) {
+      const d = parseDate(v);
+      if (d) return d;
+    }
+    return null;
+  }
+
+  function findPhaseWindow(version, pNum) {
+    const gv = window.GAME_VERSIONS || {};
+    for (const g of Object.values(gv)) {
+      if (g.version === version) {
+        const start = parseDate(g[`p${pNum}`]);
+        const end = pNum === 1 ? parseDate(g.p2) || firstNonEmptyDate(g.date1, g.date2) : firstNonEmptyDate(g.date1, g.date2);
+        return { start, end };
+      }
+      if (g.date1vs === version) {
+        const start = parseDate(g[`date1p${pNum}`]);
+        const end = pNum === 1 ? parseDate(g.date1p2) || parseDate(g.date2) : parseDate(g.date2);
+        return { start, end };
+      }
+      if (g.date2vs === version) {
+        const start = parseDate(g[`date2p${pNum}`]);
+        const end = pNum === 1 ? parseDate(g.date2p2) || parseDate(g.date2) : parseDate(g.date2);
+        return { start, end };
+      }
+    }
+    return { start: null, end: null };
+  }
+
+  function formatCountdown(ms) {
+    const s = Math.floor(ms / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    const d = Math.floor(h / 24);
+    if (d > 0) return `(${d}d)`;
+    if (h > 0) return `(${h % 24}h)`;
+    if (m > 0) return `(${m % 60}m)`;
+    return `(~${s % 60}s)`;
+  }
+
+  const { start: phaseStart, end: phaseEnd } = findPhaseWindow(char.version, char.p);
+
+  if (char.p) {
+  phaseText.textContent = `Phase ${char.p}`;
+} else {
+  phaseText.textContent = '';
+}
+
+  function updatePhaseStatus() {
+  if (!phaseStart || !char.p) {
+    phaseStatus.textContent = '';
+    return;
+  }
+
+  // Only show countdown if this is the "current" version (not date1vs/date2vs)
+  const gv = window.GAME_VERSIONS || {};
+  let isCurrentVersion = false;
+  for (const g of Object.values(gv)) {
+    if (g.version === char.version) {
+      isCurrentVersion = true;
+      break;
+    }
+  }
+
+  if (!isCurrentVersion) {
+    phaseStatus.textContent = ''; // no countdown for future versions
+    return;
+  }
+
+  const now = new Date();
+  if (!phaseEnd) {
+    phaseStatus.textContent = formatCountdown(phaseStart - now);
+  } else if (now < phaseStart) {
+    phaseStatus.textContent = formatCountdown(phaseStart - now);
+  } else if (now >= phaseEnd) {
+    phaseStatus.textContent = '(ended)';
+  } else {
+    phaseStatus.textContent = '(active)';
+  }
+}
+  updatePhaseStatus();
+  phaseInterval = setInterval(updatePhaseStatus, 1000);
 
   const rarityEl = document.createElement('p');
   rarityEl.textContent = `Rarity: ${char.rarity || 'N/A'} ★`;
@@ -402,28 +432,23 @@ function createCharacterPopup(char, getSpritePath) {
   document.body.appendChild(popup);
   document.body.style.overflow = 'hidden';
 
-  // === Countdown for version ===
-  function findMatchingVersionDates(version, phaseNum) {
-  for (const [, g] of Object.entries(window.GAME_VERSIONS)) {
-    if (g.date1vs === version && g.date1) {
-      if (phaseNum === 2 && g.date1p2) return null; // skip countdown only for phase 2
-      return { targetDate: new Date(g.date1) };
+  // === Countdown for version (special case for dateXp2) ===
+  function findVersionCountdown(version, phaseNum) {
+    for (const [, g] of Object.entries(window.GAME_VERSIONS)) {
+      if (g.date1vs === version && g.date1p2 && phaseNum === 2) return new Date(g.date1p2);
+      if (g.date2vs === version && g.date2p2 && phaseNum === 2) return new Date(g.date2p2);
+      if (g.date1vs === version && g.date1 && !(phaseNum === 2 && g.date1p2)) return new Date(g.date1);
+      if (g.date2vs === version && g.date2 && !(phaseNum === 2 && g.date2p2)) return new Date(g.date2);
     }
-    if (g.date2vs === version && g.date2) {
-      if (phaseNum === 2 && g.date2p2) return null; // skip countdown only for phase 2
-      return { targetDate: new Date(g.date2) };
-    }
+    return null;
   }
-  return null;
-}
 
-  // Then when you call it:
-  const match = findMatchingVersionDates(char.version, char.p); // char.p is the phase
+  const versionCountdownDate = findVersionCountdown(char.version, char.p);
 
-  function updateCountdown() {
-    if (!match) return (countdownEl.textContent = '');
+  function updateVersionCountdown() {
+    if (!versionCountdownDate) return (countdownEl.textContent = '');
     const now = new Date();
-    const diff = match.targetDate - now;
+    const diff = versionCountdownDate - now;
     if (diff <= 0) return (countdownEl.textContent = ' (Released)');
     const s = Math.floor(diff / 1000);
     const m = Math.floor(s / 60);
@@ -437,9 +462,9 @@ function createCharacterPopup(char, getSpritePath) {
     countdownEl.textContent = ` (${label})`;
   }
 
-  if (match) {
-    updateCountdown();
-    countdownInterval = setInterval(updateCountdown, 1000);
+  if (versionCountdownDate) {
+    updateVersionCountdown();
+    countdownInterval = setInterval(updateVersionCountdown, 1000);
   }
 }
 
