@@ -15,6 +15,7 @@ window.BDAY_CONFIG = {
     '02-22': ['Kokomi'],
     '02-29': ['Bennett'],
 
+    '03-01': ['Lauma'],
     '03-03': ['Qiqi'],
     '03-06': ['Yaoyao'],
     '03-10': ['Shenhe'],
@@ -92,6 +93,7 @@ window.BDAY_CONFIG = {
     '10-25': ['Eula'],
     '10-27': ['Nahida'],
     '10-29': ['Kazuha'],
+    '10-31': ['Flins'],
 
     '11-02': ['Xiangling'],
     '11-05': ['SkirkNew'],

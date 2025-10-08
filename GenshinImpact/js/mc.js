@@ -5,8 +5,6 @@ window.CHARA_CONFIG = {
 
     { name: 'Manekin',name2: 'Manekins', GP: 2, imgName: 'MannequinBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 3,  status: 'available' },
     { name: 'Manekina',name2: 'Manekins', GP: 2, imgName: 'MannequinGirl', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 3,  status: 'available' },
-  
-    // Add more characters here
   ],
 
 getSpritePath: function(char) {

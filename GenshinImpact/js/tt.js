@@ -1,6 +1,6 @@
 const gameConfig = {
   characters: [
-    { name: 'Alhaitham', imgName: 'Alhatham', have: [false, true], status:'new',
+    { name: 'Alhaitham', imgName: 'Alhatham', have: [false, false], 
         spriteImages: ['Noise_Filtering', 'Reading_Time'] },
         
     { name: 'Amber', imgName: 'Ambor', have: [true], 
@@ -24,7 +24,7 @@ const gameConfig = {
     { name: 'Charlotte', have: [false], 
         spriteImages: ['Photographic_Muse'] },
 
-    { name: 'Chasca', have: [false], status:'new',
+    { name: 'Chasca', have: [false], 
         spriteImages: ['Leisure_Time'] },
 
     { name: 'Chiori', have: [false], 
@@ -78,7 +78,7 @@ const gameConfig = {
     { name: 'Kaveh', have: [true], 
         spriteImages: ['Careful_Negotiations'] },
 
-    { name: 'Kazuha', have: [false], 
+    { name: 'Kazuha', have: [true], 
         spriteImages: ['Virtuoso_Performance'] },
 
     { name: 'Keqing', have: [false], 
@@ -126,7 +126,7 @@ const gameConfig = {
     { name: 'Raiden Shogun', imgName: 'Shougun', spriteFolder: 'Raiden', have: [true], 
         spriteImages: ['Ready_for_Battle'] },
 
-    { name: 'Razor', have: [false], status:'new',
+    { name: 'Razor', have: [false], 
         spriteImages: ['Watching_and_Waiting'] },
 
     { name: 'Sethos', have: [false], 
@@ -168,12 +168,24 @@ const gameConfig = {
     { name: 'Yoimiya', have: [true], 
         spriteImages: ['Filled_With_Confidence'] },
 
-    { name: 'Yun Jin', imgName: 'Yunjin', have: [false], status:'new',
+    { name: 'Yun Jin', imgName: 'Yunjin', have: [false], 
         spriteImages: ['Masters_Poise'] },
     
     { name: 'Zhongli', have: [true], 
         spriteImages: ['Solemn_Countenance'] },
-    // more characters...
+
+    { name: 'Sucrose', have: [false], status:'new',
+        spriteImages: ['Burst_of_Inspiration'] },
+
+    { name: 'Qiqi', have: [false], status:'new',
+        spriteImages: ['Serious_Contemplation'] },
+
+    { name: 'Xingqiu', have: [false], status:'new',
+        spriteImages: ['Leisurely_Moment'] },
+
+    { name: 'Clorinde', have: [false], status:'new',
+        spriteImages: ['Intimidating_Stance'] },
+    // Current TT season is 16 || Link: https://genshin-impact.fandom.com/wiki/Thespian_Trick ...
   ],
 
   pathPrefix: "../assets/charaid/Genshin/",
