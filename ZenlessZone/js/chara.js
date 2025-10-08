@@ -33,20 +33,20 @@ window.CHARA_CONFIG = {
     { name: 'Yanagi', imgName: '31', have: false, element: 'IconElectric', group:'sec6', gender:'f', rarity: 5, status: 'available', version: '2.1' },
     { name: 'Burnice', imgName: '32', have: false, element: 'IconFire', group:'sons', gender:'f', rarity: 5, status: 'available', version: '1.6' },
     { name: 'Astra Yao', imgName: '36', have: false, element: 'IconEther', group:'star', gender:'f', rarity: 5, status: 'available', version: '2.0' },
-    { name: 'Evelyn', imgName: '37', have: false, element: 'IconFire', group:'star', gender:'f', rarity: 5, status: 'available', version: '2.2' },
-    { name: 'Trigger', imgName: '39', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2' },
-    { name: 'Vivian', imgName: '41', have: false, element: 'IconEther', group:'mock', gender:'f', rarity: 5, status: 'available', version: '2.3' },
+    { name: 'Evelyn', imgName: '37', have: false, element: 'IconFire', group:'star', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
+    { name: 'Trigger', imgName: '39', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:1 },
+    { name: 'Vivian', imgName: '41', have: false, element: 'IconEther', group:'mock', gender:'f', rarity: 5, status: 'available', version: '2.3', p:1 },
     { name: 'Hugo', imgName: '42', have: false, element: 'IconIce', group:'mock', gender:'m', rarity: 5, status: 'available', version: '1.7' },
-    { name: 'Ju Fufu', imgName: '43', have: false, element: 'IconFire', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.3' },
+    { name: 'Ju Fufu', imgName: '43', have: false, element: 'IconFire', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.3', p:2 },
     { name: 'Yixuan', imgName: '44', have: false, element: 'IconAuricInk', filterElement: 'IconEther', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.0' },
     { name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available', version: '2.1' },
     { name: 'Yuzuha', imgName: '47', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available', version: '2.1' },
 
-    { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'new', version: '2.2' },
-    { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'new', version: '2.2' },
-    { name: 'Lucia', imgName: '50', have: false, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3' },
-    { name: 'Manato', imgName: '51', have: false, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'soon', version: '2.3' },
-    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3' }
+    { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'new', version: '2.2', p:1 },
+    { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'new', version: '2.2', p:2 },
+    { name: 'Lucia', imgName: '50', have: false, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3', p:1 },
+    { name: 'Manato', imgName: '51', have: false, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'soon', version: '2.3', p:1 },
+    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3', p:2 }
       // Add more characters here
   ],
 

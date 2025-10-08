@@ -151,7 +151,11 @@ function createCharacterPopup(char, getSpritePath) {
   document.getElementById('char-popup')?.remove();
   document.getElementById('popup-backdrop')?.remove();
 
-  const isMobile = window.innerWidth <= 480; // ✅ Moved to top so it runs no matter what
+  const isMobile = window.innerWidth <= 480;
+
+  // ⏱️ shared intervals for cleanup
+  let countdownInterval = null;
+  let phaseInterval = null;
 
   const backdrop = document.createElement('div');
   backdrop.id = 'popup-backdrop';
@@ -194,40 +198,45 @@ function createCharacterPopup(char, getSpritePath) {
     borderRadius: '20px',
   });
 
+  function cleanupPopup() {
+    popup.remove();
+    backdrop.remove();
+    clearInterval(countdownInterval);
+    clearInterval(phaseInterval);
+    window.removeEventListener('keydown', onKeyDown);
+    document.body.style.overflow = '';
+  }
+
   function onKeyDown(event) {
-    if (event.key === 'Escape') {
-      popup.remove();
-      backdrop.remove();
-      clearInterval(countdownInterval);
-      window.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = ''; // restore scroll
-    }
+    if (event.key === 'Escape') cleanupPopup();
   }
   window.addEventListener('keydown', onKeyDown);
 
   const sprite = document.createElement('img');
   sprite.src = getSpritePath(char);
   sprite.alt = char.name;
-  sprite.style.width = '100%';
-  sprite.style.height = '100%';
-  sprite.style.display = 'block';
-  sprite.style.objectFit = 'cover';
-  sprite.style.objectPosition = 'center top';
-  sprite.style.WebkitMaskImage = `
-    linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-    linear-gradient(to bottom, black 85%, transparent 100%)
-  `;
-  sprite.style.maskImage = `
-    linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
-    linear-gradient(to bottom, black 85%, transparent 100%)
-  `;
-  sprite.style.WebkitMaskComposite = 'destination-in';
-  sprite.style.maskComposite = 'intersect';
+  Object.assign(sprite.style, {
+    width: '100%',
+    height: '100%',
+    display: 'block',
+    objectFit: 'cover',
+    objectPosition: 'center top',
+    WebkitMaskImage: `
+      linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+      linear-gradient(to bottom, black 85%, transparent 100%)
+    `,
+    maskImage: `
+      linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%),
+      linear-gradient(to bottom, black 85%, transparent 100%)
+    `,
+    WebkitMaskComposite: 'destination-in',
+    maskComposite: 'intersect',
+  });
 
   sprite.onerror = () => {
     sprite.style.display = 'none';
-    const fallbackPlaceholder = document.createElement('div');
-    Object.assign(fallbackPlaceholder.style, {
+    const fallback = document.createElement('div');
+    Object.assign(fallback.style, {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -240,30 +249,16 @@ function createCharacterPopup(char, getSpritePath) {
       backgroundColor: '#333',
       borderRadius: '20px',
     });
-    fallbackPlaceholder.innerHTML = '';
-    const lines = ['Nothing here yet', '(－ω－)｡｡｡ zᶻᶻ'];
-    lines.forEach(line => {
-      const lineEl = document.createElement('div');
-      lineEl.textContent = line;
-      lineEl.style.margin = '2px 0';
-      lineEl.style.lineHeight = '1.2';
-      fallbackPlaceholder.appendChild(lineEl);
+    ['Nothing here yet', '(－ω－)｡｡｡ zᶻᶻ'].forEach(text => {
+      const line = document.createElement('div');
+      line.textContent = text;
+      line.style.margin = '2px 0';
+      fallback.appendChild(line);
     });
     imageContainer.style.height = isMobile ? '150px' : '200px';
-    fallbackPlaceholder.style.width = isMobile ? '120px' : '150px';
-    fallbackPlaceholder.style.height = isMobile ? '150px' : '200px';
-    imageContainer.appendChild(fallbackPlaceholder);
-  };
-
-  sprite.onload = () => {
-    const aspectRatio = sprite.naturalWidth / sprite.naturalHeight;
-    if (aspectRatio < 0.75) {
-      sprite.style.objectFit = 'contain';
-      sprite.style.objectPosition = 'top center';
-    } else {
-      sprite.style.objectFit = 'cover';
-      sprite.style.objectPosition = 'center center';
-    }
+    fallback.style.width = isMobile ? '120px' : '150px';
+    fallback.style.height = isMobile ? '150px' : '200px';
+    imageContainer.appendChild(fallback);
   };
 
   const closeButton = document.createElement('button');
@@ -281,19 +276,8 @@ function createCharacterPopup(char, getSpritePath) {
     padding: '2px 6px',
     zIndex: 10,
   });
-  closeButton.addEventListener('click', () => {
-    popup.remove();
-    backdrop.remove();
-    clearInterval(countdownInterval);
-    document.body.style.overflow = ''; // restore scroll
-  });
-
-  backdrop.addEventListener('click', () => {
-    popup.remove();
-    backdrop.remove();
-    clearInterval(countdownInterval);
-    document.body.style.overflow = ''; // restore scroll
-  });
+  closeButton.addEventListener('click', cleanupPopup);
+  backdrop.addEventListener('click', cleanupPopup);
 
   imageContainer.appendChild(sprite);
   imageContainer.appendChild(closeButton);
@@ -320,12 +304,88 @@ function createCharacterPopup(char, getSpritePath) {
   versionLine.appendChild(versionEl);
   versionLine.appendChild(countdownEl);
 
+  // === Phase with dynamic status ===
+  const phaseEl = document.createElement('div');
+  if (char.p) {
+    phaseEl.style.marginTop = '4px';
+    phaseEl.style.opacity = '0.9';
+    phaseEl.style.fontSize = '14px';
+    phaseEl.style.color = '#b4b4b4ff';
+
+    const phaseText = document.createElement('span');
+    phaseText.textContent = `Phase ${char.p}`;
+    const phaseStatus = document.createElement('span');
+    phaseStatus.style.marginLeft = '8px';
+    phaseStatus.style.opacity = '0.85';
+    phaseEl.appendChild(phaseText);
+    phaseEl.appendChild(phaseStatus);
+
+    function parseDate(s) {
+      if (!s) return null;
+      const d = new Date(s);
+      return isNaN(d.getTime()) ? null : d;
+    }
+    function firstNonEmptyDate(...vals) {
+      for (const v of vals) {
+        const d = parseDate(v);
+        if (d) return d;
+      }
+      return null;
+    }
+
+    function findPhaseWindow(version, pNum) {
+      const gv = window.GAME_VERSIONS || {};
+      for (const g of Object.values(gv)) {
+        if (g.version === version) {
+          const start = parseDate(g[`p${pNum}`]);
+          const end = pNum === 1 ? parseDate(g.p2) || firstNonEmptyDate(g.date1, g.date2) : firstNonEmptyDate(g.date1, g.date2);
+          return { start, end };
+        }
+        if (g.date1vs === version) {
+          const start = parseDate(g[`date1p${pNum}`]);
+          const end = pNum === 1 ? parseDate(g.date1p2) || parseDate(g.date2) : parseDate(g.date2);
+          return { start, end };
+        }
+        if (g.date2vs === version) {
+          const start = parseDate(g[`date2p${pNum}`]);
+          return { start, end: null };
+        }
+      }
+      return { start: null, end: null };
+    }
+
+    function formatCountdown(ms) {
+      const s = Math.floor(ms / 1000);
+      const m = Math.floor(s / 60);
+      const h = Math.floor(m / 60);
+      const d = Math.floor(h / 24);
+      if (d > 0) return `(${d}d)`;
+      if (h > 0) return `(${h % 24}h)`;
+      if (m > 0) return `(${m % 60}m)`;
+      return ` (~${s % 60}s)`;
+    }
+
+    const { start: phaseStart, end: phaseEnd } = findPhaseWindow(char.version, char.p);
+
+    function updatePhaseStatus() {
+      if (!phaseStart) return (phaseStatus.textContent = '');
+      const now = new Date();
+      if (now < phaseStart) phaseStatus.textContent = formatCountdown(phaseStart - now);
+      else if (phaseEnd && now >= phaseEnd) phaseStatus.textContent = '(ended)';
+      else phaseStatus.textContent = '(active)';
+    }
+
+    updatePhaseStatus();
+    phaseInterval = setInterval(updatePhaseStatus, 1000);
+  }
+
   const rarityEl = document.createElement('p');
   rarityEl.textContent = `Rarity: ${char.rarity || 'N/A'} ★`;
   rarityEl.style.margin = '2px 0 4px';
 
   popup.appendChild(nameEl);
   popup.appendChild(versionLine);
+  popup.appendChild(phaseEl);
   popup.appendChild(rarityEl);
 
   if (isMobile) {
@@ -340,54 +400,43 @@ function createCharacterPopup(char, getSpritePath) {
 
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
-
-  // ✅ Freeze scroll
   document.body.style.overflow = 'hidden';
 
-  // === COUNTDOWN ===
-  function findMatchingVersionDates(charVersion) {
-    for (const [gameKey, gameData] of Object.entries(window.GAME_VERSIONS)) {
-      if (gameData.date1vs === charVersion && gameData.date1) {
-        return { targetDate: new Date(gameData.date1), versionLabel: gameData.date1vs };
-      }
-      if (gameData.date2vs === charVersion && gameData.date2) {
-        return { targetDate: new Date(gameData.date2), versionLabel: gameData.date2vs };
-      }
+  // === Countdown for version ===
+  function findMatchingVersionDates(version, phaseNum) {
+  for (const [, g] of Object.entries(window.GAME_VERSIONS)) {
+    if (g.date1vs === version && g.date1) {
+      if (phaseNum === 2 && g.date1p2) return null; // skip countdown only for phase 2
+      return { targetDate: new Date(g.date1) };
     }
-    return null;
+    if (g.date2vs === version && g.date2) {
+      if (phaseNum === 2 && g.date2p2) return null; // skip countdown only for phase 2
+      return { targetDate: new Date(g.date2) };
+    }
   }
+  return null;
+}
 
-  const match = findMatchingVersionDates(char.version);
+  // Then when you call it:
+  const match = findMatchingVersionDates(char.version, char.p); // char.p is the phase
 
   function updateCountdown() {
-    if (!match) {
-      countdownEl.textContent = '';
-      return;
-    }
-
+    if (!match) return (countdownEl.textContent = '');
     const now = new Date();
     const diff = match.targetDate - now;
-
-    if (diff <= 0) {
-      countdownEl.textContent = ' (Released)';
-      return;
-    }
-
-    const seconds = Math.floor(diff / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
+    if (diff <= 0) return (countdownEl.textContent = ' (Released)');
+    const s = Math.floor(diff / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    const d = Math.floor(h / 24);
     let label = '';
-    if (days > 0) label = `in ${days}d`;
-    else if (hours > 0) label = `in ${hours % 24}h`;
-    else if (minutes > 0) label = `in ${seconds % 60}m`;
-    else label = `in ${seconds % 60}s`;
-
+    if (d > 0) label = `in ${d}d`;
+    else if (h > 0) label = `in ${h % 24}h`;
+    else if (m > 0) label = `in ${m % 60}m`;
+    else label = `in ${s % 60}s`;
     countdownEl.textContent = ` (${label})`;
   }
 
-  let countdownInterval = null;
   if (match) {
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 1000);

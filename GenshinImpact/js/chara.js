@@ -90,10 +90,10 @@ window.CHARA_CONFIG = {
     { name: 'Chiori', have: false, element: 'Geo', rarity: 5,  region:['ina','font'], gender:'f', status: 'available', version: '5.6' },
     { name: 'Citlali', have: false, element: 'Cryo', rarity: 5,  region:['nat'], gender:'f', status: 'available', version: '5.8' },
     { name: 'Dahlia', have: false, element: 'Hydro', rarity: 4, region:['mond'], gender:'m',  status: 'available', version: '5.7', perma: true },
-    { name: 'Yelan', have: false, element: 'Hydro', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.0' },
+    { name: 'Yelan', have: false, element: 'Hydro', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.0', p:2 },
     { name: 'Itto', have: false, element: 'Geo', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
     { name: 'Sigewinne', have: false, element: 'Hydro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.4' },
-    { name: 'Nilou', have: false, element: 'Hydro', rarity: 5, region:['sum'], gender:'f',  status: 'available', version: '6.0' },
+    { name: 'Nilou', have: false, element: 'Hydro', rarity: 5, region:['sum'], gender:'f',  status: 'available', version: '6.0', p:1 },
     { name: 'Mavuika', have: false, element: 'Pyro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '5.7' },
     { name: 'Varesa', have: false, element: 'Electro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '5.5' },
     { name: 'Emilie', have: false, element: 'Dendro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.7' },
@@ -106,7 +106,7 @@ window.CHARA_CONFIG = {
     { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '5.7' },
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
     
-    { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.0' },
+    { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.0', p:1 },
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'soon', version: '6.1' },
     { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.2' },
     // Add more characters here
