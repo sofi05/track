@@ -1,16 +1,18 @@
 const gameConfig = {
   characters: [
-    { name: 'Nicole', imgName: 'IconRoleCrop12_01', imgName2:'IconRole12_01', have: true, rarity: 4, status: 'available' },
-    { name: 'Ellen', imgName: 'IconRoleCrop21_01',imgName2:'IconRole21_01', have: false, rarity: 5, status: 'available'},
-    { name: 'Astra Yao', imgName: 'IconRoleCrop36_01', imgName2:'IconRole36_01',have: false, rarity: 5, status: 'available' },
-    { name: 'Yixuan', imgName: 'IconRoleCrop44_01',imgName2:'IconRole44_01', have: false, rarity: 5, status: 'available' },
-    { name: 'Alice', imgName: 'IconRoleCrop46_01', imgName2:'IconRole46_01',have: false, rarity: 5, status: 'available'},
-    { name: 'Yuzuha', imgName: 'IconRoleCrop47_01', imgName2:'IconRole47_01',have: false, rarity: 5, status: 'available' },
+    { name: 'Nicole', imgName: '12_01', imgName2:'12_01', have: true, rarity: 4, status: 'available' },
+    { name: 'Ellen', imgName: '21_01',imgName2:'21_01', have: false, rarity: 5, status: 'available'},
+    { name: 'Astra Yao', imgName: '36_01', imgName2:'36_01',have: false, rarity: 5, status: 'available' },
+    { name: 'Yixuan', imgName: '44_01',imgName2:'44_01', have: false, rarity: 5, status: 'available' },
+    { name: 'Alice', imgName: '46_01', imgName2:'46_01',have: false, rarity: 5, status: 'available'},
+    { name: 'Yuzuha', imgName: '47_01', imgName2:'47_01',have: false, rarity: 5, status: 'available' },
+    { name: 'Vivian', imgName: '41_01', imgName2:'41_01',have: false, rarity: 5, status: 'new' },
+    { name: 'Manato', imgName: '51_01', imgName2:'51_01',have: false, rarity: 4, status: 'new' },
       // Add more characters here
   ],
 
-  pathPrefix: "../assets/charaid/Zenless/Outfit/", 
-  spritePrefix: "../assets/Sprite/Zenless/Outfit/",
+  pathPrefix: "../assets/charaid/Zenless/Outfit/IconRoleCrop", 
+  spritePrefix: "../assets/Sprite/Zenless/Outfit/IconRole",
 
   getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.png`,
   getSpritePath: (c) => `${gameConfig.spritePrefix}${c.imgName2}.png`
