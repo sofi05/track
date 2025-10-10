@@ -2,7 +2,7 @@ window.GAME_VERSIONS = {
   GenshinImpact: {
     version: '6.0',
       p1: '2025-09-10T00:00:00', p2: '2025-09-30T19:00:00', 
-    date1vs: '6.1', date1: '2025-10-22T00:00:00', date1p2: '',
+    date1vs: '6.1', date1: '2025-10-22T00:00:00', date1p2: '2025-11-11T19:00:00',
     date2vs: '6.2', date2: '', date2p2: '',
     },
   StarRail: {

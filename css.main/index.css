@@ -94,11 +94,6 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 1);
 }
 
-.version-box.version-match {
-  outline: 3px solid #2a9c63;
-  outline-offset: -2px;
-}
-
 .icon-wrapper {
   position: relative;
   width: 80px;

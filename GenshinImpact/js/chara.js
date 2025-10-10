@@ -84,7 +84,7 @@ window.CHARA_CONFIG = {
 
     //DON'T HAVE
     { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '4.5' },
-    { name: 'Arlecchino', have: false, element: 'Pyro', rarity: 5, region:['font', 'unk'], gender:'f',  status: 'available', version: '5.3' },
+    { name: 'Arlecchino', have: false, element: 'Pyro', rarity: 5, region:['font', 'unk'], gender:'f',  status: 'available', version: '6.1', p:2 },
     { name: 'Ayato', have: false, element: 'Hydro', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
     { name: 'Baizhu', imgName: 'Baizhuer', have: false, element: 'Dendro', rarity: 5, region:['liy'], gender:'m',  status: 'available', version: '5.3' },
     { name: 'Chiori', have: false, element: 'Geo', rarity: 5,  region:['ina','font'], gender:'f', status: 'available', version: '5.6' },
@@ -107,7 +107,7 @@ window.CHARA_CONFIG = {
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
     
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.0', p:1 },
-    { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'soon', version: '6.1' },
+    { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'soon', version: '6.1', p:1 },
     { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.2' },
     // Add more characters here
   ],

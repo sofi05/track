@@ -40,28 +40,23 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   iconWrapper.classList.add('icon-wrapper');
 
   const rarityGradients = {
-    5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',  // Rarity 5
-    4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',  // Rarity 4
-    3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',  // Rarity 3
+    5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
+    4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
+    3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
   };
 
-  // Use char.rarity or fallback to null if invalid, then apply the gradient or fallback to gray
   const charRarity = [3, 4, 5].includes(char.rarity) ? char.rarity : null;
-
   iconWrapper.style.background = rarityGradients[charRarity] || 'linear-gradient(135deg, #444, #999)';
 
   const iconImg = document.createElement('img');
   const imgName = useImgName ? char.imgName || char.name : char.name;
-
   const iconSrc = customImgPathFn ? customImgPathFn(char, imgName, config)
     : `${iconPath}/${imagePrefix}${imgName}${imageSuffix}.png`;
-
   iconImg.src = iconSrc;
   iconImg.alt = char.name;
   iconImg.classList.add('char-icon');
 
   const fallbackImg = customFallbackPathFn ? customFallbackPathFn(char) : null;
-
   iconImg.onerror = function () {
     if (fallbackImg && iconImg.src !== fallbackImg) {
       iconImg.src = fallbackImg;
@@ -97,9 +92,68 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
 
   charBox.style.cursor = 'pointer';
   charBox.addEventListener('click', () => {
-    const spritePath = window.CHARA_CONFIG.getSpritePath(char);  
-    showCharacterPopup(char.gameFolder || 'ZenlessZone', char.id || char.name, spritePath);  
+    const spritePath = window.CHARA_CONFIG.getSpritePath(char);
+    showCharacterPopup(char.gameFolder || 'ZenlessZone', char.id || char.name, spritePath);
   });
+
+  // === PHASE-BASED OUTLINE COLOR ===
+  function findPhaseWindow(version, pNum) {
+    const gv = window.GAME_VERSIONS || {};
+    for (const g of Object.values(gv)) {
+      if (g.version === version) {
+        const start = new Date(g[`p${pNum}`]);
+        const end = pNum === 1 ? new Date(g.p2) || new Date(g.date1) || new Date(g.date2) : new Date(g.date1) || new Date(g.date2);
+        return { start, end };
+      }
+      if (g.date1vs === version) {
+        const start = new Date(g[`date1p${pNum}`]);
+        const end = pNum === 1 ? new Date(g.date1p2) || new Date(g.date2) : new Date(g.date2);
+        return { start, end };
+      }
+      if (g.date2vs === version) {
+        const start = new Date(g[`date2p${pNum}`]);
+        const end = pNum === 1 ? new Date(g.date2p2) || new Date(g.date2) : new Date(g.date2);
+        return { start, end };
+      }
+    }
+    return { start: null, end: null };
+  }
+
+function updateBoxOutline() {
+  const gv = window.GAME_VERSIONS || {};
+  const versionData = Object.values(gv).find(g => g.version === char.version);
+  if (!versionData) return;
+
+  let phaseStatusText = '';
+  if (char.p) {
+    const { start, end } = findPhaseWindow(char.version, char.p);
+    const now = new Date();
+    if (!end || now < start) {
+      phaseStatusText = 'countdown';
+    } else if (now >= end) {
+      phaseStatusText = 'ended';
+    } else {
+      phaseStatusText = 'active';
+    }
+  }
+
+  // Only apply colors if this is the current version
+  if (char.version === versionData.version) {
+    if (phaseStatusText === 'active') {
+      charBox.style.outline = '3px solid #2a9c63'; // green
+    } else if (phaseStatusText === 'countdown') {
+      charBox.style.outline = '3px solid #b9c76d'; // yellowish-green
+    } else if (phaseStatusText === 'ended') {
+      charBox.style.outline = '3px solid #727473ff'; // ended gray
+    } else {
+      // No phase → keep existing green (don't override)
+      charBox.style.outline = '3px solid #2a9c63';
+    }
+    charBox.style.outlineOffset = '-2px';
+  }
+}
+
+  updateBoxOutline();
 
   return charBox;
 };
@@ -232,32 +286,25 @@ function createCharacterPopup(char, getSpritePath) {
     maskComposite: 'intersect',
   });
 
+  const fallbackSrc = "../assets/others/page-loading.png";
+
   sprite.onerror = () => {
     sprite.style.display = 'none';
-    const fallback = document.createElement('div');
-    Object.assign(fallback.style, {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      color: '#fff',
-      fontSize: '14px',
-      height: '200px',
-      width: '150px',
-      margin: '0 auto',
-      backgroundColor: '#333',
-      borderRadius: '20px',
-    });
-    ['Nothing here yet', '(－ω－)｡｡｡ zᶻᶻ'].forEach(text => {
-      const line = document.createElement('div');
-      line.textContent = text;
-      line.style.margin = '2px 0';
-      fallback.appendChild(line);
-    });
+
+    const fallbackImg = document.createElement('img');
+    fallbackImg.src = fallbackSrc;
+    fallbackImg.alt = 'Loading…';
+    Object.assign(fallbackImg.style, {
+    display: 'block',
+    margin: '0 auto',
+    borderRadius: '20px',
+    objectFit: 'contain', // ← change from 'cover' to 'contain'
+    width: isMobile ? '120px' : '150px',
+    height: isMobile ? '150px' : '200px',
+  });
+
     imageContainer.style.height = isMobile ? '150px' : '200px';
-    fallback.style.width = isMobile ? '120px' : '150px';
-    fallback.style.height = isMobile ? '150px' : '200px';
-    imageContainer.appendChild(fallback);
+    imageContainer.appendChild(fallbackImg);
   };
 
   const closeButton = document.createElement('button');
