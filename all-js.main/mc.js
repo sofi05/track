@@ -345,7 +345,7 @@ initializeFilters();
 renderList();
 
 (function() {
-  const fallbackSrc = "../assets/others/mimo-sleep.b230350.png";
+  const fallbackSrc = "../assets/others/page-loading.png";
 
   function addFallback(img) {
     // Only if it's a sprite and has no data-fallback attribute

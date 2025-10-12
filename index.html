@@ -1,40 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HoyoDex</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet"> <!-- FONT -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">    
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HoyoDex</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">
 </head>
 <body>
-  <div class="container">
-    <h1>HOYODEX</h1>
-    
-    <div class="game-icons">
-      <a href="GenshinImpact/index.html">
-        <img src="assets/gameico/gi.webp" alt="Genshin Impact" />
-      </a>
-      <a href="StarRail/index.html">
-        <img src="assets/gameico/hsr.webp" alt="Honkai Star Rail" />
-      </a>
-      <a href="ZenlessZone/index.html">
-        <img src="assets/gameico/zzz.png" alt="Zenless Zone Zero" />
-      </a>
-      <a href="HonkaiImpact/index.html">
-        <img src="assets/gameico/hi3.webp" alt="Honkai Impact 3rd" />
-      </a>
-      <a href="NexusAnima/index.html">
-        <img src="assets/gameico/hna.webp" alt="Honkai Nexus Anima"  
-        style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';"/>
-      </a> <!--COPY STYLE TILL END, THATS FOR NEWER GAMES-->
-      <a href="PetitPlanet/index.html">
-        <img src="assets/gameico/pp.webp" alt="Petit Planet"  
-        style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';"/>
-      </a> <!--COPY STYLE TILL END, THATS FOR NEWER GAMES-->
-    </div>
-    
+
+<div class="container">
+  <h1>HOYODEX</h1>
+
+  <div class="game-icons">
+    <a href="GenshinImpact/index.html"><img src="assets/gameico/gi.webp" alt="Genshin Impact" /></a>
+    <a href="StarRail/index.html"><img src="assets/gameico/hsr.webp" alt="Honkai Star Rail" /></a>
+    <a href="ZenlessZone/index.html"><img src="assets/gameico/zzz.png" alt="Zenless Zone Zero" /></a>
+    <a href="HonkaiImpact/index.html"><img src="assets/gameico/hi3.webp" alt="Honkai Impact 3rd" /></a>
+    <a href="NexusAnima/index.html" style="filter: grayscale(100%); opacity:0.7;" 
+       onmouseover="this.style.filter='none'; this.style.opacity='1';" 
+       onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';">
+       <img src="assets/gameico/hna.webp" alt="Honkai Nexus Anima"/>
+    </a>
+    <a href="PetitPlanet/index.html" style="filter: grayscale(100%); opacity:0.7;" 
+       onmouseover="this.style.filter='none'; this.style.opacity='1';" 
+       onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';">
+       <img src="assets/gameico/pp.webp" alt="Petit Planet"/>
+    </a>
   </div>
+</div>
+
+<!-- Birthday Popup -->
+<div id="popup-overlay" style="display:none;">
+  <div id="popup-content">
+    <h2>Today's Birthdays 🎉</h2>
+    <div id="birthday-list"></div>
+    <button id="popup-close">Close</button>
+  </div>
+</div>
+
+<!-- Birthday Button -->
+<button id="birthday-button">🎂 Birthdays Today</button>
+
+<!-- Load birthday configs -->
+<script src="GenshinImpact/js/bday.js"></script>
+<script src="HonkaiImpact/js/bday.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const allConfigs = [];
+  if (window.BDAY_CONFIG) allConfigs.push(window.BDAY_CONFIG);
+  if (window.ALL_BDAY_CONFIGS && Array.isArray(window.ALL_BDAY_CONFIGS)) {
+    window.ALL_BDAY_CONFIGS.forEach(cfg => allConfigs.push(cfg));
+  }
+  if (typeof window.Genshin_BDAY_CONFIG !== "undefined") allConfigs.push(window.Genshin_BDAY_CONFIG);
+  if (typeof window.Honkai_BDAY_CONFIG !== "undefined") allConfigs.push(window.Honkai_BDAY_CONFIG);
+  if (allConfigs.length === 0 && window.BDAY_CONFIG) allConfigs.push(window.BDAY_CONFIG);
+  if (!allConfigs.length) {
+    console.warn("No BDAY_CONFIG found");
+    return;
+  }
+
+  const popup = document.getElementById("popup-overlay");
+  const closeBtn = document.getElementById("popup-close");
+  const openBtn = document.getElementById("birthday-button");
+  const list = document.getElementById("birthday-list");
+
+  function getTodayDateKey() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    return `${month}-${day}`;
+  }
+
+  // Check if there’s any birthday today
+  const todayKey = getTodayDateKey();
+  let hasBirthday = false;
+  allConfigs.forEach(config => {
+    const todayList = config.birthdays?.[todayKey];
+    if (todayList && todayList.length) hasBirthday = true;
+  });
+
+  if (!hasBirthday) {
+    // No birthdays today, hide button and popup
+    openBtn.style.display = "none";
+    popup.style.display = "none";
+    return;
+  }
+
+  function createBirthdayElement(config, nameOrEntry) {
+    const el = config.createImageElement(nameOrEntry);
+    const img = el.querySelector("img");
+    if (img && !img.src.includes("track/")) {
+      const src = img.getAttribute("src").replace(/^(\.\/|\/)?/, "");
+      img.src = `track/${src}`;
+    }
+    return el;
+  }
+
+  function renderPopupContent() {
+    list.innerHTML = '';
+    const shownNames = new Set(); // prevents duplicates
+    allConfigs.forEach(config => {
+      const todayList = config.birthdays?.[todayKey];
+      if (todayList && todayList.length) {
+        todayList.forEach(entry => {
+          const name = typeof entry === "string" ? entry : entry.name || entry;
+          if (!shownNames.has(name)) {
+            shownNames.add(name);
+            list.appendChild(createBirthdayElement(config, entry));
+          }
+        });
+      }
+    });
+  }
+
+  openBtn.addEventListener("click", () => {
+    renderPopupContent();
+    popup.style.display = "flex";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  // Close when clicking outside the popup content
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) popup.style.display = "none";
+  });
+
+  // Close when pressing Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") popup.style.display = "none";
+  });
+});
+</script>
 </body>
 </html>

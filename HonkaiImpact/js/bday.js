@@ -35,7 +35,7 @@ window.BDAY_CONFIG = {
     '12-07': [{ folder:'Kiana', imgName:'Ba-Dum_Fiery_Wishing_Star'}],
     '12-21': [{ folder:'Griseo', imgName:'Cosmic_Expression'}],
 
-    //'09-06': [{ folder:'Kiana', imgName:'Ba-Dum_Fiery_Wishing_Star'}], //Test
+    //'10-12': [{ folder:'Kiana', imgName:'Ba-Dum_Fiery_Wishing_Star'}], //Test
   },
 
 createImageElement(entry) {
@@ -55,3 +55,6 @@ createImageElement(entry) {
     return container;
   },
 };
+
+window.ALL_BDAY_CONFIGS = window.ALL_BDAY_CONFIGS || [];
+window.ALL_BDAY_CONFIGS.push(window.BDAY_CONFIG);

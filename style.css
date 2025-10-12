@@ -45,3 +45,93 @@ h1 {
 .game-icons img:hover {
   transform: scale(1.1);
 }
+
+/* NEW BDAY THING */
+  #birthday-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffdd57;
+    color: #222;
+    font-family: 'Lilita One', sans-serif;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.2s;
+  }
+  #birthday-button:hover {
+    background-color: #ffe680;
+  }
+
+  #popup-overlay {
+    display: none;
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+  }
+  #popup-overlay.active {
+    display: flex;
+  }
+  #popup-content {
+    background: #111;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    color: #fff;
+  }
+  #popup-content h2 {
+    margin-top: 0;
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 02;
+  }
+  #popup-content .birthday-icon { 
+    width: 80px; 
+    height: 80px; 
+    border: 2px solid #bdbdbd; 
+    border-radius: 20%; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 0 4px rgba(0,0,0,0.3); 
+}
+
+#popup-content .birthday-icon img { 
+    width: 90%; 
+    height: 90%; 
+    object-fit: cover; 
+    border-radius: 20%; 
+    background-color: #797878; 
+    display: block;  
+    margin: auto;  
+}
+    
+#birthday-list {
+  display: flex;
+  flex-wrap: wrap;         
+  justify-content: center; 
+  gap: 15px;              
+}
+
+  #popup-close {
+    margin-top: 15px;
+    padding: 5px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff5757;
+    color: #fff;
+    font-weight: bold;
+  }
+  #popup-close:hover {
+    background-color: #ff7f7f;
+  }

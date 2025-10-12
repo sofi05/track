@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoyoDex Quick Links</title>
+<style>
+  body { font-family: sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
+  h1, h2 { color: #dfdddd; }
+  .row { margin-bottom: 15px; }
+  button { padding: 5px 10px; margin-right: 10px; border-radius: 4px; border: 1px solid #555; background: #1a1a1a; color: #fff; cursor: pointer; }
+  button:hover { background: #238c56; }
+  input { padding: 5px; margin-right: 10px; border-radius: 4px; border: 1px solid #555; background: #1a1a1a; color: #fff; }
+  a { color: #2a9c63; }
+  .hidden { display: none; }
+  .output { margin-top: 15px; font-size: 0.95em; word-break: break-all; }
+  .note { font-size: 0.9em; color: #aaa; }
+  ul li br::after { content: "..."; } /* dots after <br> */
+  .activeBtn { background: #2a9c63; }
+  li {
+  list-style: none;
+  padding-left: 0; /* optional, removes indentation */
+}
+</style>
+</head>
+<body>
+
+<div align="center" class="row">
+  <button onclick="window.location.href='index.html'">Home</button>
+</div>
+    <h1>HoyoDex Quick Links</h1>
+<p>Choose a Game → Type → enter name/number → generate link</p>
+
+<div class="row" id="gameButtons">
+  <button data-game="gi">Genshin</button>
+  <button data-game="zzz">Zenless</button>
+  <button data-game="hi3">HI3</button>
+  <button data-game="hsr">Star Rail</button>
+</div>
+
+<div class="row hidden" id="typeRow">
+  <label>Type:</label>
+  <div id="typeButtons"></div>
+</div>
+
+<div class="row hidden" id="inputRow">
+  <label>Enter text here:</label>
+  <input type="text" id="inputField" placeholder="">
+  <button id="openLink">Open Link</button>
+  <div class="note" id="inputNote"></div>
+</div>
+
+<div class="output" id="linkOutput"></div>
+
+<ul id="refsList" class="hidden">
+  <li id="giRefs" class="hidden">
+   • <a href="https://genshin-impact.fandom.com/wiki/Thespian_Trick#Thespian_Tricks" target="_blank">Thespian Trick: Last Season 16</a>
+  </li>
+  <li id="zzzRefs" class="hidden">
+   • For info <a href="https://zenless-zone-zero.fandom.com/wiki/" target="_blank">check here</a>
+  </li>
+  <li id="hi3Refs" class="hidden">
+   • Everything is from <a href="https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki" target="_blank">here</a>
+  </li>
+  <li id="hsrRefs" class="hidden">
+  • <a href="https://homdgcat.wiki/sr/char" target="_blank">Character Number Lookup</a><br>
+  • <a href="https://homdgcat.wiki/sr/item" target="_blank">Pets</a><br>
+  • Pompom outfit taken from Google/Telegram
+</li>
+
+</ul>
+
+<script>
+const gameButtons = document.querySelectorAll('#gameButtons button');
+const typeButtonsDiv = document.getElementById('typeButtons');
+const inputField = document.getElementById('inputField');
+const openBtn = document.getElementById('openLink');
+const outputDiv = document.getElementById('linkOutput');
+const inputNote = document.getElementById('inputNote');
+const refsList = document.getElementById('refsList');
+
+const giRefs = document.getElementById('giRefs');
+const zzzRefs = document.getElementById('zzzRefs');
+const hi3Refs = document.getElementById('hi3Refs');
+const hsrRefs = document.getElementById('hsrRefs');
+const typeRow = document.getElementById('typeRow');
+const inputRow = document.getElementById('inputRow');
+
+const typeOptions = {
+  gi: ["icon","sprite"],       
+  zzz: ["icon","sprite","bangboo"],
+  hsr: ["icon","sprite","outfit"],
+  hi3: []
+};
+
+const placeholderText = {
+  gi: "Name with capslock",
+  zzz: "Number",
+  hsr: "Check link for number",
+  hi3: ""
+};
+
+let currentGame = "";
+let currentType = "";
+
+// hide everything initially
+typeRow.classList.add('hidden');
+inputRow.classList.add('hidden');
+refsList.classList.add('hidden');
+[giRefs, zzzRefs, hi3Refs, hsrRefs].forEach(el => el.classList.add('hidden'));
+
+// Game buttons
+gameButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const game = btn.dataset.game;
+    currentGame = game;
+
+    // hide previous
+    [giRefs, zzzRefs, hi3Refs, hsrRefs].forEach(el => el.classList.add('hidden'));
+    outputDiv.innerHTML = "";
+    inputNote.textContent = "";
+    refsList.classList.add('hidden');
+    typeButtonsDiv.innerHTML = "";
+    typeRow.classList.add('hidden');
+    inputRow.classList.add('hidden');
+    currentType = "";
+
+    if(!game) return;
+
+    // show refs
+    refsList.classList.remove('hidden');
+    if(game==="gi") giRefs.classList.remove("hidden");
+    if(game==="zzz") zzzRefs.classList.remove("hidden");
+    if(game==="hi3") hi3Refs.classList.remove("hidden");
+    if(game==="hsr") hsrRefs.classList.remove("hidden");
+
+    // type buttons
+    if(typeOptions[game].length > 0) {
+      typeRow.classList.remove("hidden");
+      typeOptions[game].forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
+        btn.dataset.type = opt;
+        btn.addEventListener("click", () => {
+          currentType = opt;
+          Array.from(typeButtonsDiv.children).forEach(b => b.classList.remove("activeBtn"));
+          btn.classList.add("activeBtn");
+
+          // show note for ZZZ bangboo
+          if(currentGame === "zzz" && currentType === "bangboo") inputNote.textContent = "add _01/_02 at the end for outfit";
+          else inputNote.textContent = "";
+        });
+        typeButtonsDiv.appendChild(btn);
+      });
+    }
+
+    // placeholder
+    inputField.placeholder = placeholderText[game] || "";
+
+    // input row visibility
+    if(game !== "hi3") inputRow.classList.remove("hidden");
+  });
+});
+
+// Open link
+openBtn.addEventListener('click', () => {
+  const value = inputField.value.trim();
+  let url = "";
+
+  if (!value && currentGame !== "hi3") {
+    alert("Please enter a name or number!");
+    return;
+  }
+
+  if(currentGame==="gi") {
+    if(currentType==="icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;
+    else if(currentType==="sprite") url = `https://api.hakush.in/gi/UI/UI_Gacha_AvatarImg_${value}.webp`;
+  }
+  else if(currentGame==="zzz") {
+    if(currentType==="icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}.webp`;
+    else if(currentType==="sprite") url = `https://api.hakush.in/zzz/UI/IconRole${value}.webp`;
+    else if(currentType==="bangboo") url = `https://api.hakush.in/zzz/UI/BangbooGarageRole${value}.webp`;
+  } 
+  else if(currentGame==="hsr") {
+    if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`;
+    else if(currentType==="sprite") url = `https://api.hakush.in/hsr/UI/avatardrawcard/${value}.webp`;
+    else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`;
+  } 
+  else if(currentGame==="hi3") {
+    url = "https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki";
+  }
+
+  outputDiv.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
+  window.open(url, "_blank");
+});
+</script>
+
+</body>
+</html>

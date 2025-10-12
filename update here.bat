@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated 5* 6.1 genshin banner + separated index highlight per phase (active/inactive/soon) + replaced fallback img for index/chara page"
+git commit -m "added pets pg on HSR; cred page for easy access; bday button so i know when to enter game"
 git push origin main  

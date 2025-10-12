@@ -114,7 +114,7 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
 
-    //'09-20': ['Itto', 'Paimon'],  //Test
+    //'10-12': ['Itto', 'Paimon'],  //Test
   },
 
 createImageElement(name) {
@@ -133,3 +133,6 @@ createImageElement(name) {
     return container;
   },
 };
+
+window.ALL_BDAY_CONFIGS = window.ALL_BDAY_CONFIGS || [];
+window.ALL_BDAY_CONFIGS.push(window.BDAY_CONFIG);
