@@ -22,7 +22,7 @@ window.CHARA_CONFIG = {
     { name: 'Lynette', imgName: 'Linette', have: true, element: 'Anemo', rarity: 4, region:['font'], gender:'f',  status: 'available' },
     { name: 'Lyney', imgName: 'Liney', have: true, element: 'Pyro', rarity: 5, region:['font'], gender:'m',  status: 'available' },
     { name: 'Xianyun', imgName: 'Liuyun', have: true, element: 'Anemo', rarity: 5, region:['liy'], gender:'f',  status: 'available' },
-    { name: 'Thoma', imgName: 'Tohma', have: true, element: 'Anemo', rarity: 5, region:['mond','ina'], gender:'m',  status: 'available' },
+    { name: 'Thoma', imgName: 'Tohma', have: true, element: 'Anemo', rarity: 4, region:['mond','ina'], gender:'m',  status: 'available' },
     { name: 'Chongyun', have: true, element: 'Cryo', rarity: 4, region:['liy'], gender:'m',  status: 'available' },
     { name: 'Clorinde', have: true, element: 'Electro', rarity: 5, region:['font'], gender:'f',  status: 'available' },
     { name: 'Collei', have: true, element: 'Dendro', rarity: 4, region:['sum'], gender:'f',  status: 'available' },
@@ -109,7 +109,8 @@ window.CHARA_CONFIG = {
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.0', p:1 },
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'soon', version: '6.1', p:1 },
     { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.2' },
-    // Add more characters here
+    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'',  status: 'new', version: '', p:1, perma: true },
+    // HoyoLab will count +1 with Traveler
   ],
 
   getSpritePath: function(char) {

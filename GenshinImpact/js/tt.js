@@ -1,6 +1,6 @@
 const gameConfig = {
   characters: [
-    { name: 'Alhaitham', imgName: 'Alhatham', have: [false, false], 
+    { name: 'Alhaitham', imgName: 'Alhatham', have: [false], 
         spriteImages: ['Noise_Filtering', 'Reading_Time'] },
         
     { name: 'Amber', imgName: 'Ambor', have: [true], 
@@ -185,6 +185,8 @@ const gameConfig = {
 
     { name: 'Clorinde', have: [false], status:'new',
         spriteImages: ['Intimidating_Stance'] },
+    //{ name: '', have: [false, true], status:'new', spriteFolder: '', spriteImages: ['', ''] },
+    
     // Current TT season is 16 || Link: https://genshin-impact.fandom.com/wiki/Thespian_Trick ...
   ],
 

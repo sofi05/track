@@ -1,12 +1,13 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: 'Wise', imgName: '34', have: false, group:'dest', gender:'m', rarity: 5, status: 'available', hasOutfit: false },
-    { name: 'Belle', imgName: '33', have: true, group:'dest', gender:'f', rarity: 5, status: 'available', hasOutfit: true },
-    { name: 'Wise', imgName: '34_01', have: false, group:'dest', gender:'m', rarity: 5, status: 'available', hasOutfit: false },
-    { name: 'Belle', imgName: '33_01', have: true, group:'dest', gender:'f', rarity: 5, status: 'available', hasOutfit: true },
-    { name: 'Wise', imgName: '34_02', have: false, group:'dest', gender:'m', rarity: 5, status: 'available', hasOutfit: false },
-    { name: 'Belle', imgName: '33_02', have: true, group:'dest', gender:'f', rarity: 5, status: 'available', hasOutfit: true },
-    // Add more characters here
+    { name: 'Wise', imgName: '34', have: false, gender:'m', rarity: 5, status: 'available', hasOutfit: false },
+    { name: 'Belle', imgName: '33', have: true, gender:'f', rarity: 5, status: 'available', hasOutfit: true },
+    { name: 'Wise', imgName: '34_01', have: false, gender:'m', rarity: 5, status: 'available', hasOutfit: false },
+    { name: 'Belle', imgName: '33_01', have: true, gender:'f', rarity: 5, status: 'available', hasOutfit: true },
+    { name: 'Wise', imgName: '34_02', have: false, gender:'m', rarity: 5, status: 'available', hasOutfit: false },
+    { name: 'Belle', imgName: '33_02', have: true, gender:'f', rarity: 5, status: 'available', hasOutfit: true },
+    
+    // { name: '', imgName: '', have: true, gender:'', rarity: 5, status: 'new', hasOutfit: true },
   ],
 
 imageExists(url, callback) {

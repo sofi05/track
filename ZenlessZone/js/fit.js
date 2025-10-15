@@ -8,7 +8,8 @@ const gameConfig = {
     { name: 'Yuzuha', imgName: '47_01', imgName2:'47_01',have: false, rarity: 5, status: 'available' },
     { name: 'Vivian', imgName: '41_01', imgName2:'41_01',have: false, rarity: 5, status: 'new' },
     { name: 'Manato', imgName: '51_01', imgName2:'51_01',have: false, rarity: 4, status: 'new' },
-      // Add more characters here
+    
+    // { name: '', imgName: '', imgName2:'',have: false, rarity: 4, status: 'new' },
   ],
 
   pathPrefix: "../assets/charaid/Zenless/Outfit/IconRoleCrop", 

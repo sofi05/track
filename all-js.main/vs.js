@@ -12,9 +12,9 @@ window.GAME_VERSIONS = {
     date2vs:'3.8', date2: '', date2p2: '',
   },
   ZenlessZone: {
-    version: '2.2',
-      p1: '2025-09-04T00:00:00', p2: '2025-09-24T19:00:00',
-    date1vs: '2.3', date1: '2025-10-15T00:00:00', date1p2: '2025-11-05T19:00:00',
+    version: '2.3',
+      p1: '2025-10-15T00:00:00', p2: '2025-11-05T19:00:00',
+    date1vs: '2.4', date1: '2025-11-26T00:00:00', date1p2: '',
     date2vs: ''  , date2: '', date2p2: '',
   },
   HonkaiImpact: {

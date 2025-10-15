@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const characters = [
     { name: 'Bagboo', have: true, rarity: '4' },
     { name: 'Cryboo', have: true, rarity: '4' },
-    { name: 'Avocaboo', have: false, rarity: '4' },
+    { name: 'Avocaboo', have: true, rarity: '4' },
     { name: 'Paperboo', have: true, rarity: '4' },
     { name: 'Sumoboo', have: true, rarity: '4' },
     { name: 'Exploreboo', have: true, rarity: '4' },
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Penguinboo', have: true, rarity: '4' },
     { name: 'Amillion', have: false, rarity: '5' },
     { name: 'Devilboo', have: true, rarity: '4' },
-    { name: 'Rocketboo', have: false, rarity: '5' },
+    { name: 'Rocketboo', have: true, rarity: '5' },
     { name: 'Electroboo', have: true, rarity: '4' },
     { name: 'Booressure', have: false, rarity: '4' },
     { name: 'Boollseye', have: true, rarity: '4' },
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Miss Esme', have: false, rarity: '5' },
     { name: 'Mercury', have: false, rarity: '5', status: 'new' },
     { name: 'Excaliboo', have: false, rarity: '4', status: 'new' }
+    //{ name: '', have: false, rarity: '', status: 'new' }
   ];
 
   const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';

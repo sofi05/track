@@ -41,13 +41,18 @@ window.CHARA_CONFIG = {
     { name: 'Yixuan', imgName: '44', have: false, element: 'IconAuricInk', filterElement: 'IconEther', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.0' },
     { name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available', version: '2.1' },
     { name: 'Yuzuha', imgName: '47', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available', version: '2.1' },
-
-    { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'new', version: '2.2', p:1 },
-    { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'new', version: '2.2', p:2 },
-    { name: 'Lucia', imgName: '50', have: false, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3', p:1 },
-    { name: 'Manato', imgName: '51', have: false, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'soon', version: '2.3', p:1 },
-    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'soon', version: '2.3', p:2 }
-      // Add more characters here
+    { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:1 },
+    { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
+    
+    { name: 'Lucia', imgName: '50', have: false, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.3', p:1 },
+    { name: 'Manato', imgName: '51', have: false, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'new', version: '2.3', p:1 },
+    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.3', p:2 }
+ 
+    // { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'soon', version: '', p:1 } 
+    // { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '', p:2 } 
+    
+    // { name: '', imgName: '', have: false, element: '', group:'', gender:'', rarity: 5, status: 'new', version: '', p:2, perma: true } 
+    
   ],
 
 getSpritePath: function(char) {

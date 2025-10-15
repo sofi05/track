@@ -77,7 +77,9 @@ window.CHARA_CONFIG = {
     
     { name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'new', version: '3.6', p:2 },
     { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'soon', version: '3.7', p:1 },
-    // Add more characters here
+    //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''],rarity: 5,  status: 'new', version: '', p:1, perma: true },
+    
+    // HoyoLab will count +1 with Traiblazer & +1 with the Free Collab banner
   ],
 
 getSpritePath: function(char) {

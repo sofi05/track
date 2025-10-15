@@ -9,7 +9,7 @@ window.CHARA_CONFIG = {
     { name: 'Caelus', imgName: '8007', have: true, element: 'ice', group:'reme', gender:'m', rarity: 5,  status: 'available' },
     { name: 'Stelle', imgName: '8008', have: true, element: 'ice', group:'reme', gender:'f', rarity: 5,  status: 'available' },
 
-    // Add more characters here
+    // { name: '', imgName: '', have: true, element: '', group:'', gender:'', rarity: 5,  status: 'new' },
   ],
 
 getSpritePath: function(char) {
