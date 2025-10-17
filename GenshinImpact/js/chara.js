@@ -110,7 +110,6 @@ window.CHARA_CONFIG = {
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'soon', version: '6.1', p:1 },
     { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.2' },
     //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'',  status: 'new', version: '', p:1, perma: true },
-    // HoyoLab will count +1 with Traveler
   ],
 
   getSpritePath: function(char) {

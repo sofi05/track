@@ -44,6 +44,7 @@ window.CHARA_CONFIG = {
     { name: 'Bailu', imgName: '1211', have: true, element: 'thunder', group:'abun', gender:'f', world:['txl'], rarity: 5,  status: 'available' },
     { name: 'Guinaifen', imgName: '1210', have: true, element: 'fire', group:'nihi', gender:'f', world:['txl'], rarity: 4,  status: 'available'},
     { name: 'Evernight', imgName: '1413', have: true, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5,  status: 'new'},
+    { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'new'},
 
     //DONT HAVE
     { name: 'Fu Xuan', imgName: '1208', have: false, element: 'quantum', group:'prese', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.2' },
@@ -75,11 +76,8 @@ window.CHARA_CONFIG = {
     { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.5' },
     { name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.5' },
     
-    { name: 'Dan Heng • PT', imgName: '1414', have: false, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'new', version: '3.6', p:2 },
     { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'soon', version: '3.7', p:1 },
     //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''],rarity: 5,  status: 'new', version: '', p:1, perma: true },
-    
-    // HoyoLab will count +1 with Traiblazer & +1 with the Free Collab banner
   ],
 
 getSpritePath: function(char) {

@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Agent Gulliver', have: true, rarity: '5' },
     { name: 'Brawlerboo', have: false, rarity: '4' },
     { name: 'Snap', have: false, rarity: '5' },
-    { name: 'Robin', have: false, rarity: '5' },
+    { name: 'Robin', have: true, rarity: '5' },
     { name: 'Overtimeboo', have: false, rarity: '4' },
     { name: 'Belion', have: false, rarity: '5' },
     { name: 'Miss Esme', have: false, rarity: '5' },
     { name: 'Mercury', have: false, rarity: '5', status: 'new' },
-    { name: 'Excaliboo', have: false, rarity: '4', status: 'new' }
-    //{ name: '', have: false, rarity: '', status: 'new' }
+    { name: 'Excaliboo', have: false, rarity: '4', status: 'new' },
+    //{ name: '', have: false, rarity: '', status: 'new' },
   ];
 
   const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';

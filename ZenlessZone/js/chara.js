@@ -21,6 +21,7 @@ window.CHARA_CONFIG = {
     { name: 'Anby Soldier 0', imgName: '40', have: true, element: 'IconElectric', group:'cunhar', gender:'f', rarity: 5, status: 'available' },
     { name: 'Pan Yinhu', imgName: '45', have: true, element: 'IconPhysical', group:'sum', gender:'m', rarity: 4, status: 'available' },
     { name: 'Lucy', imgName: '27', have: true, element: 'IconFire', group:'sons', gender:'f', rarity: 4, status: 'available' },
+    { name: 'Manato', imgName: '51', have: true, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'new'},
 
     //DONT HAVE
     { name: 'Nekomata', imgName: '11', have: false, element: 'IconPhysical', group:'cunhar', gender:'f', rarity: 5, status: 'available', version: '2.0', perma: true },
@@ -45,14 +46,11 @@ window.CHARA_CONFIG = {
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
     
     { name: 'Lucia', imgName: '50', have: false, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.3', p:1 },
-    { name: 'Manato', imgName: '51', have: false, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'new', version: '2.3', p:1 },
-    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.3', p:2 }
- 
-    // { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'soon', version: '', p:1 } 
-    // { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '', p:2 } 
+    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.3', p:2 },
+    { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'soon', version: '2.4', p:1 },
+    { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.4', p:2 },
     
-    // { name: '', imgName: '', have: false, element: '', group:'', gender:'', rarity: 5, status: 'new', version: '', p:2, perma: true } 
-    
+    // { name: '', imgName: '', have: false, element: '', group:'', gender:'', rarity: 5, status: 'new', version: '', p:2, perma: true },
   ],
 
 getSpritePath: function(char) {

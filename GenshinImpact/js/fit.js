@@ -18,8 +18,8 @@ const gameConfig = {
     { name: 'Hu Tao', imgName: 'Cherries_Snow-Laden_Icon',imgName2:'HutaoCostumeWinter', have: false, rarity: 5, status: 'available' },
     { name: 'Jean', imgName: 'Sea_Breeze_Dandelion_Icon',imgName2:'QinCostumeSea', have: false, rarity: 5, status: 'available' },
     { name: 'Xiangling', imgName: 'New_Years_Cheer_Icon',imgName2:'XianglingCostumeWinter', have: true, rarity: 4, status: 'available' },
-    { name: 'Xingqiu', imgName: 'Bamboo_Rain_Icon',imgName2:'XingqiuCostumeBamboo', have: true, rarity: 4, status: 'available' }
- // { name: '', imgName: '',imgName2:'', have: true, rarity: 4, status: 'new' }
+    { name: 'Xingqiu', imgName: 'Bamboo_Rain_Icon',imgName2:'XingqiuCostumeBamboo', have: true, rarity: 4, status: 'available' },
+ // { name: '', imgName: '',imgName2:'', have: true, rarity: 4, status: 'new' },
   ],
 
   pathPrefix: "../assets/charaid/Genshin/Outfit/",

@@ -114,6 +114,8 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
 
+    //'x-x': ['Jahoda'],  //soon
+    //'x-x': ['Nefer'],  //soon
     //'10-12': ['Itto', 'Paimon'],  //Test
   },
 
