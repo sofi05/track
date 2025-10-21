@@ -45,6 +45,7 @@ window.CHARA_CONFIG = {
     { name: 'Guinaifen', imgName: '1210', have: true, element: 'fire', group:'nihi', gender:'f', world:['txl'], rarity: 4,  status: 'available'},
     { name: 'Evernight', imgName: '1413', have: true, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5,  status: 'new'},
     { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'new'},
+    { name: 'Hanya', imgName: '1215', have: true, element: 'physical', group:'harm', gender:'f', world:['txl'], rarity: 4,  status: 'available'},
 
     //DONT HAVE
     { name: 'Fu Xuan', imgName: '1208', have: false, element: 'quantum', group:'prese', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.2' },
@@ -52,7 +53,6 @@ window.CHARA_CONFIG = {
     { name: 'Welt', imgName: '1004', have: false, element: 'imaginary', group:'nihi', gender:'m', world:['ae'],rarity: 5,  status: 'available', version: '3.2', perma: true },
     { name: 'Sparkle', imgName: '1306', have: false, element: 'quantum', group:'harm', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '3.4' },
     { name: 'Ruan Mei', imgName: '1303', have: false, element: 'ice', group:'harm', gender:'f', world:['hss'],rarity: 5,  status: 'available', version: '3.2' },
-    { name: 'Hanya', imgName: '1215', have: false, element: 'physical', group:'harm', gender:'f', world:['txl'], rarity: 4,  status: 'available', version: '3.6', perma: true, p:2 },
     { name: 'Huohuo', imgName: '1217', have: false, element: 'wind', group:'abun', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.1' },
     { name: 'Topaz & Numby', imgName: '1112', have: false, element: 'fire', group:'hunt', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '2.5' },
     { name: 'Jingliu', imgName: '1212', have: false, element: 'ice', group:'dest', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.4' },

@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Overtimeboo', have: false, rarity: '4' },
     { name: 'Belion', have: false, rarity: '5' },
     { name: 'Miss Esme', have: false, rarity: '5' },
-    { name: 'Mercury', have: false, rarity: '5', status: 'new' },
-    { name: 'Excaliboo', have: false, rarity: '4', status: 'new' },
+    { name: 'Mercury', have: false, rarity: '5' },
+    { name: 'Excaliboo', have: false, rarity: '4' },
     //{ name: '', have: false, rarity: '', status: 'new' },
   ];
 

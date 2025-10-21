@@ -40,6 +40,7 @@ window.BDAY_CONFIG = {
 
     '05-03': ['Candace'],
     '05-08': ['Collei'],
+    '05-09': ['Nefer'], 
     '05-18': ['Gorou'],
     '05-21': ['Yunjin'],
     '05-25': ['Dahlia'],
@@ -115,7 +116,7 @@ window.BDAY_CONFIG = {
     '12-31': ['Zhongli'],
 
     //'x-x': ['Jahoda'],  //soon
-    //'x-x': ['Nefer'],  //soon
+    //'x-x': ['Durin'],  //soon
     //'10-12': ['Itto', 'Paimon'],  //Test
   },
 

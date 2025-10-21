@@ -19,6 +19,8 @@ const gameConfig = {
     { name: 'Jean', imgName: 'Sea_Breeze_Dandelion_Icon',imgName2:'QinCostumeSea', have: false, rarity: 5, status: 'available' },
     { name: 'Xiangling', imgName: 'New_Years_Cheer_Icon',imgName2:'XianglingCostumeWinter', have: true, rarity: 4, status: 'available' },
     { name: 'Xingqiu', imgName: 'Bamboo_Rain_Icon',imgName2:'XingqiuCostumeBamboo', have: true, rarity: 4, status: 'available' },
+    { name: 'Durin', imgName: '',imgName2:'', have: false, rarity: 4, status: 'new' },
+
  // { name: '', imgName: '',imgName2:'', have: true, rarity: 4, status: 'new' },
   ],
 
