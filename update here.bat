@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated bangboo + fixed some stuff + added some charas"
+git commit -m "got a few charas + new SR/GI banner details"
 git push origin main

@@ -81,6 +81,13 @@ function renderList() {
         iconWrapper.appendChild(label);
       }
 
+      if (c.status === 'soon') {
+        const label = document.createElement('div');
+        label.textContent = 'SOON';
+        label.className = 'soon-label';
+        iconWrapper.appendChild(label);
+      }
+
       const img = document.createElement('img');
       img.className = 'char-icon';
 
