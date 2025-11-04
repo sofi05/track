@@ -1,3 +1,3 @@
 git add . 
-git commit -m "got a few charas + new SR/GI banner details"
+git commit -m "updated + replaced some sprites with in game renders"
 git push origin main
