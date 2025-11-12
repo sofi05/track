@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Red Moccus', have: false, rarity: '5' },
     { name: 'Knightboo', have: false, rarity: '4' },
     { name: 'Agent Gulliver', have: true, rarity: '5' },
-    { name: 'Brawlerboo', have: false, rarity: '4' },
+    { name: 'Brawlerboo', have: true, rarity: '4' },
     { name: 'Snap', have: false, rarity: '5' },
     { name: 'Robin', have: true, rarity: '5' },
     { name: 'Overtimeboo', have: false, rarity: '4' },

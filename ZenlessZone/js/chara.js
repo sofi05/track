@@ -23,6 +23,7 @@ window.CHARA_CONFIG = {
     { name: 'Lucy', imgName: '27', have: true, element: 'IconFire', group:'sons', gender:'f', rarity: 4, status: 'available' },
     { name: 'Manato', imgName: '51', have: true, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'new'},
     { name: 'Lucia', imgName: '50', have: true, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'new'},
+    { name: 'Yidhari', imgName: '52', have: true, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'new'},
 
     //DONT HAVE
     { name: 'Nekomata', imgName: '11', have: false, element: 'IconPhysical', group:'cunhar', gender:'f', rarity: 5, status: 'available', version: '2.0', perma: true },
@@ -46,7 +47,6 @@ window.CHARA_CONFIG = {
     { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:1 },
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
     
-    { name: 'Yidhari', imgName: '52', have: false, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'new', version: '2.3', p:2 },
     { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'soon', version: '2.4', p:1 },
     { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.4', p:2 },
     

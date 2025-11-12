@@ -1,3 +1,3 @@
 git add . 
-git commit -m "'have' updated"
+git commit -m "normal update"
 git push origin main
