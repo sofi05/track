@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GI: Characters</title>
+  <link rel="stylesheet" href="../shared/css/style.css" />
+  <link rel="stylesheet" href="../shared/css/change.css" />
+  <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">    
+</head>
+<body>
+  <h1>Characters</h1>
+  <p id="charCount" style="text-align: center; font-size: 0.8rem; margin-top: -10px; margin-bottom: 20px; color: #666;">
+  Total: 0 characters</p>
+
+  <div class="search-filter">
+    <input type="text" id="searchInput" placeholder="Search by name..." />
+    <button id="filterBtn">Filter</button>
+  </div>
+
+  <div id="filterPopup" class="filter-popup hidden">
+    <!-- STATUS -->
+    <div class="filter-category">
+      <button type="button" class="filter-toggle">Status</button>
+      <div class="filter-options">
+        <div class="sub-filter">
+          <label><input type="radio" name="have" value="true"> Have</label>
+          <label><input type="radio" name="have" value="false"> Don't</label>
+        </div>
+        <div class="sub-filter">
+          <label><input type="checkbox" name="newStatus" value="true"> New</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ELEMENT -->
+    <div class="filter-category">
+      <button type="button" class="filter-toggle">Element</button>
+      <div class="filter-options">
+        <label class="element-label">
+          <input type="radio" name="element" value="Anemo">
+          <img src="../assets/others/Genshin/Element/Anemo.png" alt="Anemo" class="element-img">
+        </label>
+        <label class="element-label">
+          <input type="radio" name="element" value="Geo">
+          <img src="../assets/others/Genshin/Element/Geo.png" alt="Geo" class="element-img">
+        </label>
+        <label class="element-label">
+          <input type="radio" name="element" value="Electro">
+          <img src="../assets/others/Genshin/Element/Electro.png" alt="Electro" class="element-img">
+        </label>
+        <label class="element-label">
+          <input type="radio" name="element" value="Dendro">
+          <img src="../assets/others/Genshin/Element/Dendro.png" alt="Dendro" class="element-img">
+        </label>
+        <label class="element-label">
+          <input type="radio" name="element" value="Hydro">
+          <img src="../assets/others/Genshin/Element/Hydro.png" alt="Hydro" class="element-img">
+        </label>
+        <label class="element-label">
+          <input type="radio" name="element" value="Pyro">
+          <img src="../assets/others/Genshin/Element/Pyro.png" alt="Pyro" class="element-img">
+        </label>
+        <label class="element-label">
+          <input type="radio" name="element" value="Cryo">
+          <img src="../assets/others/Genshin/Element/Cryo.png" alt="Cryo" class="element-img">
+        </label>
+      </div>
+    </div>
+
+    <!-- REGION -->
+    <div class="filter-category">
+      <button type="button" class="filter-toggle">Region</button>
+      <div class="filter-options region-grid">
+        <label for="region-mond" class="region-label-img">
+          <input type="radio" name="region" value="mond" id="region-mond">
+          <img src="../assets/others/Genshin/Region/mond.png" alt="Mondstadt" class="region-img">
+        </label>
+        <label for="region-liy" class="region-label-img">
+          <input type="radio" name="region" value="liy" id="region-liy">
+          <img src="../assets/others/Genshin/Region/liy.png" alt="Liyue" class="region-img">
+        </label>
+        <label for="region-ina" class="region-label-img">
+          <input type="radio" name="region" value="ina" id="region-ina">
+          <img src="../assets/others/Genshin/Region/ina.png" alt="Inazuma" class="region-img">
+        </label>
+        <label for="region-sum" class="region-label-img">
+          <input type="radio" name="region" value="sum" id="region-sum">
+          <img src="../assets/others/Genshin/Region/sum.png" alt="Sumeru" class="region-img">
+        </label>
+        <label for="region-font" class="region-label-img">
+          <input type="radio" name="region" value="font" id="region-font">
+          <img src="../assets/others/Genshin/Region/font.png" alt="Fontaine" class="region-img">
+        </label>
+        <label for="region-nat" class="region-label-img">
+          <input type="radio" name="region" value="nat" id="region-nat">
+          <img src="../assets/others/Genshin/Region/nat.png" alt="Natlan" class="region-img">
+        </label>
+        <label for="region-snez">
+          <input type="radio" name="region" value="snez" id="region-snez">Snezhnaya
+        </label>
+        <label for="region-khae">
+          <input type="radio" name="region" value="khae" id="region-khae">Khaeri'ah
+        </label>
+        <label for="region-unk">
+          <input type="radio" name="region" value="unk" id="region-unk">Unknown
+        </label>
+      </div>
+    </div>
+
+    <!-- RARITY -->
+    <div class="filter-category">
+      <button type="button" class="filter-toggle">Rarity</button>
+      <div class="filter-options">
+        <label><input type="radio" name="rarity" value="4"> 4★</label>
+        <label><input type="radio" name="rarity" value="5"> 5★ </label>
+      </div>
+    </div>
+
+    <!-- GENDER -->
+    <div class="filter-category">
+      <button type="button" class="filter-toggle">Gender</button>
+      <div class="filter-options">
+        <label><input type="radio" name="gender" value="m"> Male</label>
+        <label><input type="radio" name="gender" value="f"> Female</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="char-list" id="charList"></div>
+  <div id="popup-container"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="bottom-nav">
+    <a href="000.html" title="Home">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Home
+    </a>
+    <a href="001.html" id="tab-characters" title="Characters">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Characters
+    </a>
+    <a href="002.html" id="tab-quests" title="Quests">
+      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>Menu
+    </a>
+    <a href="003.html" id="tab-main" title="Main">
+      <img src="../assets/others/logo.png" alt="Main" class="nav-icon-image" />
+      Main
+    </a>
+    <a href="#" id="tab-play" title="Switch Game">
+      <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M3.75 9c-1.1 0-1.5 0.73-1.5 1.82 0 2.19 1.1 5.08 2.2 6.56s2.93 1.1 3.66 0l1.46-2.2h4.39l1.46 2.2c0.73 1.1 2.5 1.1 3.66 0s2.2-4.4 2.2-6.56c0-1.1-0.4-1.82-1.5-1.82-1.9 0-3 1.52-3.75 2.28H8.7c-0.6-0.6-1.5-1.8-3-1.8z"/></svg>Change
+    </a>
+  </nav>
+
+  <!--SPRITE-->
+  <div id="spritePopup" class="sprite-popup" style="display:none;">
+    <div class="popup-wrapper">
+      <span class="close-btn">✕</span>
+      <img id="spritePopupImg" src="" alt="" />
+    </div>
+  </div>
+  <div id="spriteList"></div>
+
+  <!--SCRIPTS-->
+  <script src="js/chara.js" defer></script>
+  <script src="../shared/js/chara.js" defer></script>
+  <script src="../shared/js/change.js"></script>
+</body>
+</html>
