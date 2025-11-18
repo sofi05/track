@@ -47,6 +47,7 @@ window.CHARA_CONFIG = {
     { name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', world:['pena'],rarity: 4,  status: 'available' },
 
     { name: 'The Herta', imgName: '1401', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 5,  status: 'available' },
+    { name: 'Tribbie', imgName: '1403', have: true, element: 'quantum', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available'},
     { name: 'Anaxa', imgName: '1405', have: true, element: 'wind', group:'eru', gender:'m', world:['amp'], rarity: 5,  status: 'available' },
     { name: 'Castorice', imgName: '1407', have: true, element: 'quantum', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available' },
     { name: 'Phainon', imgName: '1408', have: true, element: 'physical', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available' },
@@ -77,7 +78,7 @@ window.CHARA_CONFIG = {
     { name: 'Rappa', imgName: '1317', have: false, element: 'imaginary', group:'eru', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '2.6' },
     
     { name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.3' },
-    { name: 'Tribbie', imgName: '1403', have: false, element: 'quantum', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:1 },
+    
     { name: 'Mydei', imgName: '1404', have: false, element: 'imaginary', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:2 },
     { name: 'Cipher', imgName: '1406', have: false, element: 'quantum', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:2 },
     { name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.5' },
