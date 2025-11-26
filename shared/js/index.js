@@ -75,7 +75,8 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   charInfo.classList.add('char-info');
 
   const charName = document.createElement('h3');
-  charName.textContent = char.name;
+  charName.textContent = char.name + (char.want ? " ★" : "");
+
 
   const charVersion = document.createElement('div');
   charVersion.textContent = `Version: ${char.version || 'N/A'}`;
