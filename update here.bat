@@ -1,3 +1,3 @@
 git add . 
-git commit -m "changed names of pages and folders for shorter (easier to change)"
+git commit -m "fixed some stuff + added star for charas i want"
 git push origin main

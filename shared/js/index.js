@@ -76,6 +76,8 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
 
   const charName = document.createElement('h3');
   charName.textContent = char.name + (char.want ? " ★" : "");
+  charName.textContent = char.name + (char.want === 1 ? " ★" : char.want === 2 ? " ☆" : "");
+
 
 
   const charVersion = document.createElement('div');
