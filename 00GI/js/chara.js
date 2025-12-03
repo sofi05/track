@@ -81,6 +81,8 @@ window.CHARA_CONFIG = {
     { name: 'Mizuki', have: true, element: 'Anemo', rarity: 5, region:['ina'], gender:'f',  status: 'available' },
     { name: 'Aino', have: true, element: 'Hydro', rarity: 4, region:['snez'], gender:'f',  status: 'available' },
     { name: 'Flins', have: true, element: 'Electro', rarity: 5, region:['snez'], gender:'m',  status: 'available'},
+    { name: 'Jahoda', have: true, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'new'},
+    { name: 'Durin', have: true, element: 'Pyro', rarity: 5, region:['mond'], gender:'m',  status: 'new'},
 
     //DON'T HAVE
     { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '4.5', want: 2 }, 
@@ -106,11 +108,12 @@ window.CHARA_CONFIG = {
     { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '5.7', want: 2 },
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.0', want: 2},
+    { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.1', p:1 },
     
-    { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'new', version: '6.1', p:1 },
-    { name: 'Jahoda', have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f',  status: 'soon', version: '6.2', want: 1 },
-    { name: 'Durin', have: false, element: 'Pyro', rarity: 5, region:['mond'], gender:'m',  status: 'soon', version: '6.2', want: 1 },
-    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'',  status: 'new', version: '', p:1, perma: true, want: 1-2 },
+    { name: 'Zibai', have: false, element: 'geo', rarity: 5, region:['liy'], gender:'f',  status: 'soon', version: '6.3', p:1, },
+    { name: 'Illuga', have: false, element: 'geo', rarity: 4, region:[''], gender:'m',  status: 'soon', version: '6.3', p:1, },
+    { name: 'Columbina', have: false, element: 'hydro', rarity: 5, region:['snez'], gender:'f',  status: 'soon', version: '6.3', p:1, want: 2 },
+    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'',  status: 'soon', version: '', p:1, perma: true, want: 1-2 },
     // want -> 1 (fight) / 2 (bc story)
   ],
 

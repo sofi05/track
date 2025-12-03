@@ -21,9 +21,9 @@ window.CHARA_CONFIG = {
     { name: 'Pulchra', imgName: '38', have: true, element: 'IconPhysical', group:'sons', gender:'f', rarity: 4, status: 'available' },
     { name: 'Anby Soldier 0', imgName: '40', have: true, element: 'IconElectric', group:'cunhar', gender:'f', rarity: 5, status: 'available' },
     { name: 'Pan Yinhu', imgName: '45', have: true, element: 'IconPhysical', group:'sum', gender:'m', rarity: 4, status: 'available' },
-    { name: 'Lucia', imgName: '50', have: true, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'new'},
-    { name: 'Manato', imgName: '51', have: true, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'new'},
-    { name: 'Yidhari', imgName: '52', have: true, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'new'},
+    { name: 'Lucia', imgName: '50', have: true, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'available'},
+    { name: 'Manato', imgName: '51', have: true, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'available'},
+    { name: 'Yidhari', imgName: '52', have: true, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'available'},
 
     //DONT HAVE
     { name: 'Nekomata', imgName: '11', have: false, element: 'IconPhysical', group:'cunhar', gender:'f', rarity: 5, status: 'available', version: '2.0', perma: true, want: 1 },
@@ -47,8 +47,8 @@ window.CHARA_CONFIG = {
     { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:1, want: 2 },
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
     
-    { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'soon', version: '2.4', p:1 },
-    { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.4', p:2 },
+    { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'new', version: '2.4', p:1 },
+    { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'new', version: '2.4', p:2 },
     { name: 'Zhao', imgName: '56', have: false, element: 'IconIce', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.5', p:1 },
     { name: 'Shunguan', imgName: '55', have: false, element: 'IconHonedEdge', filterElement: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.5', p:2, want: 1},
 
