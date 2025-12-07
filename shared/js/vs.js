@@ -8,7 +8,7 @@ window.GAME_VERSIONS = {
   StarRail: { //https://game8.co/games/Honkai-Star-Rail/archives/408381
     version: '3.7',
       p1: '2025-11-05T00:00:00', p2: '2025-11-26T19:00:00', 
-    date1vs:'3.8', date1: '2025-12-17T00:00:00', date1p2: '2026-01-07T19:00:00',
+    date1vs:'3.8', date1: '2025-12-17T00:00:00', date1p2: '2026-01-07T19:00:00', //p3: '2026-01-28T19:00:00'
     date2vs:'3.9', date2: '', date2p2: '',
   },
   ZenlessZone: { //https://game8.co/games/Zenless-Zone-Zero/archives/435687

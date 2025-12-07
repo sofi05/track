@@ -47,9 +47,9 @@ window.CHARA_CONFIG = {
     { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:1, want: 2 },
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
     
-    { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'', gender:'m', rarity: 5, status: 'new', version: '2.4', p:1 },
-    { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'new', version: '2.4', p:2 },
-    { name: 'Zhao', imgName: '56', have: false, element: 'IconIce', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.5', p:1 },
+    { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'kramp', gender:'m', rarity: 5, status: 'new', version: '2.4', p:1 },
+    { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'kramp', gender:'f', rarity: 5, status: 'new', version: '2.4', p:2 },
+    { name: 'Zhao', imgName: '56', have: false, element: 'IconIce', group:'kramp', gender:'f', rarity: 5, status: 'soon', version: '2.5', p:1 },
     { name: 'Shunguan', imgName: '55', have: false, element: 'IconHonedEdge', filterElement: 'IconPhysical', group:'', gender:'f', rarity: 5, status: 'soon', version: '2.5', p:2, want: 1},
 
     // { name: '', imgName: '', have: false, element: '', group:'', gender:'', rarity: 5, status: 'new', version: '', p:2, perma: true },

@@ -174,16 +174,16 @@ const gameConfig = {
     { name: 'Zhongli', have: [true], 
         spriteImages: ['Solemn_Countenance'] },
 
-    { name: 'Sucrose', have: [false], status:'new',
+    { name: 'Sucrose', have: [false],
         spriteImages: ['Burst_of_Inspiration'] },
 
-    { name: 'Qiqi', have: [false], status:'new',
+    { name: 'Qiqi', have: [false], 
         spriteImages: ['Serious_Contemplation'] },
 
-    { name: 'Xingqiu', have: [false], status:'new',
+    { name: 'Xingqiu', have: [false], 
         spriteImages: ['Leisurely_Moment'] },
 
-    { name: 'Clorinde', have: [false], status:'new',
+    { name: 'Clorinde', have: [false],
         spriteImages: ['Intimidating_Stance'] },
     //{ name: '', have: [false, true], status:'new', spriteFolder: '', spriteImages: ['', ''] },
     

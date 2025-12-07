@@ -31,14 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Robin', have: true, rarity: '5' },
     { name: 'Overtimeboo', have: false, rarity: '4' },
     { name: 'Belion', have: false, rarity: '5' },
-    { name: 'Miss Esme', have: false, rarity: '5' },
+    { name: 'Miss Esme', have: true, rarity: '5' },
     { name: 'Mercury', have: false, rarity: '5' },
     { name: 'Excaliboo', have: false, rarity: '4' },
+    { name: 'Bild N. Boolok', have: true, rarity: '4', status: 'new' },
+    { name: 'Birkblick', have: false, rarity: '4', status: 'new' },
     //{ name: '', have: false, rarity: '', status: 'new' },
   ];
 
   const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';
-  const missingIndexes = [8, 22, 33, 34, 35];
+  const missingIndexes = [8, 22, 33, 34, 35, 40];
   let currentIndex = 1;
 
   characters.forEach((character) => {
