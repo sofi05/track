@@ -19,7 +19,7 @@ const gameConfig = {
     { name: 'Jean', imgName: 'Sea_Breeze_Dandelion_Icon',imgName2:'QinCostumeSea', have: false, rarity: 5, status: 'available' },
     { name: 'Xiangling', imgName: 'New_Years_Cheer_Icon',imgName2:'XianglingCostumeWinter', have: true, rarity: 4, status: 'available' },
     { name: 'Xingqiu', imgName: 'Bamboo_Rain_Icon',imgName2:'XingqiuCostumeBamboo', have: true, rarity: 4, status: 'available' },
-    { name: 'Durin', imgName: '',imgName2:'DurinCostumeWic', have: false, rarity: 5, status: 'soon' },
+    { name: 'Durin', imgName: 'UI_AvatarIcon_DurinCostumeWic',imgName2:'DurinCostumeWic', have: false, rarity: 5, status: 'soon' },
 
  // { name: '', imgName: '',imgName2:'', have: true, rarity: 4, status: 'new' },
   ],
@@ -27,6 +27,6 @@ const gameConfig = {
   pathPrefix: "../assets/charaid/Genshin/Outfit/",
   spritePrefix: "../assets/Sprite/Genshin/Outfit/UI_Costume_", 
 
-  getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.webp`,
+  getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.png`,
   getSpritePath: (c) => `${gameConfig.spritePrefix}${c.imgName2}.png`
 };
