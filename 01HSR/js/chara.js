@@ -56,6 +56,8 @@ window.CHARA_CONFIG = {
     { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'available'},
     { name: 'Mydei', imgName: '1404', have: true, element: 'imaginary', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available'},
     
+    { name: 'The Dahlia', imgName: '1321', have: true, element: 'fire', group:'nihi', gender:'f', world:[''],rarity: 5,  status: 'new', version: '3.8', p:1},
+    
     //DONT HAVE
     { name: 'Welt', imgName: '1004', have: false, element: 'imaginary', group:'nihi', gender:'m', world:['ae'],rarity: 5,  status: 'available', version: '3.2', perma: true, want: 1 },
 
@@ -81,11 +83,10 @@ window.CHARA_CONFIG = {
     { name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.8', want: 2, p:3 },
     { name: 'Cipher', imgName: '1406', have: false, element: 'quantum', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:2, want: 2 },
     { name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.5', want: 2 },
-    { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.5', want: 1 },
-    
-    { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'new', version: '3.7', want: 2 },
-    { name: 'The Dahlia', imgName: '1321', have: false, element: 'fire', group:'nihi', gender:'f', world:[''],rarity: 5,  status: 'soon', version: '3.8', p:1},
-    //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''],rarity: 5,  status: 'new', version: '', p:1, perma: true, want: 1-2 },
+    { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.5', want: 1 },    
+    { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'available', version: '3.7', want: 2 },
+
+    //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''],rarity: 5,  status: 'soon', version: '', p:1, perma: true, want: 1-2 },
     // want -> 1 (fight) / 2 (bc story)
   ],
 
