@@ -32,8 +32,13 @@
         bdaySection.appendChild(birthdayIcon);
       });
     } else {
-      bdaySection.textContent = 'No birthdays today!';
-    }
+    const msg = document.createElement('div');
+    msg.textContent = 'No birthdays today!';
+    msg.style.width = '50%';
+    msg.style.fontSize = '13px';
+    msg.style.opacity = '0.7';
+    bdaySection.appendChild(msg);
+  }
   }
 
   document.addEventListener('DOMContentLoaded', showTodaysBirthdays);

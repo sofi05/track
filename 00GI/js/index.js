@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const { newCharacters, rerunCharacters, permaCharacters } = filterAndSortCharacters(characters);
 
-  // === Add character count to top right corner ===
   const totalCount = newCharacters.length + rerunCharacters.length + permaCharacters.length;
 
   const charCountBox = document.createElement('div');
@@ -60,7 +59,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   };
 
+  if (newCharacters.length === 0 && newCharSlider) {
+  const msg = document.createElement('div');
+  msg.textContent = window.EMPTY_NEW_CHARACTERS_TEXT;
+  Object.assign(msg.style, window.EMPTY_NEW_CHARACTERS_STYLE);
+  newCharSlider.appendChild(msg);
+} else {
   appendChar(newCharSlider, newCharacters);
+}
   appendChar(rerunSlider, rerunCharacters);
   appendChar(permaSlider, permaCharacters);
 

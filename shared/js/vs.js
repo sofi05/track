@@ -12,9 +12,9 @@ window.GAME_VERSIONS = {
     date2vs:'4.1', date2: '', date2p2: '',
   },
   ZenlessZone: { //https://game8.co/games/Zenless-Zone-Zero/archives/435687
-    version: '2.4',
-      p1: '2025-11-26T00:00:00', p2: '2025-12-17T19:00:00',
-    date1vs: '2.5', date1: '2025-12-29T00:00:00', date1p2: '',
+    version: '2.5',
+      p1: '2025-12-29T00:00:00', p2: '2026-01-20T19:00:00',
+    date1vs: '2.6', date1: '', date1p2: '',
     date2vs: ''  , date2: '', date2p2: '',
     
   },

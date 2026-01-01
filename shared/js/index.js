@@ -23,6 +23,14 @@ window.filterAndSortCharacters = function (characters, isHI3 = false) {
   return { newCharacters, rerunCharacters, permaCharacters };
 };
 
+window.EMPTY_NEW_CHARACTERS_TEXT = 'Σ(⊙_⊙;) You got them all already???';
+
+window.EMPTY_NEW_CHARACTERS_STYLE = {
+  width: '50%',
+  fontSize: '13px',
+  opacity: '0.7'
+};
+
 window.createCharacterCard = function (char, config, customImgPathFn, customFallbackPathFn) {
   const {
     iconPath,
