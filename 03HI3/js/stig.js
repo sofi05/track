@@ -339,6 +339,12 @@ const gameConfig = {
     { name: 'Avogadro', imgName: 'Avogadro_M_Icon', 
         spriteImages: ['Avogadro_B', 'Avogadro_M', 'Avogadro_T'], },
 
+    { name: 'Aristophanes', imgName: 'Aristophanes_T_Icon', 
+        spriteImages: ['Aristophanes_B', 'Aristophanes_M', 'Aristophanes_T'], },
+
+    { name: '', imgName: '', spriteFolder: '', 
+        spriteImages: [''], },
+
     { name: '', imgName: '', spriteFolder: '', 
         spriteImages: [''], },
 

@@ -17,7 +17,7 @@ const gameConfig = {
     { name: 'Carole', imgName: 'Sweet_n_Spicy', folder:'SoloChara', spriteFolder: 'Carole', have: false, part: '1',
         spriteImages: ['Let_the_Class_End', 'Special_Blend'], },
 
-    { name: 'Coralie', imgName: 'Valkyrie_Blastmetal', folder: 'Coralie', spriteFolder: 'Coralie', have: false, part: '2', status: 'new',
+    { name: 'Coralie', imgName: 'Valkyrie_Blastmetal', folder: 'Coralie', spriteFolder: 'Coralie', have: false, part: '2', 
         spriteImages: ['Puppy_Patrol', 'Brainiac_Dark_Lord_Figure'], },
 
     { name: 'Durandal', imgName: 'Bright_Knight_-_Excelsis', folder: 'Durandal', spriteFolder: 'Durandal', have: false, part: '1',
@@ -30,17 +30,17 @@ const gameConfig = {
     { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1',
         spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring'], },
 
-    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2',
-        spriteImages: ['Salted_Plum'], },
+    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2', status: 'new',
+        spriteImages: ['Salted_Plum', 'Citrus_Days'], },
 
     { name: 'FuHua', imgName: 'Valkyrie_Accipiter', folder: 'FuHua', spriteFolder: 'FuHua', have: false, part: '1',
         spriteImages: ['Autumn_Shades', 'Blood_Voivode', 'Blue_Swallow', 'Dark_Butler', 'Hawk_of_the_Yard', 'Onyx_Simurgh',
         'Rustic_Noir', 'Seagulls_Soar', 'Spring_Traveler', 'Fire_and_Sword', 'Sword_and_Fire', 'Cerulean_Court', 
         'Taixuan_Impression', 'Ooh_Summer', 'Turn_Up_the_Music', 'Crane_of_Taixuan'], },
 
-    { name: 'Griseo', imgName: 'Starry_Impression', folder: 'Griseo', spriteFolder: 'Griseo', have: false, part: '1',
+    { name: 'Griseo', imgName: 'Starry_Impression', folder: 'Griseo', spriteFolder: 'Griseo', have: false, part: '1', status: 'new',
         spriteImages: ['Everdream', 'Maroon_Riding_Hood', 'Summer_as_a_Painting', 'Gokudo_Brushstrokes',
-        'Star-Speckled_Blue'], },
+        'Star-Speckled_Blue', 'Starlit_Amethyst'], },
 
     { name: 'Himeko', imgName: 'Battle_Storm', folder: 'Himeko', spriteFolder: 'Himeko', have: false, part: '1',
         spriteImages: ['Rouged_Mayumi', 'Vernal_Brocade', 'Rosy_Passion', 'Frisian_Cutlass', 'Desert_Camouflage', 
@@ -49,7 +49,7 @@ const gameConfig = {
     { name: 'Kallen', imgName: 'Sundenjager', folder: 'Kallen', spriteFolder: 'Kallen', have: false, part: '1',
         spriteImages: ['Blanc_X_-_Kata', 'Hanami_Daimyo', 'Pumpkin_Hunter', 'Snow_Fairy'], },
 
-    { name: 'Kiana', imgName: 'White_Comet', folder: 'Kiana', spriteFolder: 'Kiana', have: false, part: '1', status: 'new',
+    { name: 'Kiana', imgName: 'White_Comet', folder: 'Kiana', spriteFolder: 'Kiana', have: false, part: '1', 
         spriteImages: ['Bastets_Secret', 'Frostmoon_Bunny', 'Honkai_World_Diva', 'Lavender_Love', 'Lemon_Soda', 
         'Ocean_Ranger','Prodigal_Girl','Sea_Breeze','Starless_Rift','Sunny_Beach','Winter_Princess', 'Born_in_Flames',
         'Flowering_Luminance', 'Time_Runner', 'Frigid_Empress','Magic_Girl_Sirin','Parasol_Kaiserin', 'Peak_Sync_PS',
@@ -107,7 +107,7 @@ const gameConfig = {
     { name: 'Sirin', imgName: 'Miracle_Magical_Girl', folder:'SoloChara', spriteFolder: 'Sirin', have: false, part: '1',
         spriteImages: ['Magic_Academy_Uniform', 'Soaring_Wings'], },
 
-    { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', spriteFolder: 'Songque', have: false, part: '1', status: 'new',
+    { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', spriteFolder: 'Songque', have: false, part: '1',
         spriteImages: ['Whitewave_Topper_Figure'], },
 
     { name: 'Susannah', imgName: 'Valkyrie_Quicksand', folder:'SoloChara', spriteFolder: 'Susannah', have: false, part: '1',
@@ -128,8 +128,8 @@ const gameConfig = {
     { name: 'Vill-V', imgName: 'Helical_Contraption', folder:'SoloChara', spriteFolder: 'Vill-V', have: false, part: '2',
         spriteImages: ['Im_the_Storm'], },
 
-    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2',
-        spriteImages: ['Eldritch_Vantage'], },
+    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2', status: 'new',
+        spriteImages: ['Eldritch_Vantage', 'White_Velveteer'], },
     
     // Add more characters here
   ],

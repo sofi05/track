@@ -50,7 +50,9 @@ window.CHARA_CONFIG = {
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
     { name: 'Banyue', imgName: '53', have: false, element: 'IconFire', group:'kramp', gender:'m', rarity: 5, status: 'available', version: '2.4', p:1 },
     { name: 'Dialyn', imgName: '54', have: false, element: 'IconPhysical', group:'kramp', gender:'f', rarity: 5, status: 'available', version: '2.4', p:2 },
-    
+    { name: 'Sunna', imgName: '58', have: false, element: 'IconPhysical', group:'angels', gender:'f', rarity: 5, status: 'soon', version: '2.6', p:1 },
+    { name: 'Aria', imgName: '57', have: false, element: 'IconEther', group:'angels', gender:'f', rarity: 5, status: 'soon', version: '2.6', p:2 },
+
     // { name: '', imgName: '', have: false, element: '', group:'', gender:'', rarity: 5, status: 'new', version: '', p:2, perma: true },
     // want -> 1 (fight) / 2 (bc story)
   ],

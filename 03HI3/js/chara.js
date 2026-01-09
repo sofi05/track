@@ -24,7 +24,7 @@ window.CHARA_CONFIG = {
     { name: 'Fu Hua • NS', imgName: 'Night_Squire', folder:'FuHua', have: true, element: 'BIO', rarity: 4, part:'1', status: 'available' },
     { name: 'Fu Hua • VA', imgName: 'Valkyrie_Accipiter', folder:'FuHua', have: true, element: 'PSY', rarity: 4, part:'1', status: 'available' },
     { name: 'Fu Hua • AE', imgName: 'Azure_Empyrea', folder:'FuHua', have: true, element: 'PSY', rarity: 5, part:'1', status: 'available' },
-    { name: 'Fu Hua • FoV', imgName: 'Fenghuang_of_Vicissitude', folder:'FuHua', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.3' },
+    { name: 'Fu Hua • FoV', imgName: 'Fenghuang_of_Vicissitude', folder:'FuHua', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6' },
     { name: 'Fu Hua • P', imgName: 'Phoenix', folder:'FuHua', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'N/A', perma: true }, // 2- 80
     { name: 'Fu Hua • SK', imgName: 'Shadow_Knight', folder:'FuHua', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'5.2', perma: true },
 
@@ -72,7 +72,7 @@ window.CHARA_CONFIG = {
     { name: 'Sakura • GM', imgName: 'Gyakushinn_Miko', folder:'Sakura', have: true, element: 'BIO', rarity: 4, part:'1', status: 'available' },
 
     { name: 'Seele • SP', imgName: 'Swallowtail_Phantasm', folder:'Seele', have: true, element: 'QUA', rarity: 4, part:'1', status: 'available' },
-    { name: 'Seele • HoR', imgName: 'Herrscher_of_Rebirth', folder:'Seele', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.2' }, //3-80
+    { name: 'Seele • HoR', imgName: 'Herrscher_of_Rebirth', folder:'Seele', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6' }, //3-80
     { name: 'Seele • SN', imgName: 'Starchasm_Nyx', folder:'Seele', have: false, element: 'QUA', rarity: 5, part:'1', status: 'available', version:'7.7', perma: true },
     { name: 'Seele • SN ', imgName: 'Stygian_Nymph', folder:'Seele', have: false, element: 'QUA', rarity: 5, part:'1', status: 'available', version:'7.8', perma: true },
     
@@ -125,8 +125,9 @@ window.CHARA_CONFIG = {
     { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2',  status: 'available', spec:'RoO', version:'8.5' }, 
     { name: 'Theresa • SI', imgName: 'Schicksals_Imperative', folder:'Theresa', have: false, element: 'QUA', rarity: 5, part:'2',  status: 'available', spec:'WS', version:'7.7' },
     { name: 'Sushang • PS', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.5' }, 
-    
-    { name: 'Elysia • HLE', imgName: 'Hi_Love_Elf', folder:'Elysia', have: true, element: 'SD', rarity: 5, part:'2', status: 'new', spec:'GoI' },
+    { name: 'Elysia • HLE', imgName: 'Hi_Love_Elf', folder:'Elysia', have: true, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'GoI' },
+
+    { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'new', spec:'WoD',version: '8.6' }
     // Add more characters here
   ],
 
