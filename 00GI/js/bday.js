@@ -1,6 +1,7 @@
 window.BDAY_CONFIG = {
   birthdays: {
     '01-03': ['Wanderer'],
+    '01-05': ['Jahoda'],
     '01-06': ['Lanyan'],
     '01-09': ['Tohma'],
     '01-10': ['Chevreuse'],
@@ -20,7 +21,7 @@ window.BDAY_CONFIG = {
     '03-06': ['Yaoyao'],
     '03-10': ['Shenhe'],
     '03-13': ['Xilonen'],
-    '03-14': ['Qin'],
+    '03-14': ['Qin', 'Durin'],
     '03-16': ['Mizuki'],
     '03-21': ['Noel'],
     '03-23': ['Ifa'],
@@ -115,8 +116,9 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
 
-    //'x-x': ['Jahoda'],  //soon
-    //'x-x': ['Durin'],  //soon
+    //'x-x': ['Zibai'],  //soon
+    //'x-x': ['Columbina'], //soon
+    //'x-x': ['Illuga'], //soon
     //'10-12': ['Itto', 'Paimon'],  //Test
   },
 
