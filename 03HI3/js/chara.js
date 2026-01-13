@@ -15,7 +15,7 @@ window.CHARA_CONFIG = {
     { name: 'Durandal • VG', imgName: 'Valkyrie_Gloria', folder:'Durandal', have: true, element: 'QUA', rarity: 4, part:'1', status: 'available' },
     { name: 'Durandal • BN', imgName: 'Bright_Knight_-_Excelsis', folder:'Durandal', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'7.0', perma: true },
     { name: 'Durandal • DA', imgName: 'Dea_Anchora', folder:'Durandal', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'7.5', perma: true },
-    { name: 'Durandal • PE', imgName: 'Palatinus_Equinox', folder:'Durandal', have: false, element: 'IMG', rarity: 5, part:'1', status: 'available', version:'8.5', perma: true }, // 1 - 100 shards
+    { name: 'Durandal • PE', imgName: 'Palatinus_Equinox', folder:'Durandal', have: true, element: 'IMG', rarity: 5, part:'1', status: 'available'},
     
     { name: 'Elysia • HoH', imgName: 'Herrscher_of_Human_-_Ego', folder:'Elysia', have: true, element: 'PSY', rarity: 5, part:'1', status: 'available' },
     { name: 'Elysia • MPE', imgName: 'Miss_Pink_Elf', folder:'Elysia', have: true, element: 'PSY', rarity: 5, part:'1', status: 'available'},
@@ -84,7 +84,7 @@ window.CHARA_CONFIG = {
     { name: 'Theresa • VP', imgName: 'Valkyrie_Pledge', folder:'Theresa', have: true, element: 'PSY', rarity: 4, part:'1', status: 'available' },
     { name: 'Theresa • VE', imgName: 'Violet_Executer', folder:'Theresa', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'3.4', perma: true },
     { name: 'Theresa • CH', imgName: 'Celestial_Hymn', folder:'Theresa', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'5.1', perma: true },
-    { name: 'Theresa • LV', imgName: 'Lunar_Vow_-_Crimson_Love', folder:'Theresa', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.1' },
+    { name: 'Theresa • LV', imgName: 'Lunar_Vow_-_Crimson_Love', folder:'Theresa', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma:true },
     
     { name: 'Ai Hyperion', imgName: 'Chrono_Navi', folder:'SoloChara', have: true, element: 'MECH', rarity: 4, part:'1', status: 'available' }, 
     { name: 'Schariac', imgName: 'Dreamweaver', folder:'SoloChara', have: true, element: 'MECH', rarity: 5, part:'1', status: 'available' },
@@ -100,11 +100,6 @@ window.CHARA_CONFIG = {
     { name: 'Mobius', imgName: 'Infinite_Ouroboros', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.1', perma: true },
     { name: 'Shigure Kira', imgName: 'Sugary_Starburst', folder:'SoloChara', have: true, element: 'MECH', rarity: 4, part:'1', status: 'available' },
 
-    //part 1 (A Post-Honkai Odyssey -APHO-)
-    { name: 'Raiden Mei', imgName: 'Raiden_Mei_APHO', folder:'APHO', have: true, element: 'PSY', rarity:5, part:'1', status: 'available', apho: true },
-    { name: 'Lyle Collodi', imgName: 'Lyle_Collodi_APHO', folder:'APHO', have: false, element: 'MECH', rarity:3, part:'1', status: 'available', apho: true,version:'5.4',  perma: true },
-    { name: 'Timido Cute', imgName: 'Timido_Cute_APHO', folder:'APHO', have: false, element: 'MECH', rarity:3, part:'1', status: 'available', apho: true, version:'5.4', perma: true },
-    
     //COLLAB characters
     { name: 'Fischl', imgName: 'Prinzessin_der_Verurteilung', folder:'All_Collabs', have: true, element: 'BIO', rarity: 4, part:'1', status: 'available', collab: true },
     { name: 'Sparkle', imgName: 'Thousand-Faced_Maestro_-_Cameo', folder:'All_Collabs', have: false, element: 'QUA', rarity: 5, part:'2', status: 'available', collab: true, spec:'WS', version:'8.5' },
@@ -118,8 +113,8 @@ window.CHARA_CONFIG = {
 
     { name: 'Durandal • RS', imgName: 'Reign_Solaris', folder:'Durandal', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.4'  },
     { name: 'Kiana • BD', imgName: 'Ba-Dum_Fiery_Wishing_Star', folder:'Kiana', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.5'  }, 
-    { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WS', version:'8.2' },
-    { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.4' },
+    { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WS', version:'8.6', perma:true },
+    { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.6' },
     { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', have: false, element: 'PSY', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.5' }, 
     { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.4' },
     { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2',  status: 'available', spec:'RoO', version:'8.5' }, 

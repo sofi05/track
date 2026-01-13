@@ -1,9 +1,9 @@
 window.GAME_VERSIONS = {
   GenshinImpact: { //https://game8.co/games/Genshin-Impact/archives/297500
-    version: '6.2',
-      p1: '2025-12-03T02:00:00', p2: '2025-12-23T19:00:00', 
-    date1vs: '6.3', date1: '2026-01-13T02:00:00', date1p2: '',
-    date2vs: '6.4', date2: '', date2p2: '',
+    version: '6.3',
+      p1: '2026-01-14T00:00:00', p2: '2026-02-03T19:00:00', 
+    date1vs: '6.4', date1: '2026-02-24T00:00:00', date1p2: '',
+    date2vs: '6.5', date2: '', date2p2: '',
     },
   StarRail: { //https://game8.co/games/Honkai-Star-Rail/archives/408381
     version: '3.8',

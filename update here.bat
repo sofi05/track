@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated halfway, still missing stuff tho"
+git commit -m "genshin v6.3 is ready, hi3 updated"
 git push origin main
