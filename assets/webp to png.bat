@@ -20,4 +20,4 @@ for %%f in ("%input_folder%\*.webp") do (
 )
 
 echo Done converting.
-pause
+::pause

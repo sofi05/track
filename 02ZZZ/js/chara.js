@@ -24,7 +24,7 @@ window.CHARA_CONFIG = {
     { name: 'Lucia', imgName: '50', have: true, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'available'},
     { name: 'Manato', imgName: '51', have: true, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'available'},
     { name: 'Yidhari', imgName: '52', have: true, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'available'},
-    { name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available'},
+    { name: 'Alice', imgName: '46', have: true, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available'},
     { name: 'Zhao', imgName: '56', have: true, element: 'IconIce', group:'kramp', gender:'f', rarity: 5, status: 'new', version: '2.5'},
     { name: 'Shunguan', imgName: '55', have: true, element: 'IconHonedEdge', filterElement: 'IconPhysical', group:'sum', gender:'f', rarity: 5, status: 'new', version: '2.5'},
 
