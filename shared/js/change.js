@@ -16,17 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="game-icon" data-url="../03HI3/000.html">
         <img src="../assets/gameico/hi3.webp" />
       </div>
+      <div class="game-icon" data-url="../Endfield/000.html">
+        <img src="../assets/gameico/ae.webp" />
+      </div>
       <div class="game-icon" data-url="../03HNA/000.html" style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';">
         <img src="../assets/gameico/hna.webp" />
-      </div>
-      <div class="game-icon" data-url="../Endfield/index.html" style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';">
-        <img src="../assets/gameico/ae.webp" />
       </div>
     </div>
   </div>
 </div>
 
-  `;
+  `; //<div class="game-icon" data-url="..//000.html" style="filter: grayscale(100%); opacity: 0.7;" onmouseover="this.style.filter='none'; this.style.opacity='1';" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7';"><img src="../assets/gameico/ae.webp" /></div>
 
   document.getElementById('popup-container').innerHTML = popupHTML;
 

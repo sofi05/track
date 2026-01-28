@@ -44,20 +44,19 @@ window.CHARA_CONFIG = {
     { name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', group:'hunt', gender:'m', world:['ot'],rarity: 5,  status: 'available' },
     { name: 'Black Swan', imgName: '1307', have: true, element: 'wind', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
     { name: 'Acheron', imgName: '1308', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', world:['pena'],rarity: 4,  status: 'available' },
     { name: 'Firefly', imgName: '1310', have: true, element: 'fire', group:'dest', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
+    { name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', world:['pena'],rarity: 4,  status: 'available' },
+    { name: 'The Dahlia', imgName: '1321', have: true, element: 'fire', group:'nihi', gender:'f', world:[''],rarity: 5,  status: 'new', version: '3.8', p:1},
 
     { name: 'The Herta', imgName: '1401', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 5,  status: 'available' },
     { name: 'Tribbie', imgName: '1403', have: true, element: 'quantum', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available'},
+    { name: 'Mydei', imgName: '1404', have: true, element: 'imaginary', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available'},
     { name: 'Anaxa', imgName: '1405', have: true, element: 'wind', group:'eru', gender:'m', world:['amp'], rarity: 5,  status: 'available' },
     { name: 'Castorice', imgName: '1407', have: true, element: 'quantum', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available' },
     { name: 'Phainon', imgName: '1408', have: true, element: 'physical', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available' },
     { name: 'Hyacine', imgName: '1409', have: true, element: 'wind', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available' },
     { name: 'Evernight', imgName: '1413', have: true, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5,  status: 'available'},
     { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'available'},
-    { name: 'Mydei', imgName: '1404', have: true, element: 'imaginary', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available'},
-    
-    { name: 'The Dahlia', imgName: '1321', have: true, element: 'fire', group:'nihi', gender:'f', world:[''],rarity: 5,  status: 'new', version: '3.8', p:1},
     
     //DONT HAVE
     { name: 'Welt', imgName: '1004', have: false, element: 'imaginary', group:'nihi', gender:'m', world:['ae'],rarity: 5,  status: 'available', version: '3.2', perma: true, want: 1 },

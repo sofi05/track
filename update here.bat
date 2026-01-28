@@ -1,3 +1,3 @@
 git add . 
-git commit -m "updated Endfield (still need TT, Outfit Icons, Bangboo & HI3 [outfit, stigma])"
+git commit -m "put characters in order by number (if)"
 git push origin main
