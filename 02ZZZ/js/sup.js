@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Miss Esme', have: true, rarity: '5' },
     { name: 'Mercury', have: false, rarity: '5' },
     { name: 'Excaliboo', have: false, rarity: '4' },
-    { name: 'Bild N. Boolok', have: true, rarity: '4', status: 'new' },
-    { name: 'Birkblick', have: false, rarity: '4', status: 'new' },
+    { name: 'Bild N. Boolok', have: true, rarity: '4' },
+    { name: 'Birkblick', have: false, rarity: '4'},
     //{ name: '', have: false, rarity: '', status: 'new' },
   ];
 

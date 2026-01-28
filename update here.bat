@@ -1,3 +1,3 @@
 git add . 
-git commit -m "genshin v6.3 is ready, hi3 updated"
+git commit -m "updated (need TT, Outfit Icons, Bangboo & HI3 [outfit, stigma]) + Replaced PetitPlanet for Endfield"
 git push origin main

@@ -30,7 +30,7 @@ const gameConfig = {
     { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1',
         spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring'], },
 
-    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2', status: 'new',
+    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2',
         spriteImages: ['Salted_Plum', 'Citrus_Days'], },
 
     { name: 'FuHua', imgName: 'Valkyrie_Accipiter', folder: 'FuHua', spriteFolder: 'FuHua', have: false, part: '1',
@@ -38,7 +38,7 @@ const gameConfig = {
         'Rustic_Noir', 'Seagulls_Soar', 'Spring_Traveler', 'Fire_and_Sword', 'Sword_and_Fire', 'Cerulean_Court', 
         'Taixuan_Impression', 'Ooh_Summer', 'Turn_Up_the_Music', 'Crane_of_Taixuan'], },
 
-    { name: 'Griseo', imgName: 'Starry_Impression', folder: 'Griseo', spriteFolder: 'Griseo', have: false, part: '1', status: 'new',
+    { name: 'Griseo', imgName: 'Starry_Impression', folder: 'Griseo', spriteFolder: 'Griseo', have: false, part: '1', 
         spriteImages: ['Everdream', 'Maroon_Riding_Hood', 'Summer_as_a_Painting', 'Gokudo_Brushstrokes',
         'Star-Speckled_Blue', 'Starlit_Amethyst'], },
 
@@ -128,7 +128,7 @@ const gameConfig = {
     { name: 'Vill-V', imgName: 'Helical_Contraption', folder:'SoloChara', spriteFolder: 'Vill-V', have: false, part: '2',
         spriteImages: ['Im_the_Storm'], },
 
-    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2', status: 'new',
+    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2', //status: 'new',
         spriteImages: ['Eldritch_Vantage', 'White_Velveteer'], },
     
     // Add more characters here

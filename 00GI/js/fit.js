@@ -19,9 +19,11 @@ const gameConfig = {
     { name: 'Jean', imgName: 'Sea_Breeze_Dandelion_Icon',imgName2:'QinCostumeSea', have: false, rarity: 5, status: 'available' },
     { name: 'Xiangling', imgName: 'New_Years_Cheer_Icon',imgName2:'XianglingCostumeWinter', have: true, rarity: 4, status: 'available' },
     { name: 'Xingqiu', imgName: 'Bamboo_Rain_Icon',imgName2:'XingqiuCostumeBamboo', have: true, rarity: 4, status: 'available' },
-    { name: 'Durin', imgName: 'UI_AvatarIcon_DurinCostumeWic',imgName2:'DurinCostumeWic', have: false, rarity: 5, status: 'soon' },
+    { name: 'Durin', imgName: 'UI_AvatarIcon_DurinCostumeWic',imgName2:'DurinCostumeWic', have: false, rarity: 5, status: 'available' },
+    { name: 'Yaoyao', imgName: '',imgName2:'YaoyaoCostumeWinter', have: false, rarity: 4, status: 'new' },
+    { name: 'Neuvillette', imgName: '',imgName2:'NeuvilletteCostumeWinter', have: false, rarity: 4, status: 'new' },
 
- // { name: '', imgName: '',imgName2:'', have: true, rarity: 4, status: 'new' },
+ // { name: '', imgName: '',imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
 
   pathPrefix: "../assets/charaid/Genshin/Outfit/",

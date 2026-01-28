@@ -5,6 +5,7 @@ window.BDAY_CONFIG = {
     '01-06': ['Lanyan'],
     '01-09': ['Tohma'],
     '01-10': ['Chevreuse'],
+    '01-14': ['Columbina'], 
     '01-18': ['Diona'],
     '01-20': ['Citlali'],
     '01-22': ['Momoka'],
@@ -42,6 +43,7 @@ window.BDAY_CONFIG = {
     '05-03': ['Candace'],
     '05-08': ['Collei'],
     '05-09': ['Nefer'], 
+    '05-15': ['Zibai'],
     '05-18': ['Gorou'],
     '05-21': ['Yunjin'],
     '05-25': ['Dahlia'],
@@ -113,12 +115,11 @@ window.BDAY_CONFIG = {
     '12-19': ['Layla'],
     '12-21': ['Dori'],
     '12-22': ['Gaming'],
+    '12-23': ['Illuga'],
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
-
-    //'x-x': ['Zibai'],  //soon
-    //'x-x': ['Columbina'], //soon
-    //'x-x': ['Illuga'], //soon
+     
+    //'x-x': ['Varka'],  //soon
     //'10-12': ['Itto', 'Paimon'],  //Test
   },
 

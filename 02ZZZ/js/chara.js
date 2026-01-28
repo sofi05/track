@@ -24,6 +24,7 @@ window.CHARA_CONFIG = {
     { name: 'Lucia', imgName: '50', have: true, element: 'IconEther', group:'spook', gender:'f', rarity: 5, status: 'available'},
     { name: 'Manato', imgName: '51', have: true, element: 'IconFire', group:'spook', gender:'m', rarity: 4, status: 'available'},
     { name: 'Yidhari', imgName: '52', have: true, element: 'IconIce', group:'spook', gender:'f', rarity: 5, status: 'available'},
+    { name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available'},
     { name: 'Zhao', imgName: '56', have: true, element: 'IconIce', group:'kramp', gender:'f', rarity: 5, status: 'new', version: '2.5'},
     { name: 'Shunguan', imgName: '55', have: true, element: 'IconHonedEdge', filterElement: 'IconPhysical', group:'sum', gender:'f', rarity: 5, status: 'new', version: '2.5'},
 
@@ -44,7 +45,6 @@ window.CHARA_CONFIG = {
     { name: 'Hugo', imgName: '42', have: false, element: 'IconIce', group:'mock', gender:'m', rarity: 5, status: 'available', version: '2.4', p:1, want: 2 },
     { name: 'Ju Fufu', imgName: '43', have: false, element: 'IconFire', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.3', p:2 },
     { name: 'Yixuan', imgName: '44', have: false, element: 'IconAuricInk', filterElement: 'IconEther', group:'sum', gender:'f', rarity: 5, status: 'available', version: '2.0', want: 1 },
-    { name: 'Alice', imgName: '46', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available', version: '2.5', p:2 },
     { name: 'Yuzuha', imgName: '47', have: false, element: 'IconPhysical', group:'spook', gender:'f', rarity: 5, status: 'available', version: '2.1' },
     { name: 'Seed', imgName: '48', have: false, element: 'IconElectric', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:1, want: 2 },
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'IconFire', group:'obol', gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },

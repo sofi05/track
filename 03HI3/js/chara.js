@@ -113,13 +113,13 @@ window.CHARA_CONFIG = {
 
     { name: 'Durandal • RS', imgName: 'Reign_Solaris', folder:'Durandal', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.4'  },
     { name: 'Kiana • BD', imgName: 'Ba-Dum_Fiery_Wishing_Star', folder:'Kiana', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.5'  }, 
-    { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WS', version:'8.6', perma:true },
+    { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WS', version:'8.6'},
     { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.6' },
     { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', have: false, element: 'PSY', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.5' }, 
     { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2',  status: 'available', spec:'WoD', version:'8.4' },
-    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2',  status: 'available', spec:'RoO', version:'8.5' }, 
+    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2',  status: 'available', spec:'RoO', version:'8.6' }, 
     { name: 'Theresa • SI', imgName: 'Schicksals_Imperative', folder:'Theresa', have: false, element: 'QUA', rarity: 5, part:'2',  status: 'available', spec:'WS', version:'7.7' },
-    { name: 'Sushang • PS', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.5' }, 
+    { name: 'Sushang • PS', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.6' }, 
     { name: 'Elysia • HLE', imgName: 'Hi_Love_Elf', folder:'Elysia', have: true, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'GoI' },
 
     { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'new', spec:'WoD',version: '8.6' }
