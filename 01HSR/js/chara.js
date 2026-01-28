@@ -1,64 +1,64 @@
 window.CHARA_CONFIG = {
   characters: [
-    //HAVE
-    { name: 'March 7th', imgName: '1001', have: true, element: 'ice', group:'prese', gender:'f', world:['ae'],rarity: 4,  status: 'available' },
-    { name: 'Dan Heng', imgName: '1002', have: true, element: 'wind', group:'hunt', gender:'m', world:['ae'],rarity: 4,  status: 'available' },
-    { name: 'Himeko', imgName: '1003', have: true, element: 'fire', group:'eru', gender:'f', world:['ae'],rarity: 5,  status: 'available' },
-    { name: 'Kafka', imgName: '1005', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Silver Wolf', imgName: '1006', have: true, element: 'quantum', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'available' }, 
-    { name: 'Arlan', imgName: '1008', have: true, element: 'thunder', group:'dest', gender:'m', world:['hss'], rarity: 4,  status: 'available' },
-    { name: 'Asta', imgName: '1009', have: true, element: 'fire', group:'harm', gender:'f', world:['hss'], rarity: 4,  status: 'available' },
-    { name: 'Herta', imgName: '1013', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 4,  status: 'available' },
+    //HAVE - ORGANIZED BY NUMBER
+    { name: 'March 7th', imgName: '1001', have: true, element: 'ice', group:'prese', gender:'f', world:['ae'],rarity: 4 },
+    { name: 'Dan Heng', imgName: '1002', have: true, element: 'wind', group:'hunt', gender:'m', world:['ae'],rarity: 4 },
+    { name: 'Himeko', imgName: '1003', have: true, element: 'fire', group:'eru', gender:'f', world:['ae'],rarity: 5 },
+    { name: 'Kafka', imgName: '1005', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
+    { name: 'Silver Wolf', imgName: '1006', have: true, element: 'quantum', group:'nihi', gender:'f', world:['ot'],rarity: 5 }, 
+    { name: 'Arlan', imgName: '1008', have: true, element: 'thunder', group:'dest', gender:'m', world:['hss'], rarity: 4 },
+    { name: 'Asta', imgName: '1009', have: true, element: 'fire', group:'harm', gender:'f', world:['hss'], rarity: 4 },
+    { name: 'Herta', imgName: '1013', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 4 },
     
-    { name: 'Bronya', imgName: '1101', have: true, element: 'wind', group:'harm', gender:'f', world:['JVI'],rarity: 5,  status: 'available' },
-    { name: 'Seele', imgName: '1102', have: true, element: 'quantum', group:'hunt', gender:'f', world:['JVI'],rarity: 5,  status: 'available' },
-    { name: 'Serval', imgName: '1103', have: true, element: 'thunder', group:'eru', gender:'f', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Gepard', imgName: '1104', have: true, element: 'ice', group:'prese', gender:'m', world:['JVI'],rarity: 5,  status: 'available' },
-    { name: 'Natasha', imgName: '1105', have: true, element: 'physical', group:'abun', gender:'f', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Pela', imgName: '1106', have: true, element: 'ice', group:'nihi', gender:'f', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Clara', imgName: '1107', have: true, element: 'physical', group:'dest', gender:'f', world:['JVI'],rarity: 5,  status: 'available' },
-    { name: 'Sampo', imgName: '1108', have: true, element: 'wind', group:'nihi', gender:'m', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Hook', imgName: '1109', have: true, element: 'fire', group:'dest', gender:'f', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Lynx', imgName: '1110', have: true, element: 'quantum', group:'abun', gender:'f', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Luka', imgName: '1111', have: true, element: 'physical', group:'nihi', gender:'m', world:['JVI'],rarity: 4,  status: 'available' },
-    { name: 'Topaz & Numby', imgName: '1112', have: true, element: 'fire', group:'hunt', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
+    { name: 'Bronya', imgName: '1101', have: true, element: 'wind', group:'harm', gender:'f', world:['JVI'],rarity: 5 },
+    { name: 'Seele', imgName: '1102', have: true, element: 'quantum', group:'hunt', gender:'f', world:['JVI'],rarity: 5 },
+    { name: 'Serval', imgName: '1103', have: true, element: 'thunder', group:'eru', gender:'f', world:['JVI'],rarity: 4 },
+    { name: 'Gepard', imgName: '1104', have: true, element: 'ice', group:'prese', gender:'m', world:['JVI'],rarity: 5 },
+    { name: 'Natasha', imgName: '1105', have: true, element: 'physical', group:'abun', gender:'f', world:['JVI'],rarity: 4 },
+    { name: 'Pela', imgName: '1106', have: true, element: 'ice', group:'nihi', gender:'f', world:['JVI'],rarity: 4 },
+    { name: 'Clara', imgName: '1107', have: true, element: 'physical', group:'dest', gender:'f', world:['JVI'],rarity: 5 },
+    { name: 'Sampo', imgName: '1108', have: true, element: 'wind', group:'nihi', gender:'m', world:['JVI'],rarity: 4 },
+    { name: 'Hook', imgName: '1109', have: true, element: 'fire', group:'dest', gender:'f', world:['JVI'],rarity: 4 },
+    { name: 'Lynx', imgName: '1110', have: true, element: 'quantum', group:'abun', gender:'f', world:['JVI'],rarity: 4 },
+    { name: 'Luka', imgName: '1111', have: true, element: 'physical', group:'nihi', gender:'m', world:['JVI'],rarity: 4 },
+    { name: 'Topaz & Numby', imgName: '1112', have: true, element: 'fire', group:'hunt', gender:'f', world:['ot'],rarity: 5 },
 
-    { name: 'Qingque', imgName: '1201', have: true, element: 'quantum', group:'eru', gender:'f', world:['txl'], rarity: 4,  status: 'available' },
-    { name: 'Tingyun', imgName: '1202', have: true, element: 'thunder', group:'harm', gender:'f', world:['txl'], rarity: 4,  status: 'available' },
-    { name: 'Luocha', imgName: '1203', have: true, element: 'imaginary', group:'abun', gender:'m', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Blade', imgName: '1205', have: true, element: 'wind', group:'dest', gender:'m', world:['txl'],rarity: 5,  status: 'available' },
-    { name: 'Sushang', imgName: '1206', have: true, element: 'physical', group:'hunt', gender:'f', world:['txl'], rarity: 4,  status: 'available' },
-    { name: 'Yukong', imgName: '1207', have: true, element: 'imaginary', group:'harm', gender:'f', world:['txl'], rarity: 4,  status: 'available' },
-    { name: 'Yanqing', imgName: '1209', have: true, element: 'ice', group:'hunt', gender:'m', world:['txl'], rarity: 5,  status: 'available' },
-    { name: 'Guinaifen', imgName: '1210', have: true, element: 'fire', group:'nihi', gender:'f', world:['txl'], rarity: 4,  status: 'available'},
-    { name: 'Bailu', imgName: '1211', have: true, element: 'thunder', group:'abun', gender:'f', world:['txl'], rarity: 5,  status: 'available' },
-    { name: 'Dan Heng • IL', imgName: '1213', have: true, element: 'imaginary', group:'dest', gender:'m', world:['ae'],rarity: 5,  status: 'available' },
-    { name: 'Xueyi', imgName: '1214', have: true, element: 'quantum', group:'dest', gender:'f', world:['txl'], rarity: 4,  status: 'available' },
-    { name: 'Hanya', imgName: '1215', have: true, element: 'physical', group:'harm', gender:'f', world:['txl'], rarity: 4,  status: 'available'},
-    { name: 'Moze', imgName: '1223', have: true, element: 'thunder', group:'hunt', gender:'m', world:['txl'], rarity: 4,  status: 'available' },
-    { name: 'March 7th ', imgName: '1224', have: true, element: 'imaginary', group:'hunt', gender:'f', world:['ae'],rarity: 4, status: 'available'},
+    { name: 'Qingque', imgName: '1201', have: true, element: 'quantum', group:'eru', gender:'f', world:['txl'], rarity: 4 },
+    { name: 'Tingyun', imgName: '1202', have: true, element: 'thunder', group:'harm', gender:'f', world:['txl'], rarity: 4 },
+    { name: 'Luocha', imgName: '1203', have: true, element: 'imaginary', group:'abun', gender:'m', world:['ot'],rarity: 5 },
+    { name: 'Blade', imgName: '1205', have: true, element: 'wind', group:'dest', gender:'m', world:['txl'],rarity: 5 },
+    { name: 'Sushang', imgName: '1206', have: true, element: 'physical', group:'hunt', gender:'f', world:['txl'], rarity: 4 },
+    { name: 'Yukong', imgName: '1207', have: true, element: 'imaginary', group:'harm', gender:'f', world:['txl'], rarity: 4 },
+    { name: 'Yanqing', imgName: '1209', have: true, element: 'ice', group:'hunt', gender:'m', world:['txl'], rarity: 5 },
+    { name: 'Guinaifen', imgName: '1210', have: true, element: 'fire', group:'nihi', gender:'f', world:['txl'], rarity: 4},
+    { name: 'Bailu', imgName: '1211', have: true, element: 'thunder', group:'abun', gender:'f', world:['txl'], rarity: 5 },
+    { name: 'Dan Heng • IL', imgName: '1213', have: true, element: 'imaginary', group:'dest', gender:'m', world:['ae'],rarity: 5 },
+    { name: 'Xueyi', imgName: '1214', have: true, element: 'quantum', group:'dest', gender:'f', world:['txl'], rarity: 4 },
+    { name: 'Hanya', imgName: '1215', have: true, element: 'physical', group:'harm', gender:'f', world:['txl'], rarity: 4},
+    { name: 'Moze', imgName: '1223', have: true, element: 'thunder', group:'hunt', gender:'m', world:['txl'], rarity: 4 },
+    { name: 'March 7th ', imgName: '1224', have: true, element: 'imaginary', group:'hunt', gender:'f', world:['ae'],rarity: 4},
 
-    { name: 'Gallagher', imgName: '1301', have: true, element: 'fire', group:'abun', gender:'m', world:['pena'],rarity: 4,  status: 'available' },
-    { name: 'Argenti', imgName: '1302', have: true, element: 'physical', group:'eru', gender:'m', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Aventurine', imgName: '1304', have: true, element: 'imaginary', group:'prese', gender:'m', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', group:'hunt', gender:'m', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Black Swan', imgName: '1307', have: true, element: 'wind', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Acheron', imgName: '1308', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Firefly', imgName: '1310', have: true, element: 'fire', group:'dest', gender:'f', world:['ot'],rarity: 5,  status: 'available' },
-    { name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', world:['pena'],rarity: 4,  status: 'available' },
+    { name: 'Gallagher', imgName: '1301', have: true, element: 'fire', group:'abun', gender:'m', world:['pena'],rarity: 4 },
+    { name: 'Argenti', imgName: '1302', have: true, element: 'physical', group:'eru', gender:'m', world:['ot'],rarity: 5 },
+    { name: 'Aventurine', imgName: '1304', have: true, element: 'imaginary', group:'prese', gender:'m', world:['ot'],rarity: 5 },
+    { name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', group:'hunt', gender:'m', world:['ot'],rarity: 5 },
+    { name: 'Black Swan', imgName: '1307', have: true, element: 'wind', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
+    { name: 'Acheron', imgName: '1308', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
+    { name: 'Firefly', imgName: '1310', have: true, element: 'fire', group:'dest', gender:'f', world:['ot'],rarity: 5 },
+    { name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', world:['pena'],rarity: 4 },
     { name: 'The Dahlia', imgName: '1321', have: true, element: 'fire', group:'nihi', gender:'f', world:[''],rarity: 5,  status: 'new', version: '3.8', p:1},
 
-    { name: 'The Herta', imgName: '1401', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 5,  status: 'available' },
-    { name: 'Tribbie', imgName: '1403', have: true, element: 'quantum', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available'},
-    { name: 'Mydei', imgName: '1404', have: true, element: 'imaginary', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available'},
-    { name: 'Anaxa', imgName: '1405', have: true, element: 'wind', group:'eru', gender:'m', world:['amp'], rarity: 5,  status: 'available' },
-    { name: 'Castorice', imgName: '1407', have: true, element: 'quantum', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available' },
-    { name: 'Phainon', imgName: '1408', have: true, element: 'physical', group:'dest', gender:'m', world:['amp'], rarity: 5,  status: 'available' },
-    { name: 'Hyacine', imgName: '1409', have: true, element: 'wind', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available' },
-    { name: 'Evernight', imgName: '1413', have: true, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5,  status: 'available'},
-    { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5,  status: 'available'},
+    { name: 'The Herta', imgName: '1401', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 5 },
+    { name: 'Tribbie', imgName: '1403', have: true, element: 'quantum', group:'harm', gender:'f', world:['amp'], rarity: 5},
+    { name: 'Mydei', imgName: '1404', have: true, element: 'imaginary', group:'dest', gender:'m', world:['amp'], rarity: 5},
+    { name: 'Anaxa', imgName: '1405', have: true, element: 'wind', group:'eru', gender:'m', world:['amp'], rarity: 5 },
+    { name: 'Castorice', imgName: '1407', have: true, element: 'quantum', group:'reme', gender:'f', world:['amp'], rarity: 5 },
+    { name: 'Phainon', imgName: '1408', have: true, element: 'physical', group:'dest', gender:'m', world:['amp'], rarity: 5 },
+    { name: 'Hyacine', imgName: '1409', have: true, element: 'wind', group:'reme', gender:'f', world:['amp'], rarity: 5 },
+    { name: 'Evernight', imgName: '1413', have: true, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5},
+    { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5},
     
-    //DONT HAVE
+    //DONT HAVE - ORGANIZED BY NUMBER
     { name: 'Welt', imgName: '1004', have: false, element: 'imaginary', group:'nihi', gender:'m', world:['ae'],rarity: 5,  status: 'available', version: '3.2', perma: true, want: 1 },
 
     { name: 'Jing Yuan', imgName: '1204', have: false, element: 'thunder', group:'eru', gender:'m', world:['txl'], rarity: 5,  status: 'available', version: '2.7' },
@@ -88,8 +88,8 @@ window.CHARA_CONFIG = {
     { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:[''],rarity: 5,  status: 'soon', version: '4.0', p:2, want: 2 },
     { name: 'Yao Guang', imgName: '1502', have: false, element: 'physical', group:'ela', gender:'f', world:['txl'],rarity: 5,  status: 'soon', version: '4.0', p:1},
 
-    //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''],rarity: 5,  status: 'soon', version: '', p:1, perma: true, want: 1-2 },
-    // want -> 1 (fight) / 2 (bc story)
+    //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''], rarity: 5,  || status: 'soon', version: '', p:1, perma: true, want: 1-2 },
+    // NOTE: IN WANT 1 IS PRIORITY 2 IS SECONDARY (bc story)
   ],
 
 getSpritePath: function(char) {
@@ -125,7 +125,7 @@ createImageElement(c) {
     container.appendChild(img);
     container.appendChild(elementImg);
 
-    // If theres two or more in a tag
+    // IF THERES 1+ TEXT IN A TAG [WORLD EXAMPLE]
     if (Array.isArray(c.world)) {
       const worldList = document.createElement('div');
       worldList.className = 'world-list';
@@ -136,9 +136,9 @@ createImageElement(c) {
         worldLabel.textContent = world;
         worldList.appendChild(worldLabel);
       });
-
       container.appendChild(worldList);
     }
+    //=================================================
 
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;

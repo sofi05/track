@@ -1,3 +1,3 @@
 git add . 
-git commit -m "put characters in order by number (if)"
+git commit -m "Organized part of the code for future me"
 git push origin main
