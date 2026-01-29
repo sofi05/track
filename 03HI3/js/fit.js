@@ -128,10 +128,10 @@ const gameConfig = {
     { name: 'Vill-V', imgName: 'Helical_Contraption', folder:'SoloChara', spriteFolder: 'Vill-V', have: false, part: '2',
         spriteImages: ['Im_the_Storm'], },
 
-    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2', //status: 'new',
+    { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2', 
         spriteImages: ['Eldritch_Vantage', 'White_Velveteer'], },
     
-    // Add more characters here
+    //{ name: '', imgName: '', folder:'', spriteFolder: '', have: false, part: '2', //status: 'new', spriteImages: ['', ''] },
   ],
 
 

@@ -20,53 +20,51 @@ window.CHARA_CONFIG = {
     { name: 'Last Rite', imgName: '0026_lastrite', element: 'Cryo', have: true, faction: [''], gender:'f', rarity: 6},
     
     //DONT HAVE - ORGANIZED BY NUMBER
-    { name: 'Yvonne', imgName: '0017_yvonne', element: 'Cryo', have: false, faction: ['EndIndustries'], gender:'f', rarity: 6, status: 'available', version: '1.0', p:3, want: 1 },
-    { name: 'Pogranichnik', imgName: '0029_pograni', element: 'Physical', have: false, faction: ['Rhodes'], gender:'m', rarity: 6, status: 'available', version: '1.0', perma: true},
-    { name: 'Lifeng', imgName: '0015_lifeng', element: 'Physical', have: false, faction: ['Hongshan'], gender:'m', rarity: 6, status: 'available', version: '1.0', perma: true, want: 2 },
+    { name: 'Yvonne', imgName: '0017_yvonne', element: 'Cryo', have: false, faction: ['EndIndustries'], gender:'f', rarity: 6, status: 'new', version: '1.0', p:3, want: 1 },
+    { name: 'Pogranichnik', imgName: '0029_pograni', element: 'Physical', have: false, faction: ['Rhodes'], gender:'m', rarity: 6, status: 'new', version: '1.0', perma: true},
+    { name: 'Lifeng', imgName: '0015_lifeng', element: 'Physical', have: false, faction: ['Hongshan'], gender:'m', rarity: 6, status: 'new', version: '1.0', perma: true, want: 2 },
     { name: 'Laevatain', imgName: '0016_laevat', element: 'Heat', have: false, faction: ['Rhodes'], gender:'f', rarity: 6, status: 'available', version: '1.0', p:2},
-    { name: 'Ember', imgName: '0009_azrila', element: 'Heat', have: false, faction: ['SteelOath'], gender:'f', rarity: 6, status: 'available', version: '1.0', perma: true },
+    { name: 'Ember', imgName: '0009_azrila', element: 'Heat', have: false, faction: ['SteelOath'], gender:'f', rarity: 6, status: 'new', version: '1.0', perma: true },
 
     //{ name: '', imgName: '', element: '', have: false, faction: [''], gender:'', rarity: || , status: 'new', version: '', p:2, perma: true, want: 1-2 },
     // NOTE: IN WANT 1 IS PRIORITY 2 IS SECONDARY (bc story)
   ],
 
-
-  //MUST FIX BELOW HERE (CHECK OTHERS CHARA.JS FOR EXAMPLE)
   getSpritePath: function(char) {
       const imgName = char.imgName || char.name;
       const folder = char.folder || ''; 
       return `../assets/Sprite/Endfield/chr_${imgName}.png`;
     },
 
+    //CHANGE ONCE U GET A UNKNOW ICON FROM GAME
   getFallbackPath: function(char) {
     return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; 
   },
   
   createImageElement(c) {
-    const rarity = c.rarity; 
-    const gradient = getRarityGradient(rarity);  // Uses the updated gradient function
-
     const container = document.createElement('div');
     container.className = 'char-icon-container';
-    container.style.background = gradient;  // Apply the gradient to the container
 
     const img = document.createElement('img');
     img.className = 'char-icon';
-
-    const imgSrcName = c.imgName || c.name; // Use imgName if available, otherwise use name
-
-    // If imgName is missing, fallback to a default image path
-    img.src = `../assets/charaid/Endfield/chr_${imgSrcName}.png`;
+    const imgSrcName = c.imgName ? c.imgName : c.name;
+    img.src = `../assets/charaid/Endfield/chr_${imgSrcName}.png`;  
     img.alt = c.name;
 
     const fallbackImg = this.getFallbackPath(c);  
     img.onerror = () => {
-      img.src = fallbackImg;  // If image fails to load, use fallback image
+      img.src = fallbackImg;
     };
 
-    container.appendChild(img);
+    const elementImg = document.createElement('img');
+    elementImg.className = 'element-icon';
+    elementImg.src = `../assets/others/Endfield/Element/${c.element}.png`;
+    elementImg.alt = c.element;
 
-    // IF THERES 1+ TEXT IN A TAG [WORLD EXAMPLE]
+    container.appendChild(img);
+    container.appendChild(elementImg);
+
+    // IF THERES 1+ TEXT IN A TAG ---- fix it later
     if (c.group) {
       const groupLabel = document.createElement('div');
       groupLabel.className = 'type-list';

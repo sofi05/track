@@ -1,16 +1,13 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 5},
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 5},
-
-    { name: 'Manekin',name2: 'Manekins', GP: 2, imgName: 'MannequinBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 3,  status: 'available' },
-    { name: 'Manekina',name2: 'Manekins', GP: 2, imgName: 'MannequinGirl', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 3,  status: 'available' },
+    { name: '',name2: 'Endministrator', GP: 1, imgName: '0002_endminm', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 5},
+    { name: '',name2: 'Endministrator', GP: 1, imgName: '0003_endminf', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 5},
   ],
 
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
     const folder = char.folder || ''; 
-    return `../assets/Sprite/Genshin/${imgName}.png`;
+    return `../assets/Sprite/Endfield/chr_${imgName}.png`;
   },
 
 getFallbackPath: function(char) {
@@ -24,7 +21,7 @@ createImageElement(c) {
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;
+    img.src = `../assets/charaid/Endfield/chr_${imgSrcName}.png`;
     img.alt = c.name;
 
     const fallbackImg = this.getFallbackPath(c);  
@@ -37,7 +34,7 @@ createImageElement(c) {
     if (typeof c.element === 'string') {
       const elementImg = document.createElement('img');
       elementImg.className = 'element-icon';
-      elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
+      elementImg.src = `../assets/others/Endfield/Element/${c.element}.png`;
       elementImg.alt = c.element;
       container.appendChild(elementImg);
     }
@@ -57,7 +54,7 @@ createImageElement(c) {
 
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
+      const imgPath = `../assets/Sprite/Endfield/chr_${imgName}.png`;
       showPopup(imgPath, c.name);
     });
 
@@ -68,5 +65,5 @@ window.CHARA_CONFIG.pageType = "typeB";
 
 window.CHARA_CONFIG.getElementIconPath = function(el) {
   // This can vary by game, page, folder, whatever
-  return `../assets/others/Genshin/Element/${el}.png`;
+  return `../assets/others/Endfield/Element/${el}.png`;
 };

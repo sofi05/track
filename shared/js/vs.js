@@ -29,11 +29,11 @@ window.GAME_VERSIONS = {
     date1vs: '', date1:'', date1p2: '',
     date2vs: '', date2: '', date2p2: '',
   },   
-  PetitPlanet: {
-    version: '',//No beta or version yet
+  Endfield: {
+    version: '1.0',
       p1: '', p2: '',
-    date1vs: '', date1:'', date1p2: '',
-    date2vs: '', date2: '', date2p2: '',
+    date1vs: '1.2', date1:'', date1p2: '',
+    date2vs: '1.3', date2: '', date2p2: '',
   }, 
   
 };

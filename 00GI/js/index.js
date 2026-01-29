@@ -1,41 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const GAME_ID = 'GenshinImpact';
 
-  if (!window.GAME_VERSIONS) {
-    await loadScript('../shared/js/vs.js');
-  }
-
   const versionData = window.GAME_VERSIONS?.[GAME_ID];
   const actualVersion = versionData?.version;
 
   if (typeof initializeCountdown === 'function') {
     initializeCountdown(GAME_ID, 'countdown-newchars');
   }
-
-  const newCharSlider = document.getElementById('new-characters-slider');
-  const rerunSlider = document.getElementById('reruns-slider');
-  const permaSlider = document.getElementById('perma-slider');
-  const permaSection = document.getElementById('perma');
-
-  const { newCharacters, rerunCharacters, permaCharacters } = filterAndSortCharacters(characters);
-
-  const totalCount = newCharacters.length + rerunCharacters.length + permaCharacters.length;
-
-  const charCountBox = document.createElement('div');
-  charCountBox.textContent = `Total: ${totalCount} Characters`;
-  Object.assign(charCountBox.style, {
-    position: 'fixed',
-    top: '6px',
-    right: '8px',
-    fontSize: '12px',
-    color: '#fff',
-    background: '#0008',
-    padding: '4px 8px',
-    borderRadius: '6px',
-    zIndex: '9999',
-    fontFamily: 'monospace',
-    pointerEvents: 'none'
-  });
 
   document.body.appendChild(charCountBox);
 

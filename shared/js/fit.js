@@ -1,8 +1,8 @@
-const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
+// ===================================================
+//                  🔧 EDIT ZONE (⭐)
+// ===================================================
 
-let allowSwipe = false; // Track current swipe state globally
-
+// ⭐ FILTER STATE
 let selectedFilters = {
   have: false,
   want: false,
@@ -10,127 +10,158 @@ let selectedFilters = {
   part: null,
 };
 
+// GLOBAL FLAGS
+let allowSwipe = false;
+
+// ===================================================
+
+
+// ===== DOM REFERENCES =====
+const charListEl = document.getElementById('charList');
+const searchInput = document.getElementById('searchInput');
+const filterBtn = document.getElementById('filterBtn');
+const filterPopup = document.getElementById('filterPopup');
+
+
+// ===== ⭐ UTILITIES =====
+function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
+  const msg = document.createElement('div');
+  msg.className = 'no-results-message';
+  msg.textContent = message;
+  container.appendChild(msg);
+}
+
+function updateCharCount() {
+  const count = document.querySelectorAll('.char-card').length;
+  document.getElementById('charCount').textContent =
+    `Total: ${count} character${count !== 1 ? 's' : ''}`;
+}
+
+function getRarityGradient(rarity) {
+  const gradients = {
+    5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
+    4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
+    3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
+  };
+  return gradients[rarity] || 'linear-gradient(135deg, #444, #999)';
+}
+
+// ===== ⭐ FILTER LOGIC =====
+function passesFilters(c, searchTerm) {
+  const matchesSearch = c.name.toLowerCase().includes(searchTerm);
+
+  const matchesHave = !selectedFilters.have || (
+    selectedFilters.have === true &&
+    (c.have === true || (Array.isArray(c.have) && c.have.includes(true)))
+  );
+
+  const matchesWant = !selectedFilters.want || (
+    selectedFilters.want &&
+    (c.have === false || (Array.isArray(c.have) && c.have.includes(false)))
+  );
+
+  const matchesStatus =
+    !selectedFilters.new || (selectedFilters.new && c.status === 'new');
+
+  let matchesPart = true;
+  if (selectedFilters.part !== null) {
+    matchesPart = c.part === selectedFilters.part;
+    if (selectedFilters.part === 'none') {
+      matchesPart = !('part' in c);
+    }
+  }
+
+  return (
+    matchesSearch &&
+    matchesHave &&
+    matchesWant &&
+    matchesStatus &&
+    matchesPart
+  );
+}
+
+// ===== RENDERING =====
 function renderList() {
   charListEl.innerHTML = '';
   const searchTerm = searchInput.value.toLowerCase();
-
   const characters = gameConfig.characters;
-
   const filteredCharacters = characters
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      const matchesSearch = c.name.toLowerCase().includes(searchTerm);
-
-      const matchesHave = !selectedFilters.have || (
-        (selectedFilters.have === true && (c.have === true || 
-        (Array.isArray(c.have) && c.have.includes(true)))) 
-      );
-
-      const matchesWant = !selectedFilters.want || (
-        selectedFilters.want && (c.have === false || (Array.isArray(c.have) && c.have.includes(false)))
-      );
-
-      const matchesStatus = !selectedFilters.new || (selectedFilters.new && c.status === 'new');
-
-      let matchesPart = true;
-      if (selectedFilters.part !== null) {
-        matchesPart = c.part === selectedFilters.part;
-        if (selectedFilters.part === 'none') {
-          matchesPart = !('part' in c);
-        }
-      }
-
-      return matchesSearch && matchesHave && matchesWant && matchesStatus && matchesPart;
-    });
+    .filter(c => passesFilters(c, searchTerm));
 
   if (filteredCharacters.length === 0) {
     showNoResultsMessage(charListEl);
     updateCharCount();
     return;
-  } else {
-    filteredCharacters.forEach(c => {
-      if (!c.name) return;
-
-      const card = document.createElement('div');
-      card.className = 'char-card';
-      card.title = `${c.name} (${c.rarity || ''}★)`;
-
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'icon-wrapper';
-
-      function getRarityGradient(rarity) {
-        const gradients = {
-          5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)', // Gold (5★)
-          4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)', // Purple (4★)
-          3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)', // Blue (3★)
-        };
-        return gradients[rarity] || 'linear-gradient(135deg, #444, #999)'; // Fallback
-      }
-
-      if (gameConfig.id === 'hi3') {
-        iconWrapper.style.background = 'linear-gradient(135deg, #444, #999)';
-      } else {
-        iconWrapper.style.background = getRarityGradient(c.rarity);
-      }
-
-      if (c.status === 'new') {
-        const label = document.createElement('div');
-        label.textContent = 'NEW';
-        label.className = 'soon-label';
-        iconWrapper.appendChild(label);
-      }
-
-      if (c.status === 'soon') {
-        const label = document.createElement('div');
-        label.textContent = 'SOON';
-        label.className = 'soon-label';
-        iconWrapper.appendChild(label);
-      }
-
-      const img = document.createElement('img');
-      img.className = 'char-icon';
-
-      if (gameConfig.id === 'hi3') {
-        img.src = `../assets/charaid/Honkai/${c.folder}/${c.imgName}.png`;
-      } else {
-        img.src = gameConfig.getImgPath(c);
-      }
-      img.alt = c.name;
-      iconWrapper.appendChild(img);
-
-      const label = document.createElement('div');
-      label.textContent = c.name;
-
-      card.appendChild(iconWrapper);
-      card.appendChild(label);
-      charListEl.appendChild(card);
-
-      card.addEventListener('click', () => {
-        if (gameConfig.id === 'hi3') {
-          const folderPath = `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`;
-          showPopup(folderPath, c.name, c.spriteImages || []);
-        } else {
-          const spritePath = gameConfig.getSpritePath(c); 
-          showPopup(spritePath, c.name, [c.imgName2]);  
-        }
-      });
-    });
   }
+
+  filteredCharacters.forEach(c => {
+    if (!c.name) return;
+
+    const card = document.createElement('div');
+    card.className = 'char-card';
+    card.title = `${c.name} (${c.rarity || ''}★)`;
+
+    const iconWrapper = document.createElement('div');
+    iconWrapper.className = 'icon-wrapper';
+    iconWrapper.style.background = getRarityGradient(c.rarity);
+
+    if (c.status === 'new' || c.status === 'soon') {
+      const label = document.createElement('div');
+      label.textContent = c.status.toUpperCase();
+      label.className = 'soon-label';
+      iconWrapper.appendChild(label);
+    }
+
+    const img = document.createElement('img');
+    img.className = 'char-icon';
+    img.alt = c.name;
+    img.src =
+      gameConfig.id === 'hi3'
+        ? `../assets/charaid/Honkai/${c.folder}/${c.imgName}.png`
+        : gameConfig.getImgPath(c);
+
+    iconWrapper.appendChild(img);
+
+    const nameLabel = document.createElement('div');
+    nameLabel.textContent = c.name;
+
+    card.appendChild(iconWrapper);
+    card.appendChild(nameLabel);
+    charListEl.appendChild(card);
+
+    card.addEventListener('click', () => {
+      if (gameConfig.id === 'hi3') {
+        showPopup(
+          `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`,
+          c.name,
+          c.spriteImages || []
+        );
+      } else {
+        showPopup(
+          gameConfig.getSpritePath(c),
+          c.name,
+          [c.imgName2]
+        );
+      }
+    });
+  });
 
   updateCharCount();
 }
 
-document.querySelectorAll('.filter-checkbox[data-filter]').forEach(checkbox => {
-  checkbox.addEventListener('change', e => {
+// ===== ⭐ FILTER INPUTS =====
+document.querySelectorAll('.filter-checkbox[data-filter]').forEach(cb => {
+  cb.addEventListener('change', e => {
     const type = e.target.dataset.filter;
     const wasChecked = e.target.checked;
 
-    for (let key of ['have', 'want', 'new']) {
-      selectedFilters[key] = false;
-      const el = document.querySelector(`[data-filter="${key}"]`);
+    ['have', 'want', 'new'].forEach(k => {
+      selectedFilters[k] = false;
+      const el = document.querySelector(`[data-filter="${k}"]`);
       if (el) el.checked = false;
-    }
+    });
 
     if (wasChecked) {
       selectedFilters[type] = true;
@@ -145,38 +176,37 @@ document.querySelectorAll('.filter-checkbox[data-filter]').forEach(checkbox => {
   });
 });
 
+// ===== ⭐ PART FILTERS =====
 document.querySelectorAll('.part-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    for (let key of ['have', 'want', 'new']) {
-      selectedFilters[key] = false;
-      const el = document.querySelector(`[data-filter="${key}"]`);
+    ['have', 'want', 'new'].forEach(k => {
+      selectedFilters[k] = false;
+      const el = document.querySelector(`[data-filter="${k}"]`);
       if (el) el.checked = false;
-    }
+    });
 
     document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
     selectedFilters.part = btn.dataset.part;
-
     renderList();
   });
 });
 
-document.querySelectorAll('input[name="part"]').forEach(partCheckbox => {
-  partCheckbox.addEventListener('change', e => {
+document.querySelectorAll('input[name="part"]').forEach(cb => {
+  cb.addEventListener('change', e => {
     if (e.target.checked) {
-      for (let key of ['have', 'want', 'new']) {
-        selectedFilters[key] = false;
-        const el = document.querySelector(`[data-filter="${key}"]`);
+      ['have', 'want', 'new'].forEach(k => {
+        selectedFilters[k] = false;
+        const el = document.querySelector(`[data-filter="${k}"]`);
         if (el) el.checked = false;
-      }
+      });
 
-      document.querySelectorAll('input[name="part"]').forEach(cb => {
-        if (cb !== e.target) cb.checked = false;
+      document.querySelectorAll('input[name="part"]').forEach(x => {
+        if (x !== e.target) x.checked = false;
       });
 
       document.querySelectorAll('.part-btn').forEach(b => b.classList.remove('active'));
-
       selectedFilters.part = e.target.value;
     } else {
       selectedFilters.part = null;
@@ -186,21 +216,44 @@ document.querySelectorAll('input[name="part"]').forEach(partCheckbox => {
   });
 });
 
+// ===== SEARCH =====
 searchInput.addEventListener('input', renderList);
 
+// ===== FILTER POPUP =====
+if (filterBtn && filterPopup) {
+  filterBtn.addEventListener('click', () => {
+    filterPopup.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', e => {
+    if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
+      filterPopup.classList.add('hidden');
+    }
+  });
+}
+
+// ===== SPRITE POPUP =====
 function showPopup(imgPath, altText, spriteList = []) {
   const popup = document.getElementById('spritePopup');
   const popupImg = document.getElementById('spritePopupImg');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const thumbnailContainer = document.getElementById('thumbnailContainer');
+  const stopTouchStart = e => e.stopPropagation();
+  const stopTouchMove  = e => e.stopPropagation();
+  const stopTouchEnd   = e => e.stopPropagation();
+  const isArrayMode = Array.isArray(imgPath);
+  const isFullPathSingle = (
+    typeof imgPath === 'string' &&
+    (imgPath.endsWith('.png') || imgPath.endsWith('.webp')) &&
+    spriteList.length <= 1
+  );
 
   if (!popup || !popupImg || !thumbnailContainer) {
     console.error('Required popup elements not found (spritePopup / spritePopupImg / thumbnailContainer).');
     return;
   }
 
-  // Cleanup previously attached popup touch/keyboard handlers if present
   if (popup._removeTouchEvents) {
     popup._removeTouchEvents();
     delete popup._removeTouchEvents;
@@ -210,19 +263,10 @@ function showPopup(imgPath, altText, spriteList = []) {
     delete popup._removeKeydown;
   }
 
-  // Cleanup previously attached thumbnail drag listeners, if any
   if (thumbnailContainer._removeDragListeners) {
     thumbnailContainer._removeDragListeners();
     delete thumbnailContainer._removeDragListeners;
   }
-
-  // Determine image list (preserve your original behaviour)
-  const isArrayMode = Array.isArray(imgPath);
-  const isFullPathSingle = (
-    typeof imgPath === 'string' &&
-    (imgPath.endsWith('.png') || imgPath.endsWith('.webp')) &&
-    spriteList.length <= 1
-  );
 
   let images;
   if (isArrayMode) {
@@ -238,21 +282,28 @@ function showPopup(imgPath, altText, spriteList = []) {
   const totalImages = images.length;
   allowSwipe = totalImages > 1;
 
-  // Clear previous thumbs
   thumbnailContainer.innerHTML = '';
-
-  // Add passive stopPropagation for thumbnail area so touch dragging thumbnails won't bubble
-  const stopTouchStart = e => e.stopPropagation();
-  const stopTouchMove  = e => e.stopPropagation();
-  const stopTouchEnd   = e => e.stopPropagation();
   thumbnailContainer.addEventListener('touchstart', stopTouchStart, { passive: true });
   thumbnailContainer.addEventListener('touchmove', stopTouchMove, { passive: true });
   thumbnailContainer.addEventListener('touchend', stopTouchEnd, { passive: true });
+  thumbnailContainer.addEventListener('mousedown', onMouseDown);
+  thumbnailContainer.addEventListener('mousemove', onMouseMove);
+  thumbnailContainer.addEventListener('mouseup', onMouseUp);
+  thumbnailContainer.addEventListener('mouseleave', onMouseLeave);
+  thumbnailContainer._removeDragListeners = () => {
+    thumbnailContainer.removeEventListener('mousedown', onMouseDown);
+    thumbnailContainer.removeEventListener('mousemove', onMouseMove);
+    thumbnailContainer.removeEventListener('mouseup', onMouseUp);
+    thumbnailContainer.removeEventListener('mouseleave', onMouseLeave);
+    thumbnailContainer.removeEventListener('touchstart', stopTouchStart);
+    thumbnailContainer.removeEventListener('touchmove', stopTouchMove);
+    thumbnailContainer.removeEventListener('touchend', stopTouchEnd);
+  };
 
-  // Drag-to-scroll support (mouse)
   let isDragging = false;
   let startX = 0;
   let scrollLeftStart = 0;
+  let loadedThumbs = 0;
 
   function onMouseDown(e) {
     isDragging = true;
@@ -276,44 +327,22 @@ function showPopup(imgPath, altText, spriteList = []) {
     thumbnailContainer.classList.remove('dragging');
   }
 
-  thumbnailContainer.addEventListener('mousedown', onMouseDown);
-  thumbnailContainer.addEventListener('mousemove', onMouseMove);
-  thumbnailContainer.addEventListener('mouseup', onMouseUp);
-  thumbnailContainer.addEventListener('mouseleave', onMouseLeave);
-
-  // save remover so subsequent opens won't add duplicate listeners
-  thumbnailContainer._removeDragListeners = () => {
-    thumbnailContainer.removeEventListener('mousedown', onMouseDown);
-    thumbnailContainer.removeEventListener('mousemove', onMouseMove);
-    thumbnailContainer.removeEventListener('mouseup', onMouseUp);
-    thumbnailContainer.removeEventListener('mouseleave', onMouseLeave);
-    thumbnailContainer.removeEventListener('touchstart', stopTouchStart);
-    thumbnailContainer.removeEventListener('touchmove', stopTouchMove);
-    thumbnailContainer.removeEventListener('touchend', stopTouchEnd);
-  };
-
-  // Build thumbnails (uniform size to avoid accidental misses)
-  let loadedThumbs = 0;
-
   function updateThumbnailAlignment() {
   const thumbs = Array.from(thumbnailContainer.children);
   if (!thumbs.length) return;
 
-  // get computed widths including margin/gap
-  const gap = 5; // match your CSS gap
+  const gap = 5; 
   const totalThumbWidth = thumbs.reduce((sum, t) => sum + t.getBoundingClientRect().width + gap, 0);
   const containerWidth = thumbnailContainer.getBoundingClientRect().width;
 
   if (totalThumbWidth <= containerWidth) {
-    thumbnailContainer.style.justifyContent = 'center'; // center if fits
+    thumbnailContainer.style.justifyContent = 'center'; 
   } else {
-    thumbnailContainer.style.justifyContent = 'flex-start'; // left-align if scrollable
+    thumbnailContainer.style.justifyContent = 'flex-start'; 
   }
 }
 
-// call it after a small delay to allow mobile layout to settle
 setTimeout(updateThumbnailAlignment, 50);
-
   function scrollToSelectedThumbnail(i) {
     const thumbnails = thumbnailContainer.querySelectorAll('.thumbnail-img');
     if (!thumbnails[i]) return;
@@ -321,8 +350,6 @@ setTimeout(updateThumbnailAlignment, 50);
     const containerWidth = thumbnailContainer.clientWidth;
     const offsetLeft = thumb.offsetLeft;
     const thumbWidth = thumb.offsetWidth;
-
-    // center the selected thumb when possible, clamp to scrollable area
     const target = Math.min(Math.max(offsetLeft - (containerWidth / 2 - thumbWidth / 2), 0), Math.max(0, thumbnailContainer.scrollWidth - containerWidth));
     thumbnailContainer.scrollLeft = target;
   }
@@ -331,21 +358,15 @@ setTimeout(updateThumbnailAlignment, 50);
     const thumb = document.createElement('img');
     thumb.className = 'thumbnail-img';
     thumb.alt = `${altText} - ${i + 1}`;
-
-    // Ensure uniform thumbnail size (inline style as a fallback)
     thumb.style.width = '60px';
     thumb.style.height = '60px';
     thumb.style.objectFit = 'cover';
     thumb.style.flex = '0 0 auto';
-
     thumb.src = images[i];
-
     thumb.onload = () => {
       loadedThumbs++;
-      // only align/scroll after all thumbs loaded to avoid visual jump
       if (loadedThumbs === totalImages) {
         updateThumbnailAlignment();
-        // small timeout to allow layout reflow across browsers
         setTimeout(() => {
           scrollToSelectedThumbnail(0);
           thumbnailContainer.scrollLeft = 0;
@@ -353,7 +374,6 @@ setTimeout(updateThumbnailAlignment, 50);
       }
     };
 
-    // touch handlers to distinguish tap vs pan
     let touchStartX = 0;
     let touchMoved = false;
     thumb.addEventListener('touchstart', e => {
@@ -400,15 +420,12 @@ setTimeout(updateThumbnailAlignment, 50);
     thumbnailContainer.appendChild(thumb);
   }
 
-  // If only 1 image, hide the thumbs bar
   if (totalImages <= 1) {
     thumbnailContainer.style.display = 'none';
   } else {
     thumbnailContainer.style.display = 'flex';
   }
 
-  // Main image display logic
-  // ===== Main image display logic with auto-resize =====
 let index = 0;
 
 function showImageAt(idx) {
@@ -416,15 +433,12 @@ function showImageAt(idx) {
   let newSrc = images[index] || images[0] || '';
   let newAlt = `${altText} - ${newSrc.split('/').pop().replace(/\.(png|webp)/, '')}`;
 
-  // Reset sizing
   popupImg.style.width = '';
   popupImg.style.height = '';
   popupImg.style.objectFit = 'contain';
   popupImg.style.visibility = 'hidden';
   popupImg.src = newSrc;
   popupImg.alt = newAlt;
-
-  // Resize dynamically on load
   popupImg.onload = () => {
     const maxWidth = window.innerWidth * 0.95;
     const maxHeight = window.innerHeight * 0.95;
@@ -432,7 +446,6 @@ function showImageAt(idx) {
     let width = popupImg.naturalWidth;
     let height = popupImg.naturalHeight;
 
-    // scale down if bigger than popup
     const widthRatio = maxWidth / width;
     const heightRatio = maxHeight / height;
     const ratio = Math.min(widthRatio, heightRatio, 1); // don't upscale small images
@@ -449,7 +462,6 @@ function showImageAt(idx) {
     popupImg.style.visibility = 'hidden';
   };
 
-  // highlight selected thumb
   Array.from(thumbnailContainer.querySelectorAll('.thumbnail-img')).forEach((img, i) => {
     img.classList.toggle('selected', i === idx);
   });
@@ -469,7 +481,6 @@ function showImageAt(idx) {
     scrollToSelectedThumbnail(index);
   }
 
-  // Prev/next button wiring and visibility
   if (!prevBtn || !nextBtn) {
     console.warn('prevBtn or nextBtn missing.');
   } else {
@@ -484,7 +495,6 @@ function showImageAt(idx) {
     }
   }
 
-  // Keyboard arrows & ESC (register and keep a remover)
   const keyHandler = function (event) {
     if (popup.style.display !== 'flex') return;
     if (event.key === 'Escape') {
@@ -498,7 +508,6 @@ function showImageAt(idx) {
   document.addEventListener('keydown', keyHandler);
   popup._removeKeydown = () => document.removeEventListener('keydown', keyHandler);
 
-  // Touch swipe for popup image
   let touchStartXMain = 0;
   const handleTouchStart = e => (touchStartXMain = e.touches[0].clientX);
   const handleTouchEnd = e => {
@@ -510,14 +519,12 @@ function showImageAt(idx) {
 
   popup.addEventListener('touchstart', handleTouchStart, { passive: true });
   popup.addEventListener('touchend', handleTouchEnd, { passive: true });
-
   popup._removeTouchEvents = () => {
     popup.removeEventListener('touchstart', handleTouchStart);
     popup.removeEventListener('touchend', handleTouchEnd);
     if (popup._removeKeydown) popup._removeKeydown();
   };
 
-  // Start at first image (and make sure layout has time to settle)
   showImageAt(0);
   popup.style.display = 'flex';
   document.body.style.overflow = 'hidden';
@@ -527,12 +534,10 @@ function showImageAt(idx) {
     thumbnailContainer.scrollLeft = 0;
   }, 20);
 
-  // clicking outside children closes the popup — keep that behaviour
   popup.onclick = (e) => {
     if (e.target === popup) {
       popup.style.display = 'none';
 
-      // cleanup drag + touch listeners we attached
       if (thumbnailContainer._removeDragListeners) {
         thumbnailContainer._removeDragListeners();
         delete thumbnailContainer._removeDragListeners;
@@ -543,91 +548,31 @@ function showImageAt(idx) {
       }
     }
   };
-
-  // Prevent thumbnail clicks from bubbling and closing the popup
   thumbnailContainer.addEventListener('click', e => e.stopPropagation());
 }
 
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
+// ===== GLOBAL EVENTS =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
     const popup = document.getElementById('spritePopup');
-    if (popup.style.display === 'flex') { // or !== 'none'
-      popup.style.display = 'none';
-    }
-  }
-});
-
-document.querySelector('.close-btn').addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-document.getElementById('spritePopup').addEventListener('click', e => {
-  const popup = e.currentTarget;
-  const thumbnailContainer = document.getElementById('thumbnailContainer');
-
-  // Don't close if clicking inside popup children (like thumbnails, image, buttons)
-  if (
-    thumbnailContainer.contains(e.target) ||
-    document.getElementById('spritePopupImg').contains(e.target) ||
-    document.getElementById('prevBtn').contains(e.target) ||
-    document.getElementById('nextBtn').contains(e.target) ||
-    document.querySelector('.close-btn').contains(e.target)
-  ) {
-    return;
-  }
-
-  // Close only when truly clicking the background (overlay) area
-  if (e.target === popup) {
-    popup.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-});
-
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
-
-if (filterBtn && filterPopup) {
-  filterBtn.addEventListener('click', () => {
-    filterPopup.classList.toggle('hidden');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
-      filterPopup.classList.add('hidden');
-    }
-  });
-}
-
-function updateCharCount() {
-  const count = document.querySelectorAll('.char-card').length;
-  const countText = `Total: ${count} character${count !== 1 ? 's' : ''}`;
-  document.getElementById('charCount').textContent = countText;
-}
-
-function showNoResultsMessage(container, message = "Nothing new here ∑( ⚆ᗝ⚆)") {
-  const msg = document.createElement('div');
-  msg.className = 'no-results-message';
-  msg.textContent = message;
-  container.appendChild(msg);
-}
-renderList();
-
-window.addEventListener('DOMContentLoaded', () => {
-  const partButtons = document.querySelectorAll('.part-btn');
-  if (partButtons.length > 0 && !selectedFilters.part) {
-    partButtons.forEach(b => b.classList.remove('active'));
-    partButtons[0].classList.add('active');
-    selectedFilters.part = partButtons[0].dataset.part;
-    renderList();
+    if (popup?.style.display === 'flex') popup.style.display = 'none';
   }
 });
 
 window.addEventListener('resize', () => {
   const popup = document.querySelector('.sprite-popup');
-  if (popup) {
-    popup.style.height = window.innerHeight + 'px';
-  }
+  if (popup) popup.style.height = window.innerHeight + 'px';
 });
 
-document.getElementById('thumbnailContainer').addEventListener('click', e => {
-  e.stopPropagation(); // Prevent clicks from bubbling to the popup background
+// ===== INITIAL LOAD =====
+renderList();
+
+window.addEventListener('DOMContentLoaded', () => {
+  const partButtons = document.querySelectorAll('.part-btn');
+  if (partButtons.length && !selectedFilters.part) {
+    partButtons.forEach(b => b.classList.remove('active'));
+    partButtons[0].classList.add('active');
+    selectedFilters.part = partButtons[0].dataset.part;
+    renderList();
+  }
 });

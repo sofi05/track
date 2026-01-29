@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Excaliboo', have: false, rarity: '4' },
     { name: 'Bild N. Boolok', have: true, rarity: '4' },
     { name: 'Birkblick', have: false, rarity: '4'},
+    { name: 'Sprout', have: false, rarity: '5'},
     //{ name: '', have: false, rarity: '', status: 'new' },
   ];
 

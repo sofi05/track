@@ -1,11 +1,20 @@
+// ===================================================
+//                  🔧 EDIT ZONE (⭐)
+// ===================================================
+
+
+// ======= FILTER & SORT ======
+
 window.filterAndSortCharacters = function (characters, isHI3 = false) {
   const newCharacters = characters.filter(char => 
     char.have === false &&
     char.status === 'new' || char.status === 'soon');
 
+  // PERMANENT
   const permaCharacters = characters.filter(char => char.perma === true);
   const permaIds = new Set(permaCharacters.map(char => char.id || char.name)); 
 
+  // RERUNS
   let rerunCharacters = characters.filter(char =>
     char.have === false &&
     char.status === 'available' &&
@@ -16,21 +25,90 @@ window.filterAndSortCharacters = function (characters, isHI3 = false) {
     rerunCharacters = rerunCharacters.filter(char => char.version);
   }
 
-  newCharacters.sort((a, b) => a.version - b.version);
-  rerunCharacters.sort((a, b) => b.version - a.version);
+  // SORTING
+    newCharacters.sort((a, b) => {
+    if (a.version !== b.version) return a.version - b.version;
+      //will sort by phase after
+    const aPhase = a.p || 0;
+    const bPhase = b.p || 0;
+    return aPhase - bPhase;
+  });
+
+    rerunCharacters.sort((a, b) => {
+    if (b.version !== a.version) return b.version - a.version;
+      //will sort by phase after
+    const aPhase = a.p || 0;
+    const bPhase = b.p || 0;
+    return aPhase - bPhase;
+  });
+
   permaCharacters.sort((a, b) => b.version - a.version);
 
   return { newCharacters, rerunCharacters, permaCharacters };
 };
 
 window.EMPTY_NEW_CHARACTERS_TEXT = 'Σ(⊙_⊙;) You got them all already???';
-
 window.EMPTY_NEW_CHARACTERS_STYLE = {
   width: '50%',
   fontSize: '13px',
   opacity: '0.7'
 };
 
+
+// =======  DATE HELPERS=======
+function parseDateSafe(s) {
+  if (!s) return null;
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function firstNonEmptyDate(...dates) {
+  for (const d of dates) {
+    const parsed = parseDateSafe(d);
+    if (parsed) return parsed;
+  }
+  return null;
+}
+
+// ======= PHASE WINDOW =======
+function findPhaseWindow(version, pNum) {
+  const gv = window.GAME_VERSIONS || {};
+
+  function parseDate(s) {
+    if (!s) return null;
+    const d = new Date(s);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function firstNonEmptyDate(...vals) {
+    for (const v of vals) {
+      const d = parseDate(v);
+      if (d) return d;
+    }
+    return null;
+  }
+
+  for (const g of Object.values(gv)) {
+    const vsTypes = [
+      { base: 'version', startPrefix: 'p', endPrefix: 'p', fallbackDates: [g.date1, g.date2] },
+      { base: 'date1vs', startPrefix: 'date1p', endPrefix: 'date1p', fallbackDates: [g.date2] },
+      { base: 'date2vs', startPrefix: 'date2p', endPrefix: 'date2p', fallbackDates: [g.date2] },
+    ];
+
+    for (const vs of vsTypes) {
+      if (g[vs.base] === version) {
+        const start = parseDate(g[`${vs.startPrefix}${pNum}`]);
+        let end = parseDate(g[`${vs.endPrefix}${pNum + 1}`]); // next phase is the "end" of this phase
+        if (!end) end = firstNonEmptyDate(...vs.fallbackDates);
+        return { start, end };
+      }
+    }
+  }
+
+  return { start: null, end: null };
+}
+
+// =======⭐ CARD CREATION =======
 window.createCharacterCard = function (char, config, customImgPathFn, customFallbackPathFn) {
   const {
     iconPath,
@@ -48,12 +126,13 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   iconWrapper.classList.add('icon-wrapper');
 
   const rarityGradients = {
+    6: 'linear-gradient(100deg, rgb(124, 0, 0), #ff6232cc)',
     5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
     4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
     3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
   };
 
-  const charRarity = [3, 4, 5].includes(char.rarity) ? char.rarity : null;
+  const charRarity = [3, 4, 5, 6].includes(char.rarity) ? char.rarity : null;
   iconWrapper.style.background = rarityGradients[charRarity] || 'linear-gradient(135deg, #444, #999)';
 
   const iconImg = document.createElement('img');
@@ -83,10 +162,7 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   charInfo.classList.add('char-info');
 
   const charName = document.createElement('h3');
-  charName.textContent = char.name + (char.want ? " ★" : "");
   charName.textContent = char.name + (char.want === 1 ? " ★" : char.want === 2 ? " ☆" : "");
-
-
 
   const charVersion = document.createElement('div');
   charVersion.textContent = `Version: ${char.version || 'N/A'}`;
@@ -107,69 +183,46 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
     showCharacterPopup(char.gameFolder || 'ZenlessZone', char.id || char.name, spritePath);
   });
 
-  // === PHASE-BASED OUTLINE COLOR ===
-  function findPhaseWindow(version, pNum) {
+  // PHASE-BASED OUTLINE
+  function updateBoxOutline() {
     const gv = window.GAME_VERSIONS || {};
-    for (const g of Object.values(gv)) {
-      if (g.version === version) {
-        const start = new Date(g[`p${pNum}`]);
-        const end = pNum === 1 ? new Date(g.p2) || new Date(g.date1) || new Date(g.date2) : new Date(g.date1) || new Date(g.date2);
-        return { start, end };
-      }
-      if (g.date1vs === version) {
-        const start = new Date(g[`date1p${pNum}`]);
-        const end = pNum === 1 ? new Date(g.date1p2) || new Date(g.date2) : new Date(g.date2);
-        return { start, end };
-      }
-      if (g.date2vs === version) {
-        const start = new Date(g[`date2p${pNum}`]);
-        const end = pNum === 1 ? new Date(g.date2p2) || new Date(g.date2) : new Date(g.date2);
-        return { start, end };
+    const versionData = Object.values(gv).find(g => g.version === char.version);
+    if (!versionData) return;
+
+    let phaseStatusText = '';
+    if (char.p) {
+      const { start, end } = findPhaseWindow(char.version, char.p);
+      const now = new Date();
+      if (!end || now < start) {
+        phaseStatusText = 'countdown';
+      } else if (now >= end) {
+        phaseStatusText = 'ended';
+      } else {
+        phaseStatusText = 'active';
       }
     }
-    return { start: null, end: null };
-  }
 
-function updateBoxOutline() {
-  const gv = window.GAME_VERSIONS || {};
-  const versionData = Object.values(gv).find(g => g.version === char.version);
-  if (!versionData) return;
-
-  let phaseStatusText = '';
-  if (char.p) {
-    const { start, end } = findPhaseWindow(char.version, char.p);
-    const now = new Date();
-    if (!end || now < start) {
-      phaseStatusText = 'countdown';
-    } else if (now >= end) {
-      phaseStatusText = 'ended';
-    } else {
-      phaseStatusText = 'active';
+    if (char.version === versionData.version) {
+      if (phaseStatusText === 'active') {
+        charBox.style.outline = '3px solid #2a9c63'; // green
+      } else if (phaseStatusText === 'countdown') {
+        charBox.style.outline = '3px solid #b9c76d'; // yellowish-green
+      } else if (phaseStatusText === 'ended') {
+        charBox.style.outline = '3px solid #727473ff'; // ended gray
+      } else {
+        charBox.style.outline = '3px solid #2a9c63';
+      }
+      charBox.style.outlineOffset = '-2px';
     }
   }
-
-  // Only apply colors if this is the current version
-  if (char.version === versionData.version) {
-    if (phaseStatusText === 'active') {
-      charBox.style.outline = '3px solid #2a9c63'; // green
-    } else if (phaseStatusText === 'countdown') {
-      charBox.style.outline = '3px solid #b9c76d'; // yellowish-green
-    } else if (phaseStatusText === 'ended') {
-      charBox.style.outline = '3px solid #727473ff'; // ended gray
-    } else {
-      // No phase → keep existing green (don't override)
-      charBox.style.outline = '3px solid #2a9c63';
-    }
-    charBox.style.outlineOffset = '-2px';
-  }
-}
 
   updateBoxOutline();
 
   return charBox;
 };
 
-// === Utility: Dynamically load external script ===
+// =======  SCRIPT LOADER & CHAR JS  =======
+
 function loadScript(url) {
   return new Promise((resolve, reject) => {
     if (document.querySelector(`script[src="${url}"]`)) {
@@ -211,7 +264,32 @@ async function loadCharaJs(gameFolder) {
   });
 }
 
-// === Create and show character info popup ===
+// =======⭐ COUNT TOTAL CHARACTER  =======
+
+const newCharSlider = document.getElementById('new-characters-slider');
+const rerunSlider = document.getElementById('reruns-slider');
+const permaSlider = document.getElementById('perma-slider');
+const permaSection = document.getElementById('perma');
+const { newCharacters, rerunCharacters, permaCharacters } = filterAndSortCharacters(characters);
+const totalCount = newCharacters.length + rerunCharacters.length + permaCharacters.length;
+const charCountBox = document.createElement('div');
+charCountBox.textContent = `Total: ${totalCount} Characters`;
+Object.assign(charCountBox.style, {
+  position: 'fixed',
+  top: '6px',
+  right: '8px',
+  fontSize: '12px',
+  color: '#fff',
+  background: '#0008',
+  padding: '4px 8px',
+  borderRadius: '6px',
+  zIndex: '9999',
+  fontFamily: 'monospace',
+  pointerEvents: 'none'
+});
+
+// ======= ⭐ CHARACTER POPUP CREATION  =======
+
 function createCharacterPopup(char, getSpritePath) {
   document.getElementById('char-popup')?.remove();
   document.getElementById('popup-backdrop')?.remove();
@@ -301,19 +379,17 @@ function createCharacterPopup(char, getSpritePath) {
 
   sprite.onerror = () => {
     sprite.style.display = 'none';
-
     const fallbackImg = document.createElement('img');
     fallbackImg.src = fallbackSrc;
     fallbackImg.alt = 'Loading…';
     Object.assign(fallbackImg.style, {
-    display: 'block',
-    margin: '0 auto',
-    borderRadius: '20px',
-    objectFit: 'contain', // ← change from 'cover' to 'contain'
-    width: isMobile ? '120px' : '150px',
-    height: isMobile ? '150px' : '200px',
-  });
-
+      display: 'block',
+      margin: '0 auto',
+      borderRadius: '20px',
+      objectFit: 'contain',
+      width: isMobile ? '120px' : '150px',
+      height: isMobile ? '150px' : '200px',
+    });
     imageContainer.style.height = isMobile ? '150px' : '200px';
     imageContainer.appendChild(fallbackImg);
   };
@@ -361,32 +437,33 @@ function createCharacterPopup(char, getSpritePath) {
   versionLine.appendChild(versionEl);
   versionLine.appendChild(countdownEl);
 
-  // === Phase with dynamic status ===
+  // PHASE INFO
   const phaseEl = document.createElement('div');
   phaseEl.style.marginTop = '4px';
   phaseEl.style.opacity = '0.9';
   phaseEl.style.fontSize = '14px';
   phaseEl.style.color = '#b4b4b4ff';
   const phaseText = document.createElement('span');
-  phaseText.textContent = `Phase ${char.p}`;
   const phaseStatus = document.createElement('span');
   phaseStatus.style.marginLeft = '4px';
   phaseStatus.style.opacity = '0.85';
- if (char.p) {
-  phaseEl.appendChild(phaseText);
-  phaseEl.appendChild(phaseStatus);
-  popup.appendChild(phaseEl);
-}
+  if (char.p) {
+    phaseText.textContent = `Phase ${char.p}`;
+    phaseEl.appendChild(phaseText);
+    phaseEl.appendChild(phaseStatus);
+    popup.appendChild(phaseEl);
+  }
 
-  function parseDate(s) {
+  function parseDateSafe(s) {
     if (!s) return null;
     const d = new Date(s);
     return isNaN(d.getTime()) ? null : d;
   }
-  function firstNonEmptyDate(...vals) {
-    for (const v of vals) {
-      const d = parseDate(v);
-      if (d) return d;
+
+  function firstNonEmptyDate(...dates) {
+    for (const d of dates) {
+      const parsed = parseDateSafe(d);
+      if (parsed) return parsed;
     }
     return null;
   }
@@ -395,18 +472,18 @@ function createCharacterPopup(char, getSpritePath) {
     const gv = window.GAME_VERSIONS || {};
     for (const g of Object.values(gv)) {
       if (g.version === version) {
-        const start = parseDate(g[`p${pNum}`]);
-        const end = pNum === 1 ? parseDate(g.p2) || firstNonEmptyDate(g.date1, g.date2) : firstNonEmptyDate(g.date1, g.date2);
+        const start = parseDateSafe(g[`p${pNum}`]);
+        const end = pNum === 1 ? parseDateSafe(g.p2) || firstNonEmptyDate(g.date1, g.date2) : firstNonEmptyDate(g.date1, g.date2);
         return { start, end };
       }
       if (g.date1vs === version) {
-        const start = parseDate(g[`date1p${pNum}`]);
-        const end = pNum === 1 ? parseDate(g.date1p2) || parseDate(g.date2) : parseDate(g.date2);
+        const start = parseDateSafe(g[`date1p${pNum}`]);
+        const end = pNum === 1 ? parseDateSafe(g.date1p2) || parseDateSafe(g.date2) : parseDateSafe(g.date2);
         return { start, end };
       }
       if (g.date2vs === version) {
-        const start = parseDate(g[`date2p${pNum}`]);
-        const end = pNum === 1 ? parseDate(g.date2p2) || parseDate(g.date2) : parseDate(g.date2);
+        const start = parseDateSafe(g[`date2p${pNum}`]);
+        const end = pNum === 1 ? parseDateSafe(g.date2p2) || parseDateSafe(g.date2) : parseDateSafe(g.date2);
         return { start, end };
       }
     }
@@ -424,46 +501,77 @@ function createCharacterPopup(char, getSpritePath) {
     return `(~${s % 60}s)`;
   }
 
-  const { start: phaseStart, end: phaseEnd } = findPhaseWindow(char.version, char.p);
+  const gv = window.GAME_VERSIONS || {};
+  let isCurrent = Object.values(gv).some(g => g.version === char.version);
 
-  if (char.p) {
-  phaseText.textContent = `Phase ${char.p}`;
-} else {
-  phaseText.textContent = '';
-}
 
-  function updatePhaseStatus() {
-  if (!phaseStart || !char.p) {
-    phaseStatus.textContent = '';
-    return;
+  // VERSION COUNTDOWN
+  function findVersionCountdown(version, phaseNum = 1) {
+    const gv = window.GAME_VERSIONS || {};
+    for (const [, g] of Object.entries(gv)) {
+      if (g.date1vs === version) {
+        if (phaseNum === 2 && g.date1p2) return new Date(g.date1p2);
+        if (phaseNum === 3 && g.date1p3) return new Date(g.date1p3);
+        return g.date1 ? new Date(g.date1) : null;
+      }
+      //FUTURE VERSIONS
+      if (g.date2vs === version) {
+        if (phaseNum === 2 && g.date2p2) return new Date(g.date2p2);
+        if (phaseNum === 3 && g.date2p3) return new Date(g.date2p3);
+        return g.date2 ? new Date(g.date2) : null;
+      }
+    }
+    return null;
   }
 
-  // Only show countdown if this is the "current" version (not date1vs/date2vs)
-  const gv = window.GAME_VERSIONS || {};
-  let isCurrentVersion = false;
-  for (const g of Object.values(gv)) {
-    if (g.version === char.version) {
-      isCurrentVersion = true;
-      break;
+  const versionCountdownDate = findVersionCountdown(char.version, char.p || 1);
+
+  function updateVersionCountdown() {
+    if (!versionCountdownDate || isCurrent) {
+      countdownEl.textContent = '';
+      return;
+    }
+    const diff = versionCountdownDate - new Date();
+    if (diff <= 0) {
+      countdownEl.textContent = ' (Released)';
+    } else {
+      const s = Math.floor(diff / 1000);
+      const m = Math.floor(s / 60);
+      const h = Math.floor(m / 60);
+      const d = Math.floor(h / 24);
+      let label = '';
+      if (d > 0) label = `in ${d}d`;
+      else if (h > 0) label = `in ${h % 24}h`;
+      else if (m > 0) label = `in ${m % 60}m`;
+      else label = `in ${s % 60}s`;
+      countdownEl.textContent = ` (${label})`;
     }
   }
 
-  if (!isCurrentVersion) {
-    phaseStatus.textContent = ''; // no countdown for future versions
-    return;
+  if (versionCountdownDate) {
+    updateVersionCountdown();
+    countdownInterval = setInterval(updateVersionCountdown, 1000);
   }
 
-  const now = new Date();
-  if (!phaseEnd) {
-    phaseStatus.textContent = formatCountdown(phaseStart - now);
-  } else if (now < phaseStart) {
-    phaseStatus.textContent = formatCountdown(phaseStart - now);
-  } else if (now >= phaseEnd) {
-    phaseStatus.textContent = '(ended)';
-  } else {
-    phaseStatus.textContent = '(active)';
+  // PHASE COUNTDOWN FOR CURRENT VERSION
+  const { start: phaseStart, end: phaseEnd } = findPhaseWindow(char.version, char.p || 1);
+
+  function updatePhaseStatus() {
+    if (!char.p || !phaseStart) return;
+    if (!isCurrent) {
+      phaseStatus.textContent = '';
+      return;
+    }
+    const now = new Date();
+    if (!phaseEnd || now < phaseStart) {
+      phaseStatus.textContent = formatCountdown(phaseStart - now);
+    } else if (now >= phaseEnd) {
+      phaseStatus.textContent = '(ended)';
+    } else {
+      phaseStatus.textContent = '(active)';
+    }
   }
-}
+
   updatePhaseStatus();
   phaseInterval = setInterval(updatePhaseStatus, 1000);
 
@@ -489,43 +597,9 @@ function createCharacterPopup(char, getSpritePath) {
   document.body.appendChild(backdrop);
   document.body.appendChild(popup);
   document.body.style.overflow = 'hidden';
-
-  // === Countdown for version (special case for dateXp2) ===
-  function findVersionCountdown(version, phaseNum) {
-    for (const [, g] of Object.entries(window.GAME_VERSIONS)) {
-      if (g.date1vs === version && g.date1p2 && phaseNum === 2) return new Date(g.date1p2);
-      if (g.date2vs === version && g.date2p2 && phaseNum === 2) return new Date(g.date2p2);
-      if (g.date1vs === version && g.date1 && !(phaseNum === 2 && g.date1p2)) return new Date(g.date1);
-      if (g.date2vs === version && g.date2 && !(phaseNum === 2 && g.date2p2)) return new Date(g.date2);
-    }
-    return null;
-  }
-
-  const versionCountdownDate = findVersionCountdown(char.version, char.p);
-
-  function updateVersionCountdown() {
-    if (!versionCountdownDate) return (countdownEl.textContent = '');
-    const now = new Date();
-    const diff = versionCountdownDate - now;
-    if (diff <= 0) return (countdownEl.textContent = ' (Released)');
-    const s = Math.floor(diff / 1000);
-    const m = Math.floor(s / 60);
-    const h = Math.floor(m / 60);
-    const d = Math.floor(h / 24);
-    let label = '';
-    if (d > 0) label = `in ${d}d`;
-    else if (h > 0) label = `in ${h % 24}h`;
-    else if (m > 0) label = `in ${m % 60}m`;
-    else label = `in ${s % 60}s`;
-    countdownEl.textContent = ` (${label})`;
-  }
-
-  if (versionCountdownDate) {
-    updateVersionCountdown();
-    countdownInterval = setInterval(updateVersionCountdown, 1000);
-  }
 }
 
+// ======= SHOW CHARACTER POPUP  =======
 async function showCharacterPopup(gameFolder, charIdOrName) {
   try {
     const { characters, getSpritePath } = await loadCharaJs(gameFolder);
@@ -541,9 +615,3 @@ async function showCharacterPopup(gameFolder, charIdOrName) {
     showErrorPopup('Failed to load character data or popup');
   }
 }
-
-iconImg.onerror = () => {
-  if (fallbackImg) {
-    iconImg.src = fallbackImg;
-  }
-};
