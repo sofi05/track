@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HNA: Characters</title>
+  <title>AE: Characters</title>
   <link rel="stylesheet" href="../shared/css/style.css" />
   <link rel="stylesheet" href="../shared/css/change.css" />
   <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">    
@@ -39,6 +39,7 @@
       <div class="filter-options">
         <label><input type="radio" name="rarity" value="4"> 4★</label>
         <label><input type="radio" name="rarity" value="5"> 5★ </label>
+        <label><input type="radio" name="rarity" value="6"> 6★ </label>
       </div>
     </div>
 
@@ -56,32 +57,24 @@
       <button type="button" class="filter-toggle">Element</button>
       <div class="filter-options">
         <label class="element-label">
-          <input type="radio" name="element" value="fire">
-          <img src="../assets/others/StarRail/Element/fire.png" alt="fire" class="element-img">
+          <input type="radio" name="element" value="Heat">
+          <img src="../assets/others/Endfield/Element/Heat.png" alt="Heat" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="ice">
-          <img src="../assets/others/StarRail/Element/ice.png" alt="ice" class="element-img">
+          <input type="radio" name="element" value="Cryo">
+          <img src="../assets/others/Endfield/Element/Cryo.png" alt="Cryo" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="imaginary">
-          <img src="../assets/others/StarRail/Element/imaginary.png" alt="imaginary" class="element-img">
+          <input type="radio" name="element" value="Nature">
+          <img src="../assets/others/Endfield/Element/Nature.png" alt="Nature" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="physical">
-          <img src="../assets/others/StarRail/Element/physical.png" alt="physical" class="element-img">
+          <input type="radio" name="element" value="Physical">
+          <img src="../assets/others/Endfield/Element/Physical.png" alt="Physical" class="element-img">
         </label>
         <label class="element-label">
-          <input type="radio" name="element" value="quantum">
-          <img src="../assets/others/StarRail/Element/quantum.png" alt="quantum" class="element-img">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="thunder">
-          <img src="../assets/others/StarRail/Element/thunder.png" alt="thunder" class="element-img">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="element" value="wind">
-          <img src="../assets/others/StarRail/Element/wind.png" alt="wind" class="element-img">
+          <input type="radio" name="element" value="Electric">
+          <img src="../assets/others/Endfield/Element/Electric.png" alt="Electric" class="element-img">
         </label>
       </div>
     </div>
@@ -90,81 +83,45 @@
     <div class="filter-category">
       <button type="button" class="filter-toggle">Path</button>
       <div class="filter-options">
-        <label class="element-label" for="group-abun">
-          <input type="radio" name="group" value="abun" id="group-abun" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Abundance.png" alt="Abundance" />
+        <label class="element-label" for="group-Hongshan">
+          <input type="radio" name="group" value="Hongshan" id="group-Hongshan" />
+          <img class="element-img" src="../assets/others/Endfield/Group/Hongshan_Academy_Of_Sciences.png" alt="Hongshan Academy of Sciences" />
         </label>
-        <label class="element-label" for="group-dest">
-          <input type="radio" name="group" value="dest" id="group-dest" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Destruction.png" alt="Destruction" />
+        <label class="element-label" for="group-EndIndustries">
+          <input type="radio" name="group" value="EndIndustries" id="group-EndIndustries" />
+          <img class="element-img" src="../assets/others/Endfield/Group/Endfield_Industries.webp" alt="Endfield Industries" />
         </label>
-        <label class="element-label" for="group-eru">
-          <input type="radio" name="group" value="eru" id="group-eru" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Erudition.png" alt="Erudition" />
+        <label class="element-label" for="group-Rhodes">
+          <input type="radio" name="group" value="Rhodes" id="group-Rhodes" />
+          <img class="element-img" src="../assets/others/Endfield/Group/Rhodes_Island.webp" alt="Rhodes Island" />
         </label>
-        <label class="element-label" for="group-harm">
-          <input type="radio" name="group" value="harm" id="group-harm" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Harmony.png" alt="Harmony" />
+        <label class="element-label" for="group-UWST">
+          <input type="radio" name="group" value="UWST" id="group-UWST" />
+          <img class="element-img" src="../assets/others/Endfield/Group/UWST.webp" alt="UWST" />
         </label>
-        <label class="element-label" for="group-nihi">
-          <input type="radio" name="group" value="nihi" id="group-nihi" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Nihility.png" alt="Nihility" />
+        <label class="element-label" for="group-TGCC">
+          <input type="radio" name="group" value="TGCC" id="group-TGCC" />
+          <img class="element-img" src="../assets/others/Endfield/Random/UNK.png" alt="TGCC" />
         </label>
-        <label class="element-label" for="group-prese">
-          <input type="radio" name="group" value="prese" id="group-prese" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Preservation.png" alt="Preservation" />
+        <label class="element-label" for="group-OrderSO">
+          <input type="radio" name="group" value="OrderSO" id="group-OrderSO" />
+          <img class="element-img" src="../assets/others/Endfield/Random/UNK.png" alt="Order of Steel Oath" />
         </label>
-        <label class="element-label" for="group-reme">
-          <input type="radio" name="group" value="reme" id="group-reme" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_Remembrance.png" alt="Remembrance" />
+        <label class="element-label" for="group-Cabal">
+          <input type="radio" name="group" value="Cabal" id="group-Cabal" />
+          <img class="element-img" src="../assets/others/Endfield/Random/UNK.png" alt="Cabal of Tranquility" />
         </label>
-        <label class="element-label" for="group-hunt">
-          <input type="radio" name="group" value="hunt" id="group-hunt" />
-          <img class="element-img" src="../assets/others/StarRail/Path/Path_The_Hunt.png" alt="The Hunt" />
+        <label class="element-label" for="group-Hannabit">
+          <input type="radio" name="group" value="Hannabit" id="group-Hannabit" />
+          <img class="element-img" src="../assets/others/Endfield/Random/UNK.png" alt="Hannabit Circuit" />
+        </label>
+        <label class="element-label" for="group-Sesqa">
+          <input type="radio" name="group" value="Sesqa" id="group-Sesqa" />
+          <img class="element-img" src="../assets/others/Endfield/Random/UNK.png" alt="Seš'qa" />
         </label>
       </div>
     </div>
 
-    <!-- WORLD -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">World</button>
-      <div class="filter-options">
-        <label class="element-label" for="world-hss">
-          <input type="radio" name="world" value="hss" id="world-hss" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Herta_Space_Station.png" alt="Herta Space"
-          style="filter: brightness(0) invert(1);" />
-        </label>
-        <label class="element-label" for="world-ae">
-          <input type="radio" name="world" value="ae" id="world-ae" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Astral_Express.webp" alt="Astral Express" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-JVI">
-          <input type="radio" name="world" value="JVI" id="world-JVI" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Jarilo-VI.png" alt="Jarilo-VI"
-          style="filter: brightness(0) invert(1);" />
-        </label>
-        <label class="element-label" for="world-txl">
-          <input type="radio" name="world" value="txl" id="world-txl" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_The_Xianzhou_Luofu.png" alt="Xianzhou Luofu" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-pena">
-          <input type="radio" name="world" value="pena" id="world-pena" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Penacony.png" alt="Penacony" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-amp">
-          <input type="radio" name="world" value="amp" id="world-amp" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Amphoreus.png" alt="Amphoreus" 
-          style="filter: brightness(0) invert(1);"/>
-        </label>
-        <label class="element-label" for="world-ot">
-          <input type="radio" name="world" value="ot" id="world-ot" />
-          <img class="element-img" src="../assets/others/StarRail/World/Icon_Other.png" alt="Other" />
-        </label>
-      </div>
-    </div>
 </div>
 
   <div class="char-list" id="charList"></div>

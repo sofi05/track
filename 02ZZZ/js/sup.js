@@ -36,12 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Excaliboo', have: false, rarity: '4' },
     { name: 'Bild N. Boolok', have: true, rarity: '4' },
     { name: 'Birkblick', have: false, rarity: '4'},
-    { name: 'Sprout', have: false, rarity: '5'},
+    { name: 'Sprout', have: false, rarity: '5',status: 'new' },
+    { name: 'Biggest Fan', have: false, rarity: '5',status: 'soon' },
     //{ name: '', have: false, rarity: '', status: 'new' },
   ];
 
   const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';
-  const missingIndexes = [8, 22, 33, 34, 35, 40];
+  const missingIndexes = [8, 22, 33, 34, 35, 40, 44, 45];
   let currentIndex = 1;
 
   characters.forEach((character) => {

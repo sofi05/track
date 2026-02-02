@@ -337,7 +337,7 @@ h1 {
 
 .filter-options.region-grid.visible {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr); /*ICON PER COLUMN*/
   gap: 0.5em 1em;
 }
 

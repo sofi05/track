@@ -1,13 +1,13 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: '',name2: 'Endministrator', GP: 1, imgName: '0002_endminm', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 5},
-    { name: '',name2: 'Endministrator', GP: 1, imgName: '0003_endminf', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 5},
+    { name: '',name2: 'Endministrator', GP: 1, imgName: '1002', have: true, element: 'Physical', gender:'m', rarity: 6},
+    { name: '',name2: 'Endministrator', GP: 1, imgName: '1003', have: true, element: 'Physical', gender:'f', rarity: 6},
   ],
 
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
     const folder = char.folder || ''; 
-    return `../assets/Sprite/Endfield/chr_${imgName}.png`;
+    return `../assets/Sprite/Endfield/${imgName}_splash.png`;
   },
 
 getFallbackPath: function(char) {
@@ -21,7 +21,7 @@ createImageElement(c) {
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Endfield/chr_${imgSrcName}.png`;
+    img.src = `../assets/charaid/Endfield/${imgSrcName}.png`;
     img.alt = c.name;
 
     const fallbackImg = this.getFallbackPath(c);  
@@ -54,7 +54,7 @@ createImageElement(c) {
 
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Endfield/chr_${imgName}.png`;
+      const imgPath = `../assets/Sprite/Endfield/${imgName}_splash.png`;
       showPopup(imgPath, c.name);
     });
 
@@ -62,8 +62,3 @@ createImageElement(c) {
   },
 };
 window.CHARA_CONFIG.pageType = "typeB";
-
-window.CHARA_CONFIG.getElementIconPath = function(el) {
-  // This can vary by game, page, folder, whatever
-  return `../assets/others/Endfield/Element/${el}.png`;
-};

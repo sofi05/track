@@ -1,72 +1,81 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: 'Aether',name2: 'Traveler', GP: 1, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 5},
-    { name: 'Lumine',name2: 'Traveler', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 5},
+    { name: '', name2: 'Aether', GP: 2, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5 },
+    { name: '', name2: 'Lumine', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5 },
+    { name: ' ', name2: 'Aether', GP: 2, imgName: 'PlayerBoyCostumeCWXR', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, hasOutfit:true },
+    { name: ' ', name2: 'Lumine', GP: 1, imgName: 'PlayerGirlCostumeCWXR', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, hasOutfit:true },
+    ],
 
-    { name: 'Manekin',name2: 'Manekins', GP: 2, imgName: 'MannequinBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'m', rarity: 3,  status: 'available' },
-    { name: 'Manekina',name2: 'Manekins', GP: 2, imgName: 'MannequinGirl', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender:'f', rarity: 3,  status: 'available' },
-  ],
+  pageType: "typeB",
 
-getSpritePath: function(char) {
-    const imgName = char.imgName || char.name;
-    const folder = char.folder || ''; 
-    return `../assets/Sprite/Genshin/${imgName}.png`;
+  getSpritePath(char) {
+    const base = char.hasOutfit ? '../assets/Sprite/Genshin/Outfit/' : '../assets/Sprite/Genshin/';
+    const fileName = char.hasOutfit ? `UI_Costume_${char.imgName}.png` : `UI_Gacha_AvatarImg_${char.imgName}.png`;
+    return [ `${base}${fileName}` ];
   },
 
-getFallbackPath: function(char) {
-  return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; 
-},
+  getFallbackPath() {
+    return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`;
+  },
 
-createImageElement(c) {
+  createImageElement(char) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
 
     const img = document.createElement('img');
     img.className = 'char-icon';
-    const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;
-    img.alt = c.name;
+    const imgSrcName = char.imgName || char.name;
+    const baseIconPath = char.hasOutfit ? '../assets/charaid/Genshin/Outfit/' : '../assets/charaid/Genshin/';
+    const paths = [
+      `${baseIconPath}UI_AvatarIcon_${imgSrcName}.png`,
+      this.getFallbackPath(char)
+    ];
 
-    const fallbackImg = this.getFallbackPath(c);  
-    img.onerror = () => {
-      img.src = fallbackImg;
+    let currentPathIndex = 0;
+    const tryNextPath = () => {
+      if (currentPathIndex >= paths.length) return;
+      img.src = paths[currentPathIndex++];
     };
+    img.onerror = tryNextPath;
+    tryNextPath();
 
+    img.alt = char.name;
     container.appendChild(img);
 
-    if (typeof c.element === 'string') {
+    if (typeof char.element === 'string') {
       const elementImg = document.createElement('img');
       elementImg.className = 'element-icon';
-      elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
-      elementImg.alt = c.element;
+      elementImg.src = `../assets/others/Genshin/Element/${char.element}.png`;
+      elementImg.alt = char.element;
       container.appendChild(elementImg);
-    }
-
-    // If theres two or more in a tag
-    const elementList = document.createElement('div');
-    elementList.className = 'element-list';
-    if (Array.isArray(c.element)) {
-      c.element.forEach(element => {
+    } else if (Array.isArray(char.element)) {
+      const elementList = document.createElement('div');
+      elementList.className = 'element-list';
+      char.element.forEach(el => {
         const elementLabel = document.createElement('span');
         elementLabel.className = 'element-label';
-        elementLabel.textContent = element;
+        elementLabel.textContent = el;
         elementList.appendChild(elementLabel);
       });
       container.appendChild(elementList);
     }
 
     container.addEventListener('click', () => {
-      const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
-      showPopup(imgPath, c.name);
+      const spritePaths = this.getSpritePath(char).concat(this.getFallbackPath(char));
+      let idx = 0;
+      const popupImg = new Image();
+      popupImg.onerror = () => {
+        idx++;
+        if (idx < spritePaths.length) popupImg.src = spritePaths[idx];
+      };
+      popupImg.src = spritePaths[idx];
+      showPopup(popupImg.src, char.name);
     });
 
     return container;
   },
-};
-window.CHARA_CONFIG.pageType = "typeB";
 
-window.CHARA_CONFIG.getElementIconPath = function(el) {
-  // This can vary by game, page, folder, whatever
-  return `../assets/others/Genshin/Element/${el}.png`;
+  getElementIconPath(el) {
+    return `../assets/others/Genshin/Element/${el}.png`;
+  }
 };

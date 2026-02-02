@@ -19,7 +19,7 @@ const STATUS_TYPES = ["new", "soon"];
 
 // ⭐ ADD / EDIT RARITY STYLES 
 const RARITY_GRADIENTS = {
-  6: 'linear-gradient(100deg, rgb(124, 0, 0), #ff6232cc)',
+  6: 'linear-gradient(155deg, #e97171cc, rgb(148, 42, 42)',
   5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
   4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
   3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
@@ -118,7 +118,7 @@ function passesFilters(c, searchTerm) {
   if (selectedFilters.gender && c.gender !== selectedFilters.gender)
     return false;
 
-  if (selectedFilters.group && c.group !== selectedFilters.group)
+  if (selectedFilters.group && !c.group.includes(selectedFilters.group))
     return false;
 
   if (selectedFilters.world && !c.world.includes(selectedFilters.world))

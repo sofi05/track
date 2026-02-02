@@ -130,7 +130,6 @@ function renderList() {
     card.appendChild(iconWrapper);
     card.appendChild(nameLabel);
     charListEl.appendChild(card);
-
     card.addEventListener('click', () => {
       if (gameConfig.id === 'hi3') {
         showPopup(
@@ -139,10 +138,11 @@ function renderList() {
           c.spriteImages || []
         );
       } else {
+        const img2 = c.imgName2 || c.imgName; // 👈 fallback added
         showPopup(
           gameConfig.getSpritePath(c),
           c.name,
-          [c.imgName2]
+          [img2]
         );
       }
     });
@@ -535,27 +535,54 @@ function showImageAt(idx) {
   }, 20);
 
   popup.onclick = (e) => {
-    if (e.target === popup) {
-      popup.style.display = 'none';
-
-      if (thumbnailContainer._removeDragListeners) {
-        thumbnailContainer._removeDragListeners();
-        delete thumbnailContainer._removeDragListeners;
-      }
-      if (popup._removeTouchEvents) {
-        popup._removeTouchEvents();
-        delete popup._removeTouchEvents;
-      }
-    }
-  };
+  if (e.target === popup) {
+    closePopup();
+  }
+};
   thumbnailContainer.addEventListener('click', e => e.stopPropagation());
+}
+
+// ===== SPRITE POPUP CLOSE (❌ BUTTON + SAFE CLEANUP) =====
+function closePopup() {
+  const popup = document.getElementById('spritePopup');
+  const thumbnailContainer = document.getElementById('thumbnailContainer');
+  if (!popup) return;
+
+  popup.style.display = 'none';
+  document.body.style.overflow = '';
+
+  // cleanup swipe + touch
+  if (popup._removeTouchEvents) {
+    popup._removeTouchEvents();
+    delete popup._removeTouchEvents;
+  }
+
+  // cleanup key handler
+  if (popup._removeKeydown) {
+    popup._removeKeydown();
+    delete popup._removeKeydown;
+  }
+
+  // cleanup thumbnail drag
+  if (thumbnailContainer?._removeDragListeners) {
+    thumbnailContainer._removeDragListeners();
+    delete thumbnailContainer._removeDragListeners;
+  }
+}
+
+// ❌ X BUTTON
+const closeBtn = document.querySelector('.close-btn');
+if (closeBtn) {
+  closeBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    closePopup();
+  });
 }
 
 // ===== GLOBAL EVENTS =====
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    const popup = document.getElementById('spritePopup');
-    if (popup?.style.display === 'flex') popup.style.display = 'none';
+    closePopup();
   }
 });
 

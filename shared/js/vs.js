@@ -1,20 +1,20 @@
 window.GAME_VERSIONS = {
-  GenshinImpact: { //https://game8.co/games/Genshin-Impact/archives/297500
+  GenshinImpact: { //https://irminsul.gg/genshin/banners
     version: '6.3',
       p1: '2026-01-14T00:00:00', p2: '2026-02-03T19:00:00', 
     date1vs: '6.4', date1: '2026-02-24T00:00:00', date1p2: '',
     date2vs: '6.5', date2: '', date2p2: '',
     },
-  StarRail: { //https://game8.co/games/Honkai-Star-Rail/archives/408381
+  StarRail: { //https://irminsul.gg/hsr/banners
     version: '3.8',
       p1: '2025-12-17T00:00:00', p2: '2026-01-07T19:00:00', p3: '2026-01-28T19:00:00',
     date1vs:'4.0', date1: '2026-02-12T00:00:00', date1p2: '2026-03-06T19:00:00', 
     date2vs:'4.1', date2: '2026-03-26T00:00:00', date2p2: '',
   },
-  ZenlessZone: { //https://game8.co/games/Zenless-Zone-Zero/archives/435687
+  ZenlessZone: { //https://irminsul.gg/zzz/banners
     version: '2.5',
       p1: '2025-12-29T00:00:00', p2: '2026-01-20T19:00:00',
-    date1vs: '2.6', date1: '2026-02-06T00:00:00', date1p2: '2026-02-27T19:00:00', 
+    date1vs: '2.6', date1: '2026-02-06T00:00:00', date1p2: '2026-03-04T19:00:00', 
     date2vs: '2.7'  , date2: '2026-03-25T00:00:00', date2p2: '',
     
   },
@@ -29,11 +29,11 @@ window.GAME_VERSIONS = {
     date1vs: '', date1:'', date1p2: '',
     date2vs: '', date2: '', date2p2: '',
   },   
-  Endfield: {
+  Endfield: { //https://irminsul.gg/endfield/banners
     version: '1.0',
-      p1: '', p2: '',
-    date1vs: '1.2', date1:'', date1p2: '',
-    date2vs: '1.3', date2: '', date2p2: '',
+      p1: '2026-01-22T00:00:00', p2: '2026-02-07T10:00:00', p3: '2026-02-24T10:00:00', 
+    date1vs: '1.2', date1:'2026-03-13T00:00:00', date1p2: '', date1p3: '',
+    date2vs: '1.3', date2: '', date2p2: '', date2p3: ''
   }, 
   
 };

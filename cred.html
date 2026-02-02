@@ -1,263 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HoyoDex Quick Links</title>
-<style>
-  body { font-family: sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
-  h1, h2 { color: #dfdddd; }
-  .row { margin-bottom: 15px; }
-  button { padding: 5px 10px; margin-right: 10px; border-radius: 4px; border: 1px solid #555; background: #1a1a1a; color: #fff; cursor: pointer; }
-  button:hover { background: #238c56; }
-  input { padding: 5px; margin-right: 10px; border-radius: 4px; border: 1px solid #555; background: #1a1a1a; color: #fff; }
-  a { color: #2a9c63; }
-  .hidden { display: none; }
-  .output { margin-top: 15px; font-size: 0.95em; word-break: break-all; }
-  .note { font-size: 0.9em; color: #aaa; }
-  ul li br::after { content: "..."; } /* dots after <br> */
-  .activeBtn { background: #2a9c63; }
-  li {
-  list-style: none;
-  padding-left: 0; /* optional, removes indentation */
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoyoDex Quick Links</title>
+
+  <style>
+    body { font-family: sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
+    h1, h2 { color: #dfdddd; }
+    .row { margin-bottom: 15px; }
+    button { padding: 5px 10px; margin-right: 10px; border-radius: 4px; border: 1px solid #555; background: #1a1a1a; color: #fff; cursor: pointer; }
+    button:hover { background: #238c56; }
+    input { padding: 5px; margin-right: 10px; border-radius: 4px; border: 1px solid #555; background: #1a1a1a; color: #fff; }
+    a { color: #2a9c63; }
+    .hidden { display: none; }
+    .output { margin-top: 15px; font-size: 0.95em; word-break: break-all; }
+    .note { font-size: 0.9em; color: #aaa; }
+    ul li br::after { content: "..."; } /* dots after <br> */
+    .activeBtn { background: #2a9c63; }
+    li {
+    list-style: none;
+    padding-left: 0; /* optional, removes indentation */
+  }
+  .leaks-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .leaks-box table {
+    border-collapse: collapse;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .leaks-box th, .leaks-box td {
+    padding: 10px 20px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+  }
+  .leaks-box th {
+    background: #238c56;
+    color: #fff;
+  }
+  .leaks-box a {
+    color: #2a9c63;
+    text-decoration: none;
+  }
+  .leaks-box a:hover {
+    text-decoration: underline;
+  }
+  </style>
 </head>
 <body>
 
-<div align="center" class="row">
-  <button onclick="window.location.href='index.html'">Home</button>
-</div>
-    <h1>HoyoDex Quick Links</h1>
-<p>Choose a Game → Type → enter name/number → generate link</p>
+  <div align="center" class="row">
+    <button onclick="window.location.href='index.html'">Home</button>
+  </div>
+      <h1>HoyoDex Quick Links</h1>
+  <p>Choose a Game → Type → enter name/number → generate link</p>
 
-<div class="row" id="gameButtons">
-  <button data-game="gi">Genshin</button>
-  <button data-game="zzz">Zenless</button>
-  <button data-game="hi3">HI3</button>
-  <button data-game="hsr">Star Rail</button>
-</div>
+  <!-- ===================================================-->
+  <!--                 🔧 EDIT ZONE (⭐)                 -->
+  <!-- ===================================================-->
 
-<div class="row hidden" id="typeRow">
-  <label>Type:</label>
-  <div id="typeButtons"></div>
-</div>
+  <!--⭐ GAME SELECTION BUTTONS  -->
+  <div class="row" id="gameButtons">
+    <button data-game="gi">Genshin</button>
+    <button data-game="hsr">Star Rail</button>
+    <button data-game="zzz">Zenless</button>
+    <button data-game="hi3">HI3</button>
+    <button data-game="end">Endfield</button>
+    <!-- <button data-game="hna">Nexus Anima</button> -->
+  </div>
 
-<div class="row hidden" id="inputRow">
-  <label>Enter text here:</label>
-  <input type="text" id="inputField" placeholder="">
-  <button id="openLink">Open Link</button>
-  <div class="note" id="inputNote"></div>
-</div>
+  <div class="row hidden" id="typeRow">
+    <label>Type:</label>
+    <div id="typeButtons"></div>
+  </div>
 
-<div class="output" id="linkOutput"></div>
+  <div class="row hidden" id="inputRow">
+    <label>Enter text here:</label>
+    <input type="text" id="inputField" placeholder="">
+    <button id="openLink">Open Link</button>
+    <div class="note" id="inputNote"></div>
+  </div>
 
-<ul id="refsList" class="hidden">
-  <li id="giRefs" class="hidden">
-   • <a href="https://genshin-impact.fandom.com/wiki/Thespian_Trick#Thespian_Tricks" target="_blank">Thespian Trick: Last Season 16</a>
-   <br>• <a href="https://gi20.hakush.in" target="_blank">Genshin Pics taken from here</a>
-  </li>
-  <li id="zzzRefs" class="hidden">
-   • For info <a href="https://zenless-zone-zero.fandom.com/wiki/" target="_blank">check here</a><br>
-   • Leaks <a href="https://zzz3.hakush.in" target="_blank">check here</a> 
-  </li>
-  <li id="hi3Refs" class="hidden">
-   • Everything is from <a href="https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki" target="_blank">here</a>
-  </li>
-  <li id="hsrRefs" class="hidden">
-  • <a href="https://hsr20.hakush.in/char" target="_blank">Character Number Lookup</a><br>
-  • <a href="https://homdgcat.wiki/sr/item" target="_blank">Pets</a><br>
-  • <a href="https://starrail.honeyhunterworld.com" target="_blank">Alt for Icons</a><br>
-  • Pompom outfit taken from Google/Telegram
-</li>
-</ul>
+  <div class="output" id="linkOutput"></div>
 
-<h2 align="center">Leaks</h2>
-<div class="leaks-box">
-  <table>
-    <tr>
-      <th colspan="4">Game</th>
-    </tr>
-    <tr>
-      <td colspan="4"><a href="https://imgur.com/a/cdTW0P6" target="_blank">Genshin Impact</a></td>
-    </tr>
-    <tr>
-      <td colspan="4"><a href="https://imgur.com/a/1gtW2MR" target="_blank">ZZZ</a></td>
-    </tr>
-    <tr>
-      <td>Honkai</td>
-      <td><a href="https://imgur.com/a/5cfjlpX" target="_blank">Star Rail</a></td>
-      <td><a href="https://imgur.com/a/u67Gfr7" target="_blank">Impact 3rd</a></td>
-      <td><a href="https://imgur.com/a/rLjcbBa" target="_blank">Nexus Anima</a></td>
-    </tr>
-    <tr>
-      <td colspan="4"><a href="https://imgur.com/a/687Gf3y" target="_blank">Petit Planet</a></td>
-    </tr>
-    <!-- Add more rows like this -->
-    <!-- <tr><td colspan="4"><a href="LINK_HERE" target="_blank">GAME_NAME</a></td></tr> -->
+  <!--⭐ LINK FOR GAME REFERENCE HERE  -->
+  <ul id="refsList" class="hidden">
+    <!--GENSHIN-->
+    <li id="giRefs" class="hidden">
+      • <a href="https://gi20.hakush.in" target="_blank">Source from here</a><br>
+      <span style="font-size: 0.55em; margin-left: 20px;"> [Outfits_Icon: search for the chara &gt; open outfit &gt; copy name]<br> </span>
+      • <a href="https://genshin-impact.fandom.com/wiki/Thespian_Trick#Thespian_Tricks" target="_blank">Thespian Trick: Last Season 19</a>
+    </li>
+    <!--STARRAIL-->
+    <li id="hsrRefs" class="hidden">
+    • Character Source: <a href="https://hsr20.hakush.in/char" target="_blank">Look Number Here</a> <span style="font-size: 0.6em;">[<a href="https://starrail.honeyhunterworld.com" target="_blank"> ALT </a>]<br></span>
+    • <a href="https://homdgcat.wiki/sr/item" target="_blank">Pets source</a><br>
+    • Pompom outfit taken from Google/Telegram/Game
+    </li>
+    <!--ZENLESS-->
+    <li id="zzzRefs" class="hidden">
+    • <a href="https://zzz3.hakush.in" target="_blank">Source</a><br>
+    • For info <a href="https://zenless-zone-zero.fandom.com/wiki/" target="_blank">Fandom wiki</a>  
+    </li>
+    <!--HI3-->
+    <li id="hi3Refs" class="hidden">
+    • Everything from HI3 is <a href="https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki" target="_blank">here</a>
+    </li>
+    <!--ENDFIELD-->
+    <li id="endRefs" class="hidden">
+    • Character Source: <a href="https://endfield.gg/operators/" target="_blank">Look Number Here</a> 
+    </li>
+    <!--HNA
+    <li id="hnaRefs" class="hidden">
+    • Character Source: <a href="https://honkai-nexus-anima.fandom.com/wiki/Kardia" target="_blank">soon</a> 
+    </li>-->
+  </ul>
 
-    <!-- endfield links:
-     sprite: https://static.dotgg.gg/endfield/char_art/chr_0003_endminf.webp 
-     icon: https://static.dotgg.gg/endfield/characters/chr_0024_deepfin.webp
-     site: https://endfield.gg/operators/ -->
-  </table>
-</div>
+  <!--⭐ GAME LEAKS  --> <!-- FIX HOW IT LOOKS -->
+  <h2 align="center">Leaks</h2>
+  <div class="leaks-box">
+    <table>
+      <tr>
+        <th colspan="4">Game</th>
+      </tr>
+      <tr>
+        <td colspan="4"><a href="https://imgur.com/a/cdTW0P6" target="_blank">Genshin Impact</a></td>
+      </tr>
+      <tr>
+        <td colspan="4"><a href="https://imgur.com/a/1gtW2MR" target="_blank">Zenless Zone</a></td>
+      </tr>
+      <tr>
+        <td>Honkai</td> 
+        <td><a href="https://imgur.com/a/5cfjlpX" target="_blank">Star Rail</a></td>
+        <td><a href="https://imgur.com/a/u67Gfr7" target="_blank">Impact 3rd</a></td>
+        <td><a href="https://imgur.com/a/rLjcbBa" target="_blank">Nexus Anima</a></td>
+      </tr>
+      <tr>
+        <td colspan="4"><a href="#" target="_blank">Endfield (soon)</a></td>
+      </tr>
+    </table>
+  </div>
 
-<style>
-.leaks-box {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-.leaks-box table {
-  border-collapse: collapse;
-  background: #1a1a1a;
-  border: 1px solid #444;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.leaks-box th, .leaks-box td {
-  padding: 10px 20px;
-  border-bottom: 1px solid #333;
-  text-align: center;
-}
-.leaks-box th {
-  background: #238c56;
-  color: #fff;
-}
-.leaks-box a {
-  color: #2a9c63;
-  text-decoration: none;
-}
-.leaks-box a:hover {
-  text-decoration: underline;
-}
-</style>
+<!-- START OF THE SCRIPT -->
+  <script>
+    const gameButtons = document.querySelectorAll('#gameButtons button');
+    const typeButtonsDiv = document.getElementById('typeButtons');
+    const inputField = document.getElementById('inputField');
+    const openBtn = document.getElementById('openLink');
+    const outputDiv = document.getElementById('linkOutput');
+    const inputNote = document.getElementById('inputNote');
+    const refsList = document.getElementById('refsList');
+    const typeRow = document.getElementById('typeRow');
+    const inputRow = document.getElementById('inputRow');
 
-<script>
-const gameButtons = document.querySelectorAll('#gameButtons button');
-const typeButtonsDiv = document.getElementById('typeButtons');
-const inputField = document.getElementById('inputField');
-const openBtn = document.getElementById('openLink');
-const outputDiv = document.getElementById('linkOutput');
-const inputNote = document.getElementById('inputNote');
-const refsList = document.getElementById('refsList');
+    // ⭐ ADD GAME 
+    const giRefs = document.getElementById('giRefs');
+    const zzzRefs = document.getElementById('zzzRefs');
+    const hi3Refs = document.getElementById('hi3Refs');
+    const hsrRefs = document.getElementById('hsrRefs');
+    const endRefs = document.getElementById('endRefs');
+    //const hnaRefs = document.getElementById('hnaRefs');
 
-const giRefs = document.getElementById('giRefs');
-const zzzRefs = document.getElementById('zzzRefs');
-const hi3Refs = document.getElementById('hi3Refs');
-const hsrRefs = document.getElementById('hsrRefs');
-const typeRow = document.getElementById('typeRow');
-const inputRow = document.getElementById('inputRow');
+    // ⭐ ADD IMAGE TYPE
+    const typeOptions = {
+      gi: ["sprite","icon","👗 Icon"], 
+      hsr: ["sprite","icon","outfit", "👗 Icon"],      
+      zzz: ["sprite","icon","outfit","👗 Icon","bangboo"],
+      hi3: [],
+      end: ["sprite","icon"]
+      //hna: ["icon","sprite"]
+    };
 
-const typeOptions = {
-  gi: ["icon","sprite"],       
-  zzz: ["icon","sprite","bangboo"],
-  hsr: ["icon","sprite","outfit"],
-  hi3: []
-};
+    // ⭐ ADD PLACEHOLDER TEXT
+    const placeholderText = {
+      gi: "Name with capslock",
+      zzz: "Number",
+      hsr: "Check link for number",
+      hi3: "",
+      end: "Check link for number"
+      //hna: "",
+    };
 
-const placeholderText = {
-  gi: "Name with capslock",
-  zzz: "Number",
-  hsr: "Check link for number",
-  hi3: ""
-};
+    let currentGame = "";
+    let currentType = "";
 
-let currentGame = "";
-let currentType = "";
-
-// hide everything initially
-typeRow.classList.add('hidden');
-inputRow.classList.add('hidden');
-refsList.classList.add('hidden');
-[giRefs, zzzRefs, hi3Refs, hsrRefs].forEach(el => el.classList.add('hidden'));
-
-// Game buttons
-gameButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const game = btn.dataset.game;
-    currentGame = game;
-
-    // hide previous
-    [giRefs, zzzRefs, hi3Refs, hsrRefs].forEach(el => el.classList.add('hidden'));
-    outputDiv.innerHTML = "";
-    inputNote.textContent = "";
-    refsList.classList.add('hidden');
-    typeButtonsDiv.innerHTML = "";
     typeRow.classList.add('hidden');
     inputRow.classList.add('hidden');
-    currentType = "";
+    refsList.classList.add('hidden');
 
-    if(!game) return;
+    // ⭐ ADD GAME 
+    [giRefs, zzzRefs, hi3Refs, hsrRefs, endRefs].forEach(el => el.classList.add('hidden'));
 
-    // show refs
-    refsList.classList.remove('hidden');
-    if(game==="gi") giRefs.classList.remove("hidden");
-    if(game==="zzz") zzzRefs.classList.remove("hidden");
-    if(game==="hi3") hi3Refs.classList.remove("hidden");
-    if(game==="hsr") hsrRefs.classList.remove("hidden");
+    // GAME BUTTON SELECTION
+    gameButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const game = btn.dataset.game;
+        currentGame = game;
 
-    // type buttons
-    if(typeOptions[game].length > 0) {
-      typeRow.classList.remove("hidden");
-      typeOptions[game].forEach(opt => {
-        const btn = document.createElement("button");
-        btn.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
-        btn.dataset.type = opt;
-        btn.addEventListener("click", () => {
-          currentType = opt;
-          Array.from(typeButtonsDiv.children).forEach(b => b.classList.remove("activeBtn"));
-          btn.classList.add("activeBtn");
+        // ⭐ ADD GAME 
+        [giRefs, zzzRefs, hi3Refs, hsrRefs, endRefs].forEach(el => el.classList.add('hidden'));
+        
+        outputDiv.innerHTML = "";
+        inputNote.textContent = "";
+        refsList.classList.add('hidden');
+        typeButtonsDiv.innerHTML = "";
+        typeRow.classList.add('hidden');
+        inputRow.classList.add('hidden');
+        currentType = "";
 
-          // show note for ZZZ bangboo
-          if(currentGame === "zzz" && currentType === "bangboo") inputNote.textContent = "add _01/_02 at the end for outfit";
-          else inputNote.textContent = "";
-        });
-        typeButtonsDiv.appendChild(btn);
+        if(!game) return;
+
+        // ⭐ ADD GAME 
+        refsList.classList.remove('hidden');
+        if(game==="gi") giRefs.classList.remove("hidden");
+        if(game==="zzz") zzzRefs.classList.remove("hidden");
+        if(game==="hi3") hi3Refs.classList.remove("hidden");
+        if(game==="hsr") hsrRefs.classList.remove("hidden");
+        if(game==="end") endRefs.classList.remove("hidden");
+        //if(game==="hna") hnaRefs.classList.remove("hidden");
+
+        if(typeOptions[game].length > 0) {
+          typeRow.classList.remove("hidden");
+          typeOptions[game].forEach(opt => {
+            const btn = document.createElement("button");
+            btn.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
+            btn.dataset.type = opt;
+            btn.addEventListener("click", () => {
+              currentType = opt;
+              Array.from(typeButtonsDiv.children).forEach(b => b.classList.remove("activeBtn"));
+              btn.classList.add("activeBtn");
+
+              // show note for ZZZ bangboo
+              if(currentGame === "zzz" && currentType === "bangboo"); 
+              else inputNote.textContent = "";
+            });
+            typeButtonsDiv.appendChild(btn);
+          });
+        }
+
+        inputField.placeholder = placeholderText[game] || "";
+
+        if(game !== "hi3") inputRow.classList.remove("hidden");
       });
-    }
+    });
 
-    // placeholder
-    inputField.placeholder = placeholderText[game] || "";
+    openBtn.addEventListener('click', () => {
+      const value = inputField.value.trim();
+      let url = "";
 
-    // input row visibility
-    if(game !== "hi3") inputRow.classList.remove("hidden");
-  });
-});
+      if (!value && currentGame !== "hi3") {
+        alert("Please enter a name or number!");
+        return;
+      }
 
-// Open link
-openBtn.addEventListener('click', () => {
-  const value = inputField.value.trim();
-  let url = "";
+      // ⭐ ADD GAME 
+      if(currentGame==="gi") {
+        if(currentType==="icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;
+        else if(currentType==="sprite") url = `https://api.hakush.in/gi/UI/UI_Gacha_AvatarImg_${value}.webp`;
+        //else if(currentType==="outfit") url = `https://api.hakush.in/gi/UI/UI_Costume_${value}.webp`;
+        else if(currentType==="👗 Icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;
+      } 
+      else if(currentGame==="hsr") {
+        if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`;
+        else if(currentType==="sprite") url = `https://api.hakush.in/hsr/UI/avatardrawcard/${value}.webp`;
+        else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`;
+       else if(currentType==="👗 Icon") url = `https://assets.irminsul.gg/v2/hsr/characters/${value}_1.png`; //TEMPORARY
+      } 
+      else if(currentGame==="zzz") {
+        if(currentType==="icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}.webp`;
+        else if(currentType==="sprite") url = `https://api.hakush.in/zzz/UI/IconRole${value}.webp`;
+        else if(currentType==="👗 Icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}_01.webp`;
+        else if(currentType==="outfit") url = `https://api.hakush.in/zzz/UI/IconRole${value}_01.webp`;
+        else if(currentType==="bangboo") url = `https://api.hakush.in/zzz/UI/BangbooGarageRole${value}.webp`;
+      }
+      else if(currentGame==="hi3") {
+        url = "https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki";
+      }
+      else if(currentGame==="end") {
+        if(currentType==="icon") url = `https://assets.irminsul.gg/v2/endfield/operators/${value}.png`;
+        else if(currentType==="sprite") url = `https://assets.irminsul.gg/v2/endfield/operators/${value}_splash.png`;
+      } 
 
-  if (!value && currentGame !== "hi3") {
-    alert("Please enter a name or number!");
-    return;
-  }
-
-  if(currentGame==="gi") {
-    if(currentType==="icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;
-    else if(currentType==="sprite") url = `https://api.hakush.in/gi/UI/UI_Gacha_AvatarImg_${value}.webp`;
-  }
-  else if(currentGame==="zzz") {
-    if(currentType==="icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}.webp`;
-    else if(currentType==="sprite") url = `https://api.hakush.in/zzz/UI/IconRole${value}.webp`;
-    else if(currentType==="bangboo") url = `https://api.hakush.in/zzz/UI/BangbooGarageRole${value}.webp`;
-  } 
-  else if(currentGame==="hsr") {
-    if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`;
-    else if(currentType==="sprite") url = `https://api.hakush.in/hsr/UI/avatardrawcard/${value}.webp`;
-    else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`;
-  } 
-  else if(currentGame==="hi3") {
-    url = "https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki";
-  }
-
-  outputDiv.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
-  window.open(url, "_blank");
-});
-</script>
-
+      outputDiv.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;
+      window.open(url, "_blank");
+    });
+  </script>
 </body>
 </html>

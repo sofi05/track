@@ -34,7 +34,7 @@ const gameConfig = {
         spriteImages: ['Leisure_Time'] },
 
     { name: 'Collei', have: [true], 
-        spriteImages: ['Looking_Around_Curiously'] },
+        spriteImages: ['Looking_Around_Curiously', 'Deep_Contemplation'] },
 
     { name: 'Cyno', have: [false], 
         spriteImages: ['Ready_for_Battle'] },
@@ -85,7 +85,7 @@ const gameConfig = {
         spriteImages: ['Ready_for_Battle'] },
 
     { name: 'Klee', have: [true], 
-        spriteImages: ['Happy_Times'] },
+        spriteImages: ['Happy_Times', 'Bombonanza'] },
 
     { name: 'Kokomi', have: [false], 
         spriteImages: ['Leisure_Time_Sangonomiya'] },
@@ -127,7 +127,7 @@ const gameConfig = {
         spriteImages: ['Ready_for_Battle'] },
 
     { name: 'Razor', have: [false], 
-        spriteImages: ['Watching_and_Waiting'] },
+        spriteImages: ['Watching_and_Waiting', 'All_Green_and_Good_to_Go'] },
 
     { name: 'Sethos', have: [false], 
         spriteImages: ['Earnest_Negotiation'] },
@@ -142,7 +142,7 @@ const gameConfig = {
         spriteImages: ['Deep_Contemplation'] },
 
     { name: 'Venti', have: [true], 
-        spriteImages: ['Spontaneous_Performance'] },
+        spriteImages: ['Spontaneous_Performance', 'Playful_Shushing'] },
 
     { name: 'Wanderer', have: [false], 
         spriteImages: ['Surveying_Surroundings'] },
@@ -185,9 +185,34 @@ const gameConfig = {
 
     { name: 'Clorinde', have: [false],
         spriteImages: ['Intimidating_Stance'] },
-    //{ name: '', have: [false, true], status:'new', spriteFolder: '', spriteImages: ['', ''] },
+
+    { name: 'Xiao', have: [false], status:'new', 
+        spriteImages: ['All_Green_and_Good_to_Go'] },
+
+    { name: 'Kinich', have: [false], 
+        spriteImages: ['Battle_Preparation'] },
+
+    { name: 'Rosaria', have: [false], 
+        spriteImages: ['Brandishing_Weapons'] },
+
+    { name: 'Beidou', have: [false], 
+        spriteImages: ['Gathered_Over_Drinks'] },
+
+    { name: 'Dori', have: [false], status:'new',
+        spriteImages: ['Merchant\'s_Aura'] },
+
+    { name: 'Furina', have: [false], status:'new', 
+        spriteImages: ['Tea_Time'] },
+
+    { name: 'Nahida', have: [false], status:'new', 
+        spriteImages: ['Sharp_Observer'] },
+
+    { name: 'Hu Tao', spriteFolder: 'HuTao', have: [false], 
+        spriteImages: ['Leisurely_Moment'] },
+        
+    //{ name: '', have: [false, true], spriteFolder: '', spriteImages: ['', ''], status:'new', },
     
-    // Current TT season is 16 || Link: https://genshin-impact.fandom.com/wiki/Thespian_Trick ...
+    // Current TT season is 19 || Link: https://genshin-impact.fandom.com/wiki/Thespian_Trick ...
   ],
 
   pathPrefix: "../assets/charaid/Genshin/",

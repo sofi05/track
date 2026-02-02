@@ -38,6 +38,7 @@ function initializeFilters() {
 // ===== Rarity Gradient Helper =====
 function getRarityGradient(rarity) {
   const gradients = {
+    6: 'linear-gradient(155deg, #e97171cc, rgb(148, 42, 42)',
     5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
     4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
     3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',

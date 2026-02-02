@@ -1,3 +1,4 @@
 git add . 
-git commit -m "died and decided to update all the codes so far, should be easier to update, small changes still needed (check edit_track.txt)"
+git commit -m "Changes: Added/fixed outfit icon; updated TT & MC for genshin. || updated chara (added new path) for HSR || Added multiple groups and updated outfit for ZZZ, etcetc"
 git push origin main
+ 

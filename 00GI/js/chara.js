@@ -111,13 +111,14 @@ window.CHARA_CONFIG = {
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.0', want: 2},
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.1', p:1 },
     
-    { name: 'Zibai', have: false, element: 'geo', rarity: 5, region:['liy'], gender:'f',  status: 'new', version: '6.3', p:2, },
-    { name: 'Illuga', have: false, element: 'geo', rarity: 4, region:['snez'], gender:'m',  status: 'new', version: '6.3', p:2, },
-    { name: 'Columbina', have: false, element: 'hydro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.3', p:1, want: 2 },
-    { name: 'Varka', have: false, element: 'anemo', rarity: 5, region:['mond'], gender:'m',  status: 'soon', version: '6.4', p:1,},
+    { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'new', version: '6.3', p:2, },
+    { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'new', version: '6.3', p:2, },
+    { name: 'Columbina', have: false, element: 'Hydro', rarity: 5, region:['snez'], gender:'f',  status: 'new', version: '6.3', p:1, want: 2 },
+    { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'soon', version: '6.4', p:1,},
     
-    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'', || status: 'soon', version: '', p:1, perma: true, want: 1-2 },
-    // NOTE: IN WANT 1 IS PRIORITY 2 IS SECONDARY (bc story)
+    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'', || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
+    //  Element: Anemo | Hydro | Geo | Dendro | Pyro | Electro | Cryo
+    //  Region: mond | liy | ina | sum | font | nat | snez | unk | khae
   ],
 
   getSpritePath: function(char) {

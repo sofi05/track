@@ -90,10 +90,10 @@ window.CHARA_CONFIG = {
     { name: 'Theresa • SR', imgName: 'Sakuno_Rondo', folder:'Theresa', have: true, element: 'PSY', rarity: 4, part:'1' },
     { name: 'Theresa • SA', imgName: 'Starlit_Astrologos', folder:'Theresa', have: true, element: 'BIO', rarity: 4, part:'1' },
     { name: 'Theresa • VP', imgName: 'Valkyrie_Pledge', folder:'Theresa', have: true, element: 'PSY', rarity: 4, part:'1' },
+    { name: 'Theresa • LV', imgName: 'Lunar_Vow_-_Crimson_Love', folder:'Theresa', have: true, element: 'PSY', rarity: 5, part:'1'},
     //====================================================================================================================
     { name: 'Theresa • VE', imgName: 'Violet_Executer', folder:'Theresa', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'3.4', perma: true },
     { name: 'Theresa • CH', imgName: 'Celestial_Hymn', folder:'Theresa', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'5.1', perma: true },
-    { name: 'Theresa • LV', imgName: 'Lunar_Vow_-_Crimson_Love', folder:'Theresa', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma:true },
     
     { name: 'Ai Hyperion', imgName: 'Chrono_Navi', folder:'SoloChara', have: true, element: 'MECH', rarity: 4, part:'1' }, 
     { name: 'Schariac', imgName: 'Dreamweaver', folder:'SoloChara', have: true, element: 'MECH', rarity: 5, part:'1' },

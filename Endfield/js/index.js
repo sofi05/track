@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const config = {
     iconPath: '../assets/charaid/Endfield',
     elementPath: '../assets/others/Endfield/Element',
-    imagePrefix: 'chr_',
+    imagePrefix: '',
     useImgName: true,
     dynamicGradient: false,
   };
