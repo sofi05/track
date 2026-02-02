@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const config = {
     iconPath: '../assets/charaid/Zenless',
     elementPath: '../assets/others/Zenless/Element',
+    elementPrefix: 'Icon',
     imagePrefix: 'IconRoleCrop',
     useImgName: true,
     dynamicGradient: false,  

@@ -113,6 +113,7 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   const {
     iconPath,
     elementPath,
+    elementPrefix = '',
     imagePrefix = '',
     imageSuffix = '',
     useImgName = true,
@@ -151,7 +152,7 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
   };
 
   const elementIcon = document.createElement('img');
-  elementIcon.src = `${elementPath}/${char.element}.png`;
+  elementIcon.src = `${elementPath}/${elementPrefix}${char.element}.png`;
   elementIcon.alt = char.element;
   elementIcon.classList.add('element-icon');
 
