@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const config = {
     iconPath: '../assets/charaid/Endfield',
     elementPath: '../assets/others/Endfield/Element',
-    imagePrefix: '',
+    imagePrefix: 'icon_chr_',
     useImgName: true,
     dynamicGradient: false,
   };
@@ -38,7 +38,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 } else {
   appendChar(newCharSlider, newCharacters);
 }
+if (rerunCharacters.length === 0 && rerunSlider) {
+  const msg = document.createElement('div');
+  msg.textContent = window.EMPTY_RERUN_CHARACTERS_TEXT;
+  Object.assign(msg.style, window.EMPTY_RERUN_CHARACTERS_STYLE);
+  rerunSlider.appendChild(msg);
+} else {
   appendChar(rerunSlider, rerunCharacters);
+}
   appendChar(permaSlider, permaCharacters);
 
   if (permaCharacters.length === 0 && permaSection) {

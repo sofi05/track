@@ -342,7 +342,7 @@ const gameConfig = {
     { name: 'Aristophanes', imgName: 'Aristophanes_T_Icon', 
         spriteImages: ['Aristophanes_B', 'Aristophanes_M', 'Aristophanes_T'], },
 
-    { name: '', imgName: '', spriteFolder: '', 
+    { name: '???', imgName: '', status: 'soon', //coming 8.7 dunno name (theres 3x)
         spriteImages: [''], },
 
     { name: '', imgName: '', spriteFolder: '', 

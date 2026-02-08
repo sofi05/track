@@ -1,4 +1,4 @@
 git add . 
-git commit -m "fixed element not appearing in index zzz / added temp icons"
+git commit -m "need to find splash for AKE and icon for ZZZ outfit, and some for HSR 4.0 too"
 git push origin main
  

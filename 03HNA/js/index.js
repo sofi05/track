@@ -47,7 +47,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 } else {
   appendChar(newCharSlider, newCharacters);
 }
-  appendChar(rerunSlider, sortedRerunCharacters);
+  if (rerunCharacters.length === 0 && rerunSlider) {
+  const msg = document.createElement('div');
+  msg.textContent = window.EMPTY_RERUN_CHARACTERS_TEXT;
+  Object.assign(msg.style, window.EMPTY_RERUN_CHARACTERS_STYLE);
+  rerunSlider.appendChild(msg);
+} else {
+  appendChar(rerunSlider, rerunCharacters);
+}
   appendChar(permaSlider, sortedPermaCharacters);
 
   if (sortedPermaCharacters.length === 0 && permaSection) {

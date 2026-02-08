@@ -1,7 +1,7 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: '',name2: 'Endministrator', GP: 1, imgName: '1002', have: true, element: 'Physical', gender:'m', rarity: 6},
-    { name: '',name2: 'Endministrator', GP: 1, imgName: '1003', have: true, element: 'Physical', gender:'f', rarity: 6},
+    { name: '',name2: 'Endministrator', GP: 1, imgName: '0002_endminm', have: true, element: 'Physical', gender:'m', rarity: 6},
+    { name: '',name2: 'Endministrator', GP: 1, imgName: '0003_endminf', have: true, element: 'Physical', gender:'f', rarity: 6},
   ],
 
 getSpritePath: function(char) {
@@ -21,7 +21,7 @@ createImageElement(c) {
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Endfield/${imgSrcName}.png`;
+    img.src = `../assets/charaid/Endfield/icon_chr_${imgSrcName}.png`;
     img.alt = c.name;
 
     const fallbackImg = this.getFallbackPath(c);  

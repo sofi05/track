@@ -132,8 +132,12 @@ window.CHARA_CONFIG = {
     { name: 'Sushang • PS', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.6' }, 
     { name: 'Elysia • HLE', imgName: 'Hi_Love_Elf', folder:'Elysia', have: true, element: 'SD', rarity: 5, part:'2', spec:'GoI' },
 
-    { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'new', spec:'WoD',version: '8.6' }
-    //{ name: '', imgName: '', folder:'', have: false, element: '', rarity: 5, part:'2', status: 'new', spec:'',version: '' }
+    { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'new', spec:'WoD',version: '8.6' },
+    { name: 'Mei •', imgName: '', folder:'', have: false, element: 'MECH', rarity: 5, part:'2', status: 'soon', spec:'GoI',version: '8.7' },
+    //{ name: '', imgName: '', folder:'', have: false, element: '', rarity: 5, part:'2', status: 'new', spec:'',version: '' },
+
+    //  Element: IMG | SD | PSY | MECH | BIO | QUA
+    //  Spec: WoD | LoA | WS | GoI | RoO
   ],
 
 getSpritePath: function(char) {

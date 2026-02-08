@@ -17,7 +17,7 @@ const gameConfig = {
     { name: 'Carole', imgName: 'Sweet_n_Spicy', folder:'SoloChara', spriteFolder: 'Carole', have: false, part: '1',
         spriteImages: ['Let_the_Class_End', 'Special_Blend'], },
 
-    { name: 'Coralie', imgName: 'Valkyrie_Blastmetal', folder: 'Coralie', spriteFolder: 'Coralie', have: false, part: '2', 
+    { name: 'Coralie', imgName: 'Valkyrie_Blastmetal', folder: 'Coralie', spriteFolder: 'Coralie', have: false, part: '2', status: 'soon',
         spriteImages: ['Puppy_Patrol', 'Brainiac_Dark_Lord_Figure'], },
 
     { name: 'Durandal', imgName: 'Bright_Knight_-_Excelsis', folder: 'Durandal', spriteFolder: 'Durandal', have: false, part: '1',
@@ -27,7 +27,7 @@ const gameConfig = {
     { name: 'Eden', imgName: 'Golden_Diva', folder:'SoloChara', spriteFolder: 'Eden', have: false, part: '1',
         spriteImages: ['Crimson_Carol', 'Flowing_Rhyme'], },
 
-    { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1',
+    { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1', status: 'soon',
         spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring'], },
 
     { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2',
@@ -58,7 +58,7 @@ const gameConfig = {
     { name: 'Shigure Kira', imgName: 'Sugary_Starburst', folder:'SoloChara', spriteFolder: 'Kira', have: false, part: '1',
         spriteImages: ['Dreamy_Melody', 'Fuzzy_Pink_Love', 'Tonights_My_Time'], },
 
-    { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', spriteFolder: 'Lantern', have: false, part: '2',
+    { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', spriteFolder: 'Lantern', have: false, part: '2', status: 'soon',
         spriteImages: ['At_Your_Service'], },
 
     { name: 'Mei', imgName: 'Crimson_Impulse', folder: 'Mei', spriteFolder: 'Mei', have: false, part: '1',

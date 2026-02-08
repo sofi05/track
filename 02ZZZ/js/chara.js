@@ -25,8 +25,8 @@ window.CHARA_CONFIG = {
     { name: 'Lucia', imgName: '50', have: true, element: 'Ether', group:['spook'], gender:'f', rarity: 5},
     { name: 'Manato', imgName: '51', have: true, element: 'Fire', group:['spook'], gender:'m', rarity: 4},
     { name: 'Yidhari', imgName: '52', have: true, element: 'Ice', group:['spook'], gender:'f', rarity: 5},
-    { name: 'Shunguan', imgName: '55', have: true, element: 'HonedEdge', filterElement: 'Physical', group:['sum'], gender:'f', rarity: 5, status: 'new'},
-    { name: 'Zhao', imgName: '56', have: true, element: 'Ice', group:['kramp'], gender:'f', rarity: 5, status: 'new'},
+    { name: 'Shunguan', imgName: '55', have: true, element: 'HonedEdge', filterElement: 'Physical', group:['sum'], gender:'f', rarity: 5},
+    { name: 'Zhao', imgName: '56', have: true, element: 'Ice', group:['kramp'], gender:'f', rarity: 5},
 
     //DONT HAVE - ORGANIZED BY NUMBER
     { name: 'Nekomata', imgName: '11', have: false, element: 'Physical', group:['cunhar'], gender:'f', rarity: 5, status: 'available', version: '2.5', perma: true, want: 1, p:1 },
@@ -51,10 +51,13 @@ window.CHARA_CONFIG = {
     { name: 'Banyue', imgName: '53', have: false, element: 'Fire', group:['kramp', 'sum'], gender:'m', rarity: 5, status: 'available', version: '2.4', p:1 },
     { name: 'Dialyn', imgName: '54', have: false, element: 'Physical', group:['kramp'], gender:'f', rarity: 5, status: 'available', version: '2.4', p:2 },
     
-    { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'soon', version: '2.6', p:1 },
-    { name: 'Aria', imgName: '57', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'soon', version: '2.6', p:2 },
+    { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:1 },
+    { name: 'Aria', imgName: '57', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:2 },
 
-    // { name: '', imgName: '', have: false, element: '', [filterElement:'',] group:'', gender:'', rarity: 5, || status: 'new', version: '', p:2, perma: true, want: 1/2 },
+    { name: 'Nangong Yu', imgName: '59TEMP', have: false, element: '', group:['angels'], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:2 },
+    { name: 'Cissia', imgName: '60TEMP', have: false, element: '', group:[''], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:2 },
+
+    // { name: '', imgName: '', have: false, element: '', filterElement:'', group:[''], gender:'', rarity: 5, || status: 'new', version: '', p:2, perma: true, want: 1/2 },
     //  Element: Electric | Physical ⇄ HonedEdge | Fire | Ether ⇄ AuricInk | Frost ⇄ Ice 
     //  Group: cunhar | obol | vic | sec6 | belo | sons | spec | sum | spook | kramp | star | mock | angels
   ],

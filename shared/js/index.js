@@ -54,6 +54,13 @@ window.EMPTY_NEW_CHARACTERS_STYLE = {
   opacity: '0.7'
 };
 
+window.EMPTY_RERUN_CHARACTERS_TEXT = '	ヽ(°〇°)ﾉ Woah... Dedication!';
+window.EMPTY_RERUN_CHARACTERS_STYLE = {
+  width: '50%',
+  fontSize: '13px',
+  opacity: '0.7'
+};
+
 
 // =======  DATE HELPERS=======
 function parseDateSafe(s) {
