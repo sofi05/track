@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Excaliboo', have: false, rarity: '4' },
     { name: 'Bild N. Boolok', have: true, rarity: '4' },
     { name: 'Birkblick', have: false, rarity: '4'},
-    { name: 'Sprout', have: false, rarity: '5',status: 'new' },
-    { name: 'Biggest Fan', have: false, rarity: '5',status: 'soon' },
-    //{ name: '', have: false, rarity: '', status: 'new' },
+    { name: 'Sprout', have: false, rarity: '5' },
+    { name: 'Biggest Fan', have: false, rarity: '5',status: 'new' },
+    //{ name: '', have: false, rarity: '', status: 'soon' },
   ];
 
   const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';

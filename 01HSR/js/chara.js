@@ -46,7 +46,7 @@ window.CHARA_CONFIG = {
     { name: 'Acheron', imgName: '1308', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
     { name: 'Firefly', imgName: '1310', have: true, element: 'fire', group:'dest', gender:'f', world:['ot'],rarity: 5 },
     { name: 'Misha', imgName: '1312', have: true, element: 'ice', group:'dest', gender:'m', world:['pena'],rarity: 4 },
-    { name: 'The Dahlia', imgName: '1321', have: true, element: 'fire', group:'nihi', gender:'f', world:['ot'],rarity: 5,  status: 'new', version: '3.8', p:1},
+    { name: 'The Dahlia', imgName: '1321', have: true, element: 'fire', group:'nihi', gender:'f', world:['ot'],rarity: 5},
 
     { name: 'The Herta', imgName: '1401', have: true, element: 'ice', group:'eru', gender:'f', world:['hss'], rarity: 5 },
     { name: 'Tribbie', imgName: '1403', have: true, element: 'quantum', group:'harm', gender:'f', world:['amp'], rarity: 5},
@@ -85,8 +85,10 @@ window.CHARA_CONFIG = {
     { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '4.0', want: 1, p:2 },    
     { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'available', version: '3.7', want: 2 },
     
-    { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:[''],rarity: 5,  status: 'soon', version: '4.0', p:2, want: 2 }, //NEED WORLD
-    { name: 'Yao Guang', imgName: '1502', have: false, element: 'physical', group:'ela', gender:'f', world:['txl'],rarity: 5,  status: 'soon', version: '4.0', p:1},
+    { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:[''],rarity: 5,  status: 'new', version: '4.0', p:2, want: 2 }, //NEED WORLD
+    { name: 'Yao Guang', imgName: '1502', have: false, element: 'physical', group:'ela', gender:'f', world:['txl'],rarity: 5,  status: 'new', version: '4.0'},
+
+    { name: 'Ashveil', imgName: '1504', have: false, element: 'thunder', group:'hunt', gender:'m', world:[''], rarity: 5, status: 'soon', version: '4.1', p:1 }, //NEED ICON + WORLD
 
     //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''], rarity: 5,  || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
     //  Element: fire | ice | imaginary | physical | quantum | thunder | wind

@@ -8,7 +8,7 @@ const gameConfig = {
     //CHARA
     { name: 'March 7th', imgName: '1100101', have: true, rarity: 4 },
     { name: 'Firefly', imgName: '1131001', have: false, rarity: 5 },
-    { name: 'Ruan Mei', imgName: '1303', have: false, rarity: 5, status: 'soon'},
+    { name: 'Ruan Mei', imgName: '1130301', have: false, rarity: 5, status: 'soon'}, //no pic yet
     
     //{ name: '', imgName: '', imgName2:'', have: false, rarity: 5, status: 'new', // part:'pom' },
   ],

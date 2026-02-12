@@ -138,11 +138,29 @@ function renderList() {
           c.spriteImages || []
         );
       } else {
-        const img2 = c.imgName2 || c.imgName; // 👈 fallback added
+        let spriteList = [];
+
+        // add base image first
+        if (c.imgName) spriteList.push(c.imgName);
+
+        // add additional images
+        if (Array.isArray(c.imgName2)) {
+          spriteList = spriteList.concat(c.imgName2);
+        } else if (typeof c.imgName2 === 'string') {
+          spriteList.push(c.imgName2);
+        }
+
+        // remove duplicates
+        spriteList = [...new Set(spriteList)];
+
+        // build full paths
+        const fullImages = spriteList.map(name =>
+          `${gameConfig.spritePrefix}${name}.png`
+        );
+
         showPopup(
-          gameConfig.getSpritePath(c),
-          c.name,
-          [img2]
+          fullImages,
+          c.name
         );
       }
     });

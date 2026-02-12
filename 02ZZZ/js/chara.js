@@ -54,7 +54,7 @@ window.CHARA_CONFIG = {
     { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:1 },
     { name: 'Aria', imgName: '57', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:2 },
 
-    { name: 'Nangong Yu', imgName: '59TEMP', have: false, element: '', group:['angels'], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:2 },
+    { name: 'Nangong Yu', imgName: '59TEMP', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:1 },
     { name: 'Cissia', imgName: '60TEMP', have: false, element: '', group:[''], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:2 },
 
     // { name: '', imgName: '', have: false, element: '', filterElement:'', group:[''], gender:'', rarity: 5, || status: 'new', version: '', p:2, perma: true, want: 1/2 },
