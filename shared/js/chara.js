@@ -155,7 +155,11 @@ function renderList() {
     iconWrapper.className = 'icon-wrapper';
     iconWrapper.style.background = getRarityGradient(c.rarity);
 
-    if (c.status === 'new' || c.status === 'soon') {
+    if (c.out === false) {
+      card.classList.add('char-disabled');
+    }
+
+    if ((c.status === 'new' || c.status === 'soon') && c.out !== false) {
       const label = document.createElement('div');
       label.textContent = c.status.toUpperCase();
       label.className = 'soon-label';

@@ -845,3 +845,20 @@ input:checked + .slider2:before {
   clip-path: inset(8% round 30px); /* 20px corner radius */
   object-fit: cover;
 }
+
+.char-disabled {
+  filter: grayscale(99%) brightness(0.6);
+  opacity: 0.75;
+  position: relative;
+}
+
+.char-disabled::after {
+  content: "Not Released";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 10px;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 6px;
+  border-radius: 6px;
+}

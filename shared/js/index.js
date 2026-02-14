@@ -224,6 +224,17 @@ window.createCharacterCard = function (char, config, customImgPathFn, customFall
     }
   }
 
+    if (char.out === false) {
+      // gray the whole card
+      charBox.style.filter = 'grayscale(100%) brightness(0.7)';
+      
+      // optional: reduce opacity slightly
+      charBox.style.opacity = '0.8';
+      
+      // optional: prevent hover glow looking weird
+      charBox.style.transition = 'filter 0.3s ease';
+    }
+
   updateBoxOutline();
 
   return charBox;

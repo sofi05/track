@@ -87,7 +87,7 @@ window.CHARA_CONFIG = {
     { name: 'Columbina', have: true, element: 'Hydro', rarity: 5, region:['snez'], gender:'f',  status: 'new' },
 
     //DON'T HAVE - ORGANIZED BY LAUNCH
-    { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '4.5', want: 2 }, 
+    { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '6.4', want: 2,p:1 }, 
     { name: 'Arlecchino', have: false, element: 'Pyro', rarity: 5, region:['font', 'unk'], gender:'f',  status: 'available', version: '6.1', p:2, want: 2 },
     { name: 'Ayato', have: false, element: 'Hydro', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
     { name: 'Baizhu', imgName: 'Baizhuer', have: false, element: 'Dendro', rarity: 5, region:['liy'], gender:'m',  status: 'available', version: '5.3', want: 1 },
@@ -101,13 +101,13 @@ window.CHARA_CONFIG = {
     { name: 'Mavuika', have: false, element: 'Pyro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '5.7', want: 1 },
     { name: 'Varesa', have: false, element: 'Electro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '6.2', p:2, want: 1 },
     { name: 'Emilie', have: false, element: 'Dendro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.7', want: 1 },
-    { name: 'Escoffier', have: false, element: 'Cryo', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.6' },
-    { name: 'Eula', have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '4.5' },
+    { name: 'Escoffier', have: false, element: 'Cryo', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '6.4',p:2 },
+    { name: 'Eula', have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '6.4',p:1 },
     { name: 'Ineffa', have: false, element: 'Electro', rarity: 5, region:['nat','snez'], gender:'f',  status: 'available', version: '6.3', want: 2, p:1 },
     { name: 'Shenhe', have: false, element: 'Cryo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '5.7' },
     { name: 'Wriothesley', have: false, element: 'Cryo', rarity: 5, region:['font'], gender:'m',  status: 'available', version: '5.4', want: 1 },
-    { name: 'Klee', have: false, element: 'Pyro', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '4.5', want: 2 },
-    { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '5.7', want: 2 },
+    { name: 'Klee', have: false, element: 'Pyro', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '6.4', want: 2,p:1 },
+    { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '6.4', want: 2,p:2 },
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.0', want: 2},
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.1', p:1 },
@@ -117,11 +117,11 @@ window.CHARA_CONFIG = {
     { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'soon', version: '6.4', p:1,},
 
     //confirmed next
-    { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '6.X'},
-    { name: 'Alice', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '7.X'},
+    { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '6.X', out:false},
+    { name: 'Alice', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '7.X', out:false},
     //{ name: 'IlCapitano', have: false, element: '', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '7.X'},
     
-    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'', || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
+    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'', || status: 'soon', version: '', p:1, perma: true, want: 1/2, out:false },
     //  Element: Anemo | Hydro | Geo | Dendro | Pyro | Electro | Cryo
     //  Region: mond | liy | ina | sum | font | nat | snez | unk | khae
   ],
