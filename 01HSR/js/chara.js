@@ -3,7 +3,7 @@ window.CHARA_CONFIG = {
     //HAVE - ORGANIZED BY NUMBER
     { name: 'March 7th', imgName: '1001', have: true, element: 'ice', group:'prese', gender:'f', world:['ae'],rarity: 4 },
     { name: 'Dan Heng', imgName: '1002', have: true, element: 'wind', group:'hunt', gender:'m', world:['ae'],rarity: 4 },
-    { name: 'Himeko', imgName: '1003', have: true, element: 'fire', group:'eru', gender:'f', world:['ae'],rarity: 5 },
+    { name: 'Himeko', imgName: '1003', have: true, element: 'fire', group:'eru', gender:'f', world:['ae','plana'],rarity: 5 },
     { name: 'Kafka', imgName: '1005', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
     { name: 'Silver Wolf', imgName: '1006', have: true, element: 'quantum', group:'nihi', gender:'f', world:['ot'],rarity: 5 }, 
     { name: 'Arlan', imgName: '1008', have: true, element: 'thunder', group:'dest', gender:'m', world:['hss'], rarity: 4 },
@@ -17,7 +17,7 @@ window.CHARA_CONFIG = {
     { name: 'Natasha', imgName: '1105', have: true, element: 'physical', group:'abun', gender:'f', world:['JVI'],rarity: 4 },
     { name: 'Pela', imgName: '1106', have: true, element: 'ice', group:'nihi', gender:'f', world:['JVI'],rarity: 4 },
     { name: 'Clara', imgName: '1107', have: true, element: 'physical', group:'dest', gender:'f', world:['JVI'],rarity: 5 },
-    { name: 'Sampo', imgName: '1108', have: true, element: 'wind', group:'nihi', gender:'m', world:['JVI', 'ot'],rarity: 4 },
+    { name: 'Sampo', imgName: '1108', have: true, element: 'wind', group:'nihi', gender:'m', world:['JVI', 'plana'],rarity: 4 },
     { name: 'Hook', imgName: '1109', have: true, element: 'fire', group:'dest', gender:'f', world:['JVI'],rarity: 4 },
     { name: 'Lynx', imgName: '1110', have: true, element: 'quantum', group:'abun', gender:'f', world:['JVI'],rarity: 4 },
     { name: 'Luka', imgName: '1111', have: true, element: 'physical', group:'nihi', gender:'m', world:['JVI'],rarity: 4 },
@@ -42,7 +42,7 @@ window.CHARA_CONFIG = {
     { name: 'Argenti', imgName: '1302', have: true, element: 'physical', group:'eru', gender:'m', world:['ot'],rarity: 5 },
     { name: 'Aventurine', imgName: '1304', have: true, element: 'imaginary', group:'prese', gender:'m', world:['ot'],rarity: 5 },
     { name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', group:'hunt', gender:'m', world:['ot'],rarity: 5 },
-    { name: 'Sparkle', imgName: '1306', have: true, element: 'quantum', group:'harm', gender:'f', world:['ot'],rarity: 5 },
+    { name: 'Sparkle', imgName: '1306', have: true, element: 'quantum', group:'harm', gender:'f', world:['plana'],rarity: 5 },
     { name: 'Black Swan', imgName: '1307', have: true, element: 'wind', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
     { name: 'Acheron', imgName: '1308', have: true, element: 'thunder', group:'nihi', gender:'f', world:['ot'],rarity: 5 },
     { name: 'Firefly', imgName: '1310', have: true, element: 'fire', group:'dest', gender:'f', world:['ot'],rarity: 5 },
@@ -56,6 +56,7 @@ window.CHARA_CONFIG = {
     { name: 'Castorice', imgName: '1407', have: true, element: 'quantum', group:'reme', gender:'f', world:['amp'], rarity: 5 },
     { name: 'Phainon', imgName: '1408', have: true, element: 'physical', group:'dest', gender:'m', world:['amp'], rarity: 5 },
     { name: 'Hyacine', imgName: '1409', have: true, element: 'wind', group:'reme', gender:'f', world:['amp'], rarity: 5 },
+    { name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', world:['amp'], rarity: 5 },
     { name: 'Evernight', imgName: '1413', have: true, element: 'ice', group:'reme', gender:'f', world:['ae','amp'],rarity: 5},
     { name: 'Dan Heng • PT', imgName: '1414', have: true, element: 'physical', group:'prese', gender:'m', world:['ae','amp'],rarity: 5},
 
@@ -83,13 +84,12 @@ window.CHARA_CONFIG = {
     
     { name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.8', want: 2, p:3 },
     { name: 'Cipher', imgName: '1406', have: false, element: 'quantum', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:2, want: 2 },
-    { name: 'Hysilens', imgName: '1410', have: false, element: 'physical', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '4.0', want: 2, p:1 },
     { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '4.0', want: 1, p:2 },    
     { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'available', version: '3.7', want: 2 },
     
-    { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:[''],rarity: 5,  status: 'new', version: '4.0', p:2, want: 2 }, //NEED WORLD
+    { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:['plana'],rarity: 5,  status: 'new', version: '4.0', p:2, want: 2 }, 
 
-    { name: 'Ashveil', imgName: '1504', have: false, element: 'thunder', group:'hunt', gender:'m', world:[''], rarity: 5, status: 'soon', version: '4.1', p:1 }, //NEED ICON + WORLD
+    { name: 'Ashveil', imgName: '1504', have: false, element: 'thunder', group:'hunt', gender:'m', world:['plana'], rarity: 5, status: 'soon', version: '4.1', p:1 }, 
 
     //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''], rarity: 5,  || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
     //  Element: fire | ice | imaginary | physical | quantum | thunder | wind

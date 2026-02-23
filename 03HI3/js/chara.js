@@ -151,39 +151,39 @@ getFallbackPath: function(char) {
 },
 
 createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
+  const container = document.createElement('div');
+  container.className = 'char-icon-container';
 
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-    const imgSrcName = c.imgName || c.name;
-    img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
-    img.alt = c.name;
+  const img = document.createElement('img');
+  img.className = 'char-icon';
+  const imgSrcName = c.imgName || c.name;
+  img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
+  img.alt = c.name;
 
-    const fallbackImg = this.getFallbackPath(c);  
-    img.onerror = () => {
+  const fallbackImg = this.getFallbackPath(c) || "../assets/others/page-loading.png";  
+
+  // ✅ SINGLE onerror handler
+  img.onerror = () => {
+    if (img.src !== fallbackImg) {
       img.src = fallbackImg;
-    };
+    }
+  };
 
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/HI3/Element/${c.element}.png`;
-    elementImg.alt = c.element;
+  const elementImg = document.createElement('img');
+  elementImg.className = 'element-icon';
+  elementImg.src = `../assets/others/HI3/Element/${c.element}.png`;
+  elementImg.alt = c.element;
 
-    container.appendChild(img);
-    container.appendChild(elementImg);
+  container.appendChild(img);
+  container.appendChild(elementImg);
 
-    container.addEventListener('click', () => {
-      const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
-      showPopup(imgPath, c.name);
-    });
+  container.addEventListener('click', () => {
+    const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
+    showPopup(imgPath, c.name);
+  });
 
-    img.onerror = () => {
-      img.style.display = 'none';
-    };
-
-    return container;
-  }
+  return container;
+}
 };
 
 document.addEventListener('DOMContentLoaded', () => {

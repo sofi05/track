@@ -1,4 +1,4 @@
 git add . 
-git commit -m "added md of what need to be updated next"
+git commit -m "fixed majority of stuff. wait for GI6.4, AKE1.1 & HI3 8.7"
 git push origin main
  

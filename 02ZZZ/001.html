@@ -144,6 +144,10 @@
           <input type="radio" name="group" value="sq" id="group-sq" />
           <img class="element-img" src="../assets/others/Zenless/Group/IconFaction_Defense_Force_-_Silver_Squad_temp.png" alt="Silver Squad" />
         </label>
+        <label class="element-label" for="group-MOD">
+          <input type="radio" name="group" value="MOD" id="group-MOD" />
+          <img class="element-img" src="../assets/others/Zenless/Group/Faction_Metropolitan_Order_Division_Icon.png" alt="Metropolitan Order Division" />
+        </label>
       </div>
     </div>
   </div>
@@ -172,13 +176,21 @@
   </nav>
 
   <!--SPRITE-->
-  <div id="spritePopup" class="sprite-popup" style="display:none;">
-    <div class="popup-wrapper">
-      <span class="close-btn">✕</span>
-      <img id="spritePopupImg" src="" alt="" />
+  <div id="spritePopup" class="popup">
+    <div class="popup-content">
+      <button id="prevBtn" class="nav-btn">←</button>
+      
+      <div class="main-img-wrapper" style="position: relative;">
+        <img id="spritePopupImg" class="popup-img" />
+        <button class="close-btn">✕</button> <!-- Moved inside here -->
+      </div>
+      
+      <button id="nextBtn" class="nav-btn">→</button>
     </div>
+
+    <!-- THUMBNAILS OUTSIDE MAIN -->
+    <div id="thumbnailContainer"></div>
   </div>
-  <div id="spriteList"></div>
 
   <!--SCRIPTS-->
   <script src="js/chara.js" defer></script>

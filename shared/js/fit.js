@@ -131,38 +131,46 @@ function renderList() {
     card.appendChild(nameLabel);
     charListEl.appendChild(card);
     card.addEventListener('click', () => {
+      // ===== HI3 (folder + spriteImages) =====
       if (gameConfig.id === 'hi3') {
         showPopup(
           `../assets/Sprite/HI3/Outfit/${c.spriteFolder}`,
           c.name,
           c.spriteImages || []
         );
-      } else {
-        let spriteList = [];
-
-        // add base image first
-        if (c.imgName) spriteList.push(c.imgName);
-
-        // add additional images
-        if (Array.isArray(c.imgName2)) {
-          spriteList = spriteList.concat(c.imgName2);
-        } else if (typeof c.imgName2 === 'string') {
-          spriteList.push(c.imgName2);
-        }
-
-        // remove duplicates
-        spriteList = [...new Set(spriteList)];
-
-        // build full paths
-        const fullImages = spriteList.map(name =>
-          `${gameConfig.spritePrefix}${name}.png`
-        );
-
-        showPopup(
-          fullImages,
-          c.name
-        );
+        return;
       }
+
+      // ===== GENSHIN (spriteImages + folder structure) =====
+      if (Array.isArray(c.spriteImages) && c.spriteImages.length) {
+
+        const folder = c.spriteFolder || c.name.replace(/\s+/g, '');
+        const fullImages = c.spriteImages.map(img =>
+          `${gameConfig.spritePrefix}${folder}/${img}.webp`
+        );
+
+        showPopup(fullImages, c.name);
+        return;
+      }
+
+      // ===== OTHER GAME (imgName system) =====
+      let spriteList = [];
+
+      if (c.imgName) spriteList.push(c.imgName);
+
+      if (Array.isArray(c.imgName2)) {
+        spriteList = spriteList.concat(c.imgName2);
+      } else if (typeof c.imgName2 === 'string') {
+        spriteList.push(c.imgName2);
+      }
+
+      spriteList = [...new Set(spriteList)];
+
+      const fullImages = spriteList.map(name =>
+        `${gameConfig.spritePrefix}${name}.png`
+      );
+
+      showPopup(fullImages, c.name);
     });
   });
 

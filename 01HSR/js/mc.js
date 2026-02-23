@@ -6,8 +6,8 @@ window.CHARA_CONFIG = {
     { name: 'Stelle', imgName: '8004', have: true, element: 'fire', group:'prese', gender:'f', rarity: 5},
     { name: 'Caelus', imgName: '8005', have: true, element: 'imaginary', group:'harm', gender:'m', rarity: 5},
     { name: 'Stelle', imgName: '8006', have: true, element: 'imaginary', group:'harm', gender:'f', rarity: 5},
-    { name: 'Caelus', imgName: '8007', have: true, element: 'ice', group:'reme', gender:'m', rarity: 5},
-    { name: 'Stelle', imgName: '8008', have: true, element: 'ice', group:'reme', gender:'f', rarity: 5},
+    { name: 'Caelus', imgName: '8007', imgName2: ['8007','8007_1'], have: true, element: 'ice', group:'reme', gender:'m', rarity: 5},
+    { name: 'Stelle', imgName: '8008', imgName2: ['8008','8008_1'], have: true, element: 'ice', group:'reme', gender:'f', rarity: 5},
 
     // { name: '', imgName: '', have: true, element: '', group:'', gender:'', rarity: 5,  status: 'new' },
   ],
@@ -46,9 +46,17 @@ createImageElement(c) {
     container.appendChild(elementImg);
 
     container.addEventListener('click', () => {
-      const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/StarRail/${c.imgName}.png`;
-      showPopup(imgPath, c.name);
+      // Build the list of sprites to show
+      let spriteList = [];
+
+      if (Array.isArray(c.imgName2) && c.imgName2.length > 0) {
+        spriteList = c.imgName2.map(name => `../assets/Sprite/StarRail/${name}.png`);
+      } else {
+        spriteList = [`../assets/Sprite/StarRail/${c.imgName || c.name}.png`];
+      }
+
+      // Show popup manually (with thumbnails / next-prev)
+      showPopup(spriteList, c.name);
     });
 
     return container;

@@ -174,9 +174,42 @@ function renderList() {
     iconWrapper.appendChild(elementIcon);
 
     if (typeof CHARA_CONFIG.createImageElement === 'function') {
-      const imageBlock = CHARA_CONFIG.createImageElement(c);
-      if (imageBlock) iconWrapper.appendChild(imageBlock);
-    }
+  const imageBlock = CHARA_CONFIG.createImageElement(c);
+  if (imageBlock) iconWrapper.appendChild(imageBlock);
+} else {
+  // ===== IMGNAME2 SUPPORT =====
+  const img = document.createElement('img');
+  img.className = 'char-icon';
+  img.alt = c.name;
+
+  // Build list of images from imgName and imgName2
+  let spriteList = [];
+  if (c.imgName) spriteList.push(c.imgName);
+
+  if (Array.isArray(c.imgName2)) {
+    spriteList = spriteList.concat(c.imgName2);
+  } else if (typeof c.imgName2 === 'string') {
+    spriteList.push(c.imgName2);
+  }
+
+  // Remove duplicates
+  spriteList = [...new Set(spriteList)];
+
+  // Set first image as default
+  img.src = spriteList.length ? `${CHARA_CONFIG.spritePrefix || ''}${spriteList[0]}.png` : '';
+  iconWrapper.appendChild(img);
+
+  // Click opens popup with all images
+  card.addEventListener('click', () => {
+  if (!spriteList.length) return;
+  const fullImages = spriteList.map(name => `${CHARA_CONFIG.spritePrefix || ''}${name}.png`);
+
+  // ✅ Check if imgName2 exists
+  const hasImg2 = Array.isArray(c.imgName2) && c.imgName2.length > 0;
+
+  showPopup(fullImages, c.name, hasImg2);
+});
+}
 
     const label = document.createElement('div');
     label.textContent = c.name;
@@ -279,41 +312,120 @@ document.querySelectorAll('.part-btn').forEach(btn => {
 function showPopup(imgPath, altText) {
   const popup = document.getElementById('spritePopup');
   const popupImg = document.getElementById('spritePopupImg');
+  const thumbnailContainer = document.getElementById('thumbnailContainer');
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  if (!popup || !popupImg) return;
 
-  popupImg.src = imgPath;
-  popupImg.alt = altText;
+  const images = Array.isArray(imgPath) ? imgPath : [imgPath];
+  let index = 0;
 
-  const maxW = window.innerWidth * 0.95;
-  const maxH = window.innerHeight * 0.95;
+  // ===== Render thumbnails =====
+  if (images.length > 1 && thumbnailContainer) {
+    thumbnailContainer.innerHTML = '';
+    images.forEach((src, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = src;
+      thumb.className = 'thumbnail-img';
+      thumb.alt = `${altText} - ${i + 1}`;
+      thumb.style.width = '60px';
+      thumb.style.height = '60px';
+      thumb.style.objectFit = 'cover';
+      thumb.style.cursor = 'pointer';
 
-  popupImg.onload = () => {
-    const ratio = Math.min(
-      maxW / popupImg.naturalWidth,
-      maxH / popupImg.naturalHeight,
-      1
-    );
-    popupImg.style.width = popupImg.naturalWidth * ratio + 'px';
-    popupImg.style.height = popupImg.naturalHeight * ratio + 'px';
+      thumb.addEventListener('click', e => {
+        e.stopPropagation();
+        showImageAt(i);
+      });
+
+      thumbnailContainer.appendChild(thumb);
+    });
+    thumbnailContainer.style.display = 'flex';
+  } else if (thumbnailContainer) {
+    thumbnailContainer.style.display = 'none';
+  }
+
+  function showImageAt(i) {
+  index = i;
+
+  // ===== Preload image before showing =====
+  const img = new Image();
+  img.src = images[index] || "../assets/others/page-loading.png"; // fallback if no src
+
+  img.onload = () => {
+    popupImg.src = img.src;
+    popupImg.alt = `${altText}${images.length > 1 ? ' - ' + (index + 1) : ''}`;
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   };
 
-  popup.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  img.onerror = () => {
+    // fallback in case of broken URL
+    popupImg.src = "../assets/others/page-loading.png";
+    popupImg.alt = `${altText} (image missing)`;
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  // ===== Highlight current thumbnail =====
+  if (thumbnailContainer) {
+    Array.from(thumbnailContainer.children).forEach((t, idx) => {
+      t.classList.toggle('selected', idx === index);
+    });
+    scrollThumbnail(index);
+  }
 }
 
-document.querySelector('.close-btn').addEventListener('click', closePopup);
-document.getElementById('spritePopup').addEventListener('click', e => {
-  if (e.target.id === 'spritePopup') closePopup();
-});
+  function scrollThumbnail(i) {
+    if (!thumbnailContainer) return;
+    const thumb = thumbnailContainer.children[i];
+    if (!thumb) return;
+    const offset = thumb.offsetLeft - thumbnailContainer.clientWidth / 2 + thumb.clientWidth / 2;
+    thumbnailContainer.scrollLeft = offset;
+  }
+
+  showImageAt(0);
+
+  // ===== Arrow buttons =====
+  if (images.length > 1) {
+    nextBtn.style.display = 'block';
+    prevBtn.style.display = 'block';
+
+    nextBtn.onclick = e => {
+      e.stopPropagation();
+      showImageAt((index + 1) % images.length);
+    };
+    prevBtn.onclick = e => {
+      e.stopPropagation();
+      showImageAt((index - 1 + images.length) % images.length);
+    };
+  } else {
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (prevBtn) prevBtn.style.display = 'none';
+  }
+
+  // ===== Click outside image closes popup =====
+  popup.onclick = e => {
+    if (e.target === popup) closePopup();
+  };
+  popupImg.onclick = e => e.stopPropagation();
+
+  // ===== Keyboard navigation =====
+  document.onkeydown = e => {
+    if (e.key === 'Escape') closePopup();
+    if (images.length > 1) {
+      if (e.key === 'ArrowRight') showImageAt((index + 1) % images.length);
+      else if (e.key === 'ArrowLeft') showImageAt((index - 1 + images.length) % images.length);
+    }
+  };
+}
 
 function closePopup() {
   const popup = document.getElementById('spritePopup');
+  if (!popup) return;
   popup.style.display = 'none';
   document.body.style.overflow = '';
 }
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closePopup();
-});
 
 // ===== CHARACTER COUNT =====
 function updateCharCount() {

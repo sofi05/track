@@ -84,7 +84,7 @@ window.CHARA_CONFIG = {
     { name: 'Mizuki', have: true, element: 'Anemo', rarity: 5, region:['ina'], gender:'f' },
     { name: 'Flins', have: true, element: 'Electro', rarity: 5, region:['snez'], gender:'m'},
     { name: 'Durin', have: true, element: 'Pyro', rarity: 5, region:['mond'], gender:'m'},
-    { name: 'Columbina', have: true, element: 'Hydro', rarity: 5, region:['snez'], gender:'f',  status: 'new' },
+    { name: 'Columbina', have: true, element: 'Hydro', rarity: 5, region:['snez'], gender:'f'},
 
     //DON'T HAVE - ORGANIZED BY LAUNCH
     { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '6.4', want: 2,p:1 }, 
@@ -112,9 +112,9 @@ window.CHARA_CONFIG = {
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.0', want: 2},
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.1', p:1 },
     
-    { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'new', version: '6.3', p:2, },
-    { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'new', version: '6.3', p:2}, //, perma: true},
-    { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'soon', version: '6.4', p:1,},
+    { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.3', p:2, },
+    { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'available', version: '6.3', p:2, perma: true},
+    { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'new', version: '6.4', p:1,},
 
     //confirmed next
     { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '6.X', out:false},

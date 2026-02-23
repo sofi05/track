@@ -48,13 +48,21 @@
   </nav>
 
   <!--SPRITE-->
-  <div id="spritePopup" class="sprite-popup" style="display:none;">
-    <div class="popup-wrapper">
-      <span class="close-btn">✕</span>
-      <img id="spritePopupImg" src="" alt="" />
+  <div id="spritePopup" class="popup">
+    <div class="popup-content">
+      <button id="prevBtn" class="nav-btn">←</button>
+      
+      <div class="main-img-wrapper" style="position: relative;">
+        <img id="spritePopupImg" class="popup-img" />
+        <button class="close-btn">✕</button> <!-- Moved inside here -->
+      </div>
+      
+      <button id="nextBtn" class="nav-btn">→</button>
     </div>
+
+    <!-- THUMBNAILS OUTSIDE MAIN -->
+    <div id="thumbnailContainer"></div>
   </div>
-  <div id="spriteList"></div>
 
   <!--SCRIPTS-->
   <script src="js/mc.js" defer></script>

@@ -25,7 +25,7 @@ const gameConfig = {
     { name: 'Xinyan', have: [false], 
         spriteImages: ['Performance_Time'] },
     { name: 'Yanfei', have: [false], imgName: 'Feiyan',
-        spriteImages: ['Case_Overview'], status:'new', },
+        spriteImages: ['Case_Overview'] },
 
     //HYDRO
      { name: 'Ayato', have: [false], 
@@ -115,7 +115,7 @@ const gameConfig = {
     { name: 'Xiao', have: [false], 
         spriteImages: ['All_Green_and_Good_to_Go'] },
     { name: 'Xianyun', have: [false], imgName: 'Liuyun',
-        spriteImages: ['Under_Control'], status:'new', },
+        spriteImages: ['Under_Control'] },
     
     //CRYO
     { name: 'Charlotte', have: [false], 
@@ -143,7 +143,7 @@ const gameConfig = {
     { name: 'Rosaria', have: [false], 
         spriteImages: ['Brandishing_Weapons'] },
     { name: 'Shenhe', have: [false], 
-        spriteImages: ['Talismanic_Grace'], status:'new', },
+        spriteImages: ['Talismanic_Grace']},
 
     //GEO
     { name: 'Chiori', have: [false], 
@@ -161,7 +161,7 @@ const gameConfig = {
     { name: 'Zhongli', have: [true], 
         spriteImages: ['Solemn_Countenance'] },
     { name: 'Albedo', have: [false], 
-        spriteImages: ['Snapshot_Essentials'], status:'new', },
+        spriteImages: ['Snapshot_Essentials'] },
 
         
     //{ name: '', have: [false, true], imgName:'', spriteFolder: '', spriteImages: ['', ''], status:'new', },

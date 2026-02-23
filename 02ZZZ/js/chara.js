@@ -52,10 +52,10 @@ window.CHARA_CONFIG = {
     { name: 'Dialyn', imgName: '54', have: false, element: 'Physical', group:['kramp'], gender:'f', rarity: 5, status: 'available', version: '2.4', p:2 },
     
     { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:1 },
-    { name: 'Aria', imgName: '57', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:2 },
+    { name: 'Aria', imgName: '57', imgName2: ['57', '57_Form2'], have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.6', p:2 },
 
     { name: 'Nangong Yu', imgName: '59TEMP', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:1 },
-    { name: 'Cissia', imgName: '60TEMP', have: false, element: 'Electric', group:[''], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:2 },
+    { name: 'Cissia', imgName: '60TEMP', have: false, element: 'Electric', group:['MOD'], gender:'f', rarity: 5, status: 'soon', version: '2.7', p:2 },
 
     // { name: '', imgName: '', have: false, element: '', filterElement:'', group:[''], gender:'', rarity: 5, || status: 'new', version: '', p:2, perma: true, want: 1/2 },
     //  Element: Electric | Physical ⇄ HonedEdge | Fire | Ether ⇄ AuricInk | Frost ⇄ Ice 
@@ -63,10 +63,14 @@ window.CHARA_CONFIG = {
   ],
 
 getSpritePath: function(char) {
-    const imgName = char.imgName || char.name;
-    const folder = char.folder || ''; 
-    return `../assets/Sprite/Zenless/IconRole${imgName}.png`;
-  },
+  let names = [];
+  if (char.imgName) names.push(char.imgName);
+  if (Array.isArray(char.imgName2)) names = names.concat(char.imgName2);
+  else if (typeof char.imgName2 === 'string') names.push(char.imgName2);
+
+  // Return first image (default) for single-image usage
+  return `../assets/Sprite/Zenless/IconRole${names[0]}.png`;
+},
 
 getFallbackPath: function(char) {
   return `../assets/others/Zenless/Random/Icon_Event_Unknown.webp`; 
@@ -78,14 +82,10 @@ createImageElement(c) {
 
   const img = document.createElement('img');
   img.className = 'char-icon';
-  const imgSrcName = c.imgName ? c.imgName : c.name;
-  img.src = `../assets/charaid/Zenless/IconRoleCrop${imgSrcName}.png`;
+  img.src = `../assets/charaid/Zenless/IconRoleCrop${c.imgName}.png`;
   img.alt = c.name;
-
-const fallbackImg = this.getFallbackPath(c);  
-  img.onerror = () => {
-    img.src = fallbackImg;
-  };
+  const fallbackImg = this.getFallbackPath(c);  
+  img.onerror = () => { img.src = fallbackImg; };
 
   const elementImg = document.createElement('img');
   elementImg.className = 'element-icon';
@@ -95,27 +95,28 @@ const fallbackImg = this.getFallbackPath(c);
   container.appendChild(img);
   container.appendChild(elementImg);
 
-  // IF THERES 1+ TEXT IN A TAG [GROUP EXAMPLE]
-    if (Array.isArray(c.group)) {
-      const groupList = document.createElement('div');
-      groupList.className = 'group-list';
-
-      c.group.forEach(group => {
-        const groupLabel = document.createElement('span');
-        groupLabel.className = 'group-label';
-        groupLabel.textContent = group;
-        groupList.appendChild(groupLabel);
-      });
-      container.appendChild(groupList);
-    }
-    //=================================================
+  if (Array.isArray(c.group)) {
+    const groupList = document.createElement('div');
+    groupList.className = 'group-list';
+    c.group.forEach(group => {
+      const groupLabel = document.createElement('span');
+      groupLabel.className = 'group-label';
+      groupLabel.textContent = group;
+      groupList.appendChild(groupLabel);
+    });
+    container.appendChild(groupList);
+  }
 
   container.addEventListener('click', () => {
-    const imgName = c.imgName ? c.imgName : c.name;
-    const imgPath = `../assets/Sprite/Zenless/IconRole${imgName}.png`;
-    showPopup(imgPath, c.name);
+    let spriteList = [c.imgName];
+    if (Array.isArray(c.imgName2)) spriteList = spriteList.concat(c.imgName2);
+    else if (typeof c.imgName2 === 'string') spriteList.push(c.imgName2);
+    spriteList = [...new Set(spriteList)];
+
+    const fullImages = spriteList.map(name => `../assets/Sprite/Zenless/IconRole${name}.png`);
+    showPopup(fullImages, c.name);
   });
 
-    return container;
-  },
+  return container;
+},
 };

@@ -98,7 +98,7 @@
     </li>
     <!--STARRAIL-->
     <li id="hsrRefs" class="hidden">
-    • Character Source: <a href="https://hsr20.hakush.in/char" target="_blank">Look Number Here</a> <span style="font-size: 0.6em;">[<a href="https://starrail.honeyhunterworld.com" target="_blank"> ALT </a>]<br></span>
+    • Character Source: <a href="https://srtools.neonteam.dev/" target="_blank">Look Number Here</a> <span style="font-size: 0.6em;">[<a href="https://starrail.honeyhunterworld.com" target="_blank"> ALT </a>]<br></span>
     • <a href="https://homdgcat.wiki/sr/item" target="_blank">Pets source</a><br>
     • Pompom outfit taken from Google/Telegram/Game
     <!--ALT FOR PICS AND ICONS IN GAME https://github.com/Mar-7th/StarRailRes/blob/master/icon/character/1415.png-->
@@ -261,23 +261,23 @@
 
       // ⭐ ADD GAME 
       if(currentGame==="gi") {
-        if(currentType==="icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;
-        else if(currentType==="sprite") url = `https://api.hakush.in/gi/UI/UI_Gacha_AvatarImg_${value}.webp`;
+        if(currentType==="icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`; //deadlink
+        else if(currentType==="sprite") url = `https://api.hakush.in/gi/UI/UI_Gacha_AvatarImg_${value}.webp`;//deadlink
         //else if(currentType==="outfit") url = `https://api.hakush.in/gi/UI/UI_Costume_${value}.webp`;
-        else if(currentType==="👗 Icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;
+        else if(currentType==="👗 Icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;//deadlink
       } 
       else if(currentGame==="hsr") {
-        if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`;
-        else if(currentType==="sprite") url = `https://api.hakush.in/hsr/UI/avatardrawcard/${value}.webp`;
-        else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`;
+        if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`; //deadlink
+        else if(currentType==="sprite") url = `https://cdn.neonteam.dev/neonteam/assets/spriteoutput/avatardrawcard/${value}.webp`; 
+        else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`; //deadlink
        else if(currentType==="👗 Icon") url = `https://assets.irminsul.gg/v2/hsr/characters/${value}_1.png`; //TEMPORARY
       } 
       else if(currentGame==="zzz") {
-        if(currentType==="icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}.webp`;
-        else if(currentType==="sprite") url = `https://api.hakush.in/zzz/UI/IconRole${value}.webp`;
-        else if(currentType==="👗 Icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}_01.webp`;
-        else if(currentType==="outfit") url = `https://api.hakush.in/zzz/UI/IconRole${value}_01.webp`;
-        else if(currentType==="bangboo") url = `https://api.hakush.in/zzz/UI/BangbooGarageRole${value}.webp`;
+        if(currentType==="icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}.webp`; //deadlink
+        else if(currentType==="sprite") url = `https://api.hakush.in/zzz/UI/IconRole${value}.webp`;//deadlink
+        else if(currentType==="👗 Icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}_01.webp`;//deadlink
+        else if(currentType==="outfit") url = `https://api.hakush.in/zzz/UI/IconRole${value}_01.webp`;//deadlink
+        else if(currentType==="bangboo") url = `https://api.hakush.in/zzz/UI/BangbooGarageRole${value}.webp`;//deadlink
       }
       else if(currentGame==="hi3") {
         url = "https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki";

@@ -14,6 +14,7 @@ window.BDAY_CONFIG = {
     '02-02': ['Linette', 'Liney'],
     '02-11': ['Alhatham'],
     '02-14': ['Beidou'],
+    '02-17': ['Varka'], 
     '02-22': ['Kokomi'],
     '02-29': ['Bennett'],
 
@@ -119,7 +120,6 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
      
-    //'x-x': ['Varka'], 
     //'x-x': [''],  //soon
   },
 
