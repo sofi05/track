@@ -1,8 +1,8 @@
 window.GAME_VERSIONS = {
   GenshinImpact: { //https://irminsul.gg/genshin/banners
-    version: '6.3',
-      p1: '2026-01-14T00:00:00', p2: '2026-02-03T19:00:00', 
-    date1vs: '6.4', date1: '2026-02-24T00:00:00', date1p2: '',
+    version: '6.4',
+      p1: '2026-02-24T00:00:00', p2: '2026-03-17T19:00:00', 
+    date1vs: '6.4', date1: '2026-04-07T00:00:00', date1p2: '',
     date2vs: '6.5', date2: '', date2p2: '',
     },
   StarRail: { //https://irminsul.gg/hsr/banners
