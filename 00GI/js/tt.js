@@ -163,6 +163,15 @@ const gameConfig = {
     { name: 'Albedo', have: [false], 
         spriteImages: ['Snapshot_Essentials'] },
 
+    //SOON
+    { name: 'Sayu', have: [false], 
+        spriteImages: [''], status:'soon', },
+    { name: 'Ororon', imgName:'Olorun', have: [false], 
+        spriteImages: [''], status:'soon', },
+    { name: 'Ayaka', have: [false], 
+        spriteImages: [''], status:'soon', },
+    { name: 'Emilie', have: [false], 
+        spriteImages: [''], status:'soon', },
         
     //{ name: '', have: [false, true], imgName:'', spriteFolder: '', spriteImages: ['', ''], status:'new', },
     

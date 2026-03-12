@@ -111,10 +111,11 @@ window.CHARA_CONFIG = {
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
     { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.0', want: 2},
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.1', p:1 },
-    
     { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.3', p:2, },
     { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'available', version: '6.3', p:2, perma: true},
     { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'new', version: '6.4', p:1,},
+
+    { name: 'Linnea', have: false, element: 'geo', rarity: 5, region:['snez'], gender:'f', status: 'soon', version: '6.5', p:1},
 
     //confirmed next
     { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '6.X', out:false},

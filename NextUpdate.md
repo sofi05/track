@@ -1,6 +1,8 @@
 # MUST FIX / CHANGE NEXT UPDATE
 
-   ## [GENSHIN IMPACT _ UTD BETA 6.4](update_all_chara_icons_when_7.X_isout) 
+   ## [GENSHIN IMPACT _ UTD BETA 6.5](update_all_chara_icons_when_7.X_isout) 
+      + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona)
+      + Add TT 21 (marked as soon bc im lazy rn)
    ## [HONKAI STAR RAIL _ UTD BETA 4.1](add_PlanarcadiaIcon_|_assets\others\StarRail\World\)
    ## [ZENLESS ZONE ZERO _ UTD PRE-BETA 2.7](replace_'TEMP'_for_ingame_whenout) 
    ## [HONKAI IMPACT 3RD _ UTD BETA 8.7]()

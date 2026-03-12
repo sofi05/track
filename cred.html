@@ -89,17 +89,29 @@
   <div class="output" id="linkOutput"></div>
 
   <!--⭐ LINK FOR GAME REFERENCE HERE  -->
+  <!-- SOURCES
+        https://gachabase.net/?lang=en + HSR / ZZZ
+        https://irminsul.gg + HSR /ZZZ /GI / AKE
+
+        https://srtools.neonteam.dev/1001/detail
+        https://starrail.honeyhunterworld.com
+
+        https://gi.yatta.moe/en + HSR
+        https://lunaris.moe
+
+        https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki
+  -->
   <ul id="refsList" class="hidden">
     <!--GENSHIN-->
     <li id="giRefs" class="hidden">
-      • <a href="https://gi20.hakush.in" target="_blank">Source from here</a><br>
+      • <a href="https://lunaris.moe" target="_blank">Source from here</a><br>
       <span style="font-size: 0.55em; margin-left: 20px;"> [Outfits_Icon: search for the chara &gt; open outfit &gt; copy name]<br> </span>
       • <a href="https://genshin-impact.fandom.com/wiki/Thespian_Trick#Thespian_Tricks" target="_blank">Thespian Trick Pics Source</a>
     </li>
     <!--STARRAIL-->
     <li id="hsrRefs" class="hidden">
-    • Character Source: <a href="https://srtools.neonteam.dev/" target="_blank">Look Number Here</a> <span style="font-size: 0.6em;">[<a href="https://starrail.honeyhunterworld.com" target="_blank"> ALT </a>]<br></span>
-    • <a href="https://homdgcat.wiki/sr/item" target="_blank">Pets source</a><br>
+    • Character Source: <a href="https://srtools.neonteam.dev/" target="_blank">Look Number Here</a> <span style="font-size: 0.6em;">[<a href="https://starrail.honeyhunterworld.com" target="_blank"> ALT </a> | <a href="https://hsr.gachabase.net" target="_blank"> ALT </a>]<br></span>
+    • <a href="https://sr.yatta.moe/en/archive/item" target="_blank">Pets source</a><br>
     • Pompom outfit taken from Google/Telegram/Game
     <!--ALT FOR PICS AND ICONS IN GAME https://github.com/Mar-7th/StarRailRes/blob/master/icon/character/1415.png-->
     </li>
@@ -169,7 +181,7 @@
 
     // ⭐ ADD IMAGE TYPE
     const typeOptions = {
-      gi: ["sprite","icon","👗 Icon"], 
+      gi: ["sprite","icon","outfit","👗 Icon"], 
       hsr: ["sprite","icon","outfit", "👗 Icon"],      
       zzz: ["sprite","icon","outfit","👗 Icon","bangboo"],
       hi3: [],
@@ -261,10 +273,10 @@
 
       // ⭐ ADD GAME 
       if(currentGame==="gi") {
-        if(currentType==="icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`; //deadlink
-        else if(currentType==="sprite") url = `https://api.hakush.in/gi/UI/UI_Gacha_AvatarImg_${value}.webp`;//deadlink
-        //else if(currentType==="outfit") url = `https://api.hakush.in/gi/UI/UI_Costume_${value}.webp`;
-        else if(currentType==="👗 Icon") url = `https://api.hakush.in/gi/UI/UI_AvatarIcon_${value}.webp`;//deadlink
+        if(currentType==="icon") url = `https://api.lunaris.moe/data/assets/avataricon/UI_AvatarIcon_${value}.webp`; 
+        else if(currentType==="sprite") url = `https://api.lunaris.moe/data/assets/gachaimg/UI_Gacha_AvatarImg_${value}.png`;
+        else if(currentType==="👗 Icon") url = `https://gi.yatta.moe/assets/UI/UI_AvatarIcon_${value}.png`; 
+        else if(currentType==="outfit") url = `https://gi.yatta.moe/assets/UI/UI_Costume_${value}.png`;//same name as outfit
       } 
       else if(currentGame==="hsr") {
         if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`; //deadlink

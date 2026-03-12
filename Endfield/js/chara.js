@@ -5,6 +5,7 @@ window.CHARA_CONFIG = {
     { name: 'Chen Qianyu', imgName: '0005_chen', element: 'Physical', have: true, group: ['EndIndustries', 'Hongshan'], gender:'f', rarity: 5},
     { name: 'Wulfgard', imgName: '0006_wolfgd', element: 'Heat', have: true, group: ['EndIndustries', ''], gender:'m', rarity: 5 },
     { name: 'Arclight', imgName: '0007_ikut', element: 'Electric', have: true, group: ['Hannabit'], gender:'f', rarity: 5},
+    { name: 'Ember', imgName: '0009_azrila', element: 'Heat', have: true, group: ['OrderSO'], gender:'f', rarity: 6},
     { name: 'Xaihi', imgName: '0011_seraph', element: 'Cryo', have: true, group: ['Cabal'], gender:'f', rarity: 5 },
     { name: 'Avywenna', imgName: '0012_avywen', element: 'Electric', have: true, group: ['TGCC'], gender:'f', rarity: 5},
     { name: 'Gilberta', imgName: '0013_aglina', element: 'Nature', have: true, group: ['Rhodes'], gender:'f', rarity: 6},
@@ -20,16 +21,15 @@ window.CHARA_CONFIG = {
     { name: 'Alesh', imgName: '0024_deepfin', element: 'Cryo', have: true, group: ['UWST'], gender:'m', rarity: 5},
     { name: 'Ardelia', imgName: '0025_ardelia', element: 'Nature', have: true, group: ['Rhodes'], gender:'f', rarity: 6},
     { name: 'Last Rite', imgName: '0026_lastrite', element: 'Cryo', have: true, group: ['Sesqa'], gender:'f', rarity: 6},
+    { name: 'Tangtang', imgName: '0027_tangtang', element: 'Cryo', have: true, group: [''], gender:'f', rarity: 6 , status: 'new'},
     
     //DONT HAVE - ORGANIZED BY NUMBER
-    { name: 'Ember', imgName: '0009_azrila', element: 'Heat', have: false, group: ['OrderSO'], gender:'f', rarity: 6, status: 'available', version: '1.0', perma: true },
     { name: 'Lifeng', imgName: '0015_lifeng', element: 'Physical', have: false, group: ['Hongshan'], gender:'m', rarity: 6, status: 'available', version: '1.0', perma: true, want: 2 },
     { name: 'Pogranichnik', imgName: '0029_pograni', element: 'Physical', have: false, group: ['Rhodes'], gender:'m', rarity: 6, status: 'available', version: '1.0', perma: true},
 
-    { name: 'Tangtang', imgName: '0027_tangtang', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.1', p:1, want: 1 },
-    { name: 'Rossi', imgName: '0028_wulfa', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.1', p:1},
-    { name: 'Zhuang Fangyi', imgName: '0030_zhuangfy', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.1', p:1, want: 2},
-    { name: 'Mi Fu', imgName: '0031_mifu', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.1', p:1, want: 1 },
+    { name: 'Rossi', imgName: '0028_wulfa', element: 'Heat', have: false, group: [''], gender:'f', rarity: 6 , status: 'new', version: '1.1', p:2},
+    { name: 'Zhuang Fangyi', imgName: '0030_zhuangfy', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1, want: 2,out:false},
+    { name: 'Mi Fu', imgName: '0031_mifu', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1, want: 1,out:false },
     //{ name: '???', imgName: '0032_lizhiyan', element: '', have: false, group: [''], gender:'f', rarity: || , status: 'soon', version: '1.1', p:1},
 
     //was in CBT
