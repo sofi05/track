@@ -10,6 +10,7 @@ window.CHARA_CONFIG = {
     { name: 'Avywenna', imgName: '0012_avywen', element: 'Electric', have: true, group: ['TGCC'], gender:'f', rarity: 5},
     { name: 'Gilberta', imgName: '0013_aglina', element: 'Nature', have: true, group: ['Rhodes'], gender:'f', rarity: 6},
     { name: 'Snowshine', imgName: '0014_aurora', element: 'Cryo', have: true, group: ['Rhodes'], gender:'f', rarity: 5},
+    { name: 'Lifeng', imgName: '0015_lifeng', element: 'Physical', have: true, group: ['Hongshan'], gender:'m', rarity: 6},
     { name: 'Laevatain', imgName: '0016_laevat', element: 'Heat', have: true, group: ['Rhodes','EndIndustries'], gender:'f', rarity: 6},
     { name: 'Yvonne', imgName: '0017_yvonne', element: 'Cryo', have: true, group: ['EndIndustries'], gender:'f', rarity: 6},
     { name: 'Da Pan', imgName: '0018_dapan', element: 'Physical', have: true, group: ['Hongshan'], gender:'m', rarity: 5},
@@ -21,12 +22,10 @@ window.CHARA_CONFIG = {
     { name: 'Alesh', imgName: '0024_deepfin', element: 'Cryo', have: true, group: ['UWST'], gender:'m', rarity: 5},
     { name: 'Ardelia', imgName: '0025_ardelia', element: 'Nature', have: true, group: ['Rhodes'], gender:'f', rarity: 6},
     { name: 'Last Rite', imgName: '0026_lastrite', element: 'Cryo', have: true, group: ['Sesqa'], gender:'f', rarity: 6},
-    { name: 'Tangtang', imgName: '0027_tangtang', element: 'Cryo', have: true, group: [''], gender:'f', rarity: 6 , status: 'new'},
+    { name: 'Tangtang', imgName: '0027_tangtang', element: 'Cryo', have: true, group: ['EndIndustries'], gender:'f', rarity: 6 , status: 'new'},
+    { name: 'Pogranichnik', imgName: '0029_pograni', element: 'Physical', have: true, group: ['Rhodes'], gender:'m', rarity: 6},
     
     //DONT HAVE - ORGANIZED BY NUMBER
-    { name: 'Lifeng', imgName: '0015_lifeng', element: 'Physical', have: false, group: ['Hongshan'], gender:'m', rarity: 6, status: 'available', version: '1.0', perma: true, want: 2 },
-    { name: 'Pogranichnik', imgName: '0029_pograni', element: 'Physical', have: false, group: ['Rhodes'], gender:'m', rarity: 6, status: 'available', version: '1.0', perma: true},
-
     { name: 'Rossi', imgName: '0028_wulfa', element: 'Heat', have: false, group: [''], gender:'f', rarity: 6 , status: 'new', version: '1.1', p:2},
     { name: 'Zhuang Fangyi', imgName: '0030_zhuangfy', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1, want: 2,out:false},
     { name: 'Mi Fu', imgName: '0031_mifu', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1, want: 1,out:false },
@@ -44,7 +43,7 @@ window.CHARA_CONFIG = {
   getSpritePath: function(char) {
       const imgName = char.imgName || char.name;
       const folder = char.folder || ''; 
-      return `../assets/Sprite/Endfield/${imgName}_splash.png`;
+      return `../assets/Sprite/Endfield/chr_${imgName}.png`;
     },
 
     //CHANGE ONCE U GET A UNKNOW ICON FROM GAME
@@ -88,7 +87,7 @@ window.CHARA_CONFIG = {
     //=================================================
 
     container.addEventListener('click', () => {
-      const imgPath = `../assets/Sprite/Endfield/${imgSrcName}_splash.png`;
+      const imgPath = `../assets/Sprite/Endfield/chr_${imgSrcName}.png`;
       showPopup(imgPath, c.name);
     });
 

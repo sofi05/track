@@ -4,7 +4,7 @@
       + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona)
       + Add TT 21 (marked as soon bc im lazy rn)
    ## [HONKAI STAR RAIL _ UTD BETA 4.1](add_PlanarcadiaIcon_|_assets\others\StarRail\World\)
-   ## [ZENLESS ZONE ZERO _ UTD PRE-BETA 2.7](replace_'TEMP'_for_ingame_whenout) 
+      + Fix world for all 
    ## [HONKAI IMPACT 3RD _ UTD BETA 8.7]()
       + [NEW CHARA](03HI3\js\chara.js#L136)
          - Add finishing details + assets of Mei new chara || https://honkaiimpact3.hoyoverse.com/global/en-us/valkyries
@@ -48,3 +48,11 @@
    + [Zenless Zone](02ZZZ\js\sup.js) || Bangboos
 
    * [Honkai Impact](03HI3\js\stig.js) + [Support](03HI3\js\sup.js) 
+   
+   + [NEW VERSION OUT](shared\js\vs.js) + [Update](cred.html)
+
+# SITES TO PICK UPDATES
+   + [Genshin Impact](https://lunaris.moe/characters) 
+   + [Star Rail](https://hsr.gachabase.net/changelog/beta) || ALT: https://srtools.neonteam.dev/1506
+   + [Zenless Zone](https://zzz.gachabase.net/agents) || ALT: https://zzz.nanoka.cc/character
+   + [Endfield](https://www.akedata.top) || ALT: https://irminsul.gg/endfield/operators

@@ -46,7 +46,7 @@ window.CHARA_CONFIG = {
     { name: 'Ju Fufu', imgName: '43', have: false, element: 'Fire', group:['sum'], gender:'f', rarity: 5, status: 'available', version: '2.3', p:2 },
     { name: 'Yixuan', imgName: '44', have: false, element: 'AuricInk', filterElement: 'Ether', group:['sum'], gender:'f', rarity: 5, status: 'available', version: '2.6', p:1, want: 1 },
     { name: 'Yuzuha', imgName: '47', have: false, element: 'Physical', group:['spook'], gender:'f', rarity: 5, status: 'available', version: '2.6',p:2 },
-    { name: 'Seed', imgName: '48', have: false, element: 'Electric', group:['obol'], gender:'f', rarity: 5, status: 'available', version: '2.2', p:1, want: 2 },
+    { name: 'Seed', imgName: '48', have: false, element: 'Electric', group:['obol'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:2, want: 2 },
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'Fire', group:['obol'], gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
     { name: 'Banyue', imgName: '53', have: false, element: 'Fire', group:['kramp', 'sum'], gender:'m', rarity: 5, status: 'available', version: '2.4', p:1 },
     { name: 'Dialyn', imgName: '54', have: false, element: 'Physical', group:['kramp'], gender:'f', rarity: 5, status: 'available', version: '2.4', p:2 },

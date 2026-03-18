@@ -93,7 +93,7 @@ window.CHARA_CONFIG = {
     { name: 'Baizhu', imgName: 'Baizhuer', have: false, element: 'Dendro', rarity: 5, region:['liy'], gender:'m',  status: 'available', version: '5.3', want: 1 },
     { name: 'Chiori', have: false, element: 'Geo', rarity: 5,  region:['ina','font'], gender:'f', status: 'available', version: '5.6' },
     { name: 'Citlali', have: false, element: 'Cryo', rarity: 5,  region:['nat'], gender:'f', status: 'available', version: '5.8' },
-    { name: 'Dahlia', have: false, element: 'Hydro', rarity: 4, region:['mond'], gender:'m',  status: 'available', version: '5.7', perma: true, want: 1 },
+    { name: 'Dahlia', have: false, element: 'Hydro', rarity: 4, region:['mond'], gender:'m',  status: 'available', version: '6.4', perma: true, want: 1,p:2 },
     { name: 'Yelan', have: false, element: 'Hydro', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.0', p:2 },
     { name: 'Itto', have: false, element: 'Geo', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
     { name: 'Sigewinne', have: false, element: 'Hydro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.4' },
@@ -109,8 +109,8 @@ window.CHARA_CONFIG = {
     { name: 'Klee', have: false, element: 'Pyro', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '6.4', want: 2,p:1 },
     { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '6.4', want: 2,p:2 },
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '5.6' },
-    { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.0', want: 2},
-    { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.1', p:1 },
+    { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.5', want: 2, p:2}, //6.0 /p:?
+    { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.5', p:2 }, //6.1 /p:1
     { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.3', p:2, },
     { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'available', version: '6.3', p:2, perma: true},
     { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'new', version: '6.4', p:1,},

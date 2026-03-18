@@ -79,7 +79,7 @@ window.CHARA_CONFIG = {
     { name: 'Robin', imgName: '1309', have: false, element: 'physical', group:'harm', gender:'f', world:['pena'],rarity: 5,  status: 'available', version: '3.0' },
     { name: 'Sunday', imgName: '1313', have: false, element: 'imaginary', group:'harm', gender:'m', world:['ae','pena'], rarity: 5,  status: 'available', version: '3.8', want: 1, p:3 },
     { name: 'Jade', imgName: '1314', have: false, element: 'quantum', group:'eru', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '3.0' },
-    { name: 'Boothill', imgName: '1315', have: false, element: 'physical', group:'hunt', gender:'m', world:['ot'],rarity: 5,  status: 'available', version: '3.0' },
+    { name: 'Boothill', imgName: '1315', have: false, element: 'physical', group:'hunt', gender:'m', world:['ot'],rarity: 5,  status: 'available', version: '4.1',p:2 },
     { name: 'Rappa', imgName: '1317', have: false, element: 'imaginary', group:'eru', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '4.0', p:2 },
     
     { name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.8', want: 2, p:3 },
@@ -90,6 +90,8 @@ window.CHARA_CONFIG = {
     { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:['plana'],rarity: 5,  status: 'new', version: '4.0', p:2, want: 2 }, 
 
     { name: 'Ashveil', imgName: '1504', have: false, element: 'thunder', group:'hunt', gender:'m', world:['plana'], rarity: 5, status: 'soon', version: '4.1', p:1 }, 
+    { name: 'Evanescia', imgName: '1505', have: false, element: 'physical', group:'ela', gender:'f', world:['plana'], rarity: 5, status: 'soon', version: '4.2', p:2},
+    { name: 'Silver Wolf LV.999', imgName: '1506', have: false, element: 'imaginary', group:'ela', gender:'f', world:['plana','ot'], rarity: 5, status: 'soon', version: '4.2', p:1 },
 
     //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''], rarity: 5,  || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
     //  Element: fire | ice | imaginary | physical | quantum | thunder | wind
