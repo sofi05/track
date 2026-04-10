@@ -273,23 +273,27 @@
 
       // ⭐ ADD GAME 
       if(currentGame==="gi") {
-        if(currentType==="icon") url = `https://api.lunaris.moe/data/assets/avataricon/UI_AvatarIcon_${value}.webp`; 
-        else if(currentType==="sprite") url = `https://api.lunaris.moe/data/assets/gachaimg/UI_Gacha_AvatarImg_${value}.png`;
-        else if(currentType==="👗 Icon") url = `https://gi.yatta.moe/assets/UI/UI_AvatarIcon_${value}.png`; 
-        else if(currentType==="outfit") url = `https://gi.yatta.moe/assets/UI/UI_Costume_${value}.png`;//same name as outfit
+        if(currentType==="icon") url = `https://static.nanoka.cc/assets/gi/UI_AvatarIcon_${value}.webp`; 
+        //ALT https://api.lunaris.moe/data/assets/avataricon/
+        else if(currentType==="sprite") url = `https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_${value}.png`;
+        //ALT https://api.lunaris.moe/data/assets/gachaimg/
+        else if(currentType==="👗 Icon") url = `https://static.nanoka.cc/assets/gi/UI_AvatarIcon_${value}.png`;  
+        else if(currentType==="outfit") url = `https://static.nanoka.cc/assets/gi/UI_Costume_${value}.png`;
+        //ALT https://gi.yatta.moe/assets/UI/ -> Same name as outfit
       } 
       else if(currentGame==="hsr") {
-        if(currentType==="icon") url = `https://homdgcat.wiki/images/avataricon/avatar/${value}.png`; //deadlink
-        else if(currentType==="sprite") url = `https://cdn.neonteam.dev/neonteam/assets/spriteoutput/avatardrawcard/${value}.webp`; 
+        if(currentType==="icon") url = `https://static.nanoka.cc/assets/hsr/avataricon/avatar/${value}.webp`; 
+        else if(currentType==="sprite") url = `https://static.nanoka.cc/assets/hsr/avatardrawcard/${value}.webp`; 
+        //ALT https://cdn.neonteam.dev/neonteam/assets/spriteoutput/avatardrawcard/
         else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`; //deadlink
        else if(currentType==="👗 Icon") url = `https://assets.irminsul.gg/v2/hsr/characters/${value}_1.png`; //TEMPORARY
       } 
       else if(currentGame==="zzz") {
-        if(currentType==="icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}.webp`; //deadlink
-        else if(currentType==="sprite") url = `https://api.hakush.in/zzz/UI/IconRole${value}.webp`;//deadlink
-        else if(currentType==="👗 Icon") url = `https://api.hakush.in/zzz/UI/IconRoleCrop${value}_01.webp`;//deadlink
-        else if(currentType==="outfit") url = `https://api.hakush.in/zzz/UI/IconRole${value}_01.webp`;//deadlink
-        else if(currentType==="bangboo") url = `https://api.hakush.in/zzz/UI/BangbooGarageRole${value}.webp`;//deadlink
+        if(currentType==="icon") url = `https://static.nanoka.cc/assets/zzz/IconRoleCrop${value}.webp`; 
+        else if(currentType==="sprite") url = `https://static.nanoka.cc/assets/zzz/IconRole${value}.webp`;
+        else if(currentType==="👗 Icon") url = `https://static.nanoka.cc/assets/zzz/IconRoleCrop${value}_01.webp`;
+        else if(currentType==="outfit") url = `https://static.nanoka.cc/assets/zzz/IconRole${value}_01.webp`;
+        else if(currentType==="bangboo") url = `https://static.nanoka.cc/assets/zzz/BangbooGarageRole${value}.webp`;
       }
       else if(currentGame==="hi3") {
         url = "https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki";

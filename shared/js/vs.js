@@ -1,21 +1,21 @@
 window.GAME_VERSIONS = {
   GenshinImpact: { //https://irminsul.gg/genshin/banners
-    version: '6.4',
-      p1: '2026-02-24T00:00:00', p2: '2026-03-17T19:00:00', 
-    date1vs: '6.4', date1: '2026-04-07T00:00:00', date1p2: '',
-    date2vs: '6.5', date2: '', date2p2: '',
+    version: '6.5',
+      p1: '2026-04-08T00:00:00', p2: '2026-04-28T19:00:00', 
+    date1vs: '6.6', date1: '2026-05-19T00:00:00', date1p2: '',
+    date2vs: '6.7', date2: '', date2p2: '',
     },
   StarRail: { //https://irminsul.gg/hsr/banners
-    version: '4.0',
-      p1: '2026-02-12T00:00:00', p2: '2026-03-06T19:00:00', //p3: '2026-01-28T19:00:00',
-    date1vs:'4.1', date1: '2026-03-26T00:00:00', date1p2: '', 
-    date2vs:'4.2', date2: '', date2p2: '',
+    version: '4.1',
+      p1: '2026-03-26T00:00:00', p2: '2026-04-08T19:00:00',
+    date1vs:'4.2', date1: '2026-04-21T00:00:00', date1p2: '', 
+    date2vs:'4.3', date2: '', date2p2: '',
   },
   ZenlessZone: { //https://irminsul.gg/zzz/banners
-    version: '2.6',
-      p1: '2026-02-06T00:00:00', p2: '2026-03-04T19:00:00',
-    date1vs: '2.7', date1: '2026-03-24T00:00:00', date1p2: '', 
-    date2vs: '2.8'  , date2: '', date2p2: '',
+    version: '2.7',
+      p1: '2026-03-24T00:00:00', p2: '2026-04-15T19:00:00',
+    date1vs: '2.8', date1: '2026-05-06T00:00:00', date1p2: '', 
+    date2vs: '2.9'  , date2: '', date2p2: '',
     
   },
   HonkaiImpact: { //https://honkaiimpact3.fandom.com/wiki/Update_Log

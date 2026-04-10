@@ -47,6 +47,7 @@ window.BDAY_CONFIG = {
     '05-15': ['Zibai'],
     '05-18': ['Gorou'],
     '05-21': ['Yunjin'],
+    '05-23': ['Linnea'],
     '05-25': ['Dahlia'],
     '05-27': ['Fischl'],
     '05-31': ['Sethos'],
@@ -120,6 +121,9 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
      
+    'x-x': ['Nicole'],
+    'x-x': ['Lohen'],
+    'x-x': ['Prune'],
     //'x-x': [''],  //soon
   },
 
