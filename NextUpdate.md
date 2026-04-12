@@ -23,7 +23,7 @@
 # SHORTCUT TO UPDATES
 
    ## NEW CHARACTERS 
-   + [Genshin Impact](00GI\js\chara.js) + [BIRTHDAY](00GI\js\bday.js) 
+   + [Genshin Impact](00GI\js\chara.js) + [BIRTHDAY](00GI\js\bday.js) + add bday 6.6
    + [Star Rail](01HSR\js\chara.js) 
    + [Zenless Zone](02ZZZ\js\chara.js)
    + [Endfield](Endfield\js\chara.js) 
@@ -32,7 +32,7 @@
 
    ## OUTFIT
    + [Genshin Impact](00GI\js\fit.js) 
-   + [Star Rail](01HSR\js\fit.js)
+   + [Star Rail](01HSR\js\fit.js) + add 4.2 new
    + [Zenless Zone](02ZZZ\js\fit.js)
    * [Honkai Impact](03HI3\js\fit.js) 
 
@@ -44,8 +44,8 @@
 
    ## OTHERS
    + [Genshin Impact](00GI\js\tt.js) || Thespian Poses (update when have time)
-   + [Star RailT](01HSR\js\pet.js)   || Pets
-   + [Zenless Zone](02ZZZ\js\sup.js) || Bangboos
+   + [Star RailT](01HSR\js\pet.js)   || Pets + new 4.2 pet
+   + [Zenless Zone](02ZZZ\js\sup.js) || Bangboos + new 2.7/2.8
 
    * [Honkai Impact](03HI3\js\stig.js) + [Support](03HI3\js\sup.js) 
    
