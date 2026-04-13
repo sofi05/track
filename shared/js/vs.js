@@ -19,9 +19,9 @@ window.GAME_VERSIONS = {
     
   },
   HonkaiImpact: { //https://honkaiimpact3.fandom.com/wiki/Update_Log
-    version:'8.6',  
-    date1vs:'8.7', date1: '2026-03-05T05:00:00', 
-    date2vs:'8.8', date2: '', 
+    version:'8.7',  
+    date1vs:'8.8', date1: '', 
+    date2vs:'8.9', date2: '', 
   },
   NexusAnima: {
     version: '',//BETA in CBT1

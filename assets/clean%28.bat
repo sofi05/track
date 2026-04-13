@@ -20,4 +20,3 @@ for %%f in (*.webp) do (
 )
 
 endlocal
-pause

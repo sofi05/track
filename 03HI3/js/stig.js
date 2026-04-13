@@ -342,8 +342,8 @@ const gameConfig = {
     { name: 'Aristophanes', imgName: 'Aristophanes_T_Icon', 
         spriteImages: ['Aristophanes_B', 'Aristophanes_M', 'Aristophanes_T'], },
 
-    { name: '???', imgName: '', status: 'soon', //coming 8.7 dunno name (theres 3x)
-        spriteImages: [''], },
+    { name: 'Julius Caesar', spriteFolder: 'Julius', imgName: 'Julius_Caesar_T_Icon', status: 'new', 
+        spriteImages: ['Julius_Caesar_B','Julius_Caesar_M','Julius_Caesar_T'], },
 
     { name: '', imgName: '', spriteFolder: '', 
         spriteImages: [''], },

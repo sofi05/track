@@ -3,11 +3,13 @@
    ## [GENSHIN IMPACT _ UTD BETA 6.5](update_all_chara_icons_when_7.X_isout) 
       + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona)
       + Add TT 21 (marked as soon bc im lazy rn)
+      + Add 6.6 BDAYS
    ## [HONKAI STAR RAIL _ UTD BETA 4.1](add_PlanarcadiaIcon_|_assets\others\StarRail\World\)
       + Fix world for all 
+      + update with 4.2 outfit and pet
    ## [HONKAI IMPACT 3RD _ UTD BETA 8.7]()
-      + [NEW CHARA](03HI3\js\chara.js#L136)
-         - Add finishing details + assets of Mei new chara || https://honkaiimpact3.hoyoverse.com/global/en-us/valkyries
+      + [NEW ASTRAL](03HI3\js\sup.js#L24)
+         - See if need to change ART 
       
       + [SKINS](03HI3\js\fit.js) & [STIGMA](03HI3\js\stig.js)
          - Search for "soon" > those are the newest i need to add assets+name
@@ -17,13 +19,15 @@
    ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_CBT2)
 
    ## [ARKNIGHT ENDFIELD _ UTD 1.0](get_1.1_splashes)
+      + Update the groups later
 #
 
 
 # SHORTCUT TO UPDATES
+   [Version](shared/js/vs.js)
 
    ## NEW CHARACTERS 
-   + [Genshin Impact](00GI\js\chara.js) + [BIRTHDAY](00GI\js\bday.js) + add bday 6.6
+   + [Genshin Impact](00GI\js\chara.js) + [BIRTHDAY](00GI\js\bday.js)
    + [Star Rail](01HSR\js\chara.js) 
    + [Zenless Zone](02ZZZ\js\chara.js)
    + [Endfield](Endfield\js\chara.js) 
@@ -32,7 +36,7 @@
 
    ## OUTFIT
    + [Genshin Impact](00GI\js\fit.js) 
-   + [Star Rail](01HSR\js\fit.js) + add 4.2 new
+   + [Star Rail](01HSR\js\fit.js)
    + [Zenless Zone](02ZZZ\js\fit.js)
    * [Honkai Impact](03HI3\js\fit.js) 
 
@@ -44,8 +48,8 @@
 
    ## OTHERS
    + [Genshin Impact](00GI\js\tt.js) || Thespian Poses (update when have time)
-   + [Star RailT](01HSR\js\pet.js)   || Pets + new 4.2 pet
-   + [Zenless Zone](02ZZZ\js\sup.js) || Bangboos + new 2.7/2.8
+   + [Star RailT](01HSR\js\pet.js)   || Pets 
+   + [Zenless Zone](02ZZZ\js\sup.js) || Bangboos 
 
    * [Honkai Impact](03HI3\js\stig.js) + [Support](03HI3\js\sup.js) 
    
@@ -56,3 +60,4 @@
    + [Star Rail](https://hsr.gachabase.net/changelog/beta) || ALT: https://srtools.neonteam.dev/1506
    + [Zenless Zone](https://zzz.gachabase.net/agents) || ALT: https://zzz.nanoka.cc/character
    + [Endfield](https://www.akedata.top) || ALT: https://irminsul.gg/endfield/operators
+   + [HI3](https://www.arustats.com)

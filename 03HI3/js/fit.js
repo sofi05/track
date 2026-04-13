@@ -8,7 +8,7 @@ const gameConfig = {
     {name: 'Aponia', imgName: 'Disciplinary_Perdition', folder:'SoloChara', spriteFolder: 'Aponia', have: false, part: '1',
         spriteImages: ['Butterfly_Dreams', 'Mesmerizing_Blue'], },
 
-    { name: 'Bronya', imgName: 'Wolfs_Dawn', folder: 'Bronya', spriteFolder: 'Bronya', have: false, part: '1',
+    { name: 'Bronya', imgName: 'Wolfs_Dawn', folder: 'Bronya', spriteFolder: 'Bronya', have: false, part: '1', status:'soon', //8.8 skin
         spriteImages: ['White_Devil', 'Throatwort', 'Techno_Beats', 'School_Swimsuit', 'Nightfall_Witch','Midnight_Blues',
         'Mercurial_Hatter','Helenas_Wings','Fleurs_du_Mal','Carrot_and_Beet_Soup','Candy_Demon','Blue_Sky','Blue_Reunion',
         'White_ARC', 'Arc_City_Blues', 'Old_Times', 'Ultraviolet_Kinetik', 'Magic_Girl_Bronya', 'Bestial_Afterburn',
@@ -17,8 +17,8 @@ const gameConfig = {
     { name: 'Carole', imgName: 'Sweet_n_Spicy', folder:'SoloChara', spriteFolder: 'Carole', have: false, part: '1',
         spriteImages: ['Let_the_Class_End', 'Special_Blend'], },
 
-    { name: 'Coralie', imgName: 'Valkyrie_Blastmetal', folder: 'Coralie', spriteFolder: 'Coralie', have: false, part: '2', status: 'soon',
-        spriteImages: ['Puppy_Patrol', 'Brainiac_Dark_Lord_Figure'], },
+    { name: 'Coralie', imgName: 'Valkyrie_Blastmetal', folder: 'Coralie', spriteFolder: 'Coralie', have: false, part: '2', status: 'new',
+        spriteImages: ['Puppy_Patrol', 'Brainiac_Dark_Lord_Figure','Candied_Curtains'], },
 
     { name: 'Durandal', imgName: 'Bright_Knight_-_Excelsis', folder: 'Durandal', spriteFolder: 'Durandal', have: false, part: '1',
         spriteImages: ['Emerald_of_Alfheim', 'Starlit_Evening', 'Purrfect_Holiday', 'Misty_Lavender', 'Lord_Paramount', 
@@ -27,8 +27,8 @@ const gameConfig = {
     { name: 'Eden', imgName: 'Golden_Diva', folder:'SoloChara', spriteFolder: 'Eden', have: false, part: '1',
         spriteImages: ['Crimson_Carol', 'Flowing_Rhyme'], },
 
-    { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1', status: 'soon',
-        spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring'], },
+    { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1', status: 'new',
+        spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring','Lunar_Grace'], },
 
     { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2',
         spriteImages: ['Salted_Plum', 'Citrus_Days'], },
@@ -58,8 +58,8 @@ const gameConfig = {
     { name: 'Shigure Kira', imgName: 'Sugary_Starburst', folder:'SoloChara', spriteFolder: 'Kira', have: false, part: '1',
         spriteImages: ['Dreamy_Melody', 'Fuzzy_Pink_Love', 'Tonights_My_Time'], },
 
-    { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', spriteFolder: 'Lantern', have: false, part: '2', status: 'soon',
-        spriteImages: ['At_Your_Service'], },
+    { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', spriteFolder: 'Lantern', have: false, part: '2', status: 'new',
+        spriteImages: ['At_Your_Service','Lantern_Ablaze'], },
 
     { name: 'Mei', imgName: 'Crimson_Impulse', folder: 'Mei', spriteFolder: 'Mei', have: false, part: '1',
         spriteImages: ['Aeterna_Purum', 'Blue_Memories', 'Hind_of_Noel', 'Soul_Symphony','Vast_Ocean', 'Aqua_Chime',
