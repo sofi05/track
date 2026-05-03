@@ -100,6 +100,8 @@
         https://lunaris.moe
 
         https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki
+
+        https://www.akedata.top
   -->
   <ul id="refsList" class="hidden">
     <!--GENSHIN-->
@@ -122,7 +124,7 @@
     </li>
     <!--HI3-->
     <li id="hi3Refs" class="hidden">
-    • Everything from HI3 is <a href="https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki" target="_blank">here</a>
+    • Everything from HI3 is <a href="https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki" target="_blank">here</a> or <a href="https://www.arustats.com" target="_blank">here</a>
     </li>
     <!--ENDFIELD-->
     <li id="endRefs" class="hidden">
@@ -285,8 +287,8 @@
         if(currentType==="icon") url = `https://static.nanoka.cc/assets/hsr/avataricon/avatar/${value}.webp`; 
         else if(currentType==="sprite") url = `https://static.nanoka.cc/assets/hsr/avatardrawcard/${value}.webp`; 
         //ALT https://cdn.neonteam.dev/neonteam/assets/spriteoutput/avatardrawcard/
-        else if(currentType==="outfit") url = `https://api.hakush.in/hsr/UI/avatardrawcard/avatarskin/1${value}01.webp`; //deadlink
-       else if(currentType==="👗 Icon") url = `https://assets.irminsul.gg/v2/hsr/characters/${value}_1.png`; //TEMPORARY
+        else if(currentType==="outfit") url = `https://static.nanoka.cc/assets/hsr/avatardrawcard/avatarskin/1${value}01.webp`; 
+       else if(currentType==="👗 Icon") url = `https://static.nanoka.cc/assets/hsr/avataricon/avatarskin/1${value}01.webp`;
       } 
       else if(currentGame==="zzz") {
         if(currentType==="icon") url = `https://static.nanoka.cc/assets/zzz/IconRoleCrop${value}.webp`; 
@@ -300,7 +302,7 @@
       }
       else if(currentGame==="end") {
         if(currentType==="icon") url = `https://assets.irminsul.gg/v2/endfield/operators/${value}.png`;
-        else if(currentType==="sprite") url = `https://assets.irminsul.gg/v2/endfield/operators/${value}_splash.png`;
+        else if(currentType==="sprite") url = `https://www.akedata.top/public/images/character/charpic/chr_${value}.png`;
       } 
 
       outputDiv.innerHTML = `Link: <a href="${url}" target="_blank">${url}</a>`;

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Tuskpir', imgName: '251001', have: true, folder: 'Pets', rarity: '4', status: 'available' },
     { name: 'Bubbles', imgName: '251002', have: true, folder: 'Pets', rarity: '4', status: 'available'},
     { name: 'Complainer', imgName: '251003', have: false, folder: 'Pets', rarity: '5', status: 'available' },
+    { name: 'Furbobo Press Corps', imgName: '251004(temp)', have: false, folder: 'Pets', rarity: '5', status: 'new' },
     //{ name: '', imgName: '', have: false, folder: 'Pets', rarity: '5', status: 'new' },
  ];
 

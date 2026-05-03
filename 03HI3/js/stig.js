@@ -342,11 +342,11 @@ const gameConfig = {
     { name: 'Aristophanes', imgName: 'Aristophanes_T_Icon', 
         spriteImages: ['Aristophanes_B', 'Aristophanes_M', 'Aristophanes_T'], },
 
-    { name: 'Julius Caesar', spriteFolder: 'Julius', imgName: 'Julius_Caesar_T_Icon', status: 'new', 
+    { name: 'Julius Caesar', spriteFolder: 'Julius', imgName: 'Julius_Caesar_T_Icon', 
         spriteImages: ['Julius_Caesar_B','Julius_Caesar_M','Julius_Caesar_T'], },
 
-    { name: '', imgName: '', spriteFolder: '', 
-        spriteImages: [''], },
+    { name: 'Claudius Ptolemy', imgName: 'Claudius_Ptolemy_T_Icon',spriteFolder: 'Claudius', status: 'new',
+        spriteImages: ['Claudius_Ptolemy_B', 'Claudius_Ptolemy_T', 'Claudius_Ptolemy_M'], },
 
     { name: '', imgName: '', spriteFolder: '', 
         spriteImages: [''], },

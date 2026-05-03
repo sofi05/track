@@ -132,8 +132,9 @@ window.CHARA_CONFIG = {
     { name: 'Sushang • PS', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.6' }, 
     { name: 'Elysia • HLE', imgName: 'Hi_Love_Elf', folder:'Elysia', have: true, element: 'SD', rarity: 5, part:'2', spec:'GoI' },
     { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'WoD',version: '8.6' },
-    
-    { name: 'Mei • XDC', imgName: 'Xentinel_Dawnbearing_Crescent', folder:'Mei', have: false, element: 'MECH', rarity: 5, part:'2', status: 'new', spec:'GoI',version: '8.7' },
+    { name: 'Mei • XDC', imgName: 'Xentinel_Dawnbearing_Crescent', folder:'Mei', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'GoI',version: '8.7' },
+
+    { name: 'Seele • ???', imgName: '', folder:'Seele', have: false, element: 'SD', rarity: 5, part:'2', status: 'soon', spec:'',version: '8.9' }, //EDIT
     //{ name: '', imgName: '', folder:'', have: false, element: '', rarity: 5, part:'2', status: 'soon', spec:'',version: '' },
 
     //  Element: IMG | SD | PSY | MECH | BIO | QUA

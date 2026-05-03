@@ -3,7 +3,8 @@
    ## [GENSHIN IMPACT _ UTD BETA 6.5](update_all_chara_icons_when_7.X_isout) 
       + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona)
       + Add TT 21 (marked as soon bc im lazy rn)
-      + Add 6.6 BDAYS
+      + Add 6.6 BDAYS [Prune/Lohen/Nicole]
+
    ## [HONKAI STAR RAIL _ UTD BETA 4.1](add_PlanarcadiaIcon_|_assets\others\StarRail\World\)
       + Fix world for all 
       + update with 4.2 outfit and pet
@@ -56,8 +57,16 @@
    + [NEW VERSION OUT](shared\js\vs.js) + [Update](cred.html)
 
 # SITES TO PICK UPDATES
-   + [Genshin Impact](https://lunaris.moe/characters) 
-   + [Star Rail](https://hsr.gachabase.net/changelog/beta) || ALT: https://srtools.neonteam.dev/1506
-   + [Zenless Zone](https://zzz.gachabase.net/agents) || ALT: https://zzz.nanoka.cc/character
-   + [Endfield](https://www.akedata.top) || ALT: https://irminsul.gg/endfield/operators
+   + [Genshin Impact](https://lunaris.moe/characters)
+   ALT: https://gi.nanoka.cc/character/
+
+   + [Star Rail](https://hsr.nanoka.cc/character/) 
+   ALT: https://hsr.gachabase.net/changelog/beta
+
+   + [Zenless Zone](https://zzz.gachabase.net/agents) 
+   ALT: https://zzz.nanoka.cc/character
+
+   + [Endfield](https://www.akedata.top) 
+   ALT: https://irminsul.gg/endfield/operators
+   
    + [HI3](https://www.arustats.com)

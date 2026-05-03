@@ -7,7 +7,7 @@ window.CHARA_CONFIG = {
 getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
     const folder = char.folder || ''; 
-    return `../assets/Sprite/Endfield/${imgName}_splash.png`;
+    return `../assets/Sprite/Endfield/chr_${imgName}.png`;
   },
 
 getFallbackPath: function(char) {
@@ -54,7 +54,7 @@ createImageElement(c) {
 
     container.addEventListener('click', () => {
       const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Endfield/${imgName}_splash.png`;
+      const imgPath = `../assets/Sprite/Endfield/chr_${imgName}.png`;
       showPopup(imgPath, c.name);
     });
 

@@ -41,6 +41,7 @@ window.CHARA_CONFIG = {
 
     { name: 'Gallagher', imgName: '1301', have: true, element: 'fire', group:'abun', gender:'m', world:['pena'],rarity: 4 },
     { name: 'Argenti', imgName: '1302', have: true, element: 'physical', group:'eru', gender:'m', world:['ot'],rarity: 5 },
+    { name: 'Ruan Mei', imgName: '1303', have: true, element: 'ice', group:'harm', gender:'f', world:['hss'],rarity: 5},
     { name: 'Aventurine', imgName: '1304', have: true, element: 'imaginary', group:'prese', gender:'m', world:['ot'],rarity: 5 },
     { name: 'Dr. Ratio', imgName: '1305', have: true, element: 'imaginary', group:'hunt', gender:'m', world:['ot'],rarity: 5 },
     { name: 'Sparkle', imgName: '1306', have: true, element: 'quantum', group:'harm', gender:'f', world:['plana'],rarity: 5 },
@@ -76,7 +77,6 @@ window.CHARA_CONFIG = {
     { name: 'Lingsha', imgName: '1222', have: false, element: 'fire', group:'abun', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.8', want: 1, p:2 },
     { name: 'Fugue', imgName: '1225', have: false, element: 'fire', group:'nihi', gender:'f', world:['txl'], rarity: 5,  status: 'available', version: '3.8', want: 2, p:2 },
 
-    { name: 'Ruan Mei', imgName: '1303', have: false, element: 'ice', group:'harm', gender:'f', world:['hss'],rarity: 5,  status: 'available', version: '4.2', perma: true, want: 2 },
     { name: 'Robin', imgName: '1309', have: false, element: 'physical', group:'harm', gender:'f', world:['pena'],rarity: 5,  status: 'available', version: '4.2', perma: true },
     { name: 'Sunday', imgName: '1313', have: false, element: 'imaginary', group:'harm', gender:'m', world:['ae','pena'], rarity: 5,  status: 'available', version: '4.2', want: 1, p:2 },
     { name: 'Jade', imgName: '1314', have: false, element: 'quantum', group:'eru', gender:'f', world:['ot'],rarity: 5,  status: 'available', version: '3.0' },
@@ -89,8 +89,9 @@ window.CHARA_CONFIG = {
     
     { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:['plana'],rarity: 5,  status: 'available', version: '4.0', p:2, want: 2 }, 
 
-    { name: 'Evanescia', imgName: '1505', have: false, element: 'physical', group:'ela', gender:'f', world:['plana'], rarity: 5, status: 'soon', version: '4.2', p:2},
-    { name: 'Silver Wolf LV.999', imgName: '1506', have: false, element: 'imaginary', group:'ela', gender:'f', world:['plana','ot'], rarity: 5, status: 'soon', version: '4.2', p:1 },
+    { name: 'Evanescia', imgName: '1505', have: false, element: 'physical', group:'ela', gender:'f', world:['plana'], rarity: 5, status: 'new', version: '4.2', p:2},
+    { name: 'Silver Wolf LV.999', imgName: '1506', have: false, element: 'imaginary', group:'ela', gender:'f', world:['plana','ot'], rarity: 5, status: 'new', version: '4.2', p:1 },
+    { name: 'Mortenax Blade', imgName: '1507', have: false, element: 'fire', group:'nihi', gender:'m', world:[''], rarity: 5,  status: 'soon', version: '4.3', p:1},
 
     //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''], rarity: 5,  || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
     //  Element: fire | ice | imaginary | physical | quantum | thunder | wind

@@ -85,6 +85,7 @@ window.CHARA_CONFIG = {
     { name: 'Flins', have: true, element: 'Electro', rarity: 5, region:['snez'], gender:'m'},
     { name: 'Durin', have: true, element: 'Pyro', rarity: 5, region:['mond'], gender:'m'},
     { name: 'Columbina', have: true, element: 'Hydro', rarity: 5, region:['snez'], gender:'f'},
+    { name: 'Emilie', have: true, element: 'Dendro', rarity: 5, region:['font'], gender:'f'},
 
     //DON'T HAVE - ORGANIZED BY LAUNCH
     { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '6.4', want: 2,p:1 }, 
@@ -96,11 +97,10 @@ window.CHARA_CONFIG = {
     { name: 'Dahlia', have: false, element: 'Hydro', rarity: 4, region:['mond'], gender:'m',  status: 'available', version: '6.4', perma: true, want: 1,p:2 },
     { name: 'Yelan', have: false, element: 'Hydro', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.0', p:2 },
     { name: 'Itto', have: false, element: 'Geo', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
-    { name: 'Sigewinne', have: false, element: 'Hydro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.4' },
+    { name: 'Sigewinne', have: false, element: 'Hydro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '6.5', p:2 },
     { name: 'Nilou', have: false, element: 'Hydro', rarity: 5, region:['sum'], gender:'f',  status: 'available', version: '6.0', p:1 },
     { name: 'Mavuika', have: false, element: 'Pyro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '6.6', want: 1 , p:1 },
     { name: 'Varesa', have: false, element: 'Electro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '6.2', p:2, want: 1 },
-    { name: 'Emilie', have: false, element: 'Dendro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '5.7', want: 1 },
     { name: 'Escoffier', have: false, element: 'Cryo', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '6.4',p:2 },
     { name: 'Eula', have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '6.4',p:1 },
     { name: 'Ineffa', have: false, element: 'Electro', rarity: 5, region:['nat','snez'], gender:'f',  status: 'available', version: '6.3', want: 2, p:1 },
@@ -114,8 +114,8 @@ window.CHARA_CONFIG = {
     { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.3', p:2, },
     { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'available', version: '6.3', p:2, perma: true},
     { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'available', version: '6.4', p:1},
-
     { name: 'Linnea', have: false, element: 'geo', rarity: 5, region:['snez'], gender:'f', status: 'new', version: '6.5', p:1, want: 2},
+    
     { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:['unk'], gender:'f',  status: 'soon', version: '6.6', p:1},
     { name: 'Lohen',  have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'m', status: 'soon', version: '6.6', p:2, want: 2 }, //perma: true,
     { name: 'Prune',  have: false, element: 'Anemo', rarity: 4, region:[''], gender:'f', status: 'soon', version: '6.6', p:1, want: 2}, //perma: true,

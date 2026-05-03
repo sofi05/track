@@ -22,13 +22,17 @@ window.CHARA_CONFIG = {
     { name: 'Alesh', imgName: '0024_deepfin', element: 'Cryo', have: true, group: ['UWST'], gender:'m', rarity: 5},
     { name: 'Ardelia', imgName: '0025_ardelia', element: 'Nature', have: true, group: ['Rhodes'], gender:'f', rarity: 6},
     { name: 'Last Rite', imgName: '0026_lastrite', element: 'Cryo', have: true, group: ['Sesqa'], gender:'f', rarity: 6},
-    { name: 'Tangtang', imgName: '0027_tangtang', element: 'Cryo', have: true, group: ['EndIndustries'], gender:'f', rarity: 6 , status: 'new'},
+    { name: 'Tangtang', imgName: '0027_tangtang', element: 'Cryo', have: true, group: ['EndIndustries'], gender:'f', rarity: 6},
     { name: 'Pogranichnik', imgName: '0029_pograni', element: 'Physical', have: true, group: ['Rhodes'], gender:'m', rarity: 6},
-    
+
     //DONT HAVE - ORGANIZED BY NUMBER
-    { name: 'Rossi', imgName: '0028_wulfa', element: 'Heat', have: false, group: [''], gender:'f', rarity: 6 , status: 'new', version: '1.1', p:2},
-    { name: 'Zhuang Fangyi', imgName: '0030_zhuangfy', element: 'Electric', have: false, group: [''], gender:'f', rarity: 6 , status: 'soon', version: '1.2', p:1, want: 2},
-    { name: 'Mi Fu', imgName: '0031_mifu', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1, want: 1,out:false },
+    { name: 'Rossi', imgName: '0028_wulfa', element: 'Heat', have: false, group: [''], gender:'f', rarity: 6 , status: 'available', version: '1.1', p:2},
+
+    { name: 'Zhuang Fangyi', imgName: '0030_zhuangfy', element: 'Electric', have: false, group: [''], gender:'f', rarity: 6 , status: 'new', version: '1.2', p:1, want: 2},
+    { name: 'Mi Fu', imgName: '0031_mifu', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.3', p:1, want: 1,out:false },
+    { name: 'Arcane', imgName: '', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1,out:false },
+    { name: 'Camille', imgName: '', element: '', have: false, group: [''], gender:'m', rarity: 0 , status: 'soon', version: '1.3', p:1,out:false },
+    { name: 'Sui Proxy ', imgName: '', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1,out:false },
     //{ name: '???', imgName: '0032_lizhiyan', element: '', have: false, group: [''], gender:'f', rarity: || , status: 'soon', version: '1.1', p:1},
 
     //was in CBT

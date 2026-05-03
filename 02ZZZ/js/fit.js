@@ -16,6 +16,7 @@ const gameConfig = {
 
     { name: 'Nangong Yu', imgName: '59_01', imgName2: '59_01', have: false, rarity: 5, status: 'new' },
     
+    { name: 'Miyabi', imgName: '13_01', imgName2:'13_01', have: false, rarity: 5, status: 'soon' },
     // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
 
