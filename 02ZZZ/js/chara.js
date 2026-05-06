@@ -53,11 +53,11 @@ window.CHARA_CONFIG = {
     { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.6', p:1 },
     { name: 'Aria', imgName: '57', imgName2: ['57', '57_Form2'], have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.6', p:2 },
 
-    { name: 'Nangong Yu', imgName: '59', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'new', version: '2.7', p:1 },
-    { name: 'Cissia', imgName: '60', have: false, element: 'Electric', group:['MOD'], gender:'f', rarity: 5, status: 'new', version: '2.7', p:2 },
+    { name: 'Nangong Yu', imgName: '59', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:1 },
+    { name: 'Cissia', imgName: '60', have: false, element: 'Electric', group:['MOD'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:2 },
 
-    { name: 'Promeia', imgName: '61', have: false, element: 'Ice', group:['kramp'], gender:'f', rarity: 5, status: 'soon', version: '2.8', p:1 },
-    { name: 'Starlight - Billy', imgName: '62', have: false, element: 'Physical', group:['cunhar','sons'], gender:'m', rarity: 5, status: 'soon', version: '2.8', p:2 },
+    { name: 'Promeia', imgName: '61', have: false, element: 'Ice', group:['kramp'], gender:'f', rarity: 5, status: 'new', version: '2.8', p:1 },
+    { name: 'Starlight - Billy', imgName: '62', have: false, element: 'Physical', group:['cunhar','sons'], gender:'m', rarity: 5, status: 'new', version: '2.8', p:2 },
 
     { name: 'Velina', imgName: '1561(temp)', have: false, element: 'Wind', group:[''], gender:'f', rarity: 5, status: 'soon', version: '3.0', p:1},
     { name: 'Norma', imgName: '1571(temp)', have: false, element: 'Fire', group:[''], gender:'f', rarity: 5, status: 'soon', version: '3.0', p:2 },

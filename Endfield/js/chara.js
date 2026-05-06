@@ -30,7 +30,7 @@ window.CHARA_CONFIG = {
 
     { name: 'Zhuang Fangyi', imgName: '0030_zhuangfy', element: 'Electric', have: false, group: [''], gender:'f', rarity: 6 , status: 'new', version: '1.2', p:1, want: 2},
     { name: 'Mi Fu', imgName: '0031_mifu', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.3', p:1, want: 1,out:false },
-    { name: 'Arcane', imgName: '', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1,out:false },
+    { name: 'Arcane', imgName: '0032_lizhiyan', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1,out:false },
     { name: 'Camille', imgName: '', element: '', have: false, group: [''], gender:'m', rarity: 0 , status: 'soon', version: '1.3', p:1,out:false },
     { name: 'Sui Proxy ', imgName: '', element: '', have: false, group: [''], gender:'f', rarity: 0 , status: 'soon', version: '1.X', p:1,out:false },
     //{ name: '???', imgName: '0032_lizhiyan', element: '', have: false, group: [''], gender:'f', rarity: || , status: 'soon', version: '1.1', p:1},

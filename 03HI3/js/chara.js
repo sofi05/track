@@ -59,8 +59,8 @@ window.CHARA_CONFIG = {
     { name: 'Mei • HoO', imgName: 'Herrscher_of_Origin', folder:'Mei', have: true, element: 'IMG', rarity: 5, part:'1' },
     { name: 'Mei • SD', imgName: 'Shadow_Dash', folder:'Mei', have: true, element: 'MECH', rarity: 4, part:'1' },
     { name: 'Mei • VB', imgName: 'Valkyrie_Bladestrike', folder:'Mei', have: true, element: 'BIO', rarity: 4, part:'1' },
+    { name: 'Mei • HoT', imgName: 'Herrscher_of_Thunder', folder:'Mei', have: true, element: 'PSY', rarity: 5, part:'1' }, 
     //====================================================================================================================
-    { name: 'Mei • HoT', imgName: 'Herrscher_of_Thunder', folder:'Mei', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true }, // need 100 shards
     { name: 'Mei • LE', imgName: 'Lightning_Empress', folder:'Mei', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
     
     { name: 'Liliya', imgName: 'Blueberry_Blitz', folder:'Olenyeva', have: true, element: 'MECH', rarity: 4, part:'1' },
@@ -121,9 +121,9 @@ window.CHARA_CONFIG = {
     { name: 'Erdös • VB', imgName: 'Valkyrie_Boltstorm', folder:'Erdos', have: true, element: 'MECH', rarity: 4, part:'2', spec:'WS'},
     { name: 'Erdös • PA', imgName: 'Planar_Armament_-_Warped_Spacetime', folder:'Erdos', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'GoI', version:'8.4' },
 
-    { name: 'Durandal • RS', imgName: 'Reign_Solaris', folder:'Durandal', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.4'  },
+    { name: 'Durandal • RS', imgName: 'Reign_Solaris', folder:'Durandal', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.7'  },
     { name: 'Kiana • BD', imgName: 'Ba-Dum_Fiery_Wishing_Star', folder:'Kiana', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.7'  }, 
-    { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'WS', version:'8.6'},
+    { name: 'Senadina', imgName: 'Deepspace_Anchor_-_First_Light', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'WS', version:'8.8'},
     { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'WoD', version:'8.6' },
     { name: '"Lantern"', imgName: 'Lone_Destruction_-_Shadowchaser', folder:'SoloChara', have: false, element: 'PSY', rarity: 5, part:'2', status: 'available', spec:'WoD', version:'8.5' }, 
     { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'WoD', version:'8.4' },
@@ -131,7 +131,7 @@ window.CHARA_CONFIG = {
     { name: 'Theresa • SI', imgName: 'Schicksals_Imperative', folder:'Theresa', have: false, element: 'QUA', rarity: 5, part:'2', status: 'available', spec:'WS', version:'8.7' },
     { name: 'Sushang • PS', imgName: 'Peregrine_Sword', folder:'Sushang', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.6' }, 
     { name: 'Elysia • HLE', imgName: 'Hi_Love_Elf', folder:'Elysia', have: true, element: 'SD', rarity: 5, part:'2', spec:'GoI' },
-    { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'WoD',version: '8.6' },
+    { name: 'Rita • ME', imgName: 'Miss_Espionage', folder:'Rita', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'WoD',version: '8.7' },
     { name: 'Mei • XDC', imgName: 'Xentinel_Dawnbearing_Crescent', folder:'Mei', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'GoI',version: '8.7' },
 
     { name: 'Seele • ???', imgName: '', folder:'Seele', have: false, element: 'SD', rarity: 5, part:'2', status: 'soon', spec:'',version: '8.9' }, //EDIT

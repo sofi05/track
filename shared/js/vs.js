@@ -12,10 +12,10 @@ window.GAME_VERSIONS = {
     date2vs:'4.3', date2: '', date2p2: '',
   },
   ZenlessZone: { //https://irminsul.gg/zzz/banners
-    version: '2.7',
-      p1: '2026-03-24T00:00:00', p2: '2026-04-15T19:00:00',
-    date1vs: '2.8', date1: '2026-05-06T00:00:00', date1p2: '2026-05-27T19:00:00', 
-    date2vs: '2.9'  , date2: '2026-06-17T00:00:00', date2p2: '',
+    version: '2.8',
+      p1: '2026-05-06T00:00:00', p2: '2026-05-27T19:00:00',
+    date1vs: '3.0', date1: '2026-06-17T00:00:00', date1p2: '', 
+    date2vs: '3.1'  , date2: '', date2p2: '',
     
   },
   HonkaiImpact: { //https://honkaiimpact3.fandom.com/wiki/Update_Log

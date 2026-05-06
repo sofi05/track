@@ -106,7 +106,7 @@
   <ul id="refsList" class="hidden">
     <!--GENSHIN-->
     <li id="giRefs" class="hidden">
-      • <a href="https://lunaris.moe" target="_blank">Source from here</a><br>
+      • Sources: <a href="https://lunaris.moe" target="_blank">Lunari</a> | <a href="https://gi.nanoka.cc" target="_blank">Nanoka</a><br>
       <span style="font-size: 0.55em; margin-left: 20px;"> [Outfits_Icon: search for the chara &gt; open outfit &gt; copy name]<br> </span>
       • <a href="https://genshin-impact.fandom.com/wiki/Thespian_Trick#Thespian_Tricks" target="_blank">Thespian Trick Pics Source</a>
     </li>
@@ -119,7 +119,7 @@
     </li>
     <!--ZENLESS-->
     <li id="zzzRefs" class="hidden">
-    • <a href="https://zzz3.hakush.in" target="_blank">Source</a><br>
+    • <a href="https://zzz.nanoka.cc" target="_blank">Source</a><br>
     • For info <a href="https://zenless-zone-zero.fandom.com/wiki/" target="_blank">Fandom wiki</a>  
     </li>
     <!--HI3-->
@@ -276,11 +276,9 @@
       // ⭐ ADD GAME 
       if(currentGame==="gi") {
         if(currentType==="icon") url = `https://static.nanoka.cc/assets/gi/UI_AvatarIcon_${value}.webp`; 
-        //ALT https://api.lunaris.moe/data/assets/avataricon/
-        else if(currentType==="sprite") url = `https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_${value}.png`;
-        //ALT https://api.lunaris.moe/data/assets/gachaimg/
-        else if(currentType==="👗 Icon") url = `https://static.nanoka.cc/assets/gi/UI_AvatarIcon_${value}.png`;  
-        else if(currentType==="outfit") url = `https://static.nanoka.cc/assets/gi/UI_Costume_${value}.png`;
+        else if(currentType==="sprite") url = `https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_${value}.webp`;
+        else if(currentType==="👗 Icon") url = `https://static.nanoka.cc/assets/gi/UI_AvatarIcon_${value}.webp`;  
+        else if(currentType==="outfit") url = `https://static.nanoka.cc/assets/gi/UI_Costume_${value}.webp`;
         //ALT https://gi.yatta.moe/assets/UI/ -> Same name as outfit
       } 
       else if(currentGame==="hsr") {
