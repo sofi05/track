@@ -50,20 +50,21 @@ window.CHARA_CONFIG = {
     { name: 'Orphie & Magus', imgName: '49', have: false, element: 'Fire', group:['obol'], gender:'f', rarity: 5, status: 'available', version: '2.8', p:2 },
     { name: 'Banyue', imgName: '53', have: false, element: 'Fire', group:['kramp', 'sum'], gender:'m', rarity: 5, status: 'available', version: '2.4', p:1 },
     { name: 'Dialyn', imgName: '54', have: false, element: 'Physical', group:['kramp'], gender:'f', rarity: 5, status: 'available', version: '2.4', p:2 },
-    { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.6', p:1 },
     { name: 'Aria', imgName: '57', imgName2: ['57', '57_Form2'], have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.6', p:2 },
-
-    { name: 'Nangong Yu', imgName: '59', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:1 },
+    { name: 'Sunna', imgName: '58', have: false, element: 'Physical', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '3.0', p:2 },
+        { name: 'Nangong Yu', imgName: '59', have: false, element: 'Ether', group:['angels'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:1 },
     { name: 'Cissia', imgName: '60', have: false, element: 'Electric', group:['MOD'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:2 },
+    { name: 'Promeia', imgName: '61', have: false, element: 'Ice', group:['kramp'], gender:'f', rarity: 5, version: '2.8', p:1, status: 'available', },
+    { name: 'Starlight - Billy', imgName: '62', have: false, element: 'Physical', group:['cunhar','sons'], gender:'m', rarity: 5, version: '2.8', p:2, status: 'available', },
 
-    { name: 'Promeia', imgName: '61', have: false, element: 'Ice', group:['kramp'], gender:'f', rarity: 5, status: 'new', version: '2.8', p:1 },
-    { name: 'Starlight - Billy', imgName: '62', have: false, element: 'Physical', group:['cunhar','sons'], gender:'m', rarity: 5, status: 'new', version: '2.8', p:2 },
-
-    { name: 'Velina', imgName: '1561(temp)', have: false, element: 'Wind', group:[''], gender:'f', rarity: 5, status: 'soon', version: '3.0', p:1},
-    { name: 'Norma', imgName: '1571(temp)', have: false, element: 'Fire', group:[''], gender:'f', rarity: 5, status: 'soon', version: '3.0', p:2 },
-    { name: 'Pyrois', imgName: 'Agent_Pyrois(temp)', have: false, element: 'Ether', group:[''], gender:'', rarity: 5, status: 'soon', version: '3.0' },
+    { name: 'Pyrois', imgName: '63', have: false, element: 'Ether', group:[''], gender:'', rarity: 5, status: 'new', version: '3.0'},
+    { name: 'Velina', imgName: '64', have: false, element: 'Wind', group:[''], gender:'f', rarity: 5,  status: 'new', version: '3.0', p:1},
+    { name: 'Norma', imgName: '65', have: false, element: 'Fire', group:[''], gender:'f', rarity: 5, status: 'new', version: '3.0', p:2 },
+    
+    { name: 'Sigrid', imgName: '66', have: false, element: 'Ice', group:[''], gender:'f', rarity: 5, status: 'soon', version: '3.1', p:2 },
+    { name: 'Remielle', imgName: '67', have: false, element: 'Lumiflux', group:[''], gender:'F', rarity: 5,status: 'soon', version: '3.1', p:1},
     // { name: '', imgName: '', have: false, element: '', filterElement:'', group:[''], gender:'', rarity: 5, || status: 'soon', version: '', p:2, perma: true, want: 1/2 },
-    //  Element: Electric | Physical ⇄ HonedEdge | Fire | Ether ⇄ AuricInk | Frost ⇄ Ice | Wind
+    //  Element: Electric | Physical ⇄ HonedEdge | Fire | Ether ⇄ AuricInk | Frost ⇄ Ice | Wind | Lumiflux
     //  Group: cunhar | obol | vic | sec6 | belo | sons | spec | sum | spook | kramp | star | mock | angels
   ],
 

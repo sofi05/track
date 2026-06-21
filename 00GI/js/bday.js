@@ -1,5 +1,6 @@
 window.BDAY_CONFIG = {
   birthdays: {
+    //Jan
     '01-03': ['Wanderer'],
     '01-05': ['Jahoda'],
     '01-06': ['Lanyan'],
@@ -11,6 +12,7 @@ window.BDAY_CONFIG = {
     '01-22': ['Momoka'],
     '01-24': ['Rosaria'],
 
+    //Feb
     '02-02': ['Linette', 'Liney'],
     '02-11': ['Alhatham'],
     '02-14': ['Beidou'],
@@ -18,6 +20,7 @@ window.BDAY_CONFIG = {
     '02-22': ['Kokomi'],
     '02-29': ['Bennett'],
 
+    //Mar
     '03-01': ['Lauma'],
     '03-03': ['Qiqi'],
     '03-06': ['Yaoyao'],
@@ -30,7 +33,9 @@ window.BDAY_CONFIG = {
     '03-26': ['Ayato'],
     '03-30': ['Sigewinne'],
 
+    //Apr
     '04-02': ['Ineffa'],
+    '04-03': ['Lohen'],
     '04-04': ['Aloy'],
     '04-07': ['Dehya'],
     '04-10': ['Charlotte'],
@@ -41,6 +46,7 @@ window.BDAY_CONFIG = {
     '04-25': ['Baizhuer'],
     '04-30': ['Diluc'],
 
+    //May
     '05-03': ['Candace'],
     '05-08': ['Collei'],
     '05-09': ['Nefer'], 
@@ -52,6 +58,7 @@ window.BDAY_CONFIG = {
     '05-27': ['Fischl'],
     '05-31': ['Sethos'],
 
+    //Jun
     '06-01': ['Itto', 'Paimon'], 
     '06-08': ['Escoffier'],
     '06-09': ['Lisa'],
@@ -61,6 +68,7 @@ window.BDAY_CONFIG = {
     '06-26': ['Shougun'],
     '06-27': ['Yae'],
 
+    //Jul
     '07-05': ['Barbara'],
     '07-09': ['Kaveh'],
     '07-14': ['Sara'],
@@ -70,6 +78,7 @@ window.BDAY_CONFIG = {
     '07-27': ['Klee', 'Shinobu'],
     '07-28': ['Feiyan'],
 
+    //Aug
     '08-03': ['Mualani'],
     '08-08': ['Iansan'],
     '08-10': ['Ambor'],
@@ -82,6 +91,7 @@ window.BDAY_CONFIG = {
     '08-28': ['Mavuika'],
     '08-31': ['Mona'],
 
+    //Sep
     '09-07': ['Chongyun'],
     '09-09': ['Razor'],
     '09-13': ['Albedo'],
@@ -90,7 +100,9 @@ window.BDAY_CONFIG = {
     '09-22': ['Emilie'],
     '09-24': ['Freminet'],
     '09-28': ['Ayaka'],
+    '09-29': ['Nicole'],
 
+    //Oct
     '10-09': ['Xingqiu'],
     '10-13': ['Furina'],
     '10-14': ['Olorun'],
@@ -101,15 +113,17 @@ window.BDAY_CONFIG = {
     '10-29': ['Kazuha'],
     '10-31': ['Flins'],
 
+    //Nov
     '11-02': ['Xiangling'],
     '11-05': ['SkirkNew'],
     '11-11': ['Kinich'],
     '11-15': ['Varesa'],
-    '11-20': ['Keqing'],
+    '11-20': ['Keqing','Prune'],
     '11-23': ['Wriothesley'],
     '11-26': ['Sucrose'],
     '11-30': ['Kaeya'],
 
+    //Dec
     '12-02': ['Ganyu'],
     '12-03': ['Nilou'],
     '12-10': ['Chasca'],
@@ -121,9 +135,7 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
      
-    'x-x': ['Nicole'],
-    'x-x': ['Lohen'],
-    'x-x': ['Prune'],
+    'x-x': ['Sandrone'],
     //'x-x': [''],  //soon
   },
 

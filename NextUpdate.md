@@ -1,60 +1,73 @@
 # MUST FIX / CHANGE NEXT UPDATE
 
-   ## [GENSHIN IMPACT _ UTD BETA 6.5](update_all_chara_icons_when_7.X_isout) 
+   ## [GENSHIN IMPACT](+Icons +AltSprites +World) 
       + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona)
-      + Add TT 21 (marked as soon bc im lazy rn)
-      + Add 6.6 BDAYS [Prune/Lohen/Nicole]
+      + CHECK WORLD FOR ALL
+      ++ TAKE A TIME AND UPDATE ALL ICONS/SPRITE AFTER 7.X (theres minor changes)
 
-   ## [HONKAI STAR RAIL _ UTD BETA 4.1](add_PlanarcadiaIcon_|_assets\others\StarRail\World\)
-      + Fix world for all 
-      + update with 4.2 outfit and pet
-   ## [HONKAI IMPACT 3RD _ UTD BETA 8.7]()
-      + [NEW ASTRAL](03HI3\js\sup.js#L24)
-         - See if need to change ART 
-      
-      + [SKINS](03HI3\js\fit.js) & [STIGMA](03HI3\js\stig.js)
-         - Search for "soon" > those are the newest i need to add assets+name
+   ## [HONKAI STAR RAIL](assets\others\StarRail\World\)
+      + Fix world for all
+      + Add planacardia Icon to "assets\others\StarRail\World\"
+      + PUT COLLAB BUTTON IN CHARACTER PAGE
 
-      + [MC](03HI3\js\mc.js) 
-         - Need to organize whole
+   ## ZENLESS ZONE ZERO(+Element +Groups)
+      + Fix groups for all
+      + ADD ELEMENT WIND & Lumiflux  *NEW
+
+   ## [HONKAI IMPACT 3RD](+CheckAssets +EditMCPage)
+      + See if i need to replace pics from chara from 8.8+ (or all)
+      + Organize MC entire page
+
+      + SEARCH FOR "SOON" TO UPDATE > PLACEHOLDER TO ADD ASSETS LATER  || Apply to Fit/Stig
+
    ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_CBT2)
 
    ## [ARKNIGHT ENDFIELD _ UTD 1.0](get_1.1_splashes)
       + Update the groups later
-#
+
 
 
 # SHORTCUT TO UPDATES
-   [Version](shared/js/vs.js)
+   [Version](shared/js/vs.js) + [Update](cred.html)
 
-   ## NEW CHARACTERS 
-   + [Genshin Impact](00GI\js\chara.js) + [BIRTHDAY](00GI\js\bday.js)
-   + [Star Rail](01HSR\js\chara.js) 
-   + [Zenless Zone](02ZZZ\js\chara.js)
-   + [Endfield](Endfield\js\chara.js) 
+   ## GENSHIN IMPACT
+   + [ NEW CHARACTERS ](00GI\js\chara.js) _________________ [SOON_6.8](UPTO_6.7)
+   + [ BIRTHDAY ](00GI\js\bday.js) _________________ [SOON_6.7](UPTO_6.6)
+   + [ OUTFIT ](00GI\js\fit.js) _________________ [SOON_6.7](UPTO_6.6)
+   + [ MAIN ](00GI\js\mc.js) _________________ [SOON_7.0]
 
-   * [Honkai Impact](03HI3\js\chara.js) * Update when out
+   + [ thespian trick](00GI\js\tt.js) || (update when have time) [LAST_23]
 
-   ## OUTFIT
-   + [Genshin Impact](00GI\js\fit.js) 
-   + [Star Rail](01HSR\js\fit.js)
-   + [Zenless Zone](02ZZZ\js\fit.js)
-   * [Honkai Impact](03HI3\js\fit.js) 
 
-   ## MAIN CHARA 
-   + [Star Rail](01HSR\js\mc.js)     || When new element is out
-   + [Zenless Zone](02ZZZ\js\mc.js)  || When new full outfit is out
+   ## HONKAI STAR RAIL
+   + [ NEW CHARACTERS ](01HSR\js\chara.js) _________________ [SOON_4.5](UPTO_4.4)
+   + [ OUTFIT ](01HSR\js\fit.js) _________________ [LAST_4.2]
+   + [ MAIN ](01HSR\js\mc.js) 
 
-   * [Honkai Impact](03HI3\js\mc.js) || Must fix
+   + [ PET ](01HSR\js\pet.js) || (update when have time) [LAST_4.2]
+
+
+   ## ZENLESS ZONE ZERO  
+   + [ NEW CHARACTERS ](02ZZZ\js\chara.js) _________________ [SOON_3.1](UPTO_3.0)
+   + [ OUTFIT ](02ZZZ\js\fit.js) _________________ [NEW_3.0]
+   + [ BANGBOO ](02ZZZ\js\sup.js) _______________ [NEW_3.0](SOON_3.1)
+
+   + [ MAIN ](02ZZZ\js\mc.js) _________________ [NEW_3.0]
+
+
+   ## HONKAI IMPACT
+   * [ NEW CHARACTERS ](03HI3\js\chara.js) * (UPTO_8.9)
+   * [ OUTFIT ](03HI3\js\fit.js) * (UPTO_8.8)
+   * [ SUP ](03HI3\js\sup.js) * (UPTO_8.8)
+
+   * [ MAIN ](03HI3\js\mc.js) 
+   * [ STIG ](03HI3\js\stig.js) * (UPTO_8.8)
+   
 
    ## OTHERS
-   + [Genshin Impact](00GI\js\tt.js) || Thespian Poses (update when have time)
-   + [Star RailT](01HSR\js\pet.js)   || Pets 
-   + [Zenless Zone](02ZZZ\js\sup.js) || Bangboos 
+   + [Endfield](Endfield\js\chara.js) 
 
-   * [Honkai Impact](03HI3\js\stig.js) + [Support](03HI3\js\sup.js) 
-   
-   + [NEW VERSION OUT](shared\js\vs.js) + [Update](cred.html)
+
 
 # SITES TO PICK UPDATES
    + [Genshin Impact](https://lunaris.moe/characters)
@@ -70,3 +83,5 @@
    ALT: https://irminsul.gg/endfield/operators
    
    + [HI3](https://www.arustats.com)
+
+   + [HNA]()

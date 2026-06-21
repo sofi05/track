@@ -4,7 +4,12 @@ window.CHARA_CONFIG = {
     { name: '', name2: 'Lumine', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5 },
     { name: ' ', name2: 'Aether', GP: 2, imgName: 'PlayerBoyCostumeCWXR', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, hasOutfit:true },
     { name: ' ', name2: 'Lumine', GP: 1, imgName: 'PlayerGirlCostumeCWXR', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, hasOutfit:true },
-    ],
+    
+    { name: '  ', name2: 'Aether', GP: 2, imgName: '', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, hasOutfit:true, status: 'soon' },
+    { name: '  ', name2: 'Lumine', GP: 1, imgName: '', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, hasOutfit:true, status: 'soon' },
+    //{ name: ' ', name2: 'Aether', GP: 2, imgName: '', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, hasOutfit:true },
+    //{ name: ' ', name2: 'Lumine', GP: 1, imgName: '', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, hasOutfit:true },
+  ],
 
   pageType: "typeB",
 

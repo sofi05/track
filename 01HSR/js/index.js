@@ -53,5 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function getIconPath(char, imgName, config) {
-  return `${config.iconPath}/${config.imagePrefix}${imgName}.png`;
+  // If the character is a collab unit, inject 'collab/' into the path string
+  const collabFolder = char.collab ? 'collab/' : '';
+  return `${config.iconPath}/${collabFolder}${config.imagePrefix}${imgName}.png`;
 }

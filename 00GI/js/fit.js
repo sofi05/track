@@ -23,6 +23,9 @@ const gameConfig = {
     { name: 'Yaoyao', imgName: 'YaoyaoCostumeWinter', have: true, rarity: 4},
     { name: 'Neuvillette', imgName: 'NeuvilletteCostumeWinter', have: false, rarity: 5},
 
+    { name: 'Charlotte', imgName: '', imgName2:'', have: false, rarity: 4, status: 'soon' },
+    { name: 'Citlali', imgName: '', imgName2:'', have: false, rarity: 5, status: 'soon' },
+
  // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
 

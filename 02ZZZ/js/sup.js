@@ -37,8 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Bild N. Boolok', have: true, rarity: '4' },
     { name: 'Birkblick', have: false, rarity: '4'},
     { name: 'Sprout', have: false, rarity: '5' },
-    { name: 'Booltergeist', have: false, rarity: '4', status: 'soon' },
-    { name: 'Biggest Fan', have: false, rarity: '5',status: 'new' },
+    { name: 'Booltergeist', have: false, rarity: '4'},
+    { name: 'Biggest Fan', have: false, rarity: '5'},
+    { name: 'Ultra Jake', have: false, rarity: '5', status: 'new' },
+
+    { name: 'Ariel', have: false, rarity: '5', status: 'soon' },
     //{ name: '', have: false, rarity: '', status: 'soon' },
   ];
 

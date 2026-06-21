@@ -12,11 +12,11 @@ const gameConfig = {
     { name: 'Manato', imgName: '51_01', have: true, rarity: 4 },
     { name: 'Shunguan', imgName: '55_01', have: false, rarity: 5 },
     { name: 'Aria', imgName: '57_01', imgName2: ['57_01', '57_01_Form2'], have: false, rarity: 5 },
-    { name: 'Sunna', imgName: '58_01', imgName2: '58_01', have: false, rarity: 5 },
+    { name: 'Sunna', imgName: '58_01', have: false, rarity: 5 },
+    { name: 'Nangong Yu', imgName: '59_01', have: false, rarity: 5 },
+    { name: 'Miyabi', imgName: '13_01', have: false, rarity: 5 },
 
-    { name: 'Nangong Yu', imgName: '59_01', imgName2: '59_01', have: false, rarity: 5, status: 'new' },
-    
-    { name: 'Miyabi', imgName: '13_01', imgName2:'13_01', have: false, rarity: 5, status: 'soon' },
+    { name: 'Velina', imgName: '64_01', have: false, rarity: 5, status: 'new' },
     // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
 

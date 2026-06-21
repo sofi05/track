@@ -65,6 +65,14 @@ window.CHARA_CONFIG = {
 
     { name: 'Yao Guang', imgName: '1502', have: true, element: 'physical', group:'ela', gender:'f', world:['txl'],rarity: 5},
     { name: 'Ashveil', imgName: '1504', have: true, element: 'thunder', group:'hunt', gender:'m', world:['plana'], rarity: 5}, 
+    { name: 'Mortenax Blade', imgName: '1507', have: true, element: 'fire', group:'nihi', gender:'m', world:[''], rarity: 5},
+
+    //COLLAB - ORGANIZED BY NUMBER
+    { name: 'Archer', imgName: '1015', have: true, element: 'quantum', group:'hunt', gender:'m', world:['ot'], rarity: 5, collab: true },
+
+    { name: 'Saber', imgName: '1014', have: false, element: 'wind', group:'dest', gender:'f', world:['ot'], rarity: 5, version: '3.4', p:1, perma: true, want: 2, collab: true, status: 'available', },
+    { name: 'Gilgamesh', imgName: '1509', have: false, element: 'thunder', group:'dest', gender:'m', world:['ot'], rarity: 5, status: 'soon', version: '4.4', p:1, want: 2,collab: true },
+    { name: 'Rin Tohsaka', imgName: '1508', have: false, element: 'quantum', group:'eru', gender:'f', world:['ot'], rarity: 5, status: 'soon', version: '4.4', p:1,want: 2,collab: true },
     
     //DONT HAVE - ORGANIZED BY NUMBER
     { name: 'Jing Yuan', imgName: '1204', have: false, element: 'thunder', group:'eru', gender:'m', world:['txl'], rarity: 5,  status: 'available', version: '4.0' },
@@ -85,49 +93,59 @@ window.CHARA_CONFIG = {
     { name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.8', want: 2, p:3 },
     { name: 'Cipher', imgName: '1406', have: false, element: 'quantum', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:2, want: 2 },
     { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '4.0', want: 1, p:2 },    
-    { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'available', version: '3.7', want: 2 },
+    { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'available', version: '4.3', want: 2 },
     
     { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:['plana'],rarity: 5,  status: 'available', version: '4.0', p:2, want: 2 }, 
 
-    { name: 'Evanescia', imgName: '1505', have: false, element: 'physical', group:'ela', gender:'f', world:['plana'], rarity: 5, status: 'new', version: '4.2', p:2},
-    { name: 'Silver Wolf LV.999', imgName: '1506', have: false, element: 'imaginary', group:'ela', gender:'f', world:['plana','ot'], rarity: 5, status: 'new', version: '4.2', p:1 },
-    { name: 'Mortenax Blade', imgName: '1507', have: false, element: 'fire', group:'nihi', gender:'m', world:[''], rarity: 5,  status: 'soon', version: '4.3', p:1},
+    { name: 'Evanescia', imgName: '1505', have: false, element: 'physical', group:'ela', gender:'f', world:['plana'], rarity: 5, status: 'available', version: '4.2', p:2},
+    { name: 'Silver Wolf LV.999', imgName: '1506', have: false, element: 'imaginary', group:'ela', gender:'f', world:['plana','ot'], rarity: 5, status: 'available', version: '4.2', p:1 },
 
+    { name: 'Himeko • Nova', imgName: '1510', have: false, element: 'fire', group:'eru', gender:'f', world:['plana','ae'], rarity: 5, status: 'soon', version: '4.4', p:1},
+    
     //{ name: '', imgName: '', have: false, element: '', group:'', gender:'', world:[''], rarity: 5,  || status: 'soon', version: '', p:1, perma: true, want: 1/2 },
     //  Element: fire | ice | imaginary | physical | quantum | thunder | wind
     //  Group: prese | hunt | eru | nihi | dest | harm | abun | reme | ela
     //  World: ae | ot | hss | JVI | txl | pena | amp |
   ],
 
-getSpritePath: function(char) {
+  getSpritePath: function(char) {
     const imgName = char.imgName || char.name;
-    const folder = char.folder || ''; 
-    return `../assets/Sprite/StarRail/${imgName}.png`;
+    // If collab is true, it inserts 'collab/', otherwise it inserts an empty string
+    const collabFolder = char.collab ? 'collab/' : '';
+    return `../assets/Sprite/StarRail/${collabFolder}${imgName}.png`;
   },
 
-getFallbackPath: function(char) {
-  return `../assets/others/StarRail/Random/Type_Unknown_Small.webp`; 
-},
+  getFallbackPath: function(char) {
+    return `../assets/others/StarRail/Random/Type_Unknown_Small.webp`; 
+  },
 
-createImageElement(c) {
+  createImageElement(c) {
     const container = document.createElement('div');
     container.className = 'char-icon-container';
 
     const img = document.createElement('img');
     img.className = 'char-icon';
     const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/StarRail/${imgSrcName}.png`;
+    
+    // Updates the icon path to check for collab
+    const collabFolder = c.collab ? 'collab/' : '';
+    img.src = `../assets/charaid/StarRail/${collabFolder}${imgSrcName}.png`;
     img.alt = c.name;
 
     const fallbackImg = this.getFallbackPath(c);  
-  img.onerror = () => {
-    img.src = fallbackImg;
-  };
+    img.onerror = () => {
+      img.src = fallbackImg;
+    };
 
+    // --- CHANGED THIS SECTION BELOW ---
     const elementImg = document.createElement('img');
     elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/StarRail/Element/${c.element}.png`;
-    elementImg.alt = c.element;
+    
+    // If the character has no element text (like Archer/Saber), look for 'Unknown.png'
+    const elementPath = c.element ? c.element : 'Unknown'; 
+    elementImg.src = `../assets/others/StarRail/Element/${elementPath}.png`;
+    elementImg.alt = c.element || 'Unknown';
+    // ----------------------------------
 
     container.appendChild(img);
     container.appendChild(elementImg);
@@ -145,11 +163,9 @@ createImageElement(c) {
       });
       container.appendChild(worldList);
     }
-    //=================================================
 
     container.addEventListener('click', () => {
-      const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/StarRail/${c.imgName}.png`;
+      const imgPath = this.getSpritePath(c);
       showPopup(imgPath, c.name);
     });
 

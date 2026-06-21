@@ -82,7 +82,7 @@ const gameConfig = {
         spriteImages: ['Ready_for_Battle'] },
     { name: 'Lisa', have: [false], 
         spriteImages: ['Leisure_Time'] },
-    { name: 'Raiden Shogun', imgName: 'Shougun', spriteFolder: 'Raiden', have: [true], 
+    { name: 'Raiden Shogun', imgName: 'Shougun', spriteFolder: 'Raiden', have: [true], status: 'soon',
         spriteImages: ['Ready_for_Battle'] },
     { name: 'Razor', have: [false], 
         spriteImages: ['Watching_and_Waiting', 'All_Green_and_Good_to_Go'] },
@@ -134,7 +134,7 @@ const gameConfig = {
         spriteImages: ['Leisure_Time'] },
     { name: 'Layla', have: [false], 
         spriteImages: ['Thesis_Progression'] },
-    { name: 'Mika', have: [true], 
+    { name: 'Mika', have: [true],  status: 'soon',
         spriteImages: ['Striving_to_Negotiate'] },
     { name: 'Wriothesley', have: [false], 
         spriteImages: ['Tidying_Up'] },
@@ -179,17 +179,22 @@ const gameConfig = {
     { name: 'Itto', have: [false], 
         spriteImages: ['Valiant_Hero']},
     { name: 'Varesa', have: [false], 
-        spriteImages: ['Valiant_Hero'], status:'new'},
+        spriteImages: ['Valiant_Hero']},
     { name: 'Lauma', have: [false], 
-        spriteImages: ['Amiable_Conversation'], status:'new'},
+        spriteImages: ['Amiable_Conversation']},
     { name: 'Dahlia', have: [false], 
-        spriteImages: ['Relaxed_Bearing'], status:'new'},
+        spriteImages: ['Relaxed_Bearing']},
     { name: 'Chevreuse', have: [false], 
-        spriteImages: ['Ready_for_Battle'], status:'new'},
+        spriteImages: ['Ready_for_Battle']},
+
+    { name: 'Mavuika', have: [false],
+        spriteImages: ['', ''], status:'soon', },
+    { name: 'Kachina', have: [false], 
+         spriteImages: ['', ''], status:'soon', },
         
     //{ name: '', have: [false, true], imgName:'', spriteFolder: '', spriteImages: ['', ''], status:'new', },
     
-    // Current TT season is 20 || Link: https://genshin-impact.fandom.com/wiki/Thespian_Trick ...
+    // Current TT season is 24 || Link: https://genshin-impact.fandom.com/wiki/Thespian_Trick ...
   ],
 
   pathPrefix: "../assets/charaid/Genshin/",
