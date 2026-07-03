@@ -6,6 +6,7 @@ window.BDAY_CONFIG = {
     '01-06': ['Lanyan'],
     '01-09': ['Tohma'],
     '01-10': ['Chevreuse'],
+    '01-13': ['Sandrone'],
     '01-14': ['Columbina'], 
     '01-18': ['Diona'],
     '01-20': ['Citlali'],
@@ -134,8 +135,9 @@ window.BDAY_CONFIG = {
     '12-23': ['Illuga'],
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
-     
-    'x-x': ['Sandrone'],
+
+    'x-x': ['Odette'],  //soon
+    'x-x': ['Alyosha'],  //soon
     //'x-x': [''],  //soon
   },
 

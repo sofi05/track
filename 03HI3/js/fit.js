@@ -8,7 +8,7 @@ const gameConfig = {
     {name: 'Aponia', imgName: 'Disciplinary_Perdition', folder:'SoloChara', spriteFolder: 'Aponia', have: false, part: '1',
         spriteImages: ['Butterfly_Dreams', 'Mesmerizing_Blue'], },
 
-    { name: 'Bronya', imgName: 'Wolfs_Dawn', folder: 'Bronya', spriteFolder: 'Bronya', have: false, part: '1', status:'new', 
+    { name: 'Bronya', imgName: 'Wolfs_Dawn', folder: 'Bronya', spriteFolder: 'Bronya', have: false, part: '1',
         spriteImages: ['White_Devil', 'Throatwort', 'Techno_Beats', 'School_Swimsuit', 'Nightfall_Witch','Midnight_Blues',
         'Mercurial_Hatter','Helenas_Wings','Fleurs_du_Mal','Carrot_and_Beet_Soup','Candy_Demon','Blue_Sky','Blue_Reunion',
         'White_ARC', 'Arc_City_Blues', 'Old_Times', 'Ultraviolet_Kinetik', 'Magic_Girl_Bronya', 'Bestial_Afterburn',
@@ -30,8 +30,8 @@ const gameConfig = {
     { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1', 
         spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring','Lunar_Grace'], },
 
-    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2',
-        spriteImages: ['Salted_Plum', 'Citrus_Days'], },
+    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2', status:'new', 
+        spriteImages: ['Salted_Plum', 'Citrus_Days', 'Summer_Tactical_Gear'], },
 
     { name: 'FuHua', imgName: 'Valkyrie_Accipiter', folder: 'FuHua', spriteFolder: 'FuHua', have: false, part: '1',
         spriteImages: ['Autumn_Shades', 'Blood_Voivode', 'Blue_Swallow', 'Dark_Butler', 'Hawk_of_the_Yard', 'Onyx_Simurgh',
@@ -84,7 +84,7 @@ const gameConfig = {
     { name: 'Pardofelis', imgName: 'Reverist_Calico', folder:'SoloChara', spriteFolder: 'Pardofelis', have: false, part: '1',
         spriteImages: ['Meowtose_Macchiato', 'Midsummer_Collector', 'Simply_Orange', 'Spectral_Claws'], },
 
-    { name: 'PROMETHEUS', imgName: 'Terminal_Aide_0017', folder:'SoloChara', spriteFolder: 'Prometheus', have: false, part: '1',
+    { name: 'PROMETHEUS', imgName: 'Terminal_Aide_0017', folder:'SoloChara', spriteFolder: 'Prometheus', have: false, part: '1', status:'soon', 
         spriteImages: ['Fizzy_Ray', 'Saccharine_Lash-Out'], },
 
     { name: 'Rita', imgName: 'Argent_Knight_-_Artemis', folder: 'Rita', spriteFolder: 'Rita', have: false, part: '1',
@@ -107,7 +107,7 @@ const gameConfig = {
     { name: 'Sirin', imgName: 'Miracle_Magical_Girl', folder:'SoloChara', spriteFolder: 'Sirin', have: false, part: '1',
         spriteImages: ['Magic_Academy_Uniform', 'Soaring_Wings'], },
 
-    { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', spriteFolder: 'Songque', have: false, part: '1',
+    { name: 'Songque', imgName: 'Jovial_Deception_-_Shadowdimmer', folder:'SoloChara', spriteFolder: 'Songque', have: false, part: '1', status:'soon', 
         spriteImages: ['Whitewave_Topper_Figure'], },
 
     { name: 'Susannah', imgName: 'Valkyrie_Quicksand', folder:'SoloChara', spriteFolder: 'Susannah', have: false, part: '1',
@@ -116,8 +116,8 @@ const gameConfig = {
     { name: 'Sushang', imgName: 'Jade_Knight', folder: 'Sushang', spriteFolder: 'Sushang', have: false, part: '1',
         spriteImages: ['Auspicious_Dazzle', 'Midnight_Moon'], },
     
-    { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2',
-        spriteImages: ['Gentle_is_the_Night', 'Roseate_Summer'], },
+    { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2', status:'new', 
+        spriteImages: ['Gentle_is_the_Night', 'Roseate_Summer', 'Pact_Absolute'], },
     
     { name: 'Theresa', imgName: 'Valkyrie_Pledge', folder: 'Theresa', spriteFolder: 'Theresa', have: false, part: '1',
         spriteImages: ['Before_the_Dawn', 'Blood_Knight_-_Moonlight', 'Campus_Detective','Empyrean_Psalms', 'Grand_Sage',

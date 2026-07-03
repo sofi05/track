@@ -4,8 +4,9 @@ const gameConfig = {
     { name: 'Firefly', imgName: '1131001', have: false, rarity: 5 },
     { name: 'Ruan Mei', imgName: '1130301', have: true, rarity: 5}, 
     { name: 'Castorice', imgName: '1140701', have: false, rarity: 5},
-    
-    //{ name: '', imgName: '', imgName2:'', have: false, rarity: 5, status: 'new', // part:'pom' },
+
+    { name: 'Sparxie', imgName: '', have: false, rarity: 5, status: 'soon' },
+    //{ name: '', imgName: '', imgName2:'', have: false, rarity: 5, status: 'soon' },
   ],
 
 pathPrefix: "../assets/charaid/StarRail/Outfit/", 

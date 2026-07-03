@@ -92,10 +92,10 @@ window.CHARA_CONFIG = {
     
     { name: 'Aglaea', imgName: '1402', have: false, element: 'thunder', group:'reme', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.8', want: 2, p:3 },
     { name: 'Cipher', imgName: '1406', have: false, element: 'quantum', group:'nihi', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '3.7', p:2, want: 2 },
-    { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '4.0', want: 1, p:2 },    
+    { name: 'Cerydra', imgName: '1412', have: false, element: 'wind', group:'harm', gender:'f', world:['amp'], rarity: 5,  status: 'available', version: '4.4', want: 1, p:2 },    
     { name: 'Cyrene', imgName: '1415', have: false, element: 'ice', group:'reme', gender:'f', world:['amp'],rarity: 5,  status: 'available', version: '4.3', want: 2 },
     
-    { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:['plana'],rarity: 5,  status: 'available', version: '4.0', p:2, want: 2 }, 
+    { name: 'Sparxie', imgName: '1501', have: false, element: 'fire', group:'ela', gender:'f', world:['plana'],rarity: 5,  status: 'available', version: '4.4', p:1, want: 2 }, 
 
     { name: 'Evanescia', imgName: '1505', have: false, element: 'physical', group:'ela', gender:'f', world:['plana'], rarity: 5, status: 'available', version: '4.2', p:2},
     { name: 'Silver Wolf LV.999', imgName: '1506', have: false, element: 'imaginary', group:'ela', gender:'f', world:['plana','ot'], rarity: 5, status: 'available', version: '4.2', p:1 },
