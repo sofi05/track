@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Serapeum', imgName: 'Serapeum', folder:'All_AstralOp', have: false, rarity: '5', element: 'Physical', part:'2'},
     { name: 'Songque', imgName: 'Songque_AstralOp', folder:'All_AstralOp', have: false, rarity: '5', element: 'Lightning_DMG', part:'2'},
     { name: 'Theresa', imgName: 'Theresa_Apocalypse_AstralOp', folder:'All_AstralOp', have: false, rarity: '5', element: 'Lightning_DMG', part:'2'},
-    { name: 'Youyun', imgName: 'Bailu_Youyun', folder:'All_AstralOp', have: false, rarity: 5, part:'2', status: 'new',version: '8.8' },//edit
+    { name: 'Youyun', imgName: 'Bailu_Youyun', folder:'All_AstralOp', have: false, rarity: 5, part:'2',version: '8.8' },//edit
     // Add more characters here
   ];
 

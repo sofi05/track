@@ -345,8 +345,11 @@ const gameConfig = {
     { name: 'Julius Caesar', spriteFolder: 'Julius', imgName: 'Julius_Caesar_T_Icon', 
         spriteImages: ['Julius_Caesar_B','Julius_Caesar_M','Julius_Caesar_T'], },
 
-    { name: 'Claudius Ptolemy', imgName: 'Claudius_Ptolemy_T_Icon',spriteFolder: 'Claudius', status: 'new',
+    { name: 'Claudius Ptolemy', imgName: 'Claudius_Ptolemy_T_Icon',spriteFolder: 'Claudius', 
         spriteImages: ['Claudius_Ptolemy_B', 'Claudius_Ptolemy_T', 'Claudius_Ptolemy_M'], },
+
+    { name: 'SOON', imgName: '', spriteFolder: '', status: 'soon',
+        spriteImages: [''], },
 
     { name: '', imgName: '', spriteFolder: '', 
         spriteImages: [''], },

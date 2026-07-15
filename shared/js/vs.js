@@ -6,10 +6,10 @@ window.GAME_VERSIONS = {
     date2vs: '7.1', date2: '', date2p2: '',
     },
   StarRail: { //https://irminsul.gg/hsr/banners
-    version: '4.3',
-      p1: '2026-06-01T00:00:00', p2: '2026-06-24T19:00:00',
-    date1vs:'4.4', date1: '2026-07-15T00:00:00', date1p2: '', 
-    //date2vs:'4.5', date2: '', date2p2: '',
+    version: '4.4',
+      p1: '2026-07-15T00:00:00', p2: '2026-08-05T19:00:00',
+    date1vs:'4.5', date1: '2026-08-25T00:00:00', date1p2: '', 
+    //date2vs:'4.6', date2: '', date2p2: '',
   },
   ZenlessZone: { //https://irminsul.gg/zzz/banners
     version: '3.0',
@@ -19,9 +19,9 @@ window.GAME_VERSIONS = {
     
   },
   HonkaiImpact: { //https://honkaiimpact3.fandom.com/wiki/Update_Log
-    version:'8.8',  
-    date1vs:'8.9', date1: '', 
-    date2vs:'9.0', date2: '', 
+    version:'8.9',  
+    date1vs:'9.0', date1: '', 
+    date2vs:'9.1', date2: '', 
   },
   NexusAnima: {
     version: '',//BETA in CBT1

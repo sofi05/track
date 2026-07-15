@@ -30,7 +30,7 @@ const gameConfig = {
     { name: 'Elysia', imgName: 'Miss_Pink_Elf', folder: 'Elysia', spriteFolder: 'Elysia', have: false, part: '1', 
         spriteImages: ['Faded_Miss_Elf', 'Miss_Pink', 'Summer_Miss_Elf', 'Peachy_Spring','Lunar_Grace'], },
 
-    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2', status:'new', 
+    { name: 'Erdos', imgName: 'Valkyrie_Boltstorm', folder: 'Erdos', spriteFolder: 'Erdos', have: false, part: '2', status:'available', 
         spriteImages: ['Salted_Plum', 'Citrus_Days', 'Summer_Tactical_Gear'], },
 
     { name: 'FuHua', imgName: 'Valkyrie_Accipiter', folder: 'FuHua', spriteFolder: 'FuHua', have: false, part: '1',
@@ -116,7 +116,7 @@ const gameConfig = {
     { name: 'Sushang', imgName: 'Jade_Knight', folder: 'Sushang', spriteFolder: 'Sushang', have: false, part: '1',
         spriteImages: ['Auspicious_Dazzle', 'Midnight_Moon'], },
     
-    { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2', status:'new', 
+    { name: 'Thelema', imgName: 'Mad_Pleasure_-_Shadowbringer', folder:'SoloChara', spriteFolder: 'Thelema', have: false, part: '2', status:'available', 
         spriteImages: ['Gentle_is_the_Night', 'Roseate_Summer', 'Pact_Absolute'], },
     
     { name: 'Theresa', imgName: 'Valkyrie_Pledge', folder: 'Theresa', spriteFolder: 'Theresa', have: false, part: '1',
