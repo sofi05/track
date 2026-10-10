@@ -1,18 +1,19 @@
 # MUST FIX / CHANGE NEXT UPDATE
 
    ## [GENSHIN IMPACT](+Icons +AltSprites +World) 
-      + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona)
-      + CHECK WORLD FOR ALL
-      ++ TAKE A TIME AND UPDATE ALL ICONS/SPRITE AFTER 7.X (theres minor changes)
+      + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona) > already on file
+      + CHECK REGION FOR ALL
+      + missing new outfit for MC
+      + Update TT 
 
    ## [HONKAI STAR RAIL](assets\others\StarRail\World\)
-      + Fix world for all
-      + Add planacardia Icon to "assets\others\StarRail\World\"
       + PUT COLLAB BUTTON IN CHARACTER PAGE
 
    ## ZENLESS ZONE ZERO(+Element +Groups)
       + Fix groups for all
-      + ADD ELEMENT WIND & Lumiflux  *NEW
+      + UPDATE BANGBOO
+      + Change (TEMP) 
+      + update outfit for remille + same chara (also page)
 
    ## [HONKAI IMPACT 3RD](+CheckAssets +EditMCPage)
       + See if i need to replace pics from chara from 8.8+ (or all)

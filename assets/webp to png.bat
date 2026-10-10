@@ -21,3 +21,4 @@ for %%f in ("%input_folder%\*.webp") do (
 
 echo Done converting.
 ::pause
+::winget install ImageMagick.ImageMagick

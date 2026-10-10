@@ -3,10 +3,10 @@ window.CHARA_CONFIG = {
   characters: [
     //Rarity 4
     { name: 'Cassio Rollex', imgName: 'Cassio_Rollex', element: 'IconElectric', have: false, gender:'m', rarity: 4, status: 'new', version: '0.3' },
-    { name: 'Hua', element: 'IconElectric', have: false, gender:'m', rarity: 4, status: 'new', version: '0.3' },
-    { name: 'Kiana', element: 'IconElectric', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
-    { name: 'Maple Manybell', imgName: 'Maple_Manybell', element: 'IconElectric',  have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
-    { name: 'Nanafey', element: 'IconElectric', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
+    { name: 'Hua', imgName: 'Hua_2', element: 'IconElectric', have: false, gender:'m', rarity: 4, status: 'new', version: '0.3' },
+    { name: 'Kiana', imgName: 'Kiana_2', element: 'IconElectric', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
+    { name: 'Maple Manybell', imgName: 'Maple_Manybell_2', element: 'IconElectric',  have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
+    { name: 'Nanafey', imgName: 'Nanafey_2', element: 'IconElectric', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },
     { name: 'Jalily Belau', imgName: 'Jalily_Belau', element: 'IconElectric', have: false, gender:'f', rarity: 4, status: 'new', version: '0.3' },    
     
     //??
@@ -22,7 +22,7 @@ window.CHARA_CONFIG = {
     { name: 'Prabhas', imgName: 'Prabhas', element: 'IconElectric', have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
     { name: 'Armand', imgName: 'Armand', element: 'IconElectric', have: false, type: ['sov','nov'], gender:'m', rarity: 5, status: 'new', version: '0.3'  },
     { name: 'Blade', imgName: 'Blade', element: 'IconElectric', have: false, type: ['nov'], gender:'m', rarity: 5, status: 'new', version: '0.3' },
-    { name: 'Parayaya', imgName: 'Parayaya', element: 'IconElectric', have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
+    { name: 'Parayaya', imgName: 'Parayaya_2', element: 'IconElectric', have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
     { name: 'Parayaya 2', imgName: 'Parayaya_OG', element: 'IconElectric', have: false, type: ['sov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },
     { name: 'Sir Champion', imgName: 'Sir_Champion', element: 'IconElectric', gender:'m',  have: false, type: ['nov'], rarity: 5, status: 'new', version: '0.3' },
     { name: 'Hungrille', imgName: 'Hungrille', element: 'IconElectric', have: false, type: ['nov'], gender:'f', rarity: 5, status: 'new', version: '0.3' },

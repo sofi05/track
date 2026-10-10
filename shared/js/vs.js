@@ -1,20 +1,20 @@
 window.GAME_VERSIONS = {
   GenshinImpact: { //https://irminsul.gg/genshin/banners
-    version: '6.7',
-      p1: '2026-06-30T20:00:00', p2: '2026-07-21T19:00:00', 
-    date1vs: '7.0', date1: '2026-08-12T20:00:00', date1p2: '',
+    version: '7.1',
+      p1: '2026-09-23T20:00:00', p2: '2026-10-14T19:00:00', 
+    date1vs: '7.2', date1: '2026-11-04T20:00:00', date1p2: '', 
     date2vs: '7.1', date2: '', date2p2: '',
     },
   StarRail: { //https://irminsul.gg/hsr/banners
-    version: '4.4',
-      p1: '2026-07-15T00:00:00', p2: '2026-08-05T19:00:00',
-    date1vs:'4.5', date1: '2026-08-25T00:00:00', date1p2: '', 
-    //date2vs:'4.6', date2: '', date2p2: '',
+    version: '4.6',
+      p1: '2026-10-07T00:00:00', p2: '2026-10-28T19:00:00',
+    date1vs:'4.7', date1: '2026-11-18T00:00:00', date1p2: '', 
+    //date2vs:'4.8', date2: '', date2p2: '',
   },
   ZenlessZone: { //https://irminsul.gg/zzz/banners
-    version: '3.0',
-      p1: '2026-06-17T00:00:00', p2: '2026-07-08T19:00:00',
-    date1vs: '3.1', date1: '2026-07-29T00:00:00', date1p2: '', 
+    version: '3.2',
+      p1: '2026-09-09T00:00:00', p2: '2026-09-30T19:00:00', 
+    date1vs: '3.3', date1: '2026-10-21T00:00:00', date1p2: '2026-11-11T19:00:00', 
     //date2vs: '3.2'  , date2: '', date2p2: '',
     
   },

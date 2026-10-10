@@ -15,9 +15,12 @@ window.BDAY_CONFIG = {
 
     //Feb
     '02-02': ['Linette', 'Liney'],
+    '02-04': ['Vesna'], 
+    '02-09': ['Alyosha'],
     '02-11': ['Alhatham'],
     '02-14': ['Beidou'],
     '02-17': ['Varka'], 
+    '02-20': ['Odette'],
     '02-22': ['Kokomi'],
     '02-29': ['Bennett'],
 
@@ -32,6 +35,7 @@ window.BDAY_CONFIG = {
     '03-21': ['Noel'],
     '03-23': ['Ifa'],
     '03-26': ['Ayato'],
+    '03-29': ['Vodyanitsa'], 
     '03-30': ['Sigewinne'],
 
     //Apr
@@ -136,8 +140,8 @@ window.BDAY_CONFIG = {
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
 
-    'x-x': ['Odette'],  //soon
-    'x-x': ['Alyosha'],  //soon
+    'x-x': ['Valeriy'],  //soon
+    'x-x': ['Mitya'],  //soon
     //'x-x': [''],  //soon
   },
 

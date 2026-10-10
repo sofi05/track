@@ -18,6 +18,9 @@ const gameConfig = {
     { name: 'Velina', imgName: '64_01', have: false, rarity: 5 },
 
     { name: 'Lucy', imgName: '27_01', have: false, rarity: 4, status: 'soon' },
+    { name: 'Remielle', imgName: '67_01', have: false, rarity: 5, status: 'soon' },
+    { name: 'Remielle', imgName: '67_02', have: false, rarity: 5, status: 'soon' },
+    { name: 'Sigrid', imgName: '66_01', have: false, rarity: 5, status: 'soon' },
     // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
 

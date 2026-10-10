@@ -22,9 +22,8 @@ const gameConfig = {
     { name: 'Durin', imgName: 'DurinCostumeWic', have: true, rarity: 5 },
     { name: 'Yaoyao', imgName: 'YaoyaoCostumeWinter', have: true, rarity: 4},
     { name: 'Neuvillette', imgName: 'NeuvilletteCostumeWinter', have: false, rarity: 5},
-
-    { name: 'Charlotte', imgName: 'CharlotteCostumeDong', have: true, rarity: 4, status: 'new' },
-    { name: 'Citlali', imgName: 'CitlaliCostumeXia', have: false, rarity: 5, status: 'new' },
+    { name: 'Charlotte', imgName: 'CharlotteCostumeDong', have: true, rarity: 4 },
+    { name: 'Citlali', imgName: 'CitlaliCostumeXia', have: false, rarity: 5 },
 
  // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
