@@ -35,3 +35,13 @@
   background: #3d3d3d;
   transform: scale(1.02);
 }
+
+/* YouTube button: a dark, muted red with white text */
+.menu-button--youtube {
+  background: #7a2b2b;
+  color: #f5f5f5;
+}
+
+.menu-button--youtube:hover {
+  background: #953737;
+}

@@ -13,54 +13,13 @@ window.CHARA_CONFIG = {
 
     // { name: '', imgName: '', have: true, element: '', group:'', gender:'', rarity: 5,  status: 'new' },
   ],
+  // ---- paths ----
+  cycleIcons: true, // a character with imgName2 flips between its pictures
+  getIconPath: (c) => `../assets/charaid/StarRail/${c.imgName || c.name}.png`,
+  getElementPath: (c) => `../assets/others/StarRail/Element/${c.element}.png`,
+  getSpritePath: (c) => `../assets/Sprite/StarRail/${c.imgName || c.name}.png`,
+  getFallbackPath: () => '../assets/others/StarRail/Random/Type_Unknown_Small.webp',
 
-getSpritePath: function(char) {
-    const imgName = char.imgName || char.name;
-    const folder = char.folder || ''; 
-    return `../assets/Sprite/StarRail/${imgName}.png`;
-  },
-
-getFallbackPath: function(char) {
-  return `../assets/others/StarRail/Random/Type_Unknown_Small.webp`; 
-},
-
-createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
-
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-    const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/StarRail/${imgSrcName}.png`;
-    img.alt = c.name;
-
-    const fallbackImg = this.getFallbackPath(c);  
-  img.onerror = () => {
-    img.src = fallbackImg;
-  };
-
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/StarRail/Element/${c.element}.png`;
-    elementImg.alt = c.element;
-
-    container.appendChild(img);
-    container.appendChild(elementImg);
-
-    container.addEventListener('click', () => {
-      // Build the list of sprites to show
-      let spriteList = [];
-
-      if (Array.isArray(c.imgName2) && c.imgName2.length > 0) {
-        spriteList = c.imgName2.map(name => `../assets/Sprite/StarRail/${name}.png`);
-      } else {
-        spriteList = [`../assets/Sprite/StarRail/${c.imgName || c.name}.png`];
-      }
-
-      // Show popup manually (with thumbnails / next-prev)
-      showPopup(spriteList, c.name);
-    });
-
-    return container;
-  },
+  // Some entries have extra pictures (imgName2)
+  getSpritePaths: (c) => Dex.imageNames(c).map((name) => `../assets/Sprite/StarRail/${name}.png`),
 };

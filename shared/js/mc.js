@@ -1,482 +1,177 @@
+/* =====================================================================
+   mc.js — the "Main" page (003.html): the Traveler / Trailblazer / ...
+
+   Characters come from window.CHARA_CONFIG (the game's own js/mc.js).
+   Two layouts:
+     * normal          -> one list, filtered by the gender toggle
+     * pageType 'typeB' -> the toggle switches between "GP 1" and "GP 2"
+                           and the entries of one character are merged
+                           (their elements are collected on one card)
+   Needs: common.js, sprite-popup.js (loaded before this file).
+   ===================================================================== */
+
+const config = window.CHARA_CONFIG || {};
+const characters = config.characters || [];
+const isTypeB = config.pageType === 'typeB';
+
 const charListEl = document.getElementById('charList');
-const filterBtn = document.getElementById('filterBtn');
-const filterPopup = document.getElementById('filterPopup');
-const genderToggleBtn = document.getElementById('genderToggleBtn');
-const characterName = document.getElementById('characterName');
-const searchInput = document.getElementById('searchInput'); 
+const searchInput = document.getElementById('searchInput');
+const genderToggle = document.getElementById('genderToggleBtn');
+const titleEl = document.getElementById('characterName');
 
+// ---------------------------------------------------------------
+// State
+// ---------------------------------------------------------------
+let selectedGender = 'f'; // normal layout
+let selectedGP = '1'; // typeB layout
 let selectedFilters;
-let selectedGender = 'f';
-let selectedGP = '1';     // new, for typeB
-let selectedPart = '2';
-
-const filterDefaults = {
-  have: null,
-  newStatus: {
-    new: false,
-    soon: false,
-  },
-  element: null,
-  gender: null,
-  group: null,
-};
-
-const isTypeB = (window.CHARA_CONFIG?.pageType === 'typeB');
-const characters = window.CHARA_CONFIG?.characters || [];
-const hasPartInfo = characters.some(c => typeof c.part !== 'undefined');
 
 function initializeFilters() {
-  selectedFilters = JSON.parse(JSON.stringify(filterDefaults));
-  if (isTypeB) {
-    selectedFilters.GP = selectedGP; 
-  } else {
-    selectedFilters.gender = selectedGender;
-  }
-  updateTitleBasedOnToggle();
-}
-
-// ===== Rarity Gradient Helper =====
-function getRarityGradient(rarity) {
-  const gradients = {
-    6: 'linear-gradient(155deg, #e97171cc, rgb(148, 42, 42)',
-    5: 'linear-gradient(100deg, #7c4600ff, #ffa632cc)',
-    4: 'linear-gradient(135deg, #805292ff, #d9c3f3cc)',
-    3: 'linear-gradient(135deg, #498ee7ff, #c3f3e7cc)',
+  selectedFilters = {
+    have: null,
+    element: null,
+    gender: null,
+    group: null,
+    newStatus: { new: false, soon: false },
   };
-  return gradients[rarity] || 'linear-gradient(135deg, #444, #999)';
+  if (isTypeB) selectedFilters.GP = selectedGP;
+  else selectedFilters.gender = selectedGender;
+  updateTitle();
 }
 
-// ===== Type B: Merge Characters by Name + Gender =====
-function groupTypeBCharacters(characters) {
-  const map = new Map();
+const displayName = (c) => (selectedGender === 'f' ? c.name : c.maleName || c.name);
 
-  characters.forEach(char => {
-    const key = `${char.name}_${char.gender}`;
-    const elementsArray = Array.isArray(char.element)
-    ? char.element.filter(el => el != null)
-    : (char.element != null ? [char.element] : []);
+function passesFilters(c, searchTerm) {
+  const f = selectedFilters;
 
-    if (!map.has(key)) {
-      map.set(key, {
-        ...char,
-        elements: elementsArray,
-        imgNames: [char.imgName],
-        allVersions: [char],
-      });
+  if (isTypeB && f.GP && c.GP != f.GP) return false;
+  if (!isTypeB && f.gender && c.gender !== f.gender) return false;
+  if (f.element && c.element !== f.element) return false;
+  if (f.group && c.group !== f.group) return false;
+  if (f.have !== null && Boolean(c.have) !== f.have) return false;
+
+  const wantedStatuses = Object.keys(f.newStatus).filter((status) => f.newStatus[status]);
+  if (wantedStatuses.length && !wantedStatuses.includes(c.status)) return false;
+
+  return displayName(c).toLowerCase().includes(searchTerm);
+}
+
+// typeB: merge entries with the same name + gender into one card.
+function mergeTypeB(list) {
+  const merged = new Map();
+
+  list.forEach((c) => {
+    const key = `${c.name}_${c.gender}`;
+    const elements = (Array.isArray(c.element) ? c.element : [c.element]).filter((el) => el != null);
+
+    if (!merged.has(key)) {
+      merged.set(key, { ...c, elements: [...elements], imgNames: [c.imgName], allVersions: [c] });
     } else {
-      const entry = map.get(key);
-      entry.elements.push(...elementsArray);
-      entry.imgNames.push(char.imgName);
-      entry.allVersions.push(char);
+      const entry = merged.get(key);
+      entry.elements.push(...elements);
+      entry.imgNames.push(c.imgName);
+      entry.allVersions.push(c);
     }
   });
 
-  return Array.from(map.values()).map(c => ({
-    ...c,
-    elements: [...new Set(c.elements)],
-  }));
+  return [...merged.values()].map((c) => ({ ...c, elements: [...new Set(c.elements)] }));
+}
+
+// ---------------------------------------------------------------
+// Rendering
+// ---------------------------------------------------------------
+// A small element badge. With several elements it flips through them every second.
+function buildElementBadge(elements) {
+  const badge = Dex.el('div', 'element-icon');
+  const show = (el) => {
+    Dex.resolveImage(config.getElementIconPath(el)).then((url) => {
+      if (url) badge.style.backgroundImage = `url('${url}')`;
+    });
+    badge.title = el;
+  };
+  show(elements[0]);
+
+  if (elements.length > 1) {
+    let n = 0;
+    Dex.startCycle(() => show(elements[++n % elements.length]), 1000);
+  }
+  return badge;
+}
+
+function buildCard(c) {
+  const card = Dex.el('div', 'char-card');
+
+  const hasElementName = typeof c.element === 'string' && c.element.trim() !== '';
+  const elementText = c.elements?.length ? c.elements.join(', ') : hasElementName ? c.element : '';
+  card.title = elementText ? `(${elementText}, ${c.rarity}★)` : `(${c.rarity}★)`;
+
+  const iconWrapper = Dex.el('div', 'icon-wrapper');
+  iconWrapper.style.background = Dex.rarityGradient(c.rarity);
+
+  if (c.status === 'new') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'NEW'));
+  if (c.status === 'soon') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'SOON'));
+
+  // Several elements (a list) make the badge flip through them.
+  const elements = c.elements || (Array.isArray(c.element) ? c.element : []);
+  if (elements.length && config.getElementIconPath) {
+    iconWrapper.appendChild(buildElementBadge(elements));
+  }
+
+  iconWrapper.appendChild(Dex.buildCharaIcon(c, config));
+
+  card.appendChild(iconWrapper);
+  if (isTypeB) card.appendChild(Dex.el('div', 'char-label', displayName(c)));
+  return card;
 }
 
 function renderList() {
+  Dex.stopCycles();
   charListEl.innerHTML = '';
-  const searchTerm = searchInput?.value?.toLowerCase() || '';
 
-  // Filter characters based on current filters BEFORE grouping for Type B
-  let filteredChars = characters
+  const searchTerm = searchInput?.value?.toLowerCase() || '';
+  let visible = characters
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name))
-    .filter(c => {
-      if (isTypeB && selectedFilters.GP && c.GP != selectedFilters.GP) return false;
-      if (!isTypeB && selectedFilters.gender && c.gender !== selectedFilters.gender) return false;
+    .filter((c) => passesFilters(c, searchTerm));
 
-      if (selectedFilters.element && c.element !== selectedFilters.element) return false;
-      if (selectedFilters.group && c.group !== selectedFilters.group) return false;
+  if (isTypeB) visible = mergeTypeB(visible);
 
-      if (hasPartInfo) {
-        if (!(selectedPart === 'all' || c.part === selectedPart || (selectedPart === 'collab' && c.collab))) {
-          return false;
-        }
-      }
-      // Filter: Have
-      if (selectedFilters.have !== null) {
-        if (selectedFilters.have && !c.have) return false;
-        if (!selectedFilters.have && c.have) return false;
-      }
-
-      // Filter: Status (New / Soon)
-      const wantsNew = selectedFilters.newStatus.new;
-      const wantsSoon = selectedFilters.newStatus.soon;
-
-      if (wantsNew || wantsSoon) {
-        if (wantsNew && wantsSoon) {
-          if (!(c.status === 'new' || c.status === 'soon')) return false;
-        } else if (wantsNew && c.status !== 'new') {
-          return false;
-        } else if (wantsSoon && c.status !== 'soon') {
-          return false;
-        }
-      }
-
-      const charName = selectedGender === 'f' ? c.name : c.maleName || c.name;
-      if (!charName.toLowerCase().includes(searchTerm)) return false;
-
-      return true;
-    });
-
-  if (isTypeB) {
-    filteredChars = groupTypeBCharacters(filteredChars);
-  }
-
-  const CURRENT_GAME = (window.CHARA_CONFIG?.game || 'Genshin').charAt(0).toUpperCase() + (window.CHARA_CONFIG?.game || 'Genshin').slice(1).toLowerCase();
-
-  filteredChars.forEach(c => {
-  const card = document.createElement('div');
-  card.className = 'char-card';
-
-  const elementText = 
-    Array.isArray(c.elements) && c.elements.length > 0 ? c.elements.join(', ') :
-    (typeof c.element === 'string' && c.element.trim() !== '' ? c.element : '');
-
-  card.title = elementText 
-    ? `(${elementText}, ${c.rarity}★)` 
-    : `(${c.rarity}★)`;
-
-  const iconWrapper = document.createElement('div');
-  iconWrapper.className = 'icon-wrapper';
-  iconWrapper.style.background = getRarityGradient(c.rarity);
-
-  if (c.status === 'new') {
-    const newLabel = document.createElement('div');
-    newLabel.textContent = 'NEW';
-    newLabel.className = 'soon-label';
-    iconWrapper.appendChild(newLabel);
-  }
-  if (c.status === 'soon') {
-    const soonLabel = document.createElement('div');
-    soonLabel.textContent = 'SOON';
-    soonLabel.className = 'soon-label';
-    iconWrapper.appendChild(soonLabel);
-  }
-
-  // ONLY add element icon IF typeB AND has elements
-  if (isTypeB && Array.isArray(c.elements) && c.elements.length > 0) {
-    const elementIcon = document.createElement('div');
-    elementIcon.className = 'element-icon';
-
-    if (c.elements.length > 1) {
-      let index = 0;
-      const updateIcon = () => {
-        const el = c.elements[index % c.elements.length];
-        elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${el}.png')`;
-        elementIcon.title = el;
-        index++;
-      };
-      updateIcon();
-      setInterval(updateIcon, 1000);
-    } else {
-      const singleElement = c.elements[0];
-      elementIcon.style.backgroundImage = `url('../assets/others/${CURRENT_GAME}/Element/${singleElement}.png')`;
-      elementIcon.title = singleElement;
-    }
-
-    iconWrapper.appendChild(elementIcon);
-  }
-
-  if (typeof CHARA_CONFIG.createImageElement === 'function') {
-    const imageBlock = CHARA_CONFIG.createImageElement(c);
-    if (imageBlock) {
-      iconWrapper.appendChild(imageBlock);
-    }
-  }
-
-  card.appendChild(iconWrapper);
-
-  if (isTypeB) {
-    const label = document.createElement('div');
-    label.className = 'char-label';
-    label.textContent = selectedGender === 'f' ? c.name : c.maleName || c.name;
-    card.appendChild(label);
-  }
-
-  charListEl.appendChild(card);
-});
-
-
-  updateCharCount(filteredChars.length);
+  visible.forEach((c) => charListEl.appendChild(buildCard(c)));
+  Dex.updateCharCount(visible.length);
 }
 
-
-genderToggleBtn?.addEventListener('change', () => {
-  if (isTypeB) {
-    selectedGP = genderToggleBtn.checked ? '2' : '1';  
-    selectedFilters.GP = selectedGP;
-  } else {
-    selectedGender = genderToggleBtn.checked ? 'm' : 'f';
-    selectedFilters.gender = selectedGender;
-  }
-  updateTitleBasedOnToggle();
-  renderList();
-});
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    const popup = document.getElementById('spritePopup');
-    if (popup.style.display === 'flex') { // or !== 'none'
-      popup.style.display = 'none';
-    }
-  }
-});
-
-// ===== Filter Setup =====
-function setupToggleableRadio(groupName, filterKey) {
-  const inputs = document.querySelectorAll(`input[name="${groupName}"]`);
-  inputs.forEach(input => {
-    input.addEventListener('click', e => {
-      const value = e.target.value;
-
-      const parsedValue = (filterKey === "have")
-        ? (value === "true")
-        : value;
-
-      if (selectedFilters[filterKey] === parsedValue) {
-        selectedFilters[filterKey] = null;
-        input.checked = false;
-      } else {
-        selectedFilters[filterKey] = parsedValue;
-      }
-
-      renderList();
-    });
-  });
+// The big title follows the toggle ("Lumine" / "Aether" ...).
+function updateTitle() {
+  const match = isTypeB
+    ? characters.find((c) => c.GP == selectedGP)
+    : characters.find((c) => c.gender === selectedGender);
+  if (match) titleEl.textContent = isTypeB ? match.name2 : match.name;
 }
 
-setupToggleableRadio("element", "element");
-setupToggleableRadio("gender", "gender");
-setupToggleableRadio("group", "group");
-setupToggleableRadio("have", "have");
+// ---------------------------------------------------------------
+// Wiring
+// ---------------------------------------------------------------
+Dex.initFilterPanel();
+Dex.bindToggleableRadios(() => selectedFilters, ['element', 'gender', 'group', 'have'], renderList);
 
-document.querySelectorAll('input[name="newStatus"]').forEach(input => {
-  input.addEventListener('change', e => {
-    const value = e.target.value;   // "new" or "soon"
-    const isChecked = e.target.checked;
-
-    if (value === 'new') {
-      selectedFilters.newStatus.new = isChecked;
-    } else if (value === 'soon') {
-      selectedFilters.newStatus.soon = isChecked;
-    }
-
+document.querySelectorAll('input[name="newStatus"]').forEach((input) => {
+  input.addEventListener('change', (e) => {
+    selectedFilters.newStatus[e.target.value] = e.target.checked; // value is "new" or "soon"
     renderList();
   });
 });
 
-
-filterBtn?.addEventListener('click', () => {
-  filterPopup?.classList.toggle('hidden');
-});
-
-document.addEventListener('click', (e) => {
-  if (!filterBtn?.contains(e.target) && !filterPopup?.contains(e.target)) {
-    filterPopup?.classList.add('hidden');
-  }
-});
-
-// ===== Sprite Popup =====
-function showPopup(images, altText) {
-  const popup = document.getElementById('spritePopup');
-  const popupImg = document.getElementById('spritePopupImg');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const thumbnailContainer = document.getElementById('thumbnailContainer');
-
-  if (!popup || !popupImg) return;
-  if (!Array.isArray(images)) images = [images];
-
-  let index = 0;
-  let allowSwipe = images.length > 1;
-
-  function showImageAt(i) {
-    index = i;
-    popupImg.src = images[index];
-    popupImg.alt = `${altText} - ${index + 1}`;
-
-    // highlight thumbnail
-    if (thumbnailContainer) {
-      Array.from(thumbnailContainer.children).forEach((t, idx) => {
-        t.classList.toggle('selected', idx === index);
-      });
-    }
-  }
-
-  // Thumbnail setup
-if (thumbnailContainer) {
-  thumbnailContainer.innerHTML = '';
-
-  // Only create thumbnails if there is more than 1 image (i.e., imgName2 exists)
-  if (images.length > 1) {
-    images.forEach((src, i) => {
-      const thumb = document.createElement('img');
-      thumb.src = src;
-      thumb.className = 'thumbnail-img';
-      thumb.alt = `${altText} - ${i + 1}`;
-      thumb.addEventListener('click', () => showImageAt(i));
-      thumbnailContainer.appendChild(thumb);
-    });
-  }
-}
-
-  // Buttons
-  if (prevBtn && nextBtn) {
-    prevBtn.style.display = images.length > 1 ? 'block' : 'none';
-    nextBtn.style.display = images.length > 1 ? 'block' : 'none';
-    prevBtn.onclick = () => showImageAt((index - 1 + images.length) % images.length);
-    nextBtn.onclick = () => showImageAt((index + 1) % images.length);
-  }
-
-  // ===== New: Key + Swipe Handlers =====
-  const keyHandler = function (event) {
-    if (popup.style.display !== 'flex') return;
-    if (event.key === 'Escape') { closePopup(); return; }
-    if (!allowSwipe) return;
-    if (event.key === 'ArrowRight') nextBtn?.click();
-    if (event.key === 'ArrowLeft') prevBtn?.click();
-  };
-  document.addEventListener('keydown', keyHandler);
-  popup._removeKeydown = () => document.removeEventListener('keydown', keyHandler);
-
-  let touchStartXMain = 0;
-  const handleTouchStart = e => (touchStartXMain = e.touches[0].clientX);
-  const handleTouchEnd = e => {
-    const diff = e.changedTouches[0].clientX - touchStartXMain;
-    if (Math.abs(diff) < 10) return;
-    if (diff > 50) prevBtn?.click();
-    else if (diff < -50) nextBtn?.click();
-  };
-  popup.addEventListener('touchstart', handleTouchStart, { passive: true });
-  popup.addEventListener('touchend', handleTouchEnd, { passive: true });
-  popup._removeTouchEvents = () => {
-    popup.removeEventListener('touchstart', handleTouchStart);
-    popup.removeEventListener('touchend', handleTouchEnd);
-    if (popup._removeKeydown) popup._removeKeydown();
-  };
-
-  // Show first image
-  showImageAt(0);
-  popup.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-
-  // Prevent click on thumbnails from closing popup
-  thumbnailContainer?.addEventListener('click', e => e.stopPropagation());
-
-  // Click outside to close
-  popup.onclick = e => {
-    if (e.target === popup) closePopup();
-  };
-}
-
-function closePopup() {
-  const popup = document.getElementById('spritePopup');
-  const thumbnailContainer = document.getElementById('thumbnailContainer');
-  if (!popup) return;
-
-  popup.style.display = 'none';
-  document.body.style.overflow = '';
-
-  if (popup._removeTouchEvents) {
-    popup._removeTouchEvents();
-    delete popup._removeTouchEvents;
-  }
-
-  if (popup._removeKeydown) {
-    popup._removeKeydown();
-    delete popup._removeKeydown;
-  }
-}
-
-document.querySelector('.close-btn')?.addEventListener('click', () => {
-  document.getElementById('spritePopup').style.display = 'none';
-});
-
-const popup = document.getElementById('spritePopup');
-popup?.addEventListener('click', (e) => {
-  if (e.target === popup) {
-    popup.style.display = 'none';
-  }
-});
-
-// ===== Independent Filter/Search Toggles =====
-document.querySelectorAll('.filter-toggle')?.forEach(button => {
-  button.addEventListener('click', () => {
-    const allFilters = document.querySelectorAll('.filter-toggle');
-
-    allFilters.forEach(filterBtn => {
-      if (filterBtn !== button) {
-        filterBtn.classList.remove('active');
-        const options = filterBtn.nextElementSibling;
-        if (options) options.classList.remove('visible');
-      }
-    });
-
-    button.classList.toggle('active');
-    const options = button.nextElementSibling;
-    if (options) options.classList.toggle('visible');
-  });
-});
-
-function updateTitleBasedOnToggle() {
+genderToggle?.addEventListener('change', () => {
   if (isTypeB) {
-    const charsWithGP = characters.filter(c => c.GP == selectedGP);
-
-    if (charsWithGP.length > 0) {
-      const someChar = charsWithGP[0];
-      characterName.textContent = selectedGP === '1' ? someChar.name2 : someChar.name2;
-    }
+    selectedGP = genderToggle.checked ? '2' : '1';
+    selectedFilters.GP = selectedGP;
   } else {
-    const charsWithGender = characters.filter(c => c.gender === selectedGender);
-    if (charsWithGender.length > 0) {
-      characterName.textContent = charsWithGender[0].name;
-    }
+    selectedGender = genderToggle.checked ? 'm' : 'f';
+    selectedFilters.gender = selectedGender;
   }
-}
-
-function updateCharCount(count) {
-  const countEl = document.getElementById('charCount');
-  if (countEl) countEl.textContent = `Total: ${count} characters`;
-}
+  updateTitle();
+  renderList();
+});
 
 initializeFilters();
 renderList();
-
-(function() {
-  const fallbackSrc = "../assets/others/page-loading.png";
-
-  function addFallback(img) {
-    // Only if it's a sprite and has no data-fallback attribute
-    if (!img.dataset.fallbackAdded && img.closest('.sprite-popup')) {
-      img.dataset.fallbackAdded = true;
-      img.onerror = function() {
-        if (img.src !== fallbackSrc) {
-          img.src = fallbackSrc;
-          applyFallbackStyles(img);
-        }
-      };
-    }
-  }
-
-  // Apply to all existing sprites
-  document.querySelectorAll(".sprite-popup img").forEach(addFallback);
-
-  // Observe dynamically added sprites
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      mutation.addedNodes.forEach(node => {
-        if (node.tagName === "IMG" && node.closest('.sprite-popup')) addFallback(node);
-        else if (node.querySelectorAll) {
-          node.querySelectorAll(".sprite-popup img").forEach(addFallback);
-        }
-      });
-    });
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-})();

@@ -11,59 +11,35 @@ window.CHARA_CONFIG = {
     { name: 'Wise', imgName: '34_03', have: true, gender:'m', rarity: 5, status: 'new', hasOutfit: true },
     // { name: '', imgName: '', have: true, gender:'', rarity: 5, status: 'new', hasOutfit: true },
   ],
-
-imageExists(url, callback) {
-  const img = new Image();
-  img.onload = () => callback(true); 
-  img.onerror = () => callback(false); 
-  img.src = url;
-},
-
-getPath: function(char, type, callback) {
-  const imgName = char.imgName || char.name;
-  
-  const normalPath = type === 'sprite' 
-    ? `../assets/Sprite/Zenless/IconRole${imgName}.png`
-    : `../assets/charaid/Zenless/IconRoleCrop${imgName}.png`;
-
-  const outfitPath = type === 'sprite' 
-    ? `../assets/Sprite/Zenless/Outfit/IconRole${imgName}.png`
-    : `../assets/charaid/Zenless/Outfit/IconRoleCrop${imgName}.png`;
-
-  this.imageExists(normalPath, (existsNormal) => {
-    if (existsNormal) {
-      callback(normalPath);
-    } else {
-      this.imageExists(outfitPath, (existsOutfit) => {
-        if (existsOutfit) {
-          callback(outfitPath);
-        } else {
-          callback(`../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`);
-        }
-      });
-    }
-  });
-},
-
+  // ---- icons ----
+  // Pictures are either in the normal folder or in "Outfit/". Use whichever exists.
   createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
-
+    const container = Dex.el('div', 'char-icon-container');
     const img = document.createElement('img');
-
-    this.getPath(c, 'charid', (imgPath) => {
-      img.src = imgPath;  
-    });
-
-    const elementImg = document.createElement('img');
     container.appendChild(img);
 
-    container.addEventListener('click', () => {
-      this.getPath(c, 'sprite', (imgPath) => {
-        showPopup(imgPath, c.name);
-      });
+    // One picture, or several (imgName2) that flip by themselves.
+    Promise.all(Dex.imageNames(c).map((name) => this.findImage({ ...c, imgName: name }, 'charaid', 'IconRoleCrop'))).then((urls) => {
+      Dex.cycleImage(img, [...new Set(urls)], this.fallbackUrl);
     });
-
+    container.addEventListener('click', () => {
+      this.findImage(c, 'Sprite', 'IconRole').then((url) => Dex.showPopup(url, c.name));
+    });
     return container;
   },
+
+  async findImage(c, folder, prefix) {
+    const name = c.imgName || c.name;
+    const candidates = [
+      `../assets/${folder}/Zenless/${prefix}${name}.png`,
+      `../assets/${folder}/Zenless/Outfit/${prefix}${name}.png`,
+    ];
+    for (const url of candidates) {
+      const found = await Dex.resolveImage(url); // png or webp
+      if (found) return found;
+    }
+    return this.fallbackUrl;
+  },
+  fallbackUrl: '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png',
 };
+

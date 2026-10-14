@@ -431,21 +431,6 @@ h1 {
   max-height: 90vh;
 }
 
-.sprite-popup .close-btn {
-  position: absolute;
-  font-size: 13px;
-  font-weight: bold;
-  color: rgb(209, 209, 209);
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  user-select: none;
-  top: 8%;
-  right: 2%;
-  z-index: 10;
-}
-
 .popup {
   display: none;
   position: fixed;
@@ -529,15 +514,6 @@ h1 {
   display: block;
 }
 
-.thumbnail-wrapper {
-  width: 80px;              /* match thumbnail width */
-  height: 80px;             /* match thumbnail height */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;  /* top-align the image */
-  overflow: hidden;         /* still hide overflow if too tall */
-}
-
 #thumbnailContainer::-webkit-scrollbar {
   height: 6px;
 }
@@ -585,9 +561,6 @@ h1 {
     max-height: 80vh !important;
     overflow-y: auto;
   }
-  .responsive-popup .image-container {
-    height: 200px !important;
-  }
 
   .thumbnail-img {
     width: 12vw;
@@ -620,12 +593,6 @@ h1 {
     object-fit: contain;
   }
 
-  .sprite-popup .close-btn {
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-  }
-
   .sprite-popup {
     padding: 16px;
     box-sizing: border-box;
@@ -642,15 +609,33 @@ h1 {
   padding: 0 10px;
 }
 
+/* The ✕ button of every popup (sprite popup, gallery popup, character popup,
+   birthday popup). One look everywhere - change it here. */
 .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: none;
-  color: white;
-  font-size: 1.5rem;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
+  border-radius: 50%;
+  background: rgba(60, 60, 60, 0.85);
+  color: #e6e6e6;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
   cursor: pointer;
+  user-select: none;
+}
+
+.close-btn:hover {
+  background: rgba(110, 110, 110, 0.95);
+  color: #fff;
 }
 
 .game-logo {
@@ -841,11 +826,6 @@ input:checked + .slider2:before {
   color: #666;
 }
 
-.thespian-trick #spritePopupImg {
-  clip-path: inset(8% round 30px); /* 20px corner radius */
-  object-fit: cover;
-}
-
 .char-disabled {
   filter: grayscale(99%) brightness(0.6);
   opacity: 0.75;
@@ -861,4 +841,57 @@ input:checked + .slider2:before {
   background: rgba(0,0,0,0.6);
   padding: 2px 6px;
   border-radius: 6px;
+}
+
+/* ---------- small helpers used by the pages ---------- */
+
+/* "Total: N characters" line under the page title */
+.char-count {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+/* Turns a dark icon white. !important so it also wins over the hover/checked
+   filters of .element-img (this is what the old inline style did). */
+.is-white {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* ---------- Characters page: part buttons and quick filters ---------- */
+
+[hidden] {
+  display: none !important;
+}
+
+.part-toggle {
+  flex-wrap: wrap;
+}
+
+.quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  margin: 10px;
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.chip {
+  padding: 4px 9px;
+  font-size: 13px;
+}
+
+.chip-icon {
+  height: 20px;
+  width: auto;
+  display: block;
 }

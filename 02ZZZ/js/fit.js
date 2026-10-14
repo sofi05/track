@@ -23,10 +23,11 @@ const gameConfig = {
     { name: 'Sigrid', imgName: '66_01', have: false, rarity: 5, status: 'soon' },
     // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
-
-  pathPrefix: "../assets/charaid/Zenless/Outfit/IconRoleCrop", 
+  // Where the pictures are. Edit the folders here.
+  pathPrefix: "../assets/charaid/Zenless/Outfit/IconRoleCrop",
   spritePrefix: "../assets/Sprite/Zenless/Outfit/IconRole",
 
   getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.png`,
-  getSpritePath: (c) => `${gameConfig.spritePrefix}${c.imgName2 || c.imgName}.png`
+  // List of pictures shown when you click a card (imgName + imgName2)
+  getSpritePath: (c) => Dex.imageNames(c).map((name) => `${gameConfig.spritePrefix}${name}.png`),
 };

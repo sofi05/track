@@ -1,5 +1,4 @@
 const gameConfig = {
-  id: 'hi3',
   characters: [
     //SOLO FOLDER
     { name: 'Ai Hyperion', imgName: 'Chrono_Navi', folder: 'SoloChara', spriteFolder: 'Ai', have: false, part: '1',
@@ -133,24 +132,11 @@ const gameConfig = {
     
     //{ name: '', imgName: '', folder:'', spriteFolder: '', have: false, part: '2', //status: 'new', spriteImages: ['', ''] },
   ],
-
-
+  // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/Honkai/",
-  spritePrefix: ".../assets/Sprite/HI3/Outfit/", 
+  spritePrefix: "../assets/Sprite/HI3/Outfit/",
 
-  getImgPath: (char) => {
-    if (gameConfig.id === 'hi3') {
-      return `${gameConfig.pathPrefix}${char.folder}/${char.imgName}.png`; // HI3 path structure
-    }
-    return `../assets/${char.folder}/${char.imgName}.png`;
-  },
-
-  getSpritePath: (char) => {
-    if (gameConfig.id === 'hi3') {
-      return (char.spriteImages || []).map(
-        img => `${gameConfig.spritePrefix}${char.spriteFolder}/${img}.png`
-      );
-    }
-    return (char.spriteImages || []).map(img => `../assets/Sprite/${char.spriteFolder}/${img}.png`);
-  },
+  getImgPath: (c) => `${gameConfig.pathPrefix}${c.folder}/${c.imgName}.png`,
+  // Pictures shown when you click a card: <spritePrefix>/<spriteFolder>/<each of spriteImages>.png
+  getSpritePath: (c) => (c.spriteImages || []).map((img) => `${gameConfig.spritePrefix}${c.spriteFolder}/${img}.png`),
 };

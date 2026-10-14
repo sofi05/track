@@ -1,4 +1,5 @@
 window.CHARA_CONFIG = {
+  gameId: 'Endfield', // key of this game in shared/js/vs.js
   characters: [
     //HAVE - ORGANIZED BY NUMBER
     { name: 'Perlica', imgName: '0004_pelica', element: 'Electric', have: true, group: ['EndIndustries'], gender:'f', rarity: 5},
@@ -44,59 +45,12 @@ window.CHARA_CONFIG = {
     //  Element: Electric | Physical | Heat | Cryo | Nature 
     //  Group: Hongshan | EndIndustries | Rhodes | UWST | TGCC | OrderSO | Cabal | Hannabit | Sesqa
   ],
+  // ---- paths (used by the home page, the Characters page and the popups) ----
+  getIconPath: (c) => `../assets/charaid/Endfield/icon_chr_${c.imgName || c.name}.png`,
+  getElementPath: (c) => `../assets/others/Endfield/Element/${c.element}.png`,
+  getSpritePath: (c) => `../assets/Sprite/Endfield/chr_${c.imgName || c.name}.png`,
+  getFallbackPath: () => '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png', // change once the game has an "unknown" icon
 
-  getSpritePath: function(char) {
-      const imgName = char.imgName || char.name;
-      const folder = char.folder || ''; 
-      return `../assets/Sprite/Endfield/chr_${imgName}.png`;
-    },
-
-    //CHANGE ONCE U GET A UNKNOW ICON FROM GAME
-  getFallbackPath: function(char) {
-    return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`; 
-  },
-  
-  createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
-
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-    const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Endfield/icon_chr_${imgSrcName}.png`;  
-    img.alt = c.name;
-
-    const fallbackImg = this.getFallbackPath(c);  
-    img.onerror = () => {
-      img.src = fallbackImg;
-    };
-
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/Endfield/Element/${c.element}.png`;
-    elementImg.alt = c.element;
-
-    container.appendChild(img);
-    container.appendChild(elementImg);
-
-    // IF THERES 1+ TEXT IN A TAG ---- fix it later
-    if (c.group) {
-      const groupLabel = document.createElement('div');
-      groupLabel.className = 'type-list';
-      const label = document.createElement('span');
-      label.className = 'type-label';
-      label.textContent = c.group;
-      groupLabel.appendChild(label);
-      container.appendChild(groupLabel);
-    }
-    //=================================================
-
-    container.addEventListener('click', () => {
-      const imgPath = `../assets/Sprite/Endfield/chr_${imgSrcName}.png`;
-      showPopup(imgPath, c.name);
-    });
-
-    return container;
-  }
-
+  // Small text tag under the icon (group)
+  getLabels: (c) => (c.group ? { list: 'type-list', item: 'type-label', values: [c.group] } : null),
 };

@@ -1,36 +1,22 @@
+/* =====================================================================
+   countdown.js — the small "Next in 3d" text next to "New Characters".
+
+   initializeCountdown('GenshinImpact', 'countdown-newchars')
+   Reads the dates from vs.js (window.GAME_VERSIONS).
+   ===================================================================== */
 function initializeCountdown(gameKey, elementId) {
   const el = document.getElementById(elementId);
   const data = window.GAME_VERSIONS?.[gameKey];
-  const date1 = data.date1 ? new Date(data.date1) : null;
-  const date2 = data.date2 ? new Date(data.date2) : null;
+  if (!el || !data) return;
 
-  function updateCountdown(targetDate) {
-    const now = new Date();
-    const diff = targetDate - now;
-    if (diff <= 0) return null;
-    const seconds = Math.floor(diff / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (days > 0) return `Next in ${days}d`;
-    if (hours > 0) return `Next in ${hours % 24}h`;
-    if (minutes > 0) return `Next in ${minutes % 60}m`;
-    return `Next in ${seconds % 60}s`;
-  }
+  const dates = [data.date1, data.date2].map((text) => (text ? new Date(text) : null));
 
   function render() {
     const now = new Date();
-    let label = '';
+    const target = dates.find((date) => date && now < date);
 
-    if (date1 && now < date1) {
-      label = updateCountdown(date1);
-    } else if (date2 && now < date2) {
-      label = updateCountdown(date2);
-    }
-
-    if (label) {
-      el.textContent = label;
+    if (target) {
+      el.textContent = `Next in ${Dex.phase.shortDuration(target - now)}`;
       el.style.opacity = '0.8';
     } else {
       el.textContent = 'No date yet';

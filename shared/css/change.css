@@ -66,3 +66,13 @@
 .hidden {
   display: none;
 }
+/* A game that is not released yet: greyed out until you hover it. */
+.game-icon.is-dim {
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.game-icon.is-dim:hover {
+  filter: none;
+  opacity: 1;
+}

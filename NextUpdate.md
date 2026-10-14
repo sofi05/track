@@ -5,9 +5,9 @@
       + CHECK REGION FOR ALL
       + missing new outfit for MC
       + Update TT 
+      + THINKING OF REMOVING THESPIAN TRICK (leave it alone for now)
 
    ## [HONKAI STAR RAIL](assets\others\StarRail\World\)
-      + PUT COLLAB BUTTON IN CHARACTER PAGE
 
    ## ZENLESS ZONE ZERO(+Element +Groups)
       + Fix groups for all
@@ -44,9 +44,6 @@
    + [ NEW CHARACTERS ](01HSR\js\chara.js) _________________ [SOON_4.5](UPTO_4.4)
    + [ OUTFIT ](01HSR\js\fit.js) _________________ [LAST_4.2]
    + [ MAIN ](01HSR\js\mc.js) 
-
-   + [ PET ](01HSR\js\pet.js) || (update when have time) [LAST_4.2]
-
 
    ## ZENLESS ZONE ZERO  
    + [ NEW CHARACTERS ](02ZZZ\js\chara.js) _________________ [SOON_3.1](UPTO_3.0)

@@ -10,10 +10,11 @@ const gameConfig = {
     { name: 'Hyacine', imgName: '1140901', imgName2:'', have: false, rarity: 5, status: 'soon' },
     //{ name: '', imgName: '', imgName2:'', have: false, rarity: 5, status: 'soon' },
   ],
-
-pathPrefix: "../assets/charaid/StarRail/Outfit/", 
-spritePrefix: "../assets/Sprite/StarRail/Outfit/", 
+  // Where the pictures are. Edit the folders here.
+  pathPrefix: "../assets/charaid/StarRail/Outfit/",
+  spritePrefix: "../assets/Sprite/StarRail/Outfit/",
 
   getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.png`,
-  getSpritePath: (c) => `${gameConfig.spritePrefix}${c.imgName2 ?? c.imgName}.png`
+  // List of pictures shown when you click a card (imgName + imgName2)
+  getSpritePath: (c) => Dex.imageNames(c).map((name) => `${gameConfig.spritePrefix}${name}.png`),
 };

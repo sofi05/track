@@ -27,10 +27,11 @@ const gameConfig = {
 
  // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
   ],
-
+  // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/Genshin/Outfit/UI_AvatarIcon_",
-  spritePrefix: "../assets/Sprite/Genshin/Outfit/UI_Costume_", 
+  spritePrefix: "../assets/Sprite/Genshin/Outfit/UI_Costume_",
 
   getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.png`,
-  getSpritePath: (c) => `${gameConfig.spritePrefix}${c.imgName2 || c.imgName}.png`
+  // List of pictures shown when you click a card (imgName + imgName2)
+  getSpritePath: (c) => Dex.imageNames(c).map((name) => `${gameConfig.spritePrefix}${name}.png`),
 };

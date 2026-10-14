@@ -1,4 +1,5 @@
 window.CHARA_CONFIG = {
+  gameId: 'GenshinImpact', // key of this game in shared/js/vs.js
   characters: [
     //HAVE - ORGANIZED BY RARITY
     { name: 'Amber', imgName: 'Ambor', have: true, element: 'Pyro', rarity: 4, region:['mond'], gender:'f' },
@@ -135,58 +136,12 @@ window.CHARA_CONFIG = {
     //  Element: Anemo | Hydro | Geo | Dendro | Pyro | Electro | Cryo
     //  Region: mond | liy | ina | sum | font | nat | snez | unk | khae
   ],
+  // ---- paths (used by the home page, the Characters page and the popups) ----
+  getIconPath: (c) => `../assets/charaid/Genshin/UI_AvatarIcon_${c.imgName || c.name}.png`,
+  getElementPath: (c) => `../assets/others/Genshin/Element/${c.element}.png`,
+  getSpritePath: (c) => `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName || c.name}.png`,
+  getFallbackPath: () => '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png',
 
-  getSpritePath: function(char) {
-    const imgName = char.imgName || char.name;
-    const folder = char.folder || ''; 
-    return `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
-  },
-
-  getFallbackPath: function(char) {
-    return `../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png`;
-  },
-
-  createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
-
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-    const imgSrcName = c.imgName ? c.imgName : c.name;
-    img.src = `../assets/charaid/Genshin/UI_AvatarIcon_${imgSrcName}.png`;  
-    img.alt = c.name;
-
-    const fallbackImg = this.getFallbackPath(c);  
-    img.onerror = () => {
-      img.src = fallbackImg;
-    };
-
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    elementImg.src = `../assets/others/Genshin/Element/${c.element}.png`;
-    elementImg.alt = c.element;
-
-    container.appendChild(img);
-    container.appendChild(elementImg);
-
-    // IF THERES 1+ TEXT IN A TAG [REGION EXAMPLE]
-    const regionList = document.createElement('div');
-    regionList.className = 'region-list';
-    c.region.forEach(region => {
-      const regionLabel = document.createElement('span');
-      regionLabel.className = 'region-label';
-      regionLabel.textContent = region;
-      regionList.appendChild(regionLabel);
-    });
-    container.appendChild(regionList);
-    //=================================================
-
-    container.addEventListener('click', () => {
-      const imgName = c.imgName ? c.imgName : c.name;
-      const imgPath = `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${imgName}.png`;
-      showPopup(imgPath, c.name);
-    });
-
-    return container;
-  }
+  // Small text tags under the icon (Mondstadt, Liyue ...)
+  getLabels: (c) => ({ list: 'region-list', item: 'region-label', values: c.region }),
 };

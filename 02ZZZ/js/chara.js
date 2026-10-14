@@ -1,4 +1,5 @@
 window.CHARA_CONFIG = {
+  gameId: 'ZenlessZone', // key of this game in shared/js/vs.js
   characters: [
     //HAVE - ORGANIZED BY NUMBER
     { name: 'Anby', imgName: '01', have: true, element: 'Electric', group:['cunhar'], gender:'f', rarity: 4 },
@@ -71,62 +72,15 @@ window.CHARA_CONFIG = {
     //  Element: Electric | Physical ⇄ HonedEdge | Fire | Ether ⇄ AuricInk | Frost ⇄ Ice | Wind | Lumiflux
     //  Group: cunhar | obol | vic | sec6 | belo | sons | spec | sum | spook | kramp | star | mock | angels
   ],
+  // ---- paths (used by the home page, the Characters page and the popups) ----
+  getIconPath: (c) => `../assets/charaid/Zenless/IconRoleCrop${c.imgName}.png`,
+  getElementPath: (c) => `../assets/others/Zenless/Element/Icon${c.element}.png`,
+  getSpritePath: (c) => `../assets/Sprite/Zenless/IconRole${Dex.imageNames(c)[0]}.png`,
+  getFallbackPath: () => '../assets/others/Zenless/Random/Icon_Event_Unknown.webp',
 
-getSpritePath: function(char) {
-  let names = [];
-  if (char.imgName) names.push(char.imgName);
-  if (Array.isArray(char.imgName2)) names = names.concat(char.imgName2);
-  else if (typeof char.imgName2 === 'string') names.push(char.imgName2);
+  // Agents can have several pictures (imgName + imgName2)
+  getSpritePaths: (c) => Dex.imageNames(c).map((name) => `../assets/Sprite/Zenless/IconRole${name}.png`),
 
-  // Return first image (default) for single-image usage
-  return `../assets/Sprite/Zenless/IconRole${names[0]}.png`;
-},
-
-getFallbackPath: function(char) {
-  return `../assets/others/Zenless/Random/Icon_Event_Unknown.webp`; 
-},
-  
-createImageElement(c) {
-  const container = document.createElement('div');
-  container.className = 'char-icon-container';
-
-  const img = document.createElement('img');
-  img.className = 'char-icon';
-  img.src = `../assets/charaid/Zenless/IconRoleCrop${c.imgName}.png`;
-  img.alt = c.name;
-  const fallbackImg = this.getFallbackPath(c);  
-  img.onerror = () => { img.src = fallbackImg; };
-
-  const elementImg = document.createElement('img');
-  elementImg.className = 'element-icon';
-  elementImg.src = `../assets/others/Zenless/Element/Icon${c.element}.png`;  
-  elementImg.alt = c.element;
-
-  container.appendChild(img);
-  container.appendChild(elementImg);
-
-  if (Array.isArray(c.group)) {
-    const groupList = document.createElement('div');
-    groupList.className = 'group-list';
-    c.group.forEach(group => {
-      const groupLabel = document.createElement('span');
-      groupLabel.className = 'group-label';
-      groupLabel.textContent = group;
-      groupList.appendChild(groupLabel);
-    });
-    container.appendChild(groupList);
-  }
-
-  container.addEventListener('click', () => {
-    let spriteList = [c.imgName];
-    if (Array.isArray(c.imgName2)) spriteList = spriteList.concat(c.imgName2);
-    else if (typeof c.imgName2 === 'string') spriteList.push(c.imgName2);
-    spriteList = [...new Set(spriteList)];
-
-    const fullImages = spriteList.map(name => `../assets/Sprite/Zenless/IconRole${name}.png`);
-    showPopup(fullImages, c.name);
-  });
-
-  return container;
-},
+  // Small text tags under the icon (factions)
+  getLabels: (c) => (Array.isArray(c.group) ? { list: 'group-list', item: 'group-label', values: c.group } : null),
 };

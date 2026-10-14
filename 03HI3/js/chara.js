@@ -1,4 +1,5 @@
 window.CHARA_CONFIG = {
+  gameId: 'HonkaiImpact', // key of this game in shared/js/vs.js
   characters: [
     //PART 1 - ORGANIZED BY CHARA > HAVE
     { name: 'Bronya • BN', imgName: 'Black_Nucleus', folder:'Bronya', have: true, element: 'BIO', rarity: 5, part:'1' },
@@ -144,77 +145,9 @@ window.CHARA_CONFIG = {
     //  Element: IMG | SD | PSY | MECH | BIO | QUA
     //  Spec: WoD | LoA | WS | GoI | RoO
   ],
-
-getSpritePath: function(char) {
-    const imgName = char.imgName || char.name;
-    const folder = char.folder || ''; 
-    return `../assets/Sprite/HI3/${folder}/${imgName}.png`;
-  },
-
-getFallbackPath: function(char) {
-  return `../assets/others/HI3/Random/Clouds_Shadow.webp`; 
-},
-
-createImageElement(c) {
-  const container = document.createElement('div');
-  container.className = 'char-icon-container';
-
-  const img = document.createElement('img');
-  img.className = 'char-icon';
-  const imgSrcName = c.imgName || c.name;
-  img.src = `../assets/charaid/Honkai/${c.folder}/${imgSrcName}.png`;
-  img.alt = c.name;
-
-  const fallbackImg = this.getFallbackPath(c) || "../assets/others/page-loading.png";  
-
-  // ✅ SINGLE onerror handler
-  img.onerror = () => {
-    if (img.src !== fallbackImg) {
-      img.src = fallbackImg;
-    }
-  };
-
-  const elementImg = document.createElement('img');
-  elementImg.className = 'element-icon';
-  elementImg.src = `../assets/others/HI3/Element/${c.element}.png`;
-  elementImg.alt = c.element;
-
-  container.appendChild(img);
-  container.appendChild(elementImg);
-
-  container.addEventListener('click', () => {
-    const imgPath = `../assets/Sprite/HI3/${c.folder}/${imgSrcName}.png`;
-    showPopup(imgPath, c.name);
-  });
-
-  return container;
-}
+  // ---- paths (used by the home page, the Characters page and the popups) ----
+  getIconPath: (c) => `../assets/charaid/Honkai/${c.folder}/${c.imgName || c.name}.png`,
+  getElementPath: (c) => `../assets/others/HI3/Element/${c.element}.png`,
+  getSpritePath: (c) => `../assets/Sprite/HI3/${c.folder}/${c.imgName || c.name}.png`,
+  getFallbackPath: () => '../assets/others/HI3/Random/Clouds_Shadow.webp',
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-  const partButtons = document.querySelectorAll('.part-btn');
-  const specFilter = document.querySelector('#specFilter');
-
-  specFilter.classList.add('hidden');
-
-  partButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const part = this.getAttribute('data-part');
-
-      partButtons.forEach(btn => btn.classList.remove('active'));
-
-      this.classList.add('active');
-
-      if (part === '2') {
-        specFilter.classList.remove('hidden');
-      } else {
-        specFilter.classList.add('hidden');
-      }
-    });
-  });
-
-  const activePartButton = document.querySelector('.part-btn.active');
-  if (activePartButton && activePartButton.getAttribute('data-part') === '2') {
-    specFilter.classList.remove('hidden');
-  }
-});

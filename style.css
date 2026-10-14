@@ -135,3 +135,14 @@ h1 {
   #popup-close:hover {
     background-color: #ff7f7f;
   }
+
+/* A game that is not released yet: greyed out until you hover it. */
+.game-icons a.is-dim {
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.game-icons a.is-dim:hover {
+  filter: none;
+  opacity: 1;
+}

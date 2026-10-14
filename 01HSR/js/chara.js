@@ -1,4 +1,5 @@
 window.CHARA_CONFIG = {
+  gameId: 'StarRail', // key of this game in shared/js/vs.js
   characters: [
     //HAVE - ORGANIZED BY NUMBER
     { name: 'March 7th', imgName: '1001', have: true, element: 'ice', group:'prese', gender:'f', world:['ae'],rarity: 4 },
@@ -109,68 +110,13 @@ window.CHARA_CONFIG = {
     //  Group: prese | hunt | eru | nihi | dest | harm | abun | reme | ela
     //  World: ae | ot | hss | JVI | txl | pena | amp |
   ],
+  // ---- paths (used by the home page, the Characters page and the popups) ----
+  // Collab characters live in a "collab/" folder.
+  getIconPath: (c) => `../assets/charaid/StarRail/${c.collab ? 'collab/' : ''}${c.imgName || c.name}.png`,
+  getElementPath: (c) => `../assets/others/StarRail/Element/${c.element || 'Unknown'}.png`,
+  getSpritePath: (c) => `../assets/Sprite/StarRail/${c.collab ? 'collab/' : ''}${c.imgName || c.name}.png`,
+  getFallbackPath: () => '../assets/others/StarRail/Random/Type_Unknown_Small.webp',
 
-  getSpritePath: function(char) {
-    const imgName = char.imgName || char.name;
-    // If collab is true, it inserts 'collab/', otherwise it inserts an empty string
-    const collabFolder = char.collab ? 'collab/' : '';
-    return `../assets/Sprite/StarRail/${collabFolder}${imgName}.png`;
-  },
-
-  getFallbackPath: function(char) {
-    return `../assets/others/StarRail/Random/Type_Unknown_Small.webp`; 
-  },
-
-  createImageElement(c) {
-    const container = document.createElement('div');
-    container.className = 'char-icon-container';
-
-    const img = document.createElement('img');
-    img.className = 'char-icon';
-    const imgSrcName = c.imgName ? c.imgName : c.name;
-    
-    // Updates the icon path to check for collab
-    const collabFolder = c.collab ? 'collab/' : '';
-    img.src = `../assets/charaid/StarRail/${collabFolder}${imgSrcName}.png`;
-    img.alt = c.name;
-
-    const fallbackImg = this.getFallbackPath(c);  
-    img.onerror = () => {
-      img.src = fallbackImg;
-    };
-
-    // --- CHANGED THIS SECTION BELOW ---
-    const elementImg = document.createElement('img');
-    elementImg.className = 'element-icon';
-    
-    // If the character has no element text (like Archer/Saber), look for 'Unknown.png'
-    const elementPath = c.element ? c.element : 'Unknown'; 
-    elementImg.src = `../assets/others/StarRail/Element/${elementPath}.png`;
-    elementImg.alt = c.element || 'Unknown';
-    // ----------------------------------
-
-    container.appendChild(img);
-    container.appendChild(elementImg);
-
-    // IF THERES 1+ TEXT IN A TAG [WORLD EXAMPLE]
-    if (Array.isArray(c.world)) {
-      const worldList = document.createElement('div');
-      worldList.className = 'world-list';
-
-      c.world.forEach(world => {
-        const worldLabel = document.createElement('span');
-        worldLabel.className = 'world-label';
-        worldLabel.textContent = world;
-        worldList.appendChild(worldLabel);
-      });
-      container.appendChild(worldList);
-    }
-
-    container.addEventListener('click', () => {
-      const imgPath = this.getSpritePath(c);
-      showPopup(imgPath, c.name);
-    });
-
-    return container;
-  },
+  // Small text tags under the icon (worlds)
+  getLabels: (c) => (Array.isArray(c.world) ? { list: 'world-list', item: 'world-label', values: c.world } : null),
 };
