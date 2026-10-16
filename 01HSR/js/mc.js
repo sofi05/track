@@ -11,7 +11,13 @@ window.CHARA_CONFIG = {
     { name: 'Caelus', imgName: '8009', have: true, element: 'thunder', group:'ela', gender:'m', rarity: 5},
     { name: 'Stelle', imgName: '8010', have: true, element: 'thunder', group:'ela', gender:'f', rarity: 5},
 
-    // { name: '', imgName: '', have: true, element: '', group:'', gender:'', rarity: 5,  status: 'new' },
+    // ---------------------------------------------------------------------
+    // TEMPLATE: copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', imgName2: [''], have: true, element: '', group: '', gender: '', rarity: 5, status: 'new' },
+    //
+    //   imgName2      list of pictures: the icon flips between them (e.g. ['8007','8007_1'])
+    //   status       'new' / 'soon' = label           have   true / false
+    // ---------------------------------------------------------------------
   ],
   // ---- paths ----
   cycleIcons: true, // a character with imgName2 flips between its pictures

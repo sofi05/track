@@ -1,24 +1,18 @@
 # MUST FIX / CHANGE NEXT UPDATE
 
    ## [GENSHIN IMPACT](+Icons +AltSprites +World) 
-      + Add chara alt outfit in chara.js (Jean|Amber|Rosaria|Mona) > already on file
-      + CHECK REGION FOR ALL
       + missing new outfit for MC
-      + Update TT 
-      + THINKING OF REMOVING THESPIAN TRICK (leave it alone for now)
-
+      + maybe add icons on chara-page
+    
    ## [HONKAI STAR RAIL](assets\others\StarRail\World\)
-
+    
    ## ZENLESS ZONE ZERO(+Element +Groups)
-      + Fix groups for all
+      + add districts icons
       + UPDATE BANGBOO
       + Change (TEMP) 
-      + update outfit for remille + same chara (also page)
-
-   ## [HONKAI IMPACT 3RD](+CheckAssets +EditMCPage)
-      + See if i need to replace pics from chara from 8.8+ (or all)
-      + Organize MC entire page
-
+     
+   ## [HONKAI IMPACT 3RD](+CheckAssets)
+      + UPDATE TO 9.1
       + SEARCH FOR "SOON" TO UPDATE > PLACEHOLDER TO ADD ASSETS LATER  || Apply to Fit/Stig
 
    ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_CBT2)
@@ -26,6 +20,12 @@
    ## [ARKNIGHT ENDFIELD _ UTD 1.0](get_1.1_splashes)
       + Update the groups later
 
+
+
+# ASSETS
+   ## REMOVE / REPLACE
+   + HNA - update and remove / replace the old game icon
+   + HI3 - move places maybe? put character / collab / outfit etc. (sprite and charaid)
 
 
 # SHORTCUT TO UPDATES
@@ -37,13 +37,14 @@
    + [ OUTFIT ](00GI\js\fit.js) _________________ [SOON_6.7](UPTO_6.6)
    + [ MAIN ](00GI\js\mc.js) _________________ [SOON_7.0]
 
-   + [ thespian trick](00GI\js\tt.js) || (update when have time) [LAST_23]
-
 
    ## HONKAI STAR RAIL
    + [ NEW CHARACTERS ](01HSR\js\chara.js) _________________ [SOON_4.5](UPTO_4.4)
    + [ OUTFIT ](01HSR\js\fit.js) _________________ [LAST_4.2]
    + [ MAIN ](01HSR\js\mc.js) 
+
+   + [ PET ](01HSR\js\pet.js) || (update when have time) [LAST_4.2]
+
 
    ## ZENLESS ZONE ZERO  
    + [ NEW CHARACTERS ](02ZZZ\js\chara.js) _________________ [SOON_3.1](UPTO_3.0)
@@ -58,7 +59,6 @@
    * [ OUTFIT ](03HI3\js\fit.js) * (UPTO_8.8)
    * [ SUP ](03HI3\js\sup.js) * (UPTO_8.8)
 
-   * [ MAIN ](03HI3\js\mc.js) 
    * [ STIG ](03HI3\js\stig.js) * (UPTO_8.8)
    
 

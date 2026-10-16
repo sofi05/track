@@ -9,7 +9,7 @@ window.CHARA_PAGE = {
   quick: [['have', 'new'], 'rarity', 'gender'],
 
   // Filters inside the "Filter" button. Use [] to hide the button.
-  popup: ['element', 'group'],
+  popup: ['element', 'district'],
 
   // Part / collab buttons above the list. With none pressed, everything is shown.
   // field = the field on the character (part: '2' or collab: true), value = what it must be.
@@ -51,24 +51,21 @@ window.CHARA_PAGE = {
         { value: 'Lumiflux', label: 'Lumiflux', icon: '../assets/others/Zenless/Element/IconLumiflux.png' },
       ],
     },
-    group: {
-      label: 'Factions', grid: true,
+    // Districts have no icons yet. To add one, put it in assets/others/Zenless/Group/ and add
+    //   icon: '../assets/others/Zenless/Group/<file>.png'   to the option.
+    district: {
+      label: 'Districts', grid: true,
       options: [
-        { value: 'cunhar', label: 'Cunning Hares', icon: '../assets/others/Zenless/Group/IconCampGentleHouse.png' },
-        { value: 'belo', label: 'Belobog Industries', icon: '../assets/others/Zenless/Group/IconCampBelobogIndustries.png' },
-        { value: 'vic', label: 'Victoria Housekeeping', icon: '../assets/others/Zenless/Group/IconCampVictoriaHousekeepingCo..png' },
-        { value: 'sons', label: 'Sons of Calydon', icon: '../assets/others/Zenless/Group/IconCampSonsOfCalydon.png' },
-        { value: 'spec', label: 'Special Response Team', icon: '../assets/others/Zenless/Group/IconCampN.E.P.S..png' },
-        { value: 'sec6', label: 'Section 6', icon: '../assets/others/Zenless/Group/IconCampH.S.O-S6.png' },
-        { value: 'obol', label: 'Obol Squad', icon: '../assets/others/Zenless/Group/IconCampObols.png' },
-        { value: 'star', label: 'Stars of Lyra', icon: '../assets/others/Zenless/Group/IconCampStarsOfLyra.png' },
-        { value: 'mock', label: 'Mockingbird', icon: '../assets/others/Zenless/Group/IconCampMockingBird.png' },
-        { value: 'sum', label: 'Yunkui Summit', icon: '../assets/others/Zenless/Group/IconCampSuibian.png' },
-        { value: 'spook', label: 'Spook Shack', icon: '../assets/others/Zenless/Group/IconCampSpookShack.png' },
-        { value: 'kramp', label: 'Krampus Compliance', icon: '../assets/others/Zenless/Group/IconCampBlackRoot.png' },
-        { value: 'angels', label: 'Angels of Delusion', icon: '../assets/others/Zenless/Group/IconFaction_Angels_of_Delusion_temp.png' },
-        { value: 'sq', label: 'Silver Squad', icon: '../assets/others/Zenless/Group/IconFaction_Defense_Force_-_Silver_Squad_temp.png' },
-        { value: 'MOD', label: 'Metropolitan Order Division', icon: '../assets/others/Zenless/Group/Faction_Metropolitan_Order_Division_Icon.png' },
+        { value: 'SS', label: 'Sixth Street' },
+        { value: 'TQ', label: 'Throne Quarter' },
+        { value: 'OE', label: 'Old Eridu' },
+        { value: 'LS', label: 'Lumina Square' },
+        { value: 'OR', label: 'Outer Ring' },
+        { value: 'BSCS', label: 'Brant Street Construction Site' },
+        { value: 'WP', label: 'Waifei Peninsula' },
+        { value: 'Ros', label: 'Roscaelifer' },
+        { value: 'NEPS', label: 'New Eridu Public Security' },
+        { value: 'RP', label: 'Random Play' },
       ],
     },
   },

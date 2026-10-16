@@ -41,7 +41,22 @@ window.CHARA_CONFIG = {
     //{ name: 'Fjall', imgName: '0008_kholec', element: '', have: false, group: [''], gender:'m', rarity: || , status: 'new', version: '', p:2, perma: true, want: 1-2 },
     //{ name: 'Shayen Krad', imgName: '0010_shayen', element: '', have: false, group: [''], gender:'', rarity: || , status: 'new', version: '', p:2, perma: true, want: 1-2 },
 
-    //{ name: '', imgName: '', element: '', have: false, group: [''], gender:'', rarity: || , status: 'new', version: '', p:2, perma: true, want: 1-2 },
+    // ---------------------------------------------------------------------
+    // TEMPLATE (Endfield): copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', element: '', have: false, group: [''], gender: '', rarity: 5,
+    //     status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
+    //
+    //   Needed:   name, imgName, element, have, group, gender, rarity
+    //   Optional:
+    //     status         'new' / 'soon' = label + shown on the home page   'available' = rerun
+    //     version, p     banner version and phase ('7.1', p: 2): countdown and colours
+    //     perma          true = permanent banner (own row on the home page)
+    //     want           1 = ★    2 = ☆   (marker on the home page)
+    //     out            false = not out yet (greyed out, no label)
+    //   Values:
+    //     rarity: 4 | 5 | 6     gender: 'm' | 'f'
+    //     group: a list, a character can have several
+    // ---------------------------------------------------------------------
     //  Element: Electric | Physical | Heat | Cryo | Nature 
     //  Group: Hongshan | EndIndustries | Rhodes | UWST | TGCC | OrderSO | Cabal | Hannabit | Sesqa
   ],

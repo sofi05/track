@@ -9,7 +9,13 @@ window.CHARA_CONFIG = {
     { name: 'Wise', imgName: '34_01', have: false, gender:'m', rarity: 5, hasOutfit: false },
     { name: 'Wise', imgName: '34_02', have: false, gender:'m', rarity: 5, hasOutfit: false },
     { name: 'Wise', imgName: '34_03', have: true, gender:'m', rarity: 5, status: 'new', hasOutfit: true },
-    // { name: '', imgName: '', have: true, gender:'', rarity: 5, status: 'new', hasOutfit: true },
+    // ---------------------------------------------------------------------
+    // TEMPLATE: copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', imgName2: [''], have: true, gender: '', rarity: 5, status: 'new', hasOutfit: true },
+    //
+    //   imgName2      list of pictures: the icon flips between them
+    //   hasOutfit    true = the icon is in the Outfit folder        status   'new' / 'soon' = label
+    // ---------------------------------------------------------------------
   ],
   // ---- icons ----
   // Pictures are either in the normal folder or in "Outfit/". Use whichever exists.

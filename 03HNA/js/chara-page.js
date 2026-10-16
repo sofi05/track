@@ -9,7 +9,7 @@ window.CHARA_PAGE = {
   quick: [['have', 'new'], 'rarity', 'gender'],
 
   // Filters inside the "Filter" button. Use [] to hide the button.
-  popup: ['element', 'group', 'world'],
+  popup: ['element'],
 
   // Part / collab buttons above the list. With none pressed, everything is shown.
   // field = the field on the character (part: '2' or collab: true), value = what it must be.
@@ -25,41 +25,22 @@ window.CHARA_PAGE = {
 
   // The choices of each filter. A character's field may hold one value or a list of values.
   filters: {
+    // Elements of Nexus Anima (no icons yet). Capital letters do not matter when filtering.
     element: {
       label: 'Element',
       options: [
-        { value: 'fire', label: 'fire', icon: '../assets/others/StarRail/Element/fire.png' },
-        { value: 'ice', label: 'ice', icon: '../assets/others/StarRail/Element/ice.png' },
-        { value: 'imaginary', label: 'imaginary', icon: '../assets/others/StarRail/Element/imaginary.png' },
-        { value: 'physical', label: 'physical', icon: '../assets/others/StarRail/Element/physical.png' },
-        { value: 'quantum', label: 'quantum', icon: '../assets/others/StarRail/Element/quantum.png' },
-        { value: 'thunder', label: 'thunder', icon: '../assets/others/StarRail/Element/thunder.png' },
-        { value: 'wind', label: 'wind', icon: '../assets/others/StarRail/Element/wind.png' },
-      ],
-    },
-    group: {
-      label: 'Path',
-      options: [
-        { value: 'abun', label: 'Abundance', icon: '../assets/others/StarRail/Path/Path_Abundance.png' },
-        { value: 'dest', label: 'Destruction', icon: '../assets/others/StarRail/Path/Path_Destruction.png' },
-        { value: 'eru', label: 'Erudition', icon: '../assets/others/StarRail/Path/Path_Erudition.png' },
-        { value: 'harm', label: 'Harmony', icon: '../assets/others/StarRail/Path/Path_Harmony.png' },
-        { value: 'nihi', label: 'Nihility', icon: '../assets/others/StarRail/Path/Path_Nihility.png' },
-        { value: 'prese', label: 'Preservation', icon: '../assets/others/StarRail/Path/Path_Preservation.png' },
-        { value: 'reme', label: 'Remembrance', icon: '../assets/others/StarRail/Path/Path_Remembrance.png' },
-        { value: 'hunt', label: 'The Hunt', icon: '../assets/others/StarRail/Path/Path_The_Hunt.png' },
-      ],
-    },
-    world: {
-      label: 'World', white: true,
-      options: [
-        { value: 'hss', label: 'Herta Space', icon: '../assets/others/StarRail/World/Icon_Herta_Space_Station.png' },
-        { value: 'ae', label: 'Astral Express', icon: '../assets/others/StarRail/World/Icon_Astral_Express.webp' },
-        { value: 'JVI', label: 'Jarilo-VI', icon: '../assets/others/StarRail/World/Icon_Jarilo-VI.png' },
-        { value: 'txl', label: 'Xianzhou Luofu', icon: '../assets/others/StarRail/World/Icon_The_Xianzhou_Luofu.png' },
-        { value: 'pena', label: 'Penacony', icon: '../assets/others/StarRail/World/Icon_Penacony.png' },
-        { value: 'amp', label: 'Amphoreus', icon: '../assets/others/StarRail/World/Icon_Amphoreus.png' },
-        { value: 'ot', label: 'Other', icon: '../assets/others/StarRail/World/Icon_Other.png' },
+        { value: 'reality', label: 'Reality' },
+        { value: 'beauty', label: 'Beauty' },
+        { value: 'competition', label: 'Competition' },
+        { value: 'strength', label: 'Strength' },
+        { value: 'joy', label: 'Joy' },
+        { value: 'dark', label: 'Dark' },
+        { value: 'memory', label: 'Memory' },
+        { value: 'insatiability', label: 'Insatiability' },
+        { value: 'satiation', label: 'Satiation' },
+        { value: 'light', label: 'Light' },
+        { value: 'love', label: 'Love' },
+        { value: 'hate', label: 'Hate' },
       ],
     },
     rarity: {

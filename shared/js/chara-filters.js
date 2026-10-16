@@ -10,6 +10,7 @@
    and gives chara.js one thing to ask:  filters.matches(character)
 
    Rules
+     * Capital letters do not matter ('M' finds 'm', 'geo' finds 'Geo').
      * Every character field can hold ONE value or a LIST of values
        (region: 'mond'  or  region: ['mond', 'liy']). A character passes a
        filter if ANY of its values is the selected one.
@@ -27,7 +28,7 @@
   const Dex = (window.Dex = window.Dex || {});
 
   const asList = (value) => (value == null ? [] : Array.isArray(value) ? value : [value]);
-  const sameValue = (a, b) => String(a) === String(b);
+  const sameValue = (a, b) => String(a).trim().toLowerCase() === String(b).trim().toLowerCase(); // 'M' = 'm', 'geo' = 'Geo'
 
   // ---------------------------------------------------------------
   // Filters every game has. A game's settings file can change any of these
@@ -68,26 +69,6 @@
     element: { label: 'Element', fields: ['element', 'filterElement'] },
   };
 
-  const KEEP_STORAGE_KEY = 'dex-keep-filters';
-
-  function readKeepSetting(fallback) {
-    try {
-      const saved = localStorage.getItem(KEEP_STORAGE_KEY);
-      if (saved !== null) return saved === 'true';
-    } catch (e) {
-      /* storage can be blocked: just use the default */
-    }
-    return Boolean(fallback);
-  }
-
-  function saveKeepSetting(value) {
-    try {
-      localStorage.setItem(KEEP_STORAGE_KEY, String(value));
-    } catch (e) {
-      /* ignore */
-    }
-  }
-
   // ---------------------------------------------------------------
   // Main
   // ---------------------------------------------------------------
@@ -110,7 +91,7 @@
     // What is selected right now
     const selected = {}; // filter name -> value
     const pressedParts = new Set(); // indexes into `parts`
-    let keep = readKeepSetting(page.keepFilters);
+    let keep = Dex.keepFilters.read(page.keepFilters);
 
     // Everything on the page that shows a selection, so refresh() can update it
     const filterButtons = []; // { node, key, value, kind }
@@ -234,7 +215,7 @@
       keepButton.title = 'Keep your other filters selected when you pick a new one';
       keepButton.addEventListener('click', () => {
         keep = !keep;
-        saveKeepSetting(keep);
+        Dex.keepFilters.save(keep);
         refresh();
       });
       resetButton = Dex.el('button', 'part-btn chip', 'Reset');

@@ -3,6 +3,7 @@ const gameConfig = {
     { name: 'Nicole', imgName: '12_01', have: true, rarity: 4 },
     { name: 'Ellen', imgName: '21_01', have: false, rarity: 5},
     { name: 'Jane Doe', imgName: '24_01', have: true, rarity: 5 }, 
+    { name: 'Lucy', imgName: '27_01', have: true, rarity: 4},
     { name: 'Astra Yao', imgName: '36_01', have: false, rarity: 5 },
     { name: 'Vivian', imgName: '41_01', have: true, rarity: 5 },
     { name: 'Yixuan', imgName: '44_01', have: false, rarity: 5 },
@@ -12,17 +13,34 @@ const gameConfig = {
     { name: 'Manato', imgName: '51_01', have: true, rarity: 4 },
     { name: 'Shunguan', imgName: '55_01', have: false, rarity: 5 },
     { name: 'Aria', imgName: '57_01', imgName2: ['57_01', '57_01_Form2'], have: false, rarity: 5 },
+    { name: 'Aria', imgName: '57_02', have: false, rarity: 5, status: 'new' },
     { name: 'Sunna', imgName: '58_01', have: false, rarity: 5 },
+    { name: 'Sunna', imgName: '58_02', have: false, rarity: 5, status: 'new' },
     { name: 'Nangong Yu', imgName: '59_01', have: false, rarity: 5 },
+    { name: 'Nangong Yu', imgName: '59_02', have: false, rarity: 5, status: 'new' },
     { name: 'Miyabi', imgName: '13_01', have: false, rarity: 5 },
     { name: 'Velina', imgName: '64_01', have: false, rarity: 5 },
+    { name: 'Sigrid', imgName: '66_01', have: false, rarity: 5},
+    { name: 'Remielle', imgName: '67_01', have: false, rarity: 5 },
+    { name: 'Remielle', imgName: '67_02', have: false, rarity: 5  },
 
-    { name: 'Lucy', imgName: '27_01', have: false, rarity: 4, status: 'soon' },
-    { name: 'Remielle', imgName: '67_01', have: false, rarity: 5, status: 'soon' },
-    { name: 'Remielle', imgName: '67_02', have: false, rarity: 5, status: 'soon' },
-    { name: 'Sigrid', imgName: '66_01', have: false, rarity: 5, status: 'soon' },
-    // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
+    
+    { name: 'Phoenix', imgName: '', have: false, rarity: 5},
+    { name: 'Phoenix', imgName: '', have: false, rarity: 5},
+    { name: 'Severian', imgName: '', have: false, rarity: 5},
+    // ---------------------------------------------------------------------
+    // TEMPLATE: copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', imgName2: '', have: false, rarity: 4, status: 'new' },
+    //
+    //   Same name = ONE card: to add an outfit to a character, add a line with the same name.
+    //   imgName        icon of this outfit            imgName2   extra big picture(s) in the popup (one name or a list)
+    //   status         'new' / 'soon' = label         rarity     4 | 5      have   true / false
+    // ---------------------------------------------------------------------
   ],
+
+  // The version this list is updated to (shows as a red "vers." pill under the title)
+  lastVersion: '3.2',
+
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/Zenless/Outfit/IconRoleCrop",
   spritePrefix: "../assets/Sprite/Zenless/Outfit/IconRole",

@@ -130,8 +130,21 @@ const gameConfig = {
     { name: 'Vita', imgName: 'Lone_Planetfarer', folder:'SoloChara', spriteFolder: 'Vita', have: false, part: '2', 
         spriteImages: ['Eldritch_Vantage', 'White_Velveteer'], },
     
-    //{ name: '', imgName: '', folder:'', spriteFolder: '', have: false, part: '2', //status: 'new', spriteImages: ['', ''] },
+    // ---------------------------------------------------------------------
+    // TEMPLATE: copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', folder: '', spriteFolder: '', have: false, part: '2', status: 'new',
+    //     spriteImages: ['', ''] },
+    //
+    //   Same name = ONE card: to add an outfit to a character, add a line with the same name.
+    //   imgName / folder     icon:  charaid/Honkai/<folder>/<imgName>.png
+    //   spriteFolder         folder of the big pictures        spriteImages   the big pictures shown in the popup (a list)
+    //   part                 '1' | '2'          status   'new' / 'soon' = label          have   true / false
+    // ---------------------------------------------------------------------
   ],
+
+  // The version this list is updated to (shows as a red "vers." pill under the title)
+  lastVersion: '8.8',
+
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/Honkai/",
   spritePrefix: "../assets/Sprite/HI3/Outfit/",

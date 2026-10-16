@@ -4,7 +4,7 @@
    The game's own js/sup.js holds the list and then calls:
 
        Dex.initSupportPage({
-         characters,                      // [{ name, imgName, have, rarity, status?, folder?, part? }]
+         characters,                      // [{ name, imgName, imgName2?, have, rarity, status?, folder?, part? }]   imgName2 = extra big picture(s) in the popup (the icon stays imgName)
          iconFolder:   '../assets/...',   // small pictures:  <iconFolder>/<folder>/<imgName>.png
          spriteFolder: '../assets/...',   // big pictures:    <spriteFolder>/<folder>/<imgName>.png
        });
@@ -49,14 +49,15 @@
       if (c.status === 'new') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'NEW'));
       if (c.status === 'soon') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'SOON'));
 
-      const name = c.imgName || c.name;
+      const names = Dex.imageNames(c); // [imgName, imgName2 ...]: the icon uses the first, the popup shows all
+      const name = names[0];
       const img = Dex.el('img', 'char-icon');
       img.src = `${joinPath(iconFolder, c.folder, name)}.png`;
       img.alt = c.name;
       iconWrapper.appendChild(img);
 
       card.append(iconWrapper, Dex.el('div', '', c.name));
-      card.addEventListener('click', () => Dex.showPopup(`${joinPath(spriteFolder, c.folder, name)}.png`, c.name));
+      card.addEventListener('click', () => Dex.showPopup(names.map((n) => `${joinPath(spriteFolder, c.folder, n)}.png`), c.name));
       return card;
     }
 
@@ -86,14 +87,37 @@
     Dex.initFilterPanel();
     Dex.bindToggleableRadios(() => filters, ['have', 'rarity', 'element'], render);
 
+    // "Keep filters": off = one filter at a time, on = they combine
+    const keepFilters = filterPopup ? Dex.keepFilters.addToggle(filterPopup) : { isOn: () => true };
+    function clearOtherFilters(exceptKey) {
+      ['have', 'rarity', 'element'].forEach((key) => {
+        if (key === exceptKey) return;
+        filters[key] = null;
+        filterPopup.querySelectorAll(`input[name="${key}"]`).forEach((input) => (input.checked = false));
+      });
+      if (exceptKey !== 'isNew') {
+        filters.isNew = false;
+        if (newCheckbox) newCheckbox.checked = false;
+      }
+    }
+    // runs after the radio's own handler (bubbling), so `filters` is already updated
+    filterPopup?.addEventListener('click', (e) => {
+      const key = e.target.matches && e.target.matches('input[type="radio"]') ? e.target.name : null;
+      if (key && filters[key] !== null && !keepFilters.isOn()) {
+        clearOtherFilters(key);
+        render();
+      }
+    });
+
     newCheckbox?.addEventListener('change', () => {
+      if (newCheckbox.checked && !keepFilters.isOn()) clearOtherFilters('isNew');
       filters.isNew = newCheckbox.checked;
       render();
     });
 
     searchInput.addEventListener('input', render);
 
-    const partButtons = document.querySelectorAll('.part-btn');
+    const partButtons = document.querySelectorAll('.part-btn:not(.keep-btn)');
     partButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         partButtons.forEach((b) => b.classList.remove('active'));

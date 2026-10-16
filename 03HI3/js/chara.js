@@ -140,7 +140,25 @@ window.CHARA_CONFIG = {
     { name: 'Mei • XDC', imgName: 'Xentinel_Dawnbearing_Crescent', folder:'Mei', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'GoI',version: '8.9' },
 
     { name: 'Seele • WP', imgName: 'Wings_of_Panacea', folder:'Seele', have: false, element: 'SD', rarity: 5, part:'2', status: 'new', spec:'',version: '8.9' }, //EDIT
-    //{ name: '', imgName: '', folder:'', have: false, element: '', rarity: 5, part:'2', status: 'soon', spec:'',version: '' },
+    // ---------------------------------------------------------------------
+    // TEMPLATE (Honkai Impact): copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', folder: '', outfitSprites: [''], have: false, element: '', rarity: 5, part: '2', spec: '',
+    //     collab: true, status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
+    //
+    //   Needed:   name, imgName, folder, have, element, rarity, part
+    //   Optional:
+    //     outfitSprites  alternative outfits shown in the popup, e.g. ['Folder/Image'] (inside the Outfit sprite folder)
+    //     spec           the character's spec (see Values)
+    //     collab         true = collab character (Collab button)
+    //     status         'new' / 'soon' = label + shown on the home page   'available' = rerun
+    //     version, p     banner version and phase ('7.1', p: 2): countdown and colours
+    //     perma          true = permanent banner (own row on the home page)
+    //     want           1 = ★    2 = ☆   (marker on the home page)
+    //     out            false = not out yet (greyed out, no label)
+    //   Values:
+    //     part: '1' | '2'     rarity: 3 | 4 | 5     element: IMG | SD | PSY | MECH | BIO | QUA
+    //     spec: WoD | LoA | WS | GoI | RoO
+    // ---------------------------------------------------------------------
 
     //  Element: IMG | SD | PSY | MECH | BIO | QUA
     //  Spec: WoD | LoA | WS | GoI | RoO
@@ -150,4 +168,7 @@ window.CHARA_CONFIG = {
   getElementPath: (c) => `../assets/others/HI3/Element/${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/HI3/${c.folder}/${c.imgName || c.name}.png`,
   getFallbackPath: () => '../assets/others/HI3/Random/Clouds_Shadow.webp',
+
+  // Big pictures: the character, then alternative outfits (outfitSprites: ['Folder/Image'])
+  getSpritePaths: (c) => Dex.spriteList(c, `../assets/Sprite/HI3/${c.folder}/${c.imgName || c.name}.png`, '../assets/Sprite/HI3/Outfit/'),
 };

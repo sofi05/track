@@ -106,6 +106,61 @@
    * Image names of a character: `imgName` (or the name) first, then `imgName2`
    * (a name or a list of names). Duplicates and empty names are skipped.
    */
+  // Big pictures for a popup: the character's own picture(s), then any alternative
+  // outfits listed in `outfitSprites: ['QinCostumeSea']` on the character.
+  // Names are looked up in the game's Outfit sprite folder (`outfitPrefix`).
+  Dex.spriteList = function (c, main, outfitPrefix) {
+    const outfits = (c.outfitSprites == null ? [] : [].concat(c.outfitSprites)).map((name) => `${outfitPrefix}${name}.png`);
+    return [...[].concat(main), ...outfits];
+  };
+
+  // ---------------------------------------------------------------
+  // "Keep filters": ONE setting shared by every page that has filters.
+  //   off (default) -> picking a filter clears the others (one at a time)
+  //   on            -> filters combine
+  // The choice is remembered in the browser.
+  // ---------------------------------------------------------------
+  const KEEP_KEY = 'dex-keep-filters';
+  Dex.keepFilters = {
+    read(fallback) {
+      try {
+        const saved = localStorage.getItem(KEEP_KEY);
+        if (saved !== null) return saved === 'true';
+      } catch (e) {
+        /* storage can be blocked: use the default */
+      }
+      return Boolean(fallback);
+    },
+    save(value) {
+      try {
+        localStorage.setItem(KEEP_KEY, String(value));
+      } catch (e) {
+        /* ignore */
+      }
+    },
+    // Puts a "Keep filters" button at the top of a filter panel. Returns { isOn }.
+    addToggle(panel) {
+      let on = Dex.keepFilters.read(false);
+      const button = Dex.el('button', 'part-btn chip keep-btn', 'Keep filters');
+      button.type = 'button';
+      button.title = 'Keep your other filters selected when you pick a new one';
+      const paint = () => {
+        button.classList.toggle('active', on);
+        button.setAttribute('aria-pressed', String(on));
+      };
+      button.addEventListener('click', () => {
+        on = !on;
+        Dex.keepFilters.save(on);
+        paint();
+      });
+      paint();
+      const row = Dex.el('div', 'keep-row');
+      row.appendChild(button);
+      panel.insertBefore(row, panel.firstChild);
+      return { isOn: () => on };
+    },
+  };
+
   Dex.imageNames = function (c) {
     const extra = Array.isArray(c.imgName2) ? c.imgName2 : [c.imgName2];
     return [...new Set([c.imgName || c.name, ...extra].filter(Boolean))];
@@ -233,6 +288,7 @@
    *
    *   getElementPath(c)   URL of the element badge (return null for none)
    *   getSpritePaths(c)   LIST of big pictures, if a character has several
+   *                       (Dex.spriteList adds the character's `outfitSprites`)
    *   cycleIcons          true = a character with imgName2 flips between its pictures
    *   getLabels(c)        a row of text tags, as { list, item, values }, e.g.
    *                       { list: 'region-list', item: 'region-label', values: c.region }

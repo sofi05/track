@@ -25,8 +25,19 @@ const gameConfig = {
     { name: 'Charlotte', imgName: 'CharlotteCostumeDong', have: true, rarity: 4 },
     { name: 'Citlali', imgName: 'CitlaliCostumeXia', have: false, rarity: 5 },
 
- // { name: '', imgName: '', imgName2:'', have: false, rarity: 4, status: 'new' },
+ // ---------------------------------------------------------------------
+ // TEMPLATE: copy a line, remove the // and fill it in.
+ //   { name: '', imgName: '', imgName2: '', have: false, rarity: 4, status: 'new' },
+ //
+ //   Same name = ONE card: to add an outfit to a character, add a line with the same name.
+ //   imgName        icon of this outfit            imgName2   extra big picture(s) in the popup (one name or a list)
+ //   status         'new' / 'soon' = label         rarity     4 | 5      have   true / false
+ // ---------------------------------------------------------------------
   ],
+
+  // The version this list is updated to (shows as a red "vers." pill under the title)
+  lastVersion: '7.1',
+
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/Genshin/Outfit/UI_AvatarIcon_",
   spritePrefix: "../assets/Sprite/Genshin/Outfit/UI_Costume_",

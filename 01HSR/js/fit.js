@@ -8,8 +8,19 @@ const gameConfig = {
 
     { name: 'Evanescia', imgName: '1150501', imgName2:'', have: false, rarity: 5, status: 'soon' },
     { name: 'Hyacine', imgName: '1140901', imgName2:'', have: false, rarity: 5, status: 'soon' },
-    //{ name: '', imgName: '', imgName2:'', have: false, rarity: 5, status: 'soon' },
+    // ---------------------------------------------------------------------
+    // TEMPLATE: copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', imgName2: '', have: false, rarity: 5, status: 'soon' },
+    //
+    //   Same name = ONE card: to add an outfit to a character, add a line with the same name.
+    //   imgName        icon of this outfit            imgName2   extra big picture(s) in the popup (one name or a list)
+    //   status         'new' / 'soon' = label         rarity     4 | 5      have   true / false
+    // ---------------------------------------------------------------------
   ],
+
+  // The version this list is updated to (shows as a red "vers." pill under the title)
+  lastVersion: '4.5',
+
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/StarRail/Outfit/",
   spritePrefix: "../assets/Sprite/StarRail/Outfit/",

@@ -9,6 +9,7 @@
    Entries with the SAME name become ONE card: its icon flips between the
    outfits and its popup shows all of them. To add an outfit to a character,
    just add another line with the same name.
+   Optional: gameConfig.lastVersion  e.g. '6.6' -> a red "vers. 6.6" pill under the title.
    Needs: common.js, sprite-popup.js (loaded before this file).
    ===================================================================== */
 
@@ -125,7 +126,7 @@ function renderList() {
 // ---------------------------------------------------------------
 // Wiring
 // ---------------------------------------------------------------
-const partButtons = document.querySelectorAll('.part-btn');
+const partButtons = document.querySelectorAll('.part-btn:not(.keep-btn)');
 const partCheckboxes = document.querySelectorAll('input[name="part"]');
 
 function clearPartFilter() {
@@ -137,18 +138,20 @@ function clearPartFilter() {
 // The Filter button and its panel
 Dex.initFilterPanel();
 
+// "Keep filters": off = one filter at a time, on = they combine
+const filterPanel = document.getElementById('filterPopup'); // (the Stigmata page has no filters)
+const keepFilters = filterPanel ? Dex.keepFilters.addToggle(filterPanel) : { isOn: () => true };
+
 // Have / Want / New checkboxes
 document.querySelectorAll('.filter-checkbox[data-filter]').forEach((checkbox) => {
   checkbox.addEventListener('change', (e) => {
     const type = e.target.dataset.filter;
     const wasChecked = e.target.checked;
 
-    clearStatusFilters();
-    if (wasChecked) {
-      selectedFilters[type] = true;
-      e.target.checked = true;
-      clearPartFilter();
-    }
+    if (!keepFilters.isOn()) clearStatusFilters();
+    selectedFilters[type] = wasChecked;
+    e.target.checked = wasChecked;
+    if (wasChecked && !keepFilters.isOn()) clearPartFilter();
     renderList();
   });
 });
@@ -156,7 +159,7 @@ document.querySelectorAll('.filter-checkbox[data-filter]').forEach((checkbox) =>
 // Part buttons
 partButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
-    clearStatusFilters();
+    if (!keepFilters.isOn()) clearStatusFilters();
     partButtons.forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
     selectedFilters.part = btn.dataset.part;
@@ -168,7 +171,7 @@ partButtons.forEach((btn) => {
 partCheckboxes.forEach((box) => {
   box.addEventListener('change', (e) => {
     if (e.target.checked) {
-      clearStatusFilters();
+      if (!keepFilters.isOn()) clearStatusFilters();
       partCheckboxes.forEach((other) => { if (other !== e.target) other.checked = false; });
       partButtons.forEach((b) => b.classList.remove('active'));
       selectedFilters.part = e.target.value;
@@ -178,6 +181,13 @@ partCheckboxes.forEach((box) => {
     renderList();
   });
 });
+
+// Red pill under the title: the version this list is updated to (gameConfig.lastVersion). Not a filter.
+if (gameConfig.lastVersion) {
+  const pill = Dex.el('div', 'version-pill', `vers. ${gameConfig.lastVersion}`);
+  pill.title = 'This list is up to date until this version';
+  document.getElementById('charCount')?.after(pill);
+}
 
 searchInput.addEventListener('input', renderList);
 

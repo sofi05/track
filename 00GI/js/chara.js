@@ -2,7 +2,7 @@ window.CHARA_CONFIG = {
   gameId: 'GenshinImpact', // key of this game in shared/js/vs.js
   characters: [
     //HAVE - ORGANIZED BY RARITY
-    { name: 'Amber', imgName: 'Ambor', have: true, element: 'Pyro', rarity: 4, region:['mond'], gender:'f' },
+    { name: 'Amber', imgName: 'Ambor', outfitSprites: ['AmborCostumeWic'], have: true, element: 'Pyro', rarity: 4, region:['mond'], gender:'f' },
     { name: 'Lisa', have: true, element: 'Electro', rarity: 4, region:['mond'], gender:'f' },
     { name: 'Barbara', have: true, element: 'Hydro', rarity: 4, region:['mond'], gender:'f' },
     { name: 'Beidou', have: true, element: 'Electro', rarity: 4, region:['liy'], gender:'f' },
@@ -33,7 +33,7 @@ window.CHARA_CONFIG = {
     { name: 'Layla', have: true, element: 'Hydro', rarity: 4, region:['sum'], gender:'f' },
     { name: 'Mika', have: true, element: 'Cryo', rarity: 4, region:['mond'], gender:'m' },
     { name: 'Ningguang', have: true, element: 'Geo', rarity: 4, region:['liy'], gender:'f' },
-    { name: 'Rosaria', have: true, element: 'Cryo', rarity: 4, region:['mond'], gender:'f' },
+    { name: 'Rosaria', outfitSprites: ['RosariaCostumeWic'], have: true, element: 'Cryo', rarity: 4, region:['mond'], gender:'f' },
     { name: 'Sethos', have: true, element: 'Electro', rarity: 4, region:['sum'], gender:'m' },
     { name: 'Noelle', imgName: 'Noel', have: true, element: 'Geo', rarity: 4, region:['mond'], gender:'f' },
     { name: 'Ororon', imgName: 'Olorun', have: true, element: 'Electro', rarity: 4, region:['nat'], gender:'m' },
@@ -47,11 +47,11 @@ window.CHARA_CONFIG = {
     { name: 'Yaoyao', have: true, element: 'Dendro', rarity: 4, region:['liy'], gender:'f' },
     { name: 'Shinobu', have: true, element: 'Electro', rarity: 4, region:['ina'], gender:'f' },
     { name: 'Sucrose', have: true, element: 'Anemo', rarity: 4, region:['mond'], gender:'f' },
-    { name: 'Aino', have: true, element: 'Hydro', rarity: 4, region:['snez'], gender:'f' },
-    { name: 'Jahoda', have: true, element: 'Anemo', rarity: 4, region:['snez'], gender:'f'},
+    { name: 'Aino', have: true, element: 'Hydro', rarity: 4, region:['nod'], gender:'f' },
+    { name: 'Jahoda', have: true, element: 'Anemo', rarity: 4, region:['nod'], gender:'f'},
 
     { name: 'Xiao', have: true, element: 'Anemo', rarity: 5, region:['liy'], gender:'m' },
-    { name: 'Mona', have: true, element: 'Hydro', rarity: 5, region:['mond'], gender:'f' },
+    { name: 'Mona', outfitSprites: ['MonaCostumeWic'], have: true, element: 'Hydro', rarity: 5, region:['mond'], gender:'f' },
     { name: 'Diluc', have: true, element: 'Pyro', rarity: 5, region:['mond'], gender:'m' },
     { name: 'Alhaitham', imgName: 'Alhatham', have: true, element: 'Dendro', rarity: 5, region:['sum'], gender:'m' },
     { name: 'Ayaka', have: true, element: 'Cryo', rarity: 5, region:['ina'], gender:'f' },
@@ -75,7 +75,7 @@ window.CHARA_CONFIG = {
     { name: 'Wanderer', have: true, element: 'Anemo', rarity: 5, region:['ina','sum'], gender:'m' },
     { name: 'Hu Tao', imgName: 'Hutao', have: true, element: 'Pyro', rarity: 5, region:['liy'], gender:'f' },
     { name: 'Raiden Shogun', imgName: 'Shougun', have: true, element: 'Electro', rarity: 5, region:['ina'], gender:'f' },
-    { name: 'Jean', imgName: 'Qin', have: true, element: 'Anemo', rarity: 5, region:['mond'], gender:'f' },
+    { name: 'Jean', imgName: 'Qin', outfitSprites: ['QinCostumeWic'], have: true, element: 'Anemo', rarity: 5, region:['mond'], gender:'f' },
     { name: 'Zhongli', have: true, element: 'Geo', rarity: 5, region:['liy'], gender:'m' },
     { name: 'Yoimiya', have: true, element: 'Pyro', rarity: 5, region:['ina'], gender:'f' },
     { name: 'Tartaglia', have: true, element: 'Hydro', rarity: 5, region:['snez'], gender:'m' },
@@ -83,18 +83,22 @@ window.CHARA_CONFIG = {
     { name: 'Venti', have: true, element: 'Anemo', rarity: 5, region:['mond'], gender:'m' },
     { name: 'Tighnari', have: true, element: 'Dendro', rarity: 5, region:['sum'], gender:'m' },
     { name: 'Mizuki', have: true, element: 'Anemo', rarity: 5, region:['ina'], gender:'f' },
-    { name: 'Flins', have: true, element: 'Electro', rarity: 5, region:['snez'], gender:'m'},
+    { name: 'Flins', have: true, element: 'Electro', rarity: 5, region:['nod'], gender:'m'},
     { name: 'Durin', have: true, element: 'Pyro', rarity: 5, region:['mond'], gender:'m'},
-    { name: 'Columbina', have: true, element: 'Hydro', rarity: 5, region:['snez'], gender:'f'},
+    { name: 'Columbina', have: true, element: 'Hydro', rarity: 5, region:['nod','snez'], gender:'f'},
     { name: 'Emilie', have: true, element: 'Dendro', rarity: 5, region:['font'], gender:'f'},
     { name: 'Mavuika', have: true, element: 'Pyro', rarity: 5, region:['nat'], gender:'f'},
-    { name: 'Odette', have: true, element: 'Cryo', rarity: 5, region:['snez'], gender:'f'},
+    { name: 'Odette', have: true, element: 'Cryo', rarity: 5, region:['nod'], gender:'f'},
+    { name: 'Varesa', have: true, element: 'Electro', rarity: 5, region:['nat'], gender:'f'},
+    { name: 'Alyosha', have: true, element: 'Electro', rarity: 4, region:['nod'], gender:'m'},
+    { name: 'Vesna', have: true, element: 'Anemo', rarity: 5, region:['snez'], gender:'f', status: 'new'},
+
 
     //DON'T HAVE - ORGANIZED BY LAUNCH
-    { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond', 'unk'], gender:'m',  status: 'available', version: '6.4', want: 2,p:1 }, 
-    { name: 'Arlecchino', have: false, element: 'Pyro', rarity: 5, region:['font', 'unk'], gender:'f',  status: 'available', version: '7.0', p:2, want: 2 },
+    { name: 'Albedo', have: false, element: 'Geo', rarity: 5, region:['mond','khae'], gender:'m',  status: 'available', version: '6.4', p:1 }, 
+    { name: 'Arlecchino', have: false, element: 'Pyro', rarity: 5, region:['font', 'snez'], gender:'f',  status: 'available', version: '7.0', p:2, want: 2 },
     { name: 'Ayato', have: false, element: 'Hydro', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
-    { name: 'Baizhu', imgName: 'Baizhuer', have: false, element: 'Dendro', rarity: 5, region:['liy'], gender:'m',  status: 'available', version: '5.3', want: 1 },
+    { name: 'Baizhu', imgName: 'Baizhuer', have: false, element: 'Dendro', rarity: 5, region:['liy'], gender:'m',  status: 'available', version: '5.3' },
     { name: 'Chiori', have: false, element: 'Geo', rarity: 5,  region:['ina','font'], gender:'f', status: 'available', version: '5.6' },
     { name: 'Citlali', have: false, element: 'Cryo', rarity: 5,  region:['nat'], gender:'f', status: 'available', version: '6.7',p:1 },
     { name: 'Dahlia', have: false, element: 'Hydro', rarity: 4, region:['mond'], gender:'m',  status: 'available', version: '6.4', perma: true, want: 1,p:2 },
@@ -102,45 +106,64 @@ window.CHARA_CONFIG = {
     { name: 'Itto', have: false, element: 'Geo', rarity: 5, region:['ina'], gender:'m',  status: 'available', version: '5.6' },
     { name: 'Sigewinne', have: false, element: 'Hydro', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '6.5', p:2 },
     { name: 'Nilou', have: false, element: 'Hydro', rarity: 5, region:['sum'], gender:'f',  status: 'available', version: '6.0', p:1 },
-    { name: 'Varesa', have: false, element: 'Electro', rarity: 5, region:['nat'], gender:'f',  status: 'available', version: '6.2', p:2, want: 1 },
     { name: 'Escoffier', have: false, element: 'Cryo', rarity: 5, region:['font'], gender:'f',  status: 'available', version: '7.1',p:2 },
     { name: 'Eula', have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '6.4',p:1 },
-    { name: 'Ineffa', have: false, element: 'Electro', rarity: 5, region:['nat','snez'], gender:'f',  status: 'available', version: '7.0', want: 2, p:1 },
+    { name: 'Ineffa', have: false, element: 'Electro', rarity: 5, region:['nat','nod'], gender:'f',  status: 'available', version: '7.0', p:1 },
     { name: 'Shenhe', have: false, element: 'Cryo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '5.7' },
     { name: 'Wriothesley', have: false, element: 'Cryo', rarity: 5, region:['font'], gender:'m',  status: 'available', version: '6.7', want: 1, p:1 },
     { name: 'Klee', have: false, element: 'Pyro', rarity: 5, region:['mond'], gender:'f',  status: 'available', version: '6.4', want: 2,p:1 },
-    { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '7.1' , want: 2,p:2 },
+    { name: 'Skirk', imgName: 'SkirkNew', have: false, element: 'Cryo', rarity: 5, region:['bey'], gender:'f',  status: 'available', version: '7.1' , p:2 },
     { name: 'Yae Miko', imgName: 'Yae', have: false, element: 'Electro', rarity: 5, region:['ina'], gender:'f',  status: 'available', version: '6.7', p:1 },
-    { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['snez'], gender:'f',  status: 'available', version: '6.5', want: 2, p:2}, 
+    { name: 'Lauma', have: false, element: 'Dendro', rarity: 5, region:['nod'], gender:'f',  status: 'available', version: '6.5',  p:2}, 
     { name: 'Nefer', have: false, element: 'Dendro', rarity: 5, region:['snez','sum'], gender:'f',  status: 'available', version: '6.5', p:2 }, 
-    { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy'], gender:'f',  status: 'available', version: '6.3', p:2, },
-    { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['snez'], gender:'m',  status: 'available', version: '6.3', p:2, perma: true},
+    { name: 'Zibai', have: false, element: 'Geo', rarity: 5, region:['liy','cel'], gender:'f',  status: 'available', version: '6.3', p:2, },
+    { name: 'Illuga', have: false, element: 'Geo', rarity: 4, region:['nod'], gender:'m',  status: 'available', version: '6.3', p:2, perma: true, want: 1},
     { name: 'Varka', have: false, element: 'Anemo', rarity: 5, region:['mond'], gender:'m',  status: 'available', version: '6.4', p:1},
-    { name: 'Linnea', have: false, element: 'geo', rarity: 5, region:['snez'], gender:'f', status: 'available', version: '6.5', p:1, want: 2},
-    { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:['unk'], gender:'f',  status: 'available', version: '6.6', p:1},
-    { name: 'Lohen',  have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'m', status: 'available', version: '6.6', p:2, want: 2 }, //perma: true,
+    { name: 'Linnea', have: false, element: 'Geo', rarity: 5, region:['nod'], gender:'f', status: 'available', version: '6.5', p:1},
+    { name: 'Nicole', have: false, element: 'Pyro', rarity: 5, region:['cel'], gender:'f',  status: 'available', version: '6.6', p:1},
+    { name: 'Lohen',  have: false, element: 'Cryo', rarity: 5, region:['mond'], gender:'m', status: 'available', version: '6.6', p:2 }, 
     { name: 'Prune',  have: false, element: 'Anemo', rarity: 4, region:['snez'], gender:'f', status: 'available', version: '6.6', p:1, want: 2, perma: true},
     { name: 'Sandrone', imgName: 'MarionetteNew', have: false, element: 'Cryo', rarity: 5, region:['snez','font'], gender:'f', status: 'available', version: '6.7', p:1, want: 2},
-    { name: 'Alyosha', have: true, element: 'Electro', rarity: 4, region:['snez'], gender:'m', status: 'available', version: '7.0', p:1}, //perma: true},
     
-    { name: 'Vesna', have: true, element: 'Anemo', rarity: 5, region:['snez'], gender:'f', status: 'new', version: '7.1', p:1  },
     { name: 'Vodyanitsa', have: false, element: 'Hydro', rarity: 5, region:['snez'], gender:'f', status: 'new', version: '7.1', p:1, want: 2},
 
     { name: 'Mitya', have: false, element: 'Electro', rarity: 5, region:['snez'], gender:'m', status: 'soon', version: '7.2', p:1, want: 1},
     { name: 'Valeriy', have: false, element: 'Electro', rarity: 4, region:['snez'], gender:'m', status: 'soon', version: '7.2', p:1},
+
     //confirmed next
-    { name: 'Alice', have: false, element: 'Pyro', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '7.X', out:false},
-    //{ name: 'IlCapitano', have: false, element: '', rarity: 5, region:[''], gender:'f',  status: 'soon', version: '7.X'},
+    { name: 'Alice', have: false, element: 'Pyro', rarity: 5, region:['bey'], gender:'f',  status: 'soon', out:false},
+    { name: 'IlCapitano', have: false, element: 'Cryo', rarity: 5, region:['khae','snez','nat'], gender:'f',  status: 'soon',  out:false},
     
-    //{ name: '', imgName: '', have: false, element: '', rarity: 4, region:[''], gender:'', || status: 'soon', version: '', p:1, perma: true, want: 1/2 }, //out:false },
+    // ---------------------------------------------------------------------
+    // TEMPLATE (Genshin): copy a line, remove the // and fill it in.
+    //   { name: '', imgName: '', outfitSprites: [''], have: false, element: '', rarity: 4, region: [''], gender: '',
+    //     status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
+    //
+    //   Needed:   name, have, element, rarity, region, gender
+    //   Optional:
+    //     imgName        picture name when it is not the same as name (Jean = 'Qin')
+    //     outfitSprites  alternative outfits shown in the popup, e.g. ['QinCostumeWic']
+    //                    (picture name in the Outfit sprite folder; the icon does not change)
+    //     status         'new' / 'soon' = label + shown on the home page   'available' = rerun
+    //     version, p     banner version and phase ('7.1', p: 2): countdown and colours
+    //     perma          true = permanent banner (own row on the home page)
+    //     want           1 = ★    2 = ☆   (marker on the home page)
+    //     out            false = not out yet (greyed out, no label)
+    //   Values:
+    //     region: a list, a character can have several (['mond','khae'])
+    //     rarity: 4 | 5     gender: 'm' | 'f'
+    // ---------------------------------------------------------------------
     //  Element: Anemo | Hydro | Geo | Dendro | Pyro | Electro | Cryo
-    //  Region: mond | liy | ina | sum | font | nat | snez | unk | khae
+    //  Region: mond | liy | ina | sum | font | nat | snez | unk | khae | nod | cel | bey
   ],
   // ---- paths (used by the home page, the Characters page and the popups) ----
   getIconPath: (c) => `../assets/charaid/Genshin/UI_AvatarIcon_${c.imgName || c.name}.png`,
   getElementPath: (c) => `../assets/others/Genshin/Element/${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png',
+  getFallbackPath: () => '../assets/others/UI_Icon_LunaRite_Unknown.png',
+
+  // Big pictures: the character, then alternative outfits (outfitSprites: ['QinCostumeSea'])
+  getSpritePaths: (c) => Dex.spriteList(c, `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName || c.name}.png`, '../assets/Sprite/Genshin/Outfit/UI_Costume_'),
 
   // Small text tags under the icon (Mondstadt, Liyue ...)
   getLabels: (c) => ({ list: 'region-list', item: 'region-label', values: c.region }),

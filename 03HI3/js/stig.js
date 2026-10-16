@@ -356,6 +356,9 @@ const gameConfig = {
     // Add more characters here
   ],
 
+  // The version this list is updated to (shows as a red "vers." pill under the title)
+  lastVersion: '8.8',
+
   pathPrefix: "../assets/charaid/Honkai/Stigmata/",
   spritePrefix: "../assets/Sprite/HI3/Stigmata/",
 

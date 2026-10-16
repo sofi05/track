@@ -16,7 +16,7 @@ const characters = [
   
   // PART 2 - ASTRAL OP
   { name: 'Chenxue', imgName: 'Chenxue', folder:'All_AstralOp', have: false, rarity: '5', element: 'Fire_DMG', part:'2'},
-  //{ name: 'Dreamseeker', imgName: 'Dreamseeker', folder:'All_AstralOp', have: true, rarity: '5', element: 'Lightning_DMG', part:'2'},
+  { name: 'Dreamseeker', imgName: 'Dreamseeker', imgName2: 'Dreamseeker_Alt', folder:'All_AstralOp', have: true, rarity: '5', element: 'Lightning_DMG', part:'2'}, // imgName2 = male version, sprite only
   { name: 'Serapeum', imgName: 'Serapeum', folder:'All_AstralOp', have: false, rarity: '5', element: 'Physical', part:'2'},
   { name: 'Songque', imgName: 'Songque_AstralOp', folder:'All_AstralOp', have: false, rarity: '5', element: 'Lightning_DMG', part:'2'},
   { name: 'Theresa', imgName: 'Theresa_Apocalypse_AstralOp', folder:'All_AstralOp', have: false, rarity: '5', element: 'Lightning_DMG', part:'2'},
