@@ -28,9 +28,10 @@
     characters:
       '<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
     menu: '<svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>',
-    main: '<img src="../assets/others/logo.png" alt="Main" class="nav-icon-image" />',
-    change:
-      '<svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M3.75 9c-1.1 0-1.5 0.73-1.5 1.82 0 2.19 1.1 5.08 2.2 6.56s2.93 1.1 3.66 0l1.46-2.2h4.39l1.46 2.2c0.73 1.1 2.5 1.1 3.66 0s2.2-4.4 2.2-6.56c0-1.1-0.4-1.82-1.5-1.82-1.9 0-3 1.52-3.75 2.28H8.7c-0.6-0.6-1.5-1.8-3-1.8z"/></svg>',
+    // Main = star (drawn, so it takes the colour of the bar). To use another icon, paste its <svg> here.
+    main: '<svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2l2.94 6.26 6.86.84-5.06 4.73 1.32 6.8L12 17.27 5.94 20.63l1.32-6.8L2.2 9.1l6.86-.84z"/></svg>',
+    // Change = the Hoyo logo (a picture, shown white like the other icons)
+    change: '<img src="../assets/others/logo.png" alt="Change" class="nav-icon-image" />',
   };
 
   const TABS = [

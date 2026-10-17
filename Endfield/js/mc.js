@@ -9,7 +9,7 @@ window.CHARA_CONFIG = {
   cycleIcons: true, // a character with imgName2 flips between its pictures
   getIconPath: (c) => `../assets/charaid/Endfield/icon_chr_${c.imgName || c.name}.png`,
   getSpritePath: (c) => `../assets/Sprite/Endfield/chr_${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // One element -> badge on the icon. Several elements -> text tags.
   getElementPath: (c) => (typeof c.element === 'string' ? `../assets/others/Endfield/Element/${c.element}.png` : null),

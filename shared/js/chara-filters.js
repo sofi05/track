@@ -9,6 +9,10 @@
 
    and gives chara.js one thing to ask:  filters.matches(character)
 
+   On a wide screen (800px+) the "Filter" popup is replaced by a row of tabs under the buttons
+   (Element, World, Group ...): clicking a tab opens its choices in a row right below it. On a phone
+   the popup stays. Both show the same filters from the same settings.
+
    Rules
      * Capital letters do not matter ('M' finds 'm', 'geo' finds 'Geo').
      * Every character field can hold ONE value or a LIST of values
@@ -44,7 +48,7 @@
         { value: true, label: 'Have' },
         { value: false, label: "Don't" },
       ],
-      test: (c, value) => c.have === value,
+      test: (c, value) => asList(c.have).some((v) => v === value), // a card with several outfits has a list: [true, false]
     },
     new: {
       label: 'New',
@@ -68,6 +72,43 @@
     },
     element: { label: 'Element', fields: ['element', 'filterElement'] },
   };
+
+  // ---------------------------------------------------------------
+  // Look of the plain buttons: a symbol or a small drawn icon, and a colour tone.
+  // A game's settings can give any option its own:  { value, label, symbol: '♂', glyph: 'check', tone: 'blue' }
+  // tones: blue, pink, green, red, gold.  glyphs: check, cross, spark.   (An `icon` picture wins over both.)
+  // ---------------------------------------------------------------
+  const AUTO_LOOK = {
+    gender: { m: { symbol: '♂', tone: 'blue' }, f: { symbol: '♀', tone: 'pink' } },
+    have: { true: { glyph: 'check', tone: 'green' }, false: { glyph: 'cross', tone: 'red' } },
+    new: { true: { glyph: 'spark', tone: 'gold' } },
+  };
+  function look(key, option) {
+    if (option.icon) return {};
+    const auto = (AUTO_LOOK[key] || {})[String(option.value).toLowerCase()] || {};
+    return { symbol: option.symbol ?? auto.symbol, glyph: option.glyph ?? auto.glyph, tone: option.tone ?? auto.tone };
+  }
+  const GLYPH_PATHS = {
+    check: { d: 'M5 12.5l4.5 4.5L19 7', fill: false },
+    cross: { d: 'M7 7l10 10M17 7L7 17', fill: false },
+    spark: { d: 'M12 3l2.1 6 6.4 .4-5 4 1.7 6.2L12 16l-5.2 3.6 1.7-6.2-5-4 6.4-.4z', fill: true },
+  };
+  function glyphIcon(name) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('class', 'glyph');
+    const path = document.createElementNS(ns, 'path');
+    const g = GLYPH_PATHS[name];
+    path.setAttribute('d', g.d);
+    path.setAttribute('fill', g.fill ? 'currentColor' : 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', g.fill ? '1.2' : '2.6');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(path);
+    return svg;
+  }
 
   // ---------------------------------------------------------------
   // Main
@@ -98,6 +139,8 @@
     const partButtons = [];
     let resetButton = null;
     let keepButton = null;
+    let tabBarPaint = null; // repaints the tabs (set when they exist)
+    let extrasBox = null; // the Keep filters + Reset buttons (they move next to the tabs on a wide screen)
 
     const isSelected = (key, value) => key in selected && sameValue(selected[key], value);
 
@@ -110,15 +153,22 @@
 
     function pickFilter(key, value) {
       const wasOn = isSelected(key, value);
-      if (!keep) clearFilters(key);
+      if (!keep) {
+        clearFilters(key);
+        pressedParts.clear(); // one thing at a time: the part / collab buttons count too
+      }
       if (wasOn) delete selected[key];
       else selected[key] = value;
       changed();
     }
 
     function pickPart(index) {
-      if (!keep) clearFilters();
-      if (pressedParts.has(index)) pressedParts.delete(index);
+      const wasOn = pressedParts.has(index);
+      if (!keep) {
+        clearFilters();
+        pressedParts.clear(); // one thing at a time (Part 1 + Collab together needs "Keep filters")
+      }
+      if (wasOn) pressedParts.delete(index);
       else {
         // buttons that share a `group` work like radio buttons (Part 1 / Part 2)
         const group = parts[index].group;
@@ -153,6 +203,7 @@
         node.classList.toggle('active', on);
         node.setAttribute('aria-pressed', String(on));
       });
+      if (tabBarPaint) tabBarPaint();
       if (resetButton) resetButton.hidden = Object.keys(selected).length === 0 && pressedParts.size === 0;
       if (keepButton) {
         keepButton.classList.toggle('active', keep);
@@ -196,11 +247,27 @@
           def.options.forEach((option) => {
             const button = Dex.el('button', 'part-btn chip');
             button.type = 'button';
-            button.title = option.label || '';
+            Dex.addPressTip(button, option.label || '');
             button.dataset.filter = key;
             button.dataset.value = String(option.value);
-            if (option.icon) button.appendChild(iconImage(option, def, 'chip-icon'));
-            else button.textContent = option.label;
+            if (key === 'rarity' && !option.icon) {
+              button.classList.add('rarity-chip'); // "5★" in the colour of that rarity's card
+              button.style.setProperty('--rar', Dex.rarityGradient(option.value)); // darkened in style.css
+            }
+            const style = look(key, option);
+            if (style.tone) button.classList.add(`tone-${style.tone}`);
+            const stars = key === 'rarity' && !option.icon && /^(\d+)\s*★?$/.exec(String(option.label)); // "4★" -> big 4 with a small star
+            if (stars) {
+              button.classList.add('badge');
+              const inner = Dex.el('span', 'rar-inner'); // the coloured part, inside the dark button
+              inner.append(Dex.el('span', 'num', stars[1]), Dex.el('span', 'star', '★'));
+              button.appendChild(inner);
+            } else if (option.icon) button.appendChild(iconImage(option, def, 'chip-icon'));
+            else if (style.glyph) button.append(glyphIcon(style.glyph), Dex.el('span', '', option.label));
+            else if (style.symbol) {
+              button.classList.add('symbol');
+              button.textContent = style.symbol;
+            } else button.textContent = option.label;
             button.addEventListener('click', () => pickFilter(key, option.value));
             filterButtons.push({ node: button, key, value: option.value, kind: 'button' });
             wrap.appendChild(button);
@@ -210,7 +277,7 @@
       });
 
       const extras = Dex.el('div', 'chip-group');
-      keepButton = Dex.el('button', 'part-btn chip', 'Keep filters');
+      keepButton = Dex.el('button', 'part-btn chip is-keep', 'Keep filters');
       keepButton.type = 'button';
       keepButton.title = 'Keep your other filters selected when you pick a new one';
       keepButton.addEventListener('click', () => {
@@ -223,6 +290,8 @@
       resetButton.hidden = true;
       resetButton.addEventListener('click', resetAll);
       extras.append(keepButton, resetButton);
+      extras.classList.add('extras');
+      extrasBox = extras;
       container.appendChild(extras);
     }
 
@@ -236,6 +305,7 @@
         def.options.forEach((option) => {
           const hasIcon = Boolean(option.icon);
           const label = Dex.el('label', hasIcon ? (def.style === 'region' ? 'region-label-img' : 'element-label') : '');
+          if (hasIcon) Dex.addPressTip(label, option.label || String(option.value)); // name on hover / long press
 
           const input = document.createElement('input');
           input.type = def.single ? 'checkbox' : 'radio';
@@ -265,6 +335,67 @@
       });
     }
 
+    // ---------- wide screens: tabs under the buttons instead of the popup ----------
+    function buildTabs(quickBox, partBar) {
+      const tabBar = Dex.el('div', 'tab-bar quick-filters');
+      const tabOptions = Dex.el('div', 'tab-options');
+      tabOptions.hidden = true;
+      const tabs = [];
+      let open = null;
+
+      popupKeys.forEach((key) => {
+        const def = definition(key);
+        const tab = Dex.el('button', 'part-btn chip tab-btn', def.label);
+        tab.type = 'button';
+        tab.addEventListener('click', () => {
+          open = open === key ? null : key;
+          paint();
+        });
+        tabs.push({ key, tab });
+        tabBar.appendChild(tab);
+
+        const row = Dex.el('div', 'tab-row' + (def.style === 'region' ? ' big' : ''));
+        row.dataset.key = key;
+        row.hidden = true;
+        def.options.forEach((option) => {
+          const button = Dex.el('button', 'part-btn chip tab-choice');
+          button.type = 'button';
+          Dex.addPressTip(button, option.label || String(option.value));
+          button.dataset.filter = key;
+          button.dataset.value = String(option.value);
+          if (option.icon) button.appendChild(iconImage(option, def, 'chip-icon'));
+          else button.textContent = option.label;
+          button.addEventListener('click', () => pickFilter(key, option.value));
+          filterButtons.push({ node: button, key, value: option.value, kind: 'button' });
+          row.appendChild(button);
+        });
+        tabOptions.appendChild(row);
+      });
+
+      function paint() {
+        tabs.forEach(({ key, tab }) => {
+          tab.classList.toggle('active', open === key);
+          tab.classList.toggle('has-active', key in selected);
+        });
+        tabOptions.hidden = open === null;
+        tabOptions.querySelectorAll('.tab-row').forEach((row) => (row.hidden = row.dataset.key !== open));
+      }
+      tabBarPaint = paint;
+
+      quickBox.after(tabBar, tabOptions);
+      tabBar.hidden = false;
+
+      // On a wide screen the Keep filters / Reset buttons sit at the end of the tab row.
+      const wide = window.matchMedia('(min-width: 800px)');
+      const place = () => {
+        document.body.classList.toggle('filter-tabs', wide.matches);
+        if (extrasBox) (wide.matches ? tabBar : quickBox).appendChild(extrasBox);
+      };
+      wide.addEventListener('change', place);
+      place();
+      paint();
+    }
+
     const partBar = document.getElementById('partBar');
     const quickBox = document.getElementById('quickFilters');
     const popupBox = document.getElementById('filterPopup');
@@ -274,6 +405,7 @@
       partBar.hidden = parts.length === 0;
     }
     if (quickBox) buildQuick(quickBox);
+    if (quickBox && popupKeys.length) buildTabs(quickBox, partBar);
     if (popupBox) {
       buildPopup(popupBox);
       if (popupKeys.length === 0) document.getElementById('filterBtn')?.setAttribute('hidden', '');

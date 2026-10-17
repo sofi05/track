@@ -351,9 +351,23 @@ const gameConfig = {
     { name: 'SOON', imgName: '', spriteFolder: '', status: 'soon',
         spriteImages: [''], },
 
+    // TEMPLATE for the Female / Male / EXPs buttons (both are optional):
+    //   gender: 'f' | 'm'                   -> Female / Male
+    //   exps:   ['hsr', 'zzz', 'gi', 'hna'] -> EXPs: a character from another game with the same name / look.
+    //                                          The games are listed in `expsGames` below.
+    //   { name: '', imgName: '', spriteFolder: '', gender: 'f', exps: ['hsr'],
+    //       spriteImages: [''], },
     { name: '', imgName: '', spriteFolder: '', 
         spriteImages: [''], },
     // Add more characters here
+  ],
+
+  // Games listed under the "EXPs" button (value = what you write in `exps`)
+  expsGames: [
+    { value: 'hsr', label: 'HSR' },
+    { value: 'zzz', label: 'ZZZ' },
+    { value: 'gi', label: 'GI' },
+    { value: 'hna', label: 'HNA' },
   ],
 
   // The version this list is updated to (shows as a red "vers." pill under the title)

@@ -136,6 +136,7 @@ window.CHARA_CONFIG = {
     
     // ---------------------------------------------------------------------
     // TEMPLATE (Genshin): copy a line, remove the // and fill it in.
+    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
     //   { name: '', imgName: '', outfitSprites: [''], have: false, element: '', rarity: 4, region: [''], gender: '',
     //     status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
     //
@@ -160,7 +161,7 @@ window.CHARA_CONFIG = {
   getIconPath: (c) => `../assets/charaid/Genshin/UI_AvatarIcon_${c.imgName || c.name}.png`,
   getElementPath: (c) => `../assets/others/Genshin/Element/${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/UI_Icon_LunaRite_Unknown.png',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // Big pictures: the character, then alternative outfits (outfitSprites: ['QinCostumeSea'])
   getSpritePaths: (c) => Dex.spriteList(c, `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName || c.name}.png`, '../assets/Sprite/Genshin/Outfit/UI_Costume_'),

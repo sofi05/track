@@ -65,10 +65,12 @@ window.CHARA_CONFIG = {
     { name: 'Sigrid', imgName: '66', have: false, element: 'Ice', district:['Ros'], gender:'f', rarity: 5, status: 'available', version: '3.1', p:2 },
     { name: 'Roxy', imgName: '68', have: false, element: 'Wind', district:['Ros'], gender:'f', rarity: 5, status: 'new', version: '3.2', p:2, want: 2 },
     { name: 'Claret', imgName: '1611', have: false, element: 'Electric', district:['Ros'], gender:'f', rarity: 5, status: 'new', version: '3.2', p:1, },
+    
     { name: 'Phoenix', imgName: '1641', have: false, element: 'Fire', district:['TQ'], gender:'f', rarity: 5, status: 'soon', version: '3.3', p:2,  want: 1 },
     { name: 'Severian', imgName: '1631', have: false, element: 'Wind', district:['NEPS'], gender:'m', rarity: 5, status: 'soon', version: '3.3', p:2 },
     // ---------------------------------------------------------------------
     // TEMPLATE (Zenless): copy a line, remove the // and fill it in.
+    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
     //   { name: '', imgName: '', imgName2: '', outfitSprites: [''], have: false, element: '', filterElement: '', district: [''],
     //     gender: '', rarity: 5, status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
     //
@@ -94,7 +96,7 @@ window.CHARA_CONFIG = {
   getIconPath: (c) => `../assets/charaid/Zenless/IconRoleCrop${c.imgName}.png`,
   getElementPath: (c) => `../assets/others/Zenless/Element/Icon${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/Zenless/IconRole${Dex.imageNames(c)[0]}.png`,
-  getFallbackPath: () => '../assets/others/Zenless/Random/Icon_Event_Unknown.webp',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // Agents can have several pictures (imgName + imgName2)
   // (outfitSprites: ['Name'] adds alternative outfits from the Outfit folder)

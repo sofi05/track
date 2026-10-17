@@ -38,6 +38,13 @@ const gameConfig = {
     // ---------------------------------------------------------------------
   ],
 
+  // Filter buttons of this page (same settings as js/chara-page.js: quick = always visible, parts = Part / Collab buttons)
+  page: {
+    quick: [['have', 'new']],
+    popup: [],
+    parts: [],
+  },
+
   // The version this list is updated to (shows as a red "vers." pill under the title)
   lastVersion: '3.2',
 

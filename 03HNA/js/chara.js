@@ -40,6 +40,7 @@ window.CHARA_CONFIG = {
 
     // ---------------------------------------------------------------------
     // TEMPLATE (Nexus Anima): copy a line, remove the // and fill it in.
+    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
     //   { name: '', imgName: '', element: '', have: false, gender: '', rarity: 4,
     //     status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
     //
@@ -59,5 +60,5 @@ window.CHARA_CONFIG = {
   getIconPath: (c) => `../assets/charaid/NexusAnima/TempIcons/${c.imgName || c.name}.png`,
   getElementPath: () => null, // no element icons yet (Nexus Anima elements: reality, beauty, joy ...)
   getSpritePath: (c) => `../assets/Sprite/NexusAnima/${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png', // change this when needed
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 };

@@ -1,21 +1,21 @@
 # MUST FIX / CHANGE NEXT UPDATE
 
-   ## [GENSHIN IMPACT](+Icons +AltSprites +World) 
-      + missing new outfit for MC
-      + maybe add icons on chara-page
-    
-   ## [HONKAI STAR RAIL](assets\others\StarRail\World\)
+   ## [GENSHIN IMPACT](00GI\) 
+      + missing new outfit for MC  (needs a game release or a wiki update: the new outfits have no sprite in game yet)
+
+   ## [HONKAI STAR RAIL](01HSR\)
+   
     
    ## ZENLESS ZONE ZERO(+Element +Groups)
       + add districts icons
       + UPDATE BANGBOO
-      + Change (TEMP) 
      
-   ## [HONKAI IMPACT 3RD](+CheckAssets)
+   ## [HONKAI IMPACT 3RD]
       + UPDATE TO 9.1
       + SEARCH FOR "SOON" TO UPDATE > PLACEHOLDER TO ADD ASSETS LATER  || Apply to Fit/Stig
 
    ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_CBT2)
+      + add the pictures taken for the new list (assets/Temp for now: most are not transparent but are from the latest version)
 
    ## [ARKNIGHT ENDFIELD _ UTD 1.0](get_1.1_splashes)
       + Update the groups later
@@ -32,34 +32,32 @@
    [Version](shared/js/vs.js) + [Update](cred.html)
 
    ## GENSHIN IMPACT
-   + [ NEW CHARACTERS ](00GI\js\chara.js) _________________ [SOON_6.8](UPTO_6.7)
-   + [ BIRTHDAY ](00GI\js\bday.js) _________________ [SOON_6.7](UPTO_6.6)
-   + [ OUTFIT ](00GI\js\fit.js) _________________ [SOON_6.7](UPTO_6.6)
-   + [ MAIN ](00GI\js\mc.js) _________________ [SOON_7.0]
+   + [ NEW CHARACTERS ](00GI\js\chara.js)
+   + [ BIRTHDAY ](00GI\js\bday.js)
+   + [ OUTFIT ](00GI\js\fit.js)
+   + [ MAIN ](00GI\js\mc.js)
 
 
    ## HONKAI STAR RAIL
-   + [ NEW CHARACTERS ](01HSR\js\chara.js) _________________ [SOON_4.5](UPTO_4.4)
-   + [ OUTFIT ](01HSR\js\fit.js) _________________ [LAST_4.2]
+   + [ NEW CHARACTERS ](01HSR\js\chara.js)
+   + [ OUTFIT ](01HSR\js\fit.js)
    + [ MAIN ](01HSR\js\mc.js) 
-
-   + [ PET ](01HSR\js\pet.js) || (update when have time) [LAST_4.2]
 
 
    ## ZENLESS ZONE ZERO  
-   + [ NEW CHARACTERS ](02ZZZ\js\chara.js) _________________ [SOON_3.1](UPTO_3.0)
-   + [ OUTFIT ](02ZZZ\js\fit.js) _________________ [NEW_3.0]
-   + [ BANGBOO ](02ZZZ\js\sup.js) _______________ [NEW_3.0](SOON_3.1)
+   + [ NEW CHARACTERS ](02ZZZ\js\chara.js)
+   + [ OUTFIT ](02ZZZ\js\fit.js)
+   + [ BANGBOO ](02ZZZ\js\sup.js)
 
-   + [ MAIN ](02ZZZ\js\mc.js) _________________ [NEW_3.0]
+   + [ MAIN ](02ZZZ\js\mc.js)
 
 
    ## HONKAI IMPACT
-   * [ NEW CHARACTERS ](03HI3\js\chara.js) * (UPTO_8.9)
-   * [ OUTFIT ](03HI3\js\fit.js) * (UPTO_8.8)
-   * [ SUP ](03HI3\js\sup.js) * (UPTO_8.8)
+   * [ NEW CHARACTERS ](03HI3\js\chara.js)
+   * [ OUTFIT ](03HI3\js\fit.js)
+   * [ SUP ](03HI3\js\sup.js)
 
-   * [ STIG ](03HI3\js\stig.js) * (UPTO_8.8)
+   * [ STIG ](03HI3\js\stig.js)
    
 
    ## OTHERS

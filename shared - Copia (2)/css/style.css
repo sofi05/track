@@ -1,0 +1,1005 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #121212; 
+  color: #ddd; 
+}
+
+.game-page {
+  padding: 1rem;
+  padding-bottom: 100px; 
+}
+
+h1 {
+  text-align: center;
+  color: #eee;
+}
+
+/* Bottom Navigation (SVG Style) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #1e1e1e; 
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.bottom-nav a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.nav-icon-image {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-bottom: 4px;
+  filter: brightness(0) invert(1);
+  vertical-align: middle;
+}
+
+.bottom-nav a:hover {
+  color: #4096ff;
+}
+
+.bottom-nav svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  margin-bottom: 4px;
+}
+
+.search-filter {
+  margin: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-filter input {
+  flex-grow: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+}
+
+.search-filter input::placeholder {
+  color: #888;
+}
+
+.search-filter button {
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #eee;
+}
+
+.search-filter button:hover {
+  background-color: #555;
+}
+
+.char-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  padding-bottom: 80px;
+}
+
+.char-card {
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 11px;
+  color: #ddd;
+}
+
+.char-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid #444;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* THIS IS FOR CHARA */
+.icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 12px; 
+  box-sizing: border-box;
+  background-color: transparent; 
+  overflow: hidden;
+  z-index: 0;
+}
+
+.char-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.element-icon {
+  position: absolute;
+  width: 18px !important;
+  height: 18px !important;
+  top: 2px; /* Adjust the vertical position */
+  left: 2px; /* Adjust the horizontal position */
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%; 
+  z-index: 10; /* Ensure it sits above the character image */
+  border: none !important; 
+  outline: none !important; 
+  background-color: rgba(0, 0, 0, 0.171); /*eh might remove this*/
+}
+
+#filterPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(30, 30, 30, 0.95); 
+  padding: 16px 20px;
+  border: 1px solid #444;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 160px;
+  backdrop-filter: blur(6px);
+  color: #eee;
+}
+
+#filterPopup label {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+#filterPopup input[type="checkbox"] {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.soon-label {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: rgba(255, 69, 0, 0.85);
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 20;
+  text-transform: uppercase;
+  user-select: none;
+  font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.filter-category {
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+
+.filter-category:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.filter-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #eee;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  padding: 6px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-toggle::after {
+  content: '▼';
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  margin-left: 8px;
+}
+
+/* Rotate arrow when active */
+.filter-toggle.active::after {
+  transform: rotate(-180deg);
+}
+
+.filter-options {
+  margin-top: 6px;
+  display: none; 
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-options.visible {
+  display: flex;
+}
+
+.filter-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-options input[type="radio"]:checked + .element-img {
+  border-color: #4096ff;
+  box-shadow: 0 0 8px #4096ffaa;
+}
+
+.filter-options label:hover .element-img {
+  border-color: #666;
+}
+
+.filter-options input[type="radio"],
+.filter-options input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.element-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s ease, opacity 0.2s, transform 0.2s; /* Merged transitions */
+  opacity: 0.6;
+}
+
+.element-img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.element-label input[type="radio"],
+.element-label input[type="checkbox"] {
+  display: none;
+}
+
+.filter-popup .filter-section {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.sub-filter {
+  margin-bottom: 6px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.element-label:has(input[type="radio"]:checked) .element-img {
+  opacity: 1;
+  outline: 2px solid #4af;
+  outline-offset: 2px;
+}
+
+.region-grid label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter-options.region-grid {
+  display: none; 
+}
+
+.filter-options.region-grid.visible {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /*ICON PER COLUMN*/
+  gap: 0.5em 1em;
+}
+
+.region-label-img {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+  
+}
+
+.region-label-img input[type="checkbox"],
+.region-label-img input[type="radio"] {
+  display: none;
+}
+
+.region-label-img .region-img {
+  width: 40px; 
+  height: 40px;
+  object-fit: contain;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0.7;
+}
+
+.region-label-img:hover .region-img {
+  opacity: 1;
+  border-color: #4096ff;
+  box-shadow: 0 0 8px #4096ffaa;
+}
+
+.region-label-img input[type="checkbox"]:checked + .region-img {
+  border-color: #4096ff;
+  box-shadow: 0 0 12px #4096ffcc;
+  opacity: 1;
+}
+
+.part-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px;
+}
+
+.part-btn {
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #eee;
+  transition: background-color 0.2s ease;
+}
+
+.part-btn:hover {
+  background-color: #555;
+}
+
+.part-btn.active {
+  background-color: #a3a3a3;
+  border-color: #a3a3a3;
+  color: rgb(0, 0, 0);
+}
+
+/* POPUP */
+.sprite-popup { /* this is for chara page */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.sprite-popup img {
+  max-height: 90vh;
+  border-radius: 12px;
+  display: block;
+  width: 100%;      /* fill the wrapper */
+  height: auto;  
+}
+
+.sprite-popup .popup-wrapper {
+  position: relative;  
+  display: inline-block;
+  max-width: 90vw;  
+  max-height: 90vh;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 60%;
+  max-height: 80%;
+  position: relative;
+}
+
+.main-img-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 85vw;
+  max-height: 80vh;
+}
+
+.popup-img {
+  max-height: 80vh;
+  max-width: 85vw;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+
+#thumbnailContainer {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  overflow-x: auto;               /* enable horizontal scrolling */
+  width: 100%;
+  max-width: 600px;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 0;
+  background: rgba(0,0,0,0.3);    /* semi-transparent background */
+  scrollbar-width: thin;          /* Firefox */
+  scrollbar-color: rgba(200,200,200,0.5) transparent; /* Firefox */
+}
+
+.thumbnail-img {
+  width: 80px;
+  height: 80px;
+  background: rgba(200,200,200,0.1);
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* center vertically */
+  overflow: hidden;
+}
+
+.thumbnail-img img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;       /* let width scale */
+  height: auto;      /* let height scale */
+  object-fit: contain;
+  object-position: top;
+  display: block;
+}
+
+#thumbnailContainer::-webkit-scrollbar {
+  height: 6px;
+}
+
+#thumbnailContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#thumbnailContainer::-webkit-scrollbar {
+  height: 6px;
+  display: none;
+}
+
+#thumbnailContainer::-webkit-scrollbar-thumb {
+  background-color: none;
+  border-radius: 3px;
+}
+
+.thumbnail-img:hover {
+  transform: scale(1.05);
+}
+
+/* Center the image slider inside popup */
+#popup-slider {
+  display: flex;
+  justify-content: center;   /* center images horizontally */
+  align-items: center;       /* center vertically */
+  height: 100%;
+  overflow-x: auto;          /* allow horizontal scrolling */
+  scroll-behavior: smooth;
+  padding-bottom: 60px; 
+}
+
+.thumbnail-img.selected {
+  border: 2px solid #c4c3c1; /* bright border to highlight */
+  border-radius: 4px;         /* optional rounded corners */
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .responsive-popup {
+    width: 90vw !important;
+    max-width: 300px !important;
+    height: auto !important;
+    max-height: 80vh !important;
+    overflow-y: auto;
+  }
+
+  .thumbnail-img {
+    width: 12vw;
+    height: auto;
+    max-height: 80px; /* bigger than 48px */
+    object-fit: contain;
+  }
+
+  #thumbnailContainer {
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  max-height: 100px;
+  padding-top: 6px;
+  z-index: 10001; 
+  /* remove justify-content here */
+}
+
+  #thumbnailContainer::-webkit-scrollbar {
+    height: 6px;
+    display: block;         /* <--- Allow scrollbar to be visible if desired */
+  }
+
+  .sprite-popup img {
+    width: 95vw;           /* fit screen width */
+    max-height: 85vh;      /* leave some vertical space */
+    height: auto;
+    object-fit: contain;
+  }
+
+  .sprite-popup {
+    padding: 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+/* The ✕ button of every popup (sprite popup, gallery popup, character popup,
+   birthday popup). One look everywhere - change it here. */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(60, 60, 60, 0.85);
+  color: #e6e6e6;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.close-btn:hover {
+  background: rgba(110, 110, 110, 0.95);
+  color: #fff;
+}
+
+.game-logo {
+  width: 200px;        
+  height: auto;        
+  display: block;
+  margin: 0 auto;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#game-past {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  z-index: 9999;
+}
+
+.popup-inner {
+  background: rgb(65, 65, 65);
+  padding: 20px; 
+  width: 310px; 
+  height: auto; 
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00000088;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin: 20px; 
+  text-align: center;
+  margin-top: 0; 
+}
+
+.popup-inner a {
+  color: white; 
+  text-decoration: none; 
+}
+
+.game-hnk-list {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 4px;
+  flex-wrap: nowrap;  
+  margin-bottom: 0; 
+  padding-bottom: 0; 
+}
+
+.game-hnk img {
+  width: 100px; 
+  cursor: pointer;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.game-hnk img:hover {
+  border-color: #007bff;
+}
+
+.slider-content {
+  margin-top: -5px !important;
+  padding: 20px;
+  width: 300px; 
+  height: 300px; 
+  max-height: 300px; 
+  overflow: hidden; 
+  background-color: rgb(65, 65, 65); 
+  color: white; 
+  border-radius: 8px; 
+  box-sizing: border-box; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  text-align: center; 
+  padding: 20px; 
+}
+
+#slider-message h4 {
+  text-align: center; 
+  margin-bottom: 5px; 
+  font-size: 1.2em; 
+  margin-top: 0; 
+}
+
+#slider-message {
+  max-height: 220px; 
+  overflow-y: auto; 
+  display: block;
+  margin-top: -10px;
+}
+
+.game-hnk {
+  margin-bottom: 0; 
+}
+
+.game-hnk img.gray {
+  filter: grayscale(100%);
+}
+
+.game-hnk img.active {
+  filter: none;
+  border-color: #007bff; 
+}
+
+.inline-countdown {
+  font-size: 0.75em;
+  color: #ffc107;
+  margin-left: 4px;
+}
+
+/* CSS for the Gender Toggle Switch */
+.gender-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  font-family: Arial, sans-serif;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider2 {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #6e6e6e;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider2:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider2 {
+  background-color: #1c1f1c; /* Green when on */
+}
+
+input:checked + .slider2:before {
+  transform: translateX(26px);
+}
+
+.slider2.round {
+  border-radius: 34px;
+}
+
+.slider2.round:before {
+  border-radius: 50%;
+}
+
+.no-results-message {
+  padding: 20px;
+  font-size: 1.2em;
+  text-align: center;
+  color: #666;
+}
+
+.char-disabled {
+  filter: grayscale(99%) brightness(0.6);
+  opacity: 0.75;
+  position: relative;
+}
+
+.char-disabled::after {
+  content: "Not Released";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 10px;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* ---------- small helpers used by the pages ---------- */
+
+/* "Total: N characters" line under the page title */
+.char-count {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+/* Turns a dark icon white. !important so it also wins over the hover/checked
+   filters of .element-img (this is what the old inline style did). */
+.is-white {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* ---------- Characters page: part buttons and quick filters ---------- */
+
+[hidden] {
+  display: none !important;
+}
+
+.part-toggle {
+  flex-wrap: wrap;
+}
+
+.quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 14px;
+  margin: 10px;
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.chip {
+  padding: 4px 9px;
+  font-size: 13px;
+}
+
+.chip-icon {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+
+/* Version pill under the title of the Outfit pages (not a button, just information) */
+.version-pill {
+  width: fit-content;
+  margin: 4px auto 10px;
+  padding: 3px 14px;
+  border-radius: 999px;
+  background: #7a2b2b;
+  color: #f5f5f5;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+
+/* "Keep filters" row at the top of a filter panel */
+.keep-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+/* ---- Subtle "next picture" dots in the simple popup (MC page etc.) ---- */
+.sprite-dots { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); display: flex; gap: 8px; padding: 4px 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.35); z-index: 3; }
+.sprite-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.45); cursor: pointer; }
+.sprite-dot.active { background: #fff; }
+.sprite-popup img.tap-next { cursor: pointer; }
+.sprite-counter { color: #fff; font-size: 12px; padding: 0 4px; }
+
+/* ---- grouped popup (a character with several pictures): arrows, thumbnails, hint ---- */
+.sprite-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; background: none; border: 0; color: #fff; font-size: 34px; line-height: 1; padding: 12px; cursor: pointer; text-shadow: 0 0 6px rgba(0, 0, 0, 0.8); }
+.sprite-arrow.prev { left: 6px; }
+.sprite-arrow.next { right: 6px; }
+.sprite-thumbs { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); max-width: 90vw; display: flex; gap: 6px; overflow-x: auto; padding: 4px; z-index: 4; }
+.sprite-thumb { width: 60px; height: 60px; object-fit: cover; flex: 0 0 auto; border-radius: 6px; border: 2px solid transparent; opacity: 0.7; cursor: pointer; }
+.sprite-thumb.selected { border-color: #fff; opacity: 1; }
+.sprite-hint { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); padding: 6px 12px; border-radius: 999px; background: rgba(0, 0, 0, 0.7); color: #fff; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 5; }
+.sprite-hint.show { opacity: 1; }
+.sprite-popup .sprite-thumbs .sprite-thumb { width: 60px; height: 60px; max-height: 60px; border-radius: 6px; display: block; }
+
+/* Small name label for icon buttons (hover title / long press) */
+.dex-tip {
+  position: fixed;
+  z-index: 10000;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #222;
+  color: #f5f5f5;
+  border: 1px solid #555;
+  font-size: 13px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.element-label img,
+.region-label-img img,
+.chip-icon {
+  -webkit-touch-callout: none; /* no "save image" menu on long press */
+  user-select: none;
+}
+
+/* Stigmata page: Female / Male / EXPs buttons and the games under EXPs */
+.part-toggle[hidden] { display: none; }
+
+/* ---- side icons of the neighbouring characters in the grouped popup ---- */
+.sprite-side { position: absolute; top: 50%; width: 68px; height: 68px; transform: translateY(-50%); border-radius: 12px; overflow: hidden; cursor: pointer; z-index: 1; opacity: 0.35; filter: grayscale(0.7); transition: opacity 0.2s, filter 0.2s, transform 0.2s; }
+.sprite-side.prev { left: clamp(60px, 9vw, 170px); }
+.sprite-side.next { right: clamp(60px, 9vw, 170px); }
+.sprite-side img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0; max-height: none; }
+.sprite-side.armed { opacity: 1; filter: none; z-index: 3; transform: translateY(-50%) scale(1.1); box-shadow: 0 0 14px rgba(255, 255, 255, 0.45); }
+
+/* ---------- Characters page: symbols, drawn icons, tones ---------- */
+.tone-blue { --tone: #8fb4e8; --tone-bg: #3b5a80; }
+.tone-pink { --tone: #e59ab8; --tone-bg: #7a4560; }
+.tone-green { --tone: #7fc58b; }
+.tone-red { --tone: #e08a8a; }
+.tone-gold { --tone: #e3c767; }
+
+.chip.symbol { color: var(--tone); font-size: 20px; line-height: 1; padding: 2px 12px; }
+.chip.symbol:hover { color: #fff; }
+.chip.symbol.active { background: var(--tone-bg); border-color: var(--tone); color: #fff; }
+
+.chip .glyph { width: 13px; height: 13px; margin-right: 5px; vertical-align: -2px; color: var(--tone, #ccc); }
+.chip.active .glyph { color: #111; }
+
+/* "Keep filters" is not a filter, so it looks different (dashed, teal) */
+.part-btn.is-keep,
+.part-btn.keep-btn { border-style: dashed; border-color: #5d8f89; color: #9fd6cd; }
+.part-btn.is-keep:hover,
+.part-btn.keep-btn:hover { background-color: #2c4a46; }
+.part-btn.is-keep.active,
+.part-btn.keep-btn.active { background-color: #2f5d58; border-style: solid; border-color: #9fd6cd; color: #eafffb; }
+
+/* ---------- Wide screens: category tabs instead of the Filter popup ---------- */
+.tab-bar .extras { padding-left: 14px; border-left: 1px solid #444; }
+.tab-btn::after { content: '▾'; margin-left: 6px; font-size: 11px; opacity: 0.7; }
+.tab-btn.active::after { content: '▴'; }
+.tab-btn.has-active::before { content: '●'; margin-right: 5px; font-size: 9px; color: #e3c767; vertical-align: 1px; }
+.tab-btn.active.has-active::before { color: #7a5a00; }
+
+.tab-options { display: flex; justify-content: center; margin: 0 10px 10px; }
+.tab-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 8px 12px; background: #1d1d1d; border: 1px solid #333; border-radius: 10px; max-width: 900px; }
+.tab-row .chip-icon { height: 30px; }
+.tab-row.big .chip-icon { height: 36px; }
+.tab-choice { padding: 4px 8px; }
+
+@media (min-width: 800px) {
+  body.filter-tabs #filterBtn { display: none; }
+  body.filter-tabs #filterPopup { display: none !important; }
+}

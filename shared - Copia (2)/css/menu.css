@@ -1,0 +1,47 @@
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px; /* space between buttons in the same row */
+  row-gap: 32px;    /* space between rows */
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.menu-button {
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+  justify-content: center;
+  width: 120px;             /* fixed width */
+  height: 120px;            /* fixed height for square */
+  background: #2c2c2c;      /* dark background */
+  border-radius: 10px;
+  font-size: 1.0rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #eee;              /* light text */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  text-wrap: wrap;          /* allow wrapping if needed */
+  padding: 12px;            /* minimal padding inside */
+  box-sizing: border-box;   /* makes sure padding doesn’t expand size */
+}
+
+.menu-button:hover {
+  background: #3d3d3d;
+  transform: scale(1.02);
+}
+
+/* YouTube button: a dark, muted red with white text */
+.menu-button--youtube {
+  background: #7a2b2b;
+  color: #f5f5f5;
+}
+
+.menu-button--youtube:hover {
+  background: #953737;
+}

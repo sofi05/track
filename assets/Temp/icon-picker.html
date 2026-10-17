@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Icon picker</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, sans-serif; background: #151515; color: #eee; display: flex; flex-direction: column; height: 100vh; }
+  header { padding: 8px 12px; background: #202020; border-bottom: 1px solid #333; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 14px; }
+  header label.btn, header button { background: #333; border: 1px solid #555; color: #eee; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+  header button:hover, header label.btn:hover { background: #444; }
+  header button.main { background: #3b6b3b; border-color: #5a9a5a; }
+  header input[type=range] { width: 110px; vertical-align: middle; }
+  header input[type=text], header input[type=number], header select { background: #222; color: #eee; border: 1px solid #444; border-radius: 4px; padding: 3px 6px; font-size: 13px; }
+  header input[type=text] { width: 90px; }
+  header input[type=number] { width: 64px; }
+  .group { display: flex; align-items: center; gap: 6px; padding-right: 12px; border-right: 1px solid #333; }
+  main { flex: 1; display: grid; grid-template-columns: 230px 1fr 340px; min-height: 0; }
+  #list { overflow-y: auto; border-right: 1px solid #333; font-size: 13px; }
+  #list input { width: calc(100% - 12px); margin: 6px; padding: 4px; background: #222; color: #eee; border: 1px solid #444; border-radius: 4px; }
+  #list div.item { padding: 4px 10px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #list div.item:hover { background: #262626; }
+  #list div.item.current { background: #3a3a55; }
+  #list div.item.done::before { content: '✓ '; color: #6c6; }
+  #stage { overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 10px; }
+  #stage canvas { cursor: crosshair; max-width: 100%; background: #222; }
+  #side { border-left: 1px solid #333; padding: 10px; overflow-y: auto; font-size: 13px; }
+  #preview { width: 128px; height: 128px; border-radius: 12px; background: #8b6ba8; display: block; margin: 6px 0; }
+  .hint { color: #aaa; line-height: 1.45; }
+  b.step { color: #fc6; }
+  .toolbar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; align-items: center; }
+  .toolbar button { background: #333; border: 1px solid #555; color: #eee; padding: 3px 8px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  #grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tile { position: relative; width: 72px; }
+  .tile canvas { width: 72px; height: 72px; border-radius: 10px; background: #8b6ba8; cursor: pointer; display: block; outline: 2px solid transparent; }
+  .tile.current canvas { outline-color: #fc0; }
+  .tile.off canvas { opacity: 0.35; }
+  .tile input { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+<header>
+  <div class="group">
+    <label class="btn">1. Choose the picture folder <input type="file" id="folder" webkitdirectory multiple hidden /></label>
+  </div>
+  <div class="group">
+    <span>Head size <input type="range" id="headFrac" min="25" max="80" value="48" /> <span id="headFracV"></span></span>
+    <span>Head from top <input type="range" id="posFrac" min="0" max="45" value="22" /> <span id="posFracV"></span></span>
+  </div>
+  <div class="group">
+    <span>Size <input type="number" id="size" value="256" min="32" max="1024" step="32" /> px</span>
+    <select id="format"><option value="png">png</option><option value="webp">webp</option></select>
+    <span>Name: replace <input type="text" id="from" placeholder="IconRole" /> with <input type="text" id="to" placeholder="IconRoleCrop" /></span>
+    <label><input type="checkbox" id="keepFolders" checked /> keep sub-folders</label>
+  </div>
+  <button class="main" id="download">3. Download the selected icons (.zip)</button>
+  <button id="save">Save my points</button>
+  <label class="btn">Load saved points <input type="file" id="load" accept=".json" hidden /></label>
+  <span id="status"></span>
+</header>
+<main>
+  <div id="list"><input id="search" placeholder="Search..." /><div id="items"></div></div>
+  <div id="stage"><canvas id="view" width="10" height="10"></canvas></div>
+  <div id="side">
+    <div class="hint">
+      <b class="step">2. For every picture, click twice on the big one:</b><br />
+      <b>first</b> the very <b>top of the head</b> (top of the hair), <b>then</b> the <b>chin</b>.<br />
+      The yellow box is the icon that will be cut. Click again to redo a picture.<br />
+      <b>Keys:</b> → / ← next / previous, Delete = erase the points of this picture.
+    </div>
+    <canvas id="preview" width="256" height="256"></canvas>
+    <div class="hint">The two sliders at the top are the same for ALL icons: that is what makes every head the same size. Move them until it looks right and all the icons below change together.</div>
+    <div class="toolbar">
+      <b>Your icons</b>
+      <button id="all">select all</button><button id="none">select none</button>
+      <span id="count"></span>
+    </div>
+    <div class="hint">Untick the ones you do not like, then download the rest. A picture you click here opens again on the left.</div>
+    <div id="grid" style="margin-top:8px"></div>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const view = $('view'), vctx = view.getContext('2d');
+const pctx = $('preview').getContext('2d');
+let files = new Map(), images = new Map(), order = [];
+let points = {};          // path -> { top:[x,y], chin:[x,y] }  (pixels of the picture)
+let off = new Set();      // paths that are NOT selected for download
+let current = null, pending = null;
+let settings = { headFrac: 0.48, posFrac: 0.22, size: 256, format: 'png', from: '', to: '', keepFolders: true };
+
+try { Object.assign(settings, JSON.parse(localStorage.getItem('iconPickerSettings') || '{}')); } catch (e) {}
+try { points = JSON.parse(localStorage.getItem('iconPickerPoints') || '{}'); } catch (e) {}
+try { off = new Set(JSON.parse(localStorage.getItem('iconPickerOff') || '[]')); } catch (e) {}
+
+function applySettingsToControls() {
+  $('headFrac').value = Math.round(settings.headFrac * 100);
+  $('posFrac').value = Math.round(settings.posFrac * 100);
+  $('size').value = settings.size; $('format').value = settings.format;
+  $('from').value = settings.from; $('to').value = settings.to;
+  $('keepFolders').checked = settings.keepFolders;
+}
+applySettingsToControls();
+
+function persist() {
+  try {
+    localStorage.setItem('iconPickerSettings', JSON.stringify(settings));
+    localStorage.setItem('iconPickerPoints', JSON.stringify(points));
+    localStorage.setItem('iconPickerOff', JSON.stringify([...off]));
+  } catch (e) {}
+  $('headFracV').textContent = Math.round(settings.headFrac * 100) + '%';
+  $('posFracV').textContent = Math.round(settings.posFrac * 100) + '%';
+  const done = Object.keys(points).length;
+  $('status').textContent = `${done} marked / ${order.length || '?'} pictures`;
+  $('count').textContent = `${selectedPaths().length} selected`;
+}
+
+const selectedPaths = () => Object.keys(points).filter((p) => !off.has(p) && files.has(p));
+
+// The square that becomes the icon: its side comes from the head height, so every head ends up the same size.
+function cropBox(p) {
+  const side = Math.abs(p.chin[1] - p.top[1]) / settings.headFrac;
+  const cx = (p.top[0] + p.chin[0]) / 2;
+  return { x: cx - side / 2, y: p.top[1] - settings.posFrac * side, s: side };
+}
+function drawIcon(ctx, size, img, p) {
+  ctx.clearRect(0, 0, size, size);
+  const b = cropBox(p);
+  // pieces outside the picture stay transparent
+  const sx = Math.max(0, b.x), sy = Math.max(0, b.y);
+  const ex = Math.min(img.naturalWidth, b.x + b.s), ey = Math.min(img.naturalHeight, b.y + b.s);
+  if (ex <= sx || ey <= sy) return;
+  const k = size / b.s;
+  ctx.drawImage(img, sx, sy, ex - sx, ey - sy, (sx - b.x) * k, (sy - b.y) * k, (ex - sx) * k, (ey - sy) * k);
+}
+
+$('folder').addEventListener('change', (e) => {
+  files = new Map(); images = new Map(); order = [];
+  [...e.target.files].filter((f) => /\.(png|webp|jpg|jpeg)$/i.test(f.name)).forEach((f) => {
+    files.set(f.webkitRelativePath.split('/').slice(1).join('/') || f.name, f);
+  });
+  order = [...files.keys()].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  renderList();
+  if (order.length) select(order[0]);
+});
+
+function loadImage(path) {
+  if (images.has(path)) return Promise.resolve(images.get(path));
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => { images.set(path, img); resolve(img); };
+    img.onerror = () => resolve(null);
+    img.src = URL.createObjectURL(files.get(path));
+  });
+}
+
+function renderList() {
+  const q = $('search').value.toLowerCase();
+  const box = $('items'); box.innerHTML = '';
+  order.filter((p) => p.toLowerCase().includes(q)).forEach((p) => {
+    const d = document.createElement('div');
+    d.className = 'item' + (points[p] ? ' done' : '') + (p === current ? ' current' : '');
+    d.textContent = p; d.title = p; d.onclick = () => select(p);
+    box.appendChild(d);
+  });
+  persist();
+}
+$('search').addEventListener('input', renderList);
+
+async function select(path) {
+  current = path; pending = null;
+  const img = await loadImage(path);
+  if (!img) return;
+  view.width = img.naturalWidth; view.height = img.naturalHeight;
+  redraw(); renderList();
+  document.querySelector('#items .current')?.scrollIntoView({ block: 'nearest' });
+}
+
+function dot(x, y, color) {
+  vctx.fillStyle = color; vctx.strokeStyle = '#000'; vctx.lineWidth = Math.max(1, view.width / 400);
+  vctx.beginPath(); vctx.arc(x, y, Math.max(4, view.width / 150), 0, 7); vctx.fill(); vctx.stroke();
+}
+
+function redraw() {
+  const img = images.get(current); if (!img) return;
+  vctx.clearRect(0, 0, view.width, view.height);
+  vctx.drawImage(img, 0, 0);
+  const p = points[current];
+  if (p) {
+    const b = cropBox(p);
+    vctx.strokeStyle = '#fc0'; vctx.lineWidth = Math.max(2, view.width / 300);
+    vctx.strokeRect(b.x, b.y, b.s, b.s);
+    dot(p.top[0], p.top[1], '#6f6'); dot(p.chin[0], p.chin[1], '#f66');
+    drawIcon(pctx, 256, img, p);
+  } else { pctx.clearRect(0, 0, 256, 256); }
+  if (pending) dot(pending[0], pending[1], '#6f6');
+  drawGrid();
+}
+
+view.addEventListener('click', (e) => {
+  if (!current) return;
+  const r = view.getBoundingClientRect();
+  const x = (e.clientX - r.left) * (view.width / r.width), y = (e.clientY - r.top) * (view.height / r.height);
+  if (!pending) { pending = [x, y]; delete points[current]; }
+  else { points[current] = { top: pending, chin: [x, y] }; pending = null; }
+  persist(); redraw(); renderList();
+});
+
+function drawGrid() {
+  const grid = $('grid'); grid.innerHTML = '';
+  Object.keys(points).filter((p) => images.has(p)).forEach((path) => {
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (off.has(path) ? ' off' : '') + (path === current ? ' current' : '');
+    const c = document.createElement('canvas'); c.width = c.height = 144; c.title = path;
+    drawIcon(c.getContext('2d'), 144, images.get(path), points[path]);
+    c.onclick = () => select(path);
+    const box = document.createElement('input'); box.type = 'checkbox'; box.checked = !off.has(path);
+    box.onchange = () => { box.checked ? off.delete(path) : off.add(path); tile.classList.toggle('off', !box.checked); persist(); };
+    tile.append(c, box); grid.appendChild(tile);
+  });
+}
+
+['headFrac', 'posFrac'].forEach((id) => $(id).addEventListener('input', () => {
+  settings[id] = $(id).value / 100; persist(); if (current) redraw();
+}));
+$('size').addEventListener('change', () => { settings.size = Math.max(32, +$('size').value || 256); persist(); });
+$('format').addEventListener('change', () => { settings.format = $('format').value; persist(); });
+$('from').addEventListener('input', () => { settings.from = $('from').value; persist(); });
+$('to').addEventListener('input', () => { settings.to = $('to').value; persist(); });
+$('keepFolders').addEventListener('change', () => { settings.keepFolders = $('keepFolders').checked; persist(); });
+$('all').onclick = () => { off.clear(); persist(); drawGrid(); };
+$('none').onclick = () => { off = new Set(Object.keys(points)); persist(); drawGrid(); };
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' && e.target.type !== 'range' && e.target.type !== 'checkbox') return;
+  const i = order.indexOf(current);
+  if (e.key === 'ArrowRight' && i < order.length - 1) select(order[i + 1]);
+  if (e.key === 'ArrowLeft' && i > 0) select(order[i - 1]);
+  if (e.key === 'Delete' && current) { delete points[current]; pending = null; persist(); redraw(); renderList(); }
+});
+
+// ---------- save / load the points ----------
+function download(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+$('save').onclick = () => download(new Blob([JSON.stringify({ settings, points, off: [...off] }, null, 1)], { type: 'application/json' }), 'icon_points.json');
+$('load').addEventListener('change', async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const data = JSON.parse(await f.text());
+  if (data.settings) { settings = { ...settings, ...data.settings }; applySettingsToControls(); }
+  points = { ...points, ...(data.points || {}) };
+  if (data.off) off = new Set([...off, ...data.off]);
+  persist(); renderList(); drawGrid(); if (current) redraw();
+});
+
+// ---------- the zip (no compression: pngs are already small) ----------
+const CRC = (() => { const t = []; for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+const crc32 = (u8) => { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+function makeZip(entries) {          // entries: [{ name, data:Uint8Array }]
+  const enc = new TextEncoder(), parts = [], central = []; let offset = 0;
+  const u16 = (v) => [v & 255, v >>> 8], u32 = (v) => [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, v >>> 24];
+  const now = new Date();
+  const time = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
+  const date = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
+  entries.forEach(({ name, data }) => {
+    const nm = enc.encode(name), crc = crc32(data);
+    const head = new Uint8Array([0x50, 0x4b, 3, 4, ...u16(20), ...u16(0x800), ...u16(0), ...u16(time), ...u16(date), ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nm.length), ...u16(0)]);
+    parts.push(head, nm, data);
+    central.push(new Uint8Array([0x50, 0x4b, 1, 2, ...u16(20), ...u16(20), ...u16(0x800), ...u16(0), ...u16(time), ...u16(date), ...u32(crc), ...u32(data.length), ...u32(data.length), ...u16(nm.length), ...u16(0), ...u16(0), ...u16(0), ...u16(0), ...u32(0), ...u32(offset)]), nm);
+    offset += head.length + nm.length + data.length;
+  });
+  const cdSize = central.reduce((s, p) => s + p.length, 0);
+  const end = new Uint8Array([0x50, 0x4b, 5, 6, ...u16(0), ...u16(0), ...u16(entries.length), ...u16(entries.length), ...u32(cdSize), ...u32(offset), ...u16(0)]);
+  return new Blob([...parts, ...central, end], { type: 'application/zip' });
+}
+
+function outputName(path) {
+  const slash = path.lastIndexOf('/');
+  const folder = settings.keepFolders && slash >= 0 ? path.slice(0, slash + 1) : '';
+  let stem = path.slice(slash + 1).replace(/\.[^.]+$/, '');
+  if (settings.from && stem.startsWith(settings.from)) stem = settings.to + stem.slice(settings.from.length);
+  return `${folder}${stem}.${settings.format}`;
+}
+
+$('download').onclick = async () => {
+  const paths = selectedPaths();
+  if (!paths.length) { alert('Nothing selected: mark some pictures first (two clicks each) and keep them ticked.'); return; }
+  const size = settings.size, canvas = document.createElement('canvas'); canvas.width = canvas.height = size;
+  const ctx = canvas.getContext('2d'); ctx.imageSmoothingQuality = 'high';
+  const entries = [];
+  for (const path of paths) {
+    const img = await loadImage(path); if (!img) continue;
+    drawIcon(ctx, size, img, points[path]);
+    const blob = await new Promise((res) => canvas.toBlob(res, 'image/' + settings.format, 0.95));
+    entries.push({ name: outputName(path), data: new Uint8Array(await blob.arrayBuffer()) });
+  }
+  download(makeZip(entries), 'icons.zip');
+};
+persist();
+</script>
+</body>
+</html>

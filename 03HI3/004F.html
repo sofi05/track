@@ -15,17 +15,11 @@
 
   <div class="search-filter">
     <input type="text" id="searchInput" placeholder="Search by name..." />
-    <button id="filterBtn">Filter</button>
   </div>
 
-  <!-- FILTER -->
-  <div id="filterPopup" class="filter-popup hidden">
-    <div class="filter-section">
-      <label><input type="checkbox" class="filter-checkbox" data-filter="new"> New</label>
-      <label><input type="checkbox" name="part" value="2" class="part-radio"> P2</label>
-      <label><input type="checkbox" name="part" value="1" class="part-radio"> P1</label>
-    </div>
-  </div>
+  <!-- Buttons are built from gameConfig.page in js/fit.js -->
+  <div id="quickFilters" class="quick-filters"></div>
+  <div id="partBar" class="part-toggle"></div>
 
   <div class="char-list" id="charList"></div>
   <div id="popup-container"></div>
@@ -54,6 +48,7 @@
   <script src="js/fit.js" defer></script>
   <script src="../shared/js/common.js" defer></script>
   <script src="../shared/js/sprite-popup.js" defer></script>
+  <script src="../shared/js/chara-filters.js" defer></script>
   <script src="../shared/js/fit.js" defer></script>
   <script src="../shared/js/nav.js"></script>
 </body>

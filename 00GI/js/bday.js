@@ -6,7 +6,7 @@ window.BDAY_CONFIG = {
     '01-06': ['Lanyan'],
     '01-09': ['Tohma'],
     '01-10': ['Chevreuse'],
-    '01-13': ['Sandrone'],
+    '01-13': ['MarionetteNew'], // Sandrone (her icon file is called MarionetteNew)
     '01-14': ['Columbina'], 
     '01-18': ['Diona'],
     '01-20': ['Citlali'],
@@ -142,6 +142,9 @@ window.BDAY_CONFIG = {
 
     'x-x': ['Valeriy'],  //soon
     'x-x': ['Mitya'],  //soon
+    // NOTE: these two are in chara.js but were missing here. Birthday not known yet (not released), so no date:
+    //'x-x': ['Alice'],       //soon (hidden in chara.js: out:false)
+    //'x-x': ['IlCapitano'],  //soon (hidden in chara.js: out:false)
     //'x-x': [''],  //soon
   },
 

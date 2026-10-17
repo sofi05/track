@@ -118,7 +118,8 @@
     if (typeof initializeCountdown === 'function') initializeCountdown(config.gameId, 'countdown-newchars');
 
     const { fresh, reruns, permanent } = Dex.groupCharacters(characters);
-    addTotalBadge(fresh.length + reruns.length + permanent.length);
+    const countable = (list) => list.filter((c) => c.out !== false).length; // greyed-out (out:false) are not counted here
+    addTotalBadge(countable(fresh) + countable(reruns) + countable(permanent));
 
     fillRow(document.getElementById('new-characters-slider'), fresh, config, EMPTY_NEW_TEXT);
     fillRow(document.getElementById('reruns-slider'), reruns, config, EMPTY_RERUN_TEXT);

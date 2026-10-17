@@ -29,7 +29,11 @@ window.CHARA_CONFIG = {
       Dex.cycleImage(img, [...new Set(urls)], this.fallbackUrl);
     });
     container.addEventListener('click', () => {
-      this.findImage(c, 'Sprite', 'IconRole').then((url) => Dex.showPopup(url, c.name));
+      // The popup also steps through the other icons on screen (arrows / swipe / tap the picture).
+      const list = (Dex.currentList || []).includes(c) ? Dex.currentList : [c];
+      Promise.all(list.map((x) => this.findImage(x, 'Sprite', 'IconRole'))).then((urls) =>
+        Dex.showPopup(urls, c.name, { start: list.indexOf(c) })
+      );
     });
     return container;
   },
@@ -44,8 +48,11 @@ window.CHARA_CONFIG = {
       const found = await Dex.resolveImage(url); // png or webp
       if (found) return found;
     }
-    return this.fallbackUrl;
+    const temporary = await Dex.resolveImage(candidates[0], { temp: true }); // assets/Temp/
+    return temporary || this.fallbackUrl;
   },
-  fallbackUrl: '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png',
+  get fallbackUrl() {
+    return Dex.FALLBACK_ICON; // same for every game (set in shared/js/common.js)
+  },
 };
 

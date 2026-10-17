@@ -27,7 +27,8 @@ Endfield, Honkai Nexus Anima). No build step: open `index.html`, or publish with
 ## Shared scripts (`shared/js`)
 
 - `common.js`: small helpers used everywhere (the `Dex` object). Load it first.
-- `sprite-popup.js`: the big-picture popup.
+- `sprite-popup.js`: the big-picture popup (arrows / swipe / tap the picture / dots to change picture).
+- `past.js`: the "Past Games" popup of a menu page; the data is `window.PAST_GAMES` in `<game>/js/past.js`.
 - `char-popup.js`, `phase.js`, `countdown.js`, `vs.js`: home page popup, version/phase
   logic, countdown, and the current version of each game (**edit `vs.js` on every update**).
 - `nav.js`: the bottom bar and the game switcher. **To add a game, add one line to `GAMES`.**
@@ -53,3 +54,6 @@ and the choices of every filter (`filters`). A character field can hold one valu
 - **Several pictures on one icon (Main page):** give the character `imgName2: ['a', 'b']`; with `cycleIcons: true` in the game's `js/mc.js` the icon flips between them. Pictures that don't exist are skipped.
 - **Several elements on one character:** `element: ['Pyro', 'Hydro']` makes the element badge flip through them (needs `getElementIconPath` in the game's `js/mc.js`).
 - **Several outfits for one character (Outfits page):** add another line with the same `name` in `<game>/js/fit.js`. They become one card; its icon flips between the outfits and the popup shows them all.
+
+## Temporary pictures
+No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists. You can also use `assets/Temp/charaid/` (icons only) or `assets/Temp/Sprite/` (big pictures only).

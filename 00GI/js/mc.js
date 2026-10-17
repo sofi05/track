@@ -28,7 +28,7 @@ window.CHARA_CONFIG = {
     c.hasOutfit
       ? `../assets/Sprite/Genshin/Outfit/UI_Costume_${c.imgName}.png`
       : `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName}.png`,
-  getFallbackPath: () => '../assets/others/UI_Icon_LunaRite_Unknown.png',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
   getElementIconPath: (el) => `../assets/others/Genshin/Element/${el}.png`, // badge that flips through the elements
 
   // One element -> badge on the icon. Several elements -> text tags.

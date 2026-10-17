@@ -33,11 +33,14 @@ function buildCard(c) {
     iconWrapper.appendChild(Dex.el('div', 'soon-label', c.status.toUpperCase()));
   }
 
-  iconWrapper.appendChild(Dex.buildCharaIcon(c, window.CHARA_CONFIG));
+  iconWrapper.appendChild(Dex.buildCharaIcon(c, window.CHARA_CONFIG, () => stepList, true));
 
   card.append(iconWrapper, Dex.el('div', '', c.name));
   return card;
 }
+
+// The picture popup steps through these (arrows / swipe / tap): the characters on screen that are out.
+let stepList = [];
 
 function renderList() {
   charListEl.innerHTML = '';
@@ -48,6 +51,7 @@ function renderList() {
     .sort((a, b) => a.name.localeCompare(b.name))
     .filter((c) => passesFilters(c, searchTerm));
 
+  stepList = visible.filter((c) => c.out !== false);
   if (visible.length === 0) Dex.showNoResults(charListEl);
   else visible.forEach((c) => charListEl.appendChild(buildCard(c)));
 

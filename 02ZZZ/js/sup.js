@@ -56,4 +56,11 @@ characters.forEach((c) => {
   fileNumber++;
 });
 
-Dex.initSupportPage({ characters, iconFolder: spriteFolder, spriteFolder });
+// Filter buttons of this page (same settings as js/chara-page.js: quick = always visible, popup = inside "Filter")
+const page = {
+  quick: [['have', 'new'], 'rarity'],
+  popup: [],
+  parts: [],
+};
+
+Dex.initSupportPage({ characters, iconFolder: spriteFolder, spriteFolder, page });

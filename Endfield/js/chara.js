@@ -43,6 +43,7 @@ window.CHARA_CONFIG = {
 
     // ---------------------------------------------------------------------
     // TEMPLATE (Endfield): copy a line, remove the // and fill it in.
+    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
     //   { name: '', imgName: '', element: '', have: false, group: [''], gender: '', rarity: 5,
     //     status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
     //
@@ -64,7 +65,7 @@ window.CHARA_CONFIG = {
   getIconPath: (c) => `../assets/charaid/Endfield/icon_chr_${c.imgName || c.name}.png`,
   getElementPath: (c) => `../assets/others/Endfield/Element/${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/Endfield/chr_${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/Genshin/Random/UI_Icon_LunaRite_Unknown.png', // change once the game has an "unknown" icon
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // Small text tag under the icon (group)
   getLabels: (c) => (c.group ? { list: 'type-list', item: 'type-label', values: [c.group] } : null),

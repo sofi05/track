@@ -15,39 +15,10 @@
 
   <div class="search-filter">
     <input type="text" id="searchInput" placeholder="Search by name..." />
-    <button id="filterBtn">Filter</button>
   </div>
 
-  <div id="filterPopup" class="filter-popup hidden">
-    <!-- STATUS -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Status</button>
-      <div class="filter-options">
-        <div class="sub-filter">
-          <label><input type="radio" name="have" value="true"> Have</label>
-          <label><input type="radio" name="have" value="false"> Don't</label>
-        </div>
-        <div class="sub-filter">
-          <label><input type="checkbox" id="filterNew"> New</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- RARITY -->
-    <div class="filter-category">
-      <button type="button" class="filter-toggle">Rarity</button>
-      <div class="filter-options">
-        <label class="element-label">
-          <input type="radio" name="rarity" value="4">
-          <img src="../assets/others/Zenless/Rank/Icon_AgentRank_A.webp" class="element-img">
-        </label>
-        <label class="element-label">
-          <input type="radio" name="rarity" value="5">
-          <img src="../assets/others/Zenless/Rank/Icon_AgentRank_S.webp" class="element-img">
-        </label>
-      </div>
-    </div>
-  </div>
+  <!-- Buttons are built from `page` in js/sup.js -->
+  <div id="quickFilters" class="quick-filters"></div>
 
   <div class="char-list" id="charList"></div>
   <div id="popup-container"></div>
@@ -66,6 +37,7 @@
 
   <script src="../shared/js/common.js" defer></script>
   <script src="../shared/js/sprite-popup.js" defer></script>
+  <script src="../shared/js/chara-filters.js" defer></script>
   <script src="../shared/js/sup.js" defer></script>
   <script src="js/sup.js" defer></script>
   <script src="../shared/js/nav.js"></script>

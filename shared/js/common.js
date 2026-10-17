@@ -12,7 +12,10 @@
   // ---------------------------------------------------------------
   // Constants
   // ---------------------------------------------------------------
-  Dex.FALLBACK_IMG = '../assets/others/page-loading.png';
+  // Default "picture missing" images for EVERY page.
+  Dex.FALLBACK_SPRITE = '../assets/others/page-loading.png'; // big pictures (popups)
+  Dex.FALLBACK_ICON = '../assets/others/UI_Icon_LunaRite_Unknown.png'; // small icons
+  Dex.FALLBACK_IMG = Dex.FALLBACK_SPRITE; // old name, same picture
 
   // Card background by rarity (4★, 5★ ...). Add a new rarity here once.
   Dex.RARITY_GRADIENTS = {
@@ -34,8 +37,35 @@
   const swapExtension = (url) =>
     url.replace(/\.(png|webp)(\?.*)?$/i, (match, ext, query = '') => `.${ext.toLowerCase() === 'png' ? 'webp' : 'png'}${query}`);
 
-  // Any <img> on the page that fails to load gets one more try with the other extension
-  // before its own "picture missing" handling (a fallback picture) runs.
+  // TEMP pictures: a character whose real picture does not exist yet can use a temporary one.
+  // Put it in assets/Temp/ with the SAME file name the real picture will have (png or webp):
+  //   assets/Temp/1511.webp                 (any picture with that name)
+  //   assets/Temp/charaid/1511.webp         (only for the small icon)   assets/Temp/Sprite/1511.webp (only for the big picture)
+  // The real picture always wins: once it exists in its normal folder, the Temp one is ignored.
+  const TEMP_FOLDER = 'Temp';
+  const tempCandidates = (url) => {
+    const m = url.match(/^(.*assets\/)(charaid|Sprite)\/(?:.*\/)?([^/?]+)\.(?:png|webp)(?:\?.*)?$/i);
+    if (!m) return [];
+    const [, base, group, file] = m;
+    return [
+      `${base}${TEMP_FOLDER}/${group}/${file}.png`,
+      `${base}${TEMP_FOLDER}/${group}/${file}.webp`,
+      `${base}${TEMP_FOLDER}/${file}.png`,
+      `${base}${TEMP_FOLDER}/${file}.webp`,
+    ];
+  };
+
+  // The other pictures to try, in order, when `url` does not exist.
+  const retryList = (url, withTemp = true) => {
+    const list = [];
+    const other = swapExtension(url);
+    if (other !== url) list.push(other);
+    if (withTemp) list.push(...tempCandidates(url));
+    return list;
+  };
+
+  // Any <img> on the page that fails to load is retried with the other extension and then the
+  // Temp folder, before its own "picture missing" handling (a fallback picture) runs.
   document.addEventListener(
     'error',
     (event) => {
@@ -43,16 +73,18 @@
       if (!(img instanceof HTMLImageElement)) return;
 
       const source = img.getAttribute('src') || '';
-      if (img.dataset.otherFormat === source) {
-        delete img.dataset.otherFormat; // this WAS the second try: let the normal handling go on
+      let retry = img._dexRetry;
+      if (!retry || retry.current !== source) {
+        retry = img._dexRetry = { current: source, list: retryList(source) }; // a new picture started
+      }
+      const next = retry.list.shift();
+      if (!next) {
+        delete img._dexRetry; // nothing left to try: let the normal handling go on
         return;
       }
-      const other = swapExtension(source);
-      if (other === source) return;
-
+      retry.current = next;
       event.stopImmediatePropagation(); // keeps the picture's own onerror quiet for now
-      img.dataset.otherFormat = other;
-      img.src = other;
+      img.src = next;
     },
     true
   );
@@ -66,16 +98,23 @@
       probe.src = url;
     });
 
-  /** Resolves to the URL that really exists (as given, or with the other extension), or null. */
-  Dex.resolveImage = function (url) {
-    if (!resolvedPictures.has(url)) {
-      const other = swapExtension(url);
+  /**
+   * Resolves to the URL that really exists (as given, or with the other extension), or null.
+   * { temp: true } also looks in the Temp folder.
+   */
+  Dex.resolveImage = function (url, { temp = false } = {}) {
+    const key = temp ? `temp:${url}` : url;
+    if (!resolvedPictures.has(key)) {
+      const tries = [url, ...retryList(url, temp)];
       resolvedPictures.set(
-        url,
-        probePicture(url).then((ok) => (ok ? url : other !== url ? probePicture(other).then((ok2) => (ok2 ? other : null)) : null))
+        key,
+        tries.reduce(
+          (chain, candidate) => chain.then((found) => found || probePicture(candidate).then((ok) => (ok ? candidate : null))),
+          Promise.resolve(null)
+        )
       );
     }
-    return resolvedPictures.get(url);
+    return resolvedPictures.get(key);
   };
 
   // ---------------------------------------------------------------
@@ -161,6 +200,81 @@
     },
   };
 
+  // ---------------------------------------------------------------
+  // Name of an icon button: hover with the mouse (the browser shows `title`)
+  // or press and hold on a phone (a small label appears above the icon).
+  // ---------------------------------------------------------------
+  Dex.addPressTip = function (node, text) {
+    if (!text) return;
+    node.title = text;
+    let timer = null;
+    let tip = null;
+    let longPressed = false;
+
+    const hide = () => {
+      if (tip) tip.remove();
+      tip = null;
+    };
+    const show = () => {
+      longPressed = true;
+      hide();
+      tip = Dex.el('div', 'dex-tip', text);
+      document.body.appendChild(tip);
+      const box = node.getBoundingClientRect();
+      const tipBox = tip.getBoundingClientRect();
+      const left = Math.min(Math.max(8, box.left + box.width / 2 - tipBox.width / 2), window.innerWidth - tipBox.width - 8);
+      tip.style.left = `${left}px`;
+      tip.style.top = `${Math.max(8, box.top - tipBox.height - 8)}px`;
+      setTimeout(hide, 1800);
+    };
+    const cancel = () => clearTimeout(timer);
+
+    node.addEventListener('touchstart', () => {
+      longPressed = false;
+      timer = setTimeout(show, 450);
+    }, { passive: true });
+    node.addEventListener('touchmove', cancel, { passive: true });
+    node.addEventListener('touchcancel', cancel);
+    node.addEventListener('touchend', (e) => {
+      cancel();
+      if (longPressed) {
+        e.preventDefault(); // no click after a long press
+        setTimeout(() => (longPressed = false), 400);
+      }
+    });
+    node.addEventListener('contextmenu', (e) => {
+      if (longPressed) e.preventDefault(); // no "save image" menu
+    });
+    node.addEventListener('click', (e) => {
+      if (longPressed) {
+        e.preventDefault();
+        e.stopPropagation();
+        longPressed = false;
+      }
+    }, true);
+  };
+
+  /**
+   * Gives every icon-only choice inside `root` (a filter popup written in the HTML page) a name that shows
+   * on hover / long press. The name is, in this order: the label's data-tip="...", the picture's alt="...",
+   * "4★" style text for a rarity, or the choice's value.
+   */
+  Dex.tipAll = function (root) {
+    if (!root) return;
+    root.querySelectorAll('label.element-label, label.region-label-img').forEach((label) => {
+      if (label.dataset.tipDone) return;
+      label.dataset.tipDone = '1';
+      const input = label.querySelector('input');
+      const img = label.querySelector('img');
+      const text =
+        label.dataset.tip ||
+        (img && img.getAttribute('alt')) ||
+        (input && input.name === 'rarity' ? `${input.value}★` : input && input.value) ||
+        '';
+      Dex.addPressTip(label, String(text).replace(/_/g, ' '));
+    });
+  };
+
   Dex.imageNames = function (c) {
     const extra = Array.isArray(c.imgName2) ? c.imgName2 : [c.imgName2];
     return [...new Set([c.imgName || c.name, ...extra].filter(Boolean))];
@@ -218,6 +332,7 @@
   Dex.initFilterPanel = function () {
     const filterBtn = document.getElementById('filterBtn');
     const filterPopup = document.getElementById('filterPopup');
+    Dex.tipAll(filterPopup); // names for the icon-only choices written in the HTML
 
     if (filterBtn && filterPopup) {
       filterBtn.addEventListener('click', () => filterPopup.classList.toggle('hidden'));
@@ -281,7 +396,7 @@
    * `config` is the game's window.CHARA_CONFIG. It needs:
    *
    *   getIconPath(c)      URL of the small icon
-   *   getFallbackPath(c)  URL shown if the icon is missing
+   *   getFallbackPath(c)  URL shown if the icon is missing (every game uses Dex.FALLBACK_ICON)
    *   getSpritePath(c)    URL of the big picture opened on click
    *
    * and may also have:
@@ -296,7 +411,13 @@
    * A game with unusual needs can define createImageElement(c) in its config
    * instead; that function then replaces the standard icon completely.
    */
-  Dex.buildCharaIcon = function (c, config) {
+  const fallbackIcon = (config, c) => (config.getFallbackPath ? config.getFallbackPath(c) : Dex.FALLBACK_ICON);
+
+  // `getNeighbours` (optional): returns the list of characters on screen. When given, the popup
+  // also steps through THEIR pictures (MC page: next / previous character without closing).
+  // `withIcons` (Characters page): the popup shows the neighbours as faded side icons. Without it (Main page)
+  // the popup shows dots instead.
+  Dex.buildCharaIcon = function (c, config, getNeighbours, withIcons = false) {
     if (config.createImageElement) return config.createImageElement(c);
 
     const container = Dex.el('div', 'char-icon-container');
@@ -308,12 +429,12 @@
     const names = Dex.imageNames(c);
     if (config.cycleIcons && names.length > 1) {
       const urls = names.map((name) => config.getIconPath({ ...c, imgName: name }));
-      Dex.cycleImage(img, urls, config.getFallbackPath(c));
+      Dex.cycleImage(img, urls, fallbackIcon(config, c));
     } else {
       img.src = config.getIconPath(c);
       img.onerror = () => {
         img.onerror = null; // avoid an endless loop if the fallback is missing too
-        img.src = config.getFallbackPath(c);
+        img.src = fallbackIcon(config, c);
       };
     }
     container.appendChild(img);
@@ -334,7 +455,24 @@
     }
 
     container.addEventListener('click', () => {
-      Dex.showPopup(config.getSpritePaths ? config.getSpritePaths(c) : config.getSpritePath(c), c.name);
+      const picturesOf = (x) => [].concat(config.getSpritePaths ? config.getSpritePaths(x) : config.getSpritePath(x));
+      // Pages with the thumbnail gallery popup already step through the outfits of ONE character.
+      const neighbours = getNeighbours && (withIcons || !document.getElementById('thumbnailContainer')) ? getNeighbours() : null;
+      if (!neighbours || neighbours.length < 2 || !neighbours.includes(c)) return Dex.showPopup(picturesOf(c), c.name);
+      // One group per character: several pictures -> arrows + thumbnails, then on to the next character.
+      const groups = [];
+      let startGroup = 0;
+      neighbours.forEach((n) => {
+        if (n !== c && !String(n.imgName || n.name || '').trim()) return; // skip empty placeholder lines
+        if (n === c) startGroup = groups.length;
+        groups.push({
+          images: picturesOf(n),
+          name: n.name,
+          icon: withIcons && config.getIconPath ? config.getIconPath(n) : undefined, // side icons (see sprite-popup.js)
+          bg: withIcons ? Dex.rarityGradient(n.rarity) : undefined,
+        });
+      });
+      Dex.showPopup([], c.name, { groups, startGroup });
     });
     return container;
   };

@@ -105,8 +105,10 @@ window.CHARA_CONFIG = {
     { name: 'Aventurine • WF', imgName: '1513', have: false, element: 'quantum', group:'ela', gender:'m', world:['IPC','astro'], rarity: 5, status: 'available', version: '4.5', p:1},
     
      { name: 'Pearl', imgName: '1503', have: false, element: 'ice', group:'ela', gender:'f', world:['plana','IPC'], rarity: 5, status: 'new', version: '4.6', p:1},
+     { name: 'Aha!', imgName: '1511', have: false, element: 'quantum', group: 'ela', gender: 'f', world: ['plana'], rarity: 5, status: 'soon', version: '4.7', p: 1, want: 2},
     // ---------------------------------------------------------------------
     // TEMPLATE (Star Rail): copy a line, remove the // and fill it in.
+    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
     //   { name: '', imgName: '', outfitSprites: [''], collab: true, have: false, element: '', group: '', gender: '',
     //     world: [''], rarity: 5, status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
     //
@@ -130,9 +132,13 @@ window.CHARA_CONFIG = {
   // ---- paths (used by the home page, the Characters page and the popups) ----
   // Collab characters live in a "collab/" folder.
   getIconPath: (c) => `../assets/charaid/StarRail/${c.collab ? 'collab/' : ''}${c.imgName || c.name}.png`,
-  getElementPath: (c) => `../assets/others/StarRail/Element/${c.element}.png`,
+  // Data uses short names (fire, thunder ...); the icon files use the game's names (IconAttributeFire.png ...)
+  getElementPath: (c) => {
+    const name = String(c.element || 'Unknown');
+    return `../assets/others/StarRail/Element/IconAttribute${name.charAt(0).toUpperCase()}${name.slice(1)}.png`;
+  },
   getSpritePath: (c) => `../assets/Sprite/StarRail/${c.collab ? 'collab/' : ''}${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/StarRail/Random/Type_Unknown_Small.webp',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // Big pictures: the character, then alternative outfits (outfitSprites: ['Name'])
   getSpritePaths: (c) => Dex.spriteList(c, `../assets/Sprite/StarRail/${c.collab ? 'collab/' : ''}${c.imgName || c.name}.png`, '../assets/Sprite/StarRail/Outfit/'),

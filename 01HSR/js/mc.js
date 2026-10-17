@@ -22,9 +22,13 @@ window.CHARA_CONFIG = {
   // ---- paths ----
   cycleIcons: true, // a character with imgName2 flips between its pictures
   getIconPath: (c) => `../assets/charaid/StarRail/${c.imgName || c.name}.png`,
-  getElementPath: (c) => `../assets/others/StarRail/Element/${c.element}.png`,
+  // Data uses short names (fire, thunder ...); the icon files use the game's names (IconAttributeFire.png ...)
+  getElementPath: (c) => {
+    const name = String(c.element || 'Unknown');
+    return `../assets/others/StarRail/Element/IconAttribute${name.charAt(0).toUpperCase()}${name.slice(1)}.png`;
+  },
   getSpritePath: (c) => `../assets/Sprite/StarRail/${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/StarRail/Random/Type_Unknown_Small.webp',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // Some entries have extra pictures (imgName2)
   getSpritePaths: (c) => Dex.imageNames(c).map((name) => `../assets/Sprite/StarRail/${name}.png`),

@@ -117,13 +117,14 @@ function buildCard(c) {
     iconWrapper.appendChild(buildElementBadge(elements));
   }
 
-  iconWrapper.appendChild(Dex.buildCharaIcon(c, config));
+  iconWrapper.appendChild(Dex.buildCharaIcon(c, config, () => currentList));
 
   card.appendChild(iconWrapper);
   if (isTypeB) card.appendChild(Dex.el('div', 'char-label', displayName(c)));
   return card;
 }
 
+let currentList = [];
 function renderList() {
   Dex.stopCycles();
   charListEl.innerHTML = '';
@@ -136,6 +137,8 @@ function renderList() {
 
   if (isTypeB) visible = mergeTypeB(visible);
 
+  currentList = visible; // the popup steps through these
+  Dex.currentList = visible;
   visible.forEach((c) => charListEl.appendChild(buildCard(c)));
   Dex.updateCharCount(visible.length);
 }
@@ -154,8 +157,38 @@ function updateTitle() {
 Dex.initFilterPanel();
 Dex.bindToggleableRadios(() => selectedFilters, ['element', 'gender', 'group', 'have'], renderList);
 
+// Keep filters: only shown when the popup has 2+ kinds of filter. Off = picking one clears the others.
+const filterPanel = document.getElementById('filterPopup');
+const filterKinds = filterPanel
+  ? new Set([...filterPanel.querySelectorAll('input')].map((i) => (i.name === 'newStatus' ? 'status' : i.name)))
+  : new Set();
+const keepFilters = filterPanel && filterKinds.size > 1 ? Dex.keepFilters.addToggle(filterPanel) : { isOn: () => true };
+
+function clearOtherFilters(exceptKind) {
+  ['element', 'gender', 'group', 'have'].forEach((key) => {
+    if (key === exceptKind || !(key in selectedFilters)) return;
+    selectedFilters[key] = null;
+    document.querySelectorAll(`input[name="${key}"]`).forEach((input) => (input.checked = false));
+  });
+  if (exceptKind !== 'status') {
+    Object.keys(selectedFilters.newStatus).forEach((k) => (selectedFilters.newStatus[k] = false));
+    document.querySelectorAll('input[name="newStatus"]').forEach((input) => (input.checked = false));
+  }
+}
+
+// runs after the radio's own handler (bubbling), so selectedFilters is already updated
+filterPanel?.addEventListener('click', (e) => {
+  if (!e.target.matches || !e.target.matches('input[type="radio"]')) return;
+  const key = e.target.name;
+  if (selectedFilters[key] !== null && selectedFilters[key] !== undefined && !keepFilters.isOn()) {
+    clearOtherFilters(key);
+    renderList();
+  }
+});
+
 document.querySelectorAll('input[name="newStatus"]').forEach((input) => {
   input.addEventListener('change', (e) => {
+    if (e.target.checked && !keepFilters.isOn()) clearOtherFilters('status');
     selectedFilters.newStatus[e.target.value] = e.target.checked; // value is "new" or "soon"
     renderList();
   });

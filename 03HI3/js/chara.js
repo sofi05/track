@@ -142,6 +142,7 @@ window.CHARA_CONFIG = {
     { name: 'Seele • WP', imgName: 'Wings_of_Panacea', folder:'Seele', have: false, element: 'SD', rarity: 5, part:'2', status: 'new', spec:'',version: '8.9' }, //EDIT
     // ---------------------------------------------------------------------
     // TEMPLATE (Honkai Impact): copy a line, remove the // and fill it in.
+    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
     //   { name: '', imgName: '', folder: '', outfitSprites: [''], have: false, element: '', rarity: 5, part: '2', spec: '',
     //     collab: true, status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
     //
@@ -167,7 +168,7 @@ window.CHARA_CONFIG = {
   getIconPath: (c) => `../assets/charaid/Honkai/${c.folder}/${c.imgName || c.name}.png`,
   getElementPath: (c) => `../assets/others/HI3/Element/${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/HI3/${c.folder}/${c.imgName || c.name}.png`,
-  getFallbackPath: () => '../assets/others/HI3/Random/Clouds_Shadow.webp',
+  getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
   // Big pictures: the character, then alternative outfits (outfitSprites: ['Folder/Image'])
   getSpritePaths: (c) => Dex.spriteList(c, `../assets/Sprite/HI3/${c.folder}/${c.imgName || c.name}.png`, '../assets/Sprite/HI3/Outfit/'),
