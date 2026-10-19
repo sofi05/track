@@ -1,5 +1,5 @@
 const characters = [
-  { name: 'Bagboo', have: true, rarity: '4' },
+  { name: 'Bagboo', have: true, rarity: '4'},
   { name: 'Cryboo', have: true, rarity: '4' },
   { name: 'Avocaboo', have: true, rarity: '4' },
   { name: 'Paperboo', have: true, rarity: '4' },
@@ -38,9 +38,9 @@ const characters = [
   { name: 'Sprout', have: false, rarity: '5' },
   { name: 'Booltergeist', have: false, rarity: '4'},
   { name: 'Biggest Fan', have: false, rarity: '5'},
-  { name: 'Ultra Jake', have: false, rarity: '5', status: 'new' },
+  { name: 'Ultra Jake', have: false, rarity: '5'},
 
-  { name: 'Ariel', have: false, rarity: '5', status: 'soon' },
+  { name: 'Ariel', have: false, rarity: '5' },
   //{ name: '', have: false, rarity: '', status: 'soon' },
 ];
 
@@ -63,4 +63,7 @@ const page = {
   parts: [],
 };
 
-Dex.initSupportPage({ characters, iconFolder: spriteFolder, spriteFolder, page });
+// The version this list is updated to (red "vers." pill under the title). Change it when you update the list.
+const lastVersion = '3.1';
+
+Dex.initSupportPage({ characters, iconFolder: spriteFolder, spriteFolder, page, lastVersion, iconFit: 'contain' });

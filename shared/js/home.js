@@ -60,16 +60,19 @@
     const icon = Dex.el('img', 'char-icon');
     icon.src = config.getIconPath(char);
     icon.alt = char.name;
+    Dex.applyIconFit(icon, char);
     icon.onerror = () => {
       icon.onerror = null;
       icon.src = config.getFallbackPath(char);
     };
 
-    const elementIcon = Dex.el('img', 'element-icon');
-    elementIcon.src = config.getElementPath(char);
-    elementIcon.alt = char.element;
-
-    iconWrapper.append(icon, elementIcon);
+    iconWrapper.append(icon);
+    if (String(char.element ?? '').trim() !== '') {
+      const elementIcon = Dex.el('img', 'element-icon');
+      elementIcon.src = config.getElementPath(char);
+      elementIcon.alt = char.element;
+      iconWrapper.append(elementIcon);
+    }
 
     const info = Dex.el('div', 'char-info');
     const marker = char.want === 1 ? ' ★' : char.want === 2 ? ' ☆' : '';

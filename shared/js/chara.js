@@ -11,7 +11,7 @@ const searchInput = document.getElementById('searchInput');
 
 const characters = window.CHARA_CONFIG?.characters || [];
 
-const filters = Dex.initCharaFilters({ page: window.CHARA_PAGE, onChange: () => renderList() });
+const filters = Dex.initCharaFilters({ page: window.CHARA_PAGE, characters, onChange: () => renderList() });
 
 function passesFilters(c, searchTerm) {
   return c.name.toLowerCase().includes(searchTerm) && filters.matches(c);
@@ -22,15 +22,15 @@ function passesFilters(c, searchTerm) {
 // ---------------------------------------------------------------
 function buildCard(c) {
   const card = Dex.el('div', 'char-card');
-  card.title = `${c.name} (${c.element}, ${c.rarity}★)`;
+  card.title = `${c.name} (${c.element ? c.element + ', ' : ''}${c.rarity}★)`;
 
   const iconWrapper = Dex.el('div', 'icon-wrapper');
   iconWrapper.style.background = Dex.rarityGradient(c.rarity);
 
   if (c.out === false) card.classList.add('char-disabled');
 
-  if ((c.status === 'new' || c.status === 'soon') && c.out !== false) {
-    iconWrapper.appendChild(Dex.el('div', 'soon-label', c.status.toUpperCase()));
+  if ((c.status === 'new' || c.status === 'soon' || c.status === 'guest') && c.out !== false) {
+    iconWrapper.appendChild(Dex.el('div', 'soon-label' + (c.status === 'guest' ? ' guest' : ''), c.status.toUpperCase()));
   }
 
   iconWrapper.appendChild(Dex.buildCharaIcon(c, window.CHARA_CONFIG, () => stepList, true));
@@ -61,7 +61,6 @@ function renderList() {
 // ---------------------------------------------------------------
 // Wiring
 // ---------------------------------------------------------------
-Dex.initFilterPanel();
 searchInput.addEventListener('input', renderList);
 
 renderList();

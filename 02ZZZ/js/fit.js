@@ -22,12 +22,12 @@ const gameConfig = {
     { name: 'Velina', imgName: '64_01', have: false, rarity: 5 },
     { name: 'Sigrid', imgName: '66_01', have: false, rarity: 5},
     { name: 'Remielle', imgName: '67_01', have: false, rarity: 5 },
-    { name: 'Remielle', imgName: '67_02', have: false, rarity: 5  },
+    { name: 'Remielle', imgName: '67_02', imgName2: ['67_02','67_03'], have: false, rarity: 5  },
 
     
-    { name: 'Phoenix', imgName: '', have: false, rarity: 5},
-    { name: 'Phoenix', imgName: '', have: false, rarity: 5},
-    { name: 'Severian', imgName: '', have: false, rarity: 5},
+    { name: 'Phoenix', imgName: '1641_01', have: false, rarity: 5, status: 'soon'},
+    { name: 'Phoenix', imgName: '1641_02', have: false, rarity: 5, status: 'soon'},
+    { name: 'Severian', imgName: '1631_01', have: false, rarity: 5, status: 'soon'},
     // ---------------------------------------------------------------------
     // TEMPLATE: copy a line, remove the // and fill it in.
     //   { name: '', imgName: '', imgName2: '', have: false, rarity: 4, status: 'new' },

@@ -145,6 +145,26 @@
    * Image names of a character: `imgName` (or the name) first, then `imgName2`
    * (a name or a list of names). Duplicates and empty names are skipped.
    */
+  // Short lists of picture names. `entries` is what you wrote, e.g. ['606', '60611_04_01', 'Ooh_Summer'];
+  // `files` is the generated list of every picture name (window.OUTFIT_FILES, made by tools/list-sprites.py).
+  //   an entry that is a whole file name  -> that picture
+  //   anything else                       -> every picture whose name STARTS with it ('606' = all of them)
+  // A name that is not in the list is still tried as it is (the picture may be new: run the script again).
+  Dex.expandPictures = function (entries, files) {
+    const list = files || [];
+    const out = [];
+    [].concat(entries || []).forEach((entry) => {
+      const name = String(entry).trim();
+      if (!name) return;
+      const exact = list.includes(name);
+      const found = exact ? [name] : list.filter((file) => file.startsWith(name));
+      if (!found.length) console.warn(`No picture starts with "${name}". Run the sprite list script if you added it recently.`);
+      if (!exact && found.some((file) => out.includes(file))) console.warn(`"${name}" picks pictures that an earlier entry of the same list already has.`);
+      (found.length ? found : [name]).forEach((file) => out.includes(file) || out.push(file));
+    });
+    return out;
+  };
+
   // Big pictures for a popup: the character's own picture(s), then any alternative
   // outfits listed in `outfitSprites: ['QinCostumeSea']` on the character.
   // Names are looked up in the game's Outfit sprite folder (`outfitPrefix`).
@@ -415,6 +435,26 @@
 
   // `getNeighbours` (optional): returns the list of characters on screen. When given, the popup
   // also steps through THEIR pictures (MC page: next / previous character without closing).
+  // Icon framing: lets one character's icon sit closer / further away than the others.
+  // Add any of these to a character (all optional, 1 / 0 / 0 = unchanged):
+  //   zoom: 1.2    bigger (1.2 = 20% closer)  /  0.9 = smaller (shows more around the face)
+  //   iconX: 5     moves the picture to the right (in % of the icon; negative = left)
+  //   iconY: -8    moves the picture down (negative = up; use it to bring a face into the middle)
+  //   iconFit: 'contain'   show the WHOLE picture inside the square (default 'cover' fills the square and
+  //                        crops the edges). Bangboo: put  iconFit: 'contain'  in the page settings to do it for all.
+  // Works on every page that shows icons (Characters, Outfits, Bangboo, home page).
+  Dex.applyIconFit = function (img, c, defaultFit) {
+    const fit = (c && c.iconFit) || defaultFit;
+    if (fit) img.style.objectFit = fit;
+    const zoom = Number(c && c.zoom) || 1;
+    const x = Number(c && c.iconX) || 0;
+    const y = Number(c && c.iconY) || 0;
+    if (zoom === 1 && !x && !y) return img;
+    img.style.transformOrigin = 'center';
+    img.style.transform = `translate(${x}%, ${y}%) scale(${zoom})`;
+    return img;
+  };
+
   // `withIcons` (Characters page): the popup shows the neighbours as faded side icons. Without it (Main page)
   // the popup shows dots instead.
   Dex.buildCharaIcon = function (c, config, getNeighbours, withIcons = false) {
@@ -424,6 +464,7 @@
 
     const img = Dex.el('img', 'char-icon');
     img.alt = c.name;
+    Dex.applyIconFit(img, c);
 
     // A character with several pictures (imgName2) can flip between them: set cycleIcons: true in the config.
     const names = Dex.imageNames(c);
@@ -439,7 +480,7 @@
     }
     container.appendChild(img);
 
-    const elementPath = config.getElementPath ? config.getElementPath(c) : null;
+    const elementPath = config.getElementPath && String(c.element ?? '').trim() !== '' ? config.getElementPath(c) : null; // no element = no element badge
     if (elementPath) {
       const badge = Dex.el('img', 'element-icon');
       badge.src = elementPath;

@@ -1,5 +1,5 @@
 /* =====================================================================
-   sup.js — "Support" pages (004S.html): Bangboo (ZZZ), Stigmata/ELFs (HI3) ...
+   sup.js — "Support" pages (004S.html): Bangboo (ZZZ), ELFs (HI3) ...
 
    The game's own js/sup.js holds the list and then calls:
 
@@ -7,6 +7,9 @@
          characters,                      // [{ name, imgName, imgName2?, have, rarity, status?, folder?, part? }]   imgName2 = extra big picture(s) in the popup (the icon stays imgName)
          iconFolder:   '../assets/...',   // small pictures:  <iconFolder>/<folder>/<imgName>.png
          spriteFolder: '../assets/...',   // big pictures:    <spriteFolder>/<folder>/<imgName>.png
+         iconFit?:     'contain',         // show the whole picture in every icon (default: fills the square and crops the edges)
+         // any character may also have  zoom / iconX / iconY  to frame its icon (see Dex.applyIconFit in common.js)
+         lastVersion?: '3.2',             // the version this list is updated to (red "vers." pill under the title)
          page?:        { quick, popup, parts, filters }   // the filter buttons (same format as window.CHARA_PAGE, see 02ZZZ/js/chara-page.js).
                                           // Only used when the page has <div id="quickFilters">; otherwise the old Filter popup is used.
        });
@@ -19,7 +22,7 @@
   const joinPath = (...parts) => parts.filter(Boolean).join('/');
   const emptyFilters = () => ({ have: null, rarity: null, element: null, isNew: false });
 
-  Dex.initSupportPage = function ({ characters, iconFolder, spriteFolder, page }) {
+  Dex.initSupportPage = function ({ characters, iconFolder, spriteFolder, page, lastVersion, iconFit }) {
     const listEl = document.getElementById('charList');
     const searchInput = document.getElementById('searchInput');
     const filterPopup = document.getElementById('filterPopup');
@@ -28,9 +31,16 @@
     let filters = emptyFilters();
     let selectedPart = '2'; // only matters for characters that have a `part`
 
+    // Red pill under the title: the version this list is updated to. Not a filter.
+    if (lastVersion) {
+      const pill = Dex.el('div', 'version-pill', `vers. ${lastVersion}`);
+      pill.title = 'This list is up to date until this version';
+      document.getElementById('charCount')?.after(pill);
+    }
+
     // New filter bar (same as the Characters page), when the page has <div id="quickFilters"> and the game gives `page`
     const charaFilters =
-      document.getElementById('quickFilters') && page ? Dex.initCharaFilters({ page, onChange: () => render() }) : null;
+      document.getElementById('quickFilters') && page ? Dex.initCharaFilters({ page, characters, onChange: () => render() }) : null;
 
     function passesFilters(c, searchTerm) {
       if (!c.name.toLowerCase().includes(searchTerm)) return false;
@@ -55,6 +65,7 @@
 
       if (c.status === 'new') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'NEW'));
       if (c.status === 'soon') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'SOON'));
+      if (c.status === 'guest') iconWrapper.appendChild(Dex.el('div', 'soon-label guest', 'GUEST'));
 
       const names = Dex.imageNames(c); // [imgName, imgName2 ...]: the icon uses the first, the popup shows all
       const name = names[0];
@@ -65,6 +76,7 @@
         img.src = Dex.FALLBACK_ICON;
       };
       img.alt = c.name;
+      Dex.applyIconFit(img, c, iconFit); // zoom / iconX / iconY / iconFit
       iconWrapper.appendChild(img);
 
       card.append(iconWrapper, Dex.el('div', '', c.name));

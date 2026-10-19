@@ -16,6 +16,7 @@ window.CHARA_CONFIG = {
     { name: 'Lycaon', imgName: '18', have: true, element: 'Ice', district:['LS'], gender:'m', rarity: 5 },
     { name: 'Grace', imgName: '20', have: true, element: 'Electric', district:['BSCS'], gender:'f', rarity: 5 },
     { name: 'Rina', imgName: '22', have: true, element: 'Electric', district:['LS'], gender:'f', rarity: 5 },
+    { name: 'Jane Doe', imgName: '24', have: true, element: 'Physical', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '3.1', want: 1, p:1 },
     { name: 'Lucy', imgName: '27', have: true, element: 'Fire', district:['OR'], gender:'f', rarity: 4 },
     { name: 'Piper', imgName: '28', have: true, element: 'Physical', district:['OR'], gender:'f', rarity: 4 },
     { name: 'Seth', imgName: '30', have: true, element: 'Electric', district:['NEPS'], gender:'m', rarity: 4 },
@@ -30,13 +31,12 @@ window.CHARA_CONFIG = {
     { name: 'Shunguan', imgName: '55', have: true, element: 'HonedEdge', filterElement: 'Physical', district:['WP'], gender:'f', rarity: 5},
     { name: 'Zhao', imgName: '56', have: true, element: 'Ice', district:['TQ'], gender:'f', rarity: 5},
     { name: 'Pyrois', imgName: '63', imgName2: ['63','63_F', '63_M'], have: true, element: 'Ether', district:['RP'], gender:'', rarity: 5},
-    { name: 'Remielle', imgName: '67', have: true, element: 'Lumiflux', district:['Ros'], gender:'f', rarity: 5},
+    { name: 'Remielle', imgName: '67', have: true, element: 'Lumiflux', district:['Ros','OE'], gender:'f', rarity: 5},
 
 
     //DONT HAVE - ORGANIZED BY NUMBER
     { name: 'Ellen', imgName: '21', have: false, element: 'Ice', district:['LS'], gender:'f', rarity: 5, status: 'available', version: '2.4', p:2},
     { name: 'Zhu Yuan', imgName: '23', have: false, element: 'Ether', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '3.1', perma:true },
-    { name: 'Jane Doe', imgName: '24', have: false, element: 'Physical', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '3.1', want: 1, p:1 },
     { name: 'Caesar', imgName: '25', have: false, element: 'Physical', district:['OR'], gender:'f', rarity: 5, status: 'available', version: '3.1', want: 2, perma:true },
     { name: 'Lighter', imgName: '26', have: false, element: 'Fire', district:['OR'], gender:'m', rarity: 5, status: 'available', version: '1.7', want: 2 },
     { name: 'Qingyi', imgName: '29', have: false, element: 'Electric', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '2.5', want: 1, p:1 },

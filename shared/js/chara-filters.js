@@ -2,16 +2,15 @@
    chara-filters.js — builds the filters of the Characters page (001.html)
    from the game's settings file (<game>/js/chara-page.js).
 
-   It creates, inside three empty boxes of the page:
+   It creates, inside two empty boxes of the page:
        #partBar       part / collab buttons          (Part 1, Part 2, Collab ...)
        #quickFilters  buttons that are always visible (Have, Rarity, Gender ...)
-       #filterPopup   the longer filters behind the "Filter" button
 
    and gives chara.js one thing to ask:  filters.matches(character)
 
-   On a wide screen (800px+) the "Filter" popup is replaced by a row of tabs under the buttons
-   (Element, World, Group ...): clicking a tab opens its choices in a row right below it. On a phone
-   the popup stays. Both show the same filters from the same settings.
+   The longer filters (Element, World, Group ... = `popup` in the settings) are a row of tabs under
+   the buttons, on every screen size: clicking a tab opens its choices in a row right below it.
+   There is no Filter popup any more.
 
    Rules
      * Capital letters do not matter ('M' finds 'm', 'geo' finds 'Geo').
@@ -25,6 +24,10 @@
        share a `group` (Part 1 / Part 2: pressing one unpresses the other).
        They stay pressed when you pick other filters. With none pressed,
        every character is shown. 
+     * Collab: write `collab: true` on a character / outfit and the page gets a Collab button by itself
+       (if the page has a #partBar and no Collab button yet). `collabOnly: true` (together with collab: true)
+       = this one is shown ONLY while the Collab button is pressed.
+     * `status: 'guest'` = a guest character: not counted by Have / Don't (it can't be obtained).
 
    Needs: common.js (loaded before this file).
    ===================================================================== */
@@ -48,7 +51,7 @@
         { value: true, label: 'Have' },
         { value: false, label: "Don't" },
       ],
-      test: (c, value) => asList(c.have).some((v) => v === value), // a card with several outfits has a list: [true, false]
+      test: (c, value) => c.status !== 'guest' && asList(c.have).some((v) => v === value), // a card with several outfits has a list: [true, false]; guests are never Have / Don't
     },
     new: {
       label: 'New',
@@ -113,10 +116,14 @@
   // ---------------------------------------------------------------
   // Main
   // ---------------------------------------------------------------
-  Dex.initCharaFilters = function ({ page = {}, onChange = () => {} } = {}) {
+  Dex.initCharaFilters = function ({ page = {}, characters = [], onChange = () => {} } = {}) {
     const quickLayout = (page.quick || [['have', 'new'], 'rarity', 'gender']).map(asList); // groups of filter names
     const popupKeys = page.popup || [];
-    const parts = page.parts || [];
+    const parts = [...(page.parts || [])];
+    // Any `collab: true` in the list gives the page a Collab button, unless the page already has one.
+    if (characters.some((c) => c.collab === true) && !parts.some((p) => p.field === 'collab')) {
+      parts.push({ label: 'Collab', field: 'collab', value: true });
+    }
 
     const definitions = {};
     function definition(key) {
@@ -140,7 +147,7 @@
     let resetButton = null;
     let keepButton = null;
     let tabBarPaint = null; // repaints the tabs (set when they exist)
-    let extrasBox = null; // the Keep filters + Reset buttons (they move next to the tabs on a wide screen)
+    let extrasBox = null; // the Keep filters + Reset buttons (they sit at the end of the tab row)
 
     const isSelected = (key, value) => key in selected && sameValue(selected[key], value);
 
@@ -212,7 +219,10 @@
     }
 
     // ---------- the question chara.js asks ----------
+    const collabPressed = () => [...pressedParts].some((i) => parts[i].field === 'collab');
+
     function matches(character) {
+      if (character.collabOnly && !collabPressed()) return false; // "collab only": hidden until the Collab button is pressed
       for (const key of Object.keys(selected)) {
         if (!definition(key).test(character, selected[key])) return false;
       }
@@ -295,35 +305,6 @@
       container.appendChild(extras);
     }
 
-    function buildPopup(container) {
-      popupKeys.forEach((key) => {
-        const def = definition(key);
-        const category = Dex.el('div', 'filter-category');
-        category.appendChild(Object.assign(Dex.el('button', 'filter-toggle', def.label), { type: 'button' }));
-
-        const options = Dex.el('div', 'filter-options' + (def.grid ? ' region-grid' : ''));
-        def.options.forEach((option) => {
-          const hasIcon = Boolean(option.icon);
-          const label = Dex.el('label', hasIcon ? (def.style === 'region' ? 'region-label-img' : 'element-label') : '');
-          if (hasIcon) Dex.addPressTip(label, option.label || String(option.value)); // name on hover / long press
-
-          const input = document.createElement('input');
-          input.type = def.single ? 'checkbox' : 'radio';
-          input.name = key;
-          input.value = String(option.value);
-          input.addEventListener('click', () => pickFilter(key, option.value));
-          filterButtons.push({ node: input, key, value: option.value, kind: 'input' });
-          label.appendChild(input);
-
-          if (hasIcon) label.appendChild(iconImage(option, def, def.style === 'region' ? 'region-img' : 'element-img'));
-          else label.append(' ' + option.label);
-          options.appendChild(label);
-        });
-        category.appendChild(options);
-        container.appendChild(category);
-      });
-    }
-
     function buildParts(container) {
       parts.forEach((part, index) => {
         const button = Dex.el('button', 'part-btn', part.label);
@@ -335,7 +316,7 @@
       });
     }
 
-    // ---------- wide screens: tabs under the buttons instead of the popup ----------
+    // ---------- tabs under the buttons (Element, World, Group ...) ----------
     function buildTabs(quickBox, partBar) {
       const tabBar = Dex.el('div', 'tab-bar quick-filters');
       const tabOptions = Dex.el('div', 'tab-options');
@@ -385,20 +366,13 @@
       quickBox.after(tabBar, tabOptions);
       tabBar.hidden = false;
 
-      // On a wide screen the Keep filters / Reset buttons sit at the end of the tab row.
-      const wide = window.matchMedia('(min-width: 800px)');
-      const place = () => {
-        document.body.classList.toggle('filter-tabs', wide.matches);
-        if (extrasBox) (wide.matches ? tabBar : quickBox).appendChild(extrasBox);
-      };
-      wide.addEventListener('change', place);
-      place();
+      // The Keep filters / Reset buttons sit at the end of the tab row.
+      if (extrasBox) tabBar.appendChild(extrasBox);
       paint();
     }
 
     const partBar = document.getElementById('partBar');
     const quickBox = document.getElementById('quickFilters');
-    const popupBox = document.getElementById('filterPopup');
 
     if (partBar) {
       buildParts(partBar);
@@ -406,11 +380,6 @@
     }
     if (quickBox) buildQuick(quickBox);
     if (quickBox && popupKeys.length) buildTabs(quickBox, partBar);
-    if (popupBox) {
-      buildPopup(popupBox);
-      if (popupKeys.length === 0) document.getElementById('filterBtn')?.setAttribute('hidden', '');
-    }
-
     refresh();
     return { matches, reset: resetAll };
   };

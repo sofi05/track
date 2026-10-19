@@ -9,19 +9,20 @@
    To hide a tab on one page:  <nav class="bottom-nav" data-hide="main"></nav>
    (tab names: home, characters, menu, main, change)
 
-   To add a game to the switcher, add one line to GAMES below.
+   To add a game to the switcher AND to the main page (index.html), add one line to GAMES below.
    ===================================================================== */
 (function () {
   // ---- edit zone ------------------------------------------------
   const GAMES = [
-    { folder: '00GI', icon: 'gi.webp', name: 'Genshin Impact' },
+    { folder: '00GI', icon: 'gi.webp', name: 'Genshin Impact', bday: true }, // bday = has a js/bday.js (the main page loads it)
     { folder: '01HSR', icon: 'hsr.webp', name: 'Honkai: Star Rail' },
     { folder: '02ZZZ', icon: 'zzz.png', name: 'Zenless Zone Zero' },
-    { folder: '03HI3', icon: 'hi3.webp', name: 'Honkai Impact 3rd' },
+    { folder: '03HI3', icon: 'hi3.webp', name: 'Honkai Impact 3rd', bday: true },
     { folder: 'Endfield', icon: 'ae.webp', name: 'Arknights: Endfield' },
     { folder: '03HNA', icon: 'hna.webp', name: 'Honkai: Nexus Anima', dim: true }, // dim = not released yet
   ];
   // ---------------------------------------------------------------
+  window.HOYO_GAMES = GAMES; // the main page (index.html) builds its game icons and loads the birthday lists from this too
 
   const ICONS = {
     home: '<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>',

@@ -13,13 +13,14 @@
 <div class="container">
   <h1>HOYODEX</h1>
 
+  <!-- The icons come from the GAMES list in shared/js/nav.js (add a game there, once). -->
   <div class="game-icons">
-    <a href="00GI/000.html"><img src="assets/gameico/gi.webp" alt="Genshin Impact" /></a>
-    <a href="01HSR/000.html"><img src="assets/gameico/hsr.webp" alt="Honkai Star Rail" /></a>
-    <a href="02ZZZ/000.html"><img src="assets/gameico/zzz.png" alt="Zenless Zone Zero" /></a>
-    <a href="03HI3/000.html"><img src="assets/gameico/hi3.webp" alt="Honkai Impact 3rd" /></a>
-    <a href="Endfield/000.html"><img src="assets/gameico/ae.webp" alt="Arknight Endfield" /></a>
-    <a href="03HNA/000.html" class="is-dim"><img src="assets/gameico/hna.webp" alt="Honkai Nexus Anima"/></a>
+    <script src="shared/js/nav.js"></script>
+    <script>
+      HOYO_GAMES.forEach((g) =>
+        document.write(`<a href="${g.folder}/000.html"${g.dim ? ' class="is-dim"' : ''}><img src="assets/gameico/${g.icon}" alt="${g.name}" /></a>`)
+      );
+    </script>
   </div>
 </div>
 
@@ -35,10 +36,10 @@
 <!-- Birthday Button -->
 <button id="birthday-button">🎂 Birthdays Today</button>
 
-<!-- Load birthday configs -->
-<script src="00GI/js/bday.js"></script>
-<script src="03HI3/js/bday.js"></script>
-
-<script src="shared/js/bday.js"></script>
+<!-- Load the birthday list of every game marked  bday: true  in shared/js/nav.js, then the code that shows them -->
+<script>
+  HOYO_GAMES.forEach((g) => g.bday && document.write(`<script src="${g.folder}/js/bday.js"><\/script>`));
+  document.write('<script src="shared/js/bday.js"><\/script>');
+</script>
 </body>
 </html>

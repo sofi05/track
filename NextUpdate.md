@@ -1,31 +1,24 @@
 # MUST FIX / CHANGE NEXT UPDATE
 
    ## [GENSHIN IMPACT](00GI\) 
-      + missing new outfit for MC  (needs a game release or a wiki update: the new outfits have no sprite in game yet)
+   1. MC Page: Missing outfit [Night Hunt in Snow](need_wiki/game)
 
    ## [HONKAI STAR RAIL](01HSR\)
-   
     
    ## ZENLESS ZONE ZERO(+Element +Groups)
-      + add districts icons
-      + UPDATE BANGBOO
-     
+   1. add districts icons
+      
    ## [HONKAI IMPACT 3RD]
-      + UPDATE TO 9.1
-      + SEARCH FOR "SOON" TO UPDATE > PLACEHOLDER TO ADD ASSETS LATER  || Apply to Fit/Stig
+   1. UPDATE TO 9.1
 
    ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_CBT2)
-      + add the pictures taken for the new list (assets/Temp for now: most are not transparent but are from the latest version)
+      + add new pics in TEMP and rename by ids (most might not be transparent)
+      + update game icon 
+      + no sprite charas should be marked as 'out:false'
+      + add MC page & chara
 
    ## [ARKNIGHT ENDFIELD _ UTD 1.0](get_1.1_splashes)
-      + Update the groups later
-
-
-
-# ASSETS
-   ## REMOVE / REPLACE
-   + HNA - update and remove / replace the old game icon
-   + HI3 - move places maybe? put character / collab / outfit etc. (sprite and charaid)
+   1. Update everything later
 
 
 # SHORTCUT TO UPDATES
@@ -48,7 +41,6 @@
    + [ NEW CHARACTERS ](02ZZZ\js\chara.js)
    + [ OUTFIT ](02ZZZ\js\fit.js)
    + [ BANGBOO ](02ZZZ\js\sup.js)
-
    + [ MAIN ](02ZZZ\js\mc.js)
 
 
@@ -56,8 +48,6 @@
    * [ NEW CHARACTERS ](03HI3\js\chara.js)
    * [ OUTFIT ](03HI3\js\fit.js)
    * [ SUP ](03HI3\js\sup.js)
-
-   * [ STIG ](03HI3\js\stig.js)
    
 
    ## OTHERS

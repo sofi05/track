@@ -4,55 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ZZZ: Characters</title>
-  <link rel="stylesheet" href="../shared/css/style.css" />
-  <link rel="stylesheet" href="../shared/css/change.css" />  
-  <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">    
+  <!-- The page itself is built by shared/js/page.js (one template for every game). -->
+  <script src="../shared/js/page.js" data-kind="chara"></script>
 </head>
-<body>
-  <h1>Characters</h1>
-  <p id="charCount" class="char-count">
-  Total: 0 characters</p>
-
-  <div class="search-filter">
-    <input type="text" id="searchInput" placeholder="Search by name..." />
-    <button id="filterBtn">Filter</button>
-  </div>
-
-  <!-- Buttons are built from js/chara-page.js -->
-  <div id="quickFilters" class="quick-filters"></div>
-  <div id="partBar" class="part-toggle"></div>
-  <div id="filterPopup" class="filter-popup hidden"></div>
-
-  <div class="char-list" id="charList"></div>
-  <div id="popup-container"></div>
-
-  <!-- NAVIGATION -->
-  <nav class="bottom-nav"></nav>
-
-  <!--SPRITE-->
-  <div id="spritePopup" class="popup">
-    <div class="popup-content">
-      <button id="prevBtn" class="nav-btn">←</button>
-      
-      <div class="main-img-wrapper" style="position: relative;">
-        <img id="spritePopupImg" class="popup-img" />
-        <button class="close-btn">✕</button> <!-- Moved inside here -->
-      </div>
-      
-      <button id="nextBtn" class="nav-btn">→</button>
-    </div>
-
-    <!-- THUMBNAILS OUTSIDE MAIN -->
-    <div id="thumbnailContainer"></div>
-  </div>
-
-  <!--SCRIPTS-->
-  <script src="js/chara.js" defer></script>
-  <script src="js/chara-page.js" defer></script>
-  <script src="../shared/js/common.js" defer></script>
-  <script src="../shared/js/sprite-popup.js" defer></script>
-  <script src="../shared/js/chara-filters.js" defer></script>
-  <script src="../shared/js/chara.js" defer></script>
-  <script src="../shared/js/nav.js"></script>
-</body>
+<body></body>
 </html>
