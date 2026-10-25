@@ -9,14 +9,14 @@ window.CHARA_PAGE = {
   quick: [['have', 'new'], 'rarity'],
 
   // Filters inside the "Filter" button. Use [] to hide the button.
-  popup: ['element', 'spec'],
+  popup: ['element', 'role'],
 
   // Part / collab buttons above the list. With none pressed, everything is shown.
-  // field = the field on the character (part: '2' or collab: true), value = what it must be.
+  // field = the field on the character (p: 2 or collab: true), value = what it must be.
   // Remove the // from a line to turn that button on. [] hides the whole row.
   parts: [
-    { label: 'Part 1', group: 'part', field: 'part', value: '1' },
-    { label: 'Part 2', group: 'part', field: 'part', value: '2' },
+    { label: 'Part 1', group: 'part', field: 'p', value: '1' },
+    { label: 'Part 2', group: 'part', field: 'p', value: '2' },
     { label: 'Collab', field: 'collab', value: true },
   ],
 
@@ -28,30 +28,30 @@ window.CHARA_PAGE = {
     element: {
       label: 'Element',
       options: [
-        { value: 'BIO', label: 'BIO', icon: '../assets/others/HI3/Element/BIO.png' },
-        { value: 'IMG', label: 'IMG', icon: '../assets/others/HI3/Element/IMG.png' },
-        { value: 'MECH', label: 'MECH', icon: '../assets/others/HI3/Element/MECH.png' },
-        { value: 'PSY', label: 'PSY', icon: '../assets/others/HI3/Element/PSY.png' },
-        { value: 'QUA', label: 'QUA', icon: '../assets/others/HI3/Element/QUA.png' },
-        { value: 'SD', label: 'SD', icon: '../assets/others/HI3/Element/SD.png' },
+        { value: 'BIO', label: 'Biologic', icon: '../assets/others/Element/HI3_BIO.png' },
+        { value: 'IMG', label: 'Imaginary', icon: '../assets/others/Element/HI3_IMG.png' },
+        { value: 'MECH', label: 'Mecha', icon: '../assets/others/Element/HI3_MECH.png' },
+        { value: 'PSY', label: 'Psychic', icon: '../assets/others/Element/HI3_PSY.png' },
+        { value: 'QUA', label: 'Quantum', icon: '../assets/others/Element/HI3_QUA.png' },
+        { value: 'SD', label: 'Stardust', icon: '../assets/others/Element/HI3_SD.png' },
       ],
     },
-    spec: {
+    role: {
       label: 'Specialization',
       options: [
-        { value: 'WS', label: 'WS', icon: '../assets/others/HI3/Spec/World_Star.png' },
-        { value: 'WoD', label: 'WoD', icon: '../assets/others/HI3/Spec/Wheel_of_Destiny.png' },
-        { value: 'RoO', label: 'RoO', icon: '../assets/others/HI3/Spec/Rite_of_Oblivion.png' },
-        { value: 'LoA', label: 'LoA', icon: '../assets/others/HI3/Spec/Law_of_Ascension.png' },
-        { value: 'GoI', label: 'GoI', icon: '../assets/others/HI3/Spec/Grail_of_Infinitude.png' },
+        { value: 'WS', label: 'World Star', icon: '../assets/others/Role/HI3_World_Star.png' },
+        { value: 'WoD', label: 'Wheel of Destiny', icon: '../assets/others/Role/HI3_Wheel_of_Destiny.png' },
+        { value: 'RoO', label: 'Rite of Oblivion', icon: '../assets/others/Role/HI3_Rite_of_Oblivion.png' },
+        { value: 'LoA', label: 'Law of Ascension', icon: '../assets/others/Role/HI3_Law_of_Ascension.png' },
+        { value: 'GoI', label: 'Grail of Infinitude', icon: '../assets/others/Role/HI3_Grail_of_Infinitude.png' },
       ],
     },
     rarity: {
       label: 'Rarity',
       options: [
-        { value: '3', label: 'B', icon: '../assets/others/HI3/Rank/B.png' },
-        { value: '4', label: 'A', icon: '../assets/others/HI3/Rank/A.png' },
-        { value: '5', label: 'S', icon: '../assets/others/HI3/Rank/S.png' },
+        { value: '3', label: 'B', icon: '../assets/others/Rank/HI3_BattleRating_B.png' },
+        { value: '4', label: 'A', icon: '../assets/others/Rank/HI3_BattleRating_A.png' },
+        { value: '5', label: 'S', icon: '../assets/others/Rank/HI3_BattleRating_S.png' },
       ],
     },
   },

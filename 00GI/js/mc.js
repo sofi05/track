@@ -1,35 +1,26 @@
 window.CHARA_CONFIG = {
   characters: [
-    { name: '', name2: 'Aether', GP: 2, imgName: 'PlayerBoy', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5 },
-    { name: '', name2: 'Lumine', GP: 1, imgName: 'PlayerGirl', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5 },
-    { name: ' ', name2: 'Aether', GP: 2, imgName: 'PlayerBoyCostumeCWXR', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, hasOutfit:true },
-    { name: ' ', name2: 'Lumine', GP: 1, imgName: 'PlayerGirlCostumeCWXR', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, hasOutfit:true },
+    { name: 'Aether', imgIcon: 'PlayerBoy', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, have: false },
+    { name: 'Lumine', imgIcon: 'PlayerGirl', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, have: true },
+    { name: 'Aether', imgIcon: 'PlayerBoyCostumeCWXR', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, have: false, outfit: true },
+    { name: 'Lumine', imgIcon: 'PlayerGirlCostumeCWXR', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, have: true, outfit: true },
     
-    { name: '  ', name2: 'Aether', GP: 2, imgName: '', have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, hasOutfit:true, status: 'soon' },
-    { name: '  ', name2: 'Lumine', GP: 1, imgName: '', have: true, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, hasOutfit:true, status: 'soon' },
+    //no ingame sprite yet
+    { name: 'Aether', imgIcon: '', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, have: false, outfit: true },
+    { name: 'Lumine', imgIcon: '', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, have: true, outfit: true },
     // ---------------------------------------------------------------------
-    // TEMPLATE: copy a line, remove the // and fill it in.
-    //   { name: '', name2: 'Aether', GP: 2, imgName: '', imgName2: [''], have: false, element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'],
-    //     gender: 'm', rarity: 5, hasOutfit: true, status: 'soon' },
-    //   { name: '', name2: 'Lumine', GP: 1, imgName: '', imgName2: [''], have: true, element: [...], gender: 'f', rarity: 5, hasOutfit: true },
-    //
-    //   name2         the character (Aether / Lumine)      GP   1 = girl page, 2 = boy page
-    //   imgName2      list of pictures: the icon flips between them (e.g. ['PlayerBoy','PlayerBoy_2'])
-    //   element       a LIST: the badge flips through the elements; one element = a single badge
-    //   hasOutfit     true = the icon is in the Outfit folder          status   'new' / 'soon' = label
+    // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
+    // What every field means: GUIDE.md. Same name on every line = one page (no gender switch).
+    // { name: '', imgIcon: '', imgSprite: ['='], element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: '', rarity: 5, have: false, status: '', outfit: true },
     // ---------------------------------------------------------------------
   ],
-  pageType: 'typeB',
-
   // ---- paths ----
-  cycleIcons: true, // a character with imgName2 flips between its pictures
-  getIconPath: (c) => `../assets/charaid/Genshin/${c.hasOutfit ? 'Outfit/' : ''}UI_AvatarIcon_${c.imgName || c.name}.png`,
-  getSpritePath: (c) =>
-    c.hasOutfit
-      ? `../assets/Sprite/Genshin/Outfit/UI_Costume_${c.imgName}.png`
-      : `../assets/Sprite/Genshin/UI_Gacha_AvatarImg_${c.imgName}.png`,
+  getIconPath: (c) => `../assets/charaid/Genshin/${c.outfit ? 'Outfit/' : ''}UI_AvatarIcon_${Dex.iconName(c)}.png`,
+  // big pictures: an outfit line looks in the Outfit folder, the others in the normal sprite folder
+  getSpritePaths: (c) =>
+    Dex.spriteList(c, (name) => `../assets/Sprite/Genshin/${c.outfit ? 'Outfit/UI_Costume_' : 'UI_Gacha_AvatarImg_'}${name}.png`, '../assets/Sprite/Genshin/Outfit/UI_Costume_'),
   getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
-  getElementIconPath: (el) => `../assets/others/Genshin/Element/${el}.png`, // badge that flips through the elements
+  getElementIconPath: (el) => `../assets/others/Element/GI_${el}.png`, // badge that flips through the elements
 
   // One element -> badge on the icon. Several elements -> text tags.
   getElementPath(c) {

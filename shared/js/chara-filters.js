@@ -15,7 +15,7 @@
    Rules
      * Capital letters do not matter ('M' finds 'm', 'geo' finds 'Geo').
      * Every character field can hold ONE value or a LIST of values
-       (region: 'mond'  or  region: ['mond', 'liy']). A character passes a
+       (area: 'mond'  or  area: ['mond', 'liy']). A character passes a
        filter if ANY of its values is the selected one.
      * Different filters are combined (5★ + Female + Pyro), but only when
        "Keep filters" is on. When it is off, picking a filter in another
@@ -25,8 +25,13 @@
        They stay pressed when you pick other filters. With none pressed,
        every character is shown. 
      * Collab: write `collab: true` on a character / outfit and the page gets a Collab button by itself
-       (if the page has a #partBar and no Collab button yet). `collabOnly: true` (together with collab: true)
-       = this one is shown ONLY while the Collab button is pressed.
+       (if the page has a #partBar and no Collab button yet). `collabStatus` is a list that goes with it:
+         'solo' = shown ONLY while the Collab button is pressed;
+         'mhy'  = the collab is from the same company (miHoYo): a small miHoYo button appears next to Collab (only if
+                  some collabs are miHoYo and some are not). Pressing it shows only those, and un-presses Collab.
+       Example:  collab: true, collabStatus: ['mhy', 'solo']
+     * `out: false` (not out yet) WITHOUT a version: not on the home page; on this page only with the New filter (or Collab /
+       miHoYo when it is a collab). WITH a version (version: '4.8') it is a sure thing and shows like any other character.
      * `status: 'guest'` = a guest character: not counted by Have / Don't (it can't be obtained).
 
    Needs: common.js (loaded before this file).
@@ -39,9 +44,9 @@
 
   // ---------------------------------------------------------------
   // Filters every game has. A game's settings file can change any of these
-  // (for example the rarity buttons) or add new ones (region, world ...).
+  // (for example the rarity buttons) or add new ones (area, role ...).
   //   label    name of the section in the Filter popup
-  //   options  [{ value, label, icon? }]
+  //   options  [{ value, label, icon?, short? }]   short = the text written on the button; label shows when you hover / hold it
   //   fields   character fields to look at (default: the filter's own name)
   // ---------------------------------------------------------------
   const BUILT_IN = {
@@ -124,6 +129,19 @@
     if (characters.some((c) => c.collab === true) && !parts.some((p) => p.field === 'collab')) {
       parts.push({ label: 'Collab', field: 'collab', value: true });
     }
+    // A miHoYo button next to Collab, only when some collabs are miHoYo (collabStatus 'mhy') and some are not.
+    // It is only visible while Collab or miHoYo is pressed, and the two work like Part 1 / Part 2: pressing one unpresses the other.
+    const collabAt = parts.findIndex((p) => p.field === 'collab');
+    const collabs = characters.filter((c) => c.collab === true);
+    const isMhy = (c) => asList(c.collabStatus).includes('mhy');
+    if (collabAt >= 0 && collabs.some(isMhy) && collabs.some((c) => !isMhy(c)) && !parts.some((p) => p.showWith)) {
+      parts[collabAt].group = parts[collabAt].group || 'collab';
+      parts.splice(collabAt + 1, 0, { label: 'miHoYo', field: 'collabStatus', value: 'mhy', group: parts[collabAt].group, showWith: 'collab', subtle: true });
+    }
+    // Outfits page: the Main character's outfits (outfit: true in js/mc.js) are added with mc: true and get an MC button.
+    if (characters.some((c) => c.mc === true) && !parts.some((p) => p.field === 'mc')) {
+      parts.push({ label: 'Main chara', field: 'mc', value: true, subtle: true });
+    }
 
     const definitions = {};
     function definition(key) {
@@ -188,6 +206,10 @@
     function resetAll() {
       clearFilters();
       pressedParts.clear();
+      if (keep) {
+        keep = false; // Reset also unselects Keep filters
+        Dex.keepFilters.save(false);
+      }
       changed();
     }
 
@@ -207,11 +229,12 @@
       });
       partButtons.forEach(({ node, index }) => {
         const on = pressedParts.has(index);
+        if (parts[index].showWith) node.hidden = !(on || [...pressedParts].some((i) => parts[i].field === parts[index].showWith)); // only while Collab (or itself) is pressed
         node.classList.toggle('active', on);
         node.setAttribute('aria-pressed', String(on));
       });
       if (tabBarPaint) tabBarPaint();
-      if (resetButton) resetButton.hidden = Object.keys(selected).length === 0 && pressedParts.size === 0;
+      if (resetButton) resetButton.hidden = Object.keys(selected).length === 0 && pressedParts.size === 0 && !keep;
       if (keepButton) {
         keepButton.classList.toggle('active', keep);
         keepButton.setAttribute('aria-pressed', String(keep));
@@ -219,24 +242,29 @@
     }
 
     // ---------- the question chara.js asks ----------
-    const collabPressed = () => [...pressedParts].some((i) => parts[i].field === 'collab');
+    const collabPressed = () => [...pressedParts].some((i) => parts[i].field === 'collab' || parts[i].showWith === 'collab'); // miHoYo counts as Collab
+
+    const mcPressed = () => [...pressedParts].some((i) => parts[i].field === 'mc');
 
     function matches(character) {
-      if (character.collabOnly && !collabPressed()) return false; // "collab only": hidden until the Collab button is pressed
+      if (character.mcOnly && !mcPressed()) return false; // the Main character's outfits: hidden until the MC button is pressed
+      if (asList(character.collabStatus).includes('solo') && !collabPressed()) return false; // 'solo': hidden until the Collab button is pressed
+      // not out yet AND no version (might never come): only with the New filter, or Collab / miHoYo for a collab
+      if (Dex.isUnconfirmed(character) && !('new' in selected) && !(character.collab === true && collabPressed())) return false;
       for (const key of Object.keys(selected)) {
         if (!definition(key).test(character, selected[key])) return false;
       }
-      if (pressedParts.size) {
-        const inAnyPart = [...pressedParts].some((i) => partMatches(parts[i], character));
-        if (!inAnyPart) return false;
-      }
+      if (pressedParts.size && ![...pressedParts].some((i) => partMatches(parts[i], character))) return false; // Part 1 / Collab ...: any of them
       return true;
     }
 
     // `value: true` means "the field is exactly true" (collab: true);
     // anything else is compared like a filter value, so lists work too.
+    // A game that has parts writes `p: 2` on the characters of part 2 (and so on); a character WITHOUT p is part 1.
+    const usesParts = characters.some((c) => c.p != null);
     function partMatches(part, character) {
-      const field = character[part.field];
+      let field = character[part.field];
+      if (part.field === 'p' && field == null && usesParts) field = 1;
       if (part.value === true) return field === true;
       return asList(field).some((v) => sameValue(v, part.value));
     }
@@ -307,7 +335,7 @@
 
     function buildParts(container) {
       parts.forEach((part, index) => {
-        const button = Dex.el('button', 'part-btn', part.label);
+        const button = Dex.el('button', 'part-btn' + (part.subtle ? ' is-subtle' : ''), part.label);
         button.type = 'button';
         button.dataset.part = String(index);
         button.addEventListener('click', () => pickPart(index));
@@ -345,7 +373,7 @@
           button.dataset.filter = key;
           button.dataset.value = String(option.value);
           if (option.icon) button.appendChild(iconImage(option, def, 'chip-icon'));
-          else button.textContent = option.label;
+          else button.textContent = option.short || option.label; // `short`: a short text on the button, the full label shows when you hover / hold it
           button.addEventListener('click', () => pickFilter(key, option.value));
           filterButtons.push({ node: button, key, value: option.value, kind: 'button' });
           row.appendChild(button);
@@ -363,12 +391,53 @@
       }
       tabBarPaint = paint;
 
-      quickBox.after(tabBar, tabOptions);
+      // Everything below the buttons (Element / Path / World ... and Keep filters) is hidden behind a "+" button
+      // at the end of the button row. It closes when you click anywhere else, unless Keep filters is on.
+      const panel = Dex.el('div', 'more-panel');
+      panel.hidden = true;
+      panel.append(tabBar, tabOptions);
+      quickBox.after(panel);
       tabBar.hidden = false;
 
-      // The Keep filters / Reset buttons sit at the end of the tab row.
-      if (extrasBox) tabBar.appendChild(extrasBox);
+      const plus = Dex.el('button', 'part-btn chip symbol more-btn', '+');
+      plus.type = 'button';
+      plus.style.setProperty('--tone', '#c9c9c9');
+      Dex.addPressTip(plus, 'More filters');
+      const group = Dex.el('div', 'chip-group');
+      group.append(plus);
+      quickBox.appendChild(group);
+
+      const setOpen = (isOpen) => {
+        panel.hidden = !isOpen;
+        plus.classList.toggle('active', isOpen);
+        plus.textContent = isOpen ? '−' : '+';
+        if (!isOpen) {
+          open = null;
+          paint();
+        }
+      };
+      plus.addEventListener('click', () => setOpen(panel.hidden));
+      document.addEventListener('click', (e) => {
+        if (panel.hidden || keep) return;
+        if (e.target.closest('.more-panel, .more-btn')) return;
+        setOpen(false);
+      });
+      // a dot on "+" when a filter inside the panel is selected
+      const basePaint = tabBarPaint;
+      tabBarPaint = () => {
+        basePaint();
+        plus.classList.toggle('has-active', popupKeys.some((k) => k in selected));
+      };
+
+      // The Keep filters / Reset buttons sit at the end of the Collab / Part row (after a | line), so they stay in reach
+      // when the panel is closed.
+      if (extrasBox && partBar) {
+        extrasBox.classList.toggle('alone', parts.length === 0);
+        partBar.appendChild(extrasBox);
+        partBar.hidden = false;
+      }
       paint();
+      tabBarPaint();
     }
 
     const partBar = document.getElementById('partBar');

@@ -1,64 +1,52 @@
 window.CHARA_CONFIG = {
-  gameId: 'NexusAnima', // key of this game in shared/js/vs.js
+  gameId: 'NexusAnima', // key of this game in vs.js (main folder)
   //PICS ARE FROM SITE OR BETA, THEYRE TEMP, CHANGE IT ON LAUNCH
   characters: [
     //Divided by ID number (leaks)
-    { name: 'Breadhead', imgName: '002', element: 'reality', have: false, gender:'M', rarity: 4, status: 'new'},
-    { name: 'Nanafey', imgName: '010', element: 'beauty', have: false, gender:'F', rarity: 4, status: 'new'},
-    { name: 'Hua', imgName: '011', element: 'Competition', have: false, gender:'M', rarity: 4, status: 'new'},
-    { name: 'Kiana', imgName: '012', element: 'Strength', have: false, gender:'F', rarity: 4, status: 'new'},
-    { name: 'Jalily Belau', imgName: '013', element: 'Strength', have: false, gender:'F', rarity: 4, status: 'new'},
-    { name: 'Maple Manybell', imgName: '014', element: 'Joy',  have: false, gender:'F', rarity: 4, status: 'new'},
-    { name: 'Cassio Rollex', imgName: '015', element: 'joy', have: false, gender:'M', rarity: 4, status: 'new'},
-    { name: 'Lyrin', imgName: '017', element: '', have: false, gender:' ', rarity: 0, status: 'new', out:false },
-    { name: 'Olympia', imgName: '019', element: 'Dark', have: false, gender:'F', rarity: 5, status: 'new' },
-    { name: 'Herocrates', imgName: '020', element: 'Memory', have: false, gender:'M', rarity: 5, status: 'new' },
-    { name: 'Gloria', imgName: '021', element: 'insatiability', have: false, gender:'F', rarity: 4, status: 'new' },
-    { name: 'Carole Pepper', imgName: '022', element: 'satiation', have: false, gender:'F', rarity: 4, status: 'new' },
-    { name: 'Lou F Y', imgName: '023', element: ' ', have: false, gender:'F', rarity: 5, status: 'new', out:false },
-    { name: 'Shilian', imgName: '025', element: 'memory', have: false, gender:'F', rarity: 4, status: 'new' },
-    { name: 'Otto', imgName: '027', element: 'light', have: false, gender:'m', rarity: 4, status: 'new' },
-    { name: 'Hyperius', imgName: '028', element: 'light', have: false, gender:'M', rarity: 5, status: 'new' },
-    { name: 'Valynn', imgName: '029', element: '', have: false, gender:' ', rarity: 0, status: 'new', out:false },
-    { name: 'Juelle', imgName: '030', element: 'love', have: false, gender:'F', rarity: 5, status: 'new' },
-    { name: 'Nonimir', imgName: '103', element: 'reality', have: false, gender:'m', rarity: 5, status: 'new' },
-    { name: 'Darsea', imgName: '110', element: ' ', have: false, gender:'f', rarity: 0, status: 'new', out:false },
-    { name: 'Parayaya • SLH', imgName: '114', element: 'love', have: false, gender:'f', rarity: 4, status: 'new' },
-    { name: 'Bai Mei', imgName: '208', element: 'reality', have: false, gender:'F', rarity: 5, status: 'new' },
-    { name: 'Blade', imgName: '222', element: 'strength', have: false, gender:'M', rarity: 5, status: 'new'},
-    { name: 'Parayaya', imgName: '229', element: 'hate', have: false, gender:'f', rarity: 5, status: 'new'},
-    { name: 'Sir Champion', imgName: '234', element: 'Competition', gender:' ',  have: false, rarity: 5, status: 'new', out:false },
-    { name: 'Hungrille', imgName: '268', element: 'satiation', have: false, gender:'f', rarity: 5, status: 'new'},
-    { name: 'Elysia', imgName: '270', element: ' ', have: false, gender:' ', rarity: 0, status: 'new', out:false},
-    { name: 'Argenti', imgName: '908', element: ' ', have: false, gender:' ', rarity: 0, status: 'new', out:false },
-    { name: 'Victus', imgName: '101', element: ' ', have: false, gender:'m', rarity: 0, status: 'soon', out:false },
-    { name: 'Amstradath', imgName: '105', element: ' ', have: false, gender:'m', rarity: 0, status: 'soon', out:false},
-    { name: 'Apeiron', imgName: '128', element: ' ', have: false, gender:'', rarity: 0,  status: 'soon'},
-    { name: 'Prabhas', imgName: '216', element: ' ', have: false, gender:'f', rarity: 5, status: 'new' }, // removed model
-    { name: 'Armand', imgName: '217', element: 'dark', have: false, gender:'m', rarity: 5, status: 'new' }, // removed model
-    { name: 'Amorphiron', imgName: 'Amorphiron', element: ' ', have: false, gender:'m', rarity: 5, status: 'new', version: '0.3', out:false },
+    { name: 'Breadhead', imgIcon: '002', element: 'reality', gender: 'M', rarity: 4, have: false, status: 'new' },
+    { name: 'Nanafey', imgIcon: '010', element: 'beauty', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Hua', imgIcon: '011', element: 'Competition', gender: 'M', rarity: 4, have: false, status: 'new' },
+    { name: 'Kiana', imgIcon: '012', element: 'Strength', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Jalily Belau', imgIcon: '013', element: 'Strength', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Maple Manybell', imgIcon: '014', element: 'Joy', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Cassio Rollex', imgIcon: '015', element: 'joy', gender: 'M', rarity: 4, have: false, status: 'new' },
+    { name: 'Lyrin', imgIcon: '017', element: '', gender: ' ', rarity: 0, have: false, status: 'new', out: false },
+    { name: 'Olympia', imgIcon: '019', element: 'Dark', gender: 'F', rarity: 5, have: false, status: 'new' },
+    { name: 'Herocrates', imgIcon: '020', element: 'Memory', gender: 'M', rarity: 5, have: false, status: 'new' },
+    { name: 'Gloria', imgIcon: '021', element: 'insatiability', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Carole Pepper', imgIcon: '022', element: 'satiation', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Lou F Y', imgIcon: '023', element: ' ', gender: 'F', rarity: 5, have: false, status: 'new', out: false },
+    { name: 'Shilian', imgIcon: '025', element: 'memory', gender: 'F', rarity: 4, have: false, status: 'new' },
+    { name: 'Otto', imgIcon: '027', element: 'light', gender: 'm', rarity: 4, have: false, status: 'new' },
+    { name: 'Hyperius', imgIcon: '028', element: 'light', gender: 'M', rarity: 5, have: false, status: 'new' },
+    { name: 'Valynn', imgIcon: '029', element: '', gender: ' ', rarity: 0, have: false, status: 'new', out: false },
+    { name: 'Juelle', imgIcon: '030', element: 'love', gender: 'F', rarity: 5, have: false, status: 'new' },
+    { name: 'Nonimir', imgIcon: '103', element: 'reality', gender: 'm', rarity: 5, have: false, status: 'new' },
+    { name: 'Darsea', imgIcon: '110', element: ' ', gender: 'f', rarity: 0, have: false, status: 'new', out: false },
+    { name: 'Parayaya • SLH', imgIcon: '114', element: 'love', gender: 'f', rarity: 4, have: false, status: 'new' },
+    { name: 'Bai Mei', imgIcon: '208', element: 'reality', gender: 'F', rarity: 5, have: false, status: 'new' },
+    { name: 'Blade', imgIcon: '222', element: 'strength', gender: 'M', rarity: 5, have: false, status: 'new' },
+    { name: 'Parayaya', imgIcon: '229', element: 'hate', gender: 'f', rarity: 5, have: false, status: 'new' },
+    { name: 'Sir Champion', imgIcon: '234', element: 'Competition', gender: ' ', rarity: 5, have: false, status: 'new', out: false },
+    { name: 'Hungrille', imgIcon: '268', element: 'satiation', gender: 'f', rarity: 5, have: false, status: 'new' },
+    { name: 'Elysia', imgIcon: '270', element: ' ', gender: ' ', rarity: 0, have: false, status: 'new', out: false },
+    { name: 'Argenti', imgIcon: '908', element: ' ', gender: ' ', rarity: 0, have: false, status: 'new', out: false },
+    { name: 'Victus', imgIcon: '101', element: ' ', gender: 'm', rarity: 0, have: false, status: 'soon', out: false },
+    { name: 'Amstradath', imgIcon: '105', element: ' ', gender: 'm', rarity: 0, have: false, status: 'soon', out: false },
+    { name: 'Apeiron', imgIcon: '128', element: ' ', gender: '', rarity: 0, have: false, status: 'soon' },
+    { name: 'Prabhas', imgIcon: '216', element: ' ', gender: 'f', rarity: 5, have: false, status: 'new' }, // removed model
+    { name: 'Armand', imgIcon: '217', element: 'dark', gender: 'm', rarity: 5, have: false, status: 'new' }, // removed model
+    { name: 'Amorphiron', imgIcon: 'Amorphiron', element: ' ', gender: 'm', rarity: 5, have: false, status: 'new', version: '0.3', out: false },
 
     // ---------------------------------------------------------------------
-    // TEMPLATE (Nexus Anima): copy a line, remove the // and fill it in.
-    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
-    //   { name: '', imgName: '', element: '', have: false, gender: '', rarity: 4,
-    //     status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
-    //
-    //   Needed:   name, imgName, element, have, gender, rarity
-    //   Optional:
-    //     status         'new' / 'soon' = label + shown on the home page   'available' = rerun
-    //     version, p     banner version and phase ('7.1', p: 2): countdown and colours
-    //     perma          true = permanent banner (own row on the home page)
-    //     want           1 = ★    2 = ☆   (marker on the home page)
-    //     out            false = not out yet (greyed out, no label)
-    //   Values:
-    //     rarity: 4 | 5     gender: 'm' | 'f'
+    // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
+    // What every field means and its values: GUIDE.md.   Icon too close / too far: zoom, iconX, iconY (see GUIDE.md).
+    // { name: '', imgIcon: '', element: '', gender: '', rarity: , have: false, status: '', version: '', want: , perma: true, collab: true, collabStatus: [''], out: false, ph:  },
     // ---------------------------------------------------------------------
-    // Add more characters here
   ],
   // ---- paths (used by the home page, the Characters page and the popups) ----
-  getIconPath: (c) => `../assets/charaid/NexusAnima/TempIcons/${c.imgName || c.name}.png`,
+  getIconPath: (c) => `../assets/charaid/NexusAnima/TempIcons/${Dex.iconName(c)}.png`,
   getElementPath: () => null, // no element icons yet (Nexus Anima elements: reality, beauty, joy ...)
-  getSpritePath: (c) => `../assets/Sprite/NexusAnima/${c.imgName || c.name}.png`,
+  getSpritePath: (c) => `../assets/Sprite/NexusAnima/${Dex.iconName(c)}.png`,
   getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 };

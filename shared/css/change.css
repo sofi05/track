@@ -76,3 +76,16 @@
   filter: none;
   opacity: 1;
 }
+
+/* "All games": back to the start page with every game */
+.switcher-all {
+  display: inline-block;
+  margin: 10px 0 8px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: #333;
+  color: #ccc;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.switcher-all:hover { background: #444; color: #fff; }

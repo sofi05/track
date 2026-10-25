@@ -1,107 +1,93 @@
 window.CHARA_CONFIG = {
-  gameId: 'ZenlessZone', // key of this game in shared/js/vs.js
+  gameId: 'ZenlessZone', // key of this game in vs.js (main folder)
   characters: [
     //HAVE - ORGANIZED BY NUMBER
-    { name: 'Anby', imgName: '01', have: true, element: 'Electric', district:['SS'], gender:'f', rarity: 4 },
-    { name: 'Soldier 11', imgName: '05', have: true, element: 'Fire', district:['TQ', 'OE'], gender:'f', rarity: 5 },
-    { name: 'Corin', imgName: '09', have: true, element: 'Physical', district:['LS'], gender:'f', rarity: 4 },
-    { name: 'Billy', imgName: '10', have: true, element: 'Physical', district:['SS', 'OR'], gender:'m', rarity: 4 },
-    { name: 'Nekomata', imgName: '11', have: true, element: 'Physical', district:['SS'], gender:'f', rarity: 5 },
-    { name: 'Nicole', imgName: '12', have: true, element: 'Ether', district:['SS'], gender:'f', rarity: 4 },
-    { name: 'Miyabi', imgName: '13', have: true, element: 'Frost', filterElement: 'Ice', district:['TQ'], gender:'f', rarity: 5 },
-    { name: 'Koleda', imgName: '14', have: true, element: 'Fire', district:['BSCS'], gender:'f', rarity: 5 },
-    { name: 'Anton', imgName: '15', have: true, element: 'Electric', district:['BSCS'], gender:'m', rarity: 4 },
-    { name: 'Ben', imgName: '16', have: true, element: 'Fire', district:['BSCS'], gender:'m', rarity: 4 },
-    { name: 'Soukaku', imgName: '17', have: true, element: 'Ice', district:['TQ'], gender:'f', rarity: 4 },
-    { name: 'Lycaon', imgName: '18', have: true, element: 'Ice', district:['LS'], gender:'m', rarity: 5 },
-    { name: 'Grace', imgName: '20', have: true, element: 'Electric', district:['BSCS'], gender:'f', rarity: 5 },
-    { name: 'Rina', imgName: '22', have: true, element: 'Electric', district:['LS'], gender:'f', rarity: 5 },
-    { name: 'Jane Doe', imgName: '24', have: true, element: 'Physical', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '3.1', want: 1, p:1 },
-    { name: 'Lucy', imgName: '27', have: true, element: 'Fire', district:['OR'], gender:'f', rarity: 4 },
-    { name: 'Piper', imgName: '28', have: true, element: 'Physical', district:['OR'], gender:'f', rarity: 4 },
-    { name: 'Seth', imgName: '30', have: true, element: 'Electric', district:['NEPS'], gender:'m', rarity: 4 },
-    { name: 'Harumasa', imgName: '35', have: true, element: 'Electric', district:['TQ'], gender:'m', rarity: 5 },
-    { name: 'Pulchra', imgName: '38', have: true, element: 'Physical', district:['OR'], gender:'f', rarity: 4 },
-    { name: 'Anby • Soldier 0', imgName: '40', have: true, element: 'Electric', district:['SS', 'OE'], gender:'f', rarity: 5 },
-    { name: 'Pan Yinhu', imgName: '45', have: true, element: 'Physical', district:['WP'], gender:'m', rarity: 4 },
-    { name: 'Alice', imgName: '46', have: true, element: 'Physical', district:['WP'], gender:'f', rarity: 5},
-    { name: 'Lucia', imgName: '50', have: true, element: 'Ether', district:['WP'], gender:'f', rarity: 5},
-    { name: 'Manato', imgName: '51', have: true, element: 'Fire', district:['WP'], gender:'m', rarity: 4},
-    { name: 'Yidhari', imgName: '52', have: true, element: 'Ice', district:['WP'], gender:'f', rarity: 5},
-    { name: 'Shunguan', imgName: '55', have: true, element: 'HonedEdge', filterElement: 'Physical', district:['WP'], gender:'f', rarity: 5},
-    { name: 'Zhao', imgName: '56', have: true, element: 'Ice', district:['TQ'], gender:'f', rarity: 5},
-    { name: 'Pyrois', imgName: '63', imgName2: ['63','63_F', '63_M'], have: true, element: 'Ether', district:['RP'], gender:'', rarity: 5},
-    { name: 'Remielle', imgName: '67', have: true, element: 'Lumiflux', district:['Ros','OE'], gender:'f', rarity: 5},
+    { name: 'Anby', imgIcon: '01', element: 'Electric', gender: 'f', rarity: 4, area: ['SS'], have: true },
+    { name: 'Soldier 11', imgIcon: '05', element: 'Fire', gender: 'f', rarity: 5, area: ['TQ', 'OE'], have: true },
+    { name: 'Corin', imgIcon: '09', element: 'Physical', gender: 'f', rarity: 4, area: ['LS'], have: true },
+    { name: 'Billy', imgIcon: '10', element: 'Physical', gender: 'm', rarity: 4, area: ['SS', 'OR'], have: true },
+    { name: 'Nekomata', imgIcon: '11', element: 'Physical', gender: 'f', rarity: 5, area: ['SS'], have: true },
+    { name: 'Nicole', imgIcon: '12', element: 'Ether', gender: 'f', rarity: 4, area: ['SS'], have: true },
+    { name: 'Miyabi', imgIcon: '13', element: 'Frost', filterElement: 'Ice', gender: 'f', rarity: 5, area: ['TQ'], have: true },
+    { name: 'Koleda', imgIcon: '14', element: 'Fire', gender: 'f', rarity: 5, area: ['BSCS'], have: true },
+    { name: 'Anton', imgIcon: '15', element: 'Electric', gender: 'm', rarity: 4, area: ['BSCS'], have: true },
+    { name: 'Ben', imgIcon: '16', element: 'Fire', gender: 'm', rarity: 4, area: ['BSCS'], have: true },
+    { name: 'Soukaku', imgIcon: '17', element: 'Ice', gender: 'f', rarity: 4, area: ['TQ'], have: true },
+    { name: 'Lycaon', imgIcon: '18', element: 'Ice', gender: 'm', rarity: 5, area: ['LS'], have: true },
+    { name: 'Grace', imgIcon: '20', element: 'Electric', gender: 'f', rarity: 5, area: ['BSCS'], have: true },
+    { name: 'Rina', imgIcon: '22', element: 'Electric', gender: 'f', rarity: 5, area: ['LS'], have: true },
+    { name: 'Jane Doe', imgIcon: '24', element: 'Physical', gender: 'f', rarity: 5, area: ['NEPS'], have: true, status: 'available', version: '3.1', want: 1, ph: 1 },
+    { name: 'Lucy', imgIcon: '27', element: 'Fire', gender: 'f', rarity: 4, area: ['OR'], have: true },
+    { name: 'Piper', imgIcon: '28', element: 'Physical', gender: 'f', rarity: 4, area: ['OR'], have: true },
+    { name: 'Seth', imgIcon: '30', element: 'Electric', gender: 'm', rarity: 4, area: ['NEPS'], have: true },
+    { name: 'Harumasa', imgIcon: '35', element: 'Electric', gender: 'm', rarity: 5, area: ['TQ'], have: true },
+    { name: 'Pulchra', imgIcon: '38', element: 'Physical', gender: 'f', rarity: 4, area: ['OR'], have: true },
+    { name: 'Anby • Soldier 0', imgIcon: '40', element: 'Electric', gender: 'f', rarity: 5, area: ['SS', 'OE'], have: true },
+    { name: 'Pan Yinhu', imgIcon: '45', element: 'Physical', gender: 'm', rarity: 4, area: ['WP'], have: true },
+    { name: 'Alice', imgIcon: '46', element: 'Physical', gender: 'f', rarity: 5, area: ['WP'], have: true },
+    { name: 'Lucia', imgIcon: '50', element: 'Ether', gender: 'f', rarity: 5, area: ['WP'], have: true },
+    { name: 'Manato', imgIcon: '51', element: 'Fire', gender: 'm', rarity: 4, area: ['WP'], have: true },
+    { name: 'Yidhari', imgIcon: '52', element: 'Ice', gender: 'f', rarity: 5, area: ['WP'], have: true },
+    { name: 'Shunguan', imgIcon: '55', element: 'HonedEdge', filterElement: 'Physical', gender: 'f', rarity: 5, area: ['WP'], have: true },
+    { name: 'Zhao', imgIcon: '56', element: 'Ice', gender: 'f', rarity: 5, area: ['TQ'], have: true },
+    { name: 'Pyrois', imgIcon: '63', imgSprite: ['=', '63_F', '63_M'], element: 'Ether', gender: '', rarity: 5, area: ['RP'], have: true },
+    { name: 'Remielle', imgIcon: '67', element: 'Lumiflux', gender: 'f', rarity: 5, area: ['Ros','OE'], have: true },
 
+    //COLLAB
+    { name: 'Kafka', imgIcon: '', element: 'Electric', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], out: false, ph:1  },
+    { name: 'Robin', imgIcon: '1661', element: 'Ether', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], ph:1  },
 
     //DONT HAVE - ORGANIZED BY NUMBER
-    { name: 'Ellen', imgName: '21', have: false, element: 'Ice', district:['LS'], gender:'f', rarity: 5, status: 'available', version: '2.4', p:2},
-    { name: 'Zhu Yuan', imgName: '23', have: false, element: 'Ether', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '3.1', perma:true },
-    { name: 'Caesar', imgName: '25', have: false, element: 'Physical', district:['OR'], gender:'f', rarity: 5, status: 'available', version: '3.1', want: 2, perma:true },
-    { name: 'Lighter', imgName: '26', have: false, element: 'Fire', district:['OR'], gender:'m', rarity: 5, status: 'available', version: '1.7', want: 2 },
-    { name: 'Qingyi', imgName: '29', have: false, element: 'Electric', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '2.5', want: 1, p:1 },
-    { name: 'Yanagi', imgName: '31', have: false, element: 'Electric', district:['TQ'], gender:'f', rarity: 5, status: 'available', version: '3.1', perma:true },
-    { name: 'Burnice', imgName: '32', have: false, element: 'Fire', district:['OR'], gender:'f', rarity: 5, status: 'available', version: '2.5', want: 2, p:1 },
-    { name: 'Astra Yao', imgName: '36', have: false, element: 'Ether', district:['LS'], gender:'f', rarity: 5, status: 'available', version: '2.5', p:2 },
-    { name: 'Evelyn', imgName: '37', have: false, element: 'Fire', district:['LS'], gender:'f', rarity: 5, status: 'available', version: '2.2', p:2 },
-    { name: 'Trigger', imgName: '39', have: false, element: 'Electric', district:['TQ'], gender:'f', rarity: 5, status: 'available', version: '3.1', p:1, want: 2 },
-    { name: 'Vivian', imgName: '41', have: false, element: 'Ether', district:['LS'], gender:'f', rarity: 5, status: 'available', version: '2.3', p:1 },
-    { name: 'Hugo', imgName: '42', have: false, element: 'Ice', district:['LS'], gender:'m', rarity: 5, status: 'available', version: '3.1', p:1, want: 2 },
-    { name: 'Ju Fufu', imgName: '43', have: false, element: 'Fire', district:['WP'], gender:'f', rarity: 5, status: 'available', version: '2.3', p:2 },
-    { name: 'Yixuan', imgName: '44', have: false, element: 'AuricInk', filterElement: 'Ether', district:['WP'], gender:'f', rarity: 5, status: 'available', version: '2.6', p:1, want: 1 },
-    { name: 'Yuzuha', imgName: '47', have: false, element: 'Physical', district:['WP'], gender:'f', rarity: 5, status: 'available', version: '3.1',p:2 },
-    { name: 'Seed', imgName: '48', have: false, element: 'Electric', district:['TQ'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:2, want: 2 },
-    { name: 'Orphie & Magus', imgName: '49', have: false, element: 'Fire', district:['TQ'], gender:'f', rarity: 5, status: 'available', version: '2.8', p:2 },
-    { name: 'Banyue', imgName: '53', have: false, element: 'Fire', district:['TQ', 'WP'], gender:'m', rarity: 5, status: 'available', version: '2.4', p:1 },
-    { name: 'Dialyn', imgName: '54', have: false, element: 'Physical', district:['TQ'], gender:'f', rarity: 5, status: 'available', version: '3.1', p:2 },
-    { name: 'Aria', imgName: '57', imgName2: ['57', '57_Form2'], have: false, element: 'Ether', district:['SS'], gender:'f', rarity: 5, status: 'available', version: '3.1', p:1 },
-    { name: 'Sunna', imgName: '58', have: false, element: 'Physical', district:['SS'], gender:'f', rarity: 5, status: 'available', version: '3.0', p:2 },
-    { name: 'Nangong Yu', imgName: '59', have: false, element: 'Ether', district:['SS'], gender:'f', rarity: 5, status: 'available', version: '3.2', p:1 },
-    { name: 'Cissia', imgName: '60', have: false, element: 'Electric', district:['NEPS'], gender:'f', rarity: 5, status: 'available', version: '2.7', p:2 },
-    { name: 'Promeia', imgName: '61', have: false, element: 'Ice', district:['TQ'], gender:'f', rarity: 5, version: '3.2', p:1, status: 'available', },
-    { name: 'Billy • Starlight', imgName: '62', have: false, element: 'Physical', district:['SS','OR'], gender:'m', rarity: 5, version: '2.8', p:2, status: 'available', },
-    { name: 'Velina', imgName: '64', have: false, element: 'Wind', district:['Ros'], gender:'f', rarity: 5,  status: 'available', version: '3.0', p:1},
-    { name: 'Norma', imgName: '65', have: false, element: 'Fire', district:['Ros'], gender:'f', rarity: 5, status: 'available', version: '3.0', p:2 },
-    { name: 'Sigrid', imgName: '66', have: false, element: 'Ice', district:['Ros'], gender:'f', rarity: 5, status: 'available', version: '3.1', p:2 },
-    { name: 'Roxy', imgName: '68', have: false, element: 'Wind', district:['Ros'], gender:'f', rarity: 5, status: 'new', version: '3.2', p:2, want: 2 },
-    { name: 'Claret', imgName: '1611', have: false, element: 'Electric', district:['Ros'], gender:'f', rarity: 5, status: 'new', version: '3.2', p:1, },
+    { name: 'Ellen', imgIcon: '21', element: 'Ice', gender: 'f', rarity: 5, area: ['LS'], have: false, status: 'available', version: '2.4', ph: 2 },
+    { name: 'Zhu Yuan', imgIcon: '23', element: 'Ether', gender: 'f', rarity: 5, area: ['NEPS'], have: false, status: 'available', version: '3.1', perma: true },
+    { name: 'Caesar', imgIcon: '25', element: 'Physical', gender: 'f', rarity: 5, area: ['OR'], have: false, status: 'available', version: '3.1', want: 2, perma: true },
+    { name: 'Lighter', imgIcon: '26', element: 'Fire', gender: 'm', rarity: 5, area: ['OR'], have: false, status: 'available', version: '1.7', want: 2 },
+    { name: 'Qingyi', imgIcon: '29', element: 'Electric', gender: 'f', rarity: 5, area: ['NEPS'], have: false, status: 'available', version: '2.5', want: 1, ph: 1 },
+    { name: 'Yanagi', imgIcon: '31', element: 'Electric', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'available', version: '3.1', perma: true },
+    { name: 'Burnice', imgIcon: '32', element: 'Fire', gender: 'f', rarity: 5, area: ['OR'], have: false, status: 'available', version: '2.5', want: 2, ph: 1 },
+    { name: 'Astra Yao', imgIcon: '36', element: 'Ether', gender: 'f', rarity: 5, area: ['LS'], have: false, status: 'available', version: '2.5', ph: 2 },
+    { name: 'Evelyn', imgIcon: '37', element: 'Fire', gender: 'f', rarity: 5, area: ['LS'], have: false, status: 'available', version: '2.2', ph: 2 },
+    { name: 'Trigger', imgIcon: '39', element: 'Electric', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'available', version: '3.1', want: 2, ph: 1 },
+    { name: 'Vivian', imgIcon: '41', element: 'Ether', gender: 'f', rarity: 5, area: ['LS'], have: false, status: 'available', version: '2.3', ph: 1 },
+    { name: 'Hugo', imgIcon: '42', element: 'Ice', gender: 'm', rarity: 5, area: ['LS'], have: false, status: 'available', version: '3.1', want: 2, ph: 1 },
+    { name: 'Ju Fufu', imgIcon: '43', element: 'Fire', gender: 'f', rarity: 5, area: ['WP'], have: false, status: 'available', version: '2.3', ph: 2 },
+    { name: 'Yixuan', imgIcon: '44', element: 'AuricInk', filterElement: 'Ether', gender: 'f', rarity: 5, area: ['WP'], have: false, status: 'available', version: '2.6', want: 1, ph: 1 },
+    { name: 'Yuzuha', imgIcon: '47', element: 'Physical', gender: 'f', rarity: 5, area: ['WP'], have: false, status: 'available', version: '3.1', ph: 2 },
+    { name: 'Seed', imgIcon: '48', element: 'Electric', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'available', version: '2.7', want: 2, ph: 2 },
+    { name: 'Orphie & Magus', imgIcon: '49', element: 'Fire', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'available', version: '2.8', ph: 2 },
+    { name: 'Banyue', imgIcon: '53', element: 'Fire', gender: 'm', rarity: 5, area: ['TQ', 'WP'], have: false, status: 'available', version: '2.4', ph: 1 },
+    { name: 'Dialyn', imgIcon: '54', element: 'Physical', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'available', version: '3.1', ph: 2 },
+    { name: 'Aria', imgIcon: '57', imgSprite: ['=', '57_Form2'], element: 'Ether', gender: 'f', rarity: 5, area: ['SS'], have: false, status: 'available', version: '3.1', ph: 1 },
+    { name: 'Sunna', imgIcon: '58', element: 'Physical', gender: 'f', rarity: 5, area: ['SS'], have: false, status: 'available', version: '3.0', ph: 2 },
+    { name: 'Nangong Yu', imgIcon: '59', element: 'Ether', gender: 'f', rarity: 5, area: ['SS'], have: false, status: 'available', version: '3.2', ph: 1 },
+    { name: 'Cissia', imgIcon: '60', element: 'Electric', gender: 'f', rarity: 5, area: ['NEPS'], have: false, status: 'available', version: '2.7', ph: 2 },
+    { name: 'Promeia', imgIcon: '61', element: 'Ice', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'available', version: '3.2', ph: 1 },
+    { name: 'Billy • Starlight', imgIcon: '62', element: 'Physical', gender: 'm', rarity: 5, area: ['SS','OR'], have: false, status: 'available', version: '2.8', ph: 2 },
+    { name: 'Velina', imgIcon: '64', element: 'Wind', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.3', ph: 1 },
+    { name: 'Norma', imgIcon: '65', element: 'Fire', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.3', ph: 2 },
+    { name: 'Sigrid', imgIcon: '66', element: 'Ice', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.1', ph: 2 },
+    { name: 'Roxy', imgIcon: '68', element: 'Wind', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.2', want: 2, ph: 2 },
+    { name: 'Claret', imgIcon: '1611', element: 'Electric', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.2', ph: 1 },
     
-    { name: 'Phoenix', imgName: '1641', have: false, element: 'Fire', district:['TQ'], gender:'f', rarity: 5, status: 'soon', version: '3.3', p:2,  want: 1 },
-    { name: 'Severian', imgName: '1631', have: false, element: 'Wind', district:['NEPS'], gender:'m', rarity: 5, status: 'soon', version: '3.3', p:2 },
+    { name: 'Phoenix', imgIcon: '1641', element: 'Fire', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'new', version: '3.3', want: 1, ph: 1 },
+    { name: 'Severian', imgIcon: '1631', element: 'Wind', gender: 'm', rarity: 5, area: ['NEPS'], have: false, status: 'new', version: '3.3', ph: 2 },
+
+    { name: 'Sunbringer', imgIcon: '1601', element: 'Fire', filterElement: '', gender: 'f', rarity: 5, area: ['OE','Ros'], have: false, status: 'soon', version: '3.4', want: 1, ph: 1  },
     // ---------------------------------------------------------------------
-    // TEMPLATE (Zenless): copy a line, remove the // and fill it in.
-    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
-    //   { name: '', imgName: '', imgName2: '', outfitSprites: [''], have: false, element: '', filterElement: '', district: [''],
-    //     gender: '', rarity: 5, status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
-    //
-    //   Needed:   name, imgName, have, element, district, gender, rarity
-    //   Optional:
-    //     imgName2       second picture (or a list) shown in the popup, e.g. imgName2: ['67_02']
-    //     outfitSprites  alternative outfits shown in the popup, e.g. ['Name'] (picture in the Outfit sprite folder)
-    //     filterElement  the element name the Filter uses when it is different from the icon's element
-    //     status         'new' / 'soon' = label + shown on the home page   'available' = rerun
-    //     version, p     banner version and phase ('7.1', p: 2): countdown and colours
-    //     perma          true = permanent banner (own row on the home page)
-    //     want           1 = ★    2 = ☆   (marker on the home page)
-    //     out            false = not out yet (greyed out, no label)
-    //   Values:
-    //     rarity: 4 | 5     gender: 'm' | 'f'
+    // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
+    // What every field means and its values: GUIDE.md.   Icon too close / too far: zoom, iconX, iconY (see GUIDE.md).
+    // { name: '', imgIcon: '', imgSprite: ['='], element: '', filterElement: '', gender: '', rarity: , area: [''], have: false, status: '', version: '', want: , perma: true, collab: true, collabStatus: [''], out: false, ph:  },
     // ---------------------------------------------------------------------
-    //  Element: Electric | Physical ⇄ HonedEdge | Fire | Ether ⇄ AuricInk | Frost ⇄ Ice | Wind | Lumiflux
-    //  District: SS (Sixth Street) | TQ (Throne Quarter) | OE (Old Eridu) | LS (Lumina Square)
-    //            OR (Outer Ring) | BSCS (Brant Street Construction Site) | WP (Waifei Peninsula) | Ros (Roscaelifer)
-    //            NEPS (New Eridu Public Security) | RP (Random Play)
   ],
   // ---- paths (used by the home page, the Characters page and the popups) ----
-  getIconPath: (c) => `../assets/charaid/Zenless/IconRoleCrop${c.imgName}.png`,
-  getElementPath: (c) => `../assets/others/Zenless/Element/Icon${c.element}.png`,
-  getSpritePath: (c) => `../assets/Sprite/Zenless/IconRole${Dex.imageNames(c)[0]}.png`,
+  getIconPath: (c) => `../assets/charaid/Zenless/${c.collab ? 'Collab/' : ''}IconRoleCrop${Dex.iconName(c)}.png`,
+  getElementPath: (c) => `../assets/others/Element/ZZZ_Icon${c.element}.png`,
+  getSpritePath: (c) => `../assets/Sprite/Zenless/${c.collab ? 'Collab/' : ''}IconRole${Dex.iconName(c)}.png`,
   getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
-  // Agents can have several pictures (imgName + imgName2)
-  // (outfitSprites: ['Name'] adds alternative outfits from the Outfit folder)
-  getSpritePaths: (c) => Dex.spriteList(c, Dex.imageNames(c).map((name) => `../assets/Sprite/Zenless/IconRole${name}.png`), '../assets/Sprite/Zenless/Outfit/IconRole'),
+  // Agents can have several big pictures (imgSprite: ['=', '67_02', 'Outfit/Name'])
+  getSpritePaths: (c) => Dex.spriteList(c, (name) => `../assets/Sprite/Zenless/${c.collab ? 'Collab/' : ''}IconRole${name}.png`, '../assets/Sprite/Zenless/Outfit/IconRole'),
 
   // Small text tags under the icon (factions)
-  getLabels: (c) => (Array.isArray(c.district) ? { list: 'group-list', item: 'group-label', values: c.district } : null),
+  getLabels: (c) => (Array.isArray(c.area) ? { list: 'group-list', item: 'group-label', values: c.area } : null),
 };

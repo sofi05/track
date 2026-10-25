@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lilita One', sans-serif;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 4em;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.game-icons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.game-icons img {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.game-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* NEW BDAY THING */
+  #birthday-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffdd57;
+    color: #222;
+    font-family: 'Lilita One', sans-serif;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.2s;
+  }
+  #birthday-button:hover {
+    background-color: #ffe680;
+  }
+
+  #popup-overlay {
+    display: none;
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+  }
+  #popup-overlay.active {
+    display: flex;
+  }
+  #popup-content {
+    background: #111;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    color: #fff;
+  }
+  #popup-content h2 {
+    margin-top: 0;
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 02;
+  }
+  #popup-content .birthday-icon { 
+    width: 80px; 
+    height: 80px; 
+    border: 2px solid #bdbdbd; 
+    border-radius: 20%; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 0 4px rgba(0,0,0,0.3); 
+}
+
+#popup-content .birthday-icon img { 
+    width: 90%; 
+    height: 90%; 
+    object-fit: cover; 
+    border-radius: 20%; 
+    background-color: #797878; 
+    display: block;  
+    margin: auto;  
+}
+    
+#birthday-list {
+  display: flex;
+  flex-wrap: wrap;         
+  justify-content: center; 
+  gap: 15px;              
+}
+
+  #popup-close {
+    margin-top: 15px;
+    padding: 5px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff5757;
+    color: #fff;
+    font-weight: bold;
+  }
+  #popup-close:hover {
+    background-color: #ff7f7f;
+  }
+
+/* A game that is not released yet: greyed out until you hover it. */
+.game-icons a.is-dim {
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.game-icons a.is-dim:hover {
+  filter: none;
+  opacity: 1;
+}
+
+/* Other games / More / Back buttons under the icons, and the small title of a sub view */
+.index-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 36px;
+}
+.index-btn {
+  font-family: 'Lilita One', sans-serif;
+  font-size: 1em;
+  padding: 6px 18px;
+  border: 1px solid #555;
+  border-radius: 999px;
+  background: #2a2a2a;
+  color: #ccc;
+  cursor: pointer;
+}
+.index-btn:hover { background: #3a3a3a; color: #fff; }
+.view-title {
+  margin: -20px 0 24px;
+  color: #aaa;
+  letter-spacing: 1px;
+}

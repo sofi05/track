@@ -9,20 +9,12 @@
    To hide a tab on one page:  <nav class="bottom-nav" data-hide="main"></nav>
    (tab names: home, characters, menu, main, change)
 
-   To add a game to the switcher AND to the main page (index.html), add one line to GAMES below.
+   The games of the popup come from games.js in the main folder (order, icon, which ones show here).
    ===================================================================== */
 (function () {
-  // ---- edit zone ------------------------------------------------
-  const GAMES = [
-    { folder: '00GI', icon: 'gi.webp', name: 'Genshin Impact', bday: true }, // bday = has a js/bday.js (the main page loads it)
-    { folder: '01HSR', icon: 'hsr.webp', name: 'Honkai: Star Rail' },
-    { folder: '02ZZZ', icon: 'zzz.png', name: 'Zenless Zone Zero' },
-    { folder: '03HI3', icon: 'hi3.webp', name: 'Honkai Impact 3rd', bday: true },
-    { folder: 'Endfield', icon: 'ae.webp', name: 'Arknights: Endfield' },
-    { folder: '03HNA', icon: 'hna.webp', name: 'Honkai: Nexus Anima', dim: true }, // dim = not released yet
-  ];
-  // ---------------------------------------------------------------
-  window.HOYO_GAMES = GAMES; // the main page (index.html) builds its game icons and loads the birthday lists from this too
+  // The list of games lives in games.js, in the main folder (loaded before this file).
+  const GAMES = window.HOYO_GAMES || [];
+
 
   const ICONS = {
     home: '<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>',
@@ -54,16 +46,18 @@
   }
 
   function renderSwitcher(container) {
-    const icons = GAMES.map(
-      (g) =>
-        `<div class="game-icon${g.dim ? ' is-dim' : ''}" data-url="../${g.folder}/000.html">` +
-        `<img src="../assets/gameico/${g.icon}" alt="${g.name}" /></div>`
-    ).join('');
+    const icons = GAMES.filter((g) => g.change !== false)
+      .map(
+        (g) =>
+          `<div class="game-icon${g.dim ? ' is-dim' : ''}" data-url="../${g.folder}/000.html">${hoyoIconTag(g, '../')}</div>`
+      )
+      .join('');
 
     container.innerHTML =
       '<div id="game-switcher" class="game-switcher hidden">' +
       '<div class="switcher-content"><h3>Select Game</h3>' +
-      `<div class="game-icons">${icons}</div></div></div>`;
+      `<div class="game-icons">${icons}</div>` +
+      '<a class="switcher-all" href="../index.html?all">All games</a></div></div>';
 
     const switcher = container.querySelector('#game-switcher');
 

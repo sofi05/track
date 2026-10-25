@@ -1,204 +1,189 @@
 window.CHARA_CONFIG = {
-  gameId: 'HonkaiImpact', // key of this game in shared/js/vs.js
+  showPart: true, // the popup shows "Part 1" / "Part 2" from p (Honkai Impact has story parts, no banner phases)
+  gameId: 'HonkaiImpact', // key of this game in vs.js (main folder)
   characters: [
     //PART 1 - ORGANIZED BY CHARA > HAVE
-    { name: 'Bronya • VC', imgName: '301', have: true, element: 'PSY', rarity: 3, part:'1' },
-    { name: 'Bronya • YA', imgName: '302', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Bronya • SS', imgName: '303', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Bronya • WD', imgName: '311', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Bronya • BN', imgName: '312', have: true, element: 'BIO', rarity: 5, part:'1' },
-    { name: 'Bronya • HoR', imgName: '313', have: true, element: 'MECH', rarity: 5, part:'1' },
-    { name: 'Bronya • HB', imgName: '314', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Bronya • HoT', imgName: '317', have: true, element: 'IMG', rarity: 5, part:'1' },
+    { name: 'Bronya • VC', imgIcon: '301', element: 'PSY', rarity: 3, have: true },
+    { name: 'Bronya • YA', imgIcon: '302', element: 'PSY', rarity: 4, have: true },
+    { name: 'Bronya • SS', imgIcon: '303', element: 'BIO', rarity: 4, have: true },
+    { name: 'Bronya • WD', imgIcon: '311', element: 'PSY', rarity: 4, have: true },
+    { name: 'Bronya • BN', imgIcon: '312', element: 'BIO', rarity: 5, have: true },
+    { name: 'Bronya • HoR', imgIcon: '313', element: 'MECH', rarity: 5, have: true },
+    { name: 'Bronya • HB', imgIcon: '314', element: 'PSY', rarity: 4, have: true },
+    { name: 'Bronya • HoT', imgIcon: '317', element: 'IMG', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Bronya • DB', imgName: '304', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true }, // 1 -80
-    { name: 'Bronya • S', imgName: '315', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true, apho: true }, //4 -80
+    { name: 'Bronya • DB', imgIcon: '304', element: 'MECH', rarity: 5, have: false, status: 'available', version: '8.6', perma: true }, // 1 -80
+    { name: 'Bronya • S', imgIcon: '315', element: 'BIO', rarity: 5, have: false, status: 'available', version: '8.6', perma: true }, //4 -80
 
 
-    { name: 'Durandal • VG', imgName: '801', have: true, element: 'QUA', rarity: 4, part:'1' },
-    { name: 'Durandal • PE', imgName: '804', have: true, element: 'IMG', rarity: 5, part:'1'},
+    { name: 'Durandal • VG', imgIcon: '801', element: 'QUA', rarity: 4, have: true },
+    { name: 'Durandal • PE', imgIcon: '804', element: 'IMG', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Durandal • BN', imgName: '802', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Durandal • DA', imgName: '803', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Durandal • RS', imgName: '806', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.9'  },
+    { name: 'Durandal • BN', imgIcon: '802', element: 'MECH', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Durandal • DA', imgIcon: '803', element: 'BIO', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Durandal • RS', imgIcon: '806', element: 'IMG', rarity: 5, role: 'LoA', have: false, status: 'available', version: '9.0', p: 2 },
     
 
-    { name: 'Elysia • HoH', imgName: '2202', have: true, element: 'PSY', rarity: 5, part:'1' },
-    { name: 'Elysia • MPE', imgName: '2201', have: true, element: 'PSY', rarity: 5, part:'1'},
-    { name: 'Elysia • HLE', imgName: '21001', have: true, element: 'SD', rarity: 5, part:'2', spec:'GoI' },
+    { name: 'Elysia • HoH', imgIcon: '2202', element: 'PSY', rarity: 5, have: true },
+    { name: 'Elysia • MPE', imgIcon: '2201', element: 'PSY', rarity: 5, have: true },
+    { name: 'Elysia • HLE', imgIcon: '21001', element: 'SD', rarity: 5, role: 'GoI', have: true, p: 2 },
 
 
-    { name: 'Fu Hua • VA', imgName: '601', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Fu Hua • NS', imgName: '603', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Fu Hua • AE', imgName: '611', have: true, element: 'PSY', rarity: 5, part:'1' },
-    { name: 'Fu Hua • HoS', imgName: '612', have: true, element: 'BIO', rarity: 5, part:'1' },
+    { name: 'Fu Hua • VA', imgIcon: '601', element: 'PSY', rarity: 4, have: true },
+    { name: 'Fu Hua • NS', imgIcon: '603', element: 'BIO', rarity: 4, have: true },
+    { name: 'Fu Hua • AE', imgIcon: '611', element: 'PSY', rarity: 5, have: true },
+    { name: 'Fu Hua • HoS', imgIcon: '612', element: 'BIO', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Fu Hua • SK', imgName: '602', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Fu Hua • P', imgName: '604', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true }, // 2- 80
-    { name: 'Fu Hua • FoV', imgName: '613', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6' },
+    { name: 'Fu Hua • SK', imgIcon: '602', element: 'MECH', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Fu Hua • P', imgIcon: '604', element: 'PSY', rarity: 5, have: false, status: 'available', version: '8.6', perma: true }, // 2- 80
+    { name: 'Fu Hua • FoV', imgIcon: '613', element: 'BIO', rarity: 5, have: false, status: 'available', version: '9.1', perma: true },
     
 
-    { name: 'Griseo • SI', imgName: '2901', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Griseo • CE', imgName: '2902', have: true, element: 'SD', rarity: 4, part:'1' },
+    { name: 'Griseo • SI', imgIcon: '2901', element: 'PSY', rarity: 4, have: true },
+    { name: 'Griseo • CE', imgIcon: '2902', element: 'SD', rarity: 4, have: true },
     
 
-    { name: 'Himeko • VT', imgName: '401', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Himeko • SF', imgName: '402', have: true, element: 'MECH', rarity: 4, part:'1' },
-    { name: 'Himeko • BS', imgName: '403', have: true, element: 'BIO', rarity: 3, part:'1' },
-    { name: 'Himeko • K', imgName: '411', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Himeko • VK', imgName: '412', have: true, element: 'MECH', rarity: 5, part:'1' },
+    { name: 'Himeko • VT', imgIcon: '401', element: 'BIO', rarity: 4, have: true },
+    { name: 'Himeko • SF', imgIcon: '402', element: 'MECH', rarity: 4, have: true },
+    { name: 'Himeko • BS', imgIcon: '403', element: 'BIO', rarity: 3, have: true },
+    { name: 'Himeko • K', imgIcon: '411', element: 'PSY', rarity: 4, have: true },
+    { name: 'Himeko • VK', imgIcon: '412', element: 'MECH', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Himeko • BR', imgName: '404', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
+    { name: 'Himeko • BR', imgIcon: '404', element: 'PSY', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
     
 
-    { name: 'Kallen • SS', imgName: '111', have: true, element: 'PSY', rarity: 5, part:'1' },
-    { name: 'Kallen • RI', imgName: '112', have: true, element: 'MECH', rarity: 4, part:'1' },
-    { name: 'Kallen • S', imgName: '114', have: true, element: 'MECH', rarity: 4, part:'1' },
+    { name: 'Kallen • SS', imgIcon: '111', element: 'PSY', rarity: 5, have: true },
+    { name: 'Kallen • RI', imgIcon: '112', element: 'MECH', rarity: 4, have: true },
+    { name: 'Kallen • S', imgIcon: '114', element: 'MECH', rarity: 4, have: true },
 
 
-    { name: 'Kiana • WC', imgName: '101', have: true, element: 'MECH', rarity: 3, part:'1' },
-    { name: 'Kiana • VR', imgName: '102', have: true, element: 'MECH', rarity: 4, part:'1'},
-    { name: 'Kiana • DP', imgName: '104', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Kiana • HoF', imgName: '106', have: true, element: 'IMG', rarity: 5, part:'1' },
-    { name: 'Kiana • HoV', imgName: '113', have: true, element: 'BIO', rarity: 5, part:'1' },
+    { name: 'Kiana • WC', imgIcon: '101', element: 'MECH', rarity: 3, have: true },
+    { name: 'Kiana • VR', imgIcon: '102', element: 'MECH', rarity: 4, have: true },
+    { name: 'Kiana • DP', imgIcon: '104', element: 'PSY', rarity: 4, have: true },
+    { name: 'Kiana • HoF', imgIcon: '106', element: 'IMG', rarity: 5, have: true },
+    { name: 'Kiana • HoV', imgIcon: '113', element: 'BIO', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Kiana • KM', imgName: '103', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Kiana • HoF', imgName: '105', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Kiana • BD', imgName: '115', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.7'  }, 
+    { name: 'Kiana • KM', imgIcon: '103', element: 'BIO', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Kiana • HoF', imgIcon: '105', element: 'PSY', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Kiana • BD', imgIcon: '115', element: 'SD', rarity: 5, role: 'LoA', have: false, status: 'available', version: '8.7', p: 2 },
 
 
-    { name: 'Mei • CI', imgName: '201', have: true, element: 'BIO', rarity: 3, part:'1' },
-    { name: 'Mei • SD', imgName: '202', have: true, element: 'MECH', rarity: 4, part:'1' },
-    { name: 'Mei • VB', imgName: '203', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Mei • HoT', imgName: '205', have: true, element: 'PSY', rarity: 5, part:'1' }, 
-    { name: 'Mei • HoO', imgName: '206', have: true, element: 'IMG', rarity: 5, part:'1' },
+    { name: 'Mei • CI', imgIcon: '201', element: 'BIO', rarity: 3, have: true },
+    { name: 'Mei • SD', imgIcon: '202', element: 'MECH', rarity: 4, have: true },
+    { name: 'Mei • VB', imgIcon: '203', element: 'BIO', rarity: 4, have: true },
+    { name: 'Mei • HoT', imgIcon: '205', element: 'PSY', rarity: 5, have: true },
+    { name: 'Mei • HoO', imgIcon: '206', element: 'IMG', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Mei • LE', imgName: '204', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Mei • XDC', imgName: '207', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'GoI',version: '8.9' },
+    { name: 'Mei • LE', imgIcon: '204', element: 'PSY', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Mei • XDC', imgIcon: '207', element: 'MECH', rarity: 5, role: 'GoI', have: false, status: 'available', version: '8.9', p: 2 },
     
 
-    { name: 'Liliya', imgName: '421', have: true, element: 'MECH', rarity: 4, part:'1' },
-    { name: 'Rozalia • MC', imgName: '422', have: true, element: 'PSY', rarity: 5, part:'1' },
+    { name: 'Liliya', imgIcon: '421', element: 'MECH', rarity: 4, have: true },
+    { name: 'Rozalia • MC', imgIcon: '422', element: 'PSY', rarity: 5, have: true },
     
 
-    { name: 'Rita • PI', imgName: '702', have: true, element: 'MECH', rarity: 4, part:'1' },
-    { name: 'Rita • UR', imgName: '703', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Rita • FR', imgName: '705', have: true, element: 'QUA', rarity: 5, part:'1' },
+    { name: 'Rita • PI', imgIcon: '702', element: 'MECH', rarity: 4, have: true },
+    { name: 'Rita • UR', imgIcon: '703', element: 'PSY', rarity: 4, have: true },
+    { name: 'Rita • FR', imgIcon: '705', element: 'QUA', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Rita • AK', imgName: '704', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true }, 
-    { name: 'Rita • SA', imgName: '706', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Rita • ME', imgName: '707', have: false, element: 'IMG', rarity: 5, part:'2', status: 'available', spec:'WoD',version: '8.7' },
+    { name: 'Rita • AK', imgIcon: '704', element: 'BIO', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Rita • SA', imgIcon: '706', element: 'MECH', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Rita • ME', imgIcon: '707', element: 'IMG', rarity: 5, role: 'WoD', have: false, status: 'available', version: '8.7', p: 2 },
 
 
-    { name: 'Sakura • GM', imgName: '211', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Sakura • GM', imgName: '212', have: true, element: 'MECH', rarity: 5, part:'1' },
-    { name: 'Sakura • FS', imgName: '213', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Sakura • DJ', imgName: '214', have: true, element: 'BIO', rarity: 4, part:'1' },
+    { name: 'Sakura • GM', imgIcon: '211', element: 'BIO', rarity: 4, have: true },
+    { name: 'Sakura • GM', imgIcon: '212', element: 'MECH', rarity: 5, have: true },
+    { name: 'Sakura • FS', imgIcon: '213', element: 'BIO', rarity: 4, have: true },
+    { name: 'Sakura • DJ', imgIcon: '214', element: 'BIO', rarity: 4, have: true },
     
 
-    { name: 'Seele • SP', imgName: '711', have: true, element: 'QUA', rarity: 4, part:'1' },
-    { name: 'Seele • SN ', imgName: '712', have: true, element: 'QUA', rarity: 5, part:'1'},
+    { name: 'Seele • SP', imgIcon: '711', element: 'QUA', rarity: 4, have: true },
+    { name: 'Seele • SN ', imgIcon: '712', element: 'QUA', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Seele • SN', imgName: '713', have: false, element: 'QUA', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Seele • HoR', imgName: '714', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6' }, //3-80
-    { name: 'Seele • WP', imgName: '715', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'',version: '8.9' }, //EDIT
+    { name: 'Seele • SN', imgIcon: '713', element: 'QUA', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Seele • HoR', imgIcon: '714', element: 'PSY', rarity: 5, have: false, status: 'available', version: '9.1', perma: true }, //3-80
+    { name: 'Seele • WP', imgIcon: '715', element: 'SD', rarity: 5, role: '', have: false, status: 'available', version: '8.9', p: 2 }, //EDIT
 
 
-    { name: 'Sushang • JK', imgName: '3101', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true }, //1-80
-    { name: 'Sushang • PS', imgName: '3102', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'LoA', version:'8.6' }, 
+    { name: 'Sushang • JK', imgIcon: '3101', element: 'PSY', rarity: 5, have: false, status: 'available', version: '8.6', perma: true }, //1-80
+    { name: 'Sushang • PS', imgIcon: '3102', element: 'BIO', rarity: 5, role: 'LoA', have: false, status: 'available', version: '8.6', p: 2 },
 
 
-    { name: 'Theresa • VP', imgName: '501', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Theresa • SR', imgName: '503', have: true, element: 'PSY', rarity: 4, part:'1' },
-    { name: 'Theresa • SA', imgName: '506', have: true, element: 'BIO', rarity: 4, part:'1' },
-    { name: 'Theresa • LV', imgName: '507', have: true, element: 'PSY', rarity: 5, part:'1'},
-    { name: 'Theresa • LK', imgName: '511', have: true, element: 'BIO', rarity: 4, part:'1' },
+    { name: 'Theresa • VP', imgIcon: '501', element: 'PSY', rarity: 4, have: true },
+    { name: 'Theresa • SR', imgIcon: '503', element: 'PSY', rarity: 4, have: true },
+    { name: 'Theresa • SA', imgIcon: '506', element: 'BIO', rarity: 4, have: true },
+    { name: 'Theresa • LV', imgIcon: '507', element: 'PSY', rarity: 5, have: true },
+    { name: 'Theresa • LK', imgIcon: '511', element: 'BIO', rarity: 4, have: true },
     //====================================================================================================================
-    { name: 'Theresa • VE', imgName: '502', have: false, element: 'MECH', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Theresa • CH', imgName: '504', have: false, element: 'BIO', rarity: 5, part:'1', status: 'available', version:'8.6', perma: true },
-    { name: 'Theresa • SI', imgName: '512', have: false, element: 'QUA', rarity: 5, part:'2', status: 'available', spec:'WS', version:'8.7' },
+    { name: 'Theresa • VE', imgIcon: '502', element: 'MECH', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Theresa • CH', imgIcon: '504', element: 'BIO', rarity: 5, have: false, status: 'available', version: '8.6', perma: true },
+    { name: 'Theresa • SI', imgIcon: '512', element: 'QUA', rarity: 5, role: 'WS', have: false, status: 'available', version: '8.7', p: 2 },
 
 
-    { name: 'Mobius', imgName: '2301', have: true, element: 'MECH', rarity: 5, part:'1'},
-    { name: 'Natasha', imgName: '2401', have: true, element: 'IMG', rarity: 4, part:'1' },
-    { name: 'Carole Pepper', imgName: '2501', have: true, element: 'MECH', rarity: 4, part:'1'},
-    { name: 'Pardofelis', imgName: '2601', have: true, element: 'IMG', rarity: 4, part:'1' },
-    { name: 'Eden', imgName: '2801', have: true, element: 'IMG', rarity: 4, part:'1' },
-    { name: 'Ai Hyperion', imgName: '3201', have: true, element: 'MECH', rarity: 4, part:'1' }, 
-    { name: 'Susannah', imgName: '3301', have: true, element: 'QUA', rarity: 4, part:'1' },
-    { name: 'Schariac', imgName: '3401', have: true, element: 'MECH', rarity: 5, part:'1' },
-    { name: 'PROMETHEUS', imgName: '3501', have: true, element: 'IMG', rarity: 4, part:'1' },
-    { name: 'Shigure Kira', imgName: '3601', have: true, element: 'MECH', rarity: 4, part:'1' },
-    { name: 'Sirin', imgName: '3701', have: true, element: 'IMG', rarity: 5, part:'1' },
-    { name: 'Vill-V', imgName: '3001', have: true, element: 'QUA', rarity: 5, part:'1'},
+    { name: 'Mobius', imgIcon: '2301', element: 'MECH', rarity: 5, have: true },
+    { name: 'Natasha', imgIcon: '2401', element: 'IMG', rarity: 4, have: true },
+    { name: 'Carole Pepper', imgIcon: '2501', element: 'MECH', rarity: 4, have: true },
+    { name: 'Pardofelis', imgIcon: '2601', element: 'IMG', rarity: 4, have: true },
+    { name: 'Eden', imgIcon: '2801', element: 'IMG', rarity: 4, have: true },
+    { name: 'Ai Hyperion', imgIcon: '3201', element: 'MECH', rarity: 4, have: true },
+    { name: 'Susannah', imgIcon: '3301', element: 'QUA', rarity: 4, have: true },
+    { name: 'Schariac', imgIcon: '3401', element: 'MECH', rarity: 5, have: true },
+    { name: 'PROMETHEUS', imgIcon: '3501', element: 'IMG', rarity: 4, have: true },
+    { name: 'Shigure Kira', imgIcon: '3601', element: 'MECH', rarity: 4, have: true },
+    { name: 'Sirin', imgIcon: '3701', element: 'IMG', rarity: 5, have: true },
+    { name: 'Vill-V', imgIcon: '3001', element: 'QUA', rarity: 5, have: true },
     //====================================================================================================================
-    { name: 'Aponia', imgName: '2701', have: false, element: 'PSY', rarity: 5, part:'1', status: 'available', version:'8.7', perma: true },
+    { name: 'Aponia', imgIcon: '2701', element: 'PSY', rarity: 5, have: false, status: 'available', version: '8.7', perma: true },
 
     //COLLAB characters
-    { name: 'Fischl', imgName: '2101', folder:'Collab', have: true, element: 'BIO', rarity: 4, part:'1', collab: true },
+    { name: 'Fischl', imgIcon: '2101', element: 'BIO', rarity: 4, have: true, collab: true, collabStatus: ['mhy'] },
     //====================================================================================================================
-    { name: 'Sparkle', imgName: '20901', folder:'Collab', have: false, element: 'QUA', rarity: 5, part:'2', status: 'available', collab: true, spec:'WS', version:'8.8' },
-    { name: 'Asuka', imgName: '901', folder:'Collab', have: false, element: 'BIO', rarity: 4, part:'1', collab: true,collabOnly: true },
-    { name: 'Keqing', imgName: '2001', folder:'Collab', have: false, rarity: 4, part:'1', collab: true,collabOnly: true, status: 'guest' },
+    { name: 'Sparkle', imgIcon: '20901', element: 'QUA', rarity: 5, role: 'WS', have: false, status: 'available', version: '9.1', collab: true, collabStatus: ['mhy'], p: 2 },
+    { name: 'Asuka', imgIcon: '901', element: 'BIO', rarity: 4, have: false, collab: true, collabStatus: ['solo'] },
+    { name: 'Keqing', imgIcon: '2001', rarity: 4, have: false, status: 'guest', collab: true, collabStatus: ['mhy', 'solo'] },
 
     //PART 1 - ORGANIZED BY CHARA > HAVE
-    { name: 'Coralie • VB', imgName: '20301', have: true, element: 'PSY', rarity: 4, part:'2', spec:'RoO' },
+    { name: 'Coralie • VB', imgIcon: '20301', element: 'PSY', rarity: 4, role: 'RoO', have: true, p: 2 },
     //====================================================================================================================
-    { name: 'Coralie • BF', imgName: '20302', have: false, element: 'MECH', rarity: 5, part:'2', spec:'RoO', status: 'available', version:'8.8' }, 
+    { name: 'Coralie • BF', imgIcon: '20302', element: 'MECH', rarity: 5, role: 'RoO', have: false, status: 'available', version: '8.8', p: 2 },
 
-    { name: 'Helia • VB', imgName: '20401', have: true, element: 'MECH', rarity: 4, part:'2', spec:'WS'},
+    { name: 'Helia • VB', imgIcon: '20401', element: 'MECH', rarity: 4, role: 'WS', have: true, p: 2 },
     //====================================================================================================================
-    { name: 'Helia • PA', imgName: '20402', have: false, element: 'BIO', rarity: 5, part:'2', status: 'available', spec:'GoI', version:'8.8' },
+    { name: 'Helia • PA', imgIcon: '20402', element: 'BIO', rarity: 5, role: 'GoI', have: false, status: 'available', version: '8.8', p: 2 },
 
     //====================================================================================================================
-    { name: 'Senadina', imgName: '20201', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'WS', version:'8.8'},
-    { name: 'Thelema', imgName: '20501', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'WoD', version:'8.4' },
-    { name: '"Lantern"', imgName: '20601', have: false, element: 'PSY', rarity: 5, part:'2', status: 'available', spec:'WoD', version:'8.5' }, 
-    { name: 'Songque', imgName: '20701', have: false, element: 'SD', rarity: 5, part:'2', status: 'available', spec:'WoD', version:'8.6' },
-    { name: 'Vita', imgName: '20801', have: false, element: 'MECH', rarity: 5, part:'2', status: 'available', spec:'RoO', version:'8.9' }, 
+    { name: 'Senadina', imgIcon: '20201', element: 'SD', rarity: 5, role: 'WS', have: false, status: 'available', version: '8.8', p: 2 },
+    { name: 'Thelema', imgIcon: '20501', element: 'MECH', rarity: 5, role: 'WoD', have: false, status: 'available', version: '8.4', p: 2 },
+    { name: '"Lantern"', imgIcon: '20601', element: 'PSY', rarity: 5, role: 'WoD', have: true, p: 2 },
+    { name: 'Songque', imgIcon: '20701', element: 'SD', rarity: 5, role: 'WoD', have: false, status: 'available', version: '8.6', p: 2 },
+    { name: 'Vita', imgIcon: '20801', element: 'MECH', rarity: 5, role: 'RoO', have: false, status: 'available', version: '8.9', p: 2 },
     
+    { name: 'Dreamseeker', imgIcon: '', element: 'IMG', gender: 'f', rarity: 5, role: 'WoD', have: false, status: 'new', version: '9.1', want: 2, p: 2 },
     
     // ---------------------------------------------------------------------
-    // TEMPLATE (Honkai Impact): copy a line, remove the // and fill it in.
-    //   No picture yet? Put a temporary one in assets/Temp/ with the SAME file name the real picture will have (e.g. 1511.png or .webp). It is used until the real one exists.
-    //   { name: '', imgName: '', folder: '', outfitSprites: [''], have: false, element: '', rarity: 5, part: '2', spec: '',
-    //     collab: true, status: 'soon', version: '', p: 1, perma: true, want: 1, out: false },
-    //
-    //   Needed:   name, imgName, folder, have, element, rarity, part
-    //   Optional:
-    //     outfitSprites  alternative outfits shown in the popup, e.g. ['Folder/Image'] (inside the Outfit sprite folder)
-    //     spec           the character's spec (see Values)
-    //     collab         true = collab character (Collab button)
-    //     status         'new' / 'soon' = label + shown on the home page   'available' = rerun
-    //     version, p     banner version and phase ('7.1', p: 2): countdown and colours
-    //     perma          true = permanent banner (own row on the home page)
-    //     want           1 = ★    2 = ☆   (marker on the home page)
-    //     out            false = not out yet (greyed out, no label)
-    //   Values:
-    //     part: '1' | '2'     rarity: 3 | 4 | 5     element: IMG | SD | PSY | MECH | BIO | QUA
-    //     spec: WoD | LoA | WS | GoI | RoO
+    // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
+    // What every field means and its values: GUIDE.md.   Icon too close / too far: zoom, iconX, iconY (see GUIDE.md).
+    // { name: '', imgIcon: '', imgSprite: ['='], element: '', gender: '', rarity: , area: [''], role: '', have: false, status: '', version: '', want: , perma: true, collab: true, collabStatus: [''], out: false, p:  },
     // ---------------------------------------------------------------------
-
-    //  Element: IMG | SD | PSY | MECH | BIO | QUA
-    //  Spec: WoD | LoA | WS | GoI | RoO
   ],
     // ---- paths (used by the home page, the Characters page and the popups) ----
-  getIconPath: (c) => `../assets/charaid/Honkai/${subfolder(c)}${c.imgName || c.name}.png`,
-  getElementPath: (c) => `../assets/others/HI3/Element/${c.element}.png`,
+  getIconPath: (c) => `../assets/charaid/HI3/${subfolder(c)}${Dex.iconName(c)}.png`,
+  getElementPath: (c) => `../assets/others/Element/HI3_${c.element}.png`,
   getSpritePath: (c) => `../assets/Sprite/HI3/${subfolder(c)}${spriteFile(c)}.png`,
   getFallbackPath: () => Dex.FALLBACK_ICON, // same for every game (set in shared/js/common.js)
 
-  // Big pictures: the character, then alternative outfits (outfitSprites: ['Folder/Image'])
-  getSpritePaths: (c) => Dex.spriteList(c, `../assets/Sprite/HI3/${subfolder(c)}${spriteFile(c)}.png`, '../assets/Sprite/HI3/Outfit/'),
+  // Big pictures: the character, then alternative outfits (imgSprite: ['=', 'Outfit/Folder/Image'])
+  getSpritePaths: (c) => Dex.spriteList(c, (name) => `../assets/Sprite/HI3/${subfolder(c)}${name === Dex.iconName(c) ? spriteFile(c) : name}.png`, '../assets/Sprite/HI3/Outfit/'),
 };
 
-// "AstralElf/" or "Collab/" for characters with a folder, nothing for the others
+// collab characters have their pictures in the "Collab/" folder
 function subfolder(c) {
-  return c.folder ? c.folder + '/' : '';
+  return c.collab ? 'Collab/' : '';
 }
 
 //   301 (3 digits) -> 60301     2801 (4 digits) -> 62801     20201 (5 digits) -> 3020201
 const SPRITE_PREFIX = { 3: '60', 4: '6', 5: '30' };
 function spriteFile(c) {
-  return c.spriteName || (SPRITE_PREFIX[String(c.imgName).length] || '') + c.imgName || c.name;
+  const icon = Dex.iconName(c);
+  return (SPRITE_PREFIX[icon.length] || '') + icon;
 }

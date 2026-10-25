@@ -1,20 +1,17 @@
 const gameConfig = {
   characters: [
-    { name: 'March 7th', imgName: '1100101', have: true, rarity: 4 },
-    { name: 'Firefly', imgName: '1131001', have: false, rarity: 5 },
-    { name: 'Ruan Mei', imgName: '1130301', have: true, rarity: 5}, 
-    { name: 'Castorice', imgName: '1140701', have: false, rarity: 5},
-    { name: 'Sparxie', imgName: '1150101', have: false, rarity: 5},
+    { name: 'March 7th', imgIcon: '1100101', have: true, rarity: 4 },
+    { name: 'Firefly', imgIcon: '1131001', have: false, rarity: 5 },
+    { name: 'Ruan Mei', imgIcon: '1130301', have: true, rarity: 5 },
+    { name: 'Castorice', imgIcon: '1140701', have: false, rarity: 5 },
+    { name: 'Sparxie', imgIcon: '1150101', have: false, rarity: 5 },
 
-    { name: 'Evanescia', imgName: '1150501', imgName2:'', have: false, rarity: 5, status: 'soon' },
-    { name: 'Hyacine', imgName: '1140901', imgName2:'', have: false, rarity: 5, status: 'soon' },
+    { name: 'Evanescia', imgIcon: '1150501', have: false, rarity: 5, status: 'new' },
+    { name: 'Hyacine', imgIcon: '1140901', have: false, rarity: 5, status: 'new' },
     // ---------------------------------------------------------------------
     // TEMPLATE: copy a line, remove the // and fill it in.
-    //   { name: '', imgName: '', imgName2: '', have: false, rarity: 5, status: 'soon' },
-    //
-    //   Same name = ONE card: to add an outfit to a character, add a line with the same name.
-    //   imgName        icon of this outfit            imgName2   extra big picture(s) in the popup (one name or a list)
-    //   status         'new' / 'soon' = label         rarity     4 | 5      have   true / false
+    // { name: '', imgIcon: '', imgSprite: ['='], have: false, rarity: 5, status: 'soon' },
+    // What every field means (and the same-name rule): GUIDE.md > Outfits page.
     // ---------------------------------------------------------------------
   ],
 
@@ -26,13 +23,13 @@ const gameConfig = {
   },
 
   // The version this list is updated to (shows as a red "vers." pill under the title)
-  lastVersion: '4.5',
+  lastVersion: '4.6',
 
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/StarRail/Outfit/",
   spritePrefix: "../assets/Sprite/StarRail/Outfit/",
 
-  getImgPath: (c) => `${gameConfig.pathPrefix}${c.imgName}.png`,
-  // List of pictures shown when you click a card (imgName + imgName2)
-  getSpritePath: (c) => Dex.imageNames(c).map((name) => `${gameConfig.spritePrefix}${name}.png`),
+  getImgPath: (c) => `${gameConfig.pathPrefix}${Dex.iconName(c)}.png`,
+  // List of pictures shown when you click a card (imgSprite)
+  getSpritePath: (c) => Dex.spriteNames(c).map((name) => `${gameConfig.spritePrefix}${name}.png`),
 };

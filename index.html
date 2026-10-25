@@ -5,23 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>HoyoDex</title>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="shared/css/start.css">
 <link rel="icon" type="image/png" href="https://vectorseek.com/wp-content/uploads/2023/08/Hoyoverse-Icon-Logo-Vector.svg-.png">
 </head>
 <body>
 
 <div class="container">
   <h1>HOYODEX</h1>
+  <p id="viewTitle" class="view-title" hidden></p>
 
-  <!-- The icons come from the GAMES list in shared/js/nav.js (add a game there, once). -->
-  <div class="game-icons">
-    <script src="shared/js/nav.js"></script>
-    <script>
-      HOYO_GAMES.forEach((g) =>
-        document.write(`<a href="${g.folder}/000.html"${g.dim ? ' class="is-dim"' : ''}><img src="assets/gameico/${g.icon}" alt="${g.name}" /></a>`)
-      );
-    </script>
-  </div>
+  <!-- The icons are built by shared/js/index.js from the list of games in games.js (add / move / hide games THERE). -->
+  <div class="game-icons" id="gameIcons"></div>
+
+  <div class="index-buttons" id="indexButtons"></div>
 </div>
 
 <!-- Birthday Popup -->
@@ -37,6 +33,8 @@
 <button id="birthday-button">🎂 Birthdays Today</button>
 
 <!-- Load the birthday list of every game marked  bday: true  in shared/js/nav.js, then the code that shows them -->
+<script src="games.js"></script>
+<script src="shared/js/index.js"></script>
 <script>
   HOYO_GAMES.forEach((g) => g.bday && document.write(`<script src="${g.folder}/js/bday.js"><\/script>`));
   document.write('<script src="shared/js/bday.js"><\/script>');

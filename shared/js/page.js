@@ -24,8 +24,11 @@
                   outfit  Outfits page     (game js/fit.js)
                   support Supports page    (Bangboo, ELFs ... game js/sup.js)
                   main    Main character   (game js/mc.js)
+                  (outfit pages also load js/mc.js, unless data-nav-hide has "main": its `outfit: true` lines
+                   show on the Outfits page behind the MC button)
    data-nav-hide  tabs of the bottom navigation to hide on this page, e.g. "main" (games without a main character)
    data-scripts   more files of the game to load FIRST, e.g. "js/outfit-files.js" (comma separated)
+   data-popup="big"        (support pages) popup with arrows + thumbnails instead of one picture
    data-gender-toggle="off"   (main only) no Male / Female switch
    data-scripts-after   files loaded AFTER the navigation script (comma separated)
 
@@ -42,6 +45,7 @@
   const kind = me.dataset.kind;
   const shared = me.getAttribute('src').replace(/page\.js.*$/, ''); // "../shared/js/"
   const css = shared.replace(/js\/$/, 'css/'); // "../shared/css/"
+  const root = shared.replace(/shared\/js\/$/, ''); // "../"  (the main folder: vs.js and games.js live there)
 
   // popup markup: "big" = arrows + thumbnails (Characters, Outfits); "simple" = one picture (Supports, Main character)
   const POPUPS = {
@@ -64,13 +68,13 @@
     '<div class="gender-toggle"><label class="switch"><input type="checkbox" id="genderToggleBtn" />' +
     '<span class="slider2 round"></span></label><span id="genderLabel"></span></div>';
 
-  // scripts: 'game:x.js' = the game's own js/x.js, a plain word = shared/js/<word>.js
+  // scripts: 'game:x.js' = the game's own js/x.js, 'root:x' = x.js in the main folder (vs.js, games.js), a plain word = shared/js/<word>.js
   const section = (id, title, small) =>
     `<section id="${id}"><h3>${title}${small ? ` <small id="${small}"></small>` : ''}</h3><div id="${id}-slider" class="slider"></div></section>`;
 
   const KINDS = {
-    home: { popup: null, scripts: ['game:chara.js', 'vs', 'common', 'phase', 'char-popup', 'countdown', 'home'], css: ['style', 'index', 'change'] },
-    menu: { popup: null, scripts: [], css: ['style', 'index', 'menu', 'change'] },
+    home: { popup: null, scripts: ['game:chara.js', 'root:vs', 'common', 'phase', 'char-popup', 'countdown', 'home'], css: ['style', 'index', 'change'] },
+    menu: { popup: null, scripts: [], css: ['style', 'index', 'change'] },
     chara: {
       top: LIST_TOP('Characters') + '<div id="quickFilters" class="quick-filters"></div><div id="partBar" class="part-toggle"></div>',
       popup: 'big',
@@ -79,11 +83,11 @@
     outfit: {
       top: LIST_TOP('Outfits') + '<div id="quickFilters" class="quick-filters"></div><div id="partBar" class="part-toggle"></div>',
       popup: 'big',
-      scripts: ['game:fit.js', 'common', 'sprite-popup', 'chara-filters', 'fit'],
+      scripts: ['game:fit.js', 'common', 'sprite-popup', 'chara-filters', 'fit'], // + js/mc.js when the game has a Main character (see below)
     },
     support: {
-      top: LIST_TOP('Characters') + '<div id="quickFilters" class="quick-filters"></div>',
-      popup: 'simple',
+      top: LIST_TOP('Characters') + '<div id="quickFilters" class="quick-filters"></div><div id="partBar" class="part-toggle"></div>',
+      popup: 'simple', // data-popup="big" = arrows + thumbnails (pictures of one character side by side)
       scripts: ['common', 'sprite-popup', 'chara-filters', 'sup', 'game:sup.js'],
     },
     main: {
@@ -103,7 +107,8 @@
   const hide = me.dataset.navHide ? ` data-hide="${me.dataset.navHide}"` : '';
   const withGender = k.gender && me.dataset.genderToggle !== 'off';
   const extra = (me.dataset.scripts || '').split(',').map((s) => s.trim()).filter(Boolean);
-  const scripts = extra.concat(k.scripts.map((s) => (s.startsWith('game:') ? 'js/' + s.slice(5) : shared + s + '.js')));
+  const withMain = kind === 'outfit' && !(me.dataset.navHide || '').split(',').map((x) => x.trim()).includes('main');
+  const scripts = extra.concat((withMain ? ['game:mc.js'] : []).concat(k.scripts).map((s) => (s.startsWith('game:') ? 'js/' + s.slice(5) : s.startsWith('root:') ? root + s.slice(5) + '.js' : shared + s + '.js')));
 
   const cssList = (k.css || ['style', 'change']).slice();
   if (kind === 'home' && me.dataset.birthdays) cssList.splice(1, 0, 'bday'); // style, bday, index, change
@@ -153,8 +158,9 @@
     (kind === 'home' || kind === 'menu'
       ? `<nav class="bottom-nav"${hide}></nav><div id="popup-container"></div>` + (me.dataset.past ? '<div id="popup-cont"></div>' : '')
       : `<div id="popup-container"></div><nav class="bottom-nav"${hide}></nav>`) +
-    (k.popup ? POPUPS[k.popup] : '') +
+    (k.popup ? POPUPS[me.dataset.popup || k.popup] : '') +
     scripts.map((src) => `<script src="${src}"><\/script>`).join('') + // in order
+    `<script src="${root}games.js"><\/script>` + // the list of games (start page + Change popup)
     `<script src="${shared}nav.js"><\/script>` + // the navigation needs the page above
     after.map((src) => `<script src="${src}"><\/script>`).join('');
 

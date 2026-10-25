@@ -5,24 +5,20 @@
 
    ## [HONKAI STAR RAIL](01HSR\)
     
-   ## ZENLESS ZONE ZERO(+Element +Groups)
-   1. add districts icons
+   ## [ZENLESS ZONE ZERO](02ZZZ\)
       
-   ## [HONKAI IMPACT 3RD]
-   1. UPDATE TO 9.1
+   ## [HONKAI IMPACT 3RD](03HI3\)
+   1. UPDATE TO 9.1 > Missing outfit + New chara
 
-   ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_CBT2)
-      + add new pics in TEMP and rename by ids (most might not be transparent)
-      + update game icon 
-      + no sprite charas should be marked as 'out:false'
-      + add MC page & chara
-
-   ## [ARKNIGHT ENDFIELD _ UTD 1.0](get_1.1_splashes)
+   ## [HONKAI NEXUS ANIMA _ UTD CBT1](waiting_for_launch)
+   + Once out replace everything with active characters (see if you keep false:out)
+      
+   ## [ARKNIGHT ENDFIELD _ UTD 1.0](very_outdated)
    1. Update everything later
 
 
 # SHORTCUT TO UPDATES
-   [Version](shared/js/vs.js) + [Update](cred.html)
+   [Version](vs.js) + [Games](games.js) + [Update](cred.html)
 
    ## GENSHIN IMPACT
    + [ NEW CHARACTERS ](00GI\js\chara.js)

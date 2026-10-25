@@ -1,5 +1,5 @@
 // Honkai Impact 3rd birthdays.  'MM-DD': [{ name: 'Seele • HoR', id: '714' }]
-//   id = the character's imgName in js/chara.js (the picture is the same icon as on the Characters page).
+//   id = the character's imgIcon in js/chara.js (the picture is the same icon as on the Characters page).
 window.BDAY_CONFIG = {
   birthdays: {
 
@@ -45,7 +45,7 @@ createImageElement(entry) {
     container.classList.add('birthday-icon');
 
     const img = document.createElement('img');
-    const src = `../assets/charaid/Honkai/${entry.id}.png`; // the same picture as the Characters page (its imgName)
+    const src = `../assets/charaid/HI3/${entry.id}.png`; // the same picture as the Characters page (its imgIcon)
     img.src = src;
     img.alt = entry.name;
 

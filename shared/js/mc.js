@@ -1,92 +1,52 @@
 /* =====================================================================
    mc.js — the "Main" page (003.html): the Traveler / Trailblazer / ...
 
-   Characters come from window.CHARA_CONFIG (the game's own js/mc.js).
-   Two layouts:
-     * normal          -> one list, filtered by the gender toggle
-     * pageType 'typeB' -> the toggle switches between "GP 1" and "GP 2"
-                           and the entries of one character are merged
-                           (their elements are collected on one card)
+   Characters come from window.CHARA_CONFIG (the game's own js/mc.js). One card per line.
+   * Lines with DIFFERENT names (Lumine / Aether): the switch changes the page, by gender ('f' / 'm').
+     The big title is the name of that page.
+   * Lines that all have the SAME name (Endministrator): one page, no switch, every gender together.
+   A line with several elements (element: ['Pyro', 'Hydro']) gets a badge that flips through them.
+   A character you do not have (have: false) gets a small dark-red "false" in the corner of its popup.
    Needs: common.js, sprite-popup.js (loaded before this file).
    ===================================================================== */
 
 const config = window.CHARA_CONFIG || {};
 const characters = config.characters || [];
-const isTypeB = config.pageType === 'typeB';
 
 const charListEl = document.getElementById('charList');
-const searchInput = document.getElementById('searchInput');
 const genderToggle = document.getElementById('genderToggleBtn');
 const titleEl = document.getElementById('characterName');
 
-// ---------------------------------------------------------------
-// State
-// ---------------------------------------------------------------
-let selectedGender = 'f'; // normal layout
-let selectedGP = '1'; // typeB layout
-let selectedFilters;
+const names = [...new Set(characters.map((c) => String(c.name).trim()))];
+const genders = [...new Set(characters.map((c) => c.gender))];
+const singlePage = names.length < 2 || genders.length < 2; // a neutral name: one page, no switch
 
-function initializeFilters() {
-  selectedFilters = {
-    have: null,
-    element: null,
-    gender: null,
-    group: null,
-    newStatus: { new: false, soon: false },
-  };
-  if (isTypeB) selectedFilters.GP = selectedGP;
-  else selectedFilters.gender = selectedGender;
-  updateTitle();
-}
+let selectedGender = genders.includes('f') ? 'f' : genders[0];
 
-const displayName = (c) => (selectedGender === 'f' ? c.name : c.maleName || c.name);
+const isShown = (c) => singlePage || c.gender === selectedGender;
 
-function passesFilters(c, searchTerm) {
-  const f = selectedFilters;
-
-  if (isTypeB && f.GP && c.GP != f.GP) return false;
-  if (!isTypeB && f.gender && c.gender !== f.gender) return false;
-  if (f.element && c.element !== f.element) return false;
-  if (f.group && c.group !== f.group) return false;
-  if (f.have !== null && Boolean(c.have) !== f.have) return false;
-
-  const wantedStatuses = Object.keys(f.newStatus).filter((status) => f.newStatus[status]);
-  if (wantedStatuses.length && !wantedStatuses.includes(c.status)) return false;
-
-  return displayName(c).toLowerCase().includes(searchTerm);
-}
-
-// typeB: merge entries with the same name + gender into one card.
-function mergeTypeB(list) {
-  const merged = new Map();
-
-  list.forEach((c) => {
-    const key = `${c.name}_${c.gender}`;
-    const elements = (Array.isArray(c.element) ? c.element : [c.element]).filter((el) => el != null);
-
-    if (!merged.has(key)) {
-      merged.set(key, { ...c, elements: [...elements], imgNames: [c.imgName], allVersions: [c] });
-    } else {
-      const entry = merged.get(key);
-      entry.elements.push(...elements);
-      entry.imgNames.push(c.imgName);
-      entry.allVersions.push(c);
-    }
-  });
-
-  return [...merged.values()].map((c) => ({ ...c, elements: [...new Set(c.elements)] }));
-}
+// the corner note of the popup
+config.popupNote = (c) => (c.have ? '' : 'false');
 
 // ---------------------------------------------------------------
 // Rendering
 // ---------------------------------------------------------------
+// Address of the picture of one element (the game can give getElementIconPath, or the same getElementPath the
+// Characters page uses).
+function elementIconPath(c, element) {
+  if (config.getElementIconPath) return config.getElementIconPath(element);
+  return config.getElementPath ? config.getElementPath({ ...c, element }) : null;
+}
+
 // A small element badge. With several elements it flips through them every second.
-function buildElementBadge(elements) {
+function buildElementBadge(c, elements) {
   const badge = Dex.el('div', 'element-icon');
   const show = (el) => {
-    Dex.resolveImage(config.getElementIconPath(el)).then((url) => {
-      if (url) badge.style.backgroundImage = `url('${url}')`;
-    });
+    const path = elementIconPath(c, el);
+    if (path)
+      Dex.resolveImage(path).then((url) => {
+        if (url) badge.style.backgroundImage = `url('${url}')`;
+      });
     badge.title = el;
   };
   show(elements[0]);
@@ -101,9 +61,8 @@ function buildElementBadge(elements) {
 function buildCard(c) {
   const card = Dex.el('div', 'char-card');
 
-  const hasElementName = typeof c.element === 'string' && c.element.trim() !== '';
-  const elementText = c.elements?.length ? c.elements.join(', ') : hasElementName ? c.element : '';
-  card.title = elementText ? `(${elementText}, ${c.rarity}★)` : `(${c.rarity}★)`;
+  const elements = (Array.isArray(c.element) ? c.element : [c.element]).filter((el) => el != null && String(el).trim() !== '');
+  card.title = elements.length ? `(${elements.join(', ')}, ${c.rarity}★)` : `(${c.rarity}★)`;
 
   const iconWrapper = Dex.el('div', 'icon-wrapper');
   iconWrapper.style.background = Dex.rarityGradient(c.rarity);
@@ -111,16 +70,14 @@ function buildCard(c) {
   if (c.status === 'new') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'NEW'));
   if (c.status === 'soon') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'SOON'));
 
-  // Several elements (a list) make the badge flip through them.
-  const elements = c.elements || (Array.isArray(c.element) ? c.element : []);
-  if (elements.length && config.getElementIconPath) {
-    iconWrapper.appendChild(buildElementBadge(elements));
+  // Several elements (a list) make the badge flip through them (any game).
+  if (elements.length > 1 || (elements.length && config.getElementIconPath)) {
+    iconWrapper.appendChild(buildElementBadge(c, elements));
   }
 
   iconWrapper.appendChild(Dex.buildCharaIcon(c, config, () => currentList));
 
   card.appendChild(iconWrapper);
-  if (isTypeB) card.appendChild(Dex.el('div', 'char-label', displayName(c)));
   return card;
 }
 
@@ -129,82 +86,28 @@ function renderList() {
   Dex.stopCycles();
   charListEl.innerHTML = '';
 
-  const searchTerm = searchInput?.value?.toLowerCase() || '';
-  let visible = characters
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter((c) => passesFilters(c, searchTerm));
-
-  if (isTypeB) visible = mergeTypeB(visible);
+  const visible = characters.filter(isShown); // the order you wrote them in
 
   currentList = visible; // the popup steps through these
-  Dex.currentList = visible;
   visible.forEach((c) => charListEl.appendChild(buildCard(c)));
   Dex.updateCharCount(visible.length);
 }
 
-// The big title follows the toggle ("Lumine" / "Aether" ...).
+// The big title: the name of the page ("Lumine" / "Aether" ...).
 function updateTitle() {
-  const match = isTypeB
-    ? characters.find((c) => c.GP == selectedGP)
-    : characters.find((c) => c.gender === selectedGender);
-  if (match) titleEl.textContent = isTypeB ? match.name2 : match.name;
+  const match = singlePage ? characters[0] : characters.find((c) => c.gender === selectedGender);
+  if (match) titleEl.textContent = match.name;
 }
 
-// ---------------------------------------------------------------
-// Wiring
-// ---------------------------------------------------------------
-Dex.initFilterPanel();
-Dex.bindToggleableRadios(() => selectedFilters, ['element', 'gender', 'group', 'have'], renderList);
-
-// Keep filters: only shown when the popup has 2+ kinds of filter. Off = picking one clears the others.
-const filterPanel = document.getElementById('filterPopup');
-const filterKinds = filterPanel
-  ? new Set([...filterPanel.querySelectorAll('input')].map((i) => (i.name === 'newStatus' ? 'status' : i.name)))
-  : new Set();
-const keepFilters = filterPanel && filterKinds.size > 1 ? Dex.keepFilters.addToggle(filterPanel) : { isOn: () => true };
-
-function clearOtherFilters(exceptKind) {
-  ['element', 'gender', 'group', 'have'].forEach((key) => {
-    if (key === exceptKind || !(key in selectedFilters)) return;
-    selectedFilters[key] = null;
-    document.querySelectorAll(`input[name="${key}"]`).forEach((input) => (input.checked = false));
-  });
-  if (exceptKind !== 'status') {
-    Object.keys(selectedFilters.newStatus).forEach((k) => (selectedFilters.newStatus[k] = false));
-    document.querySelectorAll('input[name="newStatus"]').forEach((input) => (input.checked = false));
-  }
-}
-
-// runs after the radio's own handler (bubbling), so selectedFilters is already updated
-filterPanel?.addEventListener('click', (e) => {
-  if (!e.target.matches || !e.target.matches('input[type="radio"]')) return;
-  const key = e.target.name;
-  if (selectedFilters[key] !== null && selectedFilters[key] !== undefined && !keepFilters.isOn()) {
-    clearOtherFilters(key);
-    renderList();
-  }
-});
-
-document.querySelectorAll('input[name="newStatus"]').forEach((input) => {
-  input.addEventListener('change', (e) => {
-    if (e.target.checked && !keepFilters.isOn()) clearOtherFilters('status');
-    selectedFilters.newStatus[e.target.value] = e.target.checked; // value is "new" or "soon"
-    renderList();
-  });
-});
-
-genderToggle?.addEventListener('change', () => {
-  if (isTypeB) {
-    selectedGP = genderToggle.checked ? '2' : '1';
-    selectedFilters.GP = selectedGP;
-  } else {
+if (genderToggle) {
+  if (singlePage) genderToggle.closest('.gender-toggle').style.display = 'none';
+  else genderToggle.checked = selectedGender === 'm';
+  genderToggle.addEventListener('change', () => {
     selectedGender = genderToggle.checked ? 'm' : 'f';
-    selectedFilters.gender = selectedGender;
-  }
-  updateTitle();
-  renderList();
-});
+    updateTitle();
+    renderList();
+  });
+}
 
-initializeFilters();
+updateTitle();
 renderList();

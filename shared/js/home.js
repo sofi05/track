@@ -9,7 +9,7 @@
        getElementPath(c) element badge
        getFallbackPath() / getSpritePath(c)   used for missing icons / the popup
 
-   Needs: common.js, phase.js, char-popup.js, countdown.js, vs.js
+   Needs: common.js, phase.js, char-popup.js, countdown.js, and vs.js (main folder)
    ===================================================================== */
 (function () {
   const Dex = (window.Dex = window.Dex || {});
@@ -17,7 +17,7 @@
   const EMPTY_NEW_TEXT = 'Σ(⊙_⊙;) You got them all already???';
   const EMPTY_RERUN_TEXT = 'ヽ(°〇°)ﾉ Woah... Dedication!';
 
-  const byVersionThenPhase = (a, b) => (a.p || 0) - (b.p || 0);
+  const byVersionThenPhase = (a, b) => (a.ph || 0) - (b.ph || 0);
 
   // ---------------------------------------------------------------
   // Which characters go in which row
@@ -67,12 +67,8 @@
     };
 
     iconWrapper.append(icon);
-    if (String(char.element ?? '').trim() !== '') {
-      const elementIcon = Dex.el('img', 'element-icon');
-      elementIcon.src = config.getElementPath(char);
-      elementIcon.alt = char.element;
-      iconWrapper.append(elementIcon);
-    }
+    const badge = Dex.elementBadge(char, (e) => config.getElementPath({ ...char, element: e }));
+    if (badge) iconWrapper.append(badge);
 
     const info = Dex.el('div', 'char-info');
     const marker = char.want === 1 ? ' ★' : char.want === 2 ? ' ☆' : '';
@@ -100,7 +96,7 @@
       row.appendChild(Dex.el('div', 'empty-note', emptyText));
       return;
     }
-    const liveVersion = window.GAME_VERSIONS?.[config.gameId]?.version;
+    const liveVersion = Dex.phase.liveVersion();
     characters.forEach((char) => {
       const card = buildCard(char, config);
       if (char.version && liveVersion && char.version === liveVersion) card.classList.add('version-match');
@@ -116,7 +112,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const config = window.CHARA_CONFIG;
     if (!config) return console.error("home.js: window.CHARA_CONFIG is missing (is the game's js/chara.js loaded?)");
-    const characters = config.characters || [];
+    const characters = (config.characters || []).filter((c) => !Dex.isUnconfirmed(c)); // not out and no version: not shown here
 
     if (typeof initializeCountdown === 'function') initializeCountdown(config.gameId, 'countdown-newchars');
 

@@ -213,168 +213,11 @@ h1 {
   user-select: none;
   font-family: 'Arial Black', Arial, sans-serif;
 }
-.soon-label.guest { background: rgba(110, 90, 190, 0.9); } /* GUEST: purple instead of the orange NEW / SOON */
-
-.filter-category {
-  border-top: 1px solid #444;
-  padding-top: 10px;
-}
-
-.filter-category:first-child {
-  border-top: none;
-  padding-top: 0;
-}
-
-.filter-toggle {
-  width: 100%;
-  background: none;
-  border: none;
-  color: #eee;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: left;
-  padding: 6px 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.filter-toggle::after {
-  content: '▼';
-  font-size: 12px;
-  transition: transform 0.3s ease;
-  margin-left: 8px;
-}
-
-/* Rotate arrow when active */
-.filter-toggle.active::after {
-  transform: rotate(-180deg);
-}
-
-.filter-options {
-  margin-top: 6px;
-  display: none; 
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.filter-options.visible {
-  display: flex;
-}
-
-.filter-options label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.filter-options input[type="radio"]:checked + .element-img {
-  border-color: #4096ff;
-  box-shadow: 0 0 8px #4096ffaa;
-}
-
-.filter-options label:hover .element-img {
-  border-color: #666;
-}
-
-.filter-options input[type="radio"],
-.filter-options input[type="checkbox"] {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-.element-img {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  object-fit: contain;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: border-color 0.3s ease, opacity 0.2s, transform 0.2s; /* Merged transitions */
-  opacity: 0.6;
-}
-
-.element-img:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
+.soon-label.guest { background: rgba(110, 90, 190, 0.9); }
 
 .element-label input[type="radio"],
 .element-label input[type="checkbox"] {
   display: none;
-}
-
-.filter-popup .filter-section {
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
-}
-
-.sub-filter {
-  margin-bottom: 6px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.element-label:has(input[type="radio"]:checked) .element-img {
-  opacity: 1;
-  outline: 2px solid #4af;
-  outline-offset: 2px;
-}
-
-.region-grid label {
-  display: inline-flex;
-  align-items: center;
-}
-
-.filter-options.region-grid {
-  display: none; 
-}
-
-.filter-options.region-grid.visible {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /*ICON PER COLUMN*/
-  gap: 0.5em 1em;
-}
-
-.region-label-img {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  gap: 6px;
-  
-}
-
-.region-label-img input[type="checkbox"],
-.region-label-img input[type="radio"] {
-  display: none;
-}
-
-.region-label-img .region-img {
-  width: 40px; 
-  height: 40px;
-  object-fit: contain;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0.7;
-}
-
-.region-label-img:hover .region-img {
-  opacity: 1;
-  border-color: #4096ff;
-  box-shadow: 0 0 8px #4096ffaa;
-}
-
-.region-label-img input[type="checkbox"]:checked + .region-img {
-  border-color: #4096ff;
-  box-shadow: 0 0 12px #4096ffcc;
-  opacity: 1;
 }
 
 .part-toggle {
@@ -473,7 +316,6 @@ h1 {
   display: block;
 }
 
-
 #thumbnailContainer {
   display: flex;
   justify-content: center;
@@ -535,17 +377,6 @@ h1 {
 
 .thumbnail-img:hover {
   transform: scale(1.05);
-}
-
-/* Center the image slider inside popup */
-#popup-slider {
-  display: flex;
-  justify-content: center;   /* center images horizontally */
-  align-items: center;       /* center vertically */
-  height: 100%;
-  overflow-x: auto;          /* allow horizontal scrolling */
-  scroll-behavior: smooth;
-  padding-bottom: 60px; 
 }
 
 .thumbnail-img.selected {
@@ -897,7 +728,6 @@ input:checked + .slider2:before {
   display: block;
 }
 
-
 /* Version pill under the title of the Outfit pages (not a button, just information) */
 .version-pill {
   width: fit-content;
@@ -908,13 +738,6 @@ input:checked + .slider2:before {
   color: #f5f5f5;
   font-size: 13px;
   letter-spacing: 0.3px;
-}
-
-/* "Keep filters" row at the top of a filter panel */
-.keep-row {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
 }
 
 /* ---- Subtle "next picture" dots in the simple popup (MC page etc.) ---- */
@@ -954,7 +777,6 @@ input:checked + .slider2:before {
   white-space: nowrap;
 }
 .element-label img,
-.region-label-img img,
 .chip-icon {
   -webkit-touch-callout: none; /* no "save image" menu on long press */
   user-select: none;
@@ -984,16 +806,19 @@ input:checked + .slider2:before {
 .chip .glyph { width: 13px; height: 13px; margin-right: 5px; vertical-align: -2px; color: var(--tone, #ccc); }
 .chip.active .glyph { color: #111; }
 
+/* Quiet buttons (for example "Main chara" on the Outfits page): small, no fill, until you hover or press them */
+.part-btn.is-subtle { background: transparent; border-style: dashed; border-color: #3d3d3d; color: #8a8a8a; font-size: 12px; padding: 4px 9px; }
+.part-btn.is-subtle:hover { background-color: #2a2a2a; color: #ccc; }
+.part-btn.is-subtle.active { background-color: #a3a3a3; border-style: solid; border-color: #a3a3a3; color: #000; }
+
 /* "Keep filters" is not a filter, so it looks different (dashed, teal) */
-.part-btn.is-keep,
-.part-btn.keep-btn { border-style: dashed; border-color: #5d8f89; color: #9fd6cd; }
-.part-btn.is-keep:hover,
-.part-btn.keep-btn:hover { background-color: #2c4a46; }
-.part-btn.is-keep.active,
-.part-btn.keep-btn.active { background-color: #2f5d58; border-style: solid; border-color: #9fd6cd; color: #eafffb; }
+.part-btn.is-keep { border-style: dashed; border-color: #5d8f89; color: #9fd6cd; }
+.part-btn.is-keep:hover { background-color: #2c4a46; }
+.part-btn.is-keep.active { background-color: #2f5d58; border-style: solid; border-color: #9fd6cd; color: #eafffb; }
 
 /* ---------- Wide screens: category tabs instead of the Filter popup ---------- */
 .extras { display: flex; gap: 8px; padding-left: 14px; border-left: 1px solid #444; }
+.extras.alone { padding-left: 0; border-left: none; } /* no Part / Collab buttons before it: no divider line */
 @media (max-width: 799px) { .extras { padding-left: 0; border-left: none; } } /* phone: the buttons wrap, so no divider line */
 .tab-btn::after { content: '▾'; margin-left: 6px; font-size: 11px; opacity: 0.7; }
 .tab-btn.active::after { content: '▴'; }
@@ -1005,7 +830,6 @@ input:checked + .slider2:before {
 .tab-row .chip-icon { height: 30px; }
 .tab-row.big .chip-icon { height: 36px; }
 .tab-choice { padding: 4px 8px; }
-
 
 /* Rarity buttons: a normal dark button; the number and star are painted with the colour of that rarity's cards */
 .part-btn.rarity-chip { padding: 5px 12px; }
@@ -1027,3 +851,35 @@ input:checked + .slider2:before {
 .part-btn.rarity-chip:hover .rar-inner { filter: brightness(1.7) saturate(1.2); }
 .part-btn.rarity-chip.active { background-color: #a3a3a3; border-color: #fff; }
 .part-btn.rarity-chip.active .rar-inner { filter: brightness(0.55) saturate(1.3); } /* darker text on the light selected button */
+
+/* small dark-red note in the corner of a popup (Main page: "false" = you do not have this one) */
+.popup-note:empty { display: none; } /* no text = no pill */
+.popup-note.tone-green { background: rgba(28, 110, 66, 0.92); } /* dark green pill: HAVE */
+.popup-note {
+  position: fixed;
+  z-index: 10001;
+  background: rgba(155, 28, 36, 0.92); /* dark red pill, like the GUEST label */
+  color: white;
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* "+" button: opens the filters below (Element / Path / World ... and Keep filters) */
+.more-panel[hidden] { display: none; }
+.more-btn.has-active::after { content: '●'; margin-left: 5px; font-size: 9px; color: #e3c767; vertical-align: 4px; }
+.chip.symbol.more-btn.active { background: #3a3a3a; border-color: #777; color: #fff; }
+
+/* The other half of a picture that two characters share (Mannequins): a grey copy behind the colour picture */
+.popup img.popup-ghost, .sprite-popup img.popup-ghost, .popup-wrapper img.popup-ghost {
+  position: absolute;
+  max-height: none;
+  pointer-events: none;
+  filter: grayscale(1) brightness(0.8);
+}

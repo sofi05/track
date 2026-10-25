@@ -1,5 +1,5 @@
 const characters = [
-  { name: 'Bagboo', have: true, rarity: '4'},
+  { name: 'Bagboo', have: true, rarity: '4' },
   { name: 'Cryboo', have: true, rarity: '4' },
   { name: 'Avocaboo', have: true, rarity: '4' },
   { name: 'Paperboo', have: true, rarity: '4' },
@@ -34,14 +34,14 @@ const characters = [
   { name: 'Mercury', have: false, rarity: '5' },
   { name: 'Excaliboo', have: false, rarity: '4' },
   { name: 'Bild N. Boolok', have: true, rarity: '4' },
-  { name: 'Birkblick', have: false, rarity: '4'},
-  { name: 'Sprout', have: false, rarity: '5' },
-  { name: 'Booltergeist', have: false, rarity: '4'},
-  { name: 'Biggest Fan', have: false, rarity: '5'},
-  { name: 'Ultra Jake', have: false, rarity: '5'},
+  { name: 'Birkblick', have: false, rarity: '4' },
+  { name: 'Sprout', have: true, rarity: '5' },
+  { name: 'Booltergeist', have: false, rarity: '4' },
+  { name: 'Biggest Fan', have: false, rarity: '5' },
+  { name: 'Ultra Jake', have: false, rarity: '5' },
 
   { name: 'Ariel', have: false, rarity: '5' },
-  //{ name: '', have: false, rarity: '', status: 'soon' },
+  //{ name: '', have: false, rarity: '', status: 'soon' },   // (what the fields mean: GUIDE.md > Supports page)
 ];
 
 const spriteFolder = '../assets/Sprite/Zenless/Bangboo/';
@@ -52,7 +52,7 @@ const MISSING_NUMBERS = [8, 22, 33, 34, 35, 40, 44];
 let fileNumber = 1;
 characters.forEach((c) => {
   while (MISSING_NUMBERS.includes(fileNumber)) fileNumber++;
-  c.imgName = `BangbooGarageRole${String(fileNumber).padStart(2, '0')}`;
+  c.imgIcon = `BangbooGarageRole${String(fileNumber).padStart(2, '0')}`;
   fileNumber++;
 });
 
@@ -64,6 +64,6 @@ const page = {
 };
 
 // The version this list is updated to (red "vers." pill under the title). Change it when you update the list.
-const lastVersion = '3.1';
+const lastVersion = '3.3';
 
 Dex.initSupportPage({ characters, iconFolder: spriteFolder, spriteFolder, page, lastVersion, iconFit: 'contain' });

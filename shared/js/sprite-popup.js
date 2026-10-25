@@ -41,23 +41,36 @@
    *                    picture moves to the neighbouring character. (`pictures` is ignored then.)
    *   options.startGroup / options.start   where to begin (group number / picture number)
    *   options.holdAtEdge   see Dex.POPUP_EDGE_PRESSES
-   *   A group may also have  icon: 'url'  and  bg: 'css background'. Then the neighbouring characters show
+   *   A group may have  side: { side: 'left' | 'right', split: 56 }  for ONE picture that shows two characters (the Mannequins):
+   only that side stays in colour, the other half is shown grey. (Dex.spriteSide(c) builds it from spriteSide / spriteSplit.)
+   A group may also have  icon: 'url'  and  bg: 'css background'. Then the neighbouring characters show
    *   as small faded icons on the left / right (behind the picture). Pressing towards one brings it to the
    *   front; pressing again moves to that character. (holdAtEdge then defaults to 1; the ends do not wrap.)
    */
-  Dex.showPopup = function (images, altText, { fit = false, start = 0, groups = null, startGroup = 0, holdAtEdge } = {}) {
+  Dex.showPopup = function (images, altText, { fit = false, start = 0, groups = null, startGroup = 0, holdAtEdge, side = null } = {}) {
     const popup = byId('spritePopup');
     const popupImg = byId('spritePopupImg');
     if (!popup || !popupImg) return;
 
     // groups -> one flat list of pictures + where each group starts and ends
     const ranges = [];
+    const notesFlat = []; // the corner note of every picture ('' = none)
+    const sidesFlat = []; // for every picture: { side, split } = only that half of the picture stays in colour (null = whole picture)
     if (groups) {
-      groups = groups.map((g) => ({ ...g, images: [].concat(g.images).filter(Boolean) })).filter((g) => g.images.length);
+      // a group may have `notes`: one note per picture (same order as images), for example [{ text: 'have', tone: 'green' }, '']
+      groups = groups
+        .map((g) => {
+          const all = [].concat(g.images);
+          const keep = all.map((url, k) => (url ? k : -1)).filter((k) => k >= 0);
+          return { ...g, images: keep.map((k) => all[k]), notes: keep.map((k) => (g.notes ? g.notes[k] : undefined) ?? g.note ?? '') };
+        })
+        .filter((g) => g.images.length);
       images = [];
       groups.forEach((g) => {
         ranges.push({ from: images.length, to: images.length + g.images.length - 1, name: g.name, icon: g.icon, bg: g.bg });
         images.push(...g.images);
+        notesFlat.push(...g.notes);
+        sidesFlat.push(...g.images.map(() => g.side || null));
       });
       start = (ranges[Math.min(startGroup, ranges.length - 1)] || { from: 0 }).from + start;
     }
@@ -68,6 +81,59 @@
     const groupAt = (i) => ranges.find((r) => i >= r.from && i <= r.to) || { from: 0, to: images.length - 1 };
 
     if (removeListeners) removeListeners();
+
+    // A group may have `note: 'false'`: a small dark-red note in the corner of the popup (Main page: characters you do not have).
+    let noteEl = null;
+    if (notesFlat.some(Boolean)) {
+      noteEl = Dex.el('div', 'popup-note');
+      popup.appendChild(noteEl);
+    }
+
+    // keep the note against the bottom-right corner of the picture
+    function placeNote() {
+      if (!noteEl) return;
+      const r = popupImg.getBoundingClientRect();
+      if (!r.width) return;
+      noteEl.style.right = 'auto';
+      noteEl.style.bottom = 'auto';
+      noteEl.style.left = `${r.right - noteEl.offsetWidth - 12}px`;
+      noteEl.style.top = `${r.bottom - noteEl.offsetHeight - 12}px`;
+    }
+    window.addEventListener('resize', placeNote);
+
+    // ---- a picture of two characters: the other half is grey ----
+    // The colour picture is the normal one with a soft mask; a grey copy of the same picture sits right behind it.
+    let ghost = null;
+    function placeGhost() {
+      if (!ghost) return;
+      Object.assign(ghost.style, { left: `${popupImg.offsetLeft}px`, top: `${popupImg.offsetTop}px`, width: `${popupImg.offsetWidth}px`, height: `${popupImg.offsetHeight}px` });
+    }
+    function clearSide() {
+      if (ghost) { ghost.remove(); ghost = null; }
+      popupImg.style.position = popupImg.style.webkitMaskImage = popupImg.style.maskImage = '';
+    }
+    function applySide(spec, src) {
+      if (!spec) return clearSide();
+      const split = Number(spec.split) || 56; // % from the left where the two characters meet
+      const right = spec.side === 'right';
+      // colour on the character's own side, a short soft edge around the split line, grey on the other side
+      const from = right ? 100 - split - 2 : split - 2; // measured from the side the gradient starts on
+      const to = right ? 100 - split + 2 : split + 2;
+      const mask = `linear-gradient(${right ? 'to left' : 'to right'}, #000 ${from}%, transparent ${to}%)`;
+      popupImg.style.position = 'relative'; // so that the grey copy (behind it) stays under the colour one
+      popupImg.style.webkitMaskImage = popupImg.style.maskImage = mask;
+      if (!ghost) {
+        ghost = Dex.el('img', 'popup-ghost');
+        ghost.alt = '';
+        ghost.onerror = () => { if (ghost) ghost.style.display = 'none'; };
+        popupImg.parentElement.insertBefore(ghost, popupImg);
+      }
+      ghost.style.display = '';
+      ghost.src = src;
+      placeGhost();
+      popupImg.addEventListener('load', placeGhost, { once: true });
+    }
+    window.addEventListener('resize', placeGhost);
 
     const prevBtn = byId('prevBtn');
     const nextBtn = byId('nextBtn');
@@ -101,11 +167,19 @@
         };
       }
       popupImg.src = src;
+      applySide(sidesFlat[index] || side, src);
 
       if (thumbs) {
         thumbs.querySelectorAll('.thumbnail-img').forEach((t, n) => t.classList.toggle('selected', n === i));
       }
       refreshDots(i);
+      if (noteEl) {
+        const note = notesFlat[i];
+        noteEl.textContent = (note && note.text) || note || '';
+        noteEl.className = 'popup-note' + (note && note.tone ? ` tone-${note.tone}` : '');
+        placeNote();
+        popupImg.addEventListener('load', placeNote, { once: true });
+      }
       if (groups) refreshGroupUI();
     }
 
@@ -241,7 +315,16 @@
         }
       }
       if (several) {
-        [...groupUI.strip.children].forEach((t, n) => t.classList.toggle('selected', group.from + n === index));
+        const strip = groupUI.strip;
+        [...strip.children].forEach((t, n) => t.classList.toggle('selected', group.from + n === index));
+        // keep the selected thumbnail in view (arrow keys / swipe): centre it in the strip
+        const thumb = strip.children[index - group.from];
+        if (thumb) {
+          requestAnimationFrame(() => {
+            const target = thumb.offsetLeft - (strip.clientWidth / 2 - thumb.offsetWidth / 2);
+            strip.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+          });
+        }
       }
     }
 
@@ -413,6 +496,10 @@
         if (wrapper) { wrapper.style.position = ''; wrapper.style.zIndex = ''; }
       }
       if (dots) dots.remove();
+      if (noteEl) noteEl.remove();
+      window.removeEventListener('resize', placeNote);
+      window.removeEventListener('resize', placeGhost);
+      clearSide();
       popupImg.classList.remove('tap-next');
       popupImg.onclick = null;
       cleanups.forEach((undo) => undo());

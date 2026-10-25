@@ -32,7 +32,7 @@
     sprite.onerror = () => {
       sprite.style.display = 'none';
       const fallback = Dex.el('img', 'char-popup__fallback');
-      fallback.src = Dex.FALLBACK_IMG;
+      fallback.src = Dex.FALLBACK_SPRITE;
       fallback.alt = 'Loading…';
       imageBox.classList.add('is-fallback');
       imageBox.appendChild(fallback);
@@ -49,7 +49,8 @@
 
     const phaseEl = Dex.el('div', 'char-popup__phase');
     const phaseStatus = Dex.el('span', 'char-popup__phase-status');
-    if (char.p) phaseEl.append(Dex.el('span', '', `Phase ${char.p}`), phaseStatus);
+    if (char.ph) phaseEl.append(Dex.el('span', '', `Phase ${char.ph}`), phaseStatus);
+    else if (window.CHARA_CONFIG && window.CHARA_CONFIG.showPart) phaseEl.append(Dex.el('span', '', `Part ${char.p || 1}`)); // Honkai Impact: story part
 
     const rarityEl = Dex.el('p', 'char-popup__rarity', `Rarity: ${char.rarity || 'N/A'} ★`);
 
@@ -57,7 +58,7 @@
 
     // ---------------- live texts ----------------
     // "(in 3d)" next to the version of an upcoming character.
-    const releaseDate = Phase.releaseDate(char.version, char.p || 1);
+    const releaseDate = Phase.releaseDate(char.version, char.ph || 1);
     function updateVersionCountdown() {
       if (!releaseDate || isCurrent) {
         countdownEl.textContent = '';
@@ -72,9 +73,9 @@
     }
 
     // "(active)" / "(ended)" / "(3h)" next to the phase of a current-version character.
-    const { start: phaseStart, end: phaseEnd } = Phase.findWindow(char.version, char.p || 1);
+    const { start: phaseStart, end: phaseEnd } = Phase.findWindow(char.version, char.ph || 1);
     function updatePhaseStatus() {
-      if (!char.p || !phaseStart) return;
+      if (!char.ph || !phaseStart) return;
       if (!isCurrent) {
         phaseStatus.textContent = '';
         return;

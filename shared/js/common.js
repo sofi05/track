@@ -15,7 +15,6 @@
   // Default "picture missing" images for EVERY page.
   Dex.FALLBACK_SPRITE = '../assets/others/page-loading.png'; // big pictures (popups)
   Dex.FALLBACK_ICON = '../assets/others/UI_Icon_LunaRite_Unknown.png'; // small icons
-  Dex.FALLBACK_IMG = Dex.FALLBACK_SPRITE; // old name, same picture
 
   // Card background by rarity (4★, 5★ ...). Add a new rarity here once.
   Dex.RARITY_GRADIENTS = {
@@ -141,10 +140,6 @@
     label.textContent = `Total: ${count} character${count !== 1 ? 's' : ''}`;
   };
 
-  /**
-   * Image names of a character: `imgName` (or the name) first, then `imgName2`
-   * (a name or a list of names). Duplicates and empty names are skipped.
-   */
   // Short lists of picture names. `entries` is what you wrote, e.g. ['606', '60611_04_01', 'Ooh_Summer'];
   // `files` is the generated list of every picture name (window.OUTFIT_FILES, made by tools/list-sprites.py).
   //   an entry that is a whole file name  -> that picture
@@ -165,12 +160,11 @@
     return out;
   };
 
-  // Big pictures for a popup: the character's own picture(s), then any alternative
-  // outfits listed in `outfitSprites: ['QinCostumeSea']` on the character.
-  // Names are looked up in the game's Outfit sprite folder (`outfitPrefix`).
-  Dex.spriteList = function (c, main, outfitPrefix) {
-    const outfits = (c.outfitSprites == null ? [] : [].concat(c.outfitSprites)).map((name) => `${outfitPrefix}${name}.png`);
-    return [...[].concat(main), ...outfits];
+  // Big pictures for a popup, from the line's imgSprite (see Dex.spriteNames).
+  //   urlOf(name)     address of a picture in the game's normal sprite folder
+  //   outfitPrefix    start of the address of a picture in the Outfit folder (the part after "Outfit/" is added)
+  Dex.spriteList = function (c, urlOf, outfitPrefix) {
+    return Dex.spriteNames(c).map((name) => (name.startsWith('Outfit/') ? `${outfitPrefix}${name.slice(7)}.png` : urlOf(name)));
   };
 
   // ---------------------------------------------------------------
@@ -196,27 +190,6 @@
       } catch (e) {
         /* ignore */
       }
-    },
-    // Puts a "Keep filters" button at the top of a filter panel. Returns { isOn }.
-    addToggle(panel) {
-      let on = Dex.keepFilters.read(false);
-      const button = Dex.el('button', 'part-btn chip keep-btn', 'Keep filters');
-      button.type = 'button';
-      button.title = 'Keep your other filters selected when you pick a new one';
-      const paint = () => {
-        button.classList.toggle('active', on);
-        button.setAttribute('aria-pressed', String(on));
-      };
-      button.addEventListener('click', () => {
-        on = !on;
-        Dex.keepFilters.save(on);
-        paint();
-      });
-      paint();
-      const row = Dex.el('div', 'keep-row');
-      row.appendChild(button);
-      panel.insertBefore(row, panel.firstChild);
-      return { isOn: () => on };
     },
   };
 
@@ -274,30 +247,58 @@
     }, true);
   };
 
-  /**
-   * Gives every icon-only choice inside `root` (a filter popup written in the HTML page) a name that shows
-   * on hover / long press. The name is, in this order: the label's data-tip="...", the picture's alt="...",
-   * "4★" style text for a rarity, or the choice's value.
-   */
-  Dex.tipAll = function (root) {
-    if (!root) return;
-    root.querySelectorAll('label.element-label, label.region-label-img').forEach((label) => {
-      if (label.dataset.tipDone) return;
-      label.dataset.tipDone = '1';
-      const input = label.querySelector('input');
-      const img = label.querySelector('img');
-      const text =
-        label.dataset.tip ||
-        (img && img.getAttribute('alt')) ||
-        (input && input.name === 'rarity' ? `${input.value}★` : input && input.value) ||
-        '';
-      Dex.addPressTip(label, String(text).replace(/_/g, ' '));
-    });
+  // Name of the small picture (icon) of a line: imgIcon (or the name when there is none).
+  Dex.iconName = function (c) {
+    return c.imgIcon || c.name || '';
   };
 
-  Dex.imageNames = function (c) {
-    const extra = Array.isArray(c.imgName2) ? c.imgName2 : [c.imgName2];
-    return [...new Set([c.imgName || c.name, ...extra].filter(Boolean))];
+  // Not out yet AND no version: a character that might or might not come. Such lines are left off the home page, and the
+  // Characters / Outfits / Supports pages only show them with the New filter (or Collab / miHoYo, for a collab).
+  // With a version (version: '4.8') the line is a sure thing and behaves like any other.
+  Dex.isUnconfirmed = function (c) {
+    return c.out === false && String(c.version ?? '').trim() === '';
+  };
+
+  // The elements of a line as a list: element: 'Pyro' -> ['Pyro'],  element: ['Pyro', 'Hydro'] -> both,  none -> [].
+  Dex.elementsOf = function (c) {
+    return [].concat(c.element ?? []).map((e) => String(e ?? '').trim()).filter(Boolean);
+  };
+
+  // A line that shares ONE picture with another character (the Mannequins) says which half is its own:
+  //   spriteSide: 'left'  (or 'right')    spriteSplit: 56  (optional: % from the left where the two meet)
+  // The popup then shows the other half grey. null = a normal picture.
+  Dex.spriteSide = function (c) {
+    return c.spriteSide === 'left' || c.spriteSide === 'right' ? { side: c.spriteSide, split: c.spriteSplit } : null;
+  };
+
+  // The small element badge of a line (an <img class="element-icon">), or null when it has no element.
+  // With several elements the badge flips through them every second.
+  //   pathOf(element)   address of the picture of ONE element (null = none)
+  Dex.elementBadge = function (c, pathOf) {
+    const list = Dex.elementsOf(c).filter((e) => pathOf(e));
+    if (!list.length) return null;
+    const badge = Dex.el('img', 'element-icon');
+    const show = (e) => {
+      badge.src = pathOf(e);
+      badge.alt = e;
+      if (list.length > 1) badge.title = e;
+    };
+    show(list[0]);
+    if (list.length > 1) {
+      let n = 0;
+      Dex.startCycle(() => show(list[++n % list.length]), 1000);
+    }
+    return badge;
+  };
+
+  // The big pictures of a line, as written in `imgSprite: ['=', 'Other', 'Outfit/Name']`:
+  //   '='       the same name as imgIcon          'Name'         another picture in the normal folder
+  //   'Outfit/Name'  a picture in the Outfit folder
+  // No imgSprite = just the picture of the icon.
+  Dex.spriteNames = function (c) {
+    const icon = Dex.iconName(c);
+    const list = c.imgSprite == null ? ['='] : [].concat(c.imgSprite);
+    return [...new Set(list.map((n) => (String(n).trim() === '=' ? icon : String(n).trim())).filter(Boolean))];
   };
 
   // ---------------------------------------------------------------
@@ -332,78 +333,14 @@
     if (urls.length < 2) return;
 
     const generation = cycleGeneration;
-    Promise.all(urls.slice(1).map(Dex.resolveImage)).then((found) => {
+    // pictures that do not exist are left out; a Temp picture (assets/Temp) counts as the picture
+    Promise.all(urls.map((url) => Dex.resolveImage(url, { temp: true }))).then((found) => {
       if (generation !== cycleGeneration) return; // the list was redrawn meanwhile
-      const shown = [urls[0], ...found.filter(Boolean)];
+      const shown = found.filter(Boolean);
       if (shown.length < 2) return;
       let current = 0;
+      img.src = shown[0];
       Dex.startCycle(() => (img.src = shown[++current % shown.length]), Dex.CYCLE_MS);
-    });
-  };
-
-  // ---------------------------------------------------------------
-  // Filter UI (the "Filter" button, its panel and its radio buttons)
-  // ---------------------------------------------------------------
-
-  /**
-   * Opens / closes the filter panel and runs the accordion sections inside it.
-   * Safe to call on pages that have no filter panel.
-   */
-  Dex.initFilterPanel = function () {
-    const filterBtn = document.getElementById('filterBtn');
-    const filterPopup = document.getElementById('filterPopup');
-    Dex.tipAll(filterPopup); // names for the icon-only choices written in the HTML
-
-    if (filterBtn && filterPopup) {
-      filterBtn.addEventListener('click', () => filterPopup.classList.toggle('hidden'));
-      document.addEventListener('click', (e) => {
-        if (!filterBtn.contains(e.target) && !filterPopup.contains(e.target)) {
-          filterPopup.classList.add('hidden');
-        }
-      });
-    }
-
-    // Accordion: opening one section closes the others.
-    const toggles = document.querySelectorAll('.filter-toggle');
-    toggles.forEach((button) => {
-      button.addEventListener('click', () => {
-        toggles.forEach((other) => {
-          if (other === button) return;
-          other.classList.remove('active');
-          other.nextElementSibling?.classList.remove('visible');
-        });
-        button.classList.toggle('active');
-        button.nextElementSibling?.classList.toggle('visible');
-      });
-    });
-  };
-
-  /**
-   * Makes a group of radio buttons "toggleable": clicking the selected one
-   * clears it again.
-   *
-   *   getFilters : () => the filters object (a function, because some pages
-   *                replace the whole object when you switch part)
-   *   keys       : filter names, e.g. ['element', 'rarity']. Each key must match
-   *                the `name="..."` of its radio buttons in the HTML.
-   *   onChange   : called after every change (usually re-renders the list)
-   */
-  Dex.bindToggleableRadios = function (getFilters, keys, onChange) {
-    keys.forEach((key) => {
-      document.querySelectorAll(`input[name="${key}"]`).forEach((input) => {
-        input.addEventListener('click', (e) => {
-          const filters = getFilters();
-          const value = key === 'have' ? e.target.value === 'true' : e.target.value;
-
-          if (filters[key] === value) {
-            filters[key] = null;
-            input.checked = false;
-          } else {
-            filters[key] = value;
-          }
-          onChange();
-        });
-      });
     });
   };
 
@@ -423,10 +360,9 @@
    *
    *   getElementPath(c)   URL of the element badge (return null for none)
    *   getSpritePaths(c)   LIST of big pictures, if a character has several
-   *                       (Dex.spriteList adds the character's `outfitSprites`)
-   *   cycleIcons          true = a character with imgName2 flips between its pictures
+   *                       (Dex.spriteList builds it from the line's `imgSprite`)
    *   getLabels(c)        a row of text tags, as { list, item, values }, e.g.
-   *                       { list: 'region-list', item: 'region-label', values: c.region }
+   *                       { list: 'region-list', item: 'region-label', values: c.area }
    *
    * A game with unusual needs can define createImageElement(c) in its config
    * instead; that function then replaces the standard icon completely.
@@ -466,27 +402,22 @@
     img.alt = c.name;
     Dex.applyIconFit(img, c);
 
-    // A character with several pictures (imgName2) can flip between them: set cycleIcons: true in the config.
-    const names = Dex.imageNames(c);
-    if (config.cycleIcons && names.length > 1) {
-      const urls = names.map((name) => config.getIconPath({ ...c, imgName: name }));
-      Dex.cycleImage(img, urls, fallbackIcon(config, c));
-    } else {
-      img.src = config.getIconPath(c);
-      img.onerror = () => {
-        img.onerror = null; // avoid an endless loop if the fallback is missing too
-        img.src = fallbackIcon(config, c);
-      };
-    }
+    img.src = config.getIconPath(c);
+    img.onerror = () => {
+      // getIconPathAlt (optional): a second place to look before giving up (e.g. the Outfit folder)
+      const alt = config.getIconPathAlt && !img.dataset.alt ? config.getIconPathAlt(c) : null;
+      if (alt) {
+        img.dataset.alt = '1';
+        img.src = alt;
+        return;
+      }
+      img.onerror = null; // avoid an endless loop if the fallback is missing too
+      img.src = fallbackIcon(config, c);
+    };
     container.appendChild(img);
 
-    const elementPath = config.getElementPath && String(c.element ?? '').trim() !== '' ? config.getElementPath(c) : null; // no element = no element badge
-    if (elementPath) {
-      const badge = Dex.el('img', 'element-icon');
-      badge.src = elementPath;
-      badge.alt = c.element || 'Unknown';
-      container.appendChild(badge);
-    }
+    const badge = config.getElementPath ? Dex.elementBadge(c, (e) => config.getElementPath({ ...c, element: e })) : null; // no element = no badge
+    if (badge) container.appendChild(badge);
 
     const labels = config.getLabels ? config.getLabels(c) : null;
     if (labels && labels.values) {
@@ -495,25 +426,35 @@
       container.appendChild(list);
     }
 
-    container.addEventListener('click', () => {
+    container.addEventListener('click', async () => {
       const picturesOf = (x) => [].concat(config.getSpritePaths ? config.getSpritePaths(x) : config.getSpritePath(x));
+      // getSpritePathAlt (optional): where to look when the picture is not in the first place (e.g. Outfit folder)
+      // (getSpritePathAlt(x, url) gets the address that was not found)
+      const resolvedPictures = (x) =>
+        config.getSpritePathAlt
+          ? Promise.all(picturesOf(x).map((url) => Dex.resolveImage(url).then((found) => found || config.getSpritePathAlt(x, url))))
+          : Promise.resolve(picturesOf(x));
       // Pages with the thumbnail gallery popup already step through the outfits of ONE character.
       const neighbours = getNeighbours && (withIcons || !document.getElementById('thumbnailContainer')) ? getNeighbours() : null;
-      if (!neighbours || neighbours.length < 2 || !neighbours.includes(c)) return Dex.showPopup(picturesOf(c), c.name);
+      if (!neighbours || neighbours.length < 2 || !neighbours.includes(c)) {
+        const own = await resolvedPictures(c);
+        const note = config.popupNote ? config.popupNote(c) : '';
+        const side = Dex.spriteSide(c);
+        return note || side ? Dex.showPopup([], c.name, { groups: [{ images: own, name: c.name, note, side }] }) : Dex.showPopup(own, c.name);
+      }
       // One group per character: several pictures -> arrows + thumbnails, then on to the next character.
-      const groups = [];
-      let startGroup = 0;
-      neighbours.forEach((n) => {
-        if (n !== c && !String(n.imgName || n.name || '').trim()) return; // skip empty placeholder lines
-        if (n === c) startGroup = groups.length;
-        groups.push({
-          images: picturesOf(n),
+      const usable = neighbours.filter((n) => n === c || String(Dex.iconName(n)).trim()); // skip empty placeholder lines
+      const groups = await Promise.all(
+        usable.map(async (n) => ({
+          images: await resolvedPictures(n),
           name: n.name,
           icon: withIcons && config.getIconPath ? config.getIconPath(n) : undefined, // side icons (see sprite-popup.js)
           bg: withIcons ? Dex.rarityGradient(n.rarity) : undefined,
-        });
-      });
-      Dex.showPopup([], c.name, { groups, startGroup });
+          note: config.popupNote ? config.popupNote(n) : undefined, // small corner note (Main page)
+          side: Dex.spriteSide(n), // a picture shared by two characters: only this one's half in colour
+        }))
+      );
+      Dex.showPopup([], c.name, { groups, startGroup: usable.indexOf(c) });
     });
     return container;
   };

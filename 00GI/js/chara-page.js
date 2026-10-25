@@ -9,7 +9,7 @@ window.CHARA_PAGE = {
   quick: [['have', 'new'], 'rarity', 'gender'],
 
   // Filters inside the "Filter" button. Use [] to hide the button.
-  popup: ['element', 'region'],
+  popup: ['element', 'area'],
 
   // Part / collab buttons above the list. With none pressed, everything is shown.
   // field = the field on the character (part: '2' or collab: true), value = what it must be.
@@ -42,27 +42,27 @@ window.CHARA_PAGE = {
     element: {
       label: 'Element',
       options: [
-        { value: 'Anemo', label: 'Anemo', icon: '../assets/others/Genshin/Element/Anemo.png' },
-        { value: 'Geo', label: 'Geo', icon: '../assets/others/Genshin/Element/Geo.png' },
-        { value: 'Electro', label: 'Electro', icon: '../assets/others/Genshin/Element/Electro.png' },
-        { value: 'Dendro', label: 'Dendro', icon: '../assets/others/Genshin/Element/Dendro.png' },
-        { value: 'Hydro', label: 'Hydro', icon: '../assets/others/Genshin/Element/Hydro.png' },
-        { value: 'Pyro', label: 'Pyro', icon: '../assets/others/Genshin/Element/Pyro.png' },
-        { value: 'Cryo', label: 'Cryo', icon: '../assets/others/Genshin/Element/Cryo.png' },
+        { value: 'Anemo', label: 'Anemo', icon: '../assets/others/Element/GI_Anemo.png' },
+        { value: 'Geo', label: 'Geo', icon: '../assets/others/Element/GI_Geo.png' },
+        { value: 'Electro', label: 'Electro', icon: '../assets/others/Element/GI_Electro.png' },
+        { value: 'Dendro', label: 'Dendro', icon: '../assets/others/Element/GI_Dendro.png' },
+        { value: 'Hydro', label: 'Hydro', icon: '../assets/others/Element/GI_Hydro.png' },
+        { value: 'Pyro', label: 'Pyro', icon: '../assets/others/Element/GI_Pyro.png' },
+        { value: 'Cryo', label: 'Cryo', icon: '../assets/others/Element/GI_Cryo.png' },
       ],
     },
-    region: {
+    area: {
       label: 'Region', grid: true, style: 'region',
       options: [
-        { value: 'mond', label: 'Mondstadt', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Mengde.png' },
-        { value: 'liy', label: 'Liyue', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Liyue.png' },
-        { value: 'ina', label: 'Inazuma', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Inazuma.png' },
-        { value: 'sum', label: 'Sumeru', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Sumeru.png' },
-        { value: 'font', label: 'Fontaine', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Fontaine.png' },
-        { value: 'nat', label: 'Natlan', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Natlan.png' },
-        { value: 'nod', label: 'Nod-Krai', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_NodKrai.png' },
-        { value: 'snez', label: 'Snezhnaya', icon: '../assets/others/Genshin/Region/UI_ChapterIcon_Snezhnaya.png' },
-        { value: 'bey', label: 'Beyond', icon: '../assets/others/Genshin/Region/UI_LoadingPic_Beyond.png' },
+        { value: 'mond', label: 'Mondstadt', icon: '../assets/others/Area/GI_UI_ChapterIcon_Mengde.png' },
+        { value: 'liy', label: 'Liyue', icon: '../assets/others/Area/GI_UI_ChapterIcon_Liyue.png' },
+        { value: 'ina', label: 'Inazuma', icon: '../assets/others/Area/GI_UI_ChapterIcon_Inazuma.png' },
+        { value: 'sum', label: 'Sumeru', icon: '../assets/others/Area/GI_UI_ChapterIcon_Sumeru.png' },
+        { value: 'font', label: 'Fontaine', icon: '../assets/others/Area/GI_UI_ChapterIcon_Fontaine.png' },
+        { value: 'nat', label: 'Natlan', icon: '../assets/others/Area/GI_UI_ChapterIcon_Natlan.png' },
+        { value: 'nod', label: 'Nod-Krai', icon: '../assets/others/Area/GI_UI_ChapterIcon_NodKrai.png' },
+        { value: 'snez', label: 'Snezhnaya', icon: '../assets/others/Area/GI_UI_ChapterIcon_Snezhnaya.png' },
+        { value: 'bey', label: 'Beyond', icon: '../assets/others/Area/GI_UI_LoadingPic_Beyond.png' },
         { value: 'khae', label: 'Khaeri\'ah' },
         { value: 'cel', label: 'Celestia' },
       ],

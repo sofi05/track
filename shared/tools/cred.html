@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HoyoDex Quick Links</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, sans-serif; background: #151515; color: #eee; padding: 20px 16px 60px; }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 26px; }
+  h2 { margin: 28px 0 10px; font-size: 18px; color: #ccc; }
+  .sub { color: #999; font-size: 14px; margin: 0 0 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+  .row > label { color: #aaa; font-size: 13px; min-width: 52px; }
+  button, .btn { background: #2a2a2a; color: #eee; border: 1px solid #4a4a4a; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; text-decoration: none; }
+  button:hover, .btn:hover { background: #383838; }
+  button.on { background: #2a9c63; border-color: #2a9c63; color: #fff; }
+  button.main { background: #238c56; border-color: #2a9c63; }
+  input[type=text] { background: #222; color: #eee; border: 1px solid #4a4a4a; border-radius: 6px; padding: 7px 10px; font-size: 14px; width: min(320px, 100%); }
+  .hidden { display: none !important; }
+  .note { color: #999; font-size: 13px; }
+  #out { margin-top: 10px; font-size: 13px; word-break: break-all; }
+  #out a { color: #2a9c63; }
+  .refs { margin: 18px 0 0; padding: 12px 14px; background: #1c1c1c; border: 1px solid #333; border-radius: 8px; font-size: 14px; line-height: 1.7; }
+  .refs a, .leaks a { color: #2a9c63; text-decoration: none; }
+  .refs a:hover, .leaks a:hover { text-decoration: underline; }
+  .refs small { color: #888; }
+  .leaks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .leaks a { background: #1c1c1c; border: 1px solid #333; border-radius: 6px; padding: 6px 12px; font-size: 14px; }
+  .leaks a.soon { opacity: 0.45; pointer-events: none; }
+  .home { display: inline-block; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <a class="btn home" id="home" href="../index.html">← Home</a>
+  <h1>HoyoDex Quick Links</h1>
+  <p class="sub">Pick a game → pick a type → type the name / number → open the link (Enter works too).</p>
+
+  <div class="row" id="games"></div>
+  <div class="row hidden" id="typeRow"><label>Type</label><span id="types" class="row" style="margin:0"></span></div>
+  <div class="row hidden" id="inputRow">
+    <label>Name</label>
+    <input type="text" id="value" autocomplete="off" />
+    <button class="main" id="open">Open</button>
+    <button id="copy">Copy link</button>
+  </div>
+  <div class="note" id="hint"></div>
+  <div id="out"></div>
+  <div class="refs hidden" id="refs"></div>
+
+  <h2>Leaks</h2>
+  <div class="leaks" id="leaks"></div>
+</main>
+
+<script>
+/* =====================================================================
+   EDIT ZONE: everything you change is in this block.
+
+   GAMES      one block per game:
+                id           short name (only used inside this page)
+                name         the button
+                placeholder  hint inside the text box ('' + needsValue:false = the game has no text box)
+                types        the buttons of the second row. In each url, {v} is replaced by what you type.
+                refs         lines shown under the box (html: links, notes). Written as a list of text lines.
+   LEAKS      the Leaks buttons: [name, link]. A link of '' = "soon" (greyed out).
+
+   Add a game: copy one block of GAMES. Add a type: add one { label, url } line to `types`.
+   ===================================================================== */
+const GAMES = [
+  {
+    id: 'gi', name: 'Genshin', placeholder: 'Name with capslock',
+    types: [
+      { label: 'Sprite', url: 'https://static.nanoka.cc/assets/gi/UI_Gacha_AvatarImg_{v}.webp' },
+      { label: 'Icon', url: 'https://static.nanoka.cc/assets/gi/UI_AvatarIcon_{v}.webp' },
+      { label: 'Outfit', url: 'https://static.nanoka.cc/assets/gi/UI_Costume_{v}.webp' }, // ALT https://gi.yatta.moe/assets/UI/ (same name as outfit)
+      { label: '👗 Icon', url: 'https://static.nanoka.cc/assets/gi/UI_AvatarIcon_{v}.webp' },
+    ],
+    refs: [
+      '• Sources: <a href="https://lunaris.moe" target="_blank">Lunari</a> | <a href="https://gi.nanoka.cc" target="_blank">Nanoka</a>',
+      '<small>[Outfit icons: search for the chara &gt; open outfit &gt; copy name]</small>',
+    ],
+  },
+  {
+    id: 'hsr', name: 'Star Rail', placeholder: 'Check the link for the number',
+    types: [
+      { label: 'Sprite', url: 'https://static.nanoka.cc/assets/hsr/avatardrawcard/{v}.webp' }, // ALT https://cdn.neonteam.dev/neonteam/assets/spriteoutput/avatardrawcard/
+      { label: 'Icon', url: 'https://static.nanoka.cc/assets/hsr/avataricon/avatar/{v}.webp' },
+      { label: 'Outfit', url: 'https://static.nanoka.cc/assets/hsr/avatardrawcard/avatarskin/1{v}01.webp' },
+      { label: '👗 Icon', url: 'https://static.nanoka.cc/assets/hsr/avataricon/avatarskin/1{v}01.webp' },
+    ],
+    refs: [
+      '• Character source: <a href="https://srtools.neonteam.dev/" target="_blank">look the number up here</a> <small>[ <a href="https://hsr.gachabase.net" target="_blank">ALT</a>]</small>',
+       // ALT for pics and icons in game: https://github.com/Mar-7th/StarRailRes/blob/master/icon/character/1415.png
+    ],
+  },
+  {
+    id: 'zzz', name: 'Zenless', placeholder: 'Number',
+    types: [
+      { label: 'Sprite', url: 'https://static.nanoka.cc/assets/zzz/IconRole{v}.webp' },
+      { label: 'Icon', url: 'https://static.nanoka.cc/assets/zzz/IconRoleCrop{v}.webp' },
+      { label: 'Outfit', url: 'https://static.nanoka.cc/assets/zzz/IconRole{v}_01.webp' },
+      { label: '👗 Icon', url: 'https://static.nanoka.cc/assets/zzz/IconRoleCrop{v}_01.webp' },
+      { label: 'Bangboo', url: 'https://static.nanoka.cc/assets/zzz/BangbooGarageRole{v}.webp' },
+    ],
+    refs: [
+      '• <a href="https://zzz.nanoka.cc" target="_blank">Source</a>',
+      '• For info: <a href="https://zenless-zone-zero.fandom.com/wiki/" target="_blank">Fandom wiki</a>',
+    ],
+  },
+  {
+    id: 'hi3', name: 'HI3', needsValue: false, // no text box: the button just opens the wiki
+    types: [{ label: 'Wiki', url: 'https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki' }],
+    refs: [
+      '• Everything from HI3 is <a href="https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki" target="_blank">here</a> or <a href="https://www.arustats.com" target="_blank">here</a>',
+    ],
+  },
+  {
+    id: 'end', name: 'Endfield', placeholder: 'Check the link for the number',
+    types: [
+      { label: 'Sprite', url: 'https://www.akedata.top/public/images/character/charpic/chr_{v}.png' },
+      { label: 'Icon', url: 'https://assets.irminsul.gg/v2/endfield/operators/{v}.png' },
+    ],
+    refs: ['• Character source: <a href="https://endfield.gg/operators/" target="_blank">look the number up here</a>'],
+  },
+  // { id: 'hna', name: 'Nexus Anima', placeholder: '', types: [{ label: 'Icon', url: '' }], refs: ['• Character source: <a href="https://honkai-nexus-anima.fandom.com/wiki/Kardia" target="_blank">soon</a>'] },
+];
+
+const LEAKS = [
+  ['Genshin Impact', 'https://imgur.com/a/cdTW0P6'],
+  ['Zenless Zone', 'https://imgur.com/a/1gtW2MR'],
+  ['Star Rail', 'https://imgur.com/a/5cfjlpX'],
+  ['Impact 3rd', 'https://imgur.com/a/u67Gfr7'],
+  ['Nexus Anima', 'https://imgur.com/a/rLjcbBa'],
+  ['Endfield (soon)', ''],
+];
+/* ====================== end of the edit zone ====================== */
+
+// Other sources, for reference:
+//   https://gachabase.net/?lang=en  (HSR / ZZZ)      https://irminsul.gg  (HSR / ZZZ / GI / Endfield)
+//   https://srtools.neonteam.dev/1001/detail          https://starrail.honeyhunterworld.com
+//   https://gi.yatta.moe/en  (+ HSR)                  https://lunaris.moe
+//   https://honkaiimpact3.fandom.com/wiki/Honkai_Impact_3_Wiki      https://www.akedata.top
+
+const $ = (id) => document.getElementById(id);
+// This page works from tools/ or from shared/tools/: the Home button finds the main folder either way.
+$('home').href = (location.pathname.includes('/shared/tools/') ? '../../' : '../') + 'index.html';
+const store = {
+  get(k) { try { return localStorage.getItem('cred-' + k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem('cred-' + k, v); } catch (e) { /* storage blocked: fine */ } },
+};
+let game = null;
+let type = null;
+
+function el(tag, cls, html) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (html !== undefined) n.innerHTML = html;
+  return n;
+}
+
+function buildLink() {
+  if (!game || !type) return '';
+  const value = $('value').value.trim();
+  if (game.needsValue !== false && !value) return '';
+  return type.url.replace('{v}', value);
+}
+
+function showOut(url) {
+  $('out').innerHTML = url ? `Link: <a href="${url}" target="_blank">${url}</a>` : '';
+}
+
+function pickType(t) {
+  type = t;
+  store.set('type', t.label);
+  [...$('types').children].forEach((b) => b.classList.toggle('on', b.textContent === t.label));
+  $('hint').textContent = '';
+}
+
+function pickGame(g) {
+  game = g;
+  type = null;
+  store.set('game', g.id);
+  [...$('games').children].forEach((b) => b.classList.toggle('on', b.textContent === g.name));
+  $('out').innerHTML = '';
+  $('hint').textContent = '';
+
+  $('types').innerHTML = '';
+  g.types.forEach((t) => {
+    const b = el('button', '', t.label);
+    b.addEventListener('click', () => pickType(t));
+    $('types').appendChild(b);
+  });
+  $('typeRow').classList.toggle('hidden', g.types.length < 2);
+  if (g.types.length === 1) type = g.types[0];
+
+  $('inputRow').classList.remove('hidden');
+  $('value').classList.toggle('hidden', g.needsValue === false);
+  $('inputRow').querySelector('label').classList.toggle('hidden', g.needsValue === false);
+  $('copy').classList.toggle('hidden', g.needsValue === false);
+  $('value').placeholder = g.placeholder || '';
+  $('value').value = '';
+
+  $('refs').classList.remove('hidden');
+  $('refs').innerHTML = g.refs.map((r) => `<div>${r}</div>`).join('');
+
+  const savedType = store.get('type');
+  const again = g.types.find((t) => t.label === savedType);
+  if (again && g.types.length > 1) pickType(again);
+}
+
+function openIt() {
+  if (!game) return;
+  if (!type) { $('hint').textContent = 'Pick a type first.'; return; }
+  const url = buildLink();
+  if (!url) { $('hint').textContent = 'Type a name or number first.'; return; }
+  $('hint').textContent = '';
+  showOut(url);
+  window.open(url, '_blank');
+}
+
+GAMES.forEach((g) => {
+  const b = el('button', '', g.name);
+  b.addEventListener('click', () => pickGame(g));
+  $('games').appendChild(b);
+});
+$('open').addEventListener('click', openIt);
+$('value').addEventListener('keydown', (e) => e.key === 'Enter' && openIt());
+$('copy').addEventListener('click', () => {
+  const url = buildLink();
+  if (!url) { $('hint').textContent = 'Pick a type and type a name first.'; return; }
+  showOut(url);
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
+    () => ($('hint').textContent = 'Copied!'),
+    () => ($('hint').textContent = 'Could not copy: select the link below.')
+  );
+});
+
+LEAKS.forEach(([name, url]) => {
+  const a = el('a', url ? '' : 'soon', name);
+  a.href = url || '#';
+  a.target = '_blank';
+  $('leaks').appendChild(a);
+});
+
+const savedGame = GAMES.find((g) => g.id === store.get('game'));
+if (savedGame) pickGame(savedGame);
+</script>
+</body>
+</html>

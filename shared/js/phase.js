@@ -41,8 +41,29 @@
     return null;
   }
 
-  /** True when `version` is the game's current live version. */
-  Phase.isCurrentVersion = (version) => allGames().some((g) => g.version === version);
+  // The slot that is live right now. `version` in vs.js is the starting point, but when the date of the
+  // next version (date1 / date2) has already passed, that version counts as live even if you have not
+  // edited vs.js yet. A version that is not out yet is NOT live (its characters keep no colour until it starts).
+  const liveSlot = (game) => {
+    const now = new Date();
+    const startOf = [null, game.date1, game.date2];
+    let live = 0;
+    SLOTS.forEach((slot, i) => {
+      const start = parseDate(startOf[i]);
+      if (i > 0 && game[slot.versionKey] && start && now >= start) live = i;
+    });
+    return SLOTS[live];
+  };
+
+  /** The version number that is live right now for the page's game (e.g. '3.3'), or ''. */
+  Phase.liveVersion = () => {
+    const game = allGames()[0];
+    return game ? game[liveSlot(game).versionKey] || '' : '';
+  };
+
+  /** True when `version` is the game's live version (see liveSlot above). */
+  Phase.isCurrentVersion = (version) =>
+    Boolean(version) && allGames().some((g) => g[liveSlot(g).versionKey] === version);
 
   /** { start, end } of a phase. Dates are null when vs.js does not know them yet. */
   Phase.findWindow = function (version, phaseNumber) {
@@ -50,7 +71,9 @@
       for (const slot of SLOTS) {
         if (game[slot.versionKey] !== version) continue;
 
-        const start = parseDate(game[slot.phaseKey(phaseNumber)]);
+        // phase 1 of a later version starts when the version starts (date1 / date2)
+        const slotStart = slot === SLOTS[1] ? game.date1 : slot === SLOTS[2] ? game.date2 : '';
+        const start = parseDate(game[slot.phaseKey(phaseNumber)]) || (phaseNumber === 1 ? parseDate(slotStart) : null);
         // A phase ends when the next phase starts, or when the next version starts.
         const end =
           parseDate(game[slot.phaseKey(phaseNumber + 1)]) || firstValidDate(...slot.fallbackDates(game));
@@ -62,8 +85,8 @@
 
   /** 'countdown' (not started) | 'active' | 'ended' | '' (character has no phase) */
   Phase.statusOf = function (char) {
-    if (!char.p) return '';
-    const { start, end } = Phase.findWindow(char.version, char.p);
+    if (!char.ph) return '';
+    const { start, end } = Phase.findWindow(char.version, char.ph);
     const now = new Date();
     if (!end || now < start) return 'countdown';
     if (now >= end) return 'ended';

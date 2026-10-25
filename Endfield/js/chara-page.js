@@ -9,7 +9,7 @@ window.CHARA_PAGE = {
   quick: [['have', 'new'], 'rarity', 'gender'],
 
   // Filters inside the "Filter" button. Use [] to hide the button.
-  popup: ['element', 'group'],
+  popup: ['element', 'area'],
 
   // Part / collab buttons above the list. With none pressed, everything is shown.
   // field = the field on the character (part: '2' or collab: true), value = what it must be.
@@ -43,25 +43,25 @@ window.CHARA_PAGE = {
     element: {
       label: 'Element',
       options: [
-        { value: 'Heat', label: 'Heat', icon: '../assets/others/Endfield/Element/Heat.png' },
-        { value: 'Cryo', label: 'Cryo', icon: '../assets/others/Endfield/Element/Cryo.png' },
-        { value: 'Nature', label: 'Nature', icon: '../assets/others/Endfield/Element/Nature.png' },
-        { value: 'Physical', label: 'Physical', icon: '../assets/others/Endfield/Element/Physical.png' },
-        { value: 'Electric', label: 'Electric', icon: '../assets/others/Endfield/Element/Electric.png' },
+        { value: 'Heat', label: 'Heat', icon: '../assets/others/Element/AE_Heat.png' },
+        { value: 'Cryo', label: 'Cryo', icon: '../assets/others/Element/AE_Cryo.png' },
+        { value: 'Nature', label: 'Nature', icon: '../assets/others/Element/AE_Nature.png' },
+        { value: 'Physical', label: 'Physical', icon: '../assets/others/Element/AE_Physical.png' },
+        { value: 'Electric', label: 'Electric', icon: '../assets/others/Element/AE_Electric.png' },
       ],
     },
-    group: {
+    area: {
       label: 'Path',
       options: [
-        { value: 'Hongshan', label: 'Hongshan Academy of Sciences', icon: '../assets/others/Endfield/Group/Hongshan_Academy_Of_Sciences.png' },
-        { value: 'EndIndustries', label: 'Endfield Industries', icon: '../assets/others/Endfield/Group/Endfield_Industries.webp' },
-        { value: 'Rhodes', label: 'Rhodes Island', icon: '../assets/others/Endfield/Group/Rhodes_Island.webp' },
-        { value: 'UWST', label: 'UWST', icon: '../assets/others/Endfield/Group/UWST.webp' },
-        { value: 'TGCC', label: 'TGCC', icon: '../assets/others/Endfield/Random/UNK.png' },
-        { value: 'OrderSO', label: 'Order of Steel Oath', icon: '../assets/others/Endfield/Random/UNK.png' },
-        { value: 'Cabal', label: 'Cabal of Tranquility', icon: '../assets/others/Endfield/Random/UNK.png' },
-        { value: 'Hannabit', label: 'Hannabit Circuit', icon: '../assets/others/Endfield/Random/UNK.png' },
-        { value: 'Sesqa', label: 'Seš\'qa', icon: '../assets/others/Endfield/Random/UNK.png' },
+        { value: 'Hongshan', label: 'Hongshan Academy of Sciences', icon: '../assets/others/Area/AE_Hongshan_Academy_Of_Sciences.png' },
+        { value: 'EndIndustries', label: 'Endfield Industries', icon: '../assets/others/Area/AE_Endfield_Industries.webp' },
+        { value: 'Rhodes', label: 'Rhodes Island', icon: '../assets/others/Area/AE_Rhodes_Island.webp' },
+        { value: 'UWST', label: 'UWST', icon: '../assets/others/Area/AE_UWST.webp' },
+        { value: 'TGCC', label: 'TGCC', icon: '../assets/others/UI_Icon_LunaRite_Unknown.png' },
+        { value: 'OrderSO', label: 'Order of Steel Oath', icon: '../assets/others/UI_Icon_LunaRite_Unknown.png' },
+        { value: 'Cabal', label: 'Cabal of Tranquility', icon: '../assets/others/UI_Icon_LunaRite_Unknown.png' },
+        { value: 'Hannabit', label: 'Hannabit Circuit', icon: '../assets/others/UI_Icon_LunaRite_Unknown.png' },
+        { value: 'Sesqa', label: 'Seš\'qa', icon: '../assets/others/UI_Icon_LunaRite_Unknown.png' },
       ],
     },
   },

@@ -9,10 +9,37 @@
    Entries with the SAME name become ONE card: its icon flips between the
    outfits and its popup shows all of them. To add an outfit to a character,
    just add another line with the same name.
+   The filters look at every outfit on its own, and the card is built from the outfits that PASS: Have shows
+   only the outfits you have, Don't only the ones you do not. Outfits are merged only when the filter lets
+   them all through (no filter = all of them). A merged card shows a small green HAVE pill in the popup on
+   the pictures of the outfits you have. The Main character's lines (mc) are never merged.
    Optional: gameConfig.page  the filter buttons of the page (same format as window.CHARA_PAGE, see js/chara-page.js)
    Optional: gameConfig.lastVersion  e.g. '6.6' -> a red "vers. 6.6" pill under the title.
    Needs: common.js, sprite-popup.js, chara-filters.js (loaded before this file).
    ===================================================================== */
+
+// The Main character's outfits (a line with `outfit: true` in the game's js/mc.js) join this list, but only show when the
+// MC button is pressed. They are only added when the page loaded js/mc.js (games with a Main character).
+(function addMainCharacterOutfits() {
+  const main = window.CHARA_CONFIG && window.CHARA_CONFIG.characters;
+  if (!main || !gameConfig.characters) return;
+  main
+    .filter((c) => c.outfit === true && String(Dex.iconName(c)).trim() !== '')
+    .forEach((c) =>
+      gameConfig.characters.push({
+        name: c.name,
+        imgIcon: Dex.iconName(c),
+        imgSprite: c.imgSprite,
+        have: c.have,
+        rarity: c.rarity,
+        gender: c.gender,
+        element: c.element,
+        status: c.status,
+        mc: true,
+        mcOnly: true,
+      })
+    );
+})();
 
 const charListEl = document.getElementById('charList');
 const searchInput = document.getElementById('searchInput');
@@ -37,30 +64,25 @@ function passesFilters(c, searchTerm) {
 // ---------------------------------------------------------------
 const STATUS_PRIORITY = ['new', 'soon', 'guest']; // which status the card shows when its outfits differ
 
-function mergeSameName(list) {
+// Puts the outfits that have the same name together. The Main character's lines (mc) stay alone.
+function groupByName(list) {
   const byName = new Map();
-  const merged = [];
-
+  const cards = [];
   list.forEach((entry) => {
-    if (!entry.name || !byName.has(entry.name)) {
-      const card = { ...entry, variants: [entry] };
-      merged.push(card);
-      if (entry.name) byName.set(entry.name, card);
+    if (!entry.name) return;
+    const key = entry.mc ? null : entry.name;
+    if (key !== null && byName.has(key)) {
+      byName.get(key).variants.push(entry);
       return;
     }
-    const card = byName.get(entry.name);
-    card.variants.push(entry);
+    const card = { ...entry, variants: [entry] };
+    cards.push(card);
+    if (key !== null) byName.set(key, card);
   });
-
-  merged.forEach((card) => {
-    if (card.variants.length < 2) return;
-    // one `have` per outfit, so Have / Don't find the card if ANY outfit matches
-    card.have = card.variants.map((v) => v.have);
-    card.status = STATUS_PRIORITY.find((status) => card.variants.some((v) => v.status === status));
-    card.collab = card.variants.some((v) => v.collab === true); // Collab button finds the card if ANY outfit is collab
-    card.collabOnly = card.variants.every((v) => v.collabOnly === true); // hidden outside Collab only if ALL its outfits are
+  cards.forEach((card) => {
+    card.status = STATUS_PRIORITY.find((status) => card.variants.some((v) => v.status === status)) || card.variants[0].status;
   });
-  return merged;
+  return cards;
 }
 
 // ---------------------------------------------------------------
@@ -80,7 +102,7 @@ function buildCard(c) {
   const img = Dex.el('img', 'char-icon');
   img.alt = c.name;
   Dex.applyIconFit(img, c); // zoom / iconX / iconY of the first outfit of the card
-  const iconUrls = c.variants.map((v) => gameConfig.getImgPath(v));
+  const iconUrls = [...new Set(c.variants.map((v) => gameConfig.getImgPath(v)))]; // outfits that share one icon do not flip
   if (iconUrls.length > 1) Dex.cycleImage(img, iconUrls, Dex.FALLBACK_ICON); // the icon flips between the outfits
   else {
     img.src = iconUrls[0];
@@ -95,20 +117,37 @@ function buildCard(c) {
   card.addEventListener('click', () => {
     // The popup also knows the other characters on screen: their icons show faded on both sides, and
     // pressing -> / <- once brings the icon to the front, a second time moves to that character.
-    const groupOf = (x) => ({
-      images: [...new Set(x.variants.flatMap((v) => gameConfig.getSpritePath(v)))],
+    const groupOf = (x) => {
+      const images = [];
+      const notes = [];
+      x.variants.forEach((v) => {
+        [].concat(gameConfig.getSpritePath(v)).forEach((url) => {
+          const at = images.indexOf(url);
+          // merged card: a green pill on the pictures of the outfits you have (a single outfit has no pill);
+          // a picture that two lines share counts as "have" if ANY of them is have: true
+          const have = x.variants.length > 1 && v.have === true ? { text: 'have', tone: 'green' } : '';
+          if (at >= 0) {
+            if (have && !notes[at]) notes[at] = have;
+            return;
+          }
+          images.push(url);
+          notes.push(have);
+        });
+      });
+      return { images, notes,
       name: x.name,
       icon: gameConfig.getImgPath(x.variants[0]),
       bg: Dex.rarityGradient(x.rarity),
-    });
-    const usable = (x) => x === c || String(x.variants[0].imgName || x.name || '').trim() !== ''; // skip empty placeholder lines
+      };
+    };
+    const usable = (x) => x === c || String(Dex.iconName(x.variants[0])).trim() !== ''; // skip empty placeholder lines
     const list = stepList.includes(c) ? stepList.filter(usable) : [c];
     Dex.showPopup([], c.name, { fit: true, groups: list.map(groupOf), startGroup: list.indexOf(c) });
   });
   return card;
 }
 
-const cards = mergeSameName(gameConfig.characters);
+const cards = groupByName(gameConfig.characters);
 
 // Typing help: a short picture prefix can catch another card's pictures. Say so in the Console (F12).
 (function warnSharedPictures() {
@@ -133,10 +172,9 @@ function renderList() {
   charListEl.innerHTML = '';
   const searchTerm = searchInput.value.toLowerCase();
 
-  const visible = cards
-    .slice()
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter((c) => passesFilters(c, searchTerm));
+  // every outfit is filtered on its own, then the ones that passed are put together by name
+  const passing = gameConfig.characters.filter((entry) => passesFilters(entry, searchTerm));
+  const visible = groupByName(passing).sort((a, b) => a.name.localeCompare(b.name));
 
   stepList = visible;
   if (visible.length === 0) Dex.showNoResults(charListEl);

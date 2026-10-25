@@ -4,32 +4,25 @@
    The game's own js/sup.js holds the list and then calls:
 
        Dex.initSupportPage({
-         characters,                      // [{ name, imgName, imgName2?, have, rarity, status?, folder?, part? }]   imgName2 = extra big picture(s) in the popup (the icon stays imgName)
-         iconFolder:   '../assets/...',   // small pictures:  <iconFolder>/<folder>/<imgName>.png
-         spriteFolder: '../assets/...',   // big pictures:    <spriteFolder>/<folder>/<imgName>.png
+         characters,                      // [{ name, imgIcon, imgSprite?, have, rarity, status?, p? }]   imgSprite = the big pictures of the popup, e.g. ['=', 'Other']  ('=' = the same name as imgIcon)
+         iconFolder:   '../assets/...',   // small pictures:  <iconFolder>/<imgIcon>.png
+         spriteFolder: '../assets/...',   // big pictures:    <spriteFolder>/<each name of imgSprite>.png
          iconFit?:     'contain',         // show the whole picture in every icon (default: fills the square and crops the edges)
          // any character may also have  zoom / iconX / iconY  to frame its icon (see Dex.applyIconFit in common.js)
          lastVersion?: '3.2',             // the version this list is updated to (red "vers." pill under the title)
-         page?:        { quick, popup, parts, filters }   // the filter buttons (same format as window.CHARA_PAGE, see 02ZZZ/js/chara-page.js).
-                                          // Only used when the page has <div id="quickFilters">; otherwise the old Filter popup is used.
+         page:         { quick, popup, parts, filters }   // the filter buttons (same format as window.CHARA_PAGE, see 02ZZZ/js/chara-page.js)
        });
 
-   Needs: common.js, sprite-popup.js, chara-filters.js (loaded before this file; only for pages with the new filter bar).
+   Needs: common.js, sprite-popup.js, chara-filters.js (loaded before this file).
    ===================================================================== */
 (function () {
   const Dex = (window.Dex = window.Dex || {});
 
   const joinPath = (...parts) => parts.filter(Boolean).join('/');
-  const emptyFilters = () => ({ have: null, rarity: null, element: null, isNew: false });
 
   Dex.initSupportPage = function ({ characters, iconFolder, spriteFolder, page, lastVersion, iconFit }) {
     const listEl = document.getElementById('charList');
     const searchInput = document.getElementById('searchInput');
-    const filterPopup = document.getElementById('filterPopup');
-    const newCheckbox = document.getElementById('filterNew');
-
-    let filters = emptyFilters();
-    let selectedPart = '2'; // only matters for characters that have a `part`
 
     // Red pill under the title: the version this list is updated to. Not a filter.
     if (lastVersion) {
@@ -38,22 +31,11 @@
       document.getElementById('charCount')?.after(pill);
     }
 
-    // New filter bar (same as the Characters page), when the page has <div id="quickFilters"> and the game gives `page`
-    const charaFilters =
-      document.getElementById('quickFilters') && page ? Dex.initCharaFilters({ page, characters, onChange: () => render() }) : null;
+    // The filter bar (same as the Characters page)
+    const charaFilters = Dex.initCharaFilters({ page, characters, onChange: () => render() });
 
     function passesFilters(c, searchTerm) {
-      if (!c.name.toLowerCase().includes(searchTerm)) return false;
-      if (charaFilters) return charaFilters.matches(c);
-
-      const inPart = selectedPart === 'all' || !c.part || c.part === selectedPart || (selectedPart === 'collab' && c.collab);
-      if (!inPart) return false;
-
-      if (filters.have !== null && Boolean(c.have) !== filters.have) return false;
-      if (filters.rarity && String(c.rarity) !== filters.rarity) return false;
-      if (filters.element && c.element !== filters.element) return false;
-      if (filters.isNew && c.status !== 'new' && c.status !== 'soon') return false; // New = new + soon
-      return true;
+      return c.name.toLowerCase().includes(searchTerm) && charaFilters.matches(c);
     }
 
     function buildCard(c) {
@@ -67,10 +49,9 @@
       if (c.status === 'soon') iconWrapper.appendChild(Dex.el('div', 'soon-label', 'SOON'));
       if (c.status === 'guest') iconWrapper.appendChild(Dex.el('div', 'soon-label guest', 'GUEST'));
 
-      const names = Dex.imageNames(c); // [imgName, imgName2 ...]: the icon uses the first, the popup shows all
-      const name = names[0];
+      const name = Dex.iconName(c); // the icon
       const img = Dex.el('img', 'char-icon');
-      img.src = `${joinPath(iconFolder, c.folder, name)}.png`;
+      img.src = `${joinPath(iconFolder, name)}.png`;
       img.onerror = () => {
         img.onerror = null;
         img.src = Dex.FALLBACK_ICON;
@@ -79,20 +60,28 @@
       Dex.applyIconFit(img, c, iconFit); // zoom / iconX / iconY / iconFit
       iconWrapper.appendChild(img);
 
+      // Element badge: the picture of this element in the page's Element filter (page.filters.element.options)
+      const elementOptions = (page.filters && page.filters.element && page.filters.element.options) || [];
+      const badge = Dex.elementBadge(c, (e) => {
+        const option = elementOptions.find((o) => o.icon && String(o.value).toLowerCase() === e.toLowerCase());
+        return option ? option.icon : null;
+      });
+      if (badge) iconWrapper.appendChild(badge);
+
       card.append(iconWrapper, Dex.el('div', '', c.name));
       card.addEventListener('click', () => {
         // The popup also shows the neighbouring characters as faded side icons (press once to bring one
         // forward, twice to move to it).
         const groupOf = (x) => {
-          const list = Dex.imageNames(x);
+          const list = Dex.spriteNames(x);
           return {
-            images: list.map((n) => `${joinPath(spriteFolder, x.folder, n)}.png`),
+            images: list.map((n) => `${joinPath(spriteFolder, n)}.png`),
             name: x.name,
-            icon: `${joinPath(iconFolder, x.folder, list[0])}.png`,
+            icon: `${joinPath(iconFolder, Dex.iconName(x))}.png`,
             bg: Dex.rarityGradient(x.rarity),
           };
         };
-        const usable = (x) => x === c || String(x.imgName || x.name || '').trim() !== ''; // skip empty placeholder lines
+        const usable = (x) => x === c || String(Dex.iconName(x)).trim() !== ''; // skip empty placeholder lines
         const list = stepList.includes(c) ? stepList.filter(usable) : [c];
         Dex.showPopup([], c.name, { groups: list.map(groupOf), startGroup: list.indexOf(c) });
       });
@@ -117,64 +106,7 @@
       Dex.updateCharCount();
     }
 
-    // Switching part clears every filter and the search box.
-    function resetFilters() {
-      filters = emptyFilters();
-      searchInput.value = '';
-      filterPopup?.querySelectorAll('input').forEach((input) => (input.checked = false));
-      filterPopup?.classList.add('hidden');
-    }
-
-    if (charaFilters) {
-      searchInput.addEventListener('input', render);
-      render();
-      return;
-    }
-
-    Dex.initFilterPanel();
-    Dex.bindToggleableRadios(() => filters, ['have', 'rarity', 'element'], render);
-
-    // "Keep filters": off = one filter at a time, on = they combine
-    const keepFilters = filterPopup ? Dex.keepFilters.addToggle(filterPopup) : { isOn: () => true };
-    function clearOtherFilters(exceptKey) {
-      ['have', 'rarity', 'element'].forEach((key) => {
-        if (key === exceptKey) return;
-        filters[key] = null;
-        filterPopup.querySelectorAll(`input[name="${key}"]`).forEach((input) => (input.checked = false));
-      });
-      if (exceptKey !== 'isNew') {
-        filters.isNew = false;
-        if (newCheckbox) newCheckbox.checked = false;
-      }
-    }
-    // runs after the radio's own handler (bubbling), so `filters` is already updated
-    filterPopup?.addEventListener('click', (e) => {
-      const key = e.target.matches && e.target.matches('input[type="radio"]') ? e.target.name : null;
-      if (key && filters[key] !== null && !keepFilters.isOn()) {
-        clearOtherFilters(key);
-        render();
-      }
-    });
-
-    newCheckbox?.addEventListener('change', () => {
-      if (newCheckbox.checked && !keepFilters.isOn()) clearOtherFilters('isNew');
-      filters.isNew = newCheckbox.checked;
-      render();
-    });
-
     searchInput.addEventListener('input', render);
-
-    const partButtons = document.querySelectorAll('.part-btn:not(.keep-btn)');
-    partButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        partButtons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        resetFilters();
-        selectedPart = btn.dataset.part;
-        render();
-      });
-    });
-
     render();
   };
 })();
