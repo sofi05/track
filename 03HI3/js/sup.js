@@ -22,6 +22,7 @@ const characters = [
   { name: 'Chenxue', imgIcon: 'AstraMate_06', have: false, element: 'Fire_DMG', rarity: '5', p: 2 },
   { name: 'Youyun', imgIcon: 'AstraMate_07', have: false, element: 'Lightning_DMG', rarity: 5, p: 2 },
   { name: 'Senadina', imgIcon: 'AstraMate_08', have: false, element: 'Fire_DMG', rarity: 5, p: 2 }, 
+  { name: 'Vita', imgIcon: '', have: false, element: 'Ice_DMG', rarity: '5', p: 2, status: 'soon' },
   // Add more characters here  (what the fields mean: GUIDE.md > Supports page)
   // { name: '', imgIcon: '', imgSprite: ['='], have: false, element: '', rarity: '5', p: 2, status: 'soon' },
 ];
@@ -54,9 +55,13 @@ const page = {
   },
 };
 
+// The version this list is updated to (the red "vers." pill under the title). Change it when you update the list.
+const lastVersion = '9.1 / soon 9.2';
+
 Dex.initSupportPage({
   characters,
   iconFolder: '../assets/charaid/HI3/AstralElf',
   spriteFolder: '../assets/Sprite/HI3/AstralElf',
   page,
+  lastVersion,
 });

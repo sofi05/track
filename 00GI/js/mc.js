@@ -6,8 +6,8 @@ window.CHARA_CONFIG = {
     { name: 'Lumine', imgIcon: 'PlayerGirlCostumeCWXR', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, have: true, outfit: true },
     
     //no ingame sprite yet
-    { name: 'Aether', imgIcon: '', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, have: false, outfit: true },
-    { name: 'Lumine', imgIcon: '', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, have: true, outfit: true },
+    { name: 'Aether', imgIcon: 'PlayerBoyCostumeNHiS_Temp', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'm', rarity: 5, have: false, outfit: true },
+    { name: 'Lumine', imgIcon: 'PlayerGirlCostumeNHiS_Temp', element: ['Anemo', 'Geo', 'Electro', 'Dendro', 'Hydro', 'Pyro'], gender: 'f', rarity: 5, have: true, outfit: true },
     // ---------------------------------------------------------------------
     // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
     // What every field means: GUIDE.md. Same name on every line = one page (no gender switch).

@@ -27,7 +27,7 @@ window.CHARA_CONFIG = {
 
     { name: 'Qingque', imgIcon: '1201', element: 'quantum', gender: 'f', rarity: 4, area: ['txl'], role: 'eru', have: true },
     { name: 'Tingyun', imgIcon: '1202', element: 'thunder', gender: 'f', rarity: 4, area: ['txl'], role: 'harm', have: true },
-    { name: 'Luocha', imgIcon: '1203', element: 'imaginary', gender: 'm', rarity: 5, area: ['txl','ot'], role: 'abun', have: true },
+    { name: 'Luocha', imgIcon: '1203', element: 'imaginary', gender: 'm', rarity: 5, area: ['txl'], role: 'abun', have: true },
     { name: 'Blade', imgIcon: '1205', element: 'wind', gender: 'm', rarity: 5, area: ['txl','SH'], role: 'dest', have: true },
     { name: 'Sushang', imgIcon: '1206', element: 'physical', gender: 'f', rarity: 4, area: ['txl'], role: 'hunt', have: true },
     { name: 'Yukong', imgIcon: '1207', element: 'imaginary', gender: 'f', rarity: 4, area: ['txl'], role: 'harm', have: true },
@@ -76,21 +76,21 @@ window.CHARA_CONFIG = {
     { name: 'Saber', imgIcon: '1014', element: 'wind', gender: 'f', rarity: 5, area: ['ot'], role: 'dest', have: false, status: 'available', version: '3.4', want: 2, perma: true, collab: true, ph: 1 },
     { name: 'Rin Tohsaka', imgIcon: '1508', element: 'quantum', gender: 'f', rarity: 5, area: ['ot'], role: 'eru', have: false, status: 'available', version: '4.4', want: 2, perma: true, collab: true, ph: 1 },
     
-    { name: 'Ellen', imgIcon: '', element: '', gender: 'f', rarity: 0 , area: [''], role: '', have: false, status: 'soon', version: '4.8', collab: true, collabStatus: ['mhy'], out: false, ph:1  },
-    { name: 'Astra Yao', imgIcon: '', element: '', gender: 'f', rarity: 0 , area: [''], role: '', have: false, status: 'soon', version: '4.8', collab: true, collabStatus: ['mhy'], out: false, ph:1  },
+    { name: 'Ellen', imgIcon: 'Character_Ellen_Icon', imgSprite: 'Character_Ellen_Splash_Art', element: 'ice', gender: 'f', rarity: 5 , area: ['ot'], role: 'dest', have: false, status: 'soon', version: '4.8', collab: true, collabStatus: ['mhy'], ph:1  },
+    { name: 'Astra Yao', imgIcon: 'Character_Astra_Yao_Icon', imgSprite: 'Character_Astra_Yao_Splash_Art', element: 'quantum', gender: 'f', rarity: 5 , area: ['ot'], role: 'harm', have: false, status: 'soon', version: '4.8', collab: true, collabStatus: ['mhy'], ph:1  },
     
     //DONT HAVE - ORGANIZED BY NUMBER
-    { name: 'Jing Yuan', imgIcon: '1204', element: 'thunder', gender: 'm', rarity: 5, area: ['txl'], role: 'eru', have: false, status: 'available', version: '4.0' },
+    { name: 'Jing Yuan', imgIcon: '1204', element: 'thunder', gender: 'm', rarity: 5, area: ['txl'], role: 'eru', have: false, status: 'available', version: '4.7' },
     { name: 'Fu Xuan', imgIcon: '1208', element: 'quantum', gender: 'f', rarity: 5, area: ['txl'], role: 'prese', have: false, status: 'available', version: '4.2', perma: true },
     { name: 'Jingliu', imgIcon: '1212', element: 'ice', gender: 'f', rarity: 5, area: ['txl'], role: 'dest', have: false, status: 'available', version: '4.0', want: 2 },
-    { name: 'Huohuo', imgIcon: '1217', element: 'wind', gender: 'f', rarity: 5, area: ['txl'], role: 'abun', have: false, status: 'available', version: '4.2', perma: true },
-    { name: 'Jiaoqiu', imgIcon: '1218', element: 'fire', gender: 'm', rarity: 5, area: ['txl'], role: 'nihi', have: false, status: 'available', version: '3.2' },
+    { name: 'Huohuo', imgIcon: '1217', element: 'wind', gender: 'f', rarity: 5, area: ['txl'], role: 'abun', have: false, status: 'available', version: '4.7', perma: true },
+    { name: 'Jiaoqiu', imgIcon: '1218', element: 'fire', gender: 'm', rarity: 5, area: ['txl'], role: 'nihi', have: false, status: 'available', version: '4.7', perma: true },
     { name: 'Feixiao', imgIcon: '1220', element: 'wind', gender: 'f', rarity: 5, area: ['txl'], role: 'hunt', have: false, status: 'available', version: '4.2', want: 2, ph: 2 },
     { name: 'Yunli', imgIcon: '1221', element: 'physical', gender: 'f', rarity: 5, area: ['txl'], role: 'dest', have: false, status: 'available', version: '4.2', want: 1, perma: true },
     { name: 'Lingsha', imgIcon: '1222', element: 'fire', gender: 'f', rarity: 5, area: ['txl'], role: 'abun', have: false, status: 'available', version: '3.8', want: 1, ph: 2 },
     { name: 'Fugue', imgIcon: '1225', element: 'fire', gender: 'f', rarity: 5, area: ['txl'], role: 'nihi', have: false, status: 'available', version: '3.8', want: 2, ph: 2 },
 
-    { name: 'Robin', imgIcon: '1309', element: 'physical', gender: 'f', rarity: 5, area: ['pena'], role: 'harm', have: false, status: 'available', version: '4.2', perma: true },
+    { name: 'Robin', imgIcon: '1309', element: 'physical', gender: 'f', rarity: 5, area: ['pena'], role: 'harm', have: false, status: 'available', version: '4.7', perma: true },
     { name: 'Sunday', imgIcon: '1313', element: 'imaginary', gender: 'm', rarity: 5, area: ['ae','pena'], role: 'harm', have: false, status: 'available', version: '4.2', want: 1, ph: 2 },
     { name: 'Jade', imgIcon: '1314', element: 'quantum', gender: 'f', rarity: 5, area: ['IPC','pena'], role: 'eru', have: false, status: 'available', version: '3.0' },
     { name: 'Rappa', imgIcon: '1317', element: 'imaginary', gender: 'f', rarity: 5, area: ['pena'], role: 'eru', have: false, status: 'available', version: '4.0', ph: 2 },
@@ -100,15 +100,15 @@ window.CHARA_CONFIG = {
     { name: 'Cerydra', imgIcon: '1412', element: 'wind', gender: 'f', rarity: 5, area: ['amp'], role: 'harm', have: false, status: 'available', version: '4.4', want: 1, ph: 2 },
     { name: 'Cyrene', imgIcon: '1415', element: 'ice', gender: 'f', rarity: 5, area: ['amp'], role: 'reme', have: false, status: 'available', version: '4.3', want: 2 },
     
-    { name: 'Sparxie', imgIcon: '1501', element: 'fire', gender: 'f', rarity: 5, area: ['plana'], role: 'ela', have: false, status: 'available', version: '4.4', want: 2, ph: 1 },
-    { name: 'Evanescia', imgIcon: '1505', element: 'physical', gender: 'f', rarity: 5, area: ['plana'], role: 'ela', have: false, status: 'available', version: '4.6', ph: 2 },
-    { name: 'Silver Wolf LV.999', imgIcon: '1506', element: 'imaginary', gender: 'f', rarity: 5, area: ['plana','SH'], role: 'ela', have: false, status: 'available', version: '4.2', ph: 1 },
+    { name: 'Sparxie', imgIcon: '1501', element: 'fire', gender: 'f', rarity: 5, area: ['plana'], role: 'ela', have: false, status: 'available', version: '4.7', want: 2, ph: 1 },
+    { name: 'Evanescia', imgIcon: '1505', element: 'physical', gender: 'f', rarity: 5, area: ['plana'], role: 'ela', have: false, status: 'available', version: '4.6', ph: 1 },
+    { name: 'Silver Wolf LV.999', imgIcon: '1506', element: 'imaginary', gender: 'f', rarity: 5, area: ['plana','SH'], role: 'ela', have: false, status: 'available', version: '4.7', ph: 1 },
 
     { name: 'Robin • Summeretto', imgIcon: '1512', element: 'wind', gender: 'f', rarity: 5, area: ['pena','astro'], role: 'reme', have: false, status: 'available', version: '4.5', ph: 1 },
     { name: 'Aventurine • WF', imgIcon: '1513', element: 'quantum', gender: 'm', rarity: 5, area: ['IPC','astro'], role: 'ela', have: false, status: 'available', version: '4.5', ph: 1 },
     
-     { name: 'Pearl', imgIcon: '1503', element: 'ice', gender: 'f', rarity: 5, area: ['plana','IPC'], role: 'ela', have: false, status: 'new', version: '4.6', ph: 1 },
-     { name: 'Aha!', imgIcon: '1511', element: 'quantum', gender: 'f', rarity: 5, area: ['plana'], role: 'ela', have: false, status: 'soon', version: '4.7', want: 2, ph: 1 },
+     { name: 'Pearl', imgIcon: '1503', element: 'ice', gender: 'f', rarity: 5, area: ['plana','IPC'], role: 'ela', have: false, status: 'new', version: '4.6' },
+     { name: 'Aeon ★ Aha', imgIcon: '1511', element: 'quantum', gender: 'f', rarity: 5, area: ['plana'], role: 'ela', have: false, status: 'soon', version: '4.7', want: 2 },
     // ---------------------------------------------------------------------
     // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
     // What every field means and its values: GUIDE.md.   Icon too close / too far: zoom, iconX, iconY (see GUIDE.md).

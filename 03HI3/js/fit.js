@@ -1,7 +1,7 @@
 const gameConfig = {
   characters: [
     //SOLO FOLDER
-    { name: 'Kiana', imgIcon: '106_04_01', imgSprite: ['601_04_01', '6010', '60113', '6115_04_01'], have: false },
+    { name: 'Kiana', imgIcon: '106_04_01', imgSprite: ['601_04_01', '6010', '60113', '6115'], have: false, status: 'new' },
     { name: 'Kiana', imgIcon: '106_04_01', imgSprite: ['60105_04_02', '60101_02_01'], have: true },
 
     { name: 'Bronya', imgIcon: '311_04_01', imgSprite: ['603'], have: false },
@@ -9,7 +9,7 @@ const gameConfig = {
 
     { name: 'Himeko', imgIcon: '402_04_01', imgSprite: ['604_04_01', '6040', '6041'], have: false },
     
-    { name: 'FuHua', imgIcon: '612_04_01', imgSprite: ['606'], have: false },
+    { name: 'FuHua', imgIcon: '612_04_01', imgSprite: ['606'], have: false, status: 'soon' },
 
     { name: 'Durandal', imgIcon: '803_04_02', imgSprite: ['608'], have: false },
     
@@ -64,7 +64,7 @@ const gameConfig = {
 
     { name: 'Kallen', imgIcon: '114_04_01', imgSprite: ['60111', '60112', '60114'], have: false },
 
-    { name: 'Mei', imgIcon: '206_04_01', imgSprite: ['602_04_01', '6020'], have: false },
+    { name: 'Mei', imgIcon: '206_04_01', imgSprite: ['602_04_01', '6020', '6207_04_01'], have: false, status: 'new' },
 
     { name: 'Sakura', imgIcon: '211_03_01', imgSprite: ['6021'], have: false },
 
@@ -79,7 +79,7 @@ const gameConfig = {
 
     { name: 'Sparkle', imgIcon: '20901_04_01', imgSprite: ['620901_04_01'], have: false, p: 2, collab: true, collabStatus: ['mhy'] },
     
-    { name: 'Vita', imgIcon: '20801_04_02', imgSprite: ['620801'], have: false, p: 2 },
+    { name: 'Vita', imgIcon: '20801_04_02', imgSprite: ['620801'], have: false, p: 2, status: 'new' },
 
     { name: 'Asuka', imgIcon: '901_04_01', imgSprite: ['60901_04_01'], have: false, p: 2, collab: true, collabStatus: ['solo'] },
     
@@ -103,7 +103,7 @@ const gameConfig = {
   },
 
   // The version this list is updated to (shows as a red "vers." pill under the title)
-  lastVersion: '9.0',
+  lastVersion: '9.1 / soon: 9.2',
 
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/HI3/Outfit/",

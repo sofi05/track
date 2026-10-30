@@ -14,7 +14,11 @@ import os
 import re
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# The main folder of the site (the one with 03HI3, assets, shared ...): found by walking up from this file,
+# so the script works from tools/ and from shared/tools/.
+ROOT = os.path.dirname(os.path.abspath(__file__))
+while not os.path.isdir(os.path.join(ROOT, '03HI3')) and os.path.dirname(ROOT) != ROOT:
+    ROOT = os.path.dirname(ROOT)
 folder = os.path.join(ROOT, sys.argv[1] if len(sys.argv) > 1 else os.path.join('assets', 'Sprite', 'HI3', 'Outfit'))
 output = os.path.join(ROOT, sys.argv[2] if len(sys.argv) > 2 else os.path.join('03HI3', 'js', 'outfit-files.js'))
 

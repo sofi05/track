@@ -1,3 +1,3 @@
-  @echo off
-  py list-sprites.py
-  pause
+@echo off
+py "list-sprites.py"
+pause

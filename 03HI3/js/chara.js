@@ -158,7 +158,7 @@ window.CHARA_CONFIG = {
     { name: 'Songque', imgIcon: '20701', element: 'SD', rarity: 5, role: 'WoD', have: false, status: 'available', version: '8.6', p: 2 },
     { name: 'Vita', imgIcon: '20801', element: 'MECH', rarity: 5, role: 'RoO', have: false, status: 'available', version: '8.9', p: 2 },
     
-    { name: 'Dreamseeker', imgIcon: '', element: 'IMG', gender: 'f', rarity: 5, role: 'WoD', have: false, status: 'new', version: '9.1', want: 2, p: 2 },
+    { name: 'Dreamseeker', imgIcon: '21101', element: 'IMG', gender: 'f', rarity: 5, role: 'WoD', have: false, status: 'new', version: '9.1', want: 2, p: 2 },
     
     // ---------------------------------------------------------------------
     // TEMPLATE: copy the line, remove the // and delete the fields you do not need.

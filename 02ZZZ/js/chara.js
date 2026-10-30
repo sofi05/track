@@ -32,9 +32,10 @@ window.CHARA_CONFIG = {
     { name: 'Zhao', imgIcon: '56', element: 'Ice', gender: 'f', rarity: 5, area: ['TQ'], have: true },
     { name: 'Pyrois', imgIcon: '63', imgSprite: ['=', '63_F', '63_M'], element: 'Ether', gender: '', rarity: 5, area: ['RP'], have: true },
     { name: 'Remielle', imgIcon: '67', element: 'Lumiflux', gender: 'f', rarity: 5, area: ['Ros','OE'], have: true },
+    { name: 'Phoenix', imgIcon: '1641', element: 'Fire', gender: 'f', rarity: 5, area: ['TQ'], have: true, status: 'new'},
 
     //COLLAB
-    { name: 'Kafka', imgIcon: '', element: 'Electric', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], out: false, ph:1  },
+    { name: 'Kafka', imgIcon: 'Kafka_Temp', element: 'Electric', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], ph:1  },
     { name: 'Robin', imgIcon: '1661', element: 'Ether', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], ph:1  },
 
     //DONT HAVE - ORGANIZED BY NUMBER
@@ -69,7 +70,6 @@ window.CHARA_CONFIG = {
     { name: 'Roxy', imgIcon: '68', element: 'Wind', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.2', want: 2, ph: 2 },
     { name: 'Claret', imgIcon: '1611', element: 'Electric', gender: 'f', rarity: 5, area: ['Ros'], have: false, status: 'available', version: '3.2', ph: 1 },
     
-    { name: 'Phoenix', imgIcon: '1641', element: 'Fire', gender: 'f', rarity: 5, area: ['TQ'], have: false, status: 'new', version: '3.3', want: 1, ph: 1 },
     { name: 'Severian', imgIcon: '1631', element: 'Wind', gender: 'm', rarity: 5, area: ['NEPS'], have: false, status: 'new', version: '3.3', ph: 2 },
 
     { name: 'Sunbringer', imgIcon: '1601', element: 'Fire', filterElement: '', gender: 'f', rarity: 5, area: ['OE','Ros'], have: false, status: 'soon', version: '3.4', want: 1, ph: 1  },

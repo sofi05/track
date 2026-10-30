@@ -14,7 +14,10 @@
   Dex.openCharPopup = function (char) {
     if (closeCurrent) closeCurrent();
 
-    const spriteSrc = window.CHARA_CONFIG.getSpritePath(char);
+    // the first big picture of the line: its imgSprite list when it has one, else the picture named like the icon
+    const config = window.CHARA_CONFIG;
+    const firstSprite = config.getSpritePaths ? [].concat(config.getSpritePaths(char))[0] : null;
+    const spriteSrc = firstSprite || config.getSpritePath(char);
     const isCurrent = Phase.isCurrentVersion(char.version);
     const timers = [];
 

@@ -5,9 +5,10 @@ const gameConfig = {
     { name: 'Ruan Mei', imgIcon: '1130301', have: true, rarity: 5 },
     { name: 'Castorice', imgIcon: '1140701', have: false, rarity: 5 },
     { name: 'Sparxie', imgIcon: '1150101', have: false, rarity: 5 },
-
     { name: 'Evanescia', imgIcon: '1150501', have: false, rarity: 5, status: 'new' },
     { name: 'Hyacine', imgIcon: '1140901', have: false, rarity: 5, status: 'new' },
+
+    { name: 'Aeon ★ Aha', imgIcon: '', have: false, rarity: 5, status: 'soon' },
     // ---------------------------------------------------------------------
     // TEMPLATE: copy a line, remove the // and fill it in.
     // { name: '', imgIcon: '', imgSprite: ['='], have: false, rarity: 5, status: 'soon' },
@@ -23,7 +24,7 @@ const gameConfig = {
   },
 
   // The version this list is updated to (shows as a red "vers." pill under the title)
-  lastVersion: '4.6',
+  lastVersion: '4.6 / soon: 4.7',
 
   // Where the pictures are. Edit the folders here.
   pathPrefix: "../assets/charaid/StarRail/Outfit/",
