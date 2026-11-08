@@ -88,9 +88,9 @@
     if (!char.ph) return '';
     const { start, end } = Phase.findWindow(char.version, char.ph);
     const now = new Date();
-    if (!end || now < start) return 'countdown';
-    if (now >= end) return 'ended';
-    return 'active';
+    if (!start || now < start) return 'countdown'; // not started (or its start date is not known yet)
+    if (end && now >= end) return 'ended';
+    return 'active'; // started and the end is not known yet (vs.js has no date for the next phase / version): still running
   };
 
   /** Date when a future version (or one of its phases) goes live, or null. */

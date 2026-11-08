@@ -16,6 +16,7 @@ window.BDAY_CONFIG = {
     //Feb
     '02-02': ['Linette', 'Liney'],
     '02-04': ['Vesna'], 
+    '02-08': ['Mitya'],  
     '02-09': ['Alyosha'],
     '02-11': ['Alhatham'],
     '02-14': ['Beidou'],
@@ -34,6 +35,7 @@ window.BDAY_CONFIG = {
     '03-16': ['Mizuki'],
     '03-21': ['Noel'],
     '03-23': ['Ifa'],
+    '03-24': ['Valeriy'], 
     '03-26': ['Ayato'],
     '03-29': ['Vodyanitsa'], 
     '03-30': ['Sigewinne'],
@@ -139,9 +141,6 @@ window.BDAY_CONFIG = {
     '12-23': ['Illuga'],
     '12-29': ['Tighnari'],
     '12-31': ['Zhongli'],
-
-    'x-x': ['Valeriy'],  //soon
-    'x-x': ['Mitya'],  //soon
     
     // NOTE: these two are in chara.js but were missing here. Birthday not known yet (not released), so no date:
     //'x-x': ['Alice'],       //soon (hidden in chara.js: out:false)

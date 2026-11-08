@@ -35,7 +35,7 @@ window.CHARA_CONFIG = {
     { name: 'Phoenix', imgIcon: '1641', element: 'Fire', gender: 'f', rarity: 5, area: ['TQ'], have: true, status: 'new'},
 
     //COLLAB
-    { name: 'Kafka', imgIcon: 'Kafka_Temp', element: 'Electric', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], ph:1  },
+    { name: 'Kafka', imgIcon: '1651', element: 'Electric', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], ph:1  },
     { name: 'Robin', imgIcon: '1661', element: 'Ether', gender: 'f', rarity: 5, area: [''], have: false, status: 'soon', version: '3.4', collab: true, collabStatus: ['mhy'], ph:1  },
 
     //DONT HAVE - ORGANIZED BY NUMBER

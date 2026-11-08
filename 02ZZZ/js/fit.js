@@ -15,7 +15,7 @@ const gameConfig = {
     { name: 'Aria', imgIcon: '57_01', imgSprite: ['=', '57_01_Form2'], have: false, rarity: 5 },
     { name: 'Aria', imgIcon: '57_02', have: true, rarity: 5, status: 'new' },
     { name: 'Sunna', imgIcon: '58_01', have: false, rarity: 5 },
-    { name: 'Sunna', imgIcon: '58_02', have: false, rarity: 5, status: 'new' },
+    { name: 'Sunna', imgIcon: '58_02', have: true, rarity: 5, status: 'new' },
     { name: 'Nangong Yu', imgIcon: '59_01', have: false, rarity: 5 },
     { name: 'Nangong Yu', imgIcon: '59_02', have: true, rarity: 5, status: 'new' },
     { name: 'Miyabi', imgIcon: '13_01', have: false, rarity: 5 },

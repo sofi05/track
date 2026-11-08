@@ -84,10 +84,10 @@
         return;
       }
       const now = new Date();
-      if (!phaseEnd || now < phaseStart) {
+      if (now < phaseStart) {
         phaseStatus.textContent = `(${Phase.shortDuration(phaseStart - now, { approx: true })})`;
       } else {
-        phaseStatus.textContent = now >= phaseEnd ? '(ended)' : '(active)';
+        phaseStatus.textContent = phaseEnd && now >= phaseEnd ? '(ended)' : '(active)'; // no end date yet = still running
       }
     }
     updatePhaseStatus();

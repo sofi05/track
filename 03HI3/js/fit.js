@@ -1,4 +1,5 @@
 const gameConfig = {
+   newestFirst: true,
   characters: [
     //SOLO FOLDER
     { name: 'Kiana', imgIcon: '106_04_01', imgSprite: ['601_04_01', '6010', '60113', '6115'], have: false, status: 'new' },

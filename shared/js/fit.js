@@ -15,6 +15,8 @@
    the pictures of the outfits you have. The Main character's lines (mc) are never merged.
    Optional: gameConfig.page  the filter buttons of the page (same format as window.CHARA_PAGE, see js/chara-page.js)
    Optional: gameConfig.lastVersion  e.g. '6.6' -> a red "vers. 6.6" pill under the title.
+   Optional: gameConfig.newestFirst  true -> in the popup the pictures of a card start with the LAST one in the file
+             (the newest, since new outfits and sprites are added at the end). The cards and icons stay as they are.
    Needs: common.js, sprite-popup.js, chara-filters.js (loaded before this file).
    ===================================================================== */
 
@@ -134,6 +136,10 @@ function buildCard(c) {
           notes.push(have);
         });
       });
+      if (gameConfig.newestFirst) { // newest first: the pictures and their pills turn around together
+        images.reverse();
+        notes.reverse();
+      }
       return { images, notes,
       name: x.name,
       icon: gameConfig.getImgPath(x.variants[0]),

@@ -144,6 +144,8 @@ One line = one outfit. **Same `name` = ONE card**: to add an outfit to a charact
 - **Have pill:** in a merged card, the popup shows a dark-green `HAVE` pill in the corner of the pictures of the
   outfits you have. A card with a single outfit has no pill.
 - **Temp pictures:** a merged card flips through all its icons, Temp ones (`assets/Temp`) included.
+- **Newest picture first:** `newestFirst: true` at the top of the file (right after `const gameConfig = {`) makes the popup of every card start with the LAST picture in the file and go backwards, because you add new outfits and sprites at the end. The cards and icons keep their order. Remove the line to go back.
+  **What "newest" means:** the order of `03HI3/js/outfit-files.js`, which `hi3outfit.bat` writes. Pictures already in it keep their place, new pictures go at the end (oldest of the new ones first, by the date the file was created). To rebuild the whole order from the file dates, once, double-click `hi3outfit by date.bat`. A picture list you write out in full (`imgSprite: ['601_04_01', '6010']`) keeps the order you wrote; only a short prefix (`'601'`) follows the file order.
 - **Main chara button:** a line on the Main page (`js/mc.js`) with `outfit: true` also shows here (one card per line, never merged, with its gender), behind the
   small **Main chara** button (hidden until you press it).
 - **Collab button:** appears by itself when a line has `collab: true`.

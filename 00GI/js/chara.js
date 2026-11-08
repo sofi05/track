@@ -91,7 +91,7 @@ window.CHARA_CONFIG = {
     { name: 'Odette', element: 'Cryo', gender: 'f', rarity: 5, area: ['nod'], have: true },
     { name: 'Varesa', element: 'Electro', gender: 'f', rarity: 5, area: ['nat'], have: true },
     { name: 'Alyosha', element: 'Electro', gender: 'm', rarity: 4, area: ['nod'], have: true },
-    { name: 'Vesna', element: 'Anemo', gender: 'f', rarity: 5, area: ['snez'], have: true, status: 'new' },
+    { name: 'Vesna', element: 'Anemo', gender: 'f', rarity: 5, area: ['snez'], have: true },
 
     //COLLAB
     // (if the file names differ, write the name here with imgIcon: '...'). Until then you can put a picture called Aloy.png in assets/Temp/.
@@ -131,16 +131,21 @@ window.CHARA_CONFIG = {
     { name: 'Lohen', element: 'Cryo', gender: 'm', rarity: 5, area: ['mond'], have: false, status: 'available', version: '6.6', ph: 2 },
     { name: 'Prune', element: 'Anemo', gender: 'f', rarity: 4, area: ['snez'], have: false, status: 'available', version: '6.6', want: 2, perma: true, ph: 1 },
     { name: 'Sandrone', imgIcon: 'MarionetteNew', element: 'Cryo', gender: 'f', rarity: 5, area: ['snez','font'], have: false, status: 'available', version: '6.7', want: 2, ph: 1 },
-    
-    { name: 'Vodyanitsa', element: 'Hydro', gender: 'f', rarity: 5, area: ['snez'], have: false, status: 'new', version: '7.1', want: 2, ph: 1 },
+    { name: 'Vodyanitsa', element: 'Hydro', gender: 'f', rarity: 5, area: ['snez'], have: false, status: 'available', version: '7.1', want: 2, ph: 1 },
 
-    { name: 'Mitya', element: 'Electro', gender: 'm', rarity: 5, area: ['snez'], have: false, status: 'soon', version: '7.2', want: 1, ph: 1 },
-    { name: 'Valeriy', element: 'Electro', gender: 'm', rarity: 4, area: ['snez'], have: false, status: 'soon', version: '7.2', ph: 1 },
+    { name: 'Mitya', element: 'Electro', gender: 'm', rarity: 5, area: ['snez'], have: false, status: 'new', version: '7.2', want: 1, ph: 1 },
+    { name: 'Valeriy', element: 'Electro', gender: 'm', rarity: 4, area: ['snez'], have: true, status: 'new', version: '7.2', ph: 1 },
 
     //confirmed next
+    { name: 'Anastasya', element: 'Cryo', gender: 'f', rarity: 5, area: ['snez'], have: false, status: 'soon', version: '7.3', want: 1, ph: 1 },
+    { name: 'Danica', element: 'Electro', gender: 'f', rarity: 5, area: ['snez'], have: false, status: 'soon', version: '7.3', ph: 1 },
+
+
+
     { name: 'Alice', element: 'Pyro', gender: 'f', rarity: 5, area: ['bey'], have: false, status: 'soon', out: false },
     { name: 'IlCapitano', element: 'Cryo', gender: 'm', rarity: 5, area: ['khae','snez','nat'], have: false, status: 'soon', out: false },
     
+
     // ---------------------------------------------------------------------
     // TEMPLATE: copy the line, remove the // and delete the fields you do not need.
     // What every field means and its values: GUIDE.md.   Icon too close / too far: zoom, iconX, iconY (see GUIDE.md).
