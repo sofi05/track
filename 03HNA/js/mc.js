@@ -8,7 +8,7 @@ window.CHARA_CONFIG = {
     // { name: '', imgIcon: '', gender: '', rarity: 5, have: false, status: '' },
     // ---------------------------------------------------------------------
   ],
-  getIconPath: (c) => `../assets/charaid/NexusAnima/TempIcons/${Dex.iconName(c)}.png`,
+  getIconPath: (c) => `../assets/charaid/NexusAnima/${Dex.iconName(c)}.png`,
   getSpritePaths: (c) => Dex.spriteList(c, (name) => `../assets/Sprite/NexusAnima/${name}.png`, '../assets/Sprite/NexusAnima/'),
   getFallbackPath: () => Dex.FALLBACK_ICON,
   getElementPath: () => null, // no element icons yet
